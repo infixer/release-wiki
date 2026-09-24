@@ -274,17 +274,98 @@ export function htmlToText(html) {
     .trim()
 }
 
-/** 記事ページの HTML から本文を取り出す（readability） */
-export function extractArticleText(html, url) {
+const JA_DATE = /公開(?:日)?\s*[:：]?\s*(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/
+const EN_DATE = /Published:?\s+([A-Z][a-z]+\.? \d{1,2},? \d{4})/
+
+/** 記事ページのメタデータや本文の「公開日」から公開日時を探す */
+function findPublished(document) {
+  const meta = document.querySelector(
+    'meta[property="article:published_time"], meta[name="article:published_time"], meta[itemprop="datePublished"], meta[name="date"]',
+  )
+  const fromMeta = toIso(meta?.getAttribute("content"))
+  if (fromMeta) return fromMeta
+  const scope = document.querySelector("article, main") ?? document.body
+  const fromTime = toIso(scope?.querySelector("time[datetime]")?.getAttribute("datetime"))
+  if (fromTime) return fromTime
+  const text = scope?.textContent ?? ""
+  const ja = JA_DATE.exec(text)
+  if (ja) return new Date(Date.UTC(+ja[1], +ja[2] - 1, +ja[3])).toISOString()
+  const en = EN_DATE.exec(text)
+  return en ? toIso(`${en[1]} UTC`) : null
+}
+
+/**
+ * 記事ページの HTML から本文・タイトル・公開日時を取り出す（readability）。
+ * @returns {{ title: string | null, text: string | null, publishedAt: string | null }}
+ */
+export function extractArticle(html, url) {
   const { document } = parseHTML(html)
   try {
     // readability は documentURI から相対リンクを解決する
     Object.defineProperty(document, "documentURI", { value: url, configurable: true })
   } catch {}
+  // readability は document を書き換えるので、先に公開日を探す
+  const published = findPublished(document)
+  // <title> は「記事名 | Blog | サイト名」の形が多いので、本文の h1 を優先する
+  const h1 = normalizeText(document.querySelector("article h1, main h1, h1")?.textContent)
   const article = new Readability(document).parse()
-  if (!article?.content) return null
-  const text = htmlToText(article.content)
-  return text || normalizeText(article.textContent)
+  if (!article?.content) return { title: h1 || null, text: null, publishedAt: published }
+  return {
+    title: h1 || normalizeText(article.title) || null,
+    text: htmlToText(article.content) || normalizeText(article.textContent) || null,
+    publishedAt: toIso(article.publishedTime) ?? published,
+  }
+}
+
+export function extractArticleText(html, url) {
+  return extractArticle(html, url).text
+}
+
+/**
+ * RSS が無いサイトの一覧ページ（例: https://developer.chrome.com/new?hl=ja）から記事へのリンクを拾う。
+ * 本文の領域（DevSite の本文 → article → main → body の順）の中のリンクだけを見る。
+ * @param {{ linkPattern?: string, articleParams?: Record<string, string> }} opts
+ *   linkPattern: 記事 URL に当てはめる正規表現（指定しなければ同じサイトのリンクすべて）
+ *   articleParams: 記事 URL に付けるクエリ（例: { hl: "ja" } で日本語版を取る）
+ */
+export function parseListingPage(html, pageUrl, { linkPattern, articleParams } = {}) {
+  const { document } = parseHTML(html)
+  const scope =
+    document.querySelector(".devsite-article-body") ??
+    document.querySelector("article") ??
+    document.querySelector("main") ??
+    document.body
+  const page = new URL(pageUrl)
+  const re = linkPattern ? new RegExp(linkPattern) : null
+  const items = []
+  const found = new Set()
+  for (const a of scope?.querySelectorAll("a[href]") ?? []) {
+    let u
+    try {
+      u = new URL(a.getAttribute("href"), page)
+    } catch {
+      continue
+    }
+    if (!/^https?:$/.test(u.protocol)) continue
+    if (u.origin !== page.origin || u.pathname === page.pathname) continue
+    u.hash = ""
+    for (const [k, v] of Object.entries(articleParams ?? {})) u.searchParams.set(k, String(v))
+    const url = u.href
+    if (re && !re.test(url)) continue
+    if (found.has(url)) continue
+    // カード全体がリンクのときは中の見出しをタイトルにする
+    const heading = a.querySelector("h1, h2, h3, h4, h5, h6")
+    const title = normalizeText(heading?.textContent || a.textContent || a.getAttribute("title"))
+    if (!title) continue // 画像だけのリンクは飛ばす（同じ URL の文字リンクを待つ）
+    found.add(url)
+    const box = a.closest("li, article, tr, devsite-card, .devsite-card") ?? a.parentElement
+    const time = box?.querySelector("time[datetime]")?.getAttribute("datetime")
+    items.push({ title: title.slice(0, 200), url, publishedAt: toIso(time), html: "" })
+  }
+  if (items.length > 0 && items.every((it) => it.publishedAt)) {
+    items.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  }
+  return items
 }
 
 // ---------------------------------------------------------------------------
@@ -618,11 +699,15 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
   const state = { ...(prevState ?? {}) }
   const firstRun = !prevState?.seen
 
+  // feed（RSS/Atom）か page（RSS の無いサイトの一覧ページ）のどちらかで記事一覧を取る
+  const source = cfg.feed ?? cfg.page
   let items
   try {
-    items = parseFeed(await fetchText(fetchImpl, cfg.feed))
+    const body = await fetchText(fetchImpl, source)
+    items = cfg.feed ? parseFeed(body) : parseListingPage(body, cfg.page, cfg)
+    if (items.length === 0) throw new Error("記事へのリンクが見つかりませんでした")
   } catch (e) {
-    errors.push(`フィード ${cfg.feed} を取得できませんでした: ${e.message}`)
+    errors.push(`${cfg.feed ? "フィード" : "一覧ページ"} ${source} を取得できませんでした: ${e.message}`)
     return { inbox: base, state }
   }
   if (cfg.titleFilter) {
@@ -635,18 +720,21 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
   if (firstRun) targets = targets.slice(0, LIMITS.initialPosts)
 
   base.posts = await mapLimit(targets, LIMITS.concurrency, async (it) => {
-    let text = null
+    let article = null
     try {
-      text = extractArticleText(await fetchText(fetchImpl, it.url), it.url)
+      article = extractArticle(await fetchText(fetchImpl, it.url), it.url)
     } catch (e) {
       errors.push(`記事 ${it.url} を取得できませんでした: ${e.message}`)
     }
-    if (!text) text = htmlToText(it.html)
+    const text = article?.text || htmlToText(it.html)
+    if (!text && article) errors.push(`記事 ${it.url} の本文を取り出せませんでした`)
+    // 一覧ページのリンク文字より、記事ページのタイトルのほうが正確
+    const title = (cfg.page && article?.title) || it.title
     return {
-      title: it.title,
+      title,
       url: it.url,
-      publishedAt: it.publishedAt,
-      versions: extractVersions(it.title, text),
+      publishedAt: it.publishedAt ?? article?.publishedAt ?? null,
+      versions: extractVersions(title, text),
       text: truncate(text, LIMITS.postText),
     }
   })
@@ -740,7 +828,7 @@ export async function run({
   }
 
   for (const cfg of config.blogs) {
-    log(`blog ${cfg.id} (${cfg.feed})`)
+    log(`blog ${cfg.id} (${cfg.feed ?? cfg.page})`)
     const result = await collectBlog(cfg, state.blogs[cfg.id], { fetchImpl, now })
     state.blogs[cfg.id] = result.state
     if (result.inbox) {

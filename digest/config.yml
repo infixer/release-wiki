@@ -11,12 +11,18 @@ repos:
     # maxPrs: 60                     # 1 回で詳しく扱う PR の上限（超えた分は 1 行扱い。既定 60）
 
 blogs:
-  - id: react
-    title: React Blog
-    feed: https://react.dev/rss.xml
-    relatedRepo: react/react
-  - id: nextjs
-    title: Next.js Blog
-    feed: https://nextjs.org/feed.xml
-    relatedRepo: vercel/next.js
-    # titleFilter: "^Next\\.js \\d"  # リリース記事だけに絞る場合の正規表現
+  # RSS/Atom があるブログは feed、無いサイトは一覧ページを page に書く
+  - id: chrome
+    title: Chrome の新機能
+    page: https://developer.chrome.com/new?hl=ja
+    # 一覧ページの中で記事として拾うリンク（ナビゲーションやタグのリンクを除く）
+    linkPattern: "^https://developer\\.chrome\\.com/(blog|release-notes|docs)/.+"
+    # 記事も日本語版（翻訳が無ければ英語）で取る
+    articleParams:
+      hl: ja
+  # RSS の例:
+  # - id: nextjs
+  #   title: Next.js Blog
+  #   feed: https://nextjs.org/feed.xml
+  #   relatedRepo: vercel/next.js      # 任意: 関連リポジトリ
+  #   titleFilter: "^Next\\.js \\d"   # 任意: タイトルで絞る正規表現

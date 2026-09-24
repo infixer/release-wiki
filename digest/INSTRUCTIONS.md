@@ -46,7 +46,9 @@ id とフォルダの対応:
 ブログ:
 
 - `posts[]`: 新着記事（古い順）。`text` は本文（15000 字まで）、`versions` は本文中のバージョン表記
-- `relatedRepo`: 関連リポジトリ（`vercel/next.js` など）
+  - `publishedAt` が null のことがある（一覧ページから集めたサイト）。そのときは `collectedAt` の日付を使う
+  - `text` が空の記事は、タイトルと URL だけを記事一覧に載せ、posts ページは作らない
+- `relatedRepo`: 関連リポジトリ（`vercel/next.js` など）。null なら releases やリポジトリのトピックへのリンクは不要
 - `errors[]`: collect で起きたエラー
 
 ## 3. 書き方の共通ルール
@@ -200,7 +202,7 @@ tags:
 
 ### 5.4 `content/blogs/<id>/posts/<YYYY-MM-DD>-<slug>.md`（ブログ記事）
 
-- 日付は記事の `publishedAt`（JST）、slug は記事 URL の最後の部分（例: `next-16-4`）。
+- 日付は記事の `publishedAt`（JST）、slug は記事 URL のパスの最後の部分（クエリは除く。例: `new-in-chrome-141`）。
 
 ```markdown
 ---
@@ -236,6 +238,7 @@ tags:
 ```
 
 - `## 関連` には、`versions` に対応する `relatedRepo` の releases ページ（あるものだけ）と、関係するトピックへのリンクを書く。
+  関連するものが無ければ、同じブログの関係する記事（例: 前のバージョンの記事）へのリンクを書く。
 - **逆方向のリンク**: 関係するトピックの `## 関連` と、対応する releases ページの `## 関連` にも、この記事へのリンクを追記する。
 
 ### 5.5 `content/repos/<id>/index.md`（リポジトリのトップ。毎回書き直す）
@@ -288,25 +291,30 @@ tags:
 ```
 
 ブログの取り込みは、関連リポジトリがあればその log.md にも「ブログ: 記事 N 件」として書き、`errors` があれば添える。
+関連リポジトリが無いブログは、`blogs/<id>/index.md` の `## 取り込み履歴` に書く（5.7）。
 
-### 5.7 `content/blogs/<id>/index.md`（記事一覧。毎回書き直す）
+### 5.7 `content/blogs/<id>/index.md`（記事一覧は毎回書き直す。取り込み履歴は残す）
 
 ```markdown
 ---
-title: Next.js Blog
+title: Chrome の新機能
 updated: 2026-09-24
 tags:
-  - blog/nextjs
+  - blog/chrome
 ---
 
-[元のブログ](https://nextjs.org/blog) · 関連: [[repos/vercel-next.js/index|vercel/next.js]]
+[元のページ](https://developer.chrome.com/new?hl=ja)
 
 ## 記事
 
-- 2026-09-22 — [[blogs/nextjs/posts/2026-09-22-next-16-4|Next.js 16.4]] — （1 行の要約）
+- 2026-09-02 — [[blogs/chrome/posts/2026-09-02-new-in-chrome-141|Chrome 141 の新機能]] — （1 行の要約）
+
+## 取り込み履歴
+
+- 2026-09-24 — 記事 3 件。エラー: なし
 ```
 
-新しい順に全部並べる。
+記事は新しい順に全部並べる。`## 取り込み履歴` は関連リポジトリが無いブログだけ、先頭に 1 行ずつ追加する（直近 20 回分）。
 
 ### 5.8 `content/index.md`（サイトのトップ。毎回書き直す）
 

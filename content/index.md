@@ -19,8 +19,7 @@ tags:
 
 | ブログ | 関連リポジトリ | 最新の記事 |
 |---|---|---|
-| React Blog | react/react | — |
-| Next.js Blog | vercel/next.js | — |
+| Chrome の新機能 | — | — |
 
 各ブログのページは [[blogs/index|ブログ一覧]] から。
 

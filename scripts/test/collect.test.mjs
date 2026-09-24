@@ -12,12 +12,14 @@ import {
   collectBlog,
   collectRepo,
   createGitHub,
+  extractArticle,
   extractArticleText,
   extractVersions,
   htmlToText,
   isBotUser,
   jstDate,
   parseFeed,
+  parseListingPage,
   run,
   searchMergedPrs,
   truncate,
@@ -149,6 +151,40 @@ test("記事ページから本文を取り出す", async () => {
   assert.match(text, /- Works with Turbopack/)
   assert.doesNotMatch(text, /window\.x/)
   assert.doesNotMatch(text, /© 2026 Vercel/)
+})
+
+test("一覧ページから記事リンクを拾う（本文の領域だけ・重複と画像リンクを除く）", async () => {
+  const html = await fixture("listing.html")
+  const page = "https://developer.chrome.com/new?hl=ja"
+  const items = parseListingPage(html, page, { articleParams: { hl: "ja" } })
+  assert.deepEqual(
+    items.map((i) => [i.title, i.url]),
+    [
+      ["Chrome 141 の新機能", "https://developer.chrome.com/blog/new-in-chrome-141?hl=ja"],
+      ["Chrome 141 リリースノート", "https://developer.chrome.com/release-notes/141?hl=ja"],
+      ["Chrome 142 ベータ版", "https://developer.chrome.com/blog/chrome-142-beta?hl=ja"],
+      ["タグ: Chrome 142", "https://developer.chrome.com/tags/chrome-142?hl=ja"],
+    ],
+  )
+  const filtered = parseListingPage(html, page, {
+    linkPattern: "^https://developer\\.chrome\\.com/(blog|release-notes)/",
+  })
+  assert.deepEqual(
+    filtered.map((i) => i.url),
+    [
+      "https://developer.chrome.com/blog/new-in-chrome-141?hl=ja",
+      "https://developer.chrome.com/release-notes/141",
+      "https://developer.chrome.com/blog/chrome-142-beta",
+    ],
+  )
+})
+
+test("記事ページからタイトルと公開日（日本語の日付）を取る", async () => {
+  const a = extractArticle(await fixture("article-ja.html"), "https://developer.chrome.com/blog/new-in-chrome-141?hl=ja")
+  assert.equal(a.title, "Chrome 141 の新機能")
+  assert.equal(a.publishedAt, "2026-09-02T00:00:00.000Z")
+  assert.match(a.text, /## CSS の新機能/)
+  assert.match(a.text, /`?field-sizing`? プロパティ|field-sizing プロパティ/)
 })
 
 test("inbox の書き出し: 既存ファイルは上書きしない", async () => {
@@ -421,6 +457,44 @@ test("collectBlog: titleFilter とフィード取得の失敗", async () => {
   assert.equal(failed.inbox.posts.length, 0)
   assert.match(failed.inbox.errors[0], /フィード/)
   assert.deepEqual(failed.state.seen, ["a"])
+})
+
+test("collectBlog: RSS の無いサイトの一覧ページ（page）から取り込む", async () => {
+  const listing = await fixture("listing.html")
+  const article = await fixture("article-ja.html")
+  const { fetchImpl } = mockFetch([
+    [/\/new\?hl=ja$/, () => new Response(listing)],
+    [/\/blog\/new-in-chrome-141\?hl=ja$/, () => new Response(article)],
+    [/\/release-notes\/141\?hl=ja$/, () => new Response("<html><body></body></html>")],
+  ])
+  const cfg = {
+    id: "chrome",
+    title: "Chrome の新機能",
+    page: "https://developer.chrome.com/new?hl=ja",
+    linkPattern: "^https://developer\\.chrome\\.com/(blog|release-notes)/",
+    articleParams: { hl: "ja" },
+  }
+  const { inbox, state } = await collectBlog(cfg, undefined, { fetchImpl })
+  assert.equal(inbox.relatedRepo, null)
+  assert.deepEqual(state.seen, [
+    "https://developer.chrome.com/blog/new-in-chrome-141?hl=ja",
+    "https://developer.chrome.com/release-notes/141?hl=ja",
+    "https://developer.chrome.com/blog/chrome-142-beta?hl=ja",
+  ])
+  // 古い順（一覧ページの下から）
+  const [beta, notes, whatsNew] = inbox.posts
+  assert.equal(whatsNew.title, "Chrome 141 の新機能")
+  assert.equal(whatsNew.publishedAt, "2026-09-02T00:00:00.000Z")
+  assert.match(whatsNew.text, /Chrome 141 がリリースされました/)
+  // 本文が取れない記事と、取得できない記事はエラーに残す
+  assert.equal(notes.text, "")
+  assert.equal(beta.publishedAt, null)
+  assert.equal(inbox.errors.length, 2)
+
+  // 記事リンクが 1 つも無ければエラー
+  const { fetchImpl: empty } = mockFetch([[/\/new/, () => new Response("<main><p>no links</p></main>")]])
+  const none = await collectBlog(cfg, { seen: [] }, { fetchImpl: empty })
+  assert.match(none.inbox.errors[0], /一覧ページ.*記事へのリンクが見つかりません/)
 })
 
 // ---------------------------------------------------------------------------
