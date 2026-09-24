@@ -35,11 +35,13 @@ id とフォルダの対応:
 
 - `range.from`〜`range.to`: 取り込んだ期間
 - `latest.stable` / `latest.prerelease`: 最新の安定版と、それより新しいプレリリース（無ければ null）
-- `releasesInRange[]`: 期間内に公開された Release（`prerelease` が true ならプレリリース）
+- `releasesInRange[]`: 期間内に公開された Release（`prerelease` が true ならプレリリース。プレリリースには `body` が無い）
 - `prs[]`: マージ済み PR（古い順）
   - `hint`: 分類の目安（`feature` / `fix` / `other` / `unknown`）。目安なので、本文を読んで明らかに違えば直してよい
   - `release`: 収録状況（`📦 v16.4.0-canary.42` / `⏳ 未リリース`）。そのまま書く
-  - `body`: PR 本文（3000 字まで）、`files`: 変更ファイル（40 件まで。`filesTruncated` が true なら他にもある）
+  - `body`: PR 本文（1500 字まで。画像と長い URL は除いてある）
+  - `files`: 変更ファイル（`"パス (+追加行 -削除行)"`、本体のファイルを優先して 10 件まで）、`filesTotal`: 変更ファイルの総数
+  - `hint: "other"` の PR には `body` と `files` が無い（タイトルだけで 1 行にする）
 - `maxPrs`: 詳しく書く PR の上限
 - `errors[]`: collect で起きたエラー。空でなければ log.md に書く
 

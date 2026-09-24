@@ -9,6 +9,7 @@ import {
   LIMITS,
   classifyPr,
   cleanBody,
+  cleanPrBody,
   collectBlog,
   collectRepo,
   createGitHub,
@@ -107,6 +108,19 @@ test("本文: HTML コメントを除いて切り詰める", () => {
   assert.equal(out.endsWith("…(truncated)"), true)
   assert.equal(out.length, 3000 + "\n…(truncated)".length)
   assert.equal(truncate("short", 10), "short")
+})
+
+test("PR 本文: 画像とコミット固定の GitHub URL を短くする", () => {
+  const body = [
+    "See https://github.com/vercel/next.js/blob/3c9d1ca77f7de845315dc166a57fc9f090c638b4/packages/next/src/a.ts#L12",
+    "![screenshot](https://user-images.githubusercontent.com/1/2.png)",
+    '<img width="500" src="https://example.com/x.png">',
+    "Link https://github.com/vercel/next.js/pull/1 stays.",
+  ].join("\n")
+  assert.equal(
+    cleanPrBody(body, 1500),
+    "See packages/next/src/a.ts#L12\n\nLink https://github.com/vercel/next.js/pull/1 stays.",
+  )
 })
 
 test("バージョン表記の抽出", () => {
@@ -266,7 +280,13 @@ function repoRoutes({ searchItems, filesFail = false }) {
         if (filesFail && m[1] === "4") return json({ message: "boom" }, 422)
         const files =
           m[1] === "1"
-            ? Array.from({ length: 40 }, (_, i) => ({ filename: `packages/react/src/f${i}.js`, additions: 1, deletions: 0 }))
+            ? [
+                // テストのファイルが先に来ても、本体のファイルを優先して並べる
+                ...Array.from({ length: 3 }, (_, i) => ({ filename: `packages/react/src/__tests__/t${i}-test.js`, additions: 9, deletions: 0 })),
+                ...Array.from({ length: 40 }, (_, i) => ({ filename: `packages/react/src/f${i}.js`, additions: 1, deletions: 0 })),
+              ]
+            : m[1] === "6"
+              ? [{ filename: "docs/intro.md", additions: 1, deletions: 1 }]
             : [{ filename: "packages/react-dom/src/client/ReactDOM.js", additions: 3, deletions: 2 }]
         return json(files)
       },
@@ -294,6 +314,7 @@ test("collectRepo: 正式名・除外・収録状況・Release・state", async (
     searchItem(3, "2026-09-20T00:00:00Z", { labels: [{ name: "Dependencies" }] }),
     searchItem(4, "2026-09-21T00:00:00Z", { title: "Fix hydration mismatch" }),
     searchItem(5, "2026-09-23T00:00:00Z", { title: "Refactor scheduler" }),
+    searchItem(6, "2026-09-23T01:00:00Z", { title: "Update intro" }),
   ]
   const { fetchImpl, calls } = mockFetch(repoRoutes({ searchItems }))
   const gh = createGitHub({ token: "t", fetchImpl, wait: noWait })
@@ -309,29 +330,38 @@ test("collectRepo: 正式名・除外・収録状況・Release・state", async (
   const searchUrl = decodeURIComponent(calls.find((u) => u.includes("/search/issues")))
   assert.match(searchUrl, /repo:react\/react is:pr is:merged base:main merged:2026-09-17T00:00:00Z\.\.2026-09-23T21:17:00Z/)
 
-  assert.deepEqual(inbox.prs.map((p) => p.number), [1, 4, 5])
-  const [p1, p4, p5] = inbox.prs
+  assert.deepEqual(inbox.prs.map((p) => p.number), [1, 4, 5, 6])
+  const [p1, p4, p5, p6] = inbox.prs
   assert.equal(p1.hint, "feature")
   assert.equal(p1.release, "📦 v19.3.0")
   assert.equal(p1.body, "Body of 1")
-  assert.equal(p1.files.length, 40)
-  assert.equal(p1.filesTruncated, true)
+  assert.equal(p1.files.length, 10)
+  assert.equal(p1.files[0], "packages/react/src/f0.js (+1 -0)")
+  assert.equal(p1.filesTotal, 55)
+  assert.equal("labels" in p1, false)
   assert.equal(p4.hint, "fix")
   assert.equal(p4.release, "📦 v19.4.0-canary.1")
-  assert.deepEqual(p4.files, [{ path: "packages/react-dom/src/client/ReactDOM.js", additions: 3, deletions: 2 }])
-  assert.equal(p4.filesTruncated, false)
+  assert.deepEqual(p4.files, ["packages/react-dom/src/client/ReactDOM.js (+3 -2)"])
+  assert.equal(p4.filesTotal, 1)
   assert.equal(p5.hint, "unknown")
   assert.equal(p5.release, "⏳ 未リリース")
+  // 「その他」は本文と変更ファイルを持たない
+  assert.equal(p6.hint, "other")
+  assert.equal("body" in p6, false)
+  assert.equal("files" in p6, false)
+  assert.equal(p6.filesTotal, 1)
 
   assert.equal(inbox.latest.stable.tag, "v19.3.0")
   assert.equal(inbox.latest.prerelease.tag, "v19.4.0-canary.1")
   assert.deepEqual(inbox.releasesInRange.map((r) => r.tag), ["v19.3.0", "v19.4.0-canary.1"])
   assert.equal(inbox.releasesInRange[1].name, "v19.4.0-canary.1")
-  assert.equal(inbox.releasesInRange[1].body, "canary")
+  // プレリリースの本文は持たない
+  assert.equal(inbox.releasesInRange[0].body, "## React DOM\n- x")
+  assert.equal("body" in inbox.releasesInRange[1], false)
   assert.deepEqual(inbox.errors, [])
 
   // bot や除外ラベルの PR も含め、見た中で最新のマージ日時まで進める
-  assert.equal(state.lastMergedAt, "2026-09-23T00:00:00Z")
+  assert.equal(state.lastMergedAt, "2026-09-23T01:00:00Z")
   assert.equal(state.fullName, "react/react")
 })
 

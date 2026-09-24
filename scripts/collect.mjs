@@ -15,9 +15,10 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
 export const LIMITS = {
   initialDays: 7, // 初回に遡る日数
-  prBody: 3000,
-  releaseBody: 3000,
-  files: 40,
+  prBody: 1500,
+  releaseBody: 3000, // 安定版だけ（プレリリースの本文は PR 一覧と重なるので持たない）
+  files: 10, // inbox に書く変更ファイルの数（本体のファイルを優先）
+  filesFetch: 100, // hint の判定に使う変更ファイルの数
   postText: 15000,
   initialPosts: 5, // ブログの初回に取り込む記事数
   seen: 200,
@@ -50,6 +51,25 @@ export function cleanBody(body, max) {
     .replace(/\n{3,}/g, "\n\n")
     .trim()
   return truncate(s, max)
+}
+
+/** PR 本文を整える。画像と、コミット固定の GitHub の長い URL（…/blob/<sha>/path）を短くしてから切り詰める */
+export function cleanPrBody(body, max) {
+  const s = String(body ?? "")
+    .replace(/!\[[^\]]*\]\([^)]*\)|<img\b[^>]*>/gi, "")
+    .replace(/https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/(?:blob|tree)\/[0-9a-f]{7,40}\/(\S+)/g, "$1")
+  return cleanBody(s, max)
+}
+
+/**
+ * 変更ファイルを「パス (+追加 -削除)」の 1 行にし、本体のファイル（docs・テスト以外）を先に並べて max 件にする
+ */
+export function summarizeFiles(files, max) {
+  const main = files.filter((f) => !isOtherFile(f.filename))
+  const rest = files.filter((f) => isOtherFile(f.filename))
+  return [...main, ...rest]
+    .slice(0, max)
+    .map((f) => `${f.filename} (+${f.additions} -${f.deletions})`)
 }
 
 /** 連続する空白と空行を詰める */
@@ -545,7 +565,7 @@ export async function fetchReleases(gh, fullName, { from, to }) {
       publishedAt: r.published_at,
       url: r.html_url,
       prerelease: !!r.prerelease,
-      body: cleanBody(r.body, LIMITS.releaseBody),
+      ...(r.prerelease ? {} : { body: cleanBody(r.body, LIMITS.releaseBody) }),
     }))
   return { latest: { stable, prerelease }, releasesInRange }
 }
@@ -566,39 +586,42 @@ export async function releaseStatus(gh, fullName, latest, sha) {
 
 async function fetchPrDetail(gh, fullName, item, latest, errors) {
   const n = item.number
+  const labels = (item.labels ?? []).map((l) => (typeof l === "string" ? l : l.name))
   const pr = {
     number: n,
     title: item.title,
     url: item.html_url,
     author: item.user?.login ?? null,
     mergedAt: item.pull_request?.merged_at ?? null,
-    labels: (item.labels ?? []).map((l) => (typeof l === "string" ? l : l.name)),
+    ...(labels.length ? { labels } : {}),
     hint: "unknown",
     release: "⏳ 未リリース",
-    body: cleanBody(item.body, LIMITS.prBody),
+    body: cleanPrBody(item.body, LIMITS.prBody),
     files: [],
-    filesTruncated: false,
+    filesTotal: 0,
   }
   let detail = null
   try {
     detail = await gh.request(`/repos/${fullName}/pulls/${n}`)
-    pr.body = cleanBody(detail.body ?? item.body, LIMITS.prBody)
+    pr.body = cleanPrBody(detail.body ?? item.body, LIMITS.prBody)
     pr.mergedAt = detail.merged_at ?? pr.mergedAt
   } catch (e) {
     errors.push(`#${n} の詳細を取得できませんでした: ${e.message}`)
   }
+  let files = []
   try {
-    const files = await gh.request(`/repos/${fullName}/pulls/${n}/files?per_page=${LIMITS.files}`)
-    pr.files = files.slice(0, LIMITS.files).map((f) => ({
-      path: f.filename,
-      additions: f.additions,
-      deletions: f.deletions,
-    }))
-    pr.filesTruncated = (detail?.changed_files ?? files.length) > pr.files.length
+    files = await gh.request(`/repos/${fullName}/pulls/${n}/files?per_page=${LIMITS.filesFetch}`)
+    pr.files = summarizeFiles(files, LIMITS.files)
+    pr.filesTotal = detail?.changed_files ?? files.length
   } catch (e) {
     errors.push(`#${n} の変更ファイルを取得できませんでした: ${e.message}`)
   }
-  pr.hint = classifyPr({ title: pr.title, files: pr.files })
+  pr.hint = classifyPr({ title: pr.title, files: files.map((f) => f.filename) })
+  // 「その他」は 1 行で書くだけなので、本文と変更ファイルは持たない
+  if (pr.hint === "other") {
+    delete pr.body
+    delete pr.files
+  }
   try {
     pr.release = await releaseStatus(gh, fullName, latest, detail?.merge_commit_sha)
   } catch (e) {

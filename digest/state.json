@@ -1,14 +1,5 @@
 {
-  "repos": {
-    "react/react": {
-      "fullName": "react/react",
-      "lastMergedAt": "2026-09-22T17:27:00Z"
-    },
-    "vercel/next.js": {
-      "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-09-24T06:50:02Z"
-    }
-  },
+  "repos": {},
   "blogs": {
     "chrome": {
       "seen": [
