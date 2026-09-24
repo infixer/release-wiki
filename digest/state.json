@@ -2,78 +2,90 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-09-22T17:27:00Z"
+      "lastMergedAt": "2026-09-22T17:27:00Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-09-24T07:46:13Z"
+      "lastMergedAt": "2026-09-24T07:46:13Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
-      "lastMergedAt": "2026-09-18T00:54:21Z"
+      "lastMergedAt": "2026-09-18T00:54:21Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-09-23T22:11:57Z"
+      "lastMergedAt": "2026-09-23T22:11:57Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-09-23T20:14:39Z"
+      "lastMergedAt": "2026-09-23T20:14:39Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-09-24T00:11:51Z"
+      "lastMergedAt": "2026-09-24T00:11:51Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-09-24T07:40:10Z"
+      "lastMergedAt": "2026-09-24T07:40:10Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
-      "lastMergedAt": "2026-09-21T22:23:28Z"
+      "lastMergedAt": "2026-09-21T22:23:28Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-09-22T14:16:08Z"
+      "lastMergedAt": "2026-09-22T14:16:08Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
       "fullName": "w3c/aria",
-      "lastMergedAt": "2026-09-23T15:00:58Z"
+      "lastMergedAt": "2026-09-23T15:00:58Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/wcag": {
       "fullName": "w3c/wcag",
-      "lastMergedAt": "2026-09-20T21:07:30Z"
+      "lastMergedAt": "2026-09-20T21:07:30Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "openui/open-ui": {
       "fullName": "openui/open-ui",
-      "lastMergedAt": "2026-09-17T08:29:58Z"
+      "lastMergedAt": "2026-09-17T08:29:58Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/ecma262": {
       "fullName": "tc39/ecma262",
-      "lastMergedAt": "2026-09-20T12:26:14Z"
+      "lastMergedAt": "2026-09-20T12:26:14Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-09-24T08:15:52Z"
+      "lastMergedAt": "2026-09-24T08:15:52Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-09-24T08:42:21Z"
-    },
-    "openai/codex": {
-      "fullName": "openai/codex",
-      "lastMergedAt": "2026-09-24T07:21:35Z",
-      "lastCommitAt": "2026-09-24T07:21:20Z"
+      "lastMergedAt": "2026-09-24T08:42:21Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
       "lastMergedAt": "2026-09-24T05:42:04Z",
-      "lastCommitAt": "2026-09-24T05:42:03Z"
+      "lastCommitAt": "2026-09-24T05:42:03Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
       "fullName": "tc39/proposals",
       "lastMergedAt": "2026-09-22T02:55:19Z",
-      "lastCommitAt": "2026-09-17T08:40:39Z"
+      "lastCommitAt": "2026-09-17T08:40:39Z",
+      "lastReleaseAt": "2026-09-24T08:51:34Z"
     }
   },
   "blogs": {

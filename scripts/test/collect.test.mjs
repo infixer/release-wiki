@@ -391,9 +391,30 @@ test("collectRepo: 正式名・除外・収録状況・Release・state", async (
   assert.equal("body" in inbox.releasesInRange[1], false)
   assert.deepEqual(inbox.errors, [])
 
+  // 除いた PR の内訳
+  assert.deepEqual(inbox.excluded, { bots: { "dependabot[bot]": 1 }, labels: 1 })
+  assert.equal(state.lastReleaseAt, "2026-09-22T00:00:00Z")
   // bot や除外ラベルの PR も含め、見た中で最新のマージ日時まで進める
   assert.equal(state.lastMergedAt, "2026-09-23T01:00:00Z")
   assert.equal(state.fullName, "react/react")
+})
+
+test("collectRepo: Release は前回見た分より後だけ（PR が無い回に同じ Release を繰り返さない）、includeBots", async () => {
+  const now = new Date("2026-09-23T21:17:00Z")
+  const botPr = searchItem(9, "2026-09-23T01:00:00Z", { user: { login: "codex-bot[bot]", type: "Bot" } })
+  const { fetchImpl } = mockFetch(repoRoutes({ searchItems: [botPr] }))
+  const gh = createGitHub({ fetchImpl, wait: noWait })
+  const prev = { lastMergedAt: "2026-09-01T00:00:00Z", lastReleaseAt: "2026-09-21T00:00:00Z" }
+  const r1 = await collectRepo(gh, { repo: "facebook/react" }, prev, now)
+  // v19.3.0（9/20）は前回までに見たので入らない。bot の PR だけなので PR は 0 件
+  assert.deepEqual(r1.inbox.releasesInRange.map((r) => r.tag), ["v19.4.0-canary.1"])
+  assert.deepEqual(r1.inbox.prs, [])
+  assert.deepEqual(r1.excluded, { bots: { "codex-bot[bot]": 1 } })
+  const r2 = await collectRepo(gh, { repo: "facebook/react" }, r1.state, now)
+  assert.equal(r2.inbox, null)
+  // includeBots に書いた bot の PR は集める
+  const r3 = await collectRepo(gh, { repo: "facebook/react", includeBots: ["Codex-Bot[bot]"] }, prev, now)
+  assert.deepEqual(r3.inbox.prs.map((p) => p.number), [9])
 })
 
 test("collectRepo: 一部の取得に失敗しても続け、errors に残す", async () => {

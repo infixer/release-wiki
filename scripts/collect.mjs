@@ -947,8 +947,13 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
     return { inbox: base, state }
   }
 
+  // Release は PR とは別に、前回までに見た Release の公開日時より後のものだけを集める
+  // （PR が無い回に同じ Release を何度も入れないように）
+  const releaseFrom = prevState.lastReleaseAt ?? from
   try {
-    Object.assign(base, await fetchReleases(gh, fullName, { from, to }))
+    Object.assign(base, await fetchReleases(gh, fullName, { from: releaseFrom, to }))
+    state.lastReleaseAt =
+      base.releasesInRange.map((r) => r.publishedAt).sort().at(-1) ?? prevState.lastReleaseAt ?? to
   } catch (e) {
     errors.push(`Release を取得できませんでした: ${e.message}`)
   }
@@ -967,11 +972,20 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
   state.lastMergedAt = newest ?? prevState.lastMergedAt ?? from
 
   const exclude = new Set((cfg.excludeLabels ?? []).map((l) => l.toLowerCase()))
-  const targets = items.filter(
-    (it) =>
-      !isBotUser(it.user) &&
-      !(it.labels ?? []).some((l) => exclude.has(String(l.name ?? l).toLowerCase())),
-  )
+  const excludedLabel = (it) =>
+    (it.labels ?? []).some((l) => exclude.has(String(l.name ?? l).toLowerCase()))
+  // includeBots: ["name[bot]"] に書いた bot の PR は除かない（bot が PR を作る運用のリポジトリ向け）
+  const allowBots = new Set((cfg.includeBots ?? []).map((b) => b.toLowerCase()))
+  const isExcludedBot = (it) =>
+    isBotUser(it.user) && !allowBots.has(String(it.user?.login ?? "").toLowerCase())
+  const targets = items.filter((it) => !isExcludedBot(it) && !excludedLabel(it))
+  // 何を除いたかを残す（全部除かれて PR が 0 件のときに原因が分かるように）
+  const bots = {}
+  for (const it of items.filter(isExcludedBot)) bots[it.user.login] = (bots[it.user.login] ?? 0) + 1
+  const labelCount = items.filter((it) => !isExcludedBot(it) && excludedLabel(it)).length
+  if (Object.keys(bots).length || labelCount) {
+    base.excluded = { ...(Object.keys(bots).length ? { bots } : {}), ...(labelCount ? { labels: labelCount } : {}) }
+  }
   const prShas = new Set()
   base.prs = await mapLimit(targets, LIMITS.concurrency, (it) =>
     fetchPrDetail(gh, fullName, it, base.latest, errors, cfg, prShas),
@@ -1009,7 +1023,7 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
     (base.commits?.length ?? 0) > 0 ||
     base.releasesInRange.length > 0 ||
     errors.length > 0
-  return { inbox: hasData ? base : null, state }
+  return { inbox: hasData ? base : null, state, excluded: base.excluded }
 }
 
 // ---------------------------------------------------------------------------
@@ -1229,10 +1243,12 @@ export async function run({
     if (result.inbox) {
       const id = repoId(result.inbox.repo)
       written.push(await writeInbox(inboxDir, date, id, result.inbox))
-      log(`  PR ${result.inbox.prs.length} 件, Release ${result.inbox.releasesInRange.length} 件`)
+      const commits = result.inbox.commits ? `, 直接のコミット ${result.inbox.commits.length} 件` : ""
+      log(`  PR ${result.inbox.prs.length} 件${commits}, Release ${result.inbox.releasesInRange.length} 件`)
     } else {
       log("  新着なし")
     }
+    if (result.excluded) log(`  除外: ${JSON.stringify(result.excluded)}`)
     for (const err of result.inbox?.errors ?? []) log(`  error: ${err}`)
   }
 
