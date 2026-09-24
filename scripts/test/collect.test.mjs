@@ -162,6 +162,8 @@ test("一覧ページから記事リンクを拾う（本文の領域だけ・�
     [
       ["Chrome 141 の新機能", "https://developer.chrome.com/blog/new-in-chrome-141?hl=ja"],
       ["Chrome 141 リリースノート", "https://developer.chrome.com/release-notes/141?hl=ja"],
+      // /docs/ai は /docs/ai/webmcp の親なのでカテゴリのトップとして除く
+      ["WebMCP", "https://developer.chrome.com/docs/ai/webmcp?hl=ja"],
       ["Chrome 142 ベータ版", "https://developer.chrome.com/blog/chrome-142-beta?hl=ja"],
       ["タグ: Chrome 142", "https://developer.chrome.com/tags/chrome-142?hl=ja"],
     ],

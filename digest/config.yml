@@ -15,8 +15,9 @@ blogs:
   - id: chrome
     title: Chrome の新機能
     page: https://developer.chrome.com/new?hl=ja
-    # 一覧ページの中で記事として拾うリンク（ナビゲーションやタグのリンクを除く）
-    linkPattern: "^https://developer\\.chrome\\.com/(blog|release-notes|docs)/.+"
+    # 一覧ページの中で記事として拾うリンク。URL が変わらない新着一覧ページ（…/news、…/whats-new、…/release-notes）は除く。
+    # カテゴリのトップ（/docs/ai など、他のリンクの親にあたるパス）は collect が自動で除く
+    linkPattern: "^https://developer\\.chrome\\.com/(blog|release-notes|docs)/(?!(.*/)?(news|whats-new|release-notes)(\\?|$)).+"
     # 記事も日本語版（翻訳が無ければ英語）で取る
     articleParams:
       hl: ja

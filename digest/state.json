@@ -9,24 +9,5 @@
       "lastMergedAt": "2026-09-24T06:50:02Z"
     }
   },
-  "blogs": {
-    "chrome": {
-      "seen": [
-        "https://developer.chrome.com/docs/ai?hl=ja",
-        "https://developer.chrome.com/docs/ai/webmcp?hl=ja",
-        "https://developer.chrome.com/docs/ai/evals?hl=ja",
-        "https://developer.chrome.com/docs/performance?hl=ja",
-        "https://developer.chrome.com/docs/performance/insights?hl=ja",
-        "https://developer.chrome.com/docs/webstore?hl=ja",
-        "https://developer.chrome.com/docs/webstore/troubleshooting?hl=ja",
-        "https://developer.chrome.com/docs/ai/proofreader-api?hl=ja",
-        "https://developer.chrome.com/docs/identity?hl=ja",
-        "https://developer.chrome.com/docs/identity/automated-password-change?hl=ja",
-        "https://developer.chrome.com/docs/devtools/news?hl=ja",
-        "https://developer.chrome.com/docs/extensions/whats-new?hl=ja",
-        "https://developer.chrome.com/docs/web-platform/webgpu/news?hl=ja",
-        "https://developer.chrome.com/docs/crux/release-notes?hl=ja"
-      ]
-    }
-  }
+  "blogs": {}
 }

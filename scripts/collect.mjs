@@ -306,8 +306,14 @@ export function extractArticle(html, url) {
   } catch {}
   // readability は document を書き換えるので、先に公開日を探す
   const published = findPublished(document)
-  // <title> は「記事名 | Blog | サイト名」の形が多いので、本文の h1 を優先する
-  const h1 = normalizeText(document.querySelector("article h1, main h1, h1")?.textContent)
+  // <title> は「記事名 | Blog | サイト名」の形が多いので、本文の h1 を優先する。
+  // DevSite の h1 には「コレクションでコンテンツを整理」などのボタンの文字が混ざるので 1 行目だけを使う
+  const h1El =
+    document.querySelector("h1.devsite-page-title") ??
+    document.querySelector("article h1") ??
+    document.querySelector("main h1") ??
+    document.querySelector("h1")
+  const h1 = normalizeText(h1El?.textContent).split("\n")[0].trim()
   const article = new Readability(document).parse()
   if (!article?.content) return { title: h1 || null, text: null, publishedAt: published }
   return {
@@ -362,10 +368,15 @@ export function parseListingPage(html, pageUrl, { linkPattern, articleParams } =
     const time = box?.querySelector("time[datetime]")?.getAttribute("datetime")
     items.push({ title: title.slice(0, 200), url, publishedAt: toIso(time), html: "" })
   }
-  if (items.length > 0 && items.every((it) => it.publishedAt)) {
-    items.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  // 他のリンクの親にあたるパス（例: /docs/ai と /docs/ai/webmcp の /docs/ai）はカテゴリのトップとみなして除く
+  const paths = items.map((it) => new URL(it.url).pathname.replace(/\/$/, ""))
+  const articles = items.filter((_, i) =>
+    paths.every((other, j) => j === i || !other.startsWith(paths[i] + "/")),
+  )
+  if (articles.length > 0 && articles.every((it) => it.publishedAt)) {
+    articles.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
   }
-  return items
+  return articles
 }
 
 // ---------------------------------------------------------------------------
