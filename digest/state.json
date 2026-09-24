@@ -86,6 +86,11 @@
       "lastMergedAt": "2026-09-22T02:55:19Z",
       "lastCommitAt": "2026-09-17T08:40:39Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
+    },
+    "openai/codex": {
+      "fullName": "openai/codex",
+      "lastReleaseAt": "2026-09-24T07:12:02Z",
+      "lastMergedAt": "2026-09-24T07:21:35Z"
     }
   },
   "blogs": {
