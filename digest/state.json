@@ -51,6 +51,28 @@
     "tc39/ecma262": {
       "fullName": "tc39/ecma262",
       "lastMergedAt": "2026-09-20T12:26:14Z"
+    },
+    "pnpm/pnpm": {
+      "fullName": "pnpm/pnpm",
+      "lastMergedAt": "2026-09-24T08:15:52Z"
+    },
+    "vitest-dev/vitest": {
+      "fullName": "vitest-dev/vitest",
+      "lastMergedAt": "2026-09-24T08:35:22Z"
+    },
+    "openai/codex": {
+      "fullName": "openai/codex",
+      "lastMergedAt": "2026-09-24T07:21:35Z"
+    },
+    "w3c/csswg-drafts": {
+      "fullName": "w3c/csswg-drafts",
+      "lastMergedAt": "2026-09-24T05:42:04Z",
+      "lastCommitAt": "2026-09-24T05:42:03Z"
+    },
+    "tc39/proposals": {
+      "fullName": "tc39/proposals",
+      "lastMergedAt": "2026-09-22T02:55:19Z",
+      "lastCommitAt": "2026-09-17T08:40:39Z"
     }
   },
   "blogs": {
@@ -312,6 +334,20 @@
         "https://developer.apple.com/documentation/safari-release-notes/safari-13-release-notes#rev=Released September 19, 2019 — Version 13 (15608.2.11)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-12_1-release-notes#rev=Released March 25, 2019 — Version 12.1 (14607.1.40)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-12-release-notes#rev=Released September 17, 2018 — Version 12 (14606.1.36)"
+      ]
+    },
+    "anthropic": {
+      "seen": [
+        "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
+        "https://www.anthropic.com/news/accenture-embedded-evaluation",
+        "https://www.anthropic.com/news/life-sciences-verification-program",
+        "https://www.anthropic.com/news/enterprise-frontier-safeguards",
+        "https://www.anthropic.com/news/improving-alignment-security-efforts",
+        "https://www.anthropic.com/news/model-hardware-standard-research-preview",
+        "https://www.anthropic.com/news/expanding-support-for-scientists",
+        "https://www.anthropic.com/news/wellbeing-research-grants",
+        "https://www.anthropic.com/news/claude-text-watermark",
+        "https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards"
       ]
     }
   }

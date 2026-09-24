@@ -1,0 +1,339 @@
+{
+  "kind": "repo",
+  "repo": "openai/codex",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:40:39Z",
+  "range": {
+    "from": "2026-09-17T08:40:39Z",
+    "to": "2026-09-24T08:40:39Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "rust-v0.156.1",
+      "publishedAt": "2026-09-23T02:41:36Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.1"
+    },
+    "prerelease": {
+      "tag": "rust-v0.158.0-alpha.8",
+      "publishedAt": "2026-09-24T07:12:02Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.8"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "rust-v0.155.0-alpha.17",
+      "name": "0.155.0-alpha.17",
+      "publishedAt": "2026-09-17T21:16:29Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.0-alpha.17",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.155.0-alpha.18",
+      "name": "0.155.0-alpha.18",
+      "publishedAt": "2026-09-17T22:37:07Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.0-alpha.18",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.155.0",
+      "name": "0.155.0",
+      "publishedAt": "2026-09-17T23:14:43Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.0",
+      "prerelease": false,
+      "body": "## New Features\n\n- Added experimental `/voice` conversations with live transcripts and microphone controls on supported builds, enabled through `/experimental`. (#43581, #43651, #44331)\n- The TUI now shows live reasoning summaries in the status row and completion timestamps after successful turns. (#43558, #43921)\n- Added task hiding, archiving, and deletion in the agents overview, plus worktree ownership details and confirmed deletion of clean managed worktrees. (#43942, #44424, #44433)\n- Added Touch ID verification for MCP requests in local TUI sessions on supported Macs. (#43624, #43712, #43715)\n- Added configurable daemon update schedules and `codex app-server daemon update`; saved threads and active goals can recover after daemon restarts. (#43542, #43562, #44314)\n- Amazon Bedrock can now obtain AWS credentials from configured commands, with caching, expiration-based refresh, and authentication recovery. (#44028)\n\n## Bug Fixes\n\n- Accepted prompts are now saved even when compaction fails before a turn starts. (#44487)\n- Fixed missed tmux resizes, transcript viewport restoration, and stale history appearing after switching threads. (#43603, #43889, #43994)\n- MCP servers now report expired OAuth credentials accurately and provide reconnect guidance when token refresh fails. (#43947, #44359)\n- Automatic approval reviews now preserve complete actions and authorization evidence more reliably, retry transient failures, and distinguish review failures from unsafe-action findings. (#44482, #44569, #44570)\n- Switching accounts now invalidates remote-control sessions, cached WebSocket state, and model catalogs belonging to the previous identity. (#43906, #44341, #44489)\n- Blocked Windows-process escapes from restricted WSL sandboxes and hardened brokered shell snapshots against credential exposure. (#44286, #43909, #44040)\n\n## Chores\n\n- Aligned Python SDK and runtime publishing with stable CLI releases, using matching versions and verifying runtime assets before SDK publication. (#44067)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.154.0...rust-v0.155.0\n\n- #43521 Preserve standalone release pins during daemon updates @copyberry\n- #43524 Restrict MCP user verification and add workspace-scoped identity @copyberry\n- #43527 Discount an approval's own code-mode wrapper from Guardian score lag @copyberry\n- #43529 Ensure the standalone updater runs on managed daemon starts @copyberry\n- #43533 Fix jemalloc tools and compiler flags for Bazel musl builds @copyberry\n- #43534 Preserve Guardian context sections and share planned-action rendering @copyberry\n- #43538 Move Guardian permission context into the shared section registry @copyberry\n- #43540 Preserve the multi-agent version when forking at a turn cutoff @copyberry\n- #43542 Make app-server daemon automatic updates configurable @copyberry\n- #43545 Preserve fork runtime versions without loading full model context @copyberry\n- #43547 Add user-verification provider abstractions \n…(truncated)"
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.1",
+      "name": "0.156.0-alpha.1",
+      "publishedAt": "2026-09-18T00:23:01Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.155.0-alpha.9.2",
+      "name": "0.155.0-alpha.9.2",
+      "publishedAt": "2026-09-18T03:09:42Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.0-alpha.9.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.2",
+      "name": "0.156.0-alpha.2",
+      "publishedAt": "2026-09-18T04:56:20Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.3",
+      "name": "0.156.0-alpha.3",
+      "publishedAt": "2026-09-18T18:20:37Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.155.1",
+      "name": "0.155.1",
+      "publishedAt": "2026-09-18T20:03:04Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.1",
+      "prerelease": false,
+      "body": "## Bug Fixes\n\n- New local TUI sessions now leave reasoning summaries disabled by default, fixing request rejection by providers that do not support them. Explicit reasoning-summary settings remain respected. (#46467)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.155.0...rust-v0.155.1\n\n- #46467 Restore none as the TUI reasoning summary default (@celia-oai)"
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.4",
+      "name": "0.156.0-alpha.4",
+      "publishedAt": "2026-09-18T21:18:45Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.4",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.5",
+      "name": "0.156.0-alpha.5",
+      "publishedAt": "2026-09-19T00:22:35Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.5",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.6",
+      "name": "0.156.0-alpha.6",
+      "publishedAt": "2026-09-19T02:18:41Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.6",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.7",
+      "name": "0.156.0-alpha.7",
+      "publishedAt": "2026-09-19T04:08:15Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.7",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.8",
+      "name": "0.156.0-alpha.8",
+      "publishedAt": "2026-09-19T17:20:24Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.8",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.9",
+      "name": "0.156.0-alpha.9",
+      "publishedAt": "2026-09-20T00:17:45Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.9",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.10",
+      "name": "0.156.0-alpha.10",
+      "publishedAt": "2026-09-20T21:18:52Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.10",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.11",
+      "name": "0.156.0-alpha.11",
+      "publishedAt": "2026-09-20T22:49:40Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.11",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.12",
+      "name": "0.156.0-alpha.12",
+      "publishedAt": "2026-09-21T00:06:46Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.12",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.13",
+      "name": "0.156.0-alpha.13",
+      "publishedAt": "2026-09-21T02:15:06Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.13",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.14",
+      "name": "0.156.0-alpha.14",
+      "publishedAt": "2026-09-21T04:09:08Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.14",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.16",
+      "name": "0.156.0-alpha.16",
+      "publishedAt": "2026-09-21T16:51:16Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.16",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.1",
+      "name": "0.157.0-alpha.1",
+      "publishedAt": "2026-09-21T18:08:16Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0-alpha.17",
+      "name": "0.156.0-alpha.17",
+      "publishedAt": "2026-09-21T21:40:02Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0-alpha.17",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.2",
+      "name": "0.157.0-alpha.2",
+      "publishedAt": "2026-09-21T23:02:34Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.155.0-alpha.16.1",
+      "name": "0.155.0-alpha.16.1",
+      "publishedAt": "2026-09-22T00:20:27Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.0-alpha.16.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.3",
+      "name": "0.157.0-alpha.3",
+      "publishedAt": "2026-09-22T01:38:20Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.4",
+      "name": "0.157.0-alpha.4",
+      "publishedAt": "2026-09-22T03:01:53Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.4",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.5",
+      "name": "0.157.0-alpha.5",
+      "publishedAt": "2026-09-22T04:26:43Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.5",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.6",
+      "name": "0.157.0-alpha.6",
+      "publishedAt": "2026-09-22T05:50:02Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.6",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.7",
+      "name": "0.157.0-alpha.7",
+      "publishedAt": "2026-09-22T07:00:44Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.7",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.8",
+      "name": "0.157.0-alpha.8",
+      "publishedAt": "2026-09-22T12:34:27Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.8",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.9",
+      "name": "0.157.0-alpha.9",
+      "publishedAt": "2026-09-22T18:00:16Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.9",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.0",
+      "name": "0.156.0",
+      "publishedAt": "2026-09-22T19:51:01Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0",
+      "prerelease": false,
+      "body": "## New Features\n\n- Choose an optional fullscreen UI with `/tui` for your next launch, including transcript search, mouse selection, and right-click copying. (#46732, #46734, #46883, #46895)\n- Voice conversations are enabled by default, with an F8 toggle, a `/voice settings` picker, and bundled audio runtimes for Linux and Windows. (#44921, #46071, #44622, #44714, #44922)\n- Explore account usage, token totals, and plugin and skill activity through the `/usage` analytics dashboard. (#45764, #45769)\n- Filter tasks by status and create worktree sessions from the agent command center; worktree support is now enabled by default. (#46839, #45276, #44870)\n- Customize the terminal with six new themes and view supported Mermaid diagrams and display equations directly in responses. (#46504, #46054, #45612)\n- Update the local background server through `/daemon`, or bypass it with `--no-daemon`. (#45854, #46088)\n\n## Bug Fixes\n\n- Preserve streamed answers and plans when turns fail, are interrupted, or receive subagent completion events. (#45549, #46867)\n- Fix clipboard forwarding in tmux and SSH sessions and preserve tab indentation when terminals send pasted text as individual keystrokes. (#45457, #45454)\n- Restore Plan mode when resuming sessions and preserve thread identity and settings when editing earlier prompts. (#45519, #45845)\n- Recover login through system proxies and refresh MCP credentials when OAuth discovery returns a 503 error. (#46562, #44636)\n- Prevent speech from being dropped during playback pauses or bursts of incoming audio. (#46880)\n- Close sandbox isolation gaps involving inbound Windows connections, privileged Linux/macOS sockets, and writes through read-only macOS file handles. (#44639, #45984, #46500)\n\n## Documentation\n\n- Clarify that deprecated `friendly` and `pragmatic` personality settings no longer select response styles. (#45809)\n- Explain how `?` matches a single character in network proxy allow and deny patterns. (#46027)\n\n## Chores\n\n- Update bundled TLS dependencies, including OpenSSL 3.6.4 for Linux musl builds. (#45149, #45489)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.155.0...rust-v0.156.0\n\n- #44606 Preserve whole diagnostic attachments and report incomplete uploads @chess-oai\n- #44611 Preserve root turn attribution in turn-start events @owenlin0\n- #44613 Enable user verification for local Codex Desktop sessions @riley-oai\n- #44615 Treat non-interactive dumb terminals as warnings in `codex doctor` @etraut-openai\n- #44616 Simplify enterprise OAuth login helpers and expand callback tests @nicksteele-oai\n- #44617 Invalidate cached Guardian approvals for unscored permission widening @jif-oai\n- #44619 Allow discarded code mode tool responses to be garbage collected @jif-oai\n- #44620 Support temporary and minimal filesystem grants in MXC @iceweasel-oai\n- #44622 Add `/voice settings` to choose a voice for future conversations @bc-openai\n- #44626 Add bounded environment transport for MXC launch \n…(truncated)"
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.10",
+      "name": "0.157.0-alpha.10",
+      "publishedAt": "2026-09-22T22:07:05Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.10",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.156.1",
+      "name": "0.156.1",
+      "publishedAt": "2026-09-23T02:41:36Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.1",
+      "prerelease": false,
+      "body": "## New Features\n\n- Choose GPT-6 Sol or GPT-6 Luna from the model picker. The rate-limit switch prompt now recommends GPT-6 Luna. (#47405)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.156.0...rust-v0.156.1\n\n- #47405 [hotfix 0.156.0] Add GPT-6 Sol and Luna to the model catalog (#47332) @imac-oai"
+    },
+    {
+      "tag": "rust-v0.155.0-alpha.16.3",
+      "name": "0.155.0-alpha.16.3",
+      "publishedAt": "2026-09-23T03:41:37Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.0-alpha.16.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.11",
+      "name": "0.157.0-alpha.11",
+      "publishedAt": "2026-09-23T04:50:17Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.11",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.2",
+      "name": "0.158.0-alpha.2",
+      "publishedAt": "2026-09-23T13:07:10Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.3",
+      "name": "0.158.0-alpha.3",
+      "publishedAt": "2026-09-23T17:07:22Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.4",
+      "name": "0.158.0-alpha.4",
+      "publishedAt": "2026-09-23T18:36:50Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.4",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.155.0-alpha.16.4",
+      "name": "0.155.0-alpha.16.4",
+      "publishedAt": "2026-09-23T19:55:18Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.155.0-alpha.16.4",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.5",
+      "name": "0.158.0-alpha.5",
+      "publishedAt": "2026-09-23T22:10:20Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.5",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.6",
+      "name": "0.158.0-alpha.6",
+      "publishedAt": "2026-09-23T23:41:29Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.6",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.7",
+      "name": "0.158.0-alpha.7",
+      "publishedAt": "2026-09-24T05:28:27Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.7",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.8",
+      "name": "0.158.0-alpha.8",
+      "publishedAt": "2026-09-24T07:12:02Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.8",
+      "prerelease": true
+    }
+  ],
+  "prs": [],
+  "errors": []
+}
