@@ -9,5 +9,16 @@
       "lastMergedAt": "2026-09-24T06:50:02Z"
     }
   },
-  "blogs": {}
+  "blogs": {
+    "chrome": {
+      "seen": [
+        "https://developer.chrome.com/docs/ai/webmcp?hl=ja",
+        "https://developer.chrome.com/docs/ai/evals?hl=ja",
+        "https://developer.chrome.com/docs/performance/insights?hl=ja",
+        "https://developer.chrome.com/docs/webstore/troubleshooting?hl=ja",
+        "https://developer.chrome.com/docs/ai/proofreader-api?hl=ja",
+        "https://developer.chrome.com/docs/identity/automated-password-change?hl=ja"
+      ]
+    }
+  }
 }
