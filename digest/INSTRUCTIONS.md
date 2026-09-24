@@ -48,6 +48,8 @@ id とフォルダの対応:
   - `sha`・`url`・`author`・`committedAt`・`title`・`body`（あれば）・`hint`・`release`・`files`・`filesTotal`・`patch`（あれば）
   - PR と同じように要約する。リンクは PR 番号の代わりに ``[`abc1234`](url)`` と書く
 - `maxPrs`: 詳しく書く PR（と直接のコミット）の上限
+  - PR が `maxPrs` を超えた回は、collect が詳しく扱う PR を選んである。`brief: true` の PR は本文・変更ファイルが無いので、
+    「その他」にタイトルだけで 1 行ずつ書く（件数が多ければ、共通の接頭辞や領域ごとにまとめて 1 行にしてよい）。リンクは `https://github.com/<repo>/pull/<number>`
 - `errors[]`: collect で起きたエラー。空でなければ log.md に書く
 
 ブログ:

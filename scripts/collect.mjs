@@ -27,6 +27,7 @@ export const LIMITS = {
   maxPrs: 60,
   maxCommits: 50, // includeCommits のとき、1 回で集める直接のコミットの上限
   commitBody: 1000,
+  maxPosts: 10, // ブログで 1 回に取り込む記事の上限（初回は initialPosts）
 }
 
 const USER_AGENT = "release-wiki-collect"
@@ -126,6 +127,8 @@ export function normalizeText(text) {
 // ---------------------------------------------------------------------------
 
 const OTHER_TITLE = /^\s*(docs?|tests?|ci|chore)(\([^)]*\))?!?\s*:/i
+// Conventional Commits の接頭辞（feat: / fix(scope): など）。あればタイトルの他の語より優先する
+const CONVENTIONAL = /^\s*(feat|fix|perf|refactor|revert|build|style)(\([^)]*\))?!?\s*:/i
 const FEATURE = /\bfeat/i
 const FIX = /\b(hot|bug)?fix/i
 
@@ -147,6 +150,9 @@ export function isOtherFile(file) {
  */
 export function classifyPr({ title = "", files = [], byFiles = true }) {
   if (OTHER_TITLE.test(title)) return "other"
+  const prefix = CONVENTIONAL.exec(title)?.[1]?.toLowerCase()
+  if (prefix === "feat") return "feature"
+  if (prefix === "fix") return "fix"
   const paths = files.map((f) => (typeof f === "string" ? f : f.path))
   // byFiles: false なら変更ファイルでは other にしない（README が本体の tc39/proposals など）
   if (byFiles && paths.length > 0 && paths.every(isOtherFile)) return "other"
@@ -805,6 +811,26 @@ async function fetchPrDetail(gh, fullName, item, latest, errors, cfg = {}, shas 
 }
 
 /**
+ * PR が max 件を超えたら、詳しく扱う PR を「新機能 → 修正 → 分類なし → その他」の順に max 件選び、
+ * 残りは本文・変更ファイル・差分を持たない 1 行扱い（brief: true）にする。並び順（マージ順）は変えない
+ */
+export function limitDetailedPrs(prs, max) {
+  if (prs.length <= max) return prs
+  const rank = { feature: 0, fix: 1, unknown: 2, other: 3 }
+  const keep = new Set(
+    prs
+      .map((p, i) => ({ p, i }))
+      .sort((a, b) => (rank[a.p.hint] ?? 2) - (rank[b.p.hint] ?? 2) || a.i - b.i)
+      .slice(0, max)
+      .map((x) => x.p),
+  )
+  // 1 行扱いは番号・タイトル・分類・収録状況だけ（PR の URL は https://github.com/<repo>/pull/<number>）
+  return prs.map((p) =>
+    keep.has(p) ? p : { number: p.number, title: p.title, hint: p.hint, release: p.release, brief: true },
+  )
+}
+
+/**
  * PR を通さずにブランチへ直接入ったコミットを集める（csswg-drafts のようにエディタが直接コミットするリポジトリ向け）。
  * PR のマージコミット・「(#123)」で終わる squash コミット・マージコミット・bot のコミットは除く。
  */
@@ -952,6 +978,8 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
   )
   // 「その他」は本文と差分も持たない
   for (const pr of base.prs) if (pr.hint === "other") delete pr.patch
+  // PR が多すぎるときは、詳しく扱う分を maxPrs 件に絞る
+  base.prs = limitDetailedPrs(base.prs, base.maxPrs)
 
   if (cfg.includeCommits) {
     const since =
@@ -1050,7 +1078,8 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
   const seen = new Set(prevState?.seen ?? [])
   const seenUrls = new Set([...seen].map(urlOfKey))
   let targets = items.filter((it) => !seen.has(keyOf(it)))
-  if (firstRun) targets = targets.slice(0, LIMITS.initialPosts)
+  // 新しい順に、初回は initialPosts 件、それ以降も maxPosts 件まで（残りは既読にするだけ）
+  targets = targets.slice(0, firstRun ? LIMITS.initialPosts : (cfg.maxPosts ?? LIMITS.maxPosts))
 
   base.posts = await mapLimit(targets, LIMITS.concurrency, async (it) => {
     let article = null
@@ -1090,9 +1119,10 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
   base.posts.reverse()
 
   // 初回は取り込まなかった記事も seen に登録する
+  // 一覧に今ある分はすべて残す（数百件の過去のリリースが並ぶ一覧でも、古いものを新着と誤認しないように）
   state.seen = [...new Set([...items.map(keyOf), ...(prevState?.seen ?? [])])].slice(
     0,
-    LIMITS.seen,
+    Math.max(LIMITS.seen, items.length),
   )
   const hasData = base.posts.length > 0 || errors.length > 0
   return { inbox: hasData ? base : null, state }
@@ -1131,6 +1161,23 @@ const exists = (p) =>
     () => false,
   )
 
+/** inbox の JSON を書き出す形にする。1 行扱い（brief）の PR は 1 行にまとめる */
+export function formatInbox(data) {
+  const compact = []
+  const json = JSON.stringify(
+    data,
+    (_, v) => {
+      if (v && typeof v === "object" && !Array.isArray(v) && v.brief) {
+        compact.push(JSON.stringify(v))
+        return `__compact_${compact.length - 1}__`
+      }
+      return v
+    },
+    2,
+  )
+  return json.replace(/"__compact_(\d+)__"/g, (_, i) => compact[Number(i)]) + "\n"
+}
+
 /**
  * digest/inbox/<date>-<id>.json に書く。同じ名前のファイルがあれば上書きせず -2, -3… を付ける。
  * @returns 書き出したファイルのパス
@@ -1141,7 +1188,7 @@ export async function writeInbox(inboxDir, date, id, data) {
   for (let i = 2; await exists(file); i++) {
     file = path.join(inboxDir, `${date}-${id}-${i}.json`)
   }
-  await writeFile(file, JSON.stringify(data, null, 2) + "\n")
+  await writeFile(file, formatInbox(data))
   return file
 }
 

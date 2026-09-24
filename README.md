@@ -44,7 +44,7 @@ repos:
   - repo: owner/name
     branch: main            # 任意: 対象のブランチ（省略すると既定ブランチ。next.js なら canary）
     excludeLabels: [dependencies]  # 任意: このラベルの PR を除く
-    maxPrs: 60              # 任意: 1 回で詳しく扱う PR の上限（既定 60）
+    maxPrs: 60              # 任意: 1 回で詳しく扱う PR の上限（既定 60。超えた分は collect が 1 行扱いにする）
     includeCommits: true    # 任意: PR を通さずに直接入ったコミットも集める（csswg-drafts など）
     classifyByFiles: false  # 任意: README などの変更だけでも「その他」扱いにしない（tc39/proposals など）
     patch: 3000             # 任意: 変更の差分を 1 件あたりこの字数まで持たせる
@@ -56,6 +56,7 @@ blogs:
     feed: https://example.com/rss.xml   # RSS 2.0 / Atom
     relatedRepo: owner/name # 任意: 関連リポジトリ
     titleFilter: "^Example \\d"         # 任意: タイトルで絞る正規表現
+    maxPosts: 10                        # 任意: 1 回に取り込む記事の上限（既定 10。初回は 5）
 
   # RSS が無いサイト（一覧ページから記事へのリンクを拾う）
   - id: firefox

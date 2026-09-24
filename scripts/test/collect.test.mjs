@@ -15,6 +15,8 @@ import {
   dropSections,
   parseDoccIndex,
   parseEnDate,
+  limitDetailedPrs,
+  formatInbox,
   sortByVersion,
   collectBlog,
   collectRepo,
@@ -96,6 +98,29 @@ test("hint: feat / fix / unknown", () => {
     classifyPr({ title: "Improve errors", files: [{ path: "README.md" }, ...src] }),
     "unknown",
   )
+})
+
+test("hint: Conventional Commits の接頭辞をタイトルの他の語より優先する", () => {
+  const src = [{ path: "src/a.ts" }]
+  assert.equal(classifyPr({ title: "fix(cargo): lock weak feature dependencies", files: src }), "fix")
+  assert.equal(classifyPr({ title: "feat(run): fix-free task groups", files: src }), "feature")
+  assert.equal(classifyPr({ title: "perf: faster features", files: src }), "feature")
+})
+
+test("PR が maxPrs を超えたら、新機能 → 修正 → 分類なし → その他 の順に詳しく残し、残りは 1 行扱い", () => {
+  const pr = (number, hint) => ({ number, hint, title: `t${number}`, body: "b", files: ["f"], patch: "p" })
+  const prs = [pr(1, "other"), pr(2, "unknown"), pr(3, "fix"), pr(4, "feature"), pr(5, "fix"), pr(6, "feature")]
+  const out = limitDetailedPrs(prs, 3)
+  assert.deepEqual(out.map((p) => [p.number, !!p.brief]), [[1, true], [2, true], [3, false], [4, false], [5, true], [6, false]])
+  assert.deepEqual(out[0], { number: 1, title: "t1", hint: "other", release: undefined, brief: true })
+  assert.equal(limitDetailedPrs(prs, 10), prs)
+  // 1 行扱いは JSON でも 1 行
+  const text = formatInbox({ prs: [{ number: 1, title: "a", brief: true }, { number: 2, title: "b" }] })
+  assert.equal(
+    text,
+    '{\n  "prs": [\n    {"number":1,"title":"a","brief":true},\n    {\n      "number": 2,\n      "title": "b"\n    }\n  ]\n}\n',
+  )
+  assert.deepEqual(JSON.parse(text).prs[0], { number: 1, title: "a", brief: true })
 })
 
 test("bot の判定", () => {
@@ -749,6 +774,31 @@ test("collectBlog: titleTemplate で URL のバージョン番号からタイト
       ["Firefox 156.0.1", "2026-09-22T00:00:00.000Z", ["156.0.1"]],
     ],
   )
+})
+
+test("collectBlog: 過去の記事が数百件並ぶ一覧でも、既読を失わず、1 回の件数も絞る", async () => {
+  const links = Array.from({ length: 300 }, (_, i) => `<a href="/firefox/${i + 1}.0/releasenotes/">${i + 1}.0</a>`)
+  const listing = `<main>${links.join("")}</main>`
+  const { fetchImpl, calls } = mockFetch([
+    [/\/releases\/$/, () => new Response(listing)],
+    [/releasenotes\/$/, () => new Response("<main><article><h1>x</h1><p>notes</p></article></main>")],
+  ])
+  const cfg = {
+    id: "firefox",
+    page: "https://www.firefox.com/en-US/releases/",
+    linkPattern: "/firefox/\\d+(\\.\\d+)+/releasenotes/?$",
+    sortBy: "version",
+  }
+  const first = await collectBlog(cfg, undefined, { fetchImpl })
+  assert.equal(first.inbox.posts.length, 5)
+  assert.equal(first.state.seen.length, 300)
+  const second = await collectBlog(cfg, first.state, { fetchImpl })
+  assert.equal(second.inbox, null)
+  // 既読が無い状態（上限を超えた新着）でも maxPosts 件まで
+  const flood = await collectBlog(cfg, { seen: [] }, { fetchImpl })
+  assert.equal(flood.inbox.posts.length, 10)
+  assert.equal(flood.inbox.posts.at(-1).url, "https://www.firefox.com/firefox/300.0/releasenotes/")
+  assert.ok(calls.length < 30)
 })
 
 test("バージョン番号の大きい順に並べる", () => {
