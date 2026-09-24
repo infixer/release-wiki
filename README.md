@@ -48,6 +48,7 @@ repos:
     includeCommits: true    # 任意: PR を通さずに直接入ったコミットも集める（csswg-drafts など）
     classifyByFiles: false  # 任意: README などの変更だけでも「その他」扱いにしない（tc39/proposals など）
     patch: 3000             # 任意: 変更の差分を 1 件あたりこの字数まで持たせる
+    includeBots: ["copyberry[bot]"]  # 任意: bot が PR を作る運用のリポジトリで、その bot の PR も集める
 
 blogs:
   # RSS/Atom があるブログ
@@ -81,7 +82,7 @@ blogs:
 - `docc` のときは、ページと同じ内容の JSON（`/tutorials/data/documentation/....json`）を読みます。
   「Released … — 27.2 beta (…)」の日付やビルド番号が変わったら、同じ URL でも取り直して `updated: true` を付けます（Beta のリリースノートの更新）。
 - `repo` は転送元の名前（`facebook/react` など）でも動きますが、正式名（`react/react`）を書くのがおすすめです。
-- bot が作った PR は自動で除かれます。
+- bot が作った PR は自動で除かれます（`includeBots` に書いた bot は除かない）。除いた件数は inbox の `excluded` と Actions のログに出ます。
 
 ## 手動で実行する
 

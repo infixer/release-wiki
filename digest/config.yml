@@ -21,7 +21,9 @@ repos:
   - repo: vitest-dev/vitest
   - repo: anthropics/claude-code
   - repo: openai/codex
-    includeCommits: true # PR を通さずコミットで入る運用なので、直接のコミットを集める
+    # 社内の変更を copyberry[bot] が PR にして取り込む運用なので、この bot の PR も集める
+    includeBots: ["copyberry[bot]"]
+    maxPrs: 30 # PR がとても多い（週 400 件前後）ので、詳しく書くのは 30 件まで
 
   # 標準仕様
   - repo: whatwg/html
