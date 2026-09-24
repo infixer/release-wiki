@@ -15,16 +15,25 @@ repos:
   - repo: adobe/react-spectrum
   - repo: microsoft/TypeScript
   - repo: oxc-project/oxc
+    maxPrs: 30 # PR がとても多い（週 150 件前後）ので、詳しく書くのは 30 件まで
+  - repo: pnpm/pnpm
+  - repo: vitest-dev/vitest
   - repo: anthropics/claude-code
+  - repo: openai/codex
 
   # 標準仕様
   - repo: whatwg/html
   - repo: w3c/csswg-drafts
+    includeCommits: true # エディタが PR を通さずに直接コミットすることが多いので、直接のコミットも集める
   - repo: w3c/aria
   - repo: w3c/wcag
   - repo: openui/open-ui
   - repo: tc39/ecma262
   - repo: tc39/proposals
+    # README の表が本体（どの提案がどの Stage に進んだか）なので、差分を持たせて「その他」扱いにしない
+    includeCommits: true
+    classifyByFiles: false
+    patch: 3000
 
 blogs:
   # RSS/Atom があるブログは feed、無いサイトは一覧ページを page に書く
@@ -50,6 +59,10 @@ blogs:
     maxText: 30000
     # 本文が maxText を超えるときは、修正された不具合の一覧を省く（件数だけ残す）
     dropSectionsWhenLong: "^(Resolved Issues|Known Issues)$"
+  - id: anthropic
+    title: Anthropic News
+    page: https://www.anthropic.com/news
+    linkPattern: "^https://www\\.anthropic\\.com/news/[^/?#]+$"
   # RSS の例:
   # - id: nextjs
   #   title: Next.js Blog

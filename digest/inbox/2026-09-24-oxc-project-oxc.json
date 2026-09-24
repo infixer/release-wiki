@@ -7,7 +7,7 @@
     "from": "2026-09-17T08:29:58Z",
     "to": "2026-09-24T08:29:58Z"
   },
-  "maxPrs": 60,
+  "maxPrs": 30,
   "latest": {
     "stable": {
       "tag": "oxlint_v1.85.0",

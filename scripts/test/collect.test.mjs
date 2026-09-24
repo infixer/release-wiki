@@ -14,6 +14,7 @@ import {
   doccToText,
   dropSections,
   parseDoccIndex,
+  parseEnDate,
   sortByVersion,
   collectBlog,
   collectRepo,
@@ -413,6 +414,69 @@ test("collectRepo: 新着が無ければ inbox は null、検索に失敗した�
   }
 })
 
+test("collectRepo: includeCommits で直接のコミットも集め、PR のコミットは除く", async () => {
+  const commit = (sha, date, message, extra = {}) => ({
+    sha,
+    html_url: `https://github.com/w3c/csswg-drafts/commit/${sha}`,
+    author: { login: "tabatkins", type: "User" },
+    parents: [{ sha: "p" }],
+    commit: { message, author: { name: "Tab" }, committer: { date } },
+    ...extra,
+  })
+  const listed = [
+    commit("aaaaaaa1111", "2026-09-22T10:00:00Z", "[css-grid-3] Define masonry track sizing\n\nMore details."),
+    commit("bbbbbbb2222", "2026-09-21T10:00:00Z", "[css-color-5] Fix typo (#12345)"), // squash された PR
+    commit("ccccccc3333", "2026-09-21T09:00:00Z", "Merge pull request #1 from x/y", { parents: [{}, {}] }),
+    commit("ddddddd4444", "2026-09-20T10:00:00Z", "Update deps", { author: { login: "renovate[bot]", type: "Bot" } }),
+    commit("sha5", "2026-09-19T10:00:00Z", "PR merge commit"), // PR のマージコミット
+    commit("eeeeeee5555", "2026-09-10T00:00:00Z", "[css-ui] old"), // 前回まで
+  ]
+  const routes = [
+    [/\/repos\/w3c\/csswg-drafts$/, () => json({ full_name: "w3c/csswg-drafts", default_branch: "main" })],
+    [/\/releases\/latest$/, () => json({ message: "Not Found" }, 404)],
+    [/\/releases\?/, () => json([])],
+    [/\/search\/issues\?/, () => json({ total_count: 1, items: [searchItem(5, "2026-09-19T10:00:00Z", { title: "[css-ui] Add x" })] })],
+    [/\/pulls\/5$/, () => json({ number: 5, body: "", merge_commit_sha: "sha5", merged_at: "2026-09-19T10:00:00Z", changed_files: 1 })],
+    [/\/pulls\/5\/files/, () => json([{ filename: "css-ui-4/Overview.bs", additions: 1, deletions: 1 }])],
+    [/\/commits\?sha=main&since=2026-09-15T00%3A00%3A00Z|\/commits\?sha=main&since=2026-09-15T00:00:00Z/, () => json(listed)],
+    [
+      /\/commits\/aaaaaaa1111$/,
+      () => json({ files: [{ filename: "css-grid-3/Overview.bs", additions: 20, deletions: 3, patch: "@@ -1 +1 @@\n-a\n+b" }] }),
+    ],
+  ]
+  const { fetchImpl } = mockFetch(routes)
+  const gh = createGitHub({ fetchImpl, wait: noWait })
+  const cfg = { repo: "w3c/csswg-drafts", includeCommits: true, patch: 2000 }
+  const prev = { lastMergedAt: "2026-09-15T00:00:00Z", lastCommitAt: "2026-09-15T00:00:00Z" }
+  const { inbox, state } = await collectRepo(gh, cfg, prev, new Date("2026-09-23T21:17:00Z"))
+  assert.deepEqual(inbox.errors, [])
+  assert.deepEqual(inbox.prs.map((p) => p.number), [5])
+  assert.deepEqual(inbox.commitsRange, { from: "2026-09-15T00:00:00Z", to: "2026-09-23T21:17:00Z" })
+  assert.deepEqual(inbox.commits, [
+    {
+      sha: "aaaaaaa",
+      url: "https://github.com/w3c/csswg-drafts/commit/aaaaaaa1111",
+      author: "tabatkins",
+      committedAt: "2026-09-22T10:00:00Z",
+      title: "[css-grid-3] Define masonry track sizing",
+      hint: "unknown",
+      release: "⏳ 未リリース",
+      body: "More details.",
+      files: ["css-grid-3/Overview.bs (+20 -3)"],
+      filesTotal: 1,
+      patch: "--- css-grid-3/Overview.bs\n@@ -1 +1 @@\n-a\n+b",
+    },
+  ])
+  // 除いたコミットも含めて、見た中で最新の日時まで進める
+  assert.equal(state.lastCommitAt, "2026-09-22T10:00:00Z")
+})
+
+test("hint: classifyByFiles: false なら README だけの変更も other にしない", () => {
+  assert.equal(classifyPr({ title: "Update README.md", files: ["README.md"] }), "other")
+  assert.equal(classifyPr({ title: "Update README.md", files: ["README.md"], byFiles: false }), "unknown")
+  assert.equal(classifyPr({ title: "docs: typo", files: ["README.md"], byFiles: false }), "other")
+})
+
 test("search: 1000 件を超える期間は分割して取り直す", async () => {
   const queries = []
   const fetchImpl = async (url) => {
@@ -595,7 +659,55 @@ test("collectBlog: Apple のドキュメント（docc）から取り込み、長
   assert.deepEqual(inbox.errors, [])
 })
 
-const items26_6 = () => "https://developer.apple.com/documentation/safari-release-notes/safari-26_6-release-notes"
+const items26_6 = () =>
+  "https://developer.apple.com/documentation/safari-release-notes/safari-26_6-release-notes#rev=Released July 27, 2026 — 26.6 (20624.4.5)"
+
+test("collectBlog: Beta のリリースノートが同じ URL のまま更新されたら取り直す（updated）", async () => {
+  const index = JSON.parse(await fixture("docc-index.json"))
+  const article = await fixture("docc-article.json")
+  const routes = (idx) => [
+    [/\/safari-release-notes\.json$/, () => new Response(JSON.stringify(idx))],
+    [/-release-notes\.json$/, () => new Response(article)],
+  ]
+  const cfg = { id: "safari", docc: "https://developer.apple.com/documentation/safari-release-notes" }
+  const first = await collectBlog(cfg, undefined, { fetchImpl: mockFetch(routes(index)).fetchImpl })
+  assert.equal(first.inbox.posts.length, 3)
+  assert.ok(first.inbox.posts.every((p) => !p.updated))
+
+  // 変更なし → 新着なし
+  const same = await collectBlog(cfg, first.state, { fetchImpl: mockFetch(routes(index)).fetchImpl })
+  assert.equal(same.inbox, null)
+
+  // 27.2 beta の 2 回目（日付とビルド番号が変わる）
+  const next = structuredClone(index)
+  next.references["doc://x/documentation/safari-27_2-release-notes"].abstract = [
+    { type: "text", text: "Released September 23, 2026 — 27.2 beta 2 (20625.2.9)" },
+  ]
+  const updated = await collectBlog(cfg, first.state, { fetchImpl: mockFetch(routes(next)).fetchImpl })
+  assert.deepEqual(
+    updated.inbox.posts.map((p) => [p.title, p.publishedAt, p.updated]),
+    [["Safari 27.2 Beta Release Notes", "2026-09-23T00:00:00.000Z", true]],
+  )
+})
+
+test("一覧ページ: リンクの中の日付（time 要素の文字）とタイトル", () => {
+  const html = `<main><ul>
+    <li><a href="/news/claude-text-watermark"><div><time class="date">Aug 14, 2026</time><span class="subject">Announcements</span></div><span class="PublicationList__title">How Claude’s text watermark works</span></a></li>
+    <li><a href="/news/other"><time datetime="2026-08-07">Aug 7</time>Other news</a></li>
+  </ul></main>`
+  const items = parseListingPage(html, "https://www.anthropic.com/news", {
+    linkPattern: "^https://www\\.anthropic\\.com/news/[^/?#]+$",
+  })
+  assert.deepEqual(
+    items.map((i) => [i.title, i.publishedAt]),
+    [
+      ["How Claude’s text watermark works", "2026-08-14T00:00:00.000Z"],
+      ["Other news", "2026-08-07T00:00:00.000Z"],
+    ],
+  )
+  assert.equal(parseEnDate("Sept. 3, 2026"), "2026-09-03T00:00:00.000Z")
+  assert.equal(parseEnDate("nothing"), null)
+})
 
 test("一覧ページ: linkPattern があれば別ドメインのリンクも拾う", () => {
   const html = `<main>

@@ -25,6 +25,8 @@ export const LIMITS = {
   searchCap: 1000, // search API が 1 クエリで返せる上限
   concurrency: 4,
   maxPrs: 60,
+  maxCommits: 50, // includeCommits のとき、1 回で集める直接のコミットの上限
+  commitBody: 1000,
 }
 
 const USER_AGENT = "release-wiki-collect"
@@ -102,6 +104,12 @@ export function dropSections(text, pattern) {
   return out.join("\n").replace(/\n{3,}/g, "\n\n").trim()
 }
 
+/** 変更ファイルの差分（patch）をつなげて max 字で切る。README の表が本体のリポジトリ向け */
+export function buildPatch(files, max) {
+  const parts = files.filter((f) => f.patch).map((f) => `--- ${f.filename}\n${f.patch}`)
+  return truncate(parts.join("\n"), max)
+}
+
 /** 連続する空白と空行を詰める */
 export function normalizeText(text) {
   return String(text ?? "")
@@ -137,10 +145,11 @@ export function isOtherFile(file) {
  * 分類の目安を決める。ラベルは分類の手がかりにしない（react は CLA Signed などしか無く、next.js はラベル無し）。
  * @returns {"other" | "feature" | "fix" | "unknown"}
  */
-export function classifyPr({ title = "", files = [] }) {
+export function classifyPr({ title = "", files = [], byFiles = true }) {
   if (OTHER_TITLE.test(title)) return "other"
   const paths = files.map((f) => (typeof f === "string" ? f : f.path))
-  if (paths.length > 0 && paths.every(isOtherFile)) return "other"
+  // byFiles: false なら変更ファイルでは other にしない（README が本体の tc39/proposals など）
+  if (byFiles && paths.length > 0 && paths.every(isOtherFile)) return "other"
   if (FEATURE.test(title)) return "feature"
   if (FIX.test(title)) return "fix"
   return "unknown"
@@ -326,8 +335,18 @@ export function htmlToText(html) {
 
 const JA_DATE = /公開(?:日)?\s*[:：]?\s*(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/
 const EN_DATE = /Published:?\s+([A-Z][a-z]+\.? \d{1,2},? \d{4})/
+// 「September 16, 2026」「Sep 16, 2026」「Sept. 16, 2026」
 const EN_DATE_ANY =
-  /((?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4})(?!\d)/
+  /((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.? \d{1,2},? \d{4})(?!\d)/
+
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+
+/** 英語の日付（September 16, 2026 / Sep 16, 2026）を ISO にする */
+export function parseEnDate(s) {
+  const m = /([A-Za-z]{3})[a-z]*\.? (\d{1,2}),? (\d{4})/.exec(String(s ?? ""))
+  const month = m ? MONTHS.indexOf(m[1].toLowerCase()) : -1
+  return month < 0 ? null : new Date(Date.UTC(+m[3], month, +m[2])).toISOString()
+}
 
 /** 記事ページのメタデータや本文の「公開日」から公開日時を探す */
 function findPublished(document) {
@@ -343,7 +362,7 @@ function findPublished(document) {
   const ja = JA_DATE.exec(text)
   if (ja) return new Date(Date.UTC(+ja[1], +ja[2] - 1, +ja[3])).toISOString()
   const en = EN_DATE.exec(text) ?? EN_DATE_ANY.exec(text)
-  return en ? toIso(`${en[1]} UTC`) : null
+  return en ? parseEnDate(en[1]) : null
 }
 
 /**
@@ -413,14 +432,20 @@ export function parseListingPage(html, pageUrl, { linkPattern, articleParams } =
     const url = u.href
     if (re && !re.test(url)) continue
     if (found.has(url)) continue
-    // カード全体がリンクのときは中の見出しをタイトルにする
-    const heading = a.querySelector("h1, h2, h3, h4, h5, h6")
-    const title = normalizeText(heading?.textContent || a.textContent || a.getAttribute("title"))
+    // カード全体がリンクのときは中の見出し（か class に title を含む要素）をタイトルにする。
+    // 無ければリンクの文字から日付（time 要素）を除いたもの
+    const heading = a.querySelector("h1, h2, h3, h4, h5, h6, [class*='title']")
+    let linkText = a.textContent
+    for (const t of a.querySelectorAll("time")) linkText = linkText.replace(t.textContent, " ")
+    const title = normalizeText(heading?.textContent || linkText || a.getAttribute("title"))
     if (!title) continue // 画像だけのリンクは飛ばす（同じ URL の文字リンクを待つ）
     found.add(url)
     const box = a.closest("li, article, tr, devsite-card, .devsite-card") ?? a.parentElement
-    const time = box?.querySelector("time[datetime]")?.getAttribute("datetime")
-    items.push({ title: title.slice(0, 200), url, publishedAt: toIso(time), html: "" })
+    // time 要素の datetime、無ければ time 要素の文字（Aug 14, 2026 など）から日付を取る
+    const timeEl = a.querySelector("time") ?? box?.querySelector("time")
+    const publishedAt =
+      toIso(timeEl?.getAttribute("datetime")) ?? parseEnDate(timeEl?.textContent) ?? null
+    items.push({ title: title.slice(0, 200), url, publishedAt, html: "" })
   }
   // 他のリンクの親にあたるパス（例: /docs/ai と /docs/ai/webmcp の /docs/ai）はカテゴリのトップとみなして除く
   const paths = items.map((it) => new URL(it.url).pathname.replace(/\/$/, ""))
@@ -527,8 +552,11 @@ export function parseDoccIndex(json, pageUrl) {
       items.push({
         title: ref.title ?? "",
         url: origin + ref.url,
-        publishedAt: date ? toIso(`${date[1]} UTC`) : null,
+        publishedAt: date ? parseEnDate(date[1]) : null,
         html: "",
+        // Beta のリリースノートは同じ URL のまま中身が更新され、「Released … — 27.2 beta (20625.2.4)」の
+        // 日付とビルド番号が変わる。これを含めた key で既読を管理し、変わったら取り直す
+        key: `${origin + ref.url}#rev=${abstract}`,
       })
     }
   }
@@ -720,7 +748,11 @@ export async function releaseStatus(gh, fullName, latest, sha) {
   return "⏳ 未リリース"
 }
 
-async function fetchPrDetail(gh, fullName, item, latest, errors) {
+/**
+ * @param {{ patch?: number, classifyByFiles?: boolean }} cfg リポジトリの設定
+ * @param {Set<string>} shas マージコミットの sha を入れる（直接のコミットと見分けるため）
+ */
+async function fetchPrDetail(gh, fullName, item, latest, errors, cfg = {}, shas = new Set()) {
   const n = item.number
   const labels = (item.labels ?? []).map((l) => (typeof l === "string" ? l : l.name))
   const pr = {
@@ -741,6 +773,7 @@ async function fetchPrDetail(gh, fullName, item, latest, errors) {
     detail = await gh.request(`/repos/${fullName}/pulls/${n}`)
     pr.body = cleanPrBody(detail.body ?? item.body, LIMITS.prBody)
     pr.mergedAt = detail.merged_at ?? pr.mergedAt
+    if (detail.merge_commit_sha) shas.add(detail.merge_commit_sha)
   } catch (e) {
     errors.push(`#${n} の詳細を取得できませんでした: ${e.message}`)
   }
@@ -749,10 +782,15 @@ async function fetchPrDetail(gh, fullName, item, latest, errors) {
     files = await gh.request(`/repos/${fullName}/pulls/${n}/files?per_page=${LIMITS.filesFetch}`)
     pr.files = summarizeFiles(files, LIMITS.files)
     pr.filesTotal = detail?.changed_files ?? files.length
+    if (cfg.patch) pr.patch = buildPatch(files, cfg.patch)
   } catch (e) {
     errors.push(`#${n} の変更ファイルを取得できませんでした: ${e.message}`)
   }
-  pr.hint = classifyPr({ title: pr.title, files: files.map((f) => f.filename) })
+  pr.hint = classifyPr({
+    title: pr.title,
+    files: files.map((f) => f.filename),
+    byFiles: cfg.classifyByFiles !== false,
+  })
   // 「その他」は 1 行で書くだけなので、本文と変更ファイルは持たない
   if (pr.hint === "other") {
     delete pr.body
@@ -764,6 +802,86 @@ async function fetchPrDetail(gh, fullName, item, latest, errors) {
     errors.push(`#${n} の収録状況を判定できませんでした: ${e.message}`)
   }
   return pr
+}
+
+/**
+ * PR を通さずにブランチへ直接入ったコミットを集める（csswg-drafts のようにエディタが直接コミットするリポジトリ向け）。
+ * PR のマージコミット・「(#123)」で終わる squash コミット・マージコミット・bot のコミットは除く。
+ */
+export async function fetchDirectCommits(gh, fullName, { branch, since, to, latest, cfg, prShas, errors }) {
+  const listed = []
+  for (let page = 1; page <= 5; page++) {
+    const q = `sha=${encodeURIComponent(branch)}&since=${since}&until=${to}&per_page=100&page=${page}`
+    const res = await gh.request(`/repos/${fullName}/commits?${q}`)
+    listed.push(...res)
+    if (res.length < 100) break
+  }
+  const inRange = listed.filter((c) => Date.parse(c.commit?.committer?.date) > Date.parse(since))
+  const newest = inRange
+    .map((c) => c.commit.committer.date)
+    .sort()
+    .at(-1)
+  const direct = inRange
+    .filter((c) => {
+      const title = (c.commit?.message ?? "").split("\n")[0]
+      return (
+        !prShas.has(c.sha) &&
+        (c.parents?.length ?? 1) <= 1 &&
+        !/\(#\d+\)\s*$/.test(title) &&
+        !/^Merge (pull request|branch|remote-tracking)/.test(title) &&
+        !isBotUser(c.author) &&
+        !/\[bot\]$/i.test(c.commit?.author?.name ?? "")
+      )
+    })
+    .sort((a, b) => a.commit.committer.date.localeCompare(b.commit.committer.date))
+  const max = cfg.maxCommits ?? LIMITS.maxCommits
+  const targets = direct.slice(-max)
+  if (direct.length > max) {
+    errors.push(`直接のコミットが ${direct.length} 件あったので、新しい ${max} 件だけ集めました`)
+  }
+  const commits = await mapLimit(targets, LIMITS.concurrency, async (c) => {
+    const [title, ...rest] = (c.commit.message ?? "").split("\n")
+    const commit = {
+      sha: c.sha.slice(0, 7),
+      url: c.html_url,
+      author: c.author?.login ?? c.commit.author?.name ?? null,
+      committedAt: c.commit.committer.date,
+      title,
+      hint: "unknown",
+      release: "⏳ 未リリース",
+      body: cleanPrBody(rest.join("\n"), LIMITS.commitBody),
+      files: [],
+      filesTotal: 0,
+    }
+    let files = []
+    try {
+      const detail = await gh.request(`/repos/${fullName}/commits/${c.sha}`)
+      files = detail.files ?? []
+      commit.files = summarizeFiles(files, LIMITS.files)
+      commit.filesTotal = files.length
+      if (cfg.patch) commit.patch = buildPatch(files, cfg.patch)
+    } catch (e) {
+      errors.push(`コミット ${commit.sha} の変更ファイルを取得できませんでした: ${e.message}`)
+    }
+    commit.hint = classifyPr({
+      title,
+      files: files.map((f) => f.filename),
+      byFiles: cfg.classifyByFiles !== false,
+    })
+    if (commit.hint === "other") {
+      delete commit.body
+      delete commit.files
+      delete commit.patch
+    }
+    if (!commit.body) delete commit.body
+    try {
+      commit.release = await releaseStatus(gh, fullName, latest, c.sha)
+    } catch (e) {
+      errors.push(`コミット ${commit.sha} の収録状況を判定できませんでした: ${e.message}`)
+    }
+    return commit
+  })
+  return { commits, newest }
 }
 
 /**
@@ -828,11 +946,41 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
       !isBotUser(it.user) &&
       !(it.labels ?? []).some((l) => exclude.has(String(l.name ?? l).toLowerCase())),
   )
+  const prShas = new Set()
   base.prs = await mapLimit(targets, LIMITS.concurrency, (it) =>
-    fetchPrDetail(gh, fullName, it, base.latest, errors),
+    fetchPrDetail(gh, fullName, it, base.latest, errors, cfg, prShas),
   )
+  // 「その他」は本文と差分も持たない
+  for (const pr of base.prs) if (pr.hint === "other") delete pr.patch
 
-  const hasData = base.prs.length > 0 || base.releasesInRange.length > 0 || errors.length > 0
+  if (cfg.includeCommits) {
+    const since =
+      prevState.lastCommitAt ?? isoSec(now.getTime() - LIMITS.initialDays * 24 * 3600 * 1000)
+    base.commitsRange = { from: since, to }
+    try {
+      const { commits, newest } = await fetchDirectCommits(gh, fullName, {
+        branch: base.branch,
+        since,
+        to,
+        latest: base.latest,
+        cfg,
+        prShas,
+        errors,
+      })
+      base.commits = commits
+      state.lastCommitAt = newest ?? prevState.lastCommitAt ?? since
+    } catch (e) {
+      base.commits = []
+      // 失敗した回は lastCommitAt を進めない
+      errors.push(`直接のコミットを取得できませんでした: ${e.message}`)
+    }
+  }
+
+  const hasData =
+    base.prs.length > 0 ||
+    (base.commits?.length ?? 0) > 0 ||
+    base.releasesInRange.length > 0 ||
+    errors.length > 0
   return { inbox: hasData ? base : null, state }
 }
 
@@ -896,8 +1044,12 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
     items = items.filter((it) => re.test(it.title))
   }
 
+  // 既読は key（無ければ URL）で管理する。URL は既読で key だけ変わったものは「更新」として取り直す
+  const keyOf = (it) => it.key ?? it.url
+  const urlOfKey = (k) => k.split("#rev=")[0]
   const seen = new Set(prevState?.seen ?? [])
-  let targets = items.filter((it) => !seen.has(it.url))
+  const seenUrls = new Set([...seen].map(urlOfKey))
+  let targets = items.filter((it) => !seen.has(keyOf(it)))
   if (firstRun) targets = targets.slice(0, LIMITS.initialPosts)
 
   base.posts = await mapLimit(targets, LIMITS.concurrency, async (it) => {
@@ -928,6 +1080,8 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
       title,
       url: it.url,
       publishedAt: it.publishedAt ?? article?.publishedAt ?? null,
+      // 前に取り込んだ記事の中身が更新されたもの（既存のページを書き直す）
+      ...(seenUrls.has(it.url) ? { updated: true } : {}),
       versions: extractVersions(title, text),
       text: truncate(text, max),
     }
@@ -936,7 +1090,7 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
   base.posts.reverse()
 
   // 初回は取り込まなかった記事も seen に登録する
-  state.seen = [...new Set([...items.map((it) => it.url), ...(prevState?.seen ?? [])])].slice(
+  state.seen = [...new Set([...items.map(keyOf), ...(prevState?.seen ?? [])])].slice(
     0,
     LIMITS.seen,
   )

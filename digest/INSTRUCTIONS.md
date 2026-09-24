@@ -42,7 +42,12 @@ id とフォルダの対応:
   - `body`: PR 本文（1500 字まで。画像と長い URL は除いてある）
   - `files`: 変更ファイル（`"パス (+追加行 -削除行)"`、本体のファイルを優先して 10 件まで）、`filesTotal`: 変更ファイルの総数
   - `hint: "other"` の PR には `body` と `files` が無い（タイトルだけで 1 行にする）
-- `maxPrs`: 詳しく書く PR の上限
+  - `patch`（一部のリポジトリだけ）: 変更の差分。tc39/proposals のように README の表が本体のリポジトリでは、
+    差分の `+` / `-` 行から「どの提案がどの Stage に進んだ・追加された・取り下げられた」を読み取って書く
+- `commits[]`（一部のリポジトリだけ）: PR を通さずに直接入ったコミット（古い順）。期間は `commitsRange`
+  - `sha`・`url`・`author`・`committedAt`・`title`・`body`（あれば）・`hint`・`release`・`files`・`filesTotal`・`patch`（あれば）
+  - PR と同じように要約する。リンクは PR 番号の代わりに ``[`abc1234`](url)`` と書く
+- `maxPrs`: 詳しく書く PR（と直接のコミット）の上限
 - `errors[]`: collect で起きたエラー。空でなければ log.md に書く
 
 ブログ:
@@ -50,6 +55,9 @@ id とフォルダの対応:
 - `posts[]`: 新着記事（古い順）。`text` は本文（15000 字まで）、`versions` は本文中のバージョン表記
   - `publishedAt` が null のことがある（一覧ページから集めたサイト）。そのときは `collectedAt` の日付を使う
   - `text` が空の記事は、タイトルと URL だけを記事一覧に載せ、posts ページは作らない
+  - `updated: true` の記事は、前に取り込んだ記事（同じ URL）の中身が更新されたもの（Safari の Beta のリリースノートなど）。
+    新しいページは作らず、既存の posts ページ（`ls` で URL の slug から探す）を書き直し、先頭に「更新: <collectedAt の日付>」と、
+    前回から増えた・変わった点を書く。タイトルが変わっていればタイトルも直す（例: Beta → 正式版）
 - `relatedRepo`: 関連リポジトリ（`vercel/next.js` など）。null なら releases やリポジトリのトピックへのリンクは不要
 - `errors[]`: collect で起きたエラー
 
@@ -136,6 +144,7 @@ tags:
 ```
 
 見出しが空になるときは「なし」と書く。
+`commits[]` がある回は、直接のコミットも PR と同じ見出し（新機能 / 変更・修正 / その他）に入れ、期間の行に「直接のコミット N 件」も書く。
 
 ### 5.2 `content/repos/<id>/topics/<トピック>.md`（Wiki の本体）
 

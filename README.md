@@ -45,6 +45,9 @@ repos:
     branch: main            # 任意: 対象のブランチ（省略すると既定ブランチ。next.js なら canary）
     excludeLabels: [dependencies]  # 任意: このラベルの PR を除く
     maxPrs: 60              # 任意: 1 回で詳しく扱う PR の上限（既定 60）
+    includeCommits: true    # 任意: PR を通さずに直接入ったコミットも集める（csswg-drafts など）
+    classifyByFiles: false  # 任意: README などの変更だけでも「その他」扱いにしない（tc39/proposals など）
+    patch: 3000             # 任意: 変更の差分を 1 件あたりこの字数まで持たせる
 
 blogs:
   # RSS/Atom があるブログ
@@ -75,6 +78,7 @@ blogs:
   他のリンクの親にあたるパス（カテゴリのトップ）は除きます。`linkPattern` が無ければ同じサイトのリンクだけを拾います。
   記事ページからタイトル・本文・公開日を取り出します。リンクが 1 つも見つからなければ `errors` に記録されます。
 - `docc` のときは、ページと同じ内容の JSON（`/tutorials/data/documentation/....json`）を読みます。
+  「Released … — 27.2 beta (…)」の日付やビルド番号が変わったら、同じ URL でも取り直して `updated: true` を付けます（Beta のリリースノートの更新）。
 - `repo` は転送元の名前（`facebook/react` など）でも動きますが、正式名（`react/react`）を書くのがおすすめです。
 - bot が作った PR は自動で除かれます。
 
