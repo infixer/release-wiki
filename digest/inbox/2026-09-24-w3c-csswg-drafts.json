@@ -1,0 +1,96 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14501,
+      "title": "[css-forms-1] Lighten background colors in dark mode",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14501",
+      "author": "lukewarlow",
+      "mergedAt": "2026-09-17T17:50:35Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "See https://github.com/w3c/csswg-drafts/issues/14461",
+      "files": [
+        "css-forms-1/Overview.bs (+5 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14473,
+      "title": "[css-forms-1] Apply 4px border-radius to all base appearance controls",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14473",
+      "author": "lukewarlow",
+      "mergedAt": "2026-09-17T18:06:01Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "[css-forms-1] Apply 4px border-radius to all base appearance controls\n\nPer #14308",
+      "files": [
+        "css-forms-1/Overview.bs (+10 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14510,
+      "title": "[selectors-4][editorial] Typo",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14510",
+      "author": "cdoublev",
+      "mergedAt": "2026-09-18T23:00:08Z",
+      "labels": [
+        "selectors-4",
+        "editorial"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Remove a \"which\" left behind in 7ec6c08, which resulted in a tautology: *\"Indicate focus [...] - If the element **which** supports keyboard input [...] indicate focus.\"*.\n\nhttps://drafts.csswg.org/selectors-4/#the-focus-visible-pseudo",
+      "files": [
+        "selectors-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13846,
+      "title": "[filter-effects-1] Document Clickjacking Attacks",
+      "url": "https://github.com/w3c/csswg-drafts/pull/13846",
+      "author": "arichiv",
+      "mergedAt": "2026-09-22T22:32:13Z",
+      "labels": [
+        "Agenda+"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This formalizes the proposal here: https://chromestatus.com/feature/5117170452398080",
+      "files": [
+        "filter-effects-1/Overview.bs (+7 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14519,
+      "title": "[web-animations-1] Simplify implicit keyframes and specify their easing",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14519",
+      "author": "birtles",
+      "mergedAt": "2026-09-24T05:42:04Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #2914.\nFixes #14492.",
+      "files": [
+        "web-animations-1/Overview.bs (+21 -9)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

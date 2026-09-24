@@ -1,0 +1,41 @@
+{
+  "kind": "repo",
+  "repo": "vercel/next.js",
+  "branch": "canary",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-24T06:50:02Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v16.3.6",
+      "publishedAt": "2026-09-22T17:15:10Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.3.6"
+    },
+    "prerelease": {
+      "tag": "v16.4.0-canary.42",
+      "publishedAt": "2026-09-24T00:30:48Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.0-canary.42"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 99120,
+      "title": "Tune Node server chunking for require overhead",
+      "url": "https://github.com/vercel/next.js/pull/99120",
+      "author": "sokra",
+      "mergedAt": "2026-09-24T07:46:13Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nTune production Node.js server JavaScript chunking to use a lower estimated cost for loading a chunk, a smaller soft minimum chunk size, and no per-group chunk-count target. Client, CSS, Edge, and development chunking remain unchanged.\n\n### Why?\n\nServer chunks are loaded with Node.js `require()`, not network requests. Measurements across synthetic JavaScript chunks found roughly 0.1 ms of fixed load overhead, equivalent to approximately 2.5–25 KB of parsing work depending on code density. The existing 200 KB estimate overweights each server-side load and encourages unnecessary merging.\n\n### How?\n\nApply the server-specific tuning to both Node production chunking contexts while keeping the existing maximum merge size. The values are an initial estimate from the benchmark; representative application builds and cold-start measurements can refine them.\n\n### Verification\n\n- `cargo fmt --manifest-path crates/next-core/Cargo.toml -- --check` — passed.\n- `git diff --check` and checks of both Node contexts and unchanged Edge values — passed.\n- `cargo check -p next-core --offline` — blocked before compilation by an uncached `bgw/bincode` Git dependency.",
+      "files": [
+        "crates/next-core/src/next_server/context.rs (+8 -4)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

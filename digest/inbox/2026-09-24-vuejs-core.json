@@ -1,0 +1,53 @@
+{
+  "kind": "repo",
+  "repo": "vuejs/core",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v3.5.43",
+      "publishedAt": "2026-09-17T08:36:57Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.5.43"
+    },
+    "prerelease": {
+      "tag": "v3.6.0-rc.9",
+      "publishedAt": "2026-09-18T08:17:55Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.6.0-rc.9"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v3.5.43",
+      "name": "v3.5.43",
+      "publishedAt": "2026-09-17T08:36:57Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.5.43",
+      "prerelease": false,
+      "body": "For stable releases, please refer to [CHANGELOG.md](https://github.com/vuejs/core/blob/main/CHANGELOG.md) for details.\nFor pre-releases, please refer to [CHANGELOG.md](https://github.com/vuejs/core/blob/minor/CHANGELOG.md) of the `minor` branch."
+    },
+    {
+      "tag": "v3.6.0-rc.9",
+      "name": "v3.6.0-rc.9",
+      "publishedAt": "2026-09-18T08:17:55Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.6.0-rc.9",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 15557,
+      "title": "ci(issues): remove automatic issue closing workflow",
+      "url": "https://github.com/vuejs/core/pull/15557",
+      "author": "edison1105",
+      "mergedAt": "2026-09-18T00:54:21Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

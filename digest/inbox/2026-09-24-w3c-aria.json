@@ -1,0 +1,137 @@
+{
+  "kind": "repo",
+  "repo": "w3c/aria",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 2885,
+      "title": "editorial: update roleInfo in README",
+      "url": "https://github.com/w3c/aria/pull/2885",
+      "author": "pkra",
+      "mergedAt": "2026-09-17T16:23:48Z",
+      "labels": [
+        "editorial"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 2900,
+      "title": "Editorial: Adds alias to be able to use target as the link text",
+      "url": "https://github.com/w3c/aria/pull/2900",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-09-17T17:17:57Z",
+      "labels": [
+        "editorial",
+        "spec:aria"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "🚀 **Netlify Preview**:\n🔄 **this PR updates the following sspecs**:\n- [ARIA preview](https://deploy-preview-2900--wai-aria.netlify.app/index.html) &mdash; [ARIA diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Faria%2F&doc2=https%3A%2F%2Fdeploy-preview-2900--wai-aria.netlify.app%2Findex.html)\n\nAs a follow-up for #2894, which I didn't realized was missing the alias for these definitions to work correctly.",
+      "files": [
+        "index.html (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 2865,
+      "title": "Editorial: various typos found with cSpell",
+      "url": "https://github.com/w3c/aria/pull/2865",
+      "author": "nschonni",
+      "mergedAt": "2026-09-22T17:29:46Z",
+      "labels": [
+        "spec:core-aam",
+        "spec:aria",
+        "spec:accname",
+        "spec:mathml-aam",
+        "spec:dpub-aria",
+        "spec:dpub-aam",
+        "spec:graphics-aria",
+        "spec:graphics-aam",
+        "spec:svg-aam"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Took a pass with cSpell and cleaned up a bunch of the things that it flagged.\nCould break this up a bunch so that there is a PR per spec, but I figured I'd just open the big one first and then split it if needed.",
+      "files": [
+        "accname/index.html (+1 -1)",
+        "common/script/aria.js (+1 -1)",
+        "common/script/prComment.mjs (+1 -1)",
+        "core-aam/index.html (+3 -3)",
+        "dpub-aam/index.html (+2 -2)",
+        "dpub-aria/index.html (+4 -4)",
+        "graphics-aam/index.html (+1 -1)",
+        "graphics-aria/img/house-graphicsroles.svg (+1 -1)",
+        "graphics-aria/index.html (+1 -1)",
+        "index.html (+3 -3)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 2909,
+      "title": "Adjust repo names and ED URLs in ReSpec config",
+      "url": "https://github.com/w3c/aria/pull/2909",
+      "author": "tidoust",
+      "mergedAt": "2026-09-23T14:57:37Z",
+      "labels": [
+        "spec:core-aam",
+        "spec:html-aam",
+        "spec:accname",
+        "spec:mathml-aam",
+        "spec:dpub-aria",
+        "spec:dpub-aam",
+        "spec:graphics-aria",
+        "spec:graphics-aam",
+        "spec:svg-aam",
+        "spec:pdf-aam",
+        "spec:css-aam"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "🚀 **Netlify Preview**:\n🔄 **this PR updates the following specs**:\n- [accname preview](https://deploy-preview-2909--wai-aria.netlify.app/accname/index.html) &mdash; [accname diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Faccname%2F&doc2=https%3A%2F%2Fdeploy-preview-2909--wai-aria.netlify.app%2Faccname%2Findex.html)\n- [core-aam preview](https://deploy-preview-2909--wai-aria.netlify.app/core-aam/index.html) &mdash; [core-aam diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Fcore-aam%2F&doc2=https%3A%2F%2Fdeploy-preview-2909--wai-aria.netlify.app%2Fcore-aam%2Findex.html)\n- [css-aam preview](https://deploy-preview-2909--wai-aria.netlify.app/css-aam/index.html) &mdash; [css-aam diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Fcss-aam%2F&doc2=https%3A%2F%2Fdeploy-preview-2909--wai-aria.netlify.app%2Fcss-aam%2Findex.html)\n- [dpub-aam preview](https://deploy-preview-2909--wai-aria.netlify.app/dpub-aam/index.html) &mdash; [dpub-aam diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Fdpub-aam%2F&doc2=https%3A%2F%2Fdeploy-preview-2909--wai-aria.netlify.app%2Fdpub-aam%2Findex.html)\n- [dpub-aria preview](https://deploy-preview-2909--wai-aria.netlify.app/dpub-aria/index.html) &mdash; [dpub-aria diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Fdpub-aria%2F&doc2=https%3A%2F%2Fdeploy-preview-2909--wai-aria.netlify.app%2Fdpub-aria%2Findex.html)\n- [graphics-aam preview](ht\n…(truncated)",
+      "files": [
+        "accname/index.html (+1 -1)",
+        "core-aam/index.html (+1 -1)",
+        "css-aam/index.html (+1 -1)",
+        "dpub-aam/index.html (+1 -1)",
+        "dpub-aria/index.html (+1 -1)",
+        "graphics-aam/index.html (+1 -1)",
+        "graphics-aria/index.html (+1 -1)",
+        "html-aam/index.html (+5 -5)",
+        "mathml-aam/index.html (+1 -1)",
+        "pdf-aam/index.html (+1 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 2908,
+      "title": "Trigger build of Core AAM",
+      "url": "https://github.com/w3c/aria/pull/2908",
+      "author": "jugglinmike",
+      "mergedAt": "2026-09-23T15:00:58Z",
+      "labels": [
+        "spec:core-aam"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is a diagnostic pull request for the apparent build-process problem reported in gh-2907. Apologies for the noise!",
+      "files": [
+        "core-aam/index.html (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

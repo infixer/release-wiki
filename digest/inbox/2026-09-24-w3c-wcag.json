@@ -1,0 +1,73 @@
+{
+  "kind": "repo",
+  "repo": "w3c/wcag",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 5303,
+      "title": "Expand \"Understanding Levels of Conformance\"",
+      "url": "https://github.com/w3c/wcag/pull/5303",
+      "author": "patrickhlauke",
+      "mergedAt": "2026-09-20T21:02:15Z",
+      "labels": [
+        "Understanding",
+        "Conformance WCAG 2.x",
+        "Substantive"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Based on the lengthy discussions in https://github.com/w3c/wcag/issues/3889 - which kept stressing the idea that no, Level A/AA/AAA does not try to imply any kind of hierarchy of importance/severity (though this may perhaps be more wishful thinking) - this PR rewrites and expands this section, to hopefully provide some more clarification.\n\n* removes the use of the word \"essential\" - this currently very clearly *does* imply that some SCs are \"more essential\" (thus more important/severe) than others\n* moves the bullet about workarounds right after the first one, as it's related conceptually\n* rewords the \"freedom of expression\" point (see https://github.com/w3c/wcag/pull/5309)\n* adds a bullet about \"interpretation\" (and later mentions \"subjectivity\" in the example ... yes, it's a dirty word that WCAG doesn't want to acknowledge most of the time...but it's true)\n* gives an example after the bullet about what these bullet points actually mean - this is primarily what was missing in the \"WCAG doesn't explain itself about why levels were chosen the way they were\"\n* adds a call-back to WCAG 1.0 - where \"priority\" was used - and explains how this concept is NOT used in WCAG 2. further hammers home the idea that all SCs are important, and that deciding how to prioritise or even what level to aim for are decisions for developers/policy makers in the end\n\nCloses https://github.com/w3c/wcag/issues/3889\n\nPreview: https://deploy-preview-5303--wcag2.netlify.app/understanding/conformance#lev\n…(truncated)",
+      "files": [
+        "understanding/conformance.html (+23 -15)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 5332,
+      "title": "Tweak wording for G73: caption contains the link, the entire caption isn't a link",
+      "url": "https://github.com/w3c/wcag/pull/5332",
+      "author": "patrickhlauke",
+      "mergedAt": "2026-09-20T21:03:50Z",
+      "labels": [
+        "Techniques",
+        "Substantive"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/w3c/wcag/issues/2128\n\n[Diff preview](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fwww.w3.org%2FWAI%2FWCAG22%2FTechniques%2Fgeneral%2FG73&doc2=https%3A%2F%2Fdeploy-preview-5332--wcag2.netlify.app%2Ftechniques%2Fgeneral%2Fg73#examples)",
+      "files": [
+        "techniques/general/G73.html (+72 -88)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 5331,
+      "title": "Add ARIA14 reference to F86",
+      "url": "https://github.com/w3c/wcag/pull/5331",
+      "author": "patrickhlauke",
+      "mergedAt": "2026-09-20T21:07:30Z",
+      "labels": [
+        "Techniques"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/w3c/wcag/issues/3791",
+      "files": [
+        "techniques/failures/F86.html (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

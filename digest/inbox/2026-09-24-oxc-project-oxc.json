@@ -1,0 +1,2777 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.85.0",
+      "publishedAt": "2026-09-21T15:31:51Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.85.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "crates_v0.151.0",
+      "name": "oxc crates_v0.151.0",
+      "publishedAt": "2026-09-21T12:27:01Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/crates_v0.151.0",
+      "prerelease": false,
+      "body": "### 🚀 Features\n\n- 1fac655 coverage: Support new TypeScript fixture layout (#26226) (camc314)\n\n### 🐛 Bug Fixes\n\n- cd7228f minifier: Add missing negation for boolean literal (#26847) (Armano)\n- 32305e2 transformer: Skip enum reverse mappings for syntactic string initializers (#26724) (Dunqing)\n- 7811f0a parser: Preserve reparsed `await` tokens (#26619) (camc314)\n- 9220158 transformer: Skip recovered using loop patterns (#26722) (camc314)\n- 3130405 parser: Recover await using object binding patterns (#26721) (camc314)\n- 827fdbd parser: Reject invalid modifiers on import aliases (#26622) (camc314)\n\n### ⚡ Performance\n\n- 3f1e3aa minifier: Preallocate stmts vec size to avoid excesive reallocs (#26856) (Armano)\n- bd3f69e semantic: Reuse identifier hashes in enum member lookups (#26773) (camc314)\n- 5f72954 minifier: Reduce allocations when processing if statements (#26666) (Armano)"
+    },
+    {
+      "tag": "apps_v1.84.0",
+      "name": "oxlint v1.84.0 & oxfmt v0.69.0",
+      "publishedAt": "2026-09-21T13:03:33Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/apps_v1.84.0",
+      "prerelease": false,
+      "body": "## Table of Contents\n\n- [Oxlint v1.84.0](#oxlint-v1.84.0)\n- [Oxfmt v0.69.0](#oxfmt-v0.69.0)\n\n## Oxlint v1.84.0\n### 🚀 Features\n\n- 809090c oxlint,oxfmt: Find all `vite.config.*` variants (#26755) (leaysgur)\n- a047b67 linter: Report JavaScript plugin rule timings (#26415) (Alexander Lichter)\n- 2300898 linter/unicorn/no-unreadable-iife: Implement suggestion (#26658) (Mikhail Baev)\n\n### 🐛 Bug Fixes\n\n- 12cb547 linter/eslint/no-unused-vars: Report private namespace bindings (#26842) (camc314)\n- 927bfa4 oxlint/lsp: Align nested config handling with `configPath` semantics (#26762) (leaysgur)\n- e096dfd linter/esliny/no-unused-vars: Handle comments when removing imports (#26781) (camc314)\n- 9d48bae linter/esliny/no-unused-vars: Preserve rest bindings when removing array elements (#26778) (camc314)\n- 62a2bb2 linter/eslint/preserve-caught-error: Prevent conflicting fixes with prefer-optional-catch-binding (#26726) (camc314)\n- 0d565bc linter/unicorn/consistent-function-scoping: Detect ancestor-only function captures (#26625) (camc314)\n- 3c98cde linter/vitest/prefer-to-be-truthy: Suggest assertion rewrites (#26761) (camc314)\n- 7811f0a parser: Preserve reparsed `await` tokens (#26619) (camc314)\n- e15f103 linter/react: Add a few more missing properties to `no-unknown-property` (#26572) (Connor Shea)\n\n### ⚡ Performance\n\n- c6a00e6 linter/eslint/no-restricted-exports: Skip inactive configurations (#26772) (camc314)\n- 0026008 linter/eslint/capitalized-comments: Avoid unnecessary case-conversion allocations (#26754) (camc314)\n- 34482c9 linter/oxc/no-map-spread: Avoid collecting spread spans twice (#26718) (camc314)\n- 2ce913e linter/eslint/no-inline-comments: Skip unnecessary JSX node scans (#26714) (camc314)\n- b946951 linter/eslint/no-control-regex: Avoid temporary diagnostic allocations (#26713) (camc314)\n- 8903402 linter/promise/no-multiple-resolved: Avoid collecting executor parameters (#26691) (camc314)\n- 3aa4b25 linter/jsx-a11y/anchor-ambiguous-text: Avoid temporary word allocations (#26692) (camc314)\n- 2e07b32 linter/react/jsx-handler-names: Avoid temporary prefix collections (#26688) (camc314)\n- 2d3b7a6 linter/typescript/consistent-generic-constructors: Avoid intermediate comment strings (#26687) (camc314)\n- 97beefb linter/typescript/triple-slash-reference: Avoid attribute parsing allocations (#26686) (camc314)\n- 6b9452d linter/unicorn/prefer-export-from: Avoid temporary attribute vector (#26685) (camc314)\n- 8759780 linter/eslint/no-useless-assignment: Short-circuit identical scopes (#26684) (camc314)\n\n### 📚 Documentation\n\n- 68baaa4 linter/typescript/await-thenable: Revert add missing lang for markdown doc comment (#26757) (camc314)\n- aa7de00 lsp: Document that the `run` option only applies to push mode clients (#26670) (im10furry)\n\n## Oxfmt v0.69.0\n### 🚀 Features\n\n- 809090c oxlint,oxfmt: Find all `vite.config.*` variants (#26755) (leaysgur)\n- 4356dc2 formatter_markdown: Keep frontmatter verbatim (#26779) (leaysgur)\n- 7717813 formatter_markdown: Implement m\n…(truncated)"
+    },
+    {
+      "tag": "oxfmt_v0.70.0",
+      "name": "oxfmt v0.70.0",
+      "publishedAt": "2026-09-21T15:31:46Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxfmt_v0.70.0",
+      "prerelease": false,
+      "body": "### 🚀 Features\n\n- 415b742 oxlint,oxfmt: Do not discover nested config in Vite+ mode (#26763) (leaysgur)"
+    },
+    {
+      "tag": "oxlint_v1.85.0",
+      "name": "oxlint v1.85.0",
+      "publishedAt": "2026-09-21T15:31:51Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.85.0",
+      "prerelease": false,
+      "body": "### 🚀 Features\n\n- 415b742 oxlint,oxfmt: Do not discover nested config in Vite+ mode (#26763) (leaysgur)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 26761,
+      "title": "fix(linter/vitest/prefer-to-be-truthy): suggest assertion rewrites",
+      "url": "https://github.com/oxc-project/oxc/pull/26761",
+      "author": "camc314",
+      "mergedAt": "2026-09-17T09:22:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Reclassify `vitest/prefer-to-be-truthy`, `vitest/prefer-to-be-falsy`, and Jest/Vitest `prefer-strict-equal` replacements as suggestions, since they change which values pass an assertion. Plain `--fix` now preserves these assertions; `--fix-suggestions` applies the replacements.\n\nAdd regression coverage for both fix modes and clarify the truthy/falsy rule documentation.\n\nFixes #26760",
+      "files": [
+        "crates/oxc_linter/src/rules/jest/prefer_strict_equal.rs (+28 -2)",
+        "crates/oxc_linter/src/rules/shared/jest_vitest/prefer_strict_equal.rs (+1 -1)",
+        "crates/oxc_linter/src/rules/vitest/prefer_strict_equal.rs (+28 -2)",
+        "crates/oxc_linter/src/rules/vitest/prefer_to_be_falsy.rs (+16 -6)",
+        "crates/oxc_linter/src/rules/vitest/prefer_to_be_truthy.rs (+17 -7)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 26734,
+      "title": "docs(linter): mark unsupported unicorn css rules",
+      "url": "https://github.com/oxc-project/oxc/pull/26734",
+      "author": "baevm",
+      "mergedAt": "2026-09-17T09:23:05Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26625,
+      "title": "fix(linter/unicorn/consistent-function-scoping): detect ancestor-only function captures",
+      "url": "https://github.com/oxc-project/oxc/pull/26625",
+      "author": "camc314",
+      "mergedAt": "2026-09-17T09:28:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Report nested functions that only reference a more distant ancestor, matching Unicorn. For example, `inner` below was previously allowed and now reports that it can move to the outer scope:\n\n```js\nconst shared = 1;\nfunction outer() {\n    function inner() {\n        return shared;\n    }\n    return inner();\n}\n```\n\nInclude parameter defaults in capture checks so functions that depend on parent variables or lexical `this` remain nested. Preserve captures in parents with direct eval and Unicorn's handling of variables used directly by the parent. Cache each ancestor symbol's referencing scopes once per file, shared across candidate functions.\n\nFixes #26591",
+      "files": [
+        "crates/oxc_linter/src/generated/rule_runner_impls.rs (+2 -3)",
+        "crates/oxc_linter/src/rules/unicorn/consistent_function_scoping.rs (+586 -17)",
+        "crates/oxc_linter/src/snapshots/unicorn_consistent_function_scoping.snap (+224 -0)",
+        "tasks/track_linter_timings/linter_timings.snap (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26726,
+      "title": "fix(linter/eslint/preserve-caught-error): prevent conflicting fixes with prefer-optional-catch-binding",
+      "url": "https://github.com/oxc-project/oxc/pull/26726",
+      "author": "camc314",
+      "mergedAt": "2026-09-17T09:34:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Include an unchanged catch-binding replacement in each `preserve-caught-error` fix so it overlaps with fixes that remove the binding. With `unicorn/prefer-optional-catch-binding` enabled, `catch (error) { throw new Error('message'); }` now becomes `catch { throw new Error('message'); }` instead of adding a dangling `cause: error` reference.\n\nFixes for multiple throws sharing a catch binding now overlap and apply one per pass. Regression tests cover the conflicting fix paths and fixing a remaining throw on a later pass.\n\nFixes #26682.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/preserve_caught_error.rs (+24 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26711,
+      "title": "ci(pr): label PRs from forks via workflow_run",
+      "url": "https://github.com/oxc-project/oxc/pull/26711",
+      "author": "Dunqing",
+      "mergedAt": "2026-09-18T02:47:33Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26724,
+      "title": "fix(transformer): skip enum reverse mappings for syntactic string initializers",
+      "url": "https://github.com/oxc-project/oxc/pull/26724",
+      "author": "Dunqing",
+      "mergedAt": "2026-09-18T03:11:33Z",
+      "labels": [
+        "A-transformer",
+        "run-monitor-oxc"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "A member whose value is a string never gets a reverse mapping, but the enum lowering decides that with `is_string_literal()`, so any string-valued initializer the constant evaluator cannot fold is lowered like a number. The inner assignment then produces a string, and the outer write adds a bogus key that can overwrite a real member: with `const foo = \"x\"`, an enum containing `\"xa\" = 1` and `A = foo + \"a\"` ends up with `E[\"xa\"] === \"A\"` instead of `1`.\n\nDecide syntactically, the way tsc does in `isSyntacticallyString`: string literals, template literals, and additions with a string on either side are strings, looking through parentheses only. An `as`, `satisfies`, non-null, or angle bracket assertion around a string is not syntactically a string, so `(\"x\" as string)` keeps its reverse mapping. Anything else, including `typeof x` and `1 + foo`, keeps its reverse mapping too, matching tsc's emit exactly.\n\nNoticed while auditing enum lowering for #26242; the mis-lowering predates that work and affects plain code, so it targets main directly. The lone-surrogate connection is indirect: on main this path is not reached for `\"\\uD800\" + \"\\uDC00\"`, because the constant evaluator still folds it through the marker encoding. The JSStr migration makes the evaluator decline such strings, and the initializer then falls through to this classifier. With this rule it lowers as a string, so it cannot overwrite a sibling member named by the pair's value. A regression test for that case follows o\n…(truncated)",
+      "files": [
+        "crates/oxc_transformer/src/typescript/enum.rs (+27 -1)",
+        "tasks/coverage/snapshots/semantic_typescript.snap (+4 -4)",
+        "tasks/transform_conformance/snapshots/oxc.snap.md (+2 -2)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-typescript/test/fixtures/enum-syntactically-string-initializer/input.ts (+15 -0)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-typescript/test/fixtures/enum-syntactically-string-initializer/output.js (+16 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 26772,
+      "title": "perf(linter/eslint/no-restricted-exports): skip inactive configurations",
+      "url": "https://github.com/oxc-project/oxc/pull/26772",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T03:42:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Skip rule execution when no named-export restrictions, pattern, or default-export restrictions are configured. This avoids visiting export nodes when the rule cannot report anything, and removes the inactive default configuration from the linter timing snapshot.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_restricted_exports.rs (+12 -1)",
+        "tasks/track_linter_timings/linter_timings.snap (+0 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26773,
+      "title": "perf(semantic): reuse identifier hashes in enum member lookups",
+      "url": "https://github.com/oxc-project/oxc/pull/26773",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T03:50:33Z",
+      "labels": [
+        "A-semantic"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pass `Ident` directly to enum body scope lookups so static member accesses reuse the cached identifier hash. Convert computed string member names once before searching the body scopes, avoiding repeated hashing for merged enum declarations.",
+      "files": [
+        "crates/oxc_semantic/src/ts_enum/eval.rs (+5 -5)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26778,
+      "title": "fix(linter/esliny/no-unused-vars): preserve rest bindings when removing array elements",
+      "url": "https://github.com/oxc-project/oxc/pull/26778",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T04:46:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Removing an unused element immediately before an array rest binding treated it as the final element and deleted both surrounding commas, producing invalid syntax such as `[used...rest]`.\n\nKeep the element’s placeholder when a rest binding follows, producing `[used, ,...rest]` so the rest binding retains the same values. Adds a regression test for the suggested fix.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/fixers/fix_symbol.rs (+1 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/tests/oxc.rs (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26781,
+      "title": "fix(linter/esliny/no-unused-vars): handle comments when removing imports",
+      "url": "https://github.com/oxc-project/oxc/pull/26781",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T06:38:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Removing an unused named import stopped at a comment before the separator, leaving invalid syntax such as `import {/* comment */, used} from \"m\"`.\n\nFind the separator token across comments and remove it separately from the unused specifier, preserving the comment. Adds regression coverage for block comments, line comments, and commas inside comments.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/fixers/fix_imports.rs (+12 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/tests/oxc.rs (+28 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26408,
+      "title": "feat(playground): expose property mangling",
+      "url": "https://github.com/oxc-project/oxc/pull/26408",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T06:56:34Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Expose opt-in property mangling through `run.mangleProps` and `mangleProps` options, independently of compression and identifier mangling. Supports include/exclude regex patterns, reserved names, quoted properties, and debug names; invalid patterns appear as playground diagnostics.\n\nCompanion UI: https://github.com/oxc-project/playground/pull/439",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "napi/playground/Cargo.toml (+1 -0)",
+        "napi/playground/index.d.ts (+15 -0)",
+        "napi/playground/playground.wasi.d.cts (+15 -0)",
+        "napi/playground/src/lib.rs (+20 -2)",
+        "napi/playground/src/options.rs (+40 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 26434,
+      "title": "feat(formatter_markdown): implement markdown formatter",
+      "url": "https://github.com/oxc-project/oxc/pull/26434",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-18T08:32:37Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "- [x] Add `oxc_formatter_markdown` crate\n  - `publish = false` as always\n- [x] Implement basic syntax formatting\n- [x] Implement GFM, extended syntaxes\n- [x] Support directive container `::: foo`\n- [x] Fixed reported, upstream bugs\n- [x] Publish `oxc_markdown_parser` and use it\n- [x] Bump `Cargo.toml` version\n- [x] ~~Embedded code fence w/ Oxfmt integration~~ => Later PR",
+      "files": [
+        ".gitattributes (+1 -0)",
+        "Cargo.lock (+26 -0)",
+        "Cargo.toml (+1 -0)",
+        "crates/oxc_formatter_markdown/Cargo.toml (+39 -0)",
+        "crates/oxc_formatter_markdown/build.rs (+15 -0)",
+        "crates/oxc_formatter_markdown/examples/markdown_formatter.rs (+74 -0)",
+        "crates/oxc_formatter_markdown/src/context.rs (+143 -0)",
+        "crates/oxc_formatter_markdown/src/format.rs (+119 -0)",
+        "crates/oxc_formatter_markdown/src/lib.rs (+26 -0)",
+        "crates/oxc_formatter_markdown/src/options.rs (+92 -0)"
+      ],
+      "filesTotal": 76
+    },
+    {
+      "number": 26776,
+      "title": "docs(formatter_markdown): follow updated DIVERGENCES policy",
+      "url": "https://github.com/oxc-project/oxc/pull/26776",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-18T08:33:21Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 29
+    },
+    {
+      "number": 26779,
+      "title": "feat(formatter_markdown): keep frontmatter verbatim",
+      "url": "https://github.com/oxc-project/oxc/pull/26779",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-18T08:33:47Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Full integration will come with oxfmt later.",
+      "files": [
+        "crates/oxc_formatter_markdown/src/context.rs (+13 -1)",
+        "crates/oxc_formatter_markdown/src/format.rs (+91 -25)",
+        "crates/oxc_formatter_markdown/AGENTS.md (+2 -1)",
+        "crates/oxc_formatter_markdown/DIVERGENCES.md (+3 -2)",
+        "crates/oxc_formatter_markdown/tests/conformance.rs (+6 -34)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/front-matter.md (+7 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/front-matter.md.snap (+32 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/leading-thematic-break.md (+1 -1)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/leading-thematic-break.md.snap (+1 -1)",
+        "crates/oxc_formatter_markdown/tests/snapshots/conformance__prettier-markdown.snap (+1 -1)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 26785,
+      "title": "fix(formatter_markdown): fix real-world missmatches",
+      "url": "https://github.com/oxc-project/oxc/pull/26785",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-18T08:34:17Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "1. Code span fences: Line-start detection should look at printed (=recalculated) fence rather than the source text\n2. Leading `---` paragraphs: Dropping leading blank lines would turn the next line into front matter, so escape to `\\---`\n3. `---<div>` closing lines: The printer slices the same painted copy as the parser, prevent duplicating `---`\n4. Autolink + CJK: After words within an autolink literal stretch, follow CJK rules by inserting a space instead of removing line breaks to preserve link\n5. Line shape inside nests: Determines the shape even for line breaks within `emphasis` and other elements\n6. Reference link wrapping: Wraps the `text` part of `[text][label]`\n7. Liquid glue: With `always`, whitespace immediately following a tag is not wrapped (whitespace immediately preceding it was already prohibited)\n8. Directive blank lines: Preserves blank lines between the `:::` fence and follows the same blank line behavior",
+      "files": [
+        "Cargo.lock (+2 -2)",
+        "Cargo.toml (+1 -1)",
+        "crates/oxc_formatter_markdown/src/context.rs (+3 -0)",
+        "crates/oxc_formatter_markdown/src/format.rs (+15 -9)",
+        "crates/oxc_formatter_markdown/src/print/block.rs (+46 -8)",
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+65 -31)",
+        "crates/oxc_formatter_markdown/src/print/line_shape.rs (+125 -28)",
+        "crates/oxc_formatter_markdown/src/print/link.rs (+12 -4)",
+        "crates/oxc_formatter_markdown/src/print/text.rs (+21 -1)",
+        "crates/oxc_formatter_markdown/DIVERGENCES.md (+73 -0)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 26786,
+      "title": "docs(formatter_core): add note for blanked front matter",
+      "url": "https://github.com/oxc-project/oxc/pull/26786",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-18T08:34:50Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26783,
+      "title": "chore(coverage): migrate TypeScript snapshot paths",
+      "url": "https://github.com/oxc-project/oxc/pull/26783",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T08:40:34Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 11
+    },
+    {
+      "number": 26226,
+      "title": "feat(coverage): support new TypeScript fixture layout",
+      "url": "https://github.com/oxc-project/oxc/pull/26226",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T08:41:34Z",
+      "labels": [
+        "A-parser",
+        "A-transformer",
+        "A-codegen"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Update the coverage harness and fixture consumers for TypeScript's merged `tsc/testdata` layout, including separate compiler and conformance baseline directories. Handle strict/checkJs baseline variants and exclude fixtures without any reference baseline. Update fixture revisions, conformance snapshots, and the existing NAPI token-test exclusion paths. Remove the temporary snapshot path translation from the parent PR.\n\nLocal conformance reproduced the updated snapshots, and all 237,025 parser NAPI tests passed with token, range/parent, and lazy-transfer modes enabled. The snapshots retain the false failures for the two TS2339 fixtures without special-case exclusions.",
+      "files": [
+        "tasks/coverage/snapshots/codegen_test262.snap (+3 -3)",
+        "tasks/coverage/snapshots/codegen_typescript.snap (+5 -3)",
+        "tasks/coverage/snapshots/estree_acorn_jsx.snap (+1 -1)",
+        "tasks/coverage/snapshots/estree_acorn_jsx_tokens.snap (+1 -1)",
+        "tasks/coverage/snapshots/estree_test262.snap (+3 -3)",
+        "tasks/coverage/snapshots/estree_test262_tokens.snap (+3 -3)",
+        "tasks/coverage/snapshots/estree_typescript.snap (+23 -3)",
+        "tasks/coverage/snapshots/estree_typescript_tokens.snap (+5 -3)",
+        "tasks/coverage/snapshots/formatter_test262.snap (+3 -3)",
+        "tasks/coverage/snapshots/formatter_typescript.snap (+3 -3)"
+      ],
+      "filesTotal": 35
+    },
+    {
+      "number": 26792,
+      "title": "chore(coverage): update lexer snapshots",
+      "url": "https://github.com/oxc-project/oxc/pull/26792",
+      "author": "camc314",
+      "mergedAt": "2026-09-18T09:15:33Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 3
+    },
+    {
+      "number": 26762,
+      "title": "fix(oxlint/lsp): align nested config handling with `configPath` semantics",
+      "url": "https://github.com/oxc-project/oxc/pull/26762",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-18T11:41:35Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-editor",
+        "A-linter-plugins"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "(Pure bug fix, not related to Vite+.)\n\nWhen `configPath: \"\"` is specified, these behaved differently.\n\n- `ServerLinterBuilder::build`: unset = enable nested config\n- `LintOptions::use_nested_configs()`: set = disable nested config\n\nThis PR aligns `\"\"` as unset.\nAlso watcher should add `**/` prefix only if enabled.",
+      "files": [
+        "apps/oxlint/src/lsp/options.rs (+7 -1)",
+        "apps/oxlint/src/lsp/server_linter.rs (+3 -1)",
+        "apps/oxlint/test/lsp/init/init.test.ts (+4 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26769,
+      "title": "refactor(oxlint/lsp,oxfmt/lsp): treat empty config path string as `null`",
+      "url": "https://github.com/oxc-project/oxc/pull/26769",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-18T11:42:33Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-editor",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Follow up on https://github.com/oxc-project/oxc/pull/26762#discussion_r4042643059",
+      "files": [
+        "apps/oxfmt/src/lsp/options.rs (+9 -16)",
+        "apps/oxfmt/src/lsp/server_formatter.rs (+2 -2)",
+        "apps/oxlint/src/lsp/options.rs (+26 -9)",
+        "apps/oxlint/src/lsp/server_linter.rs (+7 -25)",
+        "tasks/website_linter/src/snapshots/schema_markdown_lsp.snap (+2 -0)",
+        "crates/oxc_language_server/README.md (+16 -16)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 26797,
+      "title": "refactor(lexer): re-order imports",
+      "url": "https://github.com/oxc-project/oxc/pull/26797",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:32:42Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nCombine and re-order imports to match the convention of the repo.",
+      "files": [
+        "crates/oxc_lexer/src/arena.rs (+1 -2)",
+        "crates/oxc_lexer/src/comment_meta.rs (+2 -1)",
+        "crates/oxc_lexer/src/diagnostics.rs (+2 -1)",
+        "crates/oxc_lexer/src/lanes.rs (+4 -2)",
+        "crates/oxc_lexer/src/lib.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+10 -10)",
+        "crates/oxc_lexer/src/token.rs (+2 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 26798,
+      "title": "refactor(lexer): import at top level",
+      "url": "https://github.com/oxc-project/oxc/pull/26798",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:33:40Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nImport at top level, instead of inline. This is the repo's convention. It reduces code complexity at call sites, and makes it clear from looking just at header of files what depends on what.",
+      "files": [
+        "crates/oxc_lexer/src/arena.rs (+28 -24)",
+        "crates/oxc_lexer/src/comment_meta.rs (+3 -2)",
+        "crates/oxc_lexer/src/diagnostics.rs (+2 -1)",
+        "crates/oxc_lexer/src/lanes.rs (+18 -23)",
+        "crates/oxc_lexer/src/lib.rs (+7 -7)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+6 -4)",
+        "crates/oxc_lexer/src/token.rs (+7 -3)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 26799,
+      "title": "refactor(lexer): remove unnecessary type annotations",
+      "url": "https://github.com/oxc-project/oxc/pull/26799",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:34:21Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nRemove some type annotations which were unnecessary. Compiler already infers the types.",
+      "files": [
+        "crates/oxc_lexer/src/arena.rs (+12 -12)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26800,
+      "title": "refactor(lexer): clarify imports, replacing `super::super`",
+      "url": "https://github.com/oxc-project/oxc/pull/26800",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:35:42Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nMy spate of refactoring PRs introduced a lot of `use super::super::...;` statements in pipeline modules. In some cases this expanded to `use super::super::super::...;` which is just silly.\n\nSwitch to import paths which start at crate root and work down, instead of working up from the importer. This makes it clearer what the import target is.\n\n```rust\n// Before\nuse super::super::super::bitmap::bm_set;\n// After\nuse crate::pipeline::bitmap::bm_set;\n```",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/hyphens.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/names.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/classify/avx2.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/compress/generic.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/constructs.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/operand.rs (+3 -3)"
+      ],
+      "filesTotal": 28
+    },
+    {
+      "number": 26801,
+      "title": "style(lexer): add line breaks between functions/items",
+      "url": "https://github.com/oxc-project/oxc/pull/26801",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:36:32Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure stylistic change.\n\nAdd line breaks between all function/type declarations, to make the code easier to read.",
+      "files": [
+        "crates/oxc_lexer/src/opmap.rs (+1 -1)",
+        "crates/oxc_lexer/src/tables.rs (+12 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26802,
+      "title": "refactor(lexer): collapse nested `if` statements",
+      "url": "https://github.com/oxc-project/oxc/pull/26802",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:37:39Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nCollapse nested `if` statements into single statements using `if` chains - as per Clippy's `collapsible_if` rule.\n\nIMO this does not negatively affect readability, and matches the rest of the repo which does obey this Clippy rule.",
+      "files": [
+        "crates/oxc_lexer/src/lanes.rs (+9 -18)",
+        "crates/oxc_lexer/src/opmap.rs (+1 -6)",
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+4 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/operand.rs (+15 -18)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/replay/mod.rs (+33 -38)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/context.rs (+8 -8)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/runs.rs (+6 -4)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/tsx.rs (+6 -6)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+1 -6)",
+        "crates/oxc_lexer/src/tables.rs (+1 -6)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 26803,
+      "title": "refactor(lexer): reduce scope of `clippy::collapsible_match` opt-outs",
+      "url": "https://github.com/oxc-project/oxc/pull/26803",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:38:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\n#26802 addressed violations of Clippy's `collapsible_if` rule.\n\n`oxc_lexer` also contains several infractions of `collapsible_match` rule. However, in this case, IMO the rule is unhelpful - it reduces readability in the cases in this crate.\n\nTherefore, this PR doesn't change any of the code, but scopes the rule exceptions just to the relevant sites with `#[expect(clippy::collapsible_match)]`. There's no need to disable the rule for large swathes of code, since in some other cases the rule could be correct.",
+      "files": [
+        "crates/oxc_lexer/src/lanes.rs (+1 -1)",
+        "crates/oxc_lexer/src/opmap.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/constructs.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/operand.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/context.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/tsx.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/tables.rs (+1 -1)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 26804,
+      "title": "refactor(lexer): reduce scope of `#[expect]` attrs",
+      "url": "https://github.com/oxc-project/oxc/pull/26804",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:39:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nScope disabling Clippy warnings to specific lines, so its clearer why these rules are disabled in specific instances. This also prevents adding more rule violations to these functions without considering whether the rule might be correct.",
+      "files": [
+        "crates/oxc_lexer/src/diagnostics.rs (+9 -5)",
+        "crates/oxc_lexer/src/lib.rs (+19 -7)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26805,
+      "title": "refactor(lexer): remove unnecessary `#![allow(unsafe_code)]`",
+      "url": "https://github.com/oxc-project/oxc/pull/26805",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:40:16Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nRemove `#![allow(unsafe_code)]` attribute from one file. It's unnecessary - we don't enforce this rule anyway. If we did, this crate would be in serious trouble!",
+      "files": [
+        "crates/oxc_lexer/src/lib.rs (+0 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26806,
+      "title": "refactor(lexer): move const assertion into `coalesce`",
+      "url": "https://github.com/oxc-project/oxc/pull/26806",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:40:51Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nMove a const assertion about `TokenKind` discriminants to `coalesce` module, which is where the invariant is depended on.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+3 -0)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+1 -4)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26807,
+      "title": "style(lexer): remove emdashes from comments",
+      "url": "https://github.com/oxc-project/oxc/pull/26807",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:41:25Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure style change.\n\nReplace emdashes from comments and a couple of assertion error messages. This is a bit of an \"LLM was here\" tell, and also encourages agents to copy the style and produce more of the same (in this crate, and elsewhere in the repo).",
+      "files": [
+        "crates/oxc_lexer/src/diagnostics.rs (+2 -2)",
+        "crates/oxc_lexer/src/lanes.rs (+8 -8)",
+        "crates/oxc_lexer/src/lib.rs (+2 -2)",
+        "crates/oxc_lexer/src/opmap.rs (+6 -6)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+5 -5)",
+        "crates/oxc_lexer/src/pipeline/classify/avx2.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/coalesce/keywords.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 26808,
+      "title": "refactor(lexer): re-order methods of `Lexer`",
+      "url": "https://github.com/oxc-project/oxc/pull/26808",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T15:42:35Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nRe-order methods of `Lexer` to read top-to-bottom with helpers lower down. This matches the style of all the rest of the files in `pipeline` directory (after a various other refactoring PRs over past 2 weeks).",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/mod.rs (+67 -67)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26812,
+      "title": "docs(lexer): fix garbled characters in comment",
+      "url": "https://github.com/oxc-project/oxc/pull/26812",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T17:27:34Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26813,
+      "title": "docs(lexer): fix partial comment",
+      "url": "https://github.com/oxc-project/oxc/pull/26813",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T17:28:06Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26814,
+      "title": "refactor(lexer): replace `diag_code` consts with `DiagCode` enum",
+      "url": "https://github.com/oxc-project/oxc/pull/26814",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T18:53:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Refactor.\n\nReplace the `diag_code` module which contains a collection of `u16` consts with an `DiagCode` enum.\n\nThis is identical in terms of memory representation, and is more idiomatic Rust.\n\nIt does alter semantics very slightly - the enum tells compiler that only the specific `u16` discriminants are possible values for `DiagCode`. This may allow it remove a branch from the `match`es on `DiagCode` in `to_oxc_diagnostic`. But lexer errors are rare, so this is cold path code, so makes no practical difference, and any difference it does make should be positive.",
+      "files": [
+        "crates/oxc_lexer/src/diagnostics.rs (+46 -46)",
+        "crates/oxc_lexer/src/error.rs (+33 -30)",
+        "crates/oxc_lexer/src/lanes.rs (+32 -32)",
+        "crates/oxc_lexer/src/lib.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+6 -6)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+8 -16)",
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/compress/common.rs (+4 -4)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 26815,
+      "title": "refactor(lexer): replace `diag_severity` consts with `DiagSeverity` enum",
+      "url": "https://github.com/oxc-project/oxc/pull/26815",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T18:55:37Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Refactor.\n\nSame as #26814. Replace `mod diag_severity` with `enum DiagSeverity`.",
+      "files": [
+        "crates/oxc_lexer/src/diagnostics.rs (+5 -5)",
+        "crates/oxc_lexer/src/error.rs (+9 -6)",
+        "crates/oxc_lexer/src/lanes.rs (+3 -3)",
+        "crates/oxc_lexer/src/lib.rs (+2 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26816,
+      "title": "refactor(lexer): use diagnostic types imported at top level",
+      "url": "https://github.com/oxc-project/oxc/pull/26816",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T18:56:13Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nUse `DiagCode`, `DiagSeverity`, and `Diagnostic` types directly, rather than prefixed with `error::`.",
+      "files": [
+        "crates/oxc_lexer/src/lib.rs (+3 -8)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26817,
+      "title": "refactor(lexer): remove `DiagCode` aliases",
+      "url": "https://github.com/oxc-project/oxc/pull/26817",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T18:57:36Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\n3 different aliases were used in different places for `DiagCode` - `Code`, `C`, and `D`. Just use `DiagCode` in full everywhere.\n\nThis does make a few lines longer and split onto multiple lines, which is unfortunate, but IMO the greater clarify is preferable.",
+      "files": [
+        "crates/oxc_lexer/src/diagnostics.rs (+51 -36)",
+        "crates/oxc_lexer/src/lanes.rs (+35 -23)",
+        "crates/oxc_lexer/tests/diagnostics.rs (+80 -95)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26818,
+      "title": "test(lexer): shorten test assertions",
+      "url": "https://github.com/oxc-project/oxc/pull/26818",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T18:58:16Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 3
+    },
+    {
+      "number": 26820,
+      "title": "refactor(lexer): use `constcat` to generate `KEYWORDS_TS`",
+      "url": "https://github.com/oxc-project/oxc/pull/26820",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T20:10:35Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nReplace explicit code to concatenate 2 arrays at compile time with `constcat::concat_slices!` macro. Produces the same result.",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "crates/oxc_lexer/Cargo.toml (+1 -0)",
+        "crates/oxc_lexer/src/opmap.rs (+5 -16)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26821,
+      "title": "refactor(lexer): rename `KEYWORDS` to `KEYWORDS_JS`",
+      "url": "https://github.com/oxc-project/oxc/pull/26821",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T20:11:28Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor - just renaming.\n\nRename `KEYWORDS` const to `KEYWORDS_JS`, to match `KEYWORDS_TS`.",
+      "files": [
+        "crates/oxc_lexer/src/opmap.rs (+3 -3)",
+        "crates/oxc_lexer/src/tables.rs (+7 -7)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26819,
+      "title": "refactor(lexer): replace `POP_*` consts with `Pop` enum",
+      "url": "https://github.com/oxc-project/oxc/pull/26819",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-18T20:16:33Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nReplace a set of 3 `POP_*` consts with a `#[repr(u8)]` enum `Pop`.\n\nThis is identical in terms of codegen, but more type-safe.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/replay/mod.rs (+22 -18)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26829,
+      "title": "test(lexer): add `just ready-lexer` recipe",
+      "url": "https://github.com/oxc-project/oxc/pull/26829",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T14:39:32Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26831,
+      "title": "refactor(lexer): move `Tables` and `OpMap` into directory together",
+      "url": "https://github.com/oxc-project/oxc/pull/26831",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:20:41Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No code changes, just moving code around.\n\n- `OpMap` is part of `Tables`, so move them both into a directory together.\n- `Tables` is only used in pipeline, so put it all inside `pipeline` directory.",
+      "files": [
+        "crates/oxc_lexer/src/lib.rs (+0 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+2 -7)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+2 -5)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+2 -6)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/names.rs (+1 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/mod.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/classify/avx2.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/classify/generic.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/classify/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 32
+    },
+    {
+      "number": 26832,
+      "title": "refactor(lexer): move byte classifier functions into separate file",
+      "url": "https://github.com/oxc-project/oxc/pull/26832",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:21:40Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No code changes, just moving code around.\n\n`tables/mod.rs` contained 6 byte-classification functions which aren't really related to `Tables`. Move them out of the `tables` module into a new `bytes.rs` file.\n\n`is_glue_join` only has one caller in `disambiguate` module, so move it next to its caller.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/bytes.rs (+31 -0)",
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/names.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/classify/generic.rs (+3 -2)",
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/walk.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/mod.rs (+7 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/bytes.rs (+1 -1)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 26833,
+      "title": "refactor(lexer): move `OP_KIND_*` consts into `tokens` module",
+      "url": "https://github.com/oxc-project/oxc/pull/26833",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:22:11Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No code changes, just moving code around.\n\nMove `OP_KIND_BASE` and `OP_KIND_MAX` constants from `tables` module into `tokens.rs`, next to the similar `KW_KIND_BASE` and `KW_KIND_MAX`. Both are just aliases for token discriminant values, same as the `KW_KIND_*` const are.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/constructs.rs (+2 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/operand.rs (+2 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/walk.rs (+1 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/mod.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/replay/mod.rs (+2 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/context.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/runs.rs (+2 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/tsx.rs (+2 -6)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/type_list.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 26834,
+      "title": "refactor(lexer): type elements of `PUNCT1`",
+      "url": "https://github.com/oxc-project/oxc/pull/26834",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:22:44Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\nIntroduce a `Punct1` struct for the elements of `PUNCT1` table. This is identical to the compiler, but `PUNCT1[i].byte` is clearer than `PUNCT1[i].0`.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/classify/generic.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/tables/opmap.rs (+41 -29)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26835,
+      "title": "refactor(lexer): remove `PUNCT1_LIST` and `PUNCT1_TOK`",
+      "url": "https://github.com/oxc-project/oxc/pull/26835",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:23:36Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Refactor.\n\nRemove the `PUNCT1_LIST` and `PUNCT1_TOK` lists, which are derived from `PUNCT1`. Just use `PUNCT1` directly. Everywhere that uses them iterates through both lists together, so this should make no difference to cache read behavior.\n\nThere _is_ one small difference in `OpMap::self_check` where the old `PUNCT1_LIST.contains(&(b as u8))` will be slightly faster than the new `PUNCT1.iter().any(|p| p.byte == b as u8)`, but this is cold path code, so makes no practical difference.\n\nA later PR will turn all the self-check logic into tests anyway, at which point this code completely disappears from release builds.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+3 -5)",
+        "crates/oxc_lexer/src/pipeline/tables/opmap.rs (+4 -28)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26836,
+      "title": "refactor(lexer): move single-byte punctuator code into separate module",
+      "url": "https://github.com/oxc-project/oxc/pull/26836",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:24:14Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No code changes, just moving code around.\n\nCode related to single-byte punctuators was spread across `tables/mod.rs` and `tables/opmap.rs`. Gather it together in a new `punct1` module.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+10 -32)",
+        "crates/oxc_lexer/src/pipeline/tables/opmap.rs (+2 -45)",
+        "crates/oxc_lexer/src/pipeline/tables/punct1.rs (+78 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26837,
+      "title": "refactor(lexer): move operator code into separate module",
+      "url": "https://github.com/oxc-project/oxc/pull/26837",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:24:51Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No code changes, just moving code around.\n\nCode related to operators was spread across `tables/mod.rs` and `tables/opmap.rs`. Gather it together in a new `operators` module.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+4 -23)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+231 -0)",
+        "crates/oxc_lexer/src/pipeline/tables/opmap.rs (+1 -212)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26838,
+      "title": "refactor(lexer): move keywords code into separate module",
+      "url": "https://github.com/oxc-project/oxc/pull/26838",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:25:23Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No code changes, just moving code around.\n\nAfter #26836 and #26837, `opmap.rs` now only contains code related to keywords. Rename the file to `keywords.rs`.\n\nAdditionally, move keyword-related code from `tables/mod.rs` into the `keywords` module.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/keywords.rs (+37 -0)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+3 -40)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26839,
+      "title": "refactor(lexer): remove `PUNCT1_NKNOWN` and `OPMAP_NOPS` consts",
+      "url": "https://github.com/oxc-project/oxc/pull/26839",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:26:33Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\n`PUNCT1_NKNOWN` and `OPMAP_NOPS` consts are just the length of `PUNCT1` and `OPMAP_OPS` tables. Remove them, and use `PUNCT1.len()` and `OPMAP_OPS.len()` instead. `.len()` on a static array is const-folded by the compiler, so it makes no difference to codegen, but it's clearer to read.",
+      "files": [
+        ".typos.toml (+0 -1)",
+        "crates/oxc_lexer/src/pipeline/classify/generic.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+9 -11)",
+        "crates/oxc_lexer/src/pipeline/tables/punct1.rs (+2 -4)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 26840,
+      "title": "refactor(lexer): remove `KW_MAX` const",
+      "url": "https://github.com/oxc-project/oxc/pull/26840",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T15:27:33Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor.\n\n`KW_MAX` const was defined as `const KW_MAX: usize = KW_COUNT_TS;`. Remove it, and use `KW_COUNT_TS` directly instead.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/keywords.rs (+9 -11)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26843,
+      "title": "refactor(lexer): move `PairLuts` into a separate module",
+      "url": "https://github.com/oxc-project/oxc/pull/26843",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T17:06:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No code changes, just moving code around.\n\nMove `PairLuts` and associated code into a separate module.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+4 -26)",
+        "crates/oxc_lexer/src/pipeline/tables/pair_luts.rs (+31 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26844,
+      "title": "refactor(lexer): move `op2_pack` and `op3_pack` fields into `OpMap`",
+      "url": "https://github.com/oxc-project/oxc/pull/26844",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T17:07:09Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Refactor. No code changes, just moving code around.\n\n`op2_pack` and `op3_pack` fields of `Tables` logically belong with `OpMap`. Move these fields and associated code into `OpMap`.\n\nThis *does* alter the memory layout of `Tables`. `Tables` is not marked `#[repr(C)]`, so I assume the layout is not critical for perf.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+1 -29)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+36 -5)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26845,
+      "title": "refactor(lexer): group keyword-related fields into `Keywords` struct",
+      "url": "https://github.com/oxc-project/oxc/pull/26845",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T17:08:33Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Refactor. No code changes, just moving code around.\n\n`kwjs`, `kwts` and `regex_kw_mask` fields of `Tables` all relate to keywords. Gather them together into a `Keywords` struct, and move all associated code into `keywords` module.\n\nLike #26844, this *does* alter the memory layout of `Tables`. `Tables` is not marked `#[repr(C)]`, so I assume the layout is not critical for perf.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/constructs.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/operand.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/mod.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/type_list.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/tables/keywords.rs (+102 -9)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+4 -83)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 26846,
+      "title": "fix(lexer): update error messages",
+      "url": "https://github.com/oxc-project/oxc/pull/26846",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-19T17:09:33Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "My PRs to break up `Tables` into multiple files (#26838 etc) left some assertions with stale error messages, referring to files which no longer exist. Fix them.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/keywords.rs (+11 -14)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+10 -13)",
+        "crates/oxc_lexer/src/pipeline/tables/punct1.rs (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26842,
+      "title": "fix(linter/eslint/no-unused-vars): report private namespace bindings",
+      "url": "https://github.com/oxc-project/oxc/pull/26842",
+      "author": "camc314",
+      "mergedAt": "2026-09-20T14:53:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "A root export such as `export const value = 1` incorrectly suppresses the unused-variable diagnostic for a private `value` declared inside a TypeScript namespace.\n\nRestrict the module-level export-name lookup to root symbols. Namespace bindings still use their own export declarations, so private unused bindings are reported even when a root export shares their name. Adds regression coverage for direct and aliased root exports, nested namespaces, and used or explicitly exported namespace bindings.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/symbol.rs (+5 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/tests/oxc.rs (+17 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26856,
+      "title": "perf(minifier): preallocate stmts vec size to avoid excesive reallocs",
+      "url": "https://github.com/oxc-project/oxc/pull/26856",
+      "author": "armano2",
+      "mergedAt": "2026-09-21T03:17:21Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "preallocate the output vector with `stmts.len()` capacity instead of starting from empty, since minimize_statements predominantly removes/collapses statements.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+2 -1)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+15 -15)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26824,
+      "title": "refactor(minifier): avoid creation of iterator when accessing ancestors",
+      "url": "https://github.com/oxc-project/oxc/pull/26824",
+      "author": "armano2",
+      "mergedAt": "2026-09-21T03:27:19Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "",
+      "files": [
+        "crates/oxc_minifier/src/peephole/inline.rs (+1 -1)",
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+11 -15)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26870,
+      "title": "refactor(minifier): separate statement input and output",
+      "url": "https://github.com/oxc-project/oxc/pull/26870",
+      "author": "Dunqing",
+      "mergedAt": "2026-09-21T03:33:32Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Follow-up to #26856.\n\nThe statement vector switches from input to output during minimization, making the code harder to follow. Build the optimized statements in a separate, preallocated `new_stmts` vector and assign it back when processing finishes.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+9 -8)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26847,
+      "title": "fix(minifier): add missing negation for boolean literal",
+      "url": "https://github.com/oxc-project/oxc/pull/26847",
+      "author": "armano2",
+      "mergedAt": "2026-09-21T06:02:19Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "we sometimes do construct `BooleanLiteral`, mostly in dce mode, with this we can negate its value instead of first wrapping it with not and afterwards flipping it\n\ninstead of:\n`true` -> `!true`\n`true` -> `false`\n\nAnd in non dce\n`true` -> `!true` -> `!!0` -> `!1`\n`true` -> `false` -> `!1`",
+      "files": [
+        "crates/oxc_minifier/src/peephole/fold_constants.rs (+1 -2)",
+        "crates/oxc_minifier/src/peephole/minimize_expression_in_boolean_context.rs (+2 -1)",
+        "crates/oxc_minifier/src/peephole/minimize_not_expression.rs (+6 -0)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+16 -16)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26755,
+      "title": "feat(oxlint,oxfmt): find all `vite.config.*` variants",
+      "url": "https://github.com/oxc-project/oxc/pull/26755",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-21T08:40:33Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-editor",
+        "A-formatter",
+        "A-linter-plugins"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Precondition for https://github.com/voidzero-dev/vite-plus/pull/2731\n\nAlso fixes existing bug that;\n\nIf that Vite+ project is using `vite.config.js` (not `.ts`):\n- CLI by `vp lint` is covered by Vite+ injecting `-c path/to/vite.config.js`,\n- but LSP cannot find it via find-up process.\n\n`-c` for LSP is not supported, since LSP options should be managed by workspace option. So, user need to set `oxc(.fmt).configPath` for each workspace...\n\nOnly VP mode is affected, and there is no syscall perf hit.",
+      "files": [
+        "apps/oxfmt/src-js/cli/js_config.ts (+1 -1)",
+        "apps/oxfmt/src/core/config/mod.rs (+7 -13)",
+        "apps/oxfmt/src/core/utils.rs (+0 -5)",
+        "apps/oxfmt/src/lsp/mod.rs (+2 -2)",
+        "apps/oxlint/src/config_loader.rs (+9 -19)",
+        "apps/oxlint/src/lib.rs (+0 -10)",
+        "apps/oxlint/src/lsp/mod.rs (+1 -1)",
+        "crates/oxc_config/src/discovery.rs (+104 -90)",
+        "crates/oxc_config/src/lib.rs (+1 -1)",
+        "apps/oxlint/test/fixtures/vite_plus_js_priority/files/test.js (+3 -0)"
+      ],
+      "filesTotal": 14
+    },
+    {
+      "number": 26791,
+      "title": "fix(ci): run `conformance-lexer` in `update_submodules` job",
+      "url": "https://github.com/oxc-project/oxc/pull/26791",
+      "author": "camc314",
+      "mergedAt": "2026-09-21T08:53:33Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26877,
+      "title": "refactor(lexer): move classify LUTS into separate module",
+      "url": "https://github.com/oxc-project/oxc/pull/26877",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T10:37:33Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No alteration to code, just moving code around.\n\nMove the 2 lookup tables used by `classify` out of `Tables` and into 2 separate structs.\n\nBefore:\n\n```rust\nstruct Tables {\n    pub mrg_lo: [u8; 16],\n    pub mrg_hi: [u8; 16],\n    pub mrg_lo_ts: [u8; 16],\n    pub wb_lo: [u8; 16],\n    pub wb_hi: [u8; 16],\n    // ...\n}\n```\n\nAfter:\n\n```rust\nstruct Tables {\n    pub merged_luts: MergedLuts,\n    pub word_luts: WordLuts,\n    // ...\n}\n\nstruct MergedLuts {\n    pub lo: [u8; 16],\n    pub hi: [u8; 16],\n    pub lo_ts: [u8; 16],\n}\n\npub struct WordLuts {\n    pub lo: [u8; 16],\n    pub hi: [u8; 16],\n}\n```\n\nMove these types and associated code into a new `classify_luts.rs` file.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/classify/avx2.rs (+7 -4)",
+        "crates/oxc_lexer/src/pipeline/tables/classify_luts.rs (+121 -0)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+17 -96)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26878,
+      "title": "refactor(lexer): move single-byte punctuation LUTs into module",
+      "url": "https://github.com/oxc-project/oxc/pull/26878",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:00:40Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No alteration to code, just moving code around.\n\nMove the constants for single-byte puncuator LUTS into a module `punct1_luts`.\n\nThis prepares the way for later PR #26880.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/classify/avx2.rs (+4 -1)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/tables/punct1.rs (+9 -4)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26879,
+      "title": "refactor(lexer): move helper functions below their call sites",
+      "url": "https://github.com/oxc-project/oxc/pull/26879",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:01:39Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No alteration to code, just moving code around.\n\nMove 2 helper functions to below their call sites, following the \"reads top to bottom\" convention.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/keywords.rs (+10 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26880,
+      "title": "perf(lexer): convert tables checks to tests",
+      "url": "https://github.com/oxc-project/oxc/pull/26880",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:02:29Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Perf optimization.\n\nThe various parts of `Tables` are constructed at runtime. At present then various \"self-checks\" are run to make sure they're accurate.\n\nConvert these checks to tests, so they're not performed at runtime, but we keep the checks.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/classify_luts.rs (+58 -30)",
+        "crates/oxc_lexer/src/pipeline/tables/keywords.rs (+73 -56)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+1 -5)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+62 -43)",
+        "crates/oxc_lexer/src/pipeline/tables/punct1.rs (+37 -21)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 26881,
+      "title": "perf(lexer): calculate regex keyword mask at build time",
+      "url": "https://github.com/oxc-project/oxc/pull/26881",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:03:37Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Perf optimization.\n\n`Keywords` part of `Tables` includes a `u64` value `regex_kw_mask` which is calculated at runtime when `Tables` is created.\n\nIt's only a `u64` so the code to calculate it (including the `RX` table of strings) takes up way more space in the binary than the 8-byte value itself. Calculate this value at compile time instead.\n\nThis also makes constructing `Keywords` cheaper at runtime.",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "crates/oxc_lexer/Cargo.toml (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/tables/keywords.rs (+43 -32)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26882,
+      "title": "refactor(lexer): combine `PairLuts::build` into `PairLuts::new`",
+      "url": "https://github.com/oxc-project/oxc/pull/26882",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:04:17Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No alteration to code, just moving code around.\n\n`PairLuts` had separate `new` and `build` functions. Combine them into one.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+2 -6)",
+        "crates/oxc_lexer/src/pipeline/tables/pair_luts.rs (+7 -6)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26883,
+      "title": "test(lexer): simplify `punct1_ord` test",
+      "url": "https://github.com/oxc-project/oxc/pull/26883",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:04:52Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26884,
+      "title": "refactor(lexer): move `punct1_ord` out of `OpMap`",
+      "url": "https://github.com/oxc-project/oxc/pull/26884",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:05:30Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "Pure refactor. No alteration to code, just moving code around.\n\nIntroduce a `Punct1Ord` struct to hold the data in `punct1_ord` field. Move it, and associated code into the `punct1` module where it naturally sits. Move the `punct1_ord` field out of `OpMap` and into `Tables`.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+6 -3)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+5 -44)",
+        "crates/oxc_lexer/src/pipeline/tables/punct1.rs (+45 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26885,
+      "title": "perf(lexer): remove `Punct1Ord`",
+      "url": "https://github.com/oxc-project/oxc/pull/26885",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-21T11:06:03Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "#26885 introduced a `Punct1Ord` struct and moved the `punct1_ord` field.\n\nThis data is actually dead code - nothing in the pipeline uses it. So delete it entirely.\n\nThis is split into a separate PR, so we can restore it easily by reverting this commit if we need it back again later.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+3 -6)",
+        "crates/oxc_lexer/src/pipeline/tables/punct1.rs (+9 -45)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26876,
+      "title": "ci(release): split oxlint and oxfmt GitHub releases",
+      "url": "https://github.com/oxc-project/oxc/pull/26876",
+      "author": "Boshen",
+      "mergedAt": "2026-09-21T12:54:54Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.85.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 26887,
+      "title": "perf(minifier): use ident hashes in label comparison",
+      "url": "https://github.com/oxc-project/oxc/pull/26887",
+      "author": "armano2",
+      "mergedAt": "2026-09-21T13:53:52Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "use `Ident` hashes when trying to fold simple labels",
+      "files": [
+        "crates/oxc_minifier/src/peephole/remove_dead_code.rs (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26763,
+      "title": "feat(oxlint,oxfmt): do not discover nested config in Vite+ mode",
+      "url": "https://github.com/oxc-project/oxc/pull/26763",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-21T14:01:35Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-editor",
+        "A-formatter",
+        "A-linter-plugins"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.85.0",
+      "body": "When Vite+ support was first added, whether to support nested config or not was undecided.\nBut for now, that policy has now been finalized, and it was decided to NOT support in v1.\n\nTechnically, Vite+ can disable nested configs by specifying either `-c` or `--disable-nested-config`.\nHowever, this only applies to the CLI. For LSP usage, this needs to be applied to arbitrary workspace settings, but users can set any directory as a workspace. (Also we are trying to remove `-c`, #26755)\n\nTherefore, as the SSoT consolidating Vite+ requirements, disable it on the Oxapps (`oxc_config`) side.\n\nDoing this eliminates [the need for each IDE extension to implement the same forced disablement individually](https://github.com/voidzero-dev/vite-plus/issues/1557#issuecomment-5710627758), and makes it easier to revert changes even if the policy is modified.\n\nAs a bonus, this also prevents [performance issue](voidzero-dev/vite-plus#2698) caused by searching through unintended nested configs.",
+      "files": [
+        "apps/oxfmt/src/cli/command.rs (+9 -0)",
+        "apps/oxfmt/src/cli/stdin_runner.rs (+6 -7)",
+        "apps/oxfmt/src/cli/walk_runner.rs (+1 -1)",
+        "apps/oxfmt/src/core/mod.rs (+1 -4)",
+        "apps/oxfmt/src/lsp/options.rs (+6 -2)",
+        "apps/oxlint/src/config_loader.rs (+1 -2)",
+        "apps/oxlint/src/lint.rs (+4 -2)",
+        "apps/oxlint/src/lsp/options.rs (+7 -2)",
+        "crates/oxc_config/src/discovery.rs (+11 -3)",
+        "tasks/website_linter/src/snapshots/schema_markdown_lsp.snap (+1 -0)"
+      ],
+      "filesTotal": 36
+    },
+    {
+      "number": 26574,
+      "title": "chore(lsp): update `tower-lsp-server` to 0.24.0-rc.1",
+      "url": "https://github.com/oxc-project/oxc/pull/26574",
+      "author": "Sysix",
+      "mergedAt": "2026-09-21T16:34:37Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-editor",
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 48
+    },
+    {
+      "number": 25763,
+      "title": "perf(lsp): register only implemented methods",
+      "url": "https://github.com/oxc-project/oxc/pull/25763",
+      "author": "Boshen",
+      "mergedAt": "2026-09-21T16:35:18Z",
+      "labels": [
+        "A-editor"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Registers only Oxlint's implemented LSP methods, reducing the release binary by 1,002.7 KiB (6.99%).\n\nDepends on [tower-lsp-server#81](https://github.com/tower-lsp-community/tower-lsp-server/pull/81), which is included in `0.24.0-rc.1`\n\nAI assistance was used to prepare this change.\n\nValidation: `cargo test -p oxc_language_server`; `cargo clippy -p oxc_language_server --all-targets -- -D warnings`.",
+      "files": [
+        "crates/oxc_language_server/src/lib.rs (+26 -4)",
+        "crates/oxc_language_server/src/tests.rs (+3 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26590,
+      "title": "chore(lsp): use `futures-util` crate instead of `futures`",
+      "url": "https://github.com/oxc-project/oxc/pull/26590",
+      "author": "Sysix",
+      "mergedAt": "2026-09-21T16:35:55Z",
+      "labels": [
+        "A-editor"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 5
+    },
+    {
+      "number": 26907,
+      "title": "perf(minifier): use ident hashes for catch var and arguments",
+      "url": "https://github.com/oxc-project/oxc/pull/26907",
+      "author": "armano2",
+      "mergedAt": "2026-09-21T20:51:44Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+7 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26908,
+      "title": "docs(ast): Add docs for `TSInstantiationExpression`",
+      "url": "https://github.com/oxc-project/oxc/pull/26908",
+      "author": "camchenry",
+      "mergedAt": "2026-09-22T01:34:35Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 26909,
+      "title": "docs(ast): Add docs for TSNamespaceExportDeclaration",
+      "url": "https://github.com/oxc-project/oxc/pull/26909",
+      "author": "camchenry",
+      "mergedAt": "2026-09-22T01:35:34Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 26910,
+      "title": "docs(ast): Add docs for TSNonNullExpression",
+      "url": "https://github.com/oxc-project/oxc/pull/26910",
+      "author": "camchenry",
+      "mergedAt": "2026-09-22T01:36:19Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 26911,
+      "title": "chore(renovate): ignore prettier updates",
+      "url": "https://github.com/oxc-project/oxc/pull/26911",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-22T02:02:33Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26915,
+      "title": "chore(type-checker): remove experimental crate",
+      "url": "https://github.com/oxc-project/oxc/pull/26915",
+      "author": "Boshen",
+      "mergedAt": "2026-09-22T07:12:33Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 22
+    },
+    {
+      "number": 26609,
+      "title": "perf(minifier): reduce allocations when minimizing assignments",
+      "url": "https://github.com/oxc-project/oxc/pull/26609",
+      "author": "armano2",
+      "mergedAt": "2026-09-22T07:32:41Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "optimize and simplify logic used to minimize assigments",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_conditions.rs (+40 -46)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+5 -5)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26921,
+      "title": "perf(linter/eslint/no-unused-vars): skip sequence checks when absent",
+      "url": "https://github.com/oxc-project/oxc/pull/26921",
+      "author": "camc314",
+      "mergedAt": "2026-09-22T09:55:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Skip discarded-read ancestor checks when the file contains no sequence expressions. Such reads cannot be discarded by a comma expression, so the cached AST node-type check avoids walking ancestors for each candidate reference.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/usage.rs (+5 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26920,
+      "title": "fix(linter/eslint/prefer-const): ignore embedded assignments",
+      "url": "https://github.com/oxc-project/oxc/pull/26920",
+      "author": "camc314",
+      "mergedAt": "2026-09-22T10:07:32Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Avoid reporting `prefer-const` when an uninitialized variable's only assignment is embedded in another expression, such as `let a; foo(a = 1)`. Like ESLint, require the assignment to be a standalone statement where a declaration is allowed, while allowing surrounding parentheses.\n\nAdds the reported TypeScript example and regression cases for calls, initializers, returns, chained assignments, destructuring, and loop bodies.\n\nFixes #26913.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/prefer_const.rs (+81 -0)",
+        "crates/oxc_linter/src/snapshots/eslint_prefer_const@oxc.snap (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26782,
+      "title": "fix(linter/eslint/no-unused-vars): recognize consumed update expressions",
+      "url": "https://github.com/oxc-project/oxc/pull/26782",
+      "author": "camc314",
+      "mergedAt": "2026-09-22T10:37:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`no-unused-vars` incorrectly reports variables whose updated values are consumed, such as `let a = 0; new Foo(a++);`.\n\nRecognize constructor arguments, computed member access, switch discriminants, and conditional/logical tests as uses of update values. Keep warnings for discarded updates and self-assignments, with regression coverage for both cases.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/usage.rs (+48 -3)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/tests/oxc.rs (+66 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26923,
+      "title": "fix(linter/eslint/no-unused-vars): honor ignore patterns inside array rest bindings",
+      "url": "https://github.com/oxc-project/oxc/pull/26923",
+      "author": "camc314",
+      "mergedAt": "2026-09-22T10:55:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`no-unused-vars` reports `const [...[_rest]] = items` despite `destructuredArrayIgnorePattern: \"^_\"` because the binding-pattern search skips array rest arguments. Recurse into those arguments so nested arrays and objects respect `destructuredArrayIgnorePattern` and `ignoreRestSiblings`.\n\nIncludes regression coverage for declarations and parameters, with controls for plain rest identifiers and nonmatching names.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/ignored.rs (+3 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/tests/oxc.rs (+20 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26830,
+      "title": "perf(minifier): take return argument directly when converting arrow fn",
+      "url": "https://github.com/oxc-project/oxc/pull/26830",
+      "author": "armano2",
+      "mergedAt": "2026-09-22T11:24:20Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "crates/oxc_minifier/src/peephole/mod.rs (+1 -1)",
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+2 -6)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+13 -13)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26823,
+      "title": "perf(minifier): update boolean context expressions in place",
+      "url": "https://github.com/oxc-project/oxc/pull/26823",
+      "author": "armano2",
+      "mergedAt": "2026-09-22T11:30:57Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "update `minimize_expression_in_boolean_context` to update expressions in place instead of creating dymmy nodes",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_expression_in_boolean_context.rs (+47 -46)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26916,
+      "title": "refactor(lexer): extract operator hashing into function",
+      "url": "https://github.com/oxc-project/oxc/pull/26916",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T12:36:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor. No code changes, just moving code around.\n\nWithin `tables/operators.rs`, centralize logic for hashing a key to get a slot index:\n\n- Move the primitive operation into `op_slot` function.\n- Several places calculate the hash of an `OpDef`. Add methods to do this to `OpDef` type.\n\nBoth changes reduce the amount of repeated code. All these methods are marked `#[inline(always)]` so it should make zero difference to codegen.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+22 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26917,
+      "title": "perf(lexer): convert opmap collision checks into test",
+      "url": "https://github.com/oxc-project/oxc/pull/26917",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T12:37:23Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Small perf optimization. Similar to #26880.\n\nWhen constructing `OpMap`, `opmap_init` ran various checks on the correctness of `OPMAP_OPS`.\n\nMove these checks into a test - they don't need to happen at runtime in release builds.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+26 -20)",
+        "crates/oxc_lexer/src/token.rs (+1 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26927,
+      "title": "refactor(lexer): simplify opmap tests",
+      "url": "https://github.com/oxc-project/oxc/pull/26927",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T12:39:34Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor of tests.\n\n- Break up tests for `OpMap` into multiple tests, each testing one specific thing.\n- Shorten syntax and rename vars for greater clarity.\n- Make the \"no collisions\" test check for collisions between keys, which is what's actually important, and makes the test exercise `op_key`.\n- Make the operator length test check all operators are between 2 and 4 bytes (inclusive). Previously this was assumed.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+59 -42)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26924,
+      "title": "fix(codegen): remove redundant dollar escapes in minified templates",
+      "url": "https://github.com/oxc-project/oxc/pull/26924",
+      "author": "camc314",
+      "mergedAt": "2026-09-22T13:02:34Z",
+      "labels": [
+        "A-minifier",
+        "A-codegen"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Remove redundant dollar escapes from untagged templates when minifying:\n\n```js\n// Before\n`^${pattern}\\$`\n// After\n`^${pattern}$`\n```\n\nPreserve escapes that prevent `${` interpolation and account for escaped backslashes. Tagged templates retain their raw spelling, and non-minified output keeps its existing behavior.\n\nThe normal minsize corpus shrinks by 11 raw bytes and 8 gzip bytes across Ant Design and TypeScript; Brotli grows by 2 bytes.",
+      "files": [
+        "crates/oxc_codegen/src/lib.rs (+29 -1)",
+        "tasks/minsize/minsize.snap (+1 -1)",
+        "crates/oxc_codegen/tests/integration/js.rs (+44 -0)",
+        "crates/oxc_codegen/tests/integration/sourcemap.rs (+25 -0)",
+        "crates/oxc_minifier/tests/mod.rs (+29 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 26935,
+      "title": "fix(linter/unicorn/prefer-spread): stop checking string split calls",
+      "url": "https://github.com/oxc-project/oxc/pull/26935",
+      "author": "camc314",
+      "mergedAt": "2026-09-22T14:36:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Stop reporting and fixing `String#split('')`, matching Unicorn's removal of this check in v66. Splitting into UTF-16 code units and spreading into code points can produce different results, for example for `\"🦄\"`.\n\nFixes #26873",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_spread.rs (+18 -61)",
+        "crates/oxc_linter/src/snapshots/unicorn_prefer_spread.snap (+0 -64)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26936,
+      "title": "fix(linter/import/no-duplicates): distinguish import attributes",
+      "url": "https://github.com/oxc-project/oxc/pull/26936",
+      "author": "camc314",
+      "mergedAt": "2026-09-22T14:40:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Treat imports with different attribute keys or values as distinct in `import/no-duplicates`, without adding an option. This follows the upstream maintainer's guidance in https://github.com/import-js/eslint-plugin-import/issues/3290#issuecomment-5771071222; the current upstream release (2.32.0) and main branch still have the same false positive.\n\nGroup imports by normalized attributes before applying the existing import-kind checks. Attribute order and quoted keys do not matter, and an empty attribute clause matches an absent clause. Regression tests cover the Bun macro example, custom attributes, genuine duplicates, and `prefer-inline` interactions.\n\nFixes #26871.",
+      "files": [
+        "crates/oxc_linter/src/rules/import/no_duplicates.rs (+143 -69)",
+        "crates/oxc_linter/src/snapshots/import_no_duplicates.snap (+48 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26555,
+      "title": "fix(linter/node/no-exports-assign): change category from style to suspicious",
+      "url": "https://github.com/oxc-project/oxc/pull/26555",
+      "author": "Bartok9",
+      "mergedAt": "2026-09-22T14:51:30Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #26282. `exports = {}` is most likely a bug (reassigns the local `exports` binding, not `module.exports`), so it fits the `suspicious` category better than `style`. Test still passes.\n\nAI disclosure: assisted by AI (Hermes/Sera); human-reviewed.\nAgent-Owner:sera",
+      "files": [
+        "crates/oxc_linter/src/rules/node/no_exports_assign.rs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26931,
+      "title": "feat(lexer): require `popcnt` CPU feature for SIMD implementation",
+      "url": "https://github.com/oxc-project/oxc/pull/26931",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T16:31:39Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Split out from #26919 to reduce the size of the diff on that PR.\n\nThat PR requires `popcnt` CPU feature for SIMD implementation. Alter all `#[cfg(...)]` blocks to include `target_feature = \"popcnt\"`.",
+      "files": [
+        ".cargo/lexer-simd.toml (+4 -4)",
+        "crates/oxc_lexer/src/lanes.rs (+42 -7)",
+        "crates/oxc_lexer/src/lib.rs (+6 -2)",
+        "crates/oxc_lexer/src/pipeline/bitmap.rs (+18 -3)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/hyphens.rs (+18 -3)",
+        "crates/oxc_lexer/src/pipeline/chunk.rs (+12 -2)",
+        "crates/oxc_lexer/src/pipeline/classify/mod.rs (+24 -4)",
+        "crates/oxc_lexer/src/pipeline/coalesce/keywords.rs (+12 -2)",
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+12 -2)",
+        "crates/oxc_lexer/src/pipeline/compress/mod.rs (+24 -4)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 26939,
+      "title": "fix(lexer): support HTML-like comments in JSX files",
+      "url": "https://github.com/oxc-project/oxc/pull/26939",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T16:32:37Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Split off from #26919, to reduce the size of that PR's diff.\n\nAnnex B HTML-like comments (``) were only handled when lexing plain JS. In JSX files they were lexed as operators.\n\nThis moves the `` handling out of `carve_js` into shared helpers in `carve/common.rs`, and uses them in `carve_jsx` too. The rules are the same as for JS: in scripts both are comments, and in modules only a `` only starts a comment once a `` means stopping at every `>`, and JSX is full of them, so that's only switched on when needed.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+138 -0)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+15 -113)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+28 -5)",
+        "crates/oxc_lexer/tests/module_goal.rs (+32 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26940,
+      "title": "fix(lexer): handle comments and Unicode whitespace in JSX tags",
+      "url": "https://github.com/oxc-project/oxc/pull/26940",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T16:33:24Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Split off from #26919, to reduce the size of that PR's diff.\n\nSeveral places in JSX carve only expected ASCII whitespace (or nothing) between tokens, so a comment or Unicode whitespace (e.g. NBSP) there threw it off:\n\n- Closing and self-closing tags: `</*c*//a>`, `<\\u{a0}/a>`, `</a\\u{a0}>`, `<a / /*c*/ >`. Comments in these spots are now lexed as comments rather than operators.\n- Member tag names: `<A/*c*/.B>x</A.B>` no longer reports a mismatched closing tag.\n- Between `<` and the tag name: Unicode whitespace is now skipped. Comments already were.\n- In `.tsx`, the look-ahead that tells a type parameter list from a JSX element: `<T /*c*/ extends U>`, `<T //c\\n,>`, `<const /*c*/ T>`, and `let f: <T> /*c*/ (x: T) => T;`, which was lexed as a JSX element.\n\nAlso, the `const` modifier in `<const T>` now has to be on the same line as its parameter, as in TypeScript.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+21 -37)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+41 -38)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/names.rs (+30 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/tests.rs (+43 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/tests.rs (+33 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 26919,
+      "title": "fix(lexer): use disambiguation state machine",
+      "url": "https://github.com/oxc-project/oxc/pull/26919",
+      "author": "ShanonJackson",
+      "mergedAt": "2026-09-22T16:49:35Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- Closes out remaining disambiguation cases; Across all ts/js/jsx corpuses that I can find and fuzz for. Ran on large swathes of node_modules 500k+ files came back completely green now.\n- This closes it out in a way that is `performant` and `elegant` (the design not the code) but not yet simple; Now that we're `correct`  the next work is to continue the stuff @overlookmotel has already been doing and just start refactoring to condense is down, and logically compartmentalize it until hopefully the final thing is something that meets sensible maintainability goals.\n----\n3 level disambiguation runs\nLevel 1 - O(1) look behind; If it's context-independent we resolve the ambiguity from the previous token.\nLevel 2 - Finite backward check, context-independent resolves some cases that are rare in user-code\nLevel 3 - Full state-machine that runs essentially the JS lexical rules to resolve the grammar; This is for fully context-dependent ambiguity and almost never appears in real user-authored code.\n\nEach level is `pay-when-occurs` performance so the hot path is never degraded by grammatical cases are very rare. However the worst case performance doesn't degrade to quadratic, it degrades to an O(N) full token walk which would happen under circumstances where a whole file is level 3 grammar.",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "crates/oxc_lexer/Cargo.toml (+1 -0)",
+        "crates/oxc_lexer/src/lanes.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/bitmap.rs (+0 -30)",
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+22 -24)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+3 -4)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+35 -191)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+53 -54)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/names.rs (+2 -8)",
+        "crates/oxc_lexer/src/pipeline/carve/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 47
+    },
+    {
+      "number": 26947,
+      "title": "fix(lexer): lex `<const\\n` as JSX",
+      "url": "https://github.com/oxc-project/oxc/pull/26947",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T20:55:35Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Follow-on after #26919.\n\nFix a bug caught by AI code reviewer in https://github.com/oxc-project/oxc/pull/26940#discussion_r4073861589.\n\nIn `.tsx` files, the lexer peeks past a `<` to decide whether it opens a type parameter list or a JSX element. A `const` modifier (`<const T,>`) has to be on the same line as its parameter. But when `const` was followed by a line break, the check fell through and read `const` itself as the parameter name. So this JSX element (tag `const`, attributes `extends` and `U`) was lexed as a type parameter list:\n\n```jsx\nx = (\n  <const extends U>\n    hi\n  </const>\n);\n```\n\nEveryone seems to agree that this is indeed valid JSX:\n\n- [Oxc parser](https://playground.oxc.rs/?t=ast&options=%7B%22run%22%3A%7B%22lint%22%3Afalse%2C%22formatter%22%3Afalse%2C%22transform%22%3Afalse%2C%22isolatedDeclarations%22%3Afalse%2C%22whitespace%22%3Afalse%2C%22mangle%22%3Afalse%2C%22mangleProps%22%3Afalse%2C%22compress%22%3Afalse%2C%22scope%22%3Atrue%2C%22symbol%22%3Atrue%2C%22cfg%22%3Afalse%7D%2C%22parser%22%3A%7B%22extension%22%3A%22tsx%22%2C%22allowReturnOutsideFunction%22%3Atrue%2C%22preserveParens%22%3Atrue%2C%22allowV8Intrinsics%22%3Atrue%2C%22semanticErrors%22%3Atrue%7D%2C%22linter%22%3A%7B%7D%2C%22formatter%22%3A%7B%22useTabs%22%3Afalse%2C%22tabWidth%22%3A2%2C%22endOfLine%22%3A%22lf%22%2C%22printWidth%22%3A80%2C%22singleQuote%22%3Afalse%2C%22jsxSingleQuote%22%3Afalse%2C%22quoteProps%22%3A%22as-needed%22%2C%22trailingComma%22%3A%22all%22%2C%22semi%22%3Atrue%2C%22arrowP\n…(truncated)",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+6 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/tests.rs (+13 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26948,
+      "title": "docs(lexer): restore and correct doc comments",
+      "url": "https://github.com/oxc-project/oxc/pull/26948",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T20:56:15Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 35
+    },
+    {
+      "number": 26949,
+      "title": "refactor(lexer): introduce `matches_tk!` macro and make `tk!` macro produce patterns",
+      "url": "https://github.com/oxc-project/oxc/pull/26949",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T20:56:44Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Refactor.\n\nIntroduce a macro `matches_tk!` which allows checking a `u8` against various `TokenKind`s' discriminants.\n\n```rust\n// Before\nif matches!(kind, tk!(Ident) | tk!(PrivateIdent)) { /* ... */ }\n// After\nif matches_tk!(kind, Ident | PrivateIdent) { /* ... */ }\n```\n\nAdditionally, expand the role of existing `tk!` macro to make it produce `|` patterns.\n\n```rust\n// Before\nmatch kind {\n    tk!(Number) | tk!(BigInt) | tk!(String) | tk!(RegExp) => do_something(),\n    _ => do_something_else(),\n}\n\n// After\nmatch kind {\n    tk!(Number | BigInt | String | RegExp) => do_something(),\n    _ => do_something_else(),\n}\n```\n\nBoth are shorter, and easier to read.\n\nUse `matches_tk!` macro to shorten some code in `compress`.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/compress/generic.rs (+5 -6)",
+        "crates/oxc_lexer/src/token.rs (+43 -25)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26950,
+      "title": "refactor(lexer): replace `TokenKind` consts with `tk!` and `matches_tk!` macros",
+      "url": "https://github.com/oxc-project/oxc/pull/26950",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-22T20:57:35Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Follow-on after #26919.\n\nThat PR introduced a large number of `const`s containing the discriminants of `TokenKind`s. Some of the code uses these consts, some uses `tk!` macro, which is intended for this purpose.\n\nRemove all the consts, and use `tk!` and `matches_tk!` macros (introduced in #26949) instead. This follows the pattern used in the rest of `oxc_lexer`, and is shorter in some places.\n\n`#[rustfmt::skip]` annotations are added in a few places to prevent these `tk!` invocations spilling across many lines, which is unreadable.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+2 -6)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/walk.rs (+3 -7)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/anchor.rs (+49 -69)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/frame.rs (+5 -53)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/jsx.rs (+3 -6)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/punct.rs (+12 -8)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/scan.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/step.rs (+14 -24)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/types.rs (+4 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/words.rs (+119 -120)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 26953,
+      "title": "fix(parser): reject module export names containing a lone surrogate",
+      "url": "https://github.com/oxc-project/oxc/pull/26953",
+      "author": "Dunqing",
+      "mergedAt": "2026-09-23T02:14:33Z",
+      "labels": [
+        "A-parser"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "A module export name that is not well-formed Unicode is an [early error](https://tc39.es/ecma262/#sec-module-semantics-static-semantics-early-errors) (`ModuleExportName : StringLiteral` is a Syntax Error if `IsStringWellFormedUnicode` of its value is false), and the parser reported it, but it still built the node and returned the recovered AST. Every consumer of `ModuleExportName::name` therefore had to tolerate an export name that cannot exist in a valid module. Acorn rejects the input outright, and Babel does the same unless error recovery is enabled.\n\nMake the error fatal, so no AST carries an ill-formed export name. Consumers can treat the name as well-formed by construction. This is preparation for the JSStr stack (#26242), where `ModuleExportName::name` keeps returning UTF-8 text and currently needs a fallback for exactly this case; with this change the fallback becomes dead and is removed there.\n\n## Example\n\n```js\nexport { x as \"\\uD800\" };\n```\n\nBefore, the error was reported and parsing continued with a recovered AST. After, the same diagnostic is reported and parsing stops:\n\n```\nx An export name cannot include a unicode lone surrogate\n```\n\nThe test262 negative test `early-export-ill-formed-string.js` still fails to parse; it now reports only its first error instead of three, and a duplicate-export diagnostic that printed the surrogate as marker text disappears with it. Verified with four new misc fixtures covering the export, re-export, namespace re-export, and import\n…(truncated)",
+      "files": [
+        "crates/oxc_parser/src/js/module.rs (+3 -1)",
+        "tasks/coverage/misc/fail/export-name-lone-surrogate-from.js (+1 -0)",
+        "tasks/coverage/misc/fail/export-name-lone-surrogate-star.js (+1 -0)",
+        "tasks/coverage/misc/fail/export-name-lone-surrogate.js (+2 -0)",
+        "tasks/coverage/misc/fail/import-name-lone-surrogate.js (+1 -0)",
+        "tasks/coverage/snapshots/lexer_misc.snap (+2 -2)",
+        "tasks/coverage/snapshots/parser_misc.snap (+26 -1)",
+        "tasks/coverage/snapshots/parser_test262.snap (+0 -28)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 26898,
+      "title": "feat(napi): add threadless WASI builds",
+      "url": "https://github.com/oxc-project/oxc/pull/26898",
+      "author": "Boshen",
+      "mergedAt": "2026-09-23T06:58:34Z",
+      "labels": [
+        "A-parser",
+        "A-minifier",
+        "A-transformer",
+        "A-react-compiler"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n- add threadless `wasm32-wasip1` builds and generated loaders for parser, minify, transform, transform-react, and transform-relay\n- use the threadless bindings for browser and Cloudflare Workers while preserving threaded WASI and WebContainer fallbacks\n- build and publish the new target in CI and release workflows\n\nCloses #25271\n\n## Testing\n\n- native NAPI builds and package tests: 1,091 passed\n- parser Chromium browser tests passed\n- local workerd smoke tests passed for all five packages\n- deployed Workers using local package tarballs passed for all five packages and reported `wasm32-wasip1`\n- packed main-package file lists match the published `0.150.0` packages\n- `just fmt`, `just check`, `just lint`, `just doc`, `just ast`, targeted Oxlint, typos, and `git diff --check` passed\n- `just ready` reaches three unrelated Oxlint ANSI-color snapshot mismatches in this non-interactive environment; no pending snapshots remain\n\n## AI assistance\n\nCodex was used to help implement and test this change. The contributor remains responsible for reviewing and understanding the changes before merge.",
+      "files": [
+        "napi/minify/browser.js (+1 -1)",
+        "napi/minify/index.js (+49 -1)",
+        "napi/minify/minify.wasip1-browser.js (+990 -0)",
+        "napi/minify/minify.wasip1-deferred.d.ts (+83 -0)",
+        "napi/minify/minify.wasip1-deferred.js (+1488 -0)",
+        "napi/minify/minify.wasip1.cjs (+1209 -0)",
+        "napi/minify/minify.wasip1.d.cts (+353 -0)",
+        "napi/minify/package.json (+3 -0)",
+        "napi/minify/scripts/patch.js (+4 -0)",
+        "napi/parser/napi.wasm.json (+1 -1)"
+      ],
+      "filesTotal": 54
+    },
+    {
+      "number": 26956,
+      "title": "fix(linter/typescript/unified-signatures): align rule with upstream",
+      "url": "https://github.com/oxc-project/oxc/pull/26956",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T10:57:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Port the `unified-signatures` changes from typescript-eslint/typescript-eslint#12656, typescript-eslint/typescript-eslint#12678, and typescript-eslint/typescript-eslint#12741:\n\n- Flatten and deduplicate union members in diagnostics, preserving necessary parentheses.\n- Report identical overload signatures.\n- Compare type parameter constraint text so distinct constraints such as `extends A` and `extends B` are not unified.\n\nIncludes the upstream regressions and additional cases checked against ESLint 8.70.1. Parenthesized type nodes are unwrapped to match ESTree, while diagnostics retain Oxc's paired labels. The rule remains diagnostic-only.\n\nValidation: focused rule tests, all 62 TypeScript rule tests, and linter clippy passed. `just ready` passed the workspace check but could not finish the all-features test build: the linker ran out of disk space (`errno=28`).",
+      "files": [
+        "crates/oxc_linter/src/rules/typescript/unified_signatures.rs (+315 -44)",
+        "crates/oxc_linter/src/snapshots/typescript_unified_signatures.snap (+366 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26960,
+      "title": "docs(ast): clarify `TSNonNullExpression` docs",
+      "url": "https://github.com/oxc-project/oxc/pull/26960",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T13:23:38Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 26961,
+      "title": "docs(ast): attach `pure` comment to `NewExpression` field",
+      "url": "https://github.com/oxc-project/oxc/pull/26961",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T13:30:47Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 26962,
+      "title": "docs(ast): use valid variance example for `TSTypeParameter`",
+      "url": "https://github.com/oxc-project/oxc/pull/26962",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T13:56:34Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26963,
+      "title": "docs(ast): correct `Class` abstract example values",
+      "url": "https://github.com/oxc-project/oxc/pull/26963",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T14:01:34Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26964,
+      "title": "docs(ast): correct `TSPropertySignature` usage example",
+      "url": "https://github.com/oxc-project/oxc/pull/26964",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T14:08:36Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26966,
+      "title": "docs(ast): fix `TSTupleType` example syntax",
+      "url": "https://github.com/oxc-project/oxc/pull/26966",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T14:13:34Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26969,
+      "title": "refactor(minifier): use `new_*` helpers instead of manual boxed nodes",
+      "url": "https://github.com/oxc-project/oxc/pull/26969",
+      "author": "armano2",
+      "mergedAt": "2026-09-23T14:19:55Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "There is no difference in behaviour or generated code, this is just cleanup",
+      "files": [
+        "crates/oxc_minifier/src/peephole/convert_to_dotted_properties.rs (+2 -2)",
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+3 -2)",
+        "crates/oxc_minifier/src/peephole/normalize.rs (+2 -3)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26967,
+      "title": "docs(ast): correct `TSIntrinsicKeyword` example",
+      "url": "https://github.com/oxc-project/oxc/pull/26967",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T14:26:37Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26971,
+      "title": "perf(minifier): avoid creation of empty block when folding try finally",
+      "url": "https://github.com/oxc-project/oxc/pull/26971",
+      "author": "armano2",
+      "mergedAt": "2026-09-23T14:31:29Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "when folding `try finally` we can just `take` finalizer instead of manually replacing it with empty block stmt and discarding it afterwwards",
+      "files": [
+        "crates/oxc_minifier/src/peephole/remove_dead_code.rs (+2 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26970,
+      "title": "docs(ast): correct `JSXText` example",
+      "url": "https://github.com/oxc-project/oxc/pull/26970",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T14:37:34Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26972,
+      "title": "docs(ast): clarify `RegExpFlags::V` flag features",
+      "url": "https://github.com/oxc-project/oxc/pull/26972",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T14:50:35Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26973,
+      "title": "docs(ast): correct `TSNumberKeyword` example",
+      "url": "https://github.com/oxc-project/oxc/pull/26973",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T15:11:35Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26974,
+      "title": "docs(ast): simplify `JSXAttribute` value description",
+      "url": "https://github.com/oxc-project/oxc/pull/26974",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T15:55:37Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 26975,
+      "title": "docs(ast): correct `JSXExpressionContainer` example",
+      "url": "https://github.com/oxc-project/oxc/pull/26975",
+      "author": "camc314",
+      "mergedAt": "2026-09-23T16:14:34Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26768,
+      "title": "perf(minifier): fold logical expressions in place",
+      "url": "https://github.com/oxc-project/oxc/pull/26768",
+      "author": "armano2",
+      "mergedAt": "2026-09-23T21:12:06Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "refactor of logical-expression folding to update expressions in place, avoiding unnecessary temporary  nodes.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/fold_constants.rs (+83 -91)",
+        "crates/oxc_minifier/src/peephole/minimize_for_statement.rs (+21 -17)",
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+1 -1)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+6 -6)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26977,
+      "title": "perf(lexer): calculate `OpMap` perfect hash table at compile time",
+      "url": "https://github.com/oxc-project/oxc/pull/26977",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-23T22:36:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n`OpMap` previously performed a search for hash multiplier at runtime in `OpMap::opmap_init`.\n\nInstead, hard-code the multiplier this search finds as a const `OPMAP_MUL`.\n\nMove the search code into a test. The test checks the hard-coded const produces no collisions. If the list of operators is changed in future and the current seed produces collisions, the test fails and it prints a new multiplier to substitute for `OPMAP_MUL`.\n\nAdditionally, calculate `opmap_slot` at compile time instead of runtime.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+62 -36)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26978,
+      "title": "refactor(lexer): fold `OpMap::build_op_pack` into `OpMap::new`",
+      "url": "https://github.com/oxc-project/oxc/pull/26978",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-23T22:37:20Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor.\n\nCombine `OpMap::build_op_pack` into `OpMap::new`. Also rename vars and shorten syntax to make it clearer.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+18 -26)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26979,
+      "title": "perf(lexer): do not store length in `op2_pack` and `op3_pack`",
+      "url": "https://github.com/oxc-project/oxc/pull/26979",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-23T22:38:18Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n`OpMap` contains 2 lookup tables `op2_pack` and `op3_pack`. Each packed value in both tables contained the length of the operator in its first byte.\n\nThis was redundant as every usage also statically added the length to the value it compared the lookup value to. The length is already included in the key used for the perfect hash table, which produces a unique packed value for each valid key.\n\nRemove the length from the packed value. This has 2 advantages:\n\n1. Less operations at lookup sites (no need to shift the operator bytes, or OR in the length).\n2. `op3_pack` shrinks from a `[u64; 256]` to a `[u32; 256]` (2 KiB -> 1 KiB).",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+5 -9)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+12 -10)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26980,
+      "title": "perf(lexer): combine `op2_pack` and `op3_pack` into one",
+      "url": "https://github.com/oxc-project/oxc/pull/26980",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-23T22:39:08Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n#26979 converted `op3_pack` to a `[u32; 256]`. After that change `op2_pack` and `op3_pack` have the same format.\n\nEvery operator has a unique index, meaning that every occupied slot in `op2_pack` corresponds to an empty slot in `op3_pack`, and vice-versa.\n\nSo there's no need for 2 tables - combine them both into a single table `op_pack` containing the entries from both.\n\nThis reduces the tables' size from 2 KiB to 1 KiB, making more of it likely to be in L1 cache.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+7 -7)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+10 -14)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26981,
+      "title": "perf(lexer): create `op_pack` at compile time",
+      "url": "https://github.com/oxc-project/oxc/pull/26981",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-23T22:40:08Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n#26979 and #22680 reduced `op_pack` table down to 1 KiB. This reduced size is small enough to sit in the binary as a `static`.\n\nCalculate the contents at compile time, instead of runtime.\n\nThis removes the code to generate the table from runtime, replacing it with a 1 KiB bulk memcpy.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+21 -18)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26982,
+      "title": "perf(lexer): use `op_pack` for all lookups",
+      "url": "https://github.com/oxc-project/oxc/pull/26982",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-23T23:47:34Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n#26979 and #26980 simplified the structure of `op_pack` lookup table. Each entry now contains the first 3 bytes of the identifier in bottom 3 bytes, and the `TokenKind` in top byte.\n\nThis is exactly the data that `opmap_lookup` needs, so use `op_pack` there too.\n\nThis change:\n\n- makes `OPMAP_OPS` unreferenced at runtime, removing it from the binary.\n- means `opmap_lookup` uses the same data as `op_pack` lookups, so it's more likely to be warm in cache.\n- reduces indirection to get the bytes of the operator - previously it had a dependent load of the `&[u8]` stored in `OpDef`s, now it gets it directly from `op_pack`.\n- reduces branches in `opmap_lookup`.\n\n`op_pack` only contains the first 3 bytes of the operator. There's only one 4-byte operator (`>>>=`), so just handle it separately.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+87 -34)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26983,
+      "title": "perf(lexer): make branch in `opmap_lookup` more predictable",
+      "url": "https://github.com/oxc-project/oxc/pull/26983",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:05:34Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n#26982 switched `opmap_lookup` to using `op_pack` for lookups. `op_pack` entries only contain the first 3 bytes of the operator, so the one 4-byte operator (`>>>=`) needs special handling.\n\nMove the branch which handles it to the bottom of the function, after the main match branch.\n\nAt the top of function `if len == 4` branch would mispredict roughly one time in 3 for callers which try 4-byte op, then 3-byte, then 2-byte. At the bottom, it's extremely rare the branch is taken, so it becomes almost entirely predictable. And on x86_64, compiler reduces it to branchless `cmov` instructions.\n\nMaking this work requires adding some conditions to the hash map collision checks (see comments in the code). These extra checks pass for the existing hash map multiplier value (and also do for many other valid multiplier values).\n\n`opmap_lookup` isn't on a hot path, so it doesn't much matter, but I noticed it could be improved a little, so why not?",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+87 -42)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26984,
+      "title": "refactor(lexer): add `opmap_pack` method",
+      "url": "https://github.com/oxc-project/oxc/pull/26984",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:12:40Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor.\n\nAdd a method `OpMap::opmap_pack` which performs hashing for the `OpMap` perfect hash table. This centralizes the hashing logic in one place. `Opmap`'s fields are no longer directly accessed, and can lose `pub`.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+28 -3)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26985,
+      "title": "refactor(lexer): store number of bits in hash in a const",
+      "url": "https://github.com/oxc-project/oxc/pull/26985",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:15:39Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor.\n\nStore the number of bits comprising the `OpMap` hash returned by `op_slot` in a const. Use that const everywhere which depends on that value.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+14 -8)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26986,
+      "title": "perf(lexer): reduce `OpMap` hash to 6 bits",
+      "url": "https://github.com/oxc-project/oxc/pull/26986",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:16:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n`OpMap` perfect hash table used an 8-bit hash. The table contains 33 active slots, and 223 empty slots.\n\nReduce hash to 6 bits, reducing the table to 64 entries.`OP_PACK` goes from 1 KiB to 256 bytes. This makes it far more likely to all sit in cache.\n\n#26977 moved the search for a multiplier out of runtime code, so the longer search to find a valid multiplier for a 64-entry table with no collisions is no problem.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26987,
+      "title": "refactor(lexer): remove `len` field from `OpDef`",
+      "url": "https://github.com/oxc-project/oxc/pull/26987",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:17:19Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor.\n\nSince #26982, `OpDef` is not touched by runtime code - only compile-time and tests now - so the optimization of a separate `len` field is now not necessary. Simplify it by just using `txt.len()`, which is the same value.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+15 -19)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 26988,
+      "title": "perf(lexer): `opmap_lookup` take a `[u8; 4]`",
+      "url": "https://github.com/oxc-project/oxc/pull/26988",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:17:49Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n`opmap_lookup` took 4 byte values as 4 x individual `u8`s.\n\nInstead, make it take a single `[u8; 4]`. This can be loaded with a single 4-byte unaligned load, instead of 4 x individual 1-byte loads, and takes only 1 register.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+2 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+3 -6)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+32 -30)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 26989,
+      "title": "docs(lexer): document all functions and types related to `OpMap`",
+      "url": "https://github.com/oxc-project/oxc/pull/26989",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:18:27Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 26990,
+      "title": "perf(lexer): remove `OpMap`",
+      "url": "https://github.com/oxc-project/oxc/pull/26990",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:19:04Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "After #26977 and #26982, `OpMap` contains only data which is calculated at compile time.\n\nRemove `OpMap` entirely, and replace it with free functions that access the `static` data directly.\n\nThis change:\n\n- Reduces work initializing `Tables`.\n- Allows `OPMAP_MUL` to be inlined as an immediate, rather than a load on critical path.\n- Means all threads use the same data, reducing memory usage (minor - only a few KB).\n- Means threads on cores which share an L2 cache can share the same data, rather than each thread having its own copy cached separately.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+11 -12)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+5 -2)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+1 -4)",
+        "crates/oxc_lexer/src/pipeline/tables/operators.rs (+75 -101)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26991,
+      "title": "refactor(lexer): move `operators` module out of `tables`",
+      "url": "https://github.com/oxc-project/oxc/pull/26991",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-24T00:19:45Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor.\n\n#26990 removed operator map functions and data from `Tables`. It no longer belongs in `tables` module. Move `operators.rs` up into `pipeline` directory.\n\n---\n\nThis concludes a stack of PRs relating to the operator perfect hash table. Summary of this stack:\n\n* Reduce size of table data used for hashing from ~4 KiB to 256 bytes.\n* Calculate all data at compile time, not runtime, so it can be stored in a `static` shared between all threads.\n* Optimize the hashing code, shaving off a few instructions and memory loads at each call site.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/classify/generic.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+3 -7)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/punct.rs (+3 -4)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/operators.rs (+5 -5)",
+        "crates/oxc_lexer/src/pipeline/tables/classify_luts.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/tables/mod.rs (+0 -3)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 26998,
+      "title": "fix(formatter_markdown): keep a line break before an inline liquid tag under preserve",
+      "url": "https://github.com/oxc-project/oxc/pull/26998",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-24T01:01:36Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Follow Prettier 3.9.8 changes: https://github.com/prettier/prettier/pull/20087",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+14 -55)",
+        "crates/oxc_formatter_markdown/src/print/link.rs (+1 -1)",
+        "crates/oxc_formatter_markdown/src/print/text.rs (+18 -23)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/liquid-inline-wrap.md.snap (+4 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26999,
+      "title": "feat(oxfmt): bump bundled Prettier version to 3.9.8",
+      "url": "https://github.com/oxc-project/oxc/pull/26999",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-24T01:02:35Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #26751\n\nRefs: https://github.com/prettier/prettier/releases/tag/3.9.8",
+      "files": [
+        "apps/oxfmt/conformance/run.ts (+5 -0)",
+        "apps/oxfmt/package.json (+1 -1)",
+        "crates/oxc_formatter_markdown/src/print/list.rs (+1 -1)",
+        "pnpm-lock.yaml (+13 -13)",
+        "apps/oxfmt/DIVERGENCES.md (+0 -81)",
+        "apps/oxfmt/conformance/snapshots/conformance.snap.md (+11 -41)",
+        "apps/oxfmt/conformance/snapshots/diffs/css-in-js/edge-cases__css-in-js__template-expression-indent.js.md (+0 -129)",
+        "apps/oxfmt/conformance/snapshots/diffs/gql-in-js/edge-cases__gql-in-js__template-expression-indent.js.md (+0 -119)",
+        "apps/oxfmt/conformance/snapshots/diffs/html-in-js/edge-cases__html-in-js__template-expression-indent.js.md (+0 -367)",
+        "apps/oxfmt/conformance/snapshots/diffs/html-in-js/externals__webawesome__carousel__carousel.ts.md (+0 -3201)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 27000,
+      "title": "fix(formatter_markdown): keep a shape line after a multi-line inline node or link title",
+      "url": "https://github.com/oxc-project/oxc/pull/27000",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-24T01:03:05Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Preserve lines whose meaning changes when they are merged into a single line; a few had been overlooked.",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+37 -15)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/line-shapes.md (+12 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/line-shapes.md.snap (+85 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27001,
+      "title": "fix(formatter_markdown): keep a math span after a kept line break from opening a block",
+      "url": "https://github.com/oxc-project/oxc/pull/27001",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-24T01:03:46Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Math `$$` should not move to opening position.",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+4 -1)",
+        "crates/oxc_formatter_markdown/src/print/line_shape.rs (+15 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/wrapped-block-starts.md (+4 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/wrapped-block-starts.md.snap (+28 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 26888,
+      "title": "fix(react-compiler): mark useWindowVirtualizer as incompatible",
+      "url": "https://github.com/oxc-project/oxc/pull/26888",
+      "author": "Boshen",
+      "mergedAt": "2026-09-24T07:07:01Z",
+      "labels": [
+        "A-react-compiler"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Ports [React commit 08725f2132](https://github.com/facebook/react/commit/08725f213248f886c7131d406d263fb42b01d501).\n\nValidation for this stack:\n\n- cargo test -p oxc_react_compiler on every layer\n- just ready on the top layer\n- React Rust runtime suite: 1,824 passed, 0 failed\n\nAI disclosure: Codex was used to port, review, and test this change.\n\n---\n\n<sub>Stack created with <a href=\"https://github.com/github/gh-stack\">GitHub Stacks CLI</a> • <a href=\"https://gh.io/stacks-feedback\">Give Feedback 💬</a></sub>",
+      "files": [
+        "crates/oxc_react_compiler/src/react_compiler_hir/default_module_type_provider.rs (+36 -16)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27002,
+      "title": "feat(oxfmt): bump bundled Prettier version to 3.9.9",
+      "url": "https://github.com/oxc-project/oxc/pull/27002",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-24T07:39:36Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Follow Prettier v3.9.9 changes: https://github.com/prettier/prettier/pull/20140\n\nRequired `oxc_markdown_parser` bump.",
+      "files": [
+        "Cargo.lock (+2 -2)",
+        "Cargo.toml (+1 -1)",
+        "apps/oxfmt/package.json (+1 -1)",
+        "pnpm-lock.yaml (+13 -13)",
+        "crates/oxc_formatter_markdown/DIVERGENCES.md (+1 -1)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/verbatim-inline-continuation.md (+2 -2)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/verbatim-inline-continuation.md.snap (+6 -6)",
+        "crates/oxc_formatter_markdown/tests/invariants.rs (+1 -1)",
+        "crates/oxc_formatter_markdown/tests/snapshots/conformance__prettier-markdown.snap (+1 -1)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 27003,
+      "title": "fix(formatter_markdown): fix more mismatches found in ecosystem-ci repos",
+      "url": "https://github.com/oxc-project/oxc/pull/27003",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-24T07:40:10Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- Stop CJK whitespace rules at inline node edges\n- Keep a kept line break before a lone `|` row under `preserve`\n- Escape a fake setext underline only when it ends its line\n- Ignore backslash-escaped backticks when choosing a code span fence",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/block.rs (+1 -1)",
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+21 -10)",
+        "crates/oxc_formatter_markdown/src/print/text.rs (+14 -6)",
+        "crates/oxc_formatter_markdown/DIVERGENCES.md (+55 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/fake-setext-underline.md (+5 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/fake-setext-underline.md.snap (+30 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/lazy-html-block.md (+3 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/lazy-html-block.md.snap (+26 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/cjk.md (+9 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/cjk.md.snap (+60 -0)"
+      ],
+      "filesTotal": 18
+    }
+  ],
+  "errors": []
+}

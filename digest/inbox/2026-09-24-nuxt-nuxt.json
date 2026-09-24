@@ -1,0 +1,340 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.5.2",
+      "publishedAt": "2026-08-05T16:19:44Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.5.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36363,
+      "title": "fix(vite): keep deduped packages out of importer-based external resolution",
+      "url": "https://github.com/nuxt/nuxt/pull/36363",
+      "author": "danielroe",
+      "mergedAt": "2026-09-17T10:25:00Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis works around an issue in nitro with tracing (nitrojs/nitro#4468, see also nitrojs/nitro#4456)\n\nthe issue is that when we have absolute paths pointing to the same bare specifier, nitro ends up with output that might have missing files (e.g. in the situation I encountered it, the _newer_ version of vue-router has a `vue-router.node.mjs` which nitro didn't copy because it looked at an older version first)... that needs to be fixed upstream.\n\nbut, regardless, this is a bug in nuxt, because we _don't_ want multiple versions of a back that is meant to be deduped, like vue or vue-router.\n\nso this PR ignores absolute-path externalisation for packages specified to be deduped",
+      "files": [
+        "packages/vite/src/plugins/resolved-externals.ts (+9 -1)",
+        "packages/vite/test/resolved-externals.test.ts (+10 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36366,
+      "title": "fix(nitro,vite): resolve nitro and its implicit deps without hoisting",
+      "url": "https://github.com/nuxt/nuxt/pull/36366",
+      "author": "danielroe",
+      "mergedAt": "2026-09-17T11:04:29Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\ncloses https://github.com/nuxt/nuxt/pull/35380\nresolves https://github.com/nuxt/nuxt/issues/35375\n\n### 📚 Description\n\nthis is a better approach than https://github.com/nuxt/nuxt/pull/35380, updated for the current shape of nitro resolution",
+      "files": [
+        "packages/nitro-server/src/compat.ts (+45 -15)",
+        "packages/nitro-server/src/index.ts (+2 -8)",
+        "packages/nitro-server/src/utils.ts (+8 -0)",
+        "packages/vite/src/shared/server.ts (+2 -0)",
+        "packages/nitro-server/test/compat.test.ts (+40 -10)",
+        "packages/nuxt/test/templates.test.ts (+1 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 36368,
+      "title": "refactor(nuxt): own more of the public api for `nuxt/app`",
+      "url": "https://github.com/nuxt/nuxt/pull/36368",
+      "author": "danielroe",
+      "mergedAt": "2026-09-18T13:20:39Z",
+      "labels": [
+        "♻️ refactor",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis extracts types for `consola`, `cookie-es` and `hookable` into nuxt core apis where we can track them",
+      "files": [
+        "package.json (+1 -1)",
+        "packages/nitro-server/src/augments.ts (+2 -3)",
+        "packages/nitro-server/src/templates.ts (+2 -3)",
+        "packages/nuxt/src/app/composables/cookie.ts (+4 -2)",
+        "packages/nuxt/src/app/composables/runtime-hook.ts (+2 -2)",
+        "packages/nuxt/src/app/index.ts (+1 -1)",
+        "packages/nuxt/src/app/internal/context.ts (+10 -0)",
+        "packages/nuxt/src/app/nuxt.ts (+8 -10)",
+        "packages/nuxt/src/app/plugins/debug-hooks.ts (+3 -1)",
+        "packages/nuxt/src/app/plugins/dev-server-logs.ts (+3 -4)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 36371,
+      "title": "perf(nuxt): drop `unctx` from client environment (+ `defu` in single-object config)",
+      "url": "https://github.com/nuxt/nuxt/pull/36371",
+      "author": "danielroe",
+      "mergedAt": "2026-09-19T08:06:11Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis drops a couple of unneeded deps - unctx brings in an extra 1 KB which isn't needed in the browser, where there is no `AsyncLocalStorage`... and defu was being used even when there was only one app.config - an unnecessary call",
+      "files": [
+        "packages/nuxt/src/app/internal/context.ts (+35 -0)",
+        "packages/nuxt/src/app/nuxt.ts (+1 -1)",
+        "packages/nuxt/src/core/nuxt.ts (+3 -2)",
+        "packages/nuxt/src/core/templates.ts (+5 -3)",
+        "packages/nuxt/test/templates.test.ts (+8 -1)",
+        "test/bundle.test.ts (+4 -4)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 36372,
+      "title": "fix(vite): await `ssrFixStacktrace`",
+      "url": "https://github.com/nuxt/nuxt/pull/36372",
+      "author": "danielroe",
+      "mergedAt": "2026-09-19T08:08:11Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis led to something like this, because the failure wasn't being caught/suppressed\n\n```\n08:03:00  ERROR  Cannot assign to read only property 'stack' of object 'Page not found: /favicon.ico'\n\n               at ViteNodeRunner.ssrFixStacktrace (/Users/daniel/code/danielroe/my-project/node_modules/.pnpm/vite-node@6.0.0_@types+node@24.13.5_@vitejs+devtools@0.7.5_esbuild@0.…\n               at Array.<anonymous> (/Users/daniel/code/danielroe/my-project/node_modules/.pnpm/@nuxt+vite-builder-nightly@5.0.0-29827390.1d6daef9_@nuxt+schema-nightly@5.0.0-29827…\n```",
+      "files": [
+        "packages/vite/src/fix-stacktrace.ts (+3 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36373,
+      "title": "perf(vite-server): index public files only once",
+      "url": "https://github.com/nuxt/nuxt/pull/36373",
+      "author": "danielroe",
+      "mergedAt": "2026-09-21T08:26:40Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis speeds up vite-server performance between 3-5% and is anyway a bug fix as we shouldn't need to probe the file system for every request...",
+      "files": [
+        "packages/vite-server/src/runtime/node.ts (+41 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36383,
+      "title": "chore: update ui templates in precommit hook",
+      "url": "https://github.com/nuxt/nuxt/pull/36383",
+      "author": "danielroe",
+      "mergedAt": "2026-09-21T12:05:20Z",
+      "labels": [
+        "🧹 p1-chore",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 4
+    },
+    {
+      "number": 36178,
+      "title": "feat(ui-templates): particle mountain loading screen",
+      "url": "https://github.com/nuxt/nuxt/pull/36178",
+      "author": "HugoRCD",
+      "mergedAt": "2026-09-21T13:17:24Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Replaces the loading screen with a WebGPU particle field that draws a mountain range behind the Nuxt lockup.\n\n- one shader, one draw call, no textures: the range comes from a ridged heightfield sampled in perspective, with occlusion for the skyline\n- a clearing keeps the field off the lockup, and hovering it fires a shockwave through the particles\n- the progress bar reads `window.__NUXT_LOADING_STATE__` or a `nuxt:loading-state` event, and stays indeterminate without a producer\n- without WebGPU the canvas is dropped and the lockup carries the screen; `prefers-reduced-motion` stops the animation entirely\n\n### Benchmark\nhttps://claude.ai/code/artifact/d3230656-e39e-4ee0-870c-2c95cffdbd53\n\n### Preview\nhttps://github.com/user-attachments/assets/333536a7-0572-4f97-b067-f208aad7cfa0\n\n### Light Mode\nhttps://github.com/user-attachments/assets/e0ff9466-74f9-4179-90c6-3b66b0b0bf91\n\n### Responsiveness\nhttps://github.com/user-attachments/assets/9fcb6d4e-6bad-44b8-9334-4d59d4ecd42f\n\n### Winter toggle\nhttps://github.com/user-attachments/assets/051f293b-0052-46d8-9f6a-bac982982a10\n\n### Focus only animations\nhttps://github.com/user-attachments/assets/38c58a81-3f6d-4ec5-aad9-20c635f70643",
+      "files": [
+        "knip.json (+2 -1)",
+        "packages/schema/src/templates/loading.ts (+3 -3)",
+        "packages/ui-templates/lib/dev.ts (+2 -1)",
+        "packages/ui-templates/templates/loading/index.html (+140 -125)",
+        "packages/ui-templates/templates/loading/messages.json (+1 -2)",
+        "packages/ui-templates/templates/loading/shader/mountains.frag.glsl (+20 -0)",
+        "packages/ui-templates/templates/loading/shader/mountains.vert.glsl (+306 -0)",
+        "packages/ui-templates/templates/loading/shader/renderer.ts (+419 -0)",
+        "packages/ui-templates/templates/loading/shader/start.ts (+102 -0)",
+        "pnpm-lock.yaml (+51 -19)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 36370,
+      "title": "fix(nitro): keep `nuxt` unexternalized in the vite dev environment",
+      "url": "https://github.com/nuxt/nuxt/pull/36370",
+      "author": "Flo0806",
+      "mergedAt": "2026-09-21T23:24:02Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nResolves: #36369\n\n### 📚 Description\n\nThe \"issue\" never occurs in the Nuxt repos playground because the workspace link resolves outside node_modules. I added `nuxt` and also `nightly` e.g. to the noExternals, no it works.\n\n### Test\nlike always - a little test is attached",
+      "files": [
+        "packages/nitro-server/src/index.ts (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36258,
+      "title": "feat(nitro,vite): map dev ssr stacktraces and render errors with  `my-bad`",
+      "url": "https://github.com/nuxt/nuxt/pull/36258",
+      "author": "danielroe",
+      "mergedAt": "2026-09-22T00:05:51Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nfollows up on #35587\nrelated to #34593\nsupersedes #33872, #34404\nresolves https://github.com/nuxt/nuxt/issues/20204\nresolves https://github.com/nuxt/nuxt/issues/24109\n\n### 📚 Description\n\nthis PR follows up on #35758 to fix the sourcemap issues that were still occurring after that fix.\n\nwhen hitting a server-side error in development, you get something a bit like this:\n\n```\nReferenceError: foo is not defined\n    at Object.<anonymous> (/_nuxt/app/pages/index.vue:1:1)\n    at async ...\n```\n\nit doesn't include a source position, or code frame. the Youch page we render into an iframe overlay doesn't help much either, because it can't show the frame in _your_ source.\n\n(the issue was that #35758 ended up resolving a second copy of the `vite-node` runner whose `moduleCache` was empty, so `ssrFixStacktrace` had no maps to consult)\n\nso this PR does two things.\n\n1. **it maps dev SSR stacktraces properly.** we now handle mapping in the Nuxt error handler, before anything reads the error.\n\n- inline sourcemaps are read whether or not the data URL carries a `charset` (`vite-node` only recognises the `charset=utf-8` form, which Vite doesn't emit)\n- mapped columns are emitted 1-based, as in a V8 stack\n- Vite transform failures forwarded over the vite-node socket keep `loc`, `plugin` and `pluginCode`, so error handlers can render an exact position instead of re-parsing `message`\n- the maps are then exposed to Nitro as `nitroApp.ssrSourceMaps` (`getSourceMap`, `getCode`, `f\n…(truncated)",
+      "files": [
+        "eslint.config.mjs (+3 -0)",
+        "knip.json (+0 -3)",
+        "package.json (+3 -2)",
+        "packages/nitro-server/package.json (+1 -0)",
+        "packages/nitro-server/src/augments.ts (+22 -0)",
+        "packages/nitro-server/src/dev-request.ts (+2 -29)",
+        "packages/nitro-server/src/index.ts (+19 -3)",
+        "packages/nitro-server/src/runtime/handlers/error-channel.ts (+21 -0)",
+        "packages/nitro-server/src/runtime/handlers/error.ts (+91 -30)",
+        "packages/nitro-server/src/runtime/plugins/dev-errors.ts (+74 -0)"
+      ],
+      "filesTotal": 124
+    },
+    {
+      "number": 36389,
+      "title": "feat(nuxt,nitro,vite,vite-server): scope dev error reports for remote peers",
+      "url": "https://github.com/nuxt/nuxt/pull/36389",
+      "author": "danielroe",
+      "mergedAt": "2026-09-22T21:29:29Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis adopts https://github.com/danielroe/my-bad/pull/46 to let us stream data even across network if intended (e.g. docker dev server)",
+      "files": [
+        "packages/nitro-server/src/runtime/handlers/error-channel.ts (+4 -7)",
+        "packages/vite-server/src/runtime/dev-error.ts (+4 -8)",
+        "packages/vite/src/dev-errors.ts (+2 -4)",
+        "pnpm-lock.yaml (+19 -19)",
+        "pnpm-workspace.yaml (+2 -2)",
+        "packages/nitro-server/test/error-channel-handler.test.ts (+17 -7)",
+        "packages/vite-server/test/dev-error-channel.test.ts (+17 -7)",
+        "packages/vite/test/dev-errors.test.ts (+2 -3)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 36391,
+      "title": "feat(nuxt): unified client prefetch scheduler",
+      "url": "https://github.com/nuxt/nuxt/pull/36391",
+      "author": "danielroe",
+      "mergedAt": "2026-09-23T08:50:33Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nfollows up on https://github.com/nuxt/nuxt/pull/36324\n\n### 📚 Description\n\nwe currently prefetch/preload nuxt chunks, components, islands, etc. in an inconsistent way.\n\n| work | before | now |\n| --- | --- | --- |\n| route chunks (`preloadRouteComponents`) | own 4-slot queue, never cancelled | `route`, cap 4 |\n| layout + middleware chunks | unthrottled | `route`, cap 4 |\n| `_payload.json` | unthrottled, result discarded after navigating | `payload`, cap 8 |\n| island JSON | one `fetch` per island key in the payload | `island`, cap 4 |\n| forwarded resource hints | 8 concurrent, 30s timeout | `hint`, cap 8 (unchanged) |\n| cross-origin URLs | speculation rules | untouched |\n\nthis PR adds one internal scheduler that all of these can now queue onto. now, 'tasks' have:\n- **a key** so duplicates are dropped\n- **a priority** (as above)\n- **a scope** so we can clean up when navigating\n- **a group** based on the destination path and query\n\non navigation we abort in-flight `navigation` work and drop the queue, apart from the payload for the route we're heading to.\n\npreviously, we had three different ways of checking for low data; now, we simply hold work in a backlog when `saveData` or 2g is detected, the tab is hidden, or a navigation in progress. (and when any of that changes, we resume it - previously things were just dropped. 😬)\n\nwe use the [Prioritized Task Scheduling API](https://developer.mozilla.org/en-US/docs/Web/API/Prioritized_Task_Scheduling_API#browser_co\n…(truncated)",
+      "files": [
+        "packages/nuxt/src/app/components/nuxt-link.ts (+35 -21)",
+        "packages/nuxt/src/app/composables/payload.ts (+44 -4)",
+        "packages/nuxt/src/app/composables/preload.ts (+36 -24)",
+        "packages/nuxt/src/app/internal/prefetch-scheduler.ts (+64 -0)",
+        "packages/nuxt/src/app/internal/prefetch-util.ts (+26 -0)",
+        "packages/nuxt/src/app/internal/prefetch.ts (+183 -0)",
+        "packages/nuxt/src/app/nuxt.ts (+4 -0)",
+        "packages/nuxt/src/app/plugins/island-link-navigation.client.ts (+5 -4)",
+        "packages/nuxt/src/app/plugins/payload.client.ts (+61 -68)",
+        "packages/nuxt/src/app/plugins/revive-payload.client.ts (+32 -9)"
+      ],
+      "filesTotal": 20
+    },
+    {
+      "number": 36397,
+      "title": "fix(nuxt): keep a configured `appSecret` and warn when it is used",
+      "url": "https://github.com/nuxt/nuxt/pull/36397",
+      "author": "danielroe",
+      "mergedAt": "2026-09-23T16:29:10Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis follows on from https://github.com/nuxt/nuxt/pull/35874 and adds a bit of backwards compatibility in case some developer has `NUXT_APP_SECRET` already set. it avoids overwriting it and warns at point-of-use only.",
+      "files": [
+        "packages/kit/src/diagnostics/config.ts (+1 -1)",
+        "packages/nuxt/src/core/app-secret.ts (+7 -11)",
+        "packages/nuxt/src/server/secret.ts (+8 -0)",
+        "packages/schema/src/types/schema.ts (+1 -0)",
+        "docs/3.guide/6.going-further/10.runtime-config.md (+3 -1)",
+        "packages/nuxt/test/app-secret.test.ts (+61 -13)",
+        "packages/nuxt/test/server-secret.test.ts (+40 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36398,
+      "title": "refactor(nuxt,nitro,vite-server): share error handling between the renderer and server builders",
+      "url": "https://github.com/nuxt/nuxt/pull/36398",
+      "author": "danielroe",
+      "mergedAt": "2026-09-23T22:11:57Z",
+      "labels": [
+        "♻️ refactor",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis shares error handling code between nitro + vite server builders, which otherwise were independently building a `my-bad` report, mapping the stack, etc.\n\n- we now have a new `createDevErrorReporter()` which can be supplied by a builder\n- there's now a single `describeError`, `isExpectedError`, `appendVary` and `isJsonRequest`\n- we move the `error-500` template into `nuxt`\n- we drop the nitro error utils file\n\n.... and more coming in a follow-up PR",
+      "files": [
+        "eslint.config.mjs (+1 -1)",
+        "nano-staged.mjs (+1 -1)",
+        "packages/nitro-server/package.json (+0 -1)",
+        "packages/nitro-server/src/runtime/handlers/error.ts (+18 -57)",
+        "packages/nitro-server/src/runtime/utils/error-channel.ts (+7 -18)",
+        "packages/nitro-server/src/runtime/utils/error.ts (+0 -32)",
+        "packages/nitro-server/src/runtime/utils/renderer/options.ts (+8 -1)",
+        "packages/nuxt/src/runtime/server/dev-error/index.ts (+74 -5)",
+        "packages/nuxt/src/runtime/server/renderer/error-template.ts (+0 -0)",
+        "packages/nuxt/src/runtime/server/renderer/error.ts (+105 -0)"
+      ],
+      "filesTotal": 19
+    }
+  ],
+  "errors": []
+}

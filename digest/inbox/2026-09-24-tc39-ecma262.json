@@ -1,0 +1,78 @@
+{
+  "kind": "repo",
+  "repo": "tc39/ecma262",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "es2026-errata",
+      "publishedAt": "2026-07-28T00:12:15Z",
+      "url": "https://github.com/tc39/ecma262/releases/tag/es2026-errata"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 3962,
+      "title": "Meta: Upgrade ESMeta to v0.8.1",
+      "url": "https://github.com/tc39/ecma262/pull/3962",
+      "author": "arcde40",
+      "mergedAt": "2026-09-18T23:36:39Z",
+      "labels": [
+        "meta",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This PR updates the version of ESMeta to [v0.8.0](https://github.com/es-meta/esmeta/releases/tag/v0.8.0) with the following key updates:\n* https://github.com/es-meta/esmeta/pull/345\n* https://github.com/es-meta/esmeta/pull/353\n* https://github.com/es-meta/esmeta/pull/347\n* https://github.com/es-meta/esmeta/pull/348\n* https://github.com/es-meta/esmeta/pull/358\n\nThis version removes `SnapToInteger` from `esmeta-ignore.json`, but newly adds five algorithms:\n* `BigIntBitwiseOp`\n* `DecimalEscape[0,1].CapturingGroupNumber`\n* `INTRINSICS.Function.prototype.bind`\n* `TimeString`\n* `TimeZoneString`\n\nAll of them are false alarms in newly supported features, caused by a limitation in the current type inference: integer and range constraints are over-approximated to `Math` through arithmetic operations. For example, in `BigIntBitwiseOp`, the arguments to `BinaryAnd`/`BinaryOr`/`BinaryXor` are always 0 or 1 by modulo 2, but inferred as `Math` rather than `Int[0, 1]`.",
+      "files": [
+        "esmeta-ignore.json (+6 -2)",
+        ".github/workflows/esmeta-installer/action.yml (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 3975,
+      "title": "Editorial: Use the String exotic object type in StringGetOwnProperty",
+      "url": "https://github.com/tc39/ecma262/pull/3975",
+      "author": "linusg",
+      "mergedAt": "2026-09-19T05:31:04Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "spec.html (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3981,
+      "title": "Editorial: change return value of SetViewValue from undefined to unused",
+      "url": "https://github.com/tc39/ecma262/pull/3981",
+      "author": "Jack-Works",
+      "mergedAt": "2026-09-20T12:26:14Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "I found this when refactoring engine262. The return value of this AO does not represent a meaningful ECMAScript value; therefore, I think it is better to change it as in this PR.",
+      "files": [
+        "spec.html (+24 -13)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

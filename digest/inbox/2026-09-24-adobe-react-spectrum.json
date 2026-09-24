@@ -1,0 +1,118 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-09-24T08:29:58Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-09-24T08:29:58Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.21.0",
+      "publishedAt": "2026-09-04T19:44:19Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.21.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10586,
+      "title": "chore: update workflow icon package and S2 TableView column menu",
+      "url": "https://github.com/adobe/react-spectrum/pull/10586",
+      "author": "yihuiliao",
+      "mergedAt": "2026-09-17T17:17:43Z",
+      "labels": [
+        "TableView",
+        "small review",
+        "ready for review",
+        "S2"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 10609,
+      "title": "fix: Properly hide separator in Menu when next node is loader/null",
+      "url": "https://github.com/adobe/react-spectrum/pull/10609",
+      "author": "LFDanLu",
+      "mergedAt": "2026-09-18T17:38:11Z",
+      "labels": [
+        "ComboBox",
+        "ready for review",
+        "S2",
+        "Menu"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "From testing\nFixes the bug where the separator was appearing after the last section since we always render a loading node in S2\nAlso adds a set width to the async loading menu docs example so it doesn't resize as items are loader\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [CLAUDE.md](https://github.com/adobe/react-spectrum/blob/main/CLAUDE.md).\n\n## 📝 Test Instructions:\n\nSee chromatic. Test the menus with sections/combobox with sections/picker with sections and make sure no divider renders after the last item\n\n## 🧢 Your Project:\n\nRSP",
+      "files": [
+        "packages/@react-spectrum/s2/chromatic/Menu.stories.tsx (+67 -1)",
+        "packages/@react-spectrum/s2/src/ComboBox.tsx (+2 -26)",
+        "packages/@react-spectrum/s2/src/Menu.tsx (+35 -24)",
+        "packages/@react-spectrum/s2/src/separator-utils.ts (+46 -0)",
+        "packages/dev/s2-docs/pages/s2/Menu.mdx (+2 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 10605,
+      "title": "fix: throw on duplicate keys in collections",
+      "url": "https://github.com/adobe/react-spectrum/pull/10605",
+      "author": "greglum",
+      "mergedAt": "2026-09-18T22:57:47Z",
+      "labels": [
+        "ready for review",
+        "no testing"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #8033\nRelated: #8886\n\n## Summary\n\n**Intent.** Make duplicate keys in a collection fail loudly during development instead of corrupting the collection. This is the check discussed in #8033 (\"check if the key already exists in the keyMap and throw if it does\") and #8886 (\"bailing out and throwing a warning\").\n\n**Why the earlier attempt broke tests.** `BaseCollection.addNode` is the update-or-insert path: every dirty element is re-added on each update, so a naive \"key already in `keyMap`\" check fires on ordinary re-renders. What actually corrupts the collection is two *different connected elements* claiming the same key. With `['a', 'a', 'b']` on `main`, `getKeyBefore('a')` returns `'a'` (a self-loop, which is the infinite iteration and out-of-memory crash in #8033); with `['a', 'x', 'a']`, iterating the collection yields only `['a']` while `size` reports 2 (the silent drop).\n\n**How.** `Document` now records which `ElementNode` owns each key when it adds the node to the collection. In `addNode`, if a different element already owns the key, it throws `Duplicate key \"…\" found in collection. Every item in a collection must have a unique key.` The owner entry is released in `removeNode` and cleared in `resetAfterSSR`. Because `updateCollection` processes removed and hidden elements before it adds anything, a key can move to a new element when the old one is removed in the same render, and hidden (`Activity`) subtrees do not conflict with visible ones; the second commit drops \n…(truncated)",
+      "files": [
+        "packages/react-aria/src/collections/Document.ts (+21 -1)",
+        "packages/react-aria-components/test/GridList.test.js (+3 -3)",
+        "packages/react-aria-components/test/ListBox.test.js (+41 -0)",
+        "packages/react-aria-components/test/Table.test.js (+31 -0)",
+        "packages/react-aria/test/collections/CollectionBuilder.test.js (+66 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 9823,
+      "title": "fix(combobox): re-open menu when async items arrive after empty response",
+      "url": "https://github.com/adobe/react-spectrum/pull/9823",
+      "author": "costajohnt",
+      "mergedAt": "2026-09-22T21:43:30Z",
+      "labels": [
+        "small review",
+        "ready for review"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #9820\n\nWhen using `useComboBox` with `useAsyncList`, if a query returns zero results (e.g. typing \"luka\" against a Star Wars API), the menu closes. Subsequent queries that return results (e.g. backspacing to \"luk\" which matches \"Luke Skywalker\") fail to re-open the menu because the `inputValue` tracking has already been updated by the time the async items arrive.\n\nThe root cause is an asymmetry between the `open()` function (which has a `|| props.items` guard to allow opening with controlled empty collections) and the auto-close check in the `useEffect` (which closes unconditionally when `filteredCollection.size === 0`).\n\nThe fix tracks when the menu was auto-closed due to an empty controlled collection and re-opens it when items become non-empty while the input is still focused. The flag is reset on user-initiated closes (blur, Escape, commit) so those remain permanent.\n\nNote: the `@react-spectrum/combobox` component already works around this by auto-setting `allowsEmptyCollection: true` when `loadingState` is provided, but direct hook users (`useComboBox` + `useComboBoxState`) and RAC ComboBox users don't get this automatic behavior.\n\n## Test plan\n\n- [x] Added test: menu re-opens when controlled items go from empty to non-empty while focused\n- [x] Added test: uncontrolled items still close the menu on empty (regression guard)\n- [x] All 276 existing combobox tests pass across 4 suites (useComboBoxState, useComboBox, RAC ComboBox, Spectrum ComboBox)\n\nCloses \n…(truncated)",
+      "files": [
+        "packages/react-stately/src/combobox/useComboBoxState.ts (+19 -0)",
+        "packages/react-aria-components/test/ComboBox.test.js (+263 -0)",
+        "packages/react-stately/test/combobox/useComboBoxState.test.js (+96 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10616,
+      "title": "chore: yarn dedupe",
+      "url": "https://github.com/adobe/react-spectrum/pull/10616",
+      "author": "snowystinger",
+      "mergedAt": "2026-09-23T20:14:39Z",
+      "labels": [
+        "ready for review"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    }
+  ],
+  "errors": []
+}
