@@ -42,7 +42,7 @@ push をきっかけに  GitHub Actions「deploy」    ← トークン消費 0
 ```yaml
 repos:
   - repo: owner/name
-    branch: main            # 対象のブランチ（next.js なら canary）
+    branch: main            # 任意: 対象のブランチ（省略すると既定ブランチ。next.js なら canary）
     excludeLabels: [dependencies]  # 任意: このラベルの PR を除く
     maxPrs: 60              # 任意: 1 回で詳しく扱う PR の上限（既定 60）
 
@@ -55,16 +55,25 @@ blogs:
     titleFilter: "^Example \\d"         # 任意: タイトルで絞る正規表現
 
   # RSS が無いサイト（一覧ページから記事へのリンクを拾う）
-  - id: chrome
-    title: Chrome の新機能
-    page: https://developer.chrome.com/new?hl=ja
-    linkPattern: "^https://developer\\.chrome\\.com/(blog|release-notes|docs)/.+"  # 任意: 記事として拾うリンク
-    articleParams: { hl: ja }  # 任意: 記事 URL に付けるクエリ（日本語版を取る）
+  - id: firefox
+    title: Firefox リリースノート
+    page: https://www.firefox.com/en-US/releases/
+    linkPattern: "/firefox/\\d+(\\.\\d+)+/releasenotes/?$"  # 任意: 記事として拾うリンク
+    articleParams: { hl: ja }  # 任意: 記事 URL に付けるクエリ（例: 日本語版を取る）
+    sortBy: version            # 任意: URL のバージョン番号の大きい順に扱う
+
+  # Apple のドキュメント（developer.apple.com/documentation/...）
+  - id: safari
+    title: Safari リリースノート
+    docc: https://developer.apple.com/documentation/safari-release-notes
+    maxText: 30000             # 任意: 本文の上限（既定 15000 字）
+    dropSectionsWhenLong: "^(Resolved Issues|Known Issues)$"  # 任意: 上限を超えるときに省く節の見出し
 ```
 
 - `page` のときは、一覧ページの本文の領域（`main` や `article` の中）にあるリンクを、上にあるものほど新しい記事とみなします。
+  他のリンクの親にあたるパス（カテゴリのトップ）は除きます。`linkPattern` が無ければ同じサイトのリンクだけを拾います。
   記事ページからタイトル・本文・公開日を取り出します。リンクが 1 つも見つからなければ `errors` に記録されます。
-
+- `docc` のときは、ページと同じ内容の JSON（`/tutorials/data/documentation/....json`）を読みます。
 - `repo` は転送元の名前（`facebook/react` など）でも動きますが、正式名（`react/react`）を書くのがおすすめです。
 - bot が作った PR は自動で除かれます。
 

@@ -1,0 +1,35 @@
+{
+  "metadata": { "title": "Safari 27 Release Notes" },
+  "primaryContentSections": [
+    {
+      "kind": "content",
+      "content": [
+        { "type": "heading", "level": 2, "text": "Overview" },
+        { "type": "paragraph", "inlineContent": [{ "type": "text", "text": "Safari 27 is available for iOS 27." }] },
+        { "type": "heading", "level": 3, "text": "CSS" },
+        { "type": "heading", "level": 4, "text": "New Features" },
+        {
+          "type": "unorderedList",
+          "items": [
+            { "content": [{ "type": "paragraph", "inlineContent": [{ "type": "text", "text": "Added support for " }, { "type": "codeVoice", "code": ":heading" }, { "type": "text", "text": ". (123456789)" }] }] },
+            { "content": [{ "type": "paragraph", "inlineContent": [{ "type": "text", "text": "Added " }, { "type": "reference", "identifier": "doc://x/ref" }, { "type": "text", "text": "." }] }] }
+          ]
+        },
+        { "type": "heading", "level": 4, "text": "Resolved Issues" },
+        {
+          "type": "unorderedList",
+          "items": [
+            { "content": [{ "type": "paragraph", "inlineContent": [{ "type": "text", "text": "Fixed a crash. (111111111)" }] }] },
+            { "content": [{ "type": "paragraph", "inlineContent": [{ "type": "text", "text": "Fixed layout. (222222222)" }] }] },
+            { "content": [{ "type": "paragraph", "inlineContent": [{ "type": "text", "text": "Fixed scrolling. (333333333)" }] }] }
+          ]
+        },
+        { "type": "heading", "level": 3, "text": "JavaScript" },
+        { "type": "heading", "level": 4, "text": "New Features" },
+        { "type": "codeListing", "syntax": "js", "code": ["const x = 1", "x.toString()"] },
+        { "type": "aside", "style": "note", "name": "Note", "content": [{ "type": "paragraph", "inlineContent": [{ "type": "text", "text": "Beta only." }] }] }
+      ]
+    }
+  ],
+  "references": { "doc://x/ref": { "title": "Navigation API" } }
+}

@@ -1,0 +1,26 @@
+{
+  "topicSections": [
+    {
+      "title": "Version 27",
+      "identifiers": ["doc://x/documentation/safari-27_2-release-notes", "doc://x/documentation/safari-27-release-notes"]
+    },
+    { "title": "Version 26", "identifiers": ["doc://x/documentation/safari-26_6-release-notes", "doc://x/missing"] }
+  ],
+  "references": {
+    "doc://x/documentation/safari-27_2-release-notes": {
+      "title": "Safari 27.2 Beta Release Notes",
+      "url": "/documentation/safari-release-notes/safari-27_2-release-notes",
+      "abstract": [{ "type": "text", "text": "Released September 16, 2026 — 27.2 beta (20625.2.4)" }]
+    },
+    "doc://x/documentation/safari-27-release-notes": {
+      "title": "Safari 27 Release Notes",
+      "url": "/documentation/safari-release-notes/safari-27-release-notes",
+      "abstract": [{ "type": "text", "text": "Released September 14, 2026 — 27.0 (20625.1.29)" }]
+    },
+    "doc://x/documentation/safari-26_6-release-notes": {
+      "title": "Safari 26.6 Release Notes",
+      "url": "/documentation/safari-release-notes/safari-26_6-release-notes",
+      "abstract": [{ "type": "text", "text": "Released July 27, 2026 — 26.6 (20624.4.5)" }]
+    }
+  }
+}

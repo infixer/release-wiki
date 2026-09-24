@@ -2,6 +2,7 @@
 # 追加・削除はこのファイルを編集して push するだけ。追加した回は直近 7 日分を取り込む。
 
 repos:
+  # branch を省略すると、そのリポジトリの既定ブランチ（main / master など）を追跡する
   - repo: react/react # facebook/react は転送されるだけなので正式名を書く（転送元でも collect が取り直す）
     branch: main
   - repo: vercel/next.js
@@ -9,6 +10,21 @@ repos:
     # 任意の設定:
     # excludeLabels: [dependencies]  # このラベルが付いた PR は集めない
     # maxPrs: 60                     # 1 回で詳しく扱う PR の上限（超えた分は 1 行扱い。既定 60）
+  - repo: vuejs/core
+  - repo: nuxt/nuxt
+  - repo: adobe/react-spectrum
+  - repo: microsoft/TypeScript
+  - repo: oxc-project/oxc
+  - repo: anthropics/claude-code
+
+  # 標準仕様
+  - repo: whatwg/html
+  - repo: w3c/csswg-drafts
+  - repo: w3c/aria
+  - repo: w3c/wcag
+  - repo: openui/open-ui
+  - repo: tc39/ecma262
+  - repo: tc39/proposals
 
 blogs:
   # RSS/Atom があるブログは feed、無いサイトは一覧ページを page に書く
@@ -21,6 +37,18 @@ blogs:
     # 記事も日本語版（翻訳が無ければ英語）で取る
     articleParams:
       hl: ja
+  - id: firefox
+    title: Firefox リリースノート
+    page: https://www.firefox.com/en-US/releases/
+    # デスクトップ版のリリースノートだけ（ESR・Beta・Android・iOS は除く）
+    linkPattern: "/firefox/\\d+(\\.\\d+)+/releasenotes/?$"
+    sortBy: version # 一覧の並び順に頼らず、バージョン番号の大きい順に扱う
+  - id: safari
+    title: Safari リリースノート
+    docc: https://developer.apple.com/documentation/safari-release-notes # Apple のドキュメント（JSON で取得）
+    maxText: 30000
+    # 本文が maxText を超えるときは、修正された不具合の一覧を省く（件数だけ残す）
+    dropSectionsWhenLong: "^(Resolved Issues|Known Issues)$"
   # RSS の例:
   # - id: nextjs
   #   title: Next.js Blog

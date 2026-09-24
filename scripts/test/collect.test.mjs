@@ -10,6 +10,11 @@ import {
   classifyPr,
   cleanBody,
   cleanPrBody,
+  doccJsonUrl,
+  doccToText,
+  dropSections,
+  parseDoccIndex,
+  sortByVersion,
   collectBlog,
   collectRepo,
   createGitHub,
@@ -239,7 +244,7 @@ function searchItem(number, mergedAt, extra = {}) {
 function repoRoutes({ searchItems, filesFail = false }) {
   let filesCalls = 0
   return [
-    [/\/repos\/facebook\/react$/, () => json({ full_name: "react/react" })],
+    [/\/repos\/facebook\/react$/, () => json({ full_name: "react/react", default_branch: "trunk" })],
     [
       /\/repos\/react\/react\/releases\/latest$/,
       () =>
@@ -370,7 +375,9 @@ test("collectRepo: 一部の取得に失敗しても続け、errors に残す", 
   const { fetchImpl } = mockFetch(repoRoutes({ searchItems, filesFail: true }))
   const gh = createGitHub({ fetchImpl, wait: noWait })
   const now = new Date("2026-09-23T21:17:00Z")
-  const { inbox } = await collectRepo(gh, { repo: "facebook/react", branch: "main" }, undefined, now)
+  const { inbox } = await collectRepo(gh, { repo: "facebook/react" }, undefined, now)
+  // branch を省略したら既定ブランチ
+  assert.equal(inbox.branch, "trunk")
   // 初回は直近 7 日
   assert.equal(inbox.range.from, "2026-09-16T21:17:00Z")
   assert.equal(inbox.prs.length, 1)
@@ -527,6 +534,93 @@ test("collectBlog: RSS の無いサイトの一覧ページ（page）から取�
   const { fetchImpl: empty } = mockFetch([[/\/new/, () => new Response("<main><p>no links</p></main>")]])
   const none = await collectBlog(cfg, { seen: [] }, { fetchImpl: empty })
   assert.match(none.inbox.errors[0], /一覧ページ.*記事へのリンクが見つかりません/)
+})
+
+test("DocC: JSON の URL・一覧・本文", async () => {
+  assert.equal(
+    doccJsonUrl("https://developer.apple.com/documentation/safari-release-notes"),
+    "https://developer.apple.com/tutorials/data/documentation/safari-release-notes.json",
+  )
+  const index = JSON.parse(await fixture("docc-index.json"))
+  const items = parseDoccIndex(index, "https://developer.apple.com/documentation/safari-release-notes")
+  assert.deepEqual(
+    items.map((i) => [i.title, i.publishedAt]),
+    [
+      ["Safari 27.2 Beta Release Notes", "2026-09-16T00:00:00.000Z"],
+      ["Safari 27 Release Notes", "2026-09-14T00:00:00.000Z"],
+      ["Safari 26.6 Release Notes", "2026-07-27T00:00:00.000Z"],
+    ],
+  )
+  assert.equal(items[0].url, "https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes")
+
+  const text = doccToText(JSON.parse(await fixture("docc-article.json")))
+  assert.match(text, /^## Overview\n\nSafari 27 is available for iOS 27\./)
+  assert.match(text, /#### New Features\n\n- Added support for `:heading`\.\n- Added Navigation API\./)
+  assert.doesNotMatch(text, /123456789/)
+  assert.match(text, /```\nconst x = 1\nx\.toString\(\)\n```/)
+  assert.match(text, /> Note: Beta only\./)
+})
+
+test("長い節を省く（Resolved Issues）", async () => {
+  const text = doccToText(JSON.parse(await fixture("docc-article.json")))
+  const out = dropSections(text, /^(Resolved Issues|Known Issues)$/)
+  assert.match(out, /#### Resolved Issues\n\n（3 件は長いため省略）\n\n### JavaScript/)
+  assert.doesNotMatch(out, /Fixed a crash/)
+  assert.match(out, /Added support for `:heading`/)
+  // 末尾の節でも件数を残す
+  assert.equal(dropSections("## A\n\n- x\n- y", /^A$/), "## A\n\n（2 件は長いため省略）")
+})
+
+test("collectBlog: Apple のドキュメント（docc）から取り込み、長いときは節を省く", async () => {
+  const index = await fixture("docc-index.json")
+  const article = await fixture("docc-article.json")
+  const { fetchImpl, calls } = mockFetch([
+    [/\/tutorials\/data\/documentation\/safari-release-notes\.json$/, () => new Response(index)],
+    [/safari-27-release-notes\.json$/, () => new Response(article)],
+    [/safari-27_2-release-notes\.json$/, () => new Response(article)],
+  ])
+  const cfg = {
+    id: "safari",
+    docc: "https://developer.apple.com/documentation/safari-release-notes",
+    maxText: 200,
+    dropSectionsWhenLong: "^(Resolved Issues|Known Issues)$",
+  }
+  const { inbox, state } = await collectBlog(cfg, { seen: [items26_6()] }, { fetchImpl })
+  assert.deepEqual(inbox.posts.map((p) => p.title), ["Safari 27 Release Notes", "Safari 27.2 Beta Release Notes"])
+  const [p27] = inbox.posts
+  assert.equal(p27.publishedAt, "2026-09-14T00:00:00.000Z")
+  assert.match(p27.text, /（3 件は長いため省略）/)
+  assert.ok(calls.some((u) => u.endsWith("/safari-release-notes/safari-27-release-notes.json")))
+  assert.equal(state.seen.length, 3)
+  assert.deepEqual(inbox.errors, [])
+})
+
+const items26_6 = () => "https://developer.apple.com/documentation/safari-release-notes/safari-26_6-release-notes"
+
+test("一覧ページ: linkPattern があれば別ドメインのリンクも拾う", () => {
+  const html = `<main>
+    <a href="https://www.mozilla.org/en-US/firefox/143.0.1/releasenotes/">143.0.1</a>
+    <a href="/en-US/firefox/143.0/releasenotes/">143.0</a>
+    <a href="/en-US/firefox/140.3.0esr/releasenotes/">140.3.0esr</a>
+    <a href="/en-US/firefox/144.0beta/releasenotes/">144.0beta</a>
+    <a href="/en-US/firefox/android/143.0/releasenotes/">Android</a>
+  </main>`
+  const items = parseListingPage(html, "https://www.firefox.com/en-US/releases/", {
+    linkPattern: "/firefox/\\d+(\\.\\d+)+/releasenotes/?$",
+  })
+  assert.deepEqual(items.map((i) => i.url), [
+    "https://www.mozilla.org/en-US/firefox/143.0.1/releasenotes/",
+    "https://www.firefox.com/en-US/firefox/143.0/releasenotes/",
+  ])
+})
+
+test("バージョン番号の大きい順に並べる", () => {
+  const urls = ["/firefox/142.0/releasenotes/", "/firefox/143.0.1/releasenotes/", "/about/", "/firefox/143.0/releasenotes/", "/firefox/99.0/releasenotes/"]
+  const items = urls.map((u) => ({ url: "https://www.firefox.com" + u }))
+  assert.deepEqual(
+    sortByVersion(items).map((i) => new URL(i.url).pathname),
+    ["/firefox/143.0.1/releasenotes/", "/firefox/143.0/releasenotes/", "/firefox/142.0/releasenotes/", "/firefox/99.0/releasenotes/", "/about/"],
+  )
 })
 
 // ---------------------------------------------------------------------------

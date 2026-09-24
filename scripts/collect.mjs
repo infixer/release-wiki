@@ -72,6 +72,36 @@ export function summarizeFiles(files, max) {
     .map((f) => `${f.filename} (+${f.additions} -${f.deletions})`)
 }
 
+/**
+ * 見出しが pattern に合う節（次の同じか上のレベルの見出しまで）を省き、省いた箇条書きの件数を残す。
+ * 例: Safari のリリースノートの「Resolved Issues」は長いので、本文が上限を超えるときだけ省く
+ */
+export function dropSections(text, pattern) {
+  const out = []
+  let dropLevel = 0
+  let dropped = 0
+  for (const line of text.split("\n")) {
+    const h = /^(#{1,6}) (.*)$/.exec(line)
+    if (h && dropLevel && h[1].length <= dropLevel) {
+      out.push(`（${dropped} 件は長いため省略）`, "")
+      dropLevel = 0
+    }
+    if (!dropLevel && h && pattern.test(h[2].trim())) {
+      dropLevel = h[1].length
+      dropped = 0
+      out.push(line, "")
+      continue
+    }
+    if (dropLevel) {
+      if (/^\s*- /.test(line) && !/^\s{2,}- /.test(line)) dropped++
+      continue
+    }
+    out.push(line)
+  }
+  if (dropLevel) out.push(`（${dropped} 件は長いため省略）`)
+  return out.join("\n").replace(/\n{3,}/g, "\n\n").trim()
+}
+
 /** 連続する空白と空行を詰める */
 export function normalizeText(text) {
   return String(text ?? "")
@@ -296,6 +326,8 @@ export function htmlToText(html) {
 
 const JA_DATE = /公開(?:日)?\s*[:：]?\s*(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/
 const EN_DATE = /Published:?\s+([A-Z][a-z]+\.? \d{1,2},? \d{4})/
+const EN_DATE_ANY =
+  /\b((?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4})\b/
 
 /** 記事ページのメタデータや本文の「公開日」から公開日時を探す */
 function findPublished(document) {
@@ -310,7 +342,7 @@ function findPublished(document) {
   const text = scope?.textContent ?? ""
   const ja = JA_DATE.exec(text)
   if (ja) return new Date(Date.UTC(+ja[1], +ja[2] - 1, +ja[3])).toISOString()
-  const en = EN_DATE.exec(text)
+  const en = EN_DATE.exec(text) ?? EN_DATE_ANY.exec(text)
   return en ? toIso(`${en[1]} UTC`) : null
 }
 
@@ -373,7 +405,9 @@ export function parseListingPage(html, pageUrl, { linkPattern, articleParams } =
       continue
     }
     if (!/^https?:$/.test(u.protocol)) continue
-    if (u.origin !== page.origin || u.pathname === page.pathname) continue
+    // linkPattern が無いときは同じサイトのリンクだけ（リダイレクト先のドメインで書かれたリンクもあるので、
+    // linkPattern があればそちらで絞る）
+    if ((!re && u.origin !== page.origin) || u.href.split("?")[0] === page.href.split("?")[0]) continue
     u.hash = ""
     for (const [k, v] of Object.entries(articleParams ?? {})) u.searchParams.set(k, String(v))
     const url = u.href
@@ -397,6 +431,108 @@ export function parseListingPage(html, pageUrl, { linkPattern, articleParams } =
     articles.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
   }
   return articles
+}
+
+// ---------------------------------------------------------------------------
+// Apple のドキュメント（DocC）
+// developer.apple.com/documentation/... は JavaScript で描画されるので、同じ内容の JSON を読む
+// ---------------------------------------------------------------------------
+
+/** https://developer.apple.com/documentation/foo → https://developer.apple.com/tutorials/data/documentation/foo.json */
+export function doccJsonUrl(pageUrl) {
+  const u = new URL(pageUrl)
+  return `${u.origin}/tutorials/data${u.pathname.replace(/\/$/, "").toLowerCase()}.json`
+}
+
+const inlineText = (list, refs) => (list ?? []).map((n) => doccInline(n, refs)).join("")
+
+function doccInline(n, refs) {
+  switch (n.type) {
+    case "text":
+      return n.text ?? ""
+    case "codeVoice":
+      return "`" + (n.code ?? "") + "`"
+    case "emphasis":
+    case "strong":
+    case "newTerm":
+      return inlineText(n.inlineContent, refs)
+    case "reference":
+      return refs?.[n.identifier]?.title ?? n.overridingTitle ?? ""
+    case "link":
+      return n.title ?? n.destination ?? ""
+    case "image":
+      return ""
+    default:
+      return n.inlineContent ? inlineText(n.inlineContent, refs) : (n.text ?? "")
+  }
+}
+
+function doccBlocks(blocks, refs, indent = "") {
+  const out = []
+  for (const b of blocks ?? []) {
+    switch (b.type) {
+      case "heading":
+        out.push("#".repeat(b.level ?? 2) + " " + (b.text ?? ""))
+        break
+      case "paragraph":
+        out.push(indent + inlineText(b.inlineContent, refs))
+        break
+      case "unorderedList":
+      case "orderedList":
+        out.push(
+          (b.items ?? [])
+            .map((item) => indent + "- " + doccBlocks(item.content, refs, indent + "  ").trim())
+            .join("\n"),
+        )
+        break
+      case "codeListing":
+        out.push("```\n" + (b.code ?? []).join("\n") + "\n```")
+        break
+      case "aside":
+        out.push("> " + (b.name ?? b.style ?? "Note") + ": " + doccBlocks(b.content, refs).trim())
+        break
+      case "table":
+        for (const row of b.rows ?? []) {
+          out.push("| " + row.map((cell) => doccBlocks(cell, refs).trim()).join(" | ") + " |")
+        }
+        break
+      default:
+        if (b.content) out.push(doccBlocks(b.content, refs, indent))
+        else if (b.inlineContent) out.push(indent + inlineText(b.inlineContent, refs))
+    }
+  }
+  return out.join("\n\n")
+}
+
+/** DocC の記事 JSON を本文テキストにする。末尾の Apple 社内の管理番号「 (123456789)」は除く */
+export function doccToText(json) {
+  const sections = (json.primaryContentSections ?? []).filter((s) => s.kind === "content")
+  const text = sections.map((s) => doccBlocks(s.content, json.references)).join("\n\n")
+  return text
+    .replace(/ \(\d{6,}\)/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+}
+
+/** DocC の一覧（topicSections の順 = 新しい順）から記事を取り出す */
+export function parseDoccIndex(json, pageUrl) {
+  const origin = new URL(pageUrl).origin
+  const items = []
+  for (const section of json.topicSections ?? []) {
+    for (const id of section.identifiers ?? []) {
+      const ref = json.references?.[id]
+      if (!ref?.url) continue
+      const abstract = inlineText(ref.abstract, json.references)
+      const date = EN_DATE_ANY.exec(abstract)
+      items.push({
+        title: ref.title ?? "",
+        url: origin + ref.url,
+        publishedAt: date ? toIso(`${date[1]} UTC`) : null,
+        html: "",
+      })
+    }
+  }
+  return items
 }
 
 // ---------------------------------------------------------------------------
@@ -639,12 +775,11 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
   const to = isoSec(now)
   const from =
     prevState.lastMergedAt ?? isoSec(now.getTime() - LIMITS.initialDays * 24 * 3600 * 1000)
-  const branch = cfg.branch ?? "main"
   const state = { ...prevState }
   const base = {
     kind: "repo",
     repo: cfg.repo,
-    branch,
+    branch: cfg.branch ?? null,
     collectedAt: to,
     range: { from, to },
     maxPrs: cfg.maxPrs ?? LIMITS.maxPrs,
@@ -661,6 +796,8 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
     fullName = repo.full_name
     state.fullName = fullName
     base.repo = fullName
+    // branch を省略したら既定ブランチ（main / master / canary など）を使う
+    base.branch = cfg.branch ?? repo.default_branch ?? "main"
   } catch (e) {
     errors.push(`リポジトリ ${cfg.repo} を取得できませんでした: ${e.message}`)
     return { inbox: base, state }
@@ -674,7 +811,7 @@ export async function collectRepo(gh, cfg, prevState = {}, now = new Date()) {
 
   let items
   try {
-    items = await searchMergedPrs(gh, { fullName, branch, from, to })
+    items = await searchMergedPrs(gh, { fullName, branch: base.branch, from, to })
   } catch (e) {
     errors.push(`マージ済み PR を検索できませんでした: ${e.message}`)
     // 検索に失敗した回は lastMergedAt を進めない（次の回に取り直す）
@@ -733,17 +870,27 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
   const state = { ...(prevState ?? {}) }
   const firstRun = !prevState?.seen
 
-  // feed（RSS/Atom）か page（RSS の無いサイトの一覧ページ）のどちらかで記事一覧を取る
-  const source = cfg.feed ?? cfg.page
+  // feed（RSS/Atom）、page（RSS の無いサイトの一覧ページ）、docc（Apple のドキュメント）のどれかで記事一覧を取る
+  const source = cfg.feed ?? cfg.page ?? cfg.docc
+  const kind = cfg.feed ? "フィード" : cfg.page ? "一覧ページ" : "ドキュメント"
   let items
   try {
-    const body = await fetchText(fetchImpl, source)
-    items = cfg.feed ? parseFeed(body) : parseListingPage(body, cfg.page, cfg)
+    if (cfg.feed) {
+      items = parseFeed(await fetchText(fetchImpl, cfg.feed))
+    } else if (cfg.page) {
+      items = parseListingPage(await fetchText(fetchImpl, cfg.page), cfg.page, cfg)
+    } else if (cfg.docc) {
+      items = parseDoccIndex(JSON.parse(await fetchText(fetchImpl, doccJsonUrl(cfg.docc))), cfg.docc)
+    } else {
+      throw new Error("feed・page・docc のどれかを書いてください")
+    }
     if (items.length === 0) throw new Error("記事へのリンクが見つかりませんでした")
   } catch (e) {
-    errors.push(`${cfg.feed ? "フィード" : "一覧ページ"} ${source} を取得できませんでした: ${e.message}`)
+    errors.push(`${kind} ${source ?? cfg.id} を取得できませんでした: ${e.message}`)
     return { inbox: base, state }
   }
+  // sortBy: version なら URL の中のバージョン番号の大きい順（一覧ページの並び順が分からないサイト向け）
+  if (cfg.sortBy === "version") items = sortByVersion(items)
   if (cfg.titleFilter) {
     const re = new RegExp(cfg.titleFilter)
     items = items.filter((it) => re.test(it.title))
@@ -756,11 +903,19 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
   base.posts = await mapLimit(targets, LIMITS.concurrency, async (it) => {
     let article = null
     try {
-      article = extractArticle(await fetchText(fetchImpl, it.url), it.url)
+      const body = await fetchText(fetchImpl, cfg.docc ? doccJsonUrl(it.url) : it.url)
+      article = cfg.docc
+        ? { title: null, text: doccToText(JSON.parse(body)), publishedAt: null }
+        : extractArticle(body, it.url)
     } catch (e) {
       errors.push(`記事 ${it.url} を取得できませんでした: ${e.message}`)
     }
-    const text = article?.text || htmlToText(it.html)
+    const max = cfg.maxText ?? LIMITS.postText
+    let text = article?.text || htmlToText(it.html)
+    // 上限を超えるときは、重要度の低い節（例: Resolved Issues）を省いてから切り詰める
+    if (text.length > max && cfg.dropSectionsWhenLong) {
+      text = dropSections(text, new RegExp(cfg.dropSectionsWhenLong))
+    }
     if (!text && article) errors.push(`記事 ${it.url} の本文を取り出せませんでした`)
     // 一覧ページのリンク文字より、記事ページのタイトルのほうが正確
     const title = (cfg.page && article?.title) || it.title
@@ -769,7 +924,7 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
       url: it.url,
       publishedAt: it.publishedAt ?? article?.publishedAt ?? null,
       versions: extractVersions(title, text),
-      text: truncate(text, LIMITS.postText),
+      text: truncate(text, max),
     }
   })
   // 古い順に並べる（ルーチンが時系列で読みやすいように）
@@ -787,6 +942,20 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
 // ---------------------------------------------------------------------------
 // 入出力
 // ---------------------------------------------------------------------------
+
+/** URL の中の最初のバージョン番号（143.0.1 など）の大きい順に並べる。番号が無いものは後ろ */
+export function sortByVersion(items) {
+  const ver = (it) => (/(\d+(?:\.\d+)+)/.exec(new URL(it.url).pathname)?.[1] ?? "").split(".").map(Number)
+  return [...items].sort((a, b) => {
+    const va = ver(a)
+    const vb = ver(b)
+    for (let i = 0; i < Math.max(va.length, vb.length); i++) {
+      const d = (vb[i] ?? -1) - (va[i] ?? -1)
+      if (d) return d
+    }
+    return 0
+  })
+}
 
 /** JST の日付（YYYY-MM-DD）。collect は JST の早朝に動くので、ルーチンの日付と揃える */
 export function jstDate(d = new Date()) {
@@ -848,7 +1017,7 @@ export async function run({
   const written = []
 
   for (const cfg of config.repos) {
-    log(`repo ${cfg.repo} (${cfg.branch ?? "main"})`)
+    log(`repo ${cfg.repo} (${cfg.branch ?? "既定ブランチ"})`)
     const result = await collectRepo(gh, cfg, state.repos[cfg.repo], now)
     state.repos[cfg.repo] = result.state
     if (result.inbox) {
@@ -862,7 +1031,7 @@ export async function run({
   }
 
   for (const cfg of config.blogs) {
-    log(`blog ${cfg.id} (${cfg.feed ?? cfg.page})`)
+    log(`blog ${cfg.id} (${cfg.feed ?? cfg.page ?? cfg.docc})`)
     const result = await collectBlog(cfg, state.blogs[cfg.id], { fetchImpl, now })
     state.blogs[cfg.id] = result.state
     if (result.inbox) {
