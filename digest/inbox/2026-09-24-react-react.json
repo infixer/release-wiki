@@ -1,0 +1,146 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-09-24T07:17:55Z",
+  "range": {
+    "from": "2026-09-17T07:17:55Z",
+    "to": "2026-09-24T07:17:55Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.0",
+      "publishedAt": "2026-09-09T18:01:33Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 37636,
+      "title": "[Flight] Server References for arbitrary object types",
+      "url": "https://github.com/react/react/pull/37636",
+      "author": "acdlite",
+      "mergedAt": "2026-09-17T16:27:11Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Added behind a new experimental flag, `enableFlightObjectReferences`.\n\nExtends Server References so that a reference can point to an object, not just a function. An object is registered with a new API, `registerServerObjectReference`, which tags it with its module id the same way `registerServerReference` tags a Server Function.\n\nThe client receives an opaque handle: reading a property or calling it throws, similar to how Temporary References work inside Server Functions. The only thing the client can do with the handle is pass it back to the server via a Server Function, where it resolves through the server manifest.\n\nThe motivating use case is letting a framework pass request-scoped values by reference, so it can omit them from the request body. For example, a framework could model `searchParams` as a module export whose value resolves from the current request. This avoids encoding the search params twice (they already appear in the request URL) but it also makes the responses more cacheable: if the search params don't appear elsewhere in the body, then a response cache can omit them from its cache key.\n\nThis initial PR only exposes the new API in the Turbopack bindings. We will port it to the other bundler configs if the experiment advances.",
+      "files": [
+        "packages/react-client/src/ReactFlightClient.js (+38 -0)",
+        "packages/react-client/src/ReactFlightReplyClient.js (+105 -0)",
+        "packages/react-server-dom-turbopack/npm/server.browser.js (+1 -0)",
+        "packages/react-server-dom-turbopack/npm/server.edge.js (+1 -0)",
+        "packages/react-server-dom-turbopack/npm/server.node.js (+1 -0)",
+        "packages/react-server-dom-turbopack/server.browser.js (+1 -0)",
+        "packages/react-server-dom-turbopack/server.edge.js (+1 -0)",
+        "packages/react-server-dom-turbopack/server.node.js (+1 -0)",
+        "packages/react-server-dom-turbopack/src/ReactFlightTurbopackReferences.js (+28 -0)",
+        "packages/react-server-dom-turbopack/src/server/ReactFlightDOMServerBrowser.js (+1 -0)"
+      ],
+      "filesTotal": 27
+    },
+    {
+      "number": 37645,
+      "title": "[compiler] Bail on use of arguments object",
+      "url": "https://github.com/react/react/pull/37645",
+      "author": "jimmyhmiller",
+      "mergedAt": "2026-09-18T09:10:51Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Before this change, the compiler would incorrectly memoize the arguments object. Causing rerenders to not work properly. I looked into adding proper support, but it seemed it would require a decent amount of change to do it cleanly, so I figured getting rid of the miscompilation was a good start.\n\nWe had tests that were using it for compiler purposes, from what I can tell changing to ...args kept the intent, so I moved them to that.",
+      "files": [
+        "compiler/crates/react_compiler_lowering/src/build_hir.rs (+12 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/HIR/BuildHIR.ts (+11 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/capture-param-mutate.expect.md (+13 -12)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/capture-param-mutate.js (+6 -6)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.unsupported-implicit-arguments.expect.md (+35 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.unsupported-implicit-arguments.js (+8 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/implicit-arguments-bailout-preserves-renders.expect.md (+38 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/implicit-arguments-bailout-preserves-renders.js (+11 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reassigned-phi-in-returned-function-expression.expect.md (+17 -14)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reassigned-phi-in-returned-function-expression.js (+3 -3)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 37625,
+      "title": "[Flight] Preserve leading `U+FEFF` in text rows",
+      "url": "https://github.com/react/react/pull/37625",
+      "author": "unstubbable",
+      "mergedAt": "2026-09-22T15:07:14Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The Flight client dropped a leading `U+FEFF` from outlined text rows when it decoded binary input. `TextDecoder` consumed the character as an encoding signature, even though it was part of the serialized string. Both the Node and Web decoders now use `ignoreBOM: true` to preserve it.\n\nRegression tests cover one and two leading U+FEFF characters with normal chunks and with every UTF-8 byte delivered separately. They also include an inline-string control. The global `TextDecoder` Flow declaration now makes `fatal` optional and declares `ignoreBOM`, matching the API.",
+      "files": [
+        "flow-typed/environments/bom.js (+1 -1)",
+        "packages/react-client/src/ReactFlightClient.js (+2 -1)",
+        "packages/react-client/src/ReactFlightClientStreamConfigNode.js (+4 -2)",
+        "packages/react-client/src/ReactFlightClientStreamConfigWeb.js (+4 -2)",
+        "packages/react-markup/src/ReactMarkupLegacyClientStreamConfig.js (+3 -1)",
+        "packages/react-noop-renderer/src/ReactNoopFlightClient.js (+2 -2)",
+        "packages/react-noop-renderer/src/ReactNoopFlightServer.js (+3 -0)",
+        "packages/react-client/src/__tests__/ReactFlight-test.js (+11 -0)",
+        "packages/react-server-dom-webpack/src/__tests__/ReactFlightDOMEdge-test.js (+73 -0)",
+        "packages/react-server-dom-webpack/src/__tests__/ReactFlightDOMNode-test.js (+69 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 37674,
+      "title": "[rust-compiler] Fix detection of shorthand and computed properties",
+      "url": "https://github.com/react/react/pull/37674",
+      "author": "jimmyhmiller",
+      "mergedAt": "2026-09-22T16:13:11Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Before this would incorrectly mark certain computed properties as shorthand. The babel code didn't care about this because of how it was written, but the swc short circuited on shorthand. Causing incorrect code generation",
+      "files": [
+        "compiler/crates/react_compiler_reactive_scopes/src/codegen_reactive_function.rs (+7 -3)",
+        "compiler/packages/babel-plugin-react-compiler/src/ReactiveScopes/CodegenReactiveFunction.ts (+4 -2)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/CodegenReactiveFunction-test.ts (+48 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36734,
+      "title": "[compiler] Allow setState after await in effect functions",
+      "url": "https://github.com/react/react/pull/36734",
+      "author": "poteto",
+      "mergedAt": "2026-09-22T17:27:00Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "`react-hooks/set-state-in-effect` flagged setState calls that happen after an `await` inside an async function invoked from an effect. Post-await code resumes in a microtask after the effect body has returned, so the \"synchronous setState cascades a render\" rationale does not apply; the lint was a false positive on a common data-loading shape (15 reactions on the issue).\n\nThe fix exempts a setState only when it is *provably* post-await: a forward must-dataflow over the HIR CFG computes the blocks that begin after an await has executed on every path from the function entry (optimistic initialization so loop back-edges do not pessimize the meet, fixpoint to the greatest solution), plus an intra-block flag for instructions after an Await in the same block. A setState reachable on any await-free path still flags, so the conditional-await case remains an error by design, with a fixture documenting that choice. Suppression is sound under try/catch because HIRBuilder terminates blocks after each instruction in a try region, and an awaited rejection also resumes in a microtask.\n\nFixtures: post-await setState (event gone), setState before the first await (still flags), setState after a conditional await (still flags). First commit documents the false positive via the lint-mode logger output, second removes it.\n\nBuilds on the approach in #36417 by @raashish1601, hardened from a seen-await flag to the path-sensitive analysis above. Implemented identically in the TypeScript compiler and \n…(truncated)",
+      "files": [
+        "compiler/crates/react_compiler_validation/src/validate_no_set_state_in_effects.rs (+76 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/Validation/ValidateNoSetStateInEffects.ts (+75 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/invalid-setState-in-useEffect-after-conditional-await.expect.md (+68 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/invalid-setState-in-useEffect-after-conditional-await.js (+23 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/invalid-setState-in-useEffect-before-await.expect.md (+60 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/invalid-setState-in-useEffect-before-await.js (+19 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/set-state-after-await-in-effect.expect.md (+59 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/set-state-after-await-in-effect.js (+19 -0)"
+      ],
+      "filesTotal": 8
+    }
+  ],
+  "errors": []
+}
