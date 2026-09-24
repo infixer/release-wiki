@@ -614,6 +614,31 @@ test("一覧ページ: linkPattern があれば別ドメインのリンクも拾
   ])
 })
 
+test("collectBlog: titleTemplate で URL のバージョン番号からタイトルを作る", async () => {
+  const listing = `<main><a href="/firefox/156.0/releasenotes/">156.0</a><a href="/firefox/156.0.1/releasenotes/">156.0.1</a></main>`
+  const note = (d) => `<html><body><main><article><h1>Firefox Release Notes</h1><p>Firefox Release</p><p>${d}</p><p>${"Various security and stability fixes are included in this release. ".repeat(5)}</p></article></main></body></html>`
+  const { fetchImpl } = mockFetch([
+    [/\/releases\/$/, () => new Response(listing)],
+    [/156\.0\.1\/releasenotes\/$/, () => new Response(note("September 22, 2026"))],
+    [/156\.0\/releasenotes\/$/, () => new Response(note("September 15, 2026"))],
+  ])
+  const cfg = {
+    id: "firefox",
+    page: "https://www.firefox.com/en-US/releases/",
+    linkPattern: "/firefox/\\d+(\\.\\d+)+/releasenotes/?$",
+    sortBy: "version",
+    titleTemplate: "Firefox {version}",
+  }
+  const { inbox } = await collectBlog(cfg, { seen: [] }, { fetchImpl })
+  assert.deepEqual(
+    inbox.posts.map((p) => [p.title, p.publishedAt, p.versions]),
+    [
+      ["Firefox 156.0", "2026-09-15T00:00:00.000Z", ["156.0"]],
+      ["Firefox 156.0.1", "2026-09-22T00:00:00.000Z", ["156.0.1"]],
+    ],
+  )
+})
+
 test("バージョン番号の大きい順に並べる", () => {
   const urls = ["/firefox/142.0/releasenotes/", "/firefox/143.0.1/releasenotes/", "/about/", "/firefox/143.0/releasenotes/", "/firefox/99.0/releasenotes/"]
   const items = urls.map((u) => ({ url: "https://www.firefox.com" + u }))

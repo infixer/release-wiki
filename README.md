@@ -61,6 +61,7 @@ blogs:
     linkPattern: "/firefox/\\d+(\\.\\d+)+/releasenotes/?$"  # 任意: 記事として拾うリンク
     articleParams: { hl: ja }  # 任意: 記事 URL に付けるクエリ（例: 日本語版を取る）
     sortBy: version            # 任意: URL のバージョン番号の大きい順に扱う
+    titleTemplate: "Firefox {version}"  # 任意: URL のバージョン番号からタイトルを作る（{title} で元のタイトル）
 
   # Apple のドキュメント（developer.apple.com/documentation/...）
   - id: safari

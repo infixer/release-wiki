@@ -327,7 +327,7 @@ export function htmlToText(html) {
 const JA_DATE = /公開(?:日)?\s*[:：]?\s*(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/
 const EN_DATE = /Published:?\s+([A-Z][a-z]+\.? \d{1,2},? \d{4})/
 const EN_DATE_ANY =
-  /\b((?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4})\b/
+  /((?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4})(?!\d)/
 
 /** 記事ページのメタデータや本文の「公開日」から公開日時を探す */
 function findPublished(document) {
@@ -918,7 +918,12 @@ export async function collectBlog(cfg, prevState, { fetchImpl = fetch, now = new
     }
     if (!text && article) errors.push(`記事 ${it.url} の本文を取り出せませんでした`)
     // 一覧ページのリンク文字より、記事ページのタイトルのほうが正確
-    const title = (cfg.page && article?.title) || it.title
+    let title = (cfg.page && article?.title) || it.title
+    // titleTemplate: "Firefox {version}" のように、URL のバージョン番号からタイトルを作る
+    if (cfg.titleTemplate) {
+      const version = /(\d+(?:\.\d+)+)/.exec(new URL(it.url).pathname)?.[1] ?? ""
+      title = cfg.titleTemplate.replaceAll("{version}", version).replaceAll("{title}", title)
+    }
     return {
       title,
       url: it.url,

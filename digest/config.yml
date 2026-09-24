@@ -43,6 +43,7 @@ blogs:
     # デスクトップ版のリリースノートだけ（ESR・Beta・Android・iOS は除く）
     linkPattern: "/firefox/\\d+(\\.\\d+)+/releasenotes/?$"
     sortBy: version # 一覧の並び順に頼らず、バージョン番号の大きい順に扱う
+    titleTemplate: "Firefox {version}" # 記事のタイトルがどれも同じなので、URL のバージョン番号から作る
   - id: safari
     title: Safari リリースノート
     docc: https://developer.apple.com/documentation/safari-release-notes # Apple のドキュメント（JSON で取得）
