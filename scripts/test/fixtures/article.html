@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head><title>Next.js 16.4 | Next.js</title><script>window.x = 1</script></head>
+<body>
+  <nav><a href="/">Home</a><a href="/docs">Docs</a><a href="/blog">Blog</a></nav>
+  <main>
+    <article>
+      <h1>Next.js 16.4</h1>
+      <p>Next.js 16.4 includes improvements to the bundle analyzer and caching. Upgrade today with the command below. This release focuses on developer experience and build performance for large applications.</p>
+      <pre><code>npx @next/codemod@canary upgrade latest
+npm install next@latest</code></pre>
+      <h2>next analyze</h2>
+      <p>The <code>next analyze</code> command is now stable. It shows which modules contribute to your bundle size, so you can find heavy dependencies quickly and keep your pages fast.</p>
+      <ul><li>Works with Turbopack</li><li>Requires v16.4.0 or later</li></ul>
+      <h2>Breaking changes</h2>
+      <p>The <code>experimental.analyze</code> option has been removed. Use the <code>next analyze</code> command instead. Projects on 16.3.6 need to update their scripts.</p>
+    </article>
+  </main>
+  <footer>© 2026 Vercel</footer>
+</body>
+</html>

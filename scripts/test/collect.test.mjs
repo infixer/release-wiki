@@ -1,0 +1,455 @@
+// ネットワークを使わないテスト。`npm test --prefix scripts` で実行する。
+import { test } from "node:test"
+import assert from "node:assert/strict"
+import { readFile, mkdtemp, mkdir, writeFile, readdir } from "node:fs/promises"
+import { tmpdir } from "node:os"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+import {
+  LIMITS,
+  classifyPr,
+  cleanBody,
+  collectBlog,
+  collectRepo,
+  createGitHub,
+  extractArticleText,
+  extractVersions,
+  htmlToText,
+  isBotUser,
+  jstDate,
+  parseFeed,
+  run,
+  searchMergedPrs,
+  truncate,
+  writeInbox,
+} from "../collect.mjs"
+
+const fixtures = path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures")
+const fixture = (name) => readFile(path.join(fixtures, name), "utf8")
+
+const json = (data, status = 200, headers = {}) =>
+  new Response(JSON.stringify(data), {
+    status,
+    headers: { "content-type": "application/json", ...headers },
+  })
+
+/** [正規表現, 応答を返す関数] の一覧で fetch を差し替える。呼ばれた URL は calls に残る */
+function mockFetch(routes) {
+  const calls = []
+  const fetchImpl = async (url) => {
+    calls.push(url)
+    for (const [re, handler] of routes) {
+      const m = re.exec(url)
+      if (m) return handler(m, url)
+    }
+    return new Response("not found", { status: 404 })
+  }
+  return { fetchImpl, calls }
+}
+
+const noWait = () => Promise.resolve()
+
+// ---------------------------------------------------------------------------
+
+test("hint: タイトルの接頭辞と変更ファイルで other を判定する", () => {
+  assert.equal(classifyPr({ title: "docs: fix typo", files: [{ path: "src/a.ts" }] }), "other")
+  assert.equal(classifyPr({ title: "chore(deps): bump", files: [] }), "other")
+  assert.equal(classifyPr({ title: "ci: cache", files: [] }), "other")
+  assert.equal(classifyPr({ title: "test: add case", files: [] }), "other")
+  assert.equal(
+    classifyPr({
+      title: "Fix flaky thing",
+      files: [
+        { path: "test/e2e/app/index.test.ts" },
+        { path: "packages/next/src/foo.test.tsx" },
+        { path: "docs/01-app/page.mdx" },
+        { path: ".github/workflows/build.yml" },
+        { path: "README.md" },
+        { path: "packages/react/src/__tests__/ReactDOM-test.js" },
+      ],
+    }),
+    "other",
+  )
+})
+
+test("hint: feat / fix / unknown", () => {
+  const src = [{ path: "packages/next/src/server/render.ts" }]
+  assert.equal(classifyPr({ title: "feat(next): add next analyze", files: src }), "feature")
+  assert.equal(classifyPr({ title: "[Feature] New hook", files: src }), "feature")
+  assert.equal(classifyPr({ title: "Fix crash on hydration", files: src }), "fix")
+  assert.equal(classifyPr({ title: "[Fiber] bugfix for Suspense", files: src }), "fix")
+  assert.equal(classifyPr({ title: "Handle prefix in router", files: src }), "unknown")
+  assert.equal(classifyPr({ title: "Promote next analyze command", files: src }), "unknown")
+  // ファイル一覧が無いときはファイルでは other にしない
+  assert.equal(classifyPr({ title: "Update something", files: [] }), "unknown")
+  // 本体のファイルが 1 つでも混ざれば other にしない
+  assert.equal(
+    classifyPr({ title: "Improve errors", files: [{ path: "README.md" }, ...src] }),
+    "unknown",
+  )
+})
+
+test("bot の判定", () => {
+  assert.equal(isBotUser({ login: "dependabot[bot]", type: "Bot" }), true)
+  assert.equal(isBotUser({ login: "renovate[bot]", type: "User" }), true)
+  assert.equal(isBotUser({ login: "gaearon", type: "User" }), false)
+})
+
+test("本文: HTML コメントを除いて切り詰める", () => {
+  const body = "## What\r\n<!-- template\nhint -->\nAdds X.\n\n\n\nMore.<!-- tail"
+  assert.equal(cleanBody(body, 3000), "## What\n\nAdds X.\n\nMore.")
+  assert.equal(cleanBody(null, 10), "")
+  const long = "a".repeat(3100)
+  const out = cleanBody(long, 3000)
+  assert.equal(out.startsWith("a".repeat(3000)), true)
+  assert.equal(out.endsWith("…(truncated)"), true)
+  assert.equal(out.length, 3000 + "\n…(truncated)".length)
+  assert.equal(truncate("short", 10), "short")
+})
+
+test("バージョン表記の抽出", () => {
+  assert.deepEqual(extractVersions("Next.js 16.4", "Requires v16.4.0 or later."), ["16.4", "16.4.0"])
+  assert.deepEqual(
+    extractVersions("React Labs", "Try v19.3. Canary 19.4.0-canary.12. Date 2026.09.24. IP 1.2.3.4"),
+    ["19.4.0-canary.12", "19.3"],
+  )
+  // 本文中の X.Y（v なし）は拾わない
+  assert.deepEqual(extractVersions("Blog", "1.5x faster"), [])
+})
+
+test("RSS を解析する（CDATA・エンティティ・新しい順）", async () => {
+  const items = parseFeed(await fixture("rss.xml"))
+  assert.deepEqual(
+    items.map((i) => i.title),
+    ["Next.js 16.4 & Turbopack", "Next.js 16.3", "Building APIs with Next.js"],
+  )
+  assert.equal(items[0].url, "https://nextjs.org/blog/next-16-4")
+  assert.equal(items[0].publishedAt, "2026-09-22T17:00:00.000Z")
+  assert.match(items[0].html, /next analyze/)
+})
+
+test("Atom を解析する", async () => {
+  const items = parseFeed(await fixture("atom.xml"))
+  assert.equal(items.length, 2)
+  assert.equal(items[0].title, "React 19.3")
+  assert.equal(items[0].url, "https://react.dev/blog/2026/09/20/react-19-3")
+  assert.equal(items[1].url, "https://react.dev/blog/2026/06/01/react-labs")
+  assert.equal(items[1].publishedAt, "2026-06-01T00:00:00.000Z")
+  assert.match(htmlToText(items[0].html), /React v19\.3 is now available\./)
+})
+
+test("RSS/Atom でなければエラー", () => {
+  assert.throws(() => parseFeed("<html><body>hi</body></html>"), /RSS\/Atom/)
+})
+
+test("記事ページから本文を取り出す", async () => {
+  const text = extractArticleText(await fixture("article.html"), "https://nextjs.org/blog/next-16-4")
+  assert.match(text, /## next analyze/)
+  assert.match(text, /```\nnpx @next\/codemod@canary upgrade latest\nnpm install next@latest\n```/)
+  assert.match(text, /- Works with Turbopack/)
+  assert.doesNotMatch(text, /window\.x/)
+  assert.doesNotMatch(text, /© 2026 Vercel/)
+})
+
+test("inbox の書き出し: 既存ファイルは上書きしない", async () => {
+  const dir = path.join(await mkdtemp(path.join(tmpdir(), "inbox-")), "inbox")
+  const a = await writeInbox(dir, "2026-09-24", "vercel-next.js", { n: 1 })
+  const b = await writeInbox(dir, "2026-09-24", "vercel-next.js", { n: 2 })
+  const c = await writeInbox(dir, "2026-09-24", "vercel-next.js", { n: 3 })
+  assert.equal(path.basename(a), "2026-09-24-vercel-next.js.json")
+  assert.equal(path.basename(b), "2026-09-24-vercel-next.js-2.json")
+  assert.equal(path.basename(c), "2026-09-24-vercel-next.js-3.json")
+  assert.deepEqual(JSON.parse(await readFile(a, "utf8")), { n: 1 })
+  assert.deepEqual(JSON.parse(await readFile(c, "utf8")), { n: 3 })
+})
+
+test("JST の日付", () => {
+  assert.equal(jstDate(new Date("2026-09-23T21:17:00Z")), "2026-09-24")
+  assert.equal(jstDate(new Date("2026-09-24T14:59:00Z")), "2026-09-24")
+})
+
+// ---------------------------------------------------------------------------
+// GitHub API（モック）
+
+function searchItem(number, mergedAt, extra = {}) {
+  return {
+    number,
+    title: `PR ${number}`,
+    html_url: `https://github.com/react/react/pull/${number}`,
+    user: { login: "alice", type: "User" },
+    labels: [],
+    body: "",
+    pull_request: { merged_at: mergedAt },
+    ...extra,
+  }
+}
+
+function repoRoutes({ searchItems, filesFail = false }) {
+  let filesCalls = 0
+  return [
+    [/\/repos\/facebook\/react$/, () => json({ full_name: "react/react" })],
+    [
+      /\/repos\/react\/react\/releases\/latest$/,
+      () =>
+        json({
+          tag_name: "v19.3.0",
+          published_at: "2026-09-20T00:00:00Z",
+          html_url: "https://github.com/react/react/releases/tag/v19.3.0",
+        }),
+    ],
+    [
+      /\/repos\/react\/react\/releases\?/,
+      () =>
+        json([
+          { tag_name: "v19.4.0-canary.1", name: "", draft: false, prerelease: true, published_at: "2026-09-22T00:00:00Z", html_url: "u1", body: "canary <!-- x -->" },
+          { tag_name: "v19.4.0-draft", draft: true, prerelease: false, published_at: null, html_url: "u2" },
+          { tag_name: "v19.3.0", name: "19.3.0 (Sep 20)", draft: false, prerelease: false, published_at: "2026-09-20T00:00:00Z", html_url: "u3", body: "## React DOM\n- x" },
+          { tag_name: "v19.2.0", name: "19.2.0", draft: false, prerelease: false, published_at: "2026-08-01T00:00:00Z", html_url: "u4", body: "old" },
+        ]),
+    ],
+    [/\/search\/issues\?/, () => json({ total_count: searchItems.length, items: searchItems })],
+    [
+      /\/repos\/react\/react\/pulls\/(\d+)$/,
+      (m) =>
+        json({
+          number: Number(m[1]),
+          body: `Body of ${m[1]} <!-- remove me -->`,
+          merge_commit_sha: `sha${m[1]}`,
+          merged_at: searchItems.find((i) => i.number === Number(m[1])).pull_request.merged_at,
+          changed_files: m[1] === "1" ? 55 : 1,
+        }),
+    ],
+    [
+      /\/repos\/react\/react\/pulls\/(\d+)\/files/,
+      (m) => {
+        filesCalls++
+        // 1 回目はレート制限で失敗させ、リトライを確かめる
+        if (filesCalls === 1) return json({ message: "API rate limit exceeded" }, 403, { "x-ratelimit-remaining": "0" })
+        if (filesFail && m[1] === "4") return json({ message: "boom" }, 422)
+        const files =
+          m[1] === "1"
+            ? Array.from({ length: 40 }, (_, i) => ({ filename: `packages/react/src/f${i}.js`, additions: 1, deletions: 0 }))
+            : [{ filename: "packages/react-dom/src/client/ReactDOM.js", additions: 3, deletions: 2 }]
+        return json(files)
+      },
+    ],
+    [
+      /\/compare\/([^/]+)\.\.\.(\w+)\?/,
+      (m) => {
+        const tag = decodeURIComponent(m[1])
+        const sha = m[2]
+        if (sha === "sha1" && tag === "v19.3.0") return json({ status: "behind" })
+        if (sha === "sha4" && tag === "v19.4.0-canary.1") return json({ status: "identical" })
+        if (sha === "sha5") return json({ status: "diverged" })
+        return json({ status: "ahead" })
+      },
+    ],
+  ]
+}
+
+test("collectRepo: 正式名・除外・収録状況・Release・state", async () => {
+  const from = "2026-09-17T00:00:00Z"
+  const searchItems = [
+    searchItem(0, from), // 前回取り込み済み（from ちょうど）
+    searchItem(1, "2026-09-18T00:00:00Z", { title: "feat: add useThing" }),
+    searchItem(2, "2026-09-19T00:00:00Z", { user: { login: "dependabot[bot]", type: "Bot" } }),
+    searchItem(3, "2026-09-20T00:00:00Z", { labels: [{ name: "Dependencies" }] }),
+    searchItem(4, "2026-09-21T00:00:00Z", { title: "Fix hydration mismatch" }),
+    searchItem(5, "2026-09-23T00:00:00Z", { title: "Refactor scheduler" }),
+  ]
+  const { fetchImpl, calls } = mockFetch(repoRoutes({ searchItems }))
+  const gh = createGitHub({ token: "t", fetchImpl, wait: noWait })
+  const cfg = { repo: "facebook/react", branch: "main", excludeLabels: ["dependencies"] }
+  const now = new Date("2026-09-23T21:17:00Z")
+  const { inbox, state } = await collectRepo(gh, cfg, { lastMergedAt: from }, now)
+
+  assert.equal(inbox.kind, "repo")
+  assert.equal(inbox.repo, "react/react")
+  assert.equal(inbox.maxPrs, 60)
+  assert.deepEqual(inbox.range, { from, to: "2026-09-23T21:17:00Z" })
+  // search には正式名を使う
+  const searchUrl = decodeURIComponent(calls.find((u) => u.includes("/search/issues")))
+  assert.match(searchUrl, /repo:react\/react is:pr is:merged base:main merged:2026-09-17T00:00:00Z\.\.2026-09-23T21:17:00Z/)
+
+  assert.deepEqual(inbox.prs.map((p) => p.number), [1, 4, 5])
+  const [p1, p4, p5] = inbox.prs
+  assert.equal(p1.hint, "feature")
+  assert.equal(p1.release, "📦 v19.3.0")
+  assert.equal(p1.body, "Body of 1")
+  assert.equal(p1.files.length, 40)
+  assert.equal(p1.filesTruncated, true)
+  assert.equal(p4.hint, "fix")
+  assert.equal(p4.release, "📦 v19.4.0-canary.1")
+  assert.deepEqual(p4.files, [{ path: "packages/react-dom/src/client/ReactDOM.js", additions: 3, deletions: 2 }])
+  assert.equal(p4.filesTruncated, false)
+  assert.equal(p5.hint, "unknown")
+  assert.equal(p5.release, "⏳ 未リリース")
+
+  assert.equal(inbox.latest.stable.tag, "v19.3.0")
+  assert.equal(inbox.latest.prerelease.tag, "v19.4.0-canary.1")
+  assert.deepEqual(inbox.releasesInRange.map((r) => r.tag), ["v19.3.0", "v19.4.0-canary.1"])
+  assert.equal(inbox.releasesInRange[1].name, "v19.4.0-canary.1")
+  assert.equal(inbox.releasesInRange[1].body, "canary")
+  assert.deepEqual(inbox.errors, [])
+
+  // bot や除外ラベルの PR も含め、見た中で最新のマージ日時まで進める
+  assert.equal(state.lastMergedAt, "2026-09-23T00:00:00Z")
+  assert.equal(state.fullName, "react/react")
+})
+
+test("collectRepo: 一部の取得に失敗しても続け、errors に残す", async () => {
+  const searchItems = [searchItem(4, "2026-09-21T00:00:00Z", { title: "Fix x" })]
+  const { fetchImpl } = mockFetch(repoRoutes({ searchItems, filesFail: true }))
+  const gh = createGitHub({ fetchImpl, wait: noWait })
+  const now = new Date("2026-09-23T21:17:00Z")
+  const { inbox } = await collectRepo(gh, { repo: "facebook/react", branch: "main" }, undefined, now)
+  // 初回は直近 7 日
+  assert.equal(inbox.range.from, "2026-09-16T21:17:00Z")
+  assert.equal(inbox.prs.length, 1)
+  assert.equal(inbox.prs[0].files.length, 0)
+  assert.equal(inbox.errors.length, 1)
+  assert.match(inbox.errors[0], /#4 の変更ファイル/)
+})
+
+test("collectRepo: 新着が無ければ inbox は null、検索に失敗したら state を進めない", async () => {
+  const now = new Date("2026-09-23T21:17:00Z")
+  const prev = { lastMergedAt: "2026-09-22T00:00:00Z" }
+  {
+    const { fetchImpl } = mockFetch(repoRoutes({ searchItems: [] }))
+    const gh = createGitHub({ fetchImpl, wait: noWait })
+    const { inbox, state } = await collectRepo(gh, { repo: "facebook/react" }, prev, now)
+    assert.equal(inbox, null)
+    assert.equal(state.lastMergedAt, prev.lastMergedAt)
+  }
+  {
+    const routes = repoRoutes({ searchItems: [] })
+    routes.unshift([/\/search\/issues\?/, () => json({ message: "Validation Failed" }, 422)])
+    const { fetchImpl } = mockFetch(routes)
+    const gh = createGitHub({ fetchImpl, wait: noWait })
+    const { inbox, state } = await collectRepo(gh, { repo: "facebook/react" }, prev, now)
+    assert.equal(state.lastMergedAt, prev.lastMergedAt)
+    assert.match(inbox.errors[0], /検索できませんでした/)
+  }
+  {
+    const { fetchImpl } = mockFetch([])
+    const gh = createGitHub({ fetchImpl, wait: noWait })
+    const { inbox } = await collectRepo(gh, { repo: "nobody/nothing" }, prev, now)
+    assert.match(inbox.errors[0], /nobody\/nothing/)
+  }
+})
+
+test("search: 1000 件を超える期間は分割して取り直す", async () => {
+  const queries = []
+  const fetchImpl = async (url) => {
+    const q = decodeURIComponent(new URL(url).searchParams.get("q"))
+    queries.push(q)
+    const [, a, b] = /merged:(\S+)\.\.(\S+)/.exec(q)
+    const span = Date.parse(b) - Date.parse(a)
+    if (span > 2 * 24 * 3600 * 1000) return json({ total_count: 1500, items: [] })
+    return json({ total_count: 2, items: [searchItem(Date.parse(a) / 1000, a), searchItem(1, "2026-09-10T00:00:00Z")] })
+  }
+  const gh = createGitHub({ fetchImpl, wait: noWait })
+  const items = await searchMergedPrs(gh, {
+    fullName: "react/react",
+    branch: "main",
+    from: "2026-09-01T00:00:00Z",
+    to: "2026-09-08T00:00:00Z",
+  })
+  assert.ok(queries.length > 3)
+  // from ちょうどの PR は除き、重複を除いてマージ日時順に並べる
+  assert.equal(items.filter((i) => i.number === 1).length, 1)
+  assert.ok(items.every((i) => i.pull_request.merged_at > "2026-09-01T00:00:00Z"))
+  const dates = items.map((i) => i.pull_request.merged_at)
+  assert.deepEqual(dates, [...dates].sort())
+})
+
+// ---------------------------------------------------------------------------
+// ブログ（モック）
+
+async function blogRoutes() {
+  const rss = await fixture("rss.xml")
+  const article = await fixture("article.html")
+  return [
+    [/nextjs\.org\/feed\.xml$/, () => new Response(rss)],
+    [/nextjs\.org\/blog\/next-16-4$/, () => new Response(article)],
+    [/nextjs\.org\/blog\/next-16-3$/, () => new Response("gone", { status: 500 })],
+  ]
+}
+
+test("collectBlog: 初回は直近の数件だけ取り込み、残りは seen に登録する", async () => {
+  const saved = LIMITS.initialPosts
+  LIMITS.initialPosts = 2
+  try {
+    const { fetchImpl } = mockFetch(await blogRoutes())
+    const cfg = { id: "nextjs", title: "Next.js Blog", feed: "https://nextjs.org/feed.xml", relatedRepo: "vercel/next.js" }
+    const { inbox, state } = await collectBlog(cfg, undefined, { fetchImpl })
+    assert.equal(inbox.kind, "blog")
+    assert.equal(inbox.relatedRepo, "vercel/next.js")
+    // 古い順
+    assert.deepEqual(inbox.posts.map((p) => p.title), ["Next.js 16.3", "Next.js 16.4 & Turbopack"])
+    const [p163, p164] = inbox.posts
+    assert.match(p164.text, /## next analyze/)
+    assert.deepEqual(p164.versions, ["16.4", "16.4.0", "16.3.6"])
+    // 記事ページが取れなければフィードの本文を使い、エラーを残す
+    assert.equal(p163.text, "Next.js 16.3 is out.")
+    assert.equal(inbox.errors.length, 1)
+    assert.equal(state.seen.length, 3)
+
+    // 2 回目: 新着が無ければ inbox は null
+    const second = await collectBlog(cfg, state, { fetchImpl })
+    assert.equal(second.inbox, null)
+    assert.deepEqual(second.state.seen, state.seen)
+
+    // seen に無い記事だけを取り込む
+    const third = await collectBlog(cfg, { seen: ["https://nextjs.org/blog/next-16-3"] }, { fetchImpl })
+    assert.deepEqual(third.inbox.posts.map((p) => p.url), [
+      "https://nextjs.org/blog/building-apis",
+      "https://nextjs.org/blog/next-16-4",
+    ])
+  } finally {
+    LIMITS.initialPosts = saved
+  }
+})
+
+test("collectBlog: titleFilter とフィード取得の失敗", async () => {
+  const { fetchImpl } = mockFetch(await blogRoutes())
+  const cfg = { id: "nextjs", feed: "https://nextjs.org/feed.xml", titleFilter: "^Next\\.js \\d" }
+  const { inbox } = await collectBlog(cfg, { seen: [] }, { fetchImpl })
+  assert.deepEqual(inbox.posts.map((p) => p.title), ["Next.js 16.3", "Next.js 16.4 & Turbopack"])
+
+  const failed = await collectBlog({ id: "x", feed: "https://example.com/none.xml" }, { seen: ["a"] }, { fetchImpl })
+  assert.equal(failed.inbox.posts.length, 0)
+  assert.match(failed.inbox.errors[0], /フィード/)
+  assert.deepEqual(failed.state.seen, ["a"])
+})
+
+// ---------------------------------------------------------------------------
+
+test("run: config.yml から inbox と state.json を作る", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "release-wiki-"))
+  await mkdir(path.join(root, "digest"))
+  await writeFile(
+    path.join(root, "digest", "config.yml"),
+    [
+      "repos:",
+      "  - repo: facebook/react",
+      "    branch: main",
+      "blogs:",
+      "  - id: nextjs",
+      "    title: Next.js Blog",
+      "    feed: https://nextjs.org/feed.xml",
+      "    relatedRepo: vercel/next.js",
+    ].join("\n"),
+  )
+  const searchItems = [searchItem(5, "2026-09-23T00:00:00Z")]
+  const { fetchImpl } = mockFetch([...(await blogRoutes()), ...repoRoutes({ searchItems })])
+  const now = new Date("2026-09-23T21:17:00Z")
+  const { written } = await run({ root, fetchImpl, now, log: () => {}, token: "t" })
+
+  const inbox = await readdir(path.join(root, "digest", "inbox"))
+  assert.deepEqual(inbox.sort(), ["2026-09-24-blog-nextjs.json", "2026-09-24-react-react.json"])
+  assert.equal(written.length, 2)
+  const state = JSON.parse(await readFile(path.join(root, "digest", "state.json"), "utf8"))
+  assert.equal(state.repos["facebook/react"].lastMergedAt, "2026-09-23T00:00:00Z")
+  assert.equal(state.blogs.nextjs.seen.length, 3)
+})

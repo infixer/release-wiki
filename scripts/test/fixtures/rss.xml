@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title><![CDATA[Next.js Blog]]></title>
+    <link>https://nextjs.org/blog</link>
+    <item>
+      <title><![CDATA[Next.js 16.3]]></title>
+      <link>https://nextjs.org/blog/next-16-3</link>
+      <pubDate>Tue, 01 Sep 2026 17:00:00 GMT</pubDate>
+      <description><![CDATA[<p>Next.js 16.3 is out.</p>]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Next.js 16.4 &amp; Turbopack]]></title>
+      <link>https://nextjs.org/blog/next-16-4</link>
+      <pubDate>Tue, 22 Sep 2026 17:00:00 GMT</pubDate>
+      <description><![CDATA[<p>Next.js 16.4 includes <code>next analyze</code>.</p>]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Building APIs with Next.js]]></title>
+      <link>https://nextjs.org/blog/building-apis</link>
+      <pubDate>Mon, 10 Aug 2026 17:00:00 GMT</pubDate>
+      <description><![CDATA[<p>How to build APIs.</p>]]></description>
+    </item>
+  </channel>
+</rss>

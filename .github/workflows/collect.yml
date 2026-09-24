@@ -1,0 +1,59 @@
+name: collect
+
+# 追跡しているリポジトリとブログの新着を digest/inbox/ に集める（LLM は使わない）。
+# JST の月・木 06:17 に実行。Claude ルーチン（08:00）より前に終わるよう余裕を持たせている。
+on:
+  schedule:
+    - cron: "17 21 * * 0,3" # UTC の日・水 21:17 = JST の月・木 06:17
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    # state.json と inbox は main にだけ書く
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install dependencies
+        working-directory: scripts
+        run: npm ci
+
+      - name: Test
+        working-directory: scripts
+        run: npm test
+
+      - name: Collect
+        run: node scripts/collect.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add digest/
+          if git diff --cached --quiet; then
+            echo "変更なし"
+            exit 0
+          fi
+          git commit -m "collect: $(TZ=Asia/Tokyo date +%F)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1

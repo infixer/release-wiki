@@ -1,0 +1,19 @@
+{
+  "name": "release-wiki-collect",
+  "private": true,
+  "type": "module",
+  "description": "digest/inbox にデータを集める GitHub Actions 用スクリプト",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "collect": "node collect.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.6.0",
+    "fast-xml-parser": "^5.11.1",
+    "linkedom": "^0.18.13",
+    "yaml": "^2.9.1"
+  }
+}

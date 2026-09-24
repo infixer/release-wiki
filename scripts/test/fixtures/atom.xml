@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>React Blog</title>
+  <entry>
+    <title type="html">React 19.3</title>
+    <link rel="alternate" href="https://react.dev/blog/2026/09/20/react-19-3"/>
+    <id>tag:react.dev,2026:react-19-3</id>
+    <published>2026-09-20T00:00:00Z</published>
+    <content type="html">&lt;p&gt;React v19.3 is now available.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>React Labs</title>
+    <link href="https://react.dev/blog/2026/06/01/react-labs"/>
+    <updated>2026-06-01T00:00:00Z</updated>
+    <summary>What we have been working on.</summary>
+  </entry>
+</feed>

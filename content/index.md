@@ -1,0 +1,30 @@
+---
+title: Release Wiki
+tags:
+  - index
+---
+
+気になる GitHub リポジトリのマージ済み PR と公式ブログを、週 2 回（月・木）まとめている Wiki です。
+
+## リポジトリ
+
+| リポジトリ | ブランチ | 最新の安定版 | 最終更新 |
+|---|---|---|---|
+| react/react | main | — | — |
+| vercel/next.js | canary | — | — |
+
+各リポジトリのページは [[repos/index|リポジトリ一覧]] から。
+
+## ブログ
+
+| ブログ | 関連リポジトリ | 最新の記事 |
+|---|---|---|
+| React Blog | react/react | — |
+| Next.js Blog | vercel/next.js | — |
+
+各ブログのページは [[blogs/index|ブログ一覧]] から。
+
+## 最近の更新
+
+> [!info] まだ取り込みはありません
+> 最初の取り込みが終わると、ここに直近の更新が並びます。

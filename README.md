@@ -1,0 +1,112 @@
+# Release Wiki
+
+気になる GitHub リポジトリのマージ済み PR と公式ブログを週 2 回（月・木）まとめ、Obsidian 形式の Wiki として GitHub Pages で公開しています。
+
+**公開 URL: https://infixer.github.io/release-wiki/**
+
+## 仕組み
+
+データ集めとサイトの公開は GitHub Actions が行い、Claude は「要約と Wiki の更新」だけを担当します。
+
+```
+月・木 06:17 JST  GitHub Actions「collect」   ← トークン消費 0
+   │  GitHub API: マージ済み PR・変更ファイル・Release・収録状況
+   │  RSS: 公式ブログの新着記事（本文テキスト）
+   │  新しいものがあれば digest/inbox/*.json に保存して commit
+   ▼
+月・木 08:00 JST  Claude ルーチン              ← トークンを使うのはここだけ
+   │  inbox が空なら何もせず終了
+   │  digest/INSTRUCTIONS.md に従い、inbox の JSON だけを読んで content/ の Wiki を更新
+   │  処理済みの inbox を削除して commit & push
+   ▼
+push をきっかけに  GitHub Actions「deploy」    ← トークン消費 0
+      Quartz で content/ をサイトにして GitHub Pages に公開
+```
+
+| パス | 役割 |
+|---|---|
+| `content/` | Wiki 本体（ここだけが公開される）。Obsidian でもそのまま開ける |
+| `digest/config.yml` | 追跡するリポジトリとブログ（人が編集） |
+| `digest/state.json` | どこまで集めたか（collect が更新。手で触らない） |
+| `digest/inbox/` | 未処理のデータ（collect が追加し、ルーチンが削除） |
+| `digest/INSTRUCTIONS.md` | ルーチン用の手順書（Wiki の書き方） |
+| `scripts/collect.mjs` | データ収集スクリプト（Node 22） |
+| `.github/workflows/collect.yml` | 月・木 06:17 JST と手動実行で collect を動かす |
+| `.github/workflows/deploy.yml` | main への push で Quartz をビルドして Pages に公開 |
+| `quartz/`, `quartz.config.ts`, `quartz.layout.ts` | [Quartz v4](https://quartz.jzhao.xyz/)（サイト生成） |
+
+## リポジトリやブログを追加する
+
+`digest/config.yml` に追記して main に push するだけです。追加した回は、リポジトリなら直近 7 日分、ブログなら直近 5 件を取り込みます。
+
+```yaml
+repos:
+  - repo: owner/name
+    branch: main            # 対象のブランチ（next.js なら canary）
+    excludeLabels: [dependencies]  # 任意: このラベルの PR を除く
+    maxPrs: 60              # 任意: 1 回で詳しく扱う PR の上限（既定 60）
+
+blogs:
+  - id: example             # content/blogs/<id>/ になる
+    title: Example Blog
+    feed: https://example.com/rss.xml   # RSS 2.0 / Atom
+    relatedRepo: owner/name # 任意: 関連リポジトリ
+    titleFilter: "^Example \\d"         # 任意: タイトルで絞る正規表現
+```
+
+- `repo` は転送元の名前（`facebook/react` など）でも動きますが、正式名（`react/react`）を書くのがおすすめです。
+- bot が作った PR は自動で除かれます。
+
+## 手動で実行する
+
+- **collect**: GitHub の Actions → collect → Run workflow（main を選ぶ）。
+  `digest/inbox/` に JSON ができたことを確認します。新着が無ければ何も commit しません。
+- **Wiki の更新**: Claude のルーチンを「今すぐ実行」します。
+- **サイトの公開**: `content/` に push すると自動で動きます。Actions → deploy → Run workflow でも実行できます。
+
+## ローカルで動かす
+
+```sh
+# サイトのプレビュー（http://localhost:8080）
+npm ci
+npx quartz build --serve
+
+# collect のテスト（ネットワークを使わない）
+npm ci --prefix scripts
+npm test --prefix scripts
+
+# collect を実際に動かす（digest/ が更新されるので注意）
+GITHUB_TOKEN=$(gh auth token) node scripts/collect.mjs
+```
+
+## 初期設定（最初に 1 回だけ）
+
+1. Settings → Pages → Build and deployment → Source を **GitHub Actions** にする。
+2. Settings → Actions → General → Workflow permissions を **Read and write permissions** にする。
+3. Claude のルーチンを作る（下記）。
+
+### Claude ルーチン
+
+| 項目 | 値 |
+|---|---|
+| 名前 | Release Wiki |
+| リポジトリ | `infixer/release-wiki` |
+| スケジュール | 月曜・木曜 8:00 JST（UTC の cron なら `0 23 * * 0,3`） |
+| モデル | Sonnet 系を推奨 |
+| コネクタ | なし |
+
+プロンプト:
+
+```text
+digest/inbox/ に JSON ファイルが無ければ、何も変更せずに「新着なし」とだけ報告して終了してください。
+
+ある場合は digest/INSTRUCTIONS.md を読み、その手順どおりに inbox の内容を content/ の Wiki に反映してください。
+処理した inbox ファイルを削除し、main に直接 commit・push してください（PR は作らない）。
+GitHub API・Web 取得・リポジトリの clone は使わないでください。必要なデータはすべて inbox にあります。
+```
+
+## 補足
+
+- Actions の定時実行は数十分遅れることがあります。遅れてもルーチンが空振りして、次の回に 2 回分まとめて処理されるだけで取りこぼしはありません（inbox は削除されるまで残ります）。
+- 1 つのリポジトリやブログで取得に失敗しても他は続行し、エラーは inbox の JSON の `errors` に入ります。ルーチンはそれを `log.md` に記録します。
+- Quartz は MIT ライセンスです（`LICENSE.txt`）。
