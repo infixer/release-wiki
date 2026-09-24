@@ -18,6 +18,7 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 変更履歴
 
+- 2026-09-24 — Node 本番サーバーのチャンク分割のコスト見積もりを調整（[#99120](https://github.com/vercel/next.js/pull/99120)）⏳ 未リリース · [[repos/vercel-next.js/changes/2026-09-24|変更]]
 - 2026-09-24 — Turbopack の `ModuleId not found for ident` エラーを再度修正（[#99102](https://github.com/vercel/next.js/pull/99102)）⏳ 未リリース · [[repos/vercel-next.js/changes/2026-09-24|変更]]
 - 2026-09-24 — カスタム `distDir` に関する安全確認を追加（[#98997](https://github.com/vercel/next.js/pull/98997)）📦 v16.4.0-canary.42 · [[repos/vercel-next.js/changes/2026-09-24|変更]]
 - 2026-09-24 — Turbopack の `ModuleId not found for ident` エラーを修正（[#99090](https://github.com/vercel/next.js/pull/99090)）📦 v16.4.0-canary.42 · [[repos/vercel-next.js/changes/2026-09-24|変更]]
