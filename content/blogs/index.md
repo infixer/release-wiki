@@ -10,4 +10,7 @@ tags:
 
 ## ブログ一覧
 
+- [[blogs/anthropic/index|Anthropic News]]
 - [[blogs/chrome/index|Chrome の新機能]]
+- [[blogs/firefox/index|Firefox リリースノート]]
+- [[blogs/safari/index|Safari リリースノート]]

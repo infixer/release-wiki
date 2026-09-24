@@ -10,5 +10,20 @@ tags:
 
 ## リポジトリ一覧
 
-- [[repos/vercel-next.js/index|vercel/next.js]]
+- [[repos/adobe-react-spectrum/index|adobe/react-spectrum]]
+- [[repos/anthropics-claude-code/index|anthropics/claude-code]]
+- [[repos/microsoft-TypeScript/index|microsoft/TypeScript]]
+- [[repos/nuxt-nuxt/index|nuxt/nuxt]]
+- [[repos/openai-codex/index|openai/codex]]
+- [[repos/oxc-project-oxc/index|oxc-project/oxc]]
+- [[repos/pnpm-pnpm/index|pnpm/pnpm]]
 - [[repos/react-react/index|react/react]]
+- [[repos/tc39-ecma262/index|tc39/ecma262]]
+- [[repos/tc39-proposals/index|tc39/proposals]]
+- [[repos/vercel-next.js/index|vercel/next.js]]
+- [[repos/vitest-dev-vitest/index|vitest-dev/vitest]]
+- [[repos/vuejs-core/index|vuejs/core]]
+- [[repos/w3c-aria/index|w3c/aria]]
+- [[repos/w3c-csswg-drafts/index|w3c/csswg-drafts]]
+- [[repos/w3c-wcag/index|w3c/wcag]]
+- [[repos/whatwg-html/index|whatwg/html]]

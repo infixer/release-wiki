@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- Node 本番サーバーのチャンク分割のコスト見積もりを調整（[#99120](https://github.com/vercel/next.js/pull/99120)）⏳ 未リリース · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
 - next/og の SVG シリアライズをセキュリティ強化（RCE 脆弱性の修正）（[#99061](https://github.com/vercel/next.js/pull/99061)）📦 v16.4.0-canary.42 · トピック: [[repos/vercel-next.js/topics/next-og|next/og]]
 - `next upgrade --ai` で AI エージェントによるセキュリティアップグレードが可能に（[#98562](https://github.com/vercel/next.js/pull/98562)）📦 v16.4.0-canary.42 · トピック: [[repos/vercel-next.js/topics/AI-アップグレード|AIアップグレード]]
 - 実験的な `agentFeedback` でコーディングエージェントの困りごとを収集（[#98582](https://github.com/vercel/next.js/pull/98582)）📦 v16.4.0-canary.42 · トピック: [[repos/vercel-next.js/topics/AI-アップグレード|AIアップグレード]]
@@ -23,7 +24,6 @@ tags:
 - `unstable_ensureStatic` セグメント設定を追加（実験的）（[#98190](https://github.com/vercel/next.js/pull/98190)）📦 v16.4.0-canary.42 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
 - カスタム `distDir` に関する安全確認を追加（[#98997](https://github.com/vercel/next.js/pull/98997)）📦 v16.4.0-canary.42 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
 - オンデマンド生成の失敗時に `error.tsx` が表示されない不具合を修正（[#99037](https://github.com/vercel/next.js/pull/99037)）📦 v16.4.0-canary.42 · トピック: [[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]
-- CSS のチャンク分割で循環参照を解消する処理を高速化（約 131 倍）（[#98860](https://github.com/vercel/next.js/pull/98860)）📦 v16.4.0-canary.42 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
 
 ## トピック
 
