@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="node_modules/@fontsource/noto-sans-jp/500.css">
+<link rel="stylesheet" href="node_modules/@fontsource/noto-sans-jp/700.css">
+<link rel="stylesheet" href="node_modules/@fontsource/schibsted-grotesk/700.css">
+<link rel="stylesheet" href="node_modules/@fontsource/schibsted-grotesk/800.css">
+<link rel="stylesheet" href="node_modules/@fontsource/ibm-plex-mono/500.css">
+<style>
+  :root {
+    --bg: #faf8f8;
+    --ink: #1f2a33;
+    --muted: #5b6770;
+    --navy: #284b63;
+    --sage: #84a59d;
+    --line: #e5e1de;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 方眼の地模様（右側だけ、薄く） */
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(40,75,99,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(40,75,99,.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+    -webkit-mask-image: linear-gradient(to right, transparent 38%, #000 75%);
+            mask-image: linear-gradient(to right, transparent 38%, #000 75%);
+  }
+  .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: var(--navy); }
+  .bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 34%; background: var(--sage); }
+
+  .main { position: absolute; left: 86px; top: 72px; width: 740px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-weight: 500;
+    font-size: 22px; letter-spacing: .02em; color: var(--navy);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--sage); }
+  h1 {
+    font-family: "Schibsted Grotesk", sans-serif; font-weight: 800;
+    font-size: 104px; line-height: 1; letter-spacing: -.035em;
+    margin-top: 24px; white-space: nowrap; color: var(--ink);
+  }
+  h1 span { color: var(--navy); }
+  .tagline {
+    margin-top: 34px; font-size: 30px; font-weight: 700; line-height: 1.5; letter-spacing: .01em;
+  }
+  .sub { margin-top: 16px; font-size: 21px; font-weight: 500; color: var(--muted); line-height: 1.6; }
+
+  .chips {
+    position: absolute; left: 86px; right: 60px; bottom: 50px;
+    display: flex; flex-wrap: wrap; gap: 10px 10px;
+    font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: 17px;
+  }
+  .chip {
+    padding: 6px 12px; border-radius: 999px; border: 1.5px solid var(--line);
+    background: #fff; color: var(--ink); white-space: nowrap;
+  }
+  .chip.blog { border-color: rgba(132,165,157,.7); background: rgba(132,165,157,.12); color: #3d5f57; }
+
+  /* タイムライン（右側） */
+  .graph { position: absolute; right: 40px; top: 60px; width: 330px; height: 330px; }
+  .card {
+    position: absolute; background: #fff; border: 1.5px solid var(--line); border-radius: 12px;
+    padding: 10px 14px; font-size: 16px; font-weight: 500; color: var(--ink);
+    box-shadow: 0 6px 18px rgba(31,42,51,.07);
+    display: flex; align-items: center; gap: 10px; white-space: nowrap;
+  }
+  .tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 14px; padding: 2px 8px; border-radius: 6px;
+    background: rgba(40,75,99,.1); color: var(--navy);
+  }
+  .tag.fix { background: rgba(132,165,157,.18); color: #3d5f57; }
+  .tag.rel { background: var(--navy); color: #fff; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="bar"></div>
+
+  <div class="main">
+    <div class="eyebrow"><span class="dot"></span>infixer.github.io/release-wiki</div>
+    <h1>Release <span>Wiki</span></h1>
+    <p class="tagline">追っているリポジトリと公式ブログの変更を、<br>週 2 回まとめて読める Wiki</p>
+    <p class="sub">マージされた PR・リリース・リリースノートを日本語で要約</p>
+  </div>
+
+  <svg class="graph" viewBox="0 0 360 360" aria-hidden="true">
+    <!-- 幹 -->
+    <line x1="40" y1="10" x2="40" y2="350" stroke="#284b63" stroke-width="5" stroke-linecap="round"/>
+    <!-- 枝 -->
+    <path d="M40 70 C 40 110, 110 100, 110 140 L 110 190 C 110 230, 40 220, 40 260"
+          fill="none" stroke="#84a59d" stroke-width="5" stroke-linecap="round"/>
+    <!-- 節 -->
+    <circle cx="40" cy="30" r="11" fill="#faf8f8" stroke="#284b63" stroke-width="5"/>
+    <circle cx="40" cy="70" r="11" fill="#faf8f8" stroke="#284b63" stroke-width="5"/>
+    <circle cx="110" cy="150" r="11" fill="#faf8f8" stroke="#84a59d" stroke-width="5"/>
+    <circle cx="110" cy="190" r="11" fill="#faf8f8" stroke="#84a59d" stroke-width="5"/>
+    <circle cx="40" cy="260" r="11" fill="#faf8f8" stroke="#284b63" stroke-width="5"/>
+    <circle cx="40" cy="320" r="15" fill="#284b63"/>
+    <circle cx="40" cy="320" r="6" fill="#faf8f8"/>
+  </svg>
+  <div class="card" style="right: 70px; top: 70px;"><span class="tag">feat</span>新機能</div>
+  <div class="card" style="right: 40px; top: 176px;"><span class="tag fix">fix</span>変更・修正</div>
+  <div class="card" style="right: 70px; top: 270px;"><span class="tag">topic</span>トピック</div>
+  <div class="card" style="right: 70px; top: 330px;"><span class="tag rel">📦 release</span>リリース</div>
+
+  <div class="chips">
+    <span class="chip">react</span><span class="chip">next.js</span><span class="chip">vue</span>
+    <span class="chip">nuxt</span><span class="chip">typescript</span><span class="chip">oxc</span>
+    <span class="chip">pnpm</span><span class="chip">vitest</span><span class="chip">claude-code</span>
+    <span class="chip">codex</span><span class="chip">html</span><span class="chip">css</span>
+    <span class="chip">aria</span><span class="chip">wcag</span><span class="chip">ecma262</span>
+    <span class="chip blog">Chrome</span><span class="chip blog">Firefox</span>
+    <span class="chip blog">Safari</span><span class="chip blog">Anthropic</span>
+  </div>
+</body>
+</html>
