@@ -1,6 +1,6 @@
 # Release Wiki
 
-気になる GitHub リポジトリのマージ済み PR と公式ブログを週 2 回（月・木）まとめ、Obsidian 形式の Wiki として GitHub Pages で公開しています。
+気になる GitHub リポジトリのマージ済み PR と公式ブログを週 3 回（月・水・金）まとめ、Obsidian 形式の Wiki として GitHub Pages で公開しています。
 
 **公開 URL: https://infixer.github.io/release-wiki/**
 
@@ -9,12 +9,12 @@
 データ集めとサイトの公開は GitHub Actions が行い、Claude は「要約と Wiki の更新」だけを担当します。
 
 ```
-月・木 06:17 JST  GitHub Actions「collect」   ← トークン消費 0
+月・水・金 06:17 JST  GitHub Actions「collect」   ← トークン消費 0
    │  GitHub API: マージ済み PR・変更ファイル・Release・収録状況
    │  ブログ: RSS や一覧ページの新着記事（本文テキスト）
    │  新しいものがあれば digest/inbox/*.json に保存して commit
    ▼
-月・木 08:00 JST  Claude ルーチン              ← トークンを使うのはここだけ
+月・水・金 08:00 JST  Claude ルーチン              ← トークンを使うのはここだけ
    │  inbox が空なら何もせず終了
    │  digest/INSTRUCTIONS.md に従い、inbox の JSON だけを読んで content/ の Wiki を更新
    │  処理済みの inbox を削除して commit & push
@@ -31,7 +31,7 @@ push をきっかけに  GitHub Actions「deploy」    ← トークン消費 0
 | `digest/inbox/` | 未処理のデータ（collect が追加し、ルーチンが削除） |
 | `digest/INSTRUCTIONS.md` | ルーチン用の手順書（Wiki の書き方） |
 | `scripts/collect.mjs` | データ収集スクリプト（Node 22） |
-| `.github/workflows/collect.yml` | 月・木 06:17 JST と手動実行で collect を動かす |
+| `.github/workflows/collect.yml` | 月・水・金 06:17 JST と手動実行で collect を動かす |
 | `.github/workflows/deploy.yml` | main への push で Quartz をビルドして Pages に公開 |
 | `quartz/`, `quartz.config.ts`, `quartz.layout.ts` | [Quartz v4](https://quartz.jzhao.xyz/)（サイト生成） |
 
@@ -118,7 +118,7 @@ GITHUB_TOKEN=$(gh auth token) node scripts/collect.mjs
 |---|---|
 | 名前 | Release Wiki |
 | リポジトリ | `infixer/release-wiki` |
-| スケジュール | 月曜・木曜 8:00 JST（UTC の cron なら `0 23 * * 0,3`） |
+| スケジュール | 月曜・水曜・金曜 8:00 JST（UTC の cron なら `0 23 * * 0,2,4`） |
 | モデル | Sonnet 系を推奨 |
 | コネクタ | なし |
 

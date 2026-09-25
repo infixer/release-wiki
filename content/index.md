@@ -1,11 +1,11 @@
 ---
 title: Release Wiki
-description: 追っている GitHub リポジトリ（React・Next.js・Vue・TypeScript・Web 標準など）と、ブラウザや Anthropic の公式ブログの変更を、週 2 回（月・木）日本語でまとめている Wiki です。
+description: 追っている GitHub リポジトリ（React・Next.js・Vue・TypeScript・Web 標準など）と、ブラウザや Anthropic の公式ブログの変更を、週 3 回（月・水・金）日本語でまとめている Wiki です。
 tags:
   - index
 ---
 
-気になる GitHub リポジトリのマージ済み PR と公式ブログを、週 2 回（月・木）まとめている Wiki です。
+気になる GitHub リポジトリのマージ済み PR と公式ブログを、週 3 回（月・水・金）まとめている Wiki です。
 
 ## リポジトリ
 

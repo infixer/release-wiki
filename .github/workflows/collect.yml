@@ -1,10 +1,10 @@
 name: collect
 
 # 追跡しているリポジトリとブログの新着を digest/inbox/ に集める（LLM は使わない）。
-# JST の月・木 06:17 に実行。Claude ルーチン（08:00）より前に終わるよう余裕を持たせている。
+# JST の月・水・金 06:17 に実行。Claude ルーチン（08:00）より前に終わるよう余裕を持たせている。
 on:
   schedule:
-    - cron: "17 21 * * 0,3" # UTC の日・水 21:17 = JST の月・木 06:17
+    - cron: "17 21 * * 0,2,4" # UTC の日・火・木 21:17 = JST の月・水・金 06:17
   workflow_dispatch:
 
 permissions:
