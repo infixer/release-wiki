@@ -1,0 +1,910 @@
+{
+  "kind": "repo",
+  "repo": "openai/codex",
+  "branch": "main",
+  "collectedAt": "2026-09-27T23:50:38Z",
+  "range": {
+    "from": "2026-09-24T07:21:35Z",
+    "to": "2026-09-27T23:50:38Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "rust-v0.157.1",
+      "publishedAt": "2026-09-26T01:02:31Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.1"
+    },
+    "prerelease": {
+      "tag": "rust-v0.159.0-alpha.10",
+      "publishedAt": "2026-09-27T21:09:15Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.10"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "rust-v0.158.0-alpha.9",
+      "name": "0.158.0-alpha.9",
+      "publishedAt": "2026-09-24T17:49:16Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.9",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.10",
+      "name": "0.158.0-alpha.10",
+      "publishedAt": "2026-09-24T20:58:11Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.10",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0-alpha.11.1",
+      "name": "0.157.0-alpha.11.1",
+      "publishedAt": "2026-09-24T21:50:10Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0-alpha.11.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.11",
+      "name": "0.158.0-alpha.11",
+      "publishedAt": "2026-09-24T23:23:08Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.11",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.12",
+      "name": "0.158.0-alpha.12",
+      "publishedAt": "2026-09-25T00:54:29Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.12",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.0",
+      "name": "0.157.0",
+      "publishedAt": "2026-09-25T02:31:06Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0",
+      "prerelease": false,
+      "body": "## New Features\n\n- Added GPT-6 Sol and Luna, including Amazon Bedrock support and migration prompts for older models. (#47332, #47347)\n- Enabled fullscreen transcripts by default and added Shift-click to extend text selections. (#47178, #47414)\n- Enabled automatic background-server startup for eligible interactive sessions, with recovery choices when server settings are incompatible. (#47179, #47318)\n- Added an `f` shortcut to fork conversations open in another app, preserving drafts and queued prompts. (#47185)\n- Made `/import` available in remote sessions and local background-server sessions. (#47317)\n- Improved terminal rendering with Unicode bullets, checkboxes, aligned equations, and optimization notation. (#47191, #47322)\n\n## Bug Fixes\n\n- Preserved active voice conversations when switching threads. (#47381)\n- Recovered unsent question answers into the composer when turns end, without disrupting active history searches. (#47422, #47423)\n- Respected tmux mouse settings and restored native scrollback for Terminal.app over SSH in automatic screen mode. (#47399, #47417)\n- Fixed configured proxy routing for realtime connections and standalone web search, including search redirects. (#47101, #47142, #47204)\n- Added retries for transient file-upload failures and increased the upload timeout to five minutes. (#47122, #47393)\n- Enforced network restrictions across redirects and ongoing HTTP and WebSocket traffic, including cancellation when policy changes revoke access. (#47389, #47407)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.156.0...rust-v0.157.0\n\n- #47063 Add a partial index for agent message board root posts @jif-oai\n- #47064 Stop redundant message-board reads when limits reach one @jif-oai\n- #47065 Deduplicate deprecation notices in the TUI transcript @etraut-openai\n- #47068 Highlight selected newlines in the transcript view @etraut-openai\n- #47073 Wait for thread idle in Guardian context budget tests @jif-oai\n- #47074 Refresh host-supplied cloud skills at turn startup @TAFOYA-OAI\n- #47075 Include attributed previews in agent message board notifications @jif-oai\n- #47077 Serialize environment updates and cancel removed pending attachments @sayan-oai\n- #47079 Mask daemon socket paths exposed through ancestor bind mounts @nicksteele-oai\n- #47081 Track cumulative MCP attribution across requests and thread history @peilin-openai\n- #47082 Show the voice toggle in the TUI shortcut overlay @etraut-openai\n- #47083 Extract per-thread enrichment into a dedicated async helper @aibrahim-oai\n- #47084 Avoid building a host SQLite driver for SQLx macros @aibrahim-oai\n- #47085 Update model catalog descriptions and GPT-5.6-Sol priority @andrewgu-oai\n- #47086 Format analytics credit usage with consistent decimal precision @fcoury-oai\n- #47088 Disable unused default dependency features @aibrahim-oai\n- #47089 Centralize JSON-RPC response serialization through payloads @aibrahim-oai\n- #47094 Restrict Unix local MCP servers to st\n…(truncated)"
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.13",
+      "name": "0.158.0-alpha.13",
+      "publishedAt": "2026-09-25T04:29:26Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.13",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.14",
+      "name": "0.158.0-alpha.14",
+      "publishedAt": "2026-09-25T12:51:36Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.14",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.15",
+      "name": "0.158.0-alpha.15",
+      "publishedAt": "2026-09-25T17:33:04Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.15",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.1",
+      "name": "0.159.0-alpha.1",
+      "publishedAt": "2026-09-25T18:48:41Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.2",
+      "name": "0.159.0-alpha.2",
+      "publishedAt": "2026-09-25T20:18:01Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.3",
+      "name": "0.159.0-alpha.3",
+      "publishedAt": "2026-09-25T21:42:44Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.157.1",
+      "name": "0.157.1",
+      "publishedAt": "2026-09-26T01:02:31Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.1",
+      "prerelease": false,
+      "body": "## Chores\n\n- Release highlights could not be determined: the supplied PR index is empty, and the GitHub tag comparison returned 404.\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.157.0...rust-v0.157.1"
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.15.1",
+      "name": "0.158.0-alpha.15.1",
+      "publishedAt": "2026-09-26T02:58:19Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.15.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.2.1",
+      "name": "0.158.0-alpha.2.1",
+      "publishedAt": "2026-09-26T04:51:49Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.2.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.4",
+      "name": "0.159.0-alpha.4",
+      "publishedAt": "2026-09-26T06:21:38Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.4",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.5",
+      "name": "0.159.0-alpha.5",
+      "publishedAt": "2026-09-26T17:34:23Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.5",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.6",
+      "name": "0.159.0-alpha.6",
+      "publishedAt": "2026-09-26T20:07:52Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.6",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.15.2",
+      "name": "0.158.0-alpha.15.2",
+      "publishedAt": "2026-09-27T00:02:58Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.15.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.7",
+      "name": "0.159.0-alpha.7",
+      "publishedAt": "2026-09-27T01:24:11Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.7",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.8",
+      "name": "0.159.0-alpha.8",
+      "publishedAt": "2026-09-27T04:48:42Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.8",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.9",
+      "name": "0.159.0-alpha.9",
+      "publishedAt": "2026-09-27T06:37:13Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.9",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.15.3",
+      "name": "0.158.0-alpha.15.3",
+      "publishedAt": "2026-09-27T19:18:13Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.15.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.10",
+      "name": "0.159.0-alpha.10",
+      "publishedAt": "2026-09-27T21:09:15Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.10",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 47797,
+      "title": "Support close-on-exec attachments without changing PTY semantics",
+      "url": "https://github.com/openai/codex/pull/47797",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T09:25:33Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Support close-on-exec attachments without changing PTY semantics\n\n## Why\n\nPassing extra descriptors to a PTY previously selected behavior intended for inherited escalation sockets: no EOF on stdin close, different signal exit statuses, and no default `SHELL`. Launch attachments need ordinary PTY behavior and must survive execution even when marked `FD_CLOEXEC`.\n\n## What changed\n\n- Add `ChildFds::Attached` alongside `ChildFds::Inherited` to distinguish launch attachments from legacy inherited descriptors.\n- Preserve ordinary EOF, default `SHELL`, and signal exit status behavior for PTY attachments.\n- Allow explicitly supplied close-on-exec descriptors through pipe and PTY launches without changing the parent's descriptor flags, using child-side flag updates and macOS spawn inheritance actions.\n- Update existing callers to use `ChildFds::Inherited`.\n\n## Testing\n\nAdd Unix coverage for attachment accessibility, unchanged parent descriptor flags, default `SHELL`, and signal exit statuses. Extend the PTY stdin-draining test to cover attachments and EOF delivery.",
+      "files": [
+        "bazel/rules/testing/wine/src/lib_tests.rs (+1 -1)",
+        "codex-rs/app-server/src/command_exec.rs (+1 -1)",
+        "codex-rs/app-server/src/request_processors/process_exec_processor.rs (+1 -1)",
+        "codex-rs/core/src/unified_exec/process_manager.rs (+1 -1)",
+        "codex-rs/exec-server/src/local_process.rs (+1 -1)",
+        "codex-rs/hooks/src/engine/command_runner_tests.rs (+1 -1)",
+        "codex-rs/sandboxing/src/spawn.rs (+3 -3)",
+        "codex-rs/sandboxing/src/terminal_queries_tests.rs (+1 -1)",
+        "codex-rs/utils/pty/src/child_command.rs (+9 -0)",
+        "codex-rs/utils/pty/src/lib.rs (+1 -0)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 47799,
+      "title": "Enable terminal input approval by default",
+      "url": "https://github.com/openai/codex/pull/47799",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T09:52:59Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Enable terminal input approval by default\n\n## What changed\n\nPromote `write_stdin_approval` to stable and enable it by default.\n\n## Testing\n\nUpdate the stdin approval suite to rely on the default feature setting. Adjust the background network approval test to account for terminal input review before network access and explicitly wait for the network assessment.",
+      "files": [
+        "codex-rs/features/src/lib.rs (+2 -2)",
+        "codex-rs/core/tests/suite/network_approval.rs (+13 -2)",
+        "codex-rs/core/tests/suite/unified_exec_stdin_approval.rs (+0 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 47808,
+      "title": "Allow hosts to provide agent controllers through ThreadManager",
+      "url": "https://github.com/openai/codex/pull/47808",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T10:39:23Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Allow hosts to provide agent controllers through ThreadManager\n\n## What changed\n\n- Add `ThreadManager::with_agent_control_factory` to select a host-owned controller asynchronously using the final thread ID for new and cold-resumed threads. Keep local control as the default, reuse live controllers on warm resume, and preserve parent controllers for internal sessions.\n- Fail startup on factory errors or when a provided controller's identity does not match the session identity.\n- Defer root service-tier updates to host controllers until thread registration succeeds, preventing failed starts from changing settings on a shared controller.",
+      "files": [
+        "codex-rs/core/src/agent/control/runtime.rs (+5 -5)",
+        "codex-rs/core/src/codex_delegate.rs (+1 -1)",
+        "codex-rs/core/src/guardian/review_session_setup.rs (+1 -1)",
+        "codex-rs/core/src/session/session.rs (+19 -12)",
+        "codex-rs/core/src/thread_manager.rs (+70 -3)",
+        "codex-rs/core/src/thread_manager_tests.rs (+1 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 47811,
+      "title": "Preserve explicit user goal updates in Guardian authorization",
+      "url": "https://github.com/openai/codex/pull/47811",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T10:47:00Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Preserve explicit user goal updates in Guardian authorization\n\n## Why\n\nExplicit user goal edits can restrict permitted actions, such as “Inspect only; do not publish.” Guardian needs these edits as authorization evidence even though they are recorded as contextual messages.\n\n## What changed\n\n- Add `UserGoalUpdate` and a recording API for objective, status, and clear updates without scheduling a model response.\n- Use host annotations to retain goal updates in Guardian review history and root authorization evidence, and invalidate cached authorization when updates are recorded.\n- Omit oversized objectives whole and mark their evidence incomplete so truncation cannot turn a restriction into a grant.\n- Keep item injection from updating shared model and multi-agent metadata.\n\n## Testing\n\nExtend authorization, retained-context, and review snapshot tests to cover goal-edit cache invalidation, root goal visibility from child threads, and restrictive goals reaching Guardian alongside managed policies.",
+      "files": [
+        "codex-rs/core/src/agent/control/user_authorization.rs (+7 -1)",
+        "codex-rs/core/src/codex_thread.rs (+10 -0)",
+        "codex-rs/core/src/context/contextual_user_message.rs (+9 -0)",
+        "codex-rs/core/src/context/mod.rs (+3 -0)",
+        "codex-rs/core/src/context/user_goal.rs (+105 -0)",
+        "codex-rs/core/src/context_manager/history.rs (+18 -25)",
+        "codex-rs/core/src/context_manager/history_user_authorization.rs (+5 -1)",
+        "codex-rs/core/src/guardian/prompt.rs (+6 -8)",
+        "codex-rs/core/src/session/retained_context.rs (+16 -0)",
+        "codex-rs/core/src/session/turn_context.rs (+10 -9)"
+      ],
+      "filesTotal": 14
+    },
+    {"number":47813,"title":"Fix sleep interruption test event handling and fixture lifetime","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 47814,
+      "title": "Fix a lost wakeup in the unified exec termination test",
+      "url": "https://github.com/openai/codex/pull/47814",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T10:56:38Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix a lost wakeup in the unified exec termination test\n\nUse `notify_one()` instead of `notify_waiters()` in\n`terminating_initial_exec_command_rechecks_initial_response_state` to retain\nthe release notification if the termination waiter has not registered yet.\nThis prevents the test from timing out due to a missed notification.",
+      "files": [
+        "codex-rs/core/src/unified_exec/mod_tests.rs (+2 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 47817,
+      "title": "Stabilize thread resume and memory dual-write tests",
+      "url": "https://github.com/openai/codex/pull/47817",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T11:10:28Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Stabilize thread resume and memory dual-write tests\n\nWait for an assistant item to start before resuming a running paginated\nthread, ensuring the user message has reached live history. Emit the initial\nresponse events before the gate and keep completion gated during resume.\n\nIncrease the memory dual-write test's consolidation timeout from 10 to 60\nseconds to allow Git workspace and agent process startup under contention\non Windows CI runners.",
+      "files": [
+        "codex-rs/memories/write/src/startup_dual_write_tests.rs (+3 -1)",
+        "codex-rs/app-server/tests/suite/v2/thread_resume.rs (+19 -9)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 47819,
+      "title": "Retry Guardian reviews when authorization changes",
+      "url": "https://github.com/openai/codex/pull/47819",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T11:19:31Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Retry Guardian reviews when authorization changes\n\n## Why\n\nNew user input during a Guardian review invalidated an in-flight approval and aborted the pending action, even when the input was only a status inquiry. Review the action again against the latest authorization evidence so it can proceed or be denied based on the updated instructions.\n\n## What changed\n\n- Treat stale authorization as a retryable review error within the existing attempt budget and shared deadline.\n- Refresh authorization evidence for each attempt while keeping the pending action fixed, and record evidence from the completed attempt.\n- Preserve cancellation and history-reset aborts, and deny approval if stale authorization exhausts the retry budget.\n\n## Testing\n\nAdd and update coverage for parent status updates, authorization revocation, repeated updates, cancellation, history resets, and retry deadlines. Verify that refreshed reviews see the latest input and that the pending action executes exactly once only after approval.",
+      "files": [
+        "codex-rs/analytics/src/events.rs (+1 -0)",
+        "codex-rs/core/src/agent/control/user_authorization.rs (+1 -0)",
+        "codex-rs/core/src/codex_thread.rs (+2 -0)",
+        "codex-rs/core/src/guardian/review.rs (+18 -12)",
+        "codex-rs/core/src/guardian/review_request.rs (+93 -59)",
+        "codex-rs/core/src/guardian/tests.rs (+17 -2)",
+        "codex-rs/ext/guardian-reviewer/src/completion.rs (+5 -1)",
+        "codex-rs/ext/guardian-reviewer/src/metrics.rs (+1 -0)",
+        "codex-rs/ext/guardian-reviewer/src/outcome.rs (+3 -0)",
+        "codex-rs/ext/guardian-reviewer/src/retry.rs (+20 -7)"
+      ],
+      "filesTotal": 16
+    },
+    {"number":47820,"title":"Add integration coverage for host agent controllers","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47824,"title":"Allow four concurrent threads in the multi-agent resume test","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47828,"title":"Wait for login completion in recommended plugin tests","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 47830,
+      "title": "Bind Guardian async scores to target environment permissions",
+      "url": "https://github.com/openai/codex/pull/47830",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T12:34:21Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Bind Guardian async scores to target environment permissions\n\n## Why\n\nAsynchronous Guardian scoring omitted the target environment's denied-read restrictions, and cached score authorization did not include that permission context. A score from one environment could therefore be reused for an action in another environment with different restrictions.\n\n## What changed\n\n- Share permission resolution between synchronous review and asynchronous scoring, including resolving `write_stdin` targets from the owning terminal session.\n- Include environment identity and denied-read paths/globs in async scoring context and cached score authorization.\n- Fall back to synchronous review when permission evidence cannot be resolved or exceeds the async limit of 3,000 bytes, rather than omitting restrictions.\n\n## Testing\n\nAdd regression coverage for rejecting cached scores with different environments or denied paths, passing the target environment's restrictions to the classifier, and rejecting oversized async permission evidence.",
+      "files": [
+        "codex-rs/Cargo.lock (+1 -0)",
+        "codex-rs/core/src/guardian/mod.rs (+2 -0)",
+        "codex-rs/core/src/guardian/permissions.rs (+109 -0)",
+        "codex-rs/core/src/guardian/prompt.rs (+3 -61)",
+        "codex-rs/core/src/guardian/review_request.rs (+9 -0)",
+        "codex-rs/core/src/guardian/snapshots/codex_core__guardian__tests__guardian_followup_review_request_layout.snap (+2 -2)",
+        "codex-rs/core/src/guardian/snapshots/codex_core__guardian__tests__guardian_review_request_layout.snap (+1 -1)",
+        "codex-rs/core/src/guardian/tests.rs (+8 -1)",
+        "codex-rs/core/src/tools/handlers/mod.rs (+1 -0)",
+        "codex-rs/core/src/tools/handlers/request_permissions.rs (+2 -2)"
+      ],
+      "filesTotal": 35
+    },
+    {
+      "number": 47832,
+      "title": "Stabilize Rosetta test timing and retry delay telemetry",
+      "url": "https://github.com/openai/codex/pull/47832",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T13:10:06Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Stabilize Rosetta test timing and retry delay telemetry\n\n## Why\n\nCold Rosetta translation and cache invalidation from hard-linked executables can interfere with timed CLI tests. Sampling the clock twice also makes local retry telemetry report a delay shorter than the selected backoff.\n\n## What changed\n\n- Warm CLI fixtures with `--version` on macOS x86_64 before timed checks, and use copies or Unix symlinks to avoid invalidating the shared executable's Rosetta cache.\n- Use one clock sample to calculate the response retry deadline and recorded delay.\n- Include the retry telemetry event in delay-range assertion failures for the headerless rate-limit stream test.",
+      "files": [
+        "codex-rs/core/src/responses_retry.rs (+4 -4)",
+        "codex-rs/cli/tests/app_server_daemon.rs (+16 -0)",
+        "codex-rs/cli/tests/daemon_startup.rs (+15 -0)",
+        "codex-rs/cli/tests/doctor_path_safety.rs (+18 -2)",
+        "codex-rs/cli/tests/worktree.rs (+15 -0)",
+        "codex-rs/core/tests/suite/retry_after.rs (+4 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 47847,
+      "title": "Keep the TUI responsive during clipboard copies",
+      "url": "https://github.com/openai/codex/pull/47847",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T14:15:57Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Keep the TUI responsive during clipboard copies\n\n## Why\n\nNative clipboard setup and writes can block, preventing the TUI from processing input or closing overlays while a copy is in progress.\n\n## What changed\n\n- Route clipboard copies through one session worker that retains native clipboard ownership. Keep terminal escape output on the UI thread.\n- Show pending and busy status messages, reject additional copies without queuing them, and ask users to retry image paste after an active copy finishes.\n- Abandon setup after five seconds and prevent late delivery. Keep the worker busy until the blocked call returns, and bound shutdown waiting for clipboard handoff.\n- Match completions to their originating requests so stale results cannot clear newer selections or unexpectedly resume transcript following. Retain selections on automatic copies, failures, and unconfirmed delivery.\n\n## Testing\n\nAdd regression tests for blocked backends, overlay exit, copy and paste ordering, setup expiry, bounded shutdown, completion status messages, and preservation of replaced or moved selections.",
+      "files": [
+        "codex-rs/tui/src/app.rs (+2 -0)",
+        "codex-rs/tui/src/app/clipboard.rs (+54 -0)",
+        "codex-rs/tui/src/app/event_dispatch.rs (+6 -3)",
+        "codex-rs/tui/src/app/input.rs (+4 -2)",
+        "codex-rs/tui/src/app/owned_transcript.rs (+8 -14)",
+        "codex-rs/tui/src/app/transcript_export.rs (+3 -1)",
+        "codex-rs/tui/src/app_event.rs (+1 -1)",
+        "codex-rs/tui/src/bottom_pane/chat_composer/mouse.rs (+11 -0)",
+        "codex-rs/tui/src/bottom_pane/chat_composer/mouse_tests.rs (+23 -0)",
+        "codex-rs/tui/src/bottom_pane/mod.rs (+9 -0)"
+      ],
+      "filesTotal": 38
+    },
+    {
+      "number": 47851,
+      "title": "Preserve human overrides across repeated heartbeat instructions",
+      "url": "https://github.com/openai/codex/pull/47851",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T14:48:56Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Preserve human overrides across repeated heartbeat instructions\n\n## Why\n\nUnchanged scheduled heartbeat instructions should not become fresh authorization evidence that supersedes a later human override or floods Guardian review context.\n\n## What changed\n\n- Capture heartbeat provenance per input, including when steering an active turn, and persist it in history and retained context.\n- Coalesce unchanged instructions for each automation at their original acceptance order. Preserve changed instruction versions and ordinary human messages.\n- Represent repeated heartbeats as references to earlier instructions in Guardian transcripts, while tracking the latest input turn separately for trusted skill selection.\n- Limit coalescing to recognized, bounded heartbeat envelopes with host-provided provenance.\n\n## Testing\n\nAdd regression coverage for human overrides across repeated and steered heartbeats, instruction changes, checkpoint restoration, transcript references, envelope parsing, and latest-turn trusted skills in delegated reviews.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-stable.json.zst (+0 -0)",
+        "codex-rs/core/src/agent/control/user_authorization.rs (+8 -3)",
+        "codex-rs/core/src/context_manager/history_user_authorization.rs (+3 -0)",
+        "codex-rs/core/src/guardian/input_budget_tests.rs (+2 -2)",
+        "codex-rs/core/src/hook_runtime.rs (+2 -2)",
+        "codex-rs/core/src/session/input_queue.rs (+16 -4)",
+        "codex-rs/core/src/session/mod.rs (+16 -3)",
+        "codex-rs/core/src/session/review.rs (+1 -1)",
+        "codex-rs/core/src/session/rollout_reconstruction_tests.rs (+1 -0)",
+        "codex-rs/core/src/session/tests.rs (+17 -11)"
+      ],
+      "filesTotal": 29
+    },
+    {
+      "number": 47852,
+      "title": "Avoid blocking async proxy resolution on the system proxy cache",
+      "url": "https://github.com/openai/codex/pull/47852",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T14:50:42Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Avoid blocking async proxy resolution on the system proxy cache\n\n## Why\n\nPlatform proxy resolution holds the system proxy cache mutex, so checking the cache could block a Tokio worker while another lookup was in progress.\n\n## What changed\n\nUse `try_lock` for cache reads, treating contention as a cache miss so async callers on Windows and macOS wait through the existing asynchronous resolver path.\n\n## Testing\n\nAdd a Windows/macOS regression test that verifies resolution yields while the cache is locked and completes after release. Adapt the cached-route test to tolerate concurrent cache writers, and isolate the unavailable-decision cache test from shared cache contention.",
+      "files": [
+        "codex-rs/http-client/src/outbound_proxy.rs (+3 -1)",
+        "codex-rs/http-client/src/outbound_proxy_tests.rs (+63 -6)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 47856,
+      "title": "Initialize media estimates outside the global cache lock",
+      "url": "https://github.com/openai/codex/pull/47856",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T14:58:20Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Initialize media estimates outside the global cache lock\n\n## Why\n\nImage and audio estimate cache misses computed values while holding the cache mutex, blocking access to unrelated keys during initialization.\n\n## What changed\n\nAdd `BlockingLruCache::get_or_init` using `Arc<OnceLock<V>>` and migrate the image and audio estimate caches to it. Initialization and same-key waits run in a Tokio blocking region after releasing the cache mutex. Callers share initialization while an entry remains cached; eviction can allow another initialization, so factories must be deterministic.\n\n## Testing\n\nAdd a concurrency test covering access to other keys during initialization, eviction of an in-flight entry, and successful completion of both the evicted initializer and its replacement.",
+      "files": [
+        "codex-rs/core/src/context_manager/history.rs (+9 -7)",
+        "codex-rs/utils/audio/src/lib.rs (+4 -2)",
+        "codex-rs/utils/cache/src/initialization_tests.rs (+51 -0)",
+        "codex-rs/utils/cache/src/lib.rs (+25 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 47858,
+      "title": "Validate loaded plugins outside the cache lock",
+      "url": "https://github.com/openai/codex/pull/47858",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T14:58:46Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Validate loaded plugins outside the cache lock\n\n## Why\n\nChecking installed plugin roots performs filesystem work while holding the loaded plugins cache mutex, blocking lookups for other cache keys.\n\n## What changed\n\nStore cache entries in `Arc`s and release the mutex before validating installation paths. After reacquiring the lock, check the cache generation and entry identity to reject entries invalidated or replaced during validation. Preserve stale-entry eviction and most-recently-used ordering.",
+      "files": [
+        "codex-rs/core-plugins/src/manager.rs (+32 -19)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 47861,
+      "title": "Avoid nested read locking when rendering browser sign-in",
+      "url": "https://github.com/openai/codex/pull/47861",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T15:21:45Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Avoid nested read locking when rendering browser sign-in\n\n## Why\n\n`render_ref` already holds a read lock on `sign_in_state`. Acquiring another read lock in `render_continue_in_browser` can deadlock when a writer is waiting.\n\n## What changed\n\nPass the borrowed `ContinueInBrowserState` from `render_ref` into the browser sign-in renderer instead of reading the lock again.\n\n## Testing\n\nUpdate the existing narrow-width browser sign-in test to exercise `render_ref`, retaining checks for the full OSC 8 authentication link, device-code guidance, and cancellation footer.",
+      "files": [
+        "codex-rs/tui/src/onboarding/auth.rs (+11 -9)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 47867,
+      "title": "Render remote permission paths using executor context",
+      "url": "https://github.com/openai/codex/pull/47867",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T15:57:59Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Render remote permission paths using executor context\n\n## What changed\n\n- Resolve remote sandbox modes, writable roots, and denied read paths/globs using the executor's filesystem context, displaying paths in its native format. Preserve local filesystem resolution for local environments.\n- Resolve remote read denials individually so missing executor facts omit only the unresolved entries.\n- Apply a shared 32 KiB budget to displayed permission paths/globs, omitting whole entries and warning that all restrictions still apply, including omitted read denials.\n\n## Testing\n\nAdd coverage for remote Windows writable roots and read denials, missing executor path facts, and whole-entry omission with multibyte paths under the shared budget.",
+      "files": [
+        "codex-rs/core/src/context/world_state/permissions.rs (+4 -0)",
+        "codex-rs/core/src/context/world_state/permissions_tests.rs (+2 -0)",
+        "codex-rs/core/src/session/world_state.rs (+10 -0)",
+        "codex-rs/prompts/src/permissions_instructions.rs (+100 -27)",
+        "codex-rs/prompts/src/permissions_instructions_tests.rs (+90 -20)",
+        "codex-rs/protocol/src/permissions.rs (+3 -1)",
+        "codex-rs/core/tests/suite/unified_exec_process_events.rs (+44 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 47870,
+      "title": "Add opt-in OTLP logging for Guardian assessments",
+      "url": "https://github.com/openai/codex/pull/47870",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T16:06:22Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Add opt-in OTLP logging for Guardian assessments\n\n## What changed\n\nAdd `otel.log_guardian_assessments`, disabled by default and requiring an OTLP HTTP or gRPC log exporter. Emit `codex.guardian_assessment` when a synchronous Guardian review finishes, including review identifiers, status, risk level, user authorization, and rationale. Include `allow` or `deny` outcomes only for completed model assessments, not review errors, timeouts, or cancellations.\n\nCap exported rationales at 64 KiB on a UTF-8 character boundary and record their original byte length and truncation status. Use the log-only route to exclude assessment payloads from trace export, local state logs, and bug-report log buffers. Cached V2 approvals are not included.\n\n## Testing\n\nAdd coverage for configuration gating, enabled and disabled denial logging, terminal statuses and outcomes, UTF-8 rationale truncation, export routing, and bug-report log buffer exclusion.",
+      "files": [
+        "codex-rs/config/src/types.rs (+14 -0)",
+        "codex-rs/core/config.schema.json (+4 -0)",
+        "codex-rs/core/src/config/config_tests.rs (+6 -1)",
+        "codex-rs/core/src/config/otel.rs (+1 -0)",
+        "codex-rs/core/src/guardian/decision.rs (+1 -0)",
+        "codex-rs/ext/guardian-reviewer/src/review.rs (+4 -0)",
+        "codex-rs/ext/guardian-reviewer/src/routing.rs (+2 -0)",
+        "codex-rs/feedback/src/lib.rs (+2 -0)",
+        "codex-rs/otel/src/guardian_assessment.rs (+68 -0)",
+        "codex-rs/otel/src/lib.rs (+1 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 47871,
+      "title": "Fix PID reservation test race and update guardian heartbeat snapshot",
+      "url": "https://github.com/openai/codex/pull/47871",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T16:07:30Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix PID reservation test race and update guardian heartbeat snapshot\n\n## Why\n\nThe PID reservation test could race with the backend's read on Windows by deleting the PID file from its cleanup task. The guardian heartbeat snapshot and environment normalization also needed to match the current permission-context wording.\n\n## What changed\n\n- Release the reservation lock and let `stop()` remove the stale PID file, then assert that the file is gone.\n- Update the guardian heartbeat snapshot and normalization pattern to use `The active permission profile for environment`.",
+      "files": [
+        "codex-rs/app-server-daemon/src/backend/pid_tests.rs (+6 -6)",
+        "codex-rs/core/tests/suite/scenarios_guardian_heartbeat.rs (+2 -2)",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__guardian_heartbeat__heartbeat_repetitions_keep_later_human_authorization.snap (+1 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 47873,
+      "title": "Measure deferred tool namespace fragments before and after truncation",
+      "url": "https://github.com/openai/codex/pull/47873",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T16:15:04Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Measure deferred tool namespace fragments before and after truncation\n\n## What changed\n\nRecord `codex.thread.tools.namespaces_total` and `codex.thread.tools.fragment_bytes` histograms through session telemetry. Tag samples by `stage` (`before` or `after` the 4 KiB cap) and `kind` (`snapshot` or `delta`). Measure bytes after description normalization and XML escaping, including the `<tools>` wrapper, with explicit fragment-size buckets.\n\nDelta counts include only changed entries, and unchanged state emits no samples.\n\n## Testing\n\nExtend rendering tests to verify snapshot and delta metrics, omission counts, byte sizes with Unicode and XML escaping, and no samples for unchanged state.",
+      "files": [
+        "codex-rs/core/src/context/world_state/tools.rs (+69 -6)",
+        "codex-rs/core/src/context/world_state/tools_tests.rs (+136 -26)",
+        "codex-rs/core/src/session/world_state.rs (+4 -3)",
+        "codex-rs/otel/src/metrics/names.rs (+7 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 47879,
+      "title": "Fix macOS system-alias matching in patch permission checks",
+      "url": "https://github.com/openai/codex/pull/47879",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T16:37:10Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix macOS system-alias matching in patch permission checks\n\n## Why\n\nLocal `apply_patch` permission checks can treat a macOS system alias and its canonical spelling as different locations, sending writes covered by temporary-directory grants for unnecessary approval.\n\n## What changed\n\n- Normalize trusted top-level aliases in local policy roots and patch targets, reusing a prepared matcher for permission requests and patch safety checks.\n- Share alias normalization with Seatbelt and the macOS executor sandbox while preserving mutable symlinks and missing descendants.\n- Preserve read-only and deny precedence, protected metadata restrictions, and remote URI matching. Propagate normalization failures from fallible permission checks.\n\n## Testing\n\nAdd macOS regressions for multi-file patches with missing parent directories through both direct `apply_patch` calls and shell interception, asserting automatic approval and file contents. Add unit coverage for alias restriction precedence, mutable symlink preservation, missing descendants, and remote permission isolation.",
+      "files": [
+        "codex-rs/core/src/apply_patch.rs (+7 -10)",
+        "codex-rs/core/src/apply_patch_tests.rs (+4 -3)",
+        "codex-rs/core/src/safety.rs (+69 -29)",
+        "codex-rs/core/src/safety_tests.rs (+147 -78)",
+        "codex-rs/core/src/tools/handlers/apply_patch.rs (+74 -89)",
+        "codex-rs/core/src/tools/handlers/apply_patch_tests.rs (+24 -19)",
+        "codex-rs/exec-server/src/fs_sandbox.rs (+20 -5)",
+        "codex-rs/protocol/src/permission_profile_intersection_tests.rs (+17 -4)",
+        "codex-rs/protocol/src/permissions.rs (+55 -43)",
+        "codex-rs/protocol/src/permissions/local_aliases.rs (+131 -0)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 47881,
+      "title": "Use Tokio's clock for TUI paste timing",
+      "url": "https://github.com/openai/codex/pull/47881",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T16:48:39Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Use Tokio's clock for TUI paste timing\n\n## Why\n\nPaste input classification and asynchronous flush deadlines need to share a clock, including when Tokio time is paused in tests.\n\n## What changed\n\nUse Tokio's clock for chat composer paste timing and startup draft newline tracking, converting to `std::time::Instant` where existing composer helpers require it.\n\n## Testing\n\nRun the existing startup draft multiline paste test with `start_paused = true`. It checks that non-bracketed pastes preserve newlines without submitting the draft.",
+      "files": [
+        "codex-rs/tui/src/bottom_pane/chat_composer.rs (+8 -5)",
+        "codex-rs/tui/src/startup_draft.rs (+1 -1)",
+        "codex-rs/tui/src/startup_draft_input.rs (+1 -1)",
+        "codex-rs/tui/src/startup_draft_tests.rs (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":47886,"title":"Preserve diagnostic logs when SQLite logging fails","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47887,"title":"Warn users when SQLite diagnostic log writes fail","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47889,"title":"Include TUI client logs in diagnostic uploads","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47891,"title":"Support client secrets for pre-registered MCP OAuth clients","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47894,"title":"Clean up temporary Codex homes after TUI tests","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47896,"title":"Preserve Markdown formatting when copying transcript selections","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47898,"title":"Preserve local-binding inheritance in environment network policies","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47899,"title":"Add diagnostic reasons to MCP attribution errors","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47900,"title":"Default local threads to paginated history","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47901,"title":"Add bounded credential-storage telemetry helpers","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47902,"title":"Avoid repeated table clones during config merging","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47903,"title":"Move config key alias normalization ahead of merging","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47904,"title":"Support nested canonical paths in config key aliases","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47908,"title":"Alias `tui.whimsy` to `tui.effects.starfield`","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47911,"title":"Add TUI composer support for prompt suggestions","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 47912,
+      "title": "Fix attestation routing during thread startup",
+      "url": "https://github.com/openai/codex/pull/47912",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-24T18:38:16Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix attestation routing during thread startup\n\n## Why\n\nThread startup can prewarm the Responses WebSocket before the creating client is registered with the thread, leaving the handshake unable to request attestation from that client.\n\n## What changed\n\nReserve a thread ID and register the creating connection before starting the thread, including for ephemeral threads. Remove the thread state if startup fails.\n\n## Testing\n\nExtend the attestation round-trip test to cover persistent and ephemeral threads. Handle attestation requests while awaiting `thread/start` and `turn/start` responses, and verify the WebSocket handshake includes the expected `x-oai-attestation` header.",
+      "files": [
+        "codex-rs/app-server/src/request_processors/thread_processor.rs (+13 -1)",
+        "codex-rs/app-server/tests/suite/v2/attestation.rs (+39 -30)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":47913,"title":"Add an opt-in flag to defer mailbox preemption","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47915,"title":"Reuse verified V8 checksum manifests from the artifact cache","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47918,"title":"Parameterize the turn-start originator header test","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47919,"title":"Transport large Windows sandbox launch payloads through the environment","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47920,"title":"Allow directory moves under global Seatbelt basename denies","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47922,"title":"Allow full-access Windows setup to provision through registered Core","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47924,"title":"Make project trust lookup paths explicit and defer root resolution","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47926,"title":"Retry file blob uploads on HTTP 502 and 504","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47927,"title":"Use `127.0.0.1` for local login redirects","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47929,"title":"Generate TUI prompt suggestions after successful turns","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47932,"title":"Remove GPT-5.4 from bundled catalogs and preserve migration prompts","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47934,"title":"Apply the unchanged-model compaction shortcut to all session sources","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47935,"title":"Allow cached catalogs to satisfy MCP startup readiness","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47936,"title":"Make MCP and Code Mode input schema budgets configurable","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47937,"title":"Add direct replies for thread settings updates","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47939,"title":"Separate selected plugin identities from MCP contributions","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47943,"title":"Remove unused Windows world-writable audit code","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47945,"title":"Parameterize the thread initialization analytics test by originator","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47946,"title":"Add an in-memory agent message board for ephemeral sessions","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47947,"title":"Expand root authorization context to 16 messages","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47951,"title":"Use prebuilt V8 archives for Bazel on macOS and GNU Linux","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47952,"title":"Prune expired in-memory message board registry entries","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47954,"title":"Move fullscreen startup tips into the transcript","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47956,"title":"Support file references in image edit requests","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47957,"title":"Bound tool-call observations to the outgoing Responses message budget","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47962,"title":"Request transparent huge pages for Cargo and eligible Bazel rustc jobs","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47964,"title":"Preserve the client-agent header for Amazon Bedrock Runtime","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47967,"title":"Surface Flex capacity failures as a distinct terminal error","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47968,"title":"Handle Btrfs device mismatches when masking daemon sockets","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47970,"title":"Expose current environment selections for a running turn","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47971,"title":"Add Pro Max plan support and update Pro display names","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47974,"title":"Preserve Git directory protections across writable roots","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47975,"title":"Prevent stale voice answers from reappearing during speech recovery","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47981,"title":"Prepare MCP calls directly from advertised tool identities","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47984,"title":"Add multi-agent spawn latency and failure metrics","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47988,"title":"Reuse MCP handlers across equivalent bindings","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":47989,"title":"Add startup-only PID namespace inheritance to exec-server","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48004,"title":"Respect configured authentication in the thread manager sample","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48015,"title":"Validate tool suggestion install URLs before showing the app link","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48017,"title":"Test same-cell permission grants and strict review in code mode","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48035,"title":"Remove plugin extension metadata from discovery and summaries","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48060,"title":"Deduplicate retained instructions across Guardian reviews","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48069,"title":"Handle early command yields in the Guardian network approval test","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48072,"title":"Skip message-board notification previews when there are no recipients","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48073,"title":"Avoid stdin approval for runtime-only permission grants","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48077,"title":"Add Serde support to agent message board request types","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48078,"title":"Replay exec-server shell snapshots through unnamed files","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48098,"title":"Preserve recent authorization context for Guardian reviews","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48099,"title":"Honor shell environment policy in legacy snapshots","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48100,"title":"Add an HTTP client for remote agent message boards","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48101,"title":"Show multiline command previews in `/ps`","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48109,"title":"Deduplicate retained instructions against Guardian transcripts","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48110,"title":"Deduplicate retained instructions in async Guardian context","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48115,"title":"Preserve user text parts during local compaction","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48116,"title":"Allow reasoning shortcuts to reach Max","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48118,"title":"Add configurable right-click paste to the fullscreen TUI","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48119,"title":"Prevent worker completion races in the guardian authorization test","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48121,"title":"Keep startup drafts visible during command center session handoff","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48123,"title":"Add early yielding for code-mode observations","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48130,"title":"Use request notifications in the cloud config loader lifetime test","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48132,"title":"Allow Left to open the command center from read-only conversations","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48135,"title":"Add opt-in code-mode yielding on new user input","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48138,"title":"Suppress console windows when spawning the code-mode host on Windows","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48141,"title":"Preempt model responses when new user input arrives","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48143,"title":"Preserve executor MCP credential boundaries across reconnects","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48151,"title":"Add item anchors to `thread/items/list` pagination","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48155,"title":"Preserve filesystem denials when preparing approved commands","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48157,"title":"Allow Windows daemon launches with residual job membership","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 48158,
+      "title": "Fix Guardian retained context spacing and empty assistant handling",
+      "url": "https://github.com/openai/codex/pull/48158",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-25T18:29:00Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix Guardian retained context spacing and empty assistant handling\n\n## Why\n\nComplete assistant messages with empty text can produce misleading omitted-context notices in Guardian reviews.\n\n## What changed\n\n- Skip complete, empty assistant messages when recording and rendering retained context, while preserving omission notices for incomplete messages.\n- Separate retained instruction fragments with blank lines and keep blank lines free of role prefixes, while labeling every nonempty line with its original role.\n- Update source-order guidance detection and empty-section deduplication for the added spacing.\n\n## Testing\n\nExtend retained-context tests to cover empty completed messages across resume, restored empty messages, incomplete-message notices, blank-line spacing, and role labeling. Update Guardian prompt snapshots.",
+      "files": [
+        "codex-rs/core/src/guardian/snapshots/codex_core__guardian__tests__guardian_followup_review_request_layout.snap (+8 -0)",
+        "codex-rs/core/src/guardian/snapshots/codex_core__guardian__tests__guardian_review_request_layout.snap (+4 -0)",
+        "codex-rs/core/src/guardian/snapshots/codex_core__guardian__tests__network_access_guardian_prompt_layout.snap (+4 -0)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/extension_tests.rs (+2 -2)",
+        "codex-rs/guardian-context/src/authorization.rs (+8 -2)",
+        "codex-rs/guardian-context/src/composition.rs (+4 -2)",
+        "codex-rs/guardian-context/src/registry_tests.rs (+2 -2)",
+        "codex-rs/guardian-context/src/retained_instructions.rs (+4 -1)",
+        "codex-rs/guardian-context/src/retained_instructions_tests.rs (+17 -2)",
+        "codex-rs/history/src/retained_assistant_messages.rs (+5 -0)"
+      ],
+      "filesTotal": 14
+    },
+    {"number":48168,"title":"Generate unique exec-server process IDs for every request","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48174,"title":"Preserve usage limit windows in turn and compaction analytics","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48176,"title":"Protect `.aws` directories under sandbox writable roots","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 48187,
+      "title": "Fix zsh alias quoting in sourced shell snapshots",
+      "url": "https://github.com/openai/codex/pull/48187",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-25T19:43:22Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix zsh alias quoting in sourced shell snapshots\n\n## Why\n\nSourced snapshots parse options and aliases as a group before restored options take effect. Aliases serialized with `RC_QUOTES` enabled can therefore be misinterpreted by the replay shell.\n\n## What changed\n\nSerialize zsh aliases for sourced snapshots with `NO_RC_QUOTES` in a subshell, preserving the captured shell options and avoiding a dependency on the optional `zsh/parameter` module.\n\n## Testing\n\nExtend regression coverage to execute restored aliases with `RC_QUOTES` enabled and disabled across source and eval replay. Expand macOS zsh concurrent replay tests to cover quoted aliases, preserved options, and blocked descriptor paths with and without a TTY.",
+      "files": [
+        "codex-rs/shell-command/src/shell_snapshot_capture.rs (+8 -1)",
+        "codex-rs/shell-command/src/shell_snapshot_tests.rs (+34 -12)",
+        "codex-rs/exec-server/tests/exec_process/shell_snapshot.rs (+21 -2)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":48190,"title":"Bound agent message board SSE frames before parsing","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48197,"title":"Optimize `blake3` in Bazel fastbuilds","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48198,"title":"Honor execution environment proxy requirements","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48199,"title":"Keep archived threads with empty previews visible in listings","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48200,"title":"Extract Responses header conversion into a shared module","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48205,"title":"Dismiss viewed TUI warnings when closing the viewer","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48206,"title":"Add a keep-and-next action to the warnings viewer","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48207,"title":"Preserve queued output for observers during code-mode termination","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48211,"title":"Keep Codex visible during external editor handoff","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48213,"title":"Isolate executable fixture copies in CLI tests on Linux","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48222,"title":"Preserve late result metadata for truncated code-mode calls","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48224,"title":"Preserve model and access program pairs during compaction","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48229,"title":"Extract Responses failure parsing into a dedicated module","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48238,"title":"Suppress console windows for local Windows MCP servers","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48272,"title":"Prevent Windows daemon launches from retaining launcher stdio","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48318,"title":"Keep TUI reconnect attempts running until the shared deadline","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48344,"title":"Preserve tool metadata for OpenAI provider endpoint overrides","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48350,"title":"Display reconnect commands on a separate line","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48352,"title":"Show turn tips while working and after completion in the TUI","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48353,"title":"Stabilize skill catalogs across executor availability changes","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48469,"title":"Default to copying transcript selections in more terminals","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48483,"title":"Prevent console windows for piped Windows child processes","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 48489,
+      "title": "Fix Mermaid shape, relationship, and state description parsing",
+      "url": "https://github.com/openai/codex/pull/48489",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-26T17:26:20Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix Mermaid shape, relationship, and state description parsing\n\n## What changed\n\n- Reject unsupported flowchart shapes and Markdown strings so the terminal renderer preserves the source with an unsupported-feature notice instead of misrendering it. Keep ordinary quoted labels containing shape-like punctuation valid.\n- Preserve class relationship targets beginning with `o`, such as `A --orange`, instead of consuming the first letter as an aggregation marker.\n- Accumulate state aliases and descriptions in source order: use the first as the title and subsequent entries as body rows, preserving state identity and limiting body rows to 16.\n\n## Testing\n\nAdd parser regressions for these cases and description limits, update class and state snapshots, and extend TUI snapshots to verify source preservation for unsupported flowchart syntax.",
+      "files": [
+        "codex-rs/mermaid/src/families_tests.rs (+59 -6)",
+        "codex-rs/mermaid/src/parse.rs (+11 -0)",
+        "codex-rs/mermaid/src/relations.rs (+6 -0)",
+        "codex-rs/mermaid/src/snapshots/codex_mermaid__families_tests__class.snap (+2 -3)",
+        "codex-rs/mermaid/src/snapshots/codex_mermaid__families_tests__state.snap (+3 -2)",
+        "codex-rs/mermaid/src/state.rs (+17 -7)",
+        "codex-rs/mermaid/src/tests.rs (+27 -0)",
+        "codex-rs/tui/src/markdown_render/mermaid_tests.rs (+10 -0)",
+        "codex-rs/tui/src/markdown_render/snapshots/codex_tui__markdown_render__mermaid__tests__mermaid_fallback_notices_preserve_source.snap (+16 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {"number":48491,"title":"Fall back to embedded mode under restrictive Windows launchers","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 48502,
+      "title": "Fix ChatGPT browser sign-in for local app servers",
+      "url": "https://github.com/openai/codex/pull/48502",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-26T18:15:56Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix ChatGPT browser sign-in for local app servers\n\n## Why\n\nLocal daemons use a remote request handle even though their login callback is local, so the TUI skipped opening the browser. Login completion could also arrive while the browser was opening, before the TUI had recorded the active login.\n\n## What changed\n\n- Use `AppServerTarget` to open the login URL for embedded servers and local daemons, while continuing to skip automatic browser opening for remote workspaces.\n- Set the pending login state and schedule a frame before opening the browser so completion notifications can match the active login.\n\n## Testing\n\nAdd regression tests for browser opening across embedded, local daemon, and remote targets, and for login completion during browser opening.",
+      "files": [
+        "codex-rs/tui/src/lib.rs (+1 -0)",
+        "codex-rs/tui/src/onboarding/auth.rs (+98 -9)",
+        "codex-rs/tui/src/onboarding/onboarding_screen.rs (+3 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":48508,"title":"Preserve WebSocket continuations when steering a turn","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48513,"title":"Refresh the TUI welcome screen for new sessions","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48531,"title":"Add context to Windows sandbox runtime registration errors","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48544,"title":"Make onboarding login links easier to copy","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48547,"title":"Fade blossom replays back to the idle state","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48548,"title":"Preserve table cell source metadata through TUI rendering","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48549,"title":"Preserve Markdown tables and whitespace when copying TUI responses","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 48551,
+      "title": "Fix TUI math rendering for zero and big wedge expressions",
+      "url": "https://github.com/openai/codex/pull/48551",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-26T22:05:45Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix TUI math rendering for zero and big wedge expressions\n\n## Why\n\nInline `$0$` was left unrendered, and expressions containing `\\bigwedge`, `\\bigl`, or `\\bigr` fell back to raw LaTeX.\n\n## What changed\n\n- Allow `$0$` through the inline math detection heuristic.\n- Render `\\bigwedge` as `⋀`, with limits stacked above and below in display math.\n- Handle `\\bigl` and `\\bigr` like `\\left` and `\\right`.\n\n## Testing\n\nAdd a regression snapshot covering inline zero, inline big wedge, and a multiline display expression with stacked limits and delimiters.",
+      "files": [
+        "codex-rs/tui/src/markdown_render/math.rs (+2 -1)",
+        "codex-rs/tui/src/markdown_render/math/render.rs (+5 -2)",
+        "codex-rs/tui/src/markdown_render/math/render/structured.rs (+3 -3)",
+        "codex-rs/tui/src/markdown_render/math_display_tests.rs (+15 -0)",
+        "codex-rs/tui/src/markdown_render/snapshots/codex_tui__markdown_render__math__display_tests__issue_48403_renders_zero_and_multiline_display.snap (+10 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":48560,"title":"Keep working tips stable during transcript interaction","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48562,"title":"Use a consistent borderless session header in the TUI","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48565,"title":"Allow macOS TLS trust evaluation in network-enabled Seatbelt profiles","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48568,"title":"Allow exec-server to proxy permitted private IPs upstream","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48574,"title":"Preserve deferred tool namespace names before descriptions","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48575,"title":"Allow provisioned executors more time to come online","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48604,"title":"Remove the bundled `plugin-creator` skill","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48611,"title":"Centralize persistent mode enablement checks","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48621,"title":"Remove follow-up prompt suggestions from the TUI","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48623,"title":"Preserve empty Markdown list markers in the TUI","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48626,"title":"Stop showing previous-session summaries when switching TUI sessions","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48628,"title":"Preserve blank TUI sessions when switching tasks","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48643,"title":"Set the provisioned macOS CLI bundle name to ChatGPT","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48646,"title":"Fix the session-start helper call in the command center test","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48686,"title":"Remove WebSocket headers and tool payloads from info logs","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48724,"title":"Prevent Linux ETXTBSY races in MCP stdio tests","hint":"other","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48725,"title":"Retain confirmed Code Mode messages for Guardian reviews","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 48727,
+      "title": "Centralize executable fixture creation to avoid Linux ETXTBSY races",
+      "url": "https://github.com/openai/codex/pull/48727",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-27T15:25:26Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Centralize executable fixture creation to avoid Linux ETXTBSY races\n\n## Why\n\nConcurrent tests can inherit writable descriptors for executable fixtures, causing `ETXTBSY` when those fixtures launch on Linux.\n\n## What changed\n\nExpose shared `write_executable` and `copy_executable` helpers from `codex_utils_cargo_bin` and adopt them in CLI, exec-server, and MCP tests. On Linux, writes and copies complete in separate processes so sibling test spawns cannot inherit the writable descriptors. Script fixtures receive mode `0o755`, and copied executables retain their source permissions.\n\nRemove the executable-busy retry loop from the program resolver test now that its script uses the shared helper.",
+      "files": [
+        "codex-rs/rmcp-client/src/program_resolver.rs (+6 -29)",
+        "codex-rs/utils/cargo-bin/src/executable.rs (+62 -0)",
+        "codex-rs/utils/cargo-bin/src/lib.rs (+5 -0)",
+        "codex-rs/cli/tests/app_server_daemon.rs (+1 -4)",
+        "codex-rs/cli/tests/doctor_path_safety.rs (+1 -4)",
+        "codex-rs/cli/tests/exec_server.rs (+1 -4)",
+        "codex-rs/cli/tests/support/executable.rs (+0 -39)",
+        "codex-rs/exec-server/tests/common/fake_bwrap.rs (+1 -5)",
+        "codex-rs/rmcp-client/tests/mcp_2026_stdio.rs (+1 -21)",
+        "codex-rs/rmcp-client/tests/process_group_cleanup.rs (+1 -3)"
+      ],
+      "filesTotal": 10
+    },
+    {"number":48754,"title":"Render `/status` without borders and wrap long values","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48757,"title":"Match TUI status shimmer timing to desktop headers","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48761,"title":"Show hidden output line counts in compact terminal activity","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48764,"title":"Preserve MCP app resource URIs without defaulting display mode","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {
+      "number": 48772,
+      "title": "Fix Unix socket connections through long symlink paths",
+      "url": "https://github.com/openai/codex/pull/48772",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-27T19:14:37Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.159.0-alpha.10",
+      "body": "Fix Unix socket connections through long symlink paths\n\n## Why\n\nAn advertised control socket path can exceed the Unix socket path limit even when its symlink target is short enough to connect to.\n\n## What changed\n\nOn Unix, resolve the socket path and retry the connection when the initial attempt returns `InvalidInput`.\n\n## Testing\n\nAdd a regression test that creates control sockets under two long home paths, checks that their symlink targets are distinct, and verifies that clients can connect through both advertised paths.",
+      "files": [
+        "codex-rs/app-server-transport/src/transport/unix_socket_tests.rs (+42 -0)",
+        "codex-rs/uds/src/lib.rs (+8 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":48775,"title":"Match pinned transcript headers to the original prompt style","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48776,"title":"Remove the `current` badge from TUI task rows","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48779,"title":"Preserve independent Guardian history across parent compaction","hint":"unknown","release":"📦 rust-v0.159.0-alpha.10","brief":true},
+    {"number":48783,"title":"Add single-server MCP status discovery with thread connection reuse","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":48796,"title":"Add opt-in structured errors for Guardian circuit-breaker interruptions","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 48799,
+      "title": "Fix SGR mouse reporting for Windows terminal capture",
+      "url": "https://github.com/openai/codex/pull/48799",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-27T22:14:11Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix SGR mouse reporting for Windows terminal capture\n\n## Why\n\nSome Windows terminals send legacy mouse reports as key records. Requesting SGR reports lets ConPTY translate them into mouse records.\n\n## What changed\n\nWrite and flush the SGR encoding request separately from `EnablePointerCapture`, so it also reaches terminals when capture uses the Windows console API. Explicitly reset SGR encoding during Windows mouse cleanup, even if restoring the console mode fails.\n\n## Testing\n\nAdd regression tests for cleanup after SGR setup fails and an isolated Windows console test that checks mouse input activation, SGR encoding, and restoration of the original console mode and default encoding.",
+      "files": [
+        "codex-rs/tui/src/tui/alternate_screen.rs (+19 -2)",
+        "codex-rs/tui/src/tui/alternate_screen_tests.rs (+38 -2)",
+        "codex-rs/tui/src/tui/alternate_screen_windows_tests.rs (+85 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":48800,"title":"Use the terminal palette for ordered Markdown list markers","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":48805,"title":"Allow transcript wheel scrolling while a modal is open","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":48807,"title":"Show short turn durations in TUI completion footers","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":48812,"title":"Add history-aware prewarming for idle threads","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":48814,"title":"Preserve punctuation and semicolons in Mermaid labels","hint":"unknown","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}

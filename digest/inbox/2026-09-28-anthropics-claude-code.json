@@ -1,0 +1,178 @@
+{
+  "kind": "repo",
+  "repo": "anthropics/claude-code",
+  "branch": "main",
+  "collectedAt": "2026-09-27T23:50:38Z",
+  "range": {
+    "from": "2026-09-21T22:23:28Z",
+    "to": "2026-09-27T23:50:38Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v2.1.283",
+      "publishedAt": "2026-09-25T21:50:12Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v2.1.282",
+      "name": "v2.1.282",
+      "publishedAt": "2026-09-24T18:38:05Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.282",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added a `maxProseWidth` setting that caps the width of Claude's prose in wide terminals while tables and code blocks keep the full width\n- Added a startup notice, and `/status` and `claude doctor` entries, listing telemetry variables in a project's settings files that were ignored or that turned telemetry off\n- Added the `allowClaudeInChromeWithManagedMcp` managed setting to let `claude --chrome` run alongside an exclusive `managed-mcp.json`; the error shown when Chrome is blocked now names it\n- Added `store.readiness_grace_seconds` to the Claude apps gateway so `/readyz` can stay ready through a short Postgres outage such as a database failover\n- Added a scrollbar to the `/feedback` drafts list in fullscreen mode; it appears while the mouse is over the list\n- Fixed every request failing with a 400 error in conversations whose history holds web search results the API cannot decrypt (for example, from a turn answered through a third-party gateway)\n- Fixed more cases of continued or resumed sessions (`--continue`, `--resume`) re-sending earlier messages in a changed form, which could make the API drop Claude's earlier reasoning\n- Fixed earlier extended thinking being dropped when `/model`, `/rename`, `/artifacts` or another immediate slash command was used while Claude was working\n- Fixed continued or resumed conversations losing earlier extended thinking when relaunched with a `--tools` list that leaves out a built-in tool offered earlier in the conversation\n- Fixed sessions failing on every turn with an \"Invalid `data` in `redacted_thinking` block\" API error; Claude Code now drops the conversation's thinking blocks and retries once\n- Fixed compaction failing when the summarization request is refused; it now retries on a fallback model\n- Fixed a failed turn (\"Effort 'xhigh' isn't available with thinking turned off\") after a safety-related model switch in sessions with thinking off and effort above high\n- Fixed an unanswered Fable usage-credits prompt switching models in SDK-hosted sessions such as Claude Desktop; the turn now ends instead, and Remote Control clients now see the model-switch notice\n- Fixed `/model` with a full Fable model id stopping at an API error instead of opening the usage-credits prompt when the plan needs usage credits that aren't turned on yet\n- Fixed requests failing for up to a minute with an \"another Claude Code process is refreshing it\" login error after that other process was closed or killed mid-refresh\n- Fixed sessions started while another Claude Code window was refreshing the sign-in (common with several VS Code windows) not retrying their organization policy fetch\n- Fixed CLAUDE.md and rules being read at startup through a repository symlink reaching macOS's `/Network` via `..` or a `/.vol`-style kernel path, or a rules link to macOS's `/home` being listed\n- Fixed Bash permission rules with a mid-pattern `:*` being skipped in settings files while `--allowedTools` honored them; they now work fr\n…(truncated)"
+    },
+    {
+      "tag": "v2.1.283",
+      "name": "v2.1.283",
+      "publishedAt": "2026-09-25T21:50:12Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added `x-claude-code-prompt-id` to the gateway hint headers so LLM gateways can group the requests that serve one user prompt; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added `availableModelsMatch` managed setting: with `\"exact\"`, an `availableModels` entry allows only the model version it names, so new releases stay blocked until listed\n- Added `deniedModels` managed setting to block specific models, even when `availableModels` allows them\n- Added MCP tool, WebFetch and WebSearch outputs to the `tool.output` OpenTelemetry span event when `OTEL_LOG_TOOL_CONTENT=1`\n- Added `/doctor prompt-audit` (also `/checkup prompt-audit`) to audit your CLAUDE.md files, skills, agents and commands for prompting patterns written for older models\n- Added click-to-expand for truncated messages from your other sessions in fullscreen mode\n- Added `path` to `--plugin-dir` load-failure entries in the stream-json `system/init` `plugin_errors`, naming the directory that did not load\n- Added an opt-in `load_test_mode` block to the Claude apps gateway config: requests are built and signed but not sent upstream, and clients get a canned reply, so a deployment can be load tested\n- Added a `mantle` upstream provider to the Claude apps gateway for Amazon Bedrock's Mantle endpoint\n- Fixed SDK sessions losing a deferred tool call or finished tool result when a turn ended early, a held approval prompt after a worker restart, and a non-streaming fallback's `result.usage`\n- Fixed MCP progress notifications being discarded once a long-running tool call moved to the background; the background task now shows the latest progress\n- Fixed stdio MCP servers being left running when the session ended while they were still starting\n- Fixed a brief HTTP 404 from a stateless remote MCP server (for example a proxy mid-redeploy) leaving that server unusable for the rest of the session while still shown as connected\n- Fixed MCP sign-in for a server with no valid URL failing with an opaque SDK error; `/mcp` no longer offers Authenticate for such servers\n- Fixed the weekly Fable limit not appearing in `/usage` and the VS Code usage meters when telemetry is disabled\n- Fixed `/model` accepting Sonnet 4.6 or Sonnet 5 with `[1m]` when the id carried a date or `-v1:0` suffix, in the cases where the plain id was refused\n- Fixed `/model` picker showing a hardcoded Haiku version and price when `ANTHROPIC_DEFAULT_HAIKU_MODEL` pins a different model\n- Fixed dynamic workflows started during a model fallback running every agent on the fallback model instead of retrying the configured model\n- Fixed `DISABLE_PROMPT_CACHING_HAIKU` having no effect when Haiku is the session's main model\n- Fixed `claude plugin validate` saying Claude Code accepts a plugin or marketplace name it cannot install; such names in `marketplace.json` now fail validation\n- Fixed `claude plugin validate` passing plugins whose `outputStyles`, `themes`, `monitors`, or `lspServers` paths are missing or point outsi\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 96570,
+      "title": "diff: the command.run hook names its command by a literal the engine's scan reads",
+      "url": "https://github.com/anthropics/claude-code/pull/96570",
+      "author": "poteat",
+      "mergedAt": "2026-09-24T17:22:13Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.283",
+      "body": "The mod's `command.run` hook matched its own command through a named constant (`{ command: Names.COMMAND_NAME }`). The engine's scan of a hooks module reads literal command names in `command.run` matchers, and uses them to decide which slash commands typed right at startup must wait for a module that is still loading. A constant it cannot read counts as \"may hook any command\", so while the diff mod was loading every early listed command (`/help`, `/exit`, ...) waited for it.\n\nThe matcher now spells the literal, `{ command: 'diff' }`, the way the mod's `clear`/`resume` hook already does. Behaviour is unchanged (the constant's value is `'diff'`); `claude plugin validate mods/diff` now reports `command.run{command=diff}`.\n\nChecked:\n\n- `claude plugin validate mods/diff` passes and lists the hook as `command.run{command=diff}`.\n- With an engine that holds early commands by name, an early `/help` typed while a mod with a 3 s start loads opens in 4.5 to 4.9 s with this line and 8.2 s without it.",
+      "files": [
+        "mods/diff/hooks/register.ts (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 95423,
+      "title": "diff: a shell command the tool held read-only fetches nothing",
+      "url": "https://github.com/anthropics/claude-code/pull/95423",
+      "author": "poteat",
+      "mergedAt": "2026-09-24T17:22:21Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.283",
+      "body": "With its pane open, the `diff` mod refetched the diff after every Bash or PowerShell tool call. The built-in panel refetches only after a shell command that may have written: one the tool holds read-only (`ls`, `git status`, `cat`, a grep) is skipped. The mod now reads `isReadOnly` off the shell tool's `tool.call` result and skips the refetch when it is set; where the engine does not set it, behaviour is unchanged. Adds a `register` test that fails before the change. Checked: `tsc -p mods/tsconfig.json`, `claude plugin validate mods/diff`, `claude plugin test mods/diff` (143 pass).",
+      "files": [
+        "mods/diff/hooks/register.ts (+1 -3)",
+        "mods/diff/hooks/tools/index.ts (+1 -0)",
+        "mods/diff/hooks/tools/may-have-written.ts (+23 -0)",
+        "mods/diff/tests/fixtures/index.ts (+1 -0)",
+        "mods/diff/tests/fixtures/read-only-answer.ts (+13 -0)",
+        "mods/diff/tests/register.test.ts (+35 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 96487,
+      "title": "telemetry: rows carry the engine's version, base version and build time from $.session.version()",
+      "url": "https://github.com/anthropics/claude-code/pull/96487",
+      "author": "poteat",
+      "mergedAt": "2026-09-24T17:49:27Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.283",
+      "body": "The mod gathered its environment fields before the engine exposed its own version, so rows sent from external builds arrived with no version. `$.session.version()` answers `{ version, base?, builtAt? }` on every build from 2.1.281, and the mod now reads it once beside its other environment probes and fills the row's `version`, `version_base` and `build_time` columns.\n\nOn an engine that does not answer the read, the three columns stay empty and the debug log says so once; the row is still sent. `mods/types/claude-code.d.ts` gains the `session.version` typings, and the README moves the three fields from \"what the engine alone knows\" to what the mod reads.\n\nChecked:\n\n- `mods/telemetry/tests/register.test.ts`: the expected row carries the engine-version fixture; a new case, \"an engine without the version read leaves those three columns empty\", checks the row without them and the one debug line.",
+      "files": [
+        "mods/telemetry/hooks/context/environment-fields-of/environment-fields-of.ts (+6 -0)",
+        "mods/telemetry/hooks/context/environment-fields/environment-fields.ts (+5 -2)",
+        "mods/telemetry/hooks/context/probe-of/probe-of.ts (+22 -11)",
+        "mods/telemetry/hooks/context/probe/probe.ts (+4 -1)",
+        "mods/telemetry/hooks/register.ts (+1 -0)",
+        "mods/telemetry/hooks/telemetry-deps/telemetry-deps.ts (+7 -0)",
+        "mods/types/claude-code.d.ts (+54 -0)",
+        "mods/telemetry/README.md (+6 -4)",
+        "mods/telemetry/tests/fixtures/engine-version.ts (+11 -0)",
+        "mods/telemetry/tests/fixtures/expected-row.ts (+4 -0)"
+      ],
+      "filesTotal": 14
+    },
+    {
+      "number": 96363,
+      "title": "diff: pass --no-color so forced git colors do not empty the diff body",
+      "url": "https://github.com/anthropics/claude-code/pull/96363",
+      "author": "poteat",
+      "mergedAt": "2026-09-24T18:16:27Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.283",
+      "body": "With `color.ui=always` or `color.diff=always` in a repository's or a person's git config, every `git diff` the mod runs answers with ANSI escapes. The header and the per-file counts stay right (they come from `--shortstat` and `--numstat`, which git never colors), but no line matches the hunk header pattern any more, so every file's body is empty and the pane shows `No diff content` under each changed file.\n\n`--no-color` now rides the shared diff arguments (`DIFF_LEADING_ARGS`), which every `git diff` child of the mod spreads (the stats pass, the numstat listing, a file's hunks), so they all answer plain text whatever either setting says. The argv's doc says what the flag pins. The new test in `tests/git/fetch-diff.test.ts` scripts a colored answer for a body fetch without the flag and a plain one with it, and expects the file's hunk.\n\nChecked:\n\n- A real temporary repository with `color.ui=always`, then with `color.diff=always`, `diff.colorMoved=zebra` and a custom `color.diff.meta`: before, `/diff` from `claude --plugin-dir mods/diff` shows `2 files changed +2 -1`, the two rows with their counts, and `No diff content` under each; after, each file's hunks. Without either setting the pane reads the same before and after.\n- The new test fails with the argv line reverted (1 of 156) and passes with it.\n- `tsc -p mods/tsconfig.json`, `claude plugin validate mods/diff`, `git diff --check`, and `claude plugin test` on all four mods (207 tests) under 2.1.277.\n\nPatch by @7487, from #9\n…(truncated)",
+      "files": [
+        "mods/diff/hooks/git/argv/diff-leading-args.ts (+4 -1)",
+        "mods/diff/tests/git/fetch-diff.test.ts (+36 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 96364,
+      "title": "agents-md: an auto-paginated Read of a nested AGENTS.md no longer counts as delivering it",
+      "url": "https://github.com/anthropics/claude-code/pull/96364",
+      "author": "poteat",
+      "mergedAt": "2026-09-24T18:41:17Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.283",
+      "body": "A `Read` of a nested `AGENTS.md` itself counts as delivering it when it names no `offset` or `limit`, so later Reads under that directory do not attach it again. But a whole-file Read of a file over the Read tool's token cap is paginated by the tool: the model gets the first page and a banner, and the result says so (`truncatedByTokenCap`, `numLines` short of `totalLines`). The mod marked the file delivered all the same, so the rest of the instructions never reached that loop unless the model paged through the file on its own.\n\nThe `tool.call` hook on `Read` now reads the returned record before recording delivery: a text result that is flagged `truncatedByTokenCap`, does not start at line 1, or returned fewer lines than the file has is a partial read, as an explicit `offset` or `limit` already was, and the file is attached whole at the next `Read` under its directory. A complete read, and a result with no structured record, behave as before. The tests in `tests/register.test.ts` cover the six cases (auto-paginated, short line range, complete, explicit limit, explicit offset, unstructured result).\n\nChecked:\n\n- A project with a 600-line `nested/AGENTS.md` and `CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS=3000`, `claude -p --plugin-dir mods/agents-md` against a scripted local Messages endpoint that Reads `nested/AGENTS.md` and then `nested/source.ts`: the first Read comes back as lines 1-190 of 603; before, the second Read attaches nothing and the file's last rule is in no request; a\n…(truncated)",
+      "files": [
+        "mods/agents-md/hooks/register.ts (+8 -1)",
+        "mods/agents-md/tests/register.test.ts (+74 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 96917,
+      "title": "telemetry: log and mark are what the mod's hooks do, the noun added only where the engine has none",
+      "url": "https://github.com/anthropics/claude-code/pull/96917",
+      "author": "poteat",
+      "mergedAt": "2026-09-25T01:32:25Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.283",
+      "body": "What `$.telemetry.log` and `$.telemetry.mark` do was the two methods of the noun the mod adds in the `engine.create` fold. It now lives in two hooks on the noun's events, `telemetry.log` and `telemetry.mark`, beneath the gate: each checks the entry, queues its row and answers `{ value }`; an entry that breaks a rule is answered `{ deny }` with the reason, so the caller's promise still rejects, its text ending `$.telemetry.log: <reason>` as before. The rows, the batching, the gate and what is sent are unchanged.\n\nThis lets the same mod run on an engine that provides `$.telemetry` itself: the `engine.create` step hands up what it was given, untouched, when that already has a `telemetry`, and adds the noun, as before, only where there is none. A log entry may name where it goes with `to`: `anthropic`, the default, is this mod's, and an entry for `collector` is passed on beneath. `to` is never part of a row. `types/index.d.ts` gains `TelemetryDestination` and the optional `to`; the README says what the mod hooks now.\n\nChecked:\n\n- `mods/telemetry/tests/register.test.ts`: a new case, \"a refused entry is denied by the hook, naming the caller and the reason\", pins the rejection's exact text for `log` and for `mark`.\n- `mods/telemetry/tests/gate.test.ts`: two new cases, each with a plugin whose one hook is on every event: one turns a row's `to` to the other destination, one adds a key beside the entry's fields. Either way the row goes out once and equals the expected row.\n- Against a \n…(truncated)",
+      "files": [
+        "mods/telemetry/.claude-plugin/plugin.json (+1 -1)",
+        "mods/telemetry/hooks/answer-of/answer-of.ts (+24 -0)",
+        "mods/telemetry/hooks/answer-of/index.ts (+3 -0)",
+        "mods/telemetry/hooks/entries/index.ts (+2 -0)",
+        "mods/telemetry/hooks/entries/is-refused-entry/index.ts (+3 -0)",
+        "mods/telemetry/hooks/entries/is-refused-entry/is-refused-entry.ts (+11 -0)",
+        "mods/telemetry/hooks/entries/refusal/refusal.ts (+5 -3)",
+        "mods/telemetry/hooks/entries/refused-entry/index.ts (+3 -0)",
+        "mods/telemetry/hooks/entries/refused-entry/refused-entry.ts (+6 -0)",
+        "mods/telemetry/hooks/hooks.json (+1 -1)"
+      ],
+      "filesTotal": 20
+    },
+    {
+      "number": 96930,
+      "title": "telemetry, agents-md: the test plugins hook and call the collector stream by name, and stand in for telemetry through its events",
+      "url": "https://github.com/anthropics/claude-code/pull/96930",
+      "author": "poteat",
+      "mergedAt": "2026-09-25T02:35:27Z",
+      "hint": "other",
+      "release": "📦 v2.1.283",
+      "filesTotal": 8
+    },
+    {
+      "number": 96953,
+      "title": "diff: the focus hook answers to either name the engine stamps on its elements",
+      "url": "https://github.com/anthropics/claude-code/pull/96953",
+      "author": "poteat",
+      "mergedAt": "2026-09-25T18:42:20Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.283",
+      "body": "The mod's `ui.focus` hook matched the elements it drew through its own name, one constant (`{ plugin: Names.PLUGIN_NAME }`, `'diff'`). The engine stamps an element with the name the plugin is registered under, and a build that carries this mod registers it as `cc-plugin-diff`. With a single name in the matcher the hook would stop seeing its own elements there, and silently: the inline file list would no longer follow the focus ring, and nothing would say why.\n\nA matcher takes an array as any-of, so the constant is now the two names, `PLUGIN_NAMES = ['diff', 'cc-plugin-diff']`. Loaded from this folder (`--plugin-dir`, `claude plugin test`) the mod is `diff`, as its manifest says, and nothing changes. The addresses the tests press (`$.ui.press({ plugin: 'diff', ... })`) are resolved against that manifest name, so they stay as they are.\n\nChecked:\n\n- `mods/diff/tests/views.test.ts`: a new case, \"the walk follows under the name a build registers\", raises the same walk with the focus stamped `cc-plugin-diff` and expects the same recentring. With the matcher put back to the single name, that case is the one that fails (157 pass, 1 fail).\n- Against a current build, at this branch's head: the mods' typecheck passes and `claude plugin test mods/diff` passes 158 of 158.",
+      "files": [
+        "mods/diff/hooks/names/index.ts (+1 -1)",
+        "mods/diff/hooks/names/plugin-name.ts (+0 -5)",
+        "mods/diff/hooks/names/plugin-names.ts (+6 -0)",
+        "mods/diff/hooks/register.ts (+1 -1)",
+        "mods/diff/tests/fixtures/ring-onto.ts (+3 -2)",
+        "mods/diff/tests/views.test.ts (+18 -0)"
+      ],
+      "filesTotal": 6
+    }
+  ],
+  "errors": []
+}

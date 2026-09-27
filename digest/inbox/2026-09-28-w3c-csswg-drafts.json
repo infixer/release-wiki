@@ -1,0 +1,52 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-09-27T23:50:38Z",
+  "range": {
+    "from": "2026-09-24T05:42:04Z",
+    "to": "2026-09-27T23:50:38Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14526,
+      "title": "[scroll-animations-1] make `ViewTimelineOptions.subject` a required member",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14526",
+      "author": "graouts",
+      "mergedAt": "2026-09-25T09:55:09Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Apply edits for the resolution made for https://github.com/w3c/csswg-drafts/issues/13959.",
+      "files": [
+        "scroll-animations-1/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-09-24T05:42:03Z",
+    "to": "2026-09-27T23:50:38Z"
+  },
+  "commits": [
+    {
+      "sha": "bbb1d87",
+      "url": "https://github.com/w3c/csswg-drafts/commit/bbb1d87033095f792421c668c4211bc4f00cfe93",
+      "author": "svgeesus",
+      "committedAt": "2026-09-26T18:43:50Z",
+      "title": "[css-color-4][editorial] WPT",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+4 -0)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

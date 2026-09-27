@@ -1,0 +1,141 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-09-27T23:50:38Z",
+  "range": {
+    "from": "2026-09-24T08:42:21Z",
+    "to": "2026-09-27T23:50:38Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.0.2",
+      "publishedAt": "2026-09-25T08:58:17Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v5.0.2",
+      "name": "v5.0.2",
+      "publishedAt": "2026-09-25T08:58:17Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.2",
+      "prerelease": false,
+      "body": "### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes\n\n- Bind `process` in case global is overwritten &nbsp;-&nbsp; by @AriPerkkio in https://github.com/vitest-dev/vitest/issues/11343 [<samp>(0b792)</samp>](https://github.com/vitest-dev/vitest/commit/0b79231ad)\n- **detect-async-leaks**:\n  - Ignore `process.stdio` handles &nbsp;-&nbsp; by @AriPerkkio in https://github.com/vitest-dev/vitest/issues/11333 [<samp>(0fd6b)</samp>](https://github.com/vitest-dev/vitest/commit/0fd6b9790)\n- **expect**:\n  - Fix `toMatchObject` with asymmetric matchers &nbsp;-&nbsp; by @ShreeBohara, **Claude Opus 5**, @hi-ogawa, **Hiroshi Ogawa** and **Codex (GPT-5)** in https://github.com/vitest-dev/vitest/issues/11100 [<samp>(42523)</samp>](https://github.com/vitest-dev/vitest/commit/42523289e)\n- **jsdom**:\n  - Fix `Request` with `Blob` body on jsdom 28+ &nbsp;-&nbsp; by @harshit-d3v in https://github.com/vitest-dev/vitest/issues/11295 [<samp>(d1c3e)</samp>](https://github.com/vitest-dev/vitest/commit/d1c3ecc93)\n- **reporter**:\n  - `agent` to respect `--silent` &nbsp;-&nbsp; by @Raj4478 and @AriPerkkio in https://github.com/vitest-dev/vitest/issues/11271 [<samp>(5b95e)</samp>](https://github.com/vitest-dev/vitest/commit/5b95efb6d)\n- **reporters**:\n  - Handle concurrent `createReport` calls &nbsp;-&nbsp; by @7rulnik in https://github.com/vitest-dev/vitest/issues/11278 [<samp>(e8e55)</samp>](https://github.com/vitest-dev/vitest/commit/e8e556ff7)\n  - `hanging-process` to use ESM entrypoint &nbsp;-&nbsp; by @AriPerkkio in https://github.com/vitest-dev/vitest/issues/11316 [<samp>(4e91e)</samp>](https://github.com/vitest-dev/vitest/commit/4e91e5668)\n- **spy**:\n  - Fix stack overflow when spying `Set.prototype.add` &nbsp;-&nbsp; by @fengmk2 in https://github.com/vitest-dev/vitest/issues/11299 [<samp>(a0a93)</samp>](https://github.com/vitest-dev/vitest/commit/a0a939653)\n- **ui**:\n  - Persist authentication cookie beyond current browser session &nbsp;-&nbsp; by @hi-ogawa, **Hiroshi Ogawa** and **OpenCode (gpt-5.6-sol)** in https://github.com/vitest-dev/vitest/issues/11066 [<samp>(f8819)</samp>](https://github.com/vitest-dev/vitest/commit/f88195e16)\n\n##### &nbsp;&nbsp;&nbsp;&nbsp;[View changes on GitHub](https://github.com/vitest-dev/vitest/compare/v5.0.1...v5.0.2)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 11333,
+      "title": "fix(detect-async-leaks): ignore `process.stdio` handles",
+      "url": "https://github.com/vitest-dev/vitest/pull/11333",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-09-25T02:08:50Z",
+      "hint": "fix",
+      "release": "📦 v5.0.2",
+      "body": "### Description\n\nResolves https://github.com/vitest-dev/vitest/issues/11330\n\nBefore https://github.com/vitest-dev/vitest/pull/10685 we loaded `local-pkg` before async hooks were enabled. That package provided accidental transitive `import process from 'node:process'` which initialized these stdio lazy handles.\n\nNow we'll ignore all `PIPEWRAP`s and `TTYWRAP`s that are related to main process stdio.\n\n### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:\n- [x] It's really useful if your PR references an issue where it is discussed ahead of time. If the feature is substantial or introduces breaking changes without a discussion, PR might be closed.\n- [x] Ideally, include a test that fails without this PR but passes with it.\n- [x] Please, don't make changes to `pnpm-lock.yaml` unless you introduce a new test example.\n- [x] Please check [Allow edits by maintainers](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork) to make review process faster. Note that this option is not available for repositories that are owned by Github organizations.\n\n### Tests\n- [x] Run the tests with `pnpm test:ci`.\n\n### Documentation\n- [ ] If you introduce new functionality, document it. You can run documentation with `pnpm run docs` command.\n\n### Changesets\n- [x] Changes in changelog are generated from PR name. Please, make sure that it explains your ch\n…(truncated)",
+      "files": [
+        "packages/vitest/src/runtime/detect-async-leaks.ts (+21 -2)",
+        "test/e2e/test/detect-async-leaks.test.ts (+34 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11351,
+      "title": "docs: `sequence.setupFiles` default is `'list'`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11351",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-09-25T03:17:52Z",
+      "hint": "other",
+      "release": "📦 v5.0.2",
+      "filesTotal": 6
+    },
+    {
+      "number": 11354,
+      "title": "docs: correct stale config defaults",
+      "url": "https://github.com/vitest-dev/vitest/pull/11354",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-09-25T07:11:50Z",
+      "hint": "other",
+      "release": "📦 v5.0.2",
+      "filesTotal": 4
+    },
+    {
+      "number": 11341,
+      "title": "docs: add Chromatic to VRT guide",
+      "url": "https://github.com/vitest-dev/vitest/pull/11341",
+      "author": "kylegach",
+      "mergedAt": "2026-09-25T07:27:04Z",
+      "hint": "other",
+      "release": "📦 v5.0.2",
+      "filesTotal": 1
+    },
+    {
+      "number": 11343,
+      "title": "fix: bind `process` in case global is overwritten",
+      "url": "https://github.com/vitest-dev/vitest/pull/11343",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-09-25T08:08:16Z",
+      "hint": "fix",
+      "release": "📦 v5.0.2",
+      "body": "### Description\n\n- Resolves https://github.com/vitest-dev/vitest/issues/11339\n- Similar fix as in #8916\n\n### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:\n- [x] It's really useful if your PR references an issue where it is discussed ahead of time. If the feature is substantial or introduces breaking changes without a discussion, PR might be closed.\n- [x] Ideally, include a test that fails without this PR but passes with it.\n- [x] Please, don't make changes to `pnpm-lock.yaml` unless you introduce a new test example.\n- [x] Please check [Allow edits by maintainers](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork) to make review process faster. Note that this option is not available for repositories that are owned by Github organizations.\n\n### Tests\n- [x] Run the tests with `pnpm test:ci`.\n\n### Documentation\n- [ ] If you introduce new functionality, document it. You can run documentation with `pnpm run docs` command.\n\n### Changesets\n- [x] Changes in changelog are generated from PR name. Please, make sure that it explains your changes in an understandable manner. Please, prefix changeset messages with `feat:`, `fix:`, `perf:`, `docs:`, or `chore:`.",
+      "files": [
+        "packages/vitest/src/runtime/moduleRunner/cachedResolver.ts (+2 -1)",
+        "packages/vitest/src/runtime/rpc.ts (+7 -5)",
+        "test/unit/test/stubbed-process.test.ts (+34 -10)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11344,
+      "title": "docs: fix grammar in benchmark provider guide",
+      "url": "https://github.com/vitest-dev/vitest/pull/11344",
+      "author": "pisethTang",
+      "mergedAt": "2026-09-25T08:09:00Z",
+      "hint": "other",
+      "release": "📦 v5.0.2",
+      "filesTotal": 1
+    },
+    {
+      "number": 11365,
+      "title": "chore: ask to not act on behalf of the operator",
+      "url": "https://github.com/vitest-dev/vitest/pull/11365",
+      "author": "sheremet-va",
+      "mergedAt": "2026-09-27T10:58:48Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11366,
+      "title": "fix(browser): delay server `listen` until tests start running",
+      "url": "https://github.com/vitest-dev/vitest/pull/11366",
+      "author": "sheremet-va",
+      "mergedAt": "2026-09-27T12:12:37Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### Description\n\nRelated to https://github.com/vitest-dev/vitest-ecosystem-ci/pull/61\n\nvscode collects tests without running them which causes the optimizer to throw an error (because we close it before it completes)\n\n### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:\n- [ ] It's really useful if your PR references an issue where it is discussed ahead of time. If the feature is substantial or introduces breaking changes without a discussion, PR might be closed.\n- [ ] Ideally, include a test that fails without this PR but passes with it.\n- [ ] Please, don't make changes to `pnpm-lock.yaml` unless you introduce a new test example.\n- [ ] Please check [Allow edits by maintainers](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork) to make review process faster. Note that this option is not available for repositories that are owned by Github organizations.\n\n### Tests\n- [ ] Run the tests with `pnpm test:ci`.\n\n### Documentation\n- [ ] If you introduce new functionality, document it. You can run documentation with `pnpm run docs` command.\n\n### Changesets\n- [ ] Changes in changelog are generated from PR name. Please, make sure that it explains your changes in an understandable manner. Please, prefix changeset messages with `feat:`, `fix:`, `perf:`, `docs:`, or `chore:`.",
+      "files": [
+        "packages/vitest/src/node/logger.ts (+2 -1)",
+        "packages/vitest/src/node/plugins/browserLoader.ts (+27 -1)",
+        "packages/vitest/src/node/plugins/testConfig.ts (+2 -0)",
+        "packages/vitest/src/node/project.ts (+3 -1)",
+        "packages/vitest/src/node/types/browser.ts (+1 -1)",
+        "packages/vitest/src/node/types/config.ts (+5 -0)",
+        "docs/config/api.md (+2 -0)",
+        "docs/guide/browser/index.md (+1 -1)",
+        "test/e2e/fixtures/browser-server-listen/basic.test.ts (+5 -0)",
+        "test/e2e/fixtures/browser-server-listen/vitest.config.ts (+13 -0)"
+      ],
+      "filesTotal": 11
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "vitest-release-bot[bot]": 1
+    }
+  }
+}

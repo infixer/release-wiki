@@ -1,0 +1,454 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-09-27T23:50:38Z",
+  "range": {
+    "from": "2026-09-23T22:11:57Z",
+    "to": "2026-09-27T23:50:38Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.5.2",
+      "publishedAt": "2026-08-05T16:19:44Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.5.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36399,
+      "title": "feat(nuxt,vite-server): render the error page in the renderer itself",
+      "url": "https://github.com/nuxt/nuxt/pull/36399",
+      "author": "danielroe",
+      "mergedAt": "2026-09-24T09:11:11Z",
+      "labels": [
+        "✨ enhancement"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\ncurrently, we perform a second render when there's an issue rendering. we encode the error in a query, and make a _fresh request_ to `/__nuxt_error` with this query, then render that error fresh.\n\nthis is one of the more idiosyncratic behaviours, although it did allow for clearly isolating error context\n\n@pi0 has been suggesting for a while that it's a good idea for us to consider a simple try/catch around the renderer, and I agree....\n\nthis PR moves the error render into `fetch`; on the same event:\n\n- the caught error is normalised, handed to `captureError` and `onDevError`, and we then render `error.vue` is with a fresh `NuxtSSRContext`\n- we keep the headers and cookies the failed render had already written (for free, because it's the same event)\n- we avoid having to track recursion as it's a simple try/catch\n- JSON requests _do_ throw and avoid the `error.vue` entirely\n\nbecause this is a bigger change, it's gated behind `experimental.inlineErrorRendering`, which is enabled by default from `compatibilityVersion: 5`.\n\n### 🚨 Bigger changes\n\nthis is intended to be non-breaking, but it's worth pointing out that:\n\n- error renders don't go through Nitro middleware or route rules a second time\n- `render:html` fires for the error page with the _original_ event, and `x-nitro-prerender` hints are also collected from the original event\n- modules listening on Nitro's `error` hook still fire, through `captureError`\n- `/__nuxt_error` is no longer\n…(truncated)",
+      "files": [
+        "knip.json (+1 -0)",
+        "packages/kit/src/internal/renderer.ts (+2 -0)",
+        "packages/nuxt/src/runtime/server/renderer-config.ts (+2 -0)",
+        "packages/nuxt/src/runtime/server/renderer/error.ts (+34 -6)",
+        "packages/nuxt/src/runtime/server/renderer/index.ts (+133 -7)",
+        "packages/schema/src/config/experimental.ts (+16 -0)",
+        "packages/schema/src/types/schema.ts (+11 -0)",
+        "packages/vite-server/src/runtime/dev-error.ts (+0 -7)",
+        "packages/vite-server/src/runtime/renderer.ts (+4 -19)",
+        "vitest.config.ts (+54 -33)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 36407,
+      "title": "fix(nitro): keep dev error channel out of production builds",
+      "url": "https://github.com/nuxt/nuxt/pull/36407",
+      "author": "danielroe",
+      "mergedAt": "2026-09-24T09:51:42Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted this issue in nuxt/ecosystem-ci testing.\n\nit's actually not broken on main, just 4.x, but this is intended to keep us in sync across branches",
+      "files": [
+        "packages/nitro-server/src/index.ts (+3 -0)",
+        "packages/nitro-server/src/internal.d.ts (+4 -0)",
+        "packages/nitro-server/src/runtime/handlers/error.ts (+1 -1)",
+        "packages/nitro-server/src/runtime/utils/renderer/options.ts (+2 -2)",
+        "packages/nitro-server/tsdown.config.ts (+1 -0)",
+        "vitest.config.ts (+1 -0)",
+        "packages/nitro-server/test/nitro-config.test.ts (+7 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36408,
+      "title": "fix(nuxt): match app route rules against base-relative paths",
+      "url": "https://github.com/nuxt/nuxt/pull/36408",
+      "author": "danielroe",
+      "mergedAt": "2026-09-24T14:08:01Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis bug isn't reproducible on 4.x so it is a main-only commit\n\nthanks to @Kushalkhemka for the report ❤️",
+      "files": [
+        "packages/nuxt/src/app/composables/manifest.ts (+2 -1)",
+        "packages/nuxt/src/core/templates.ts (+2 -2)",
+        "packages/nuxt/src/pages/module.ts (+1 -1)",
+        "packages/nuxt/test/route-rules-template.test.ts (+12 -2)",
+        "test/bundle.test.ts (+1 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36409,
+      "title": "fix(nuxt): parse payload url as origin-relative path",
+      "url": "https://github.com/nuxt/nuxt/pull/36409",
+      "author": "danielroe",
+      "mergedAt": "2026-09-25T05:09:04Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthanks to @Kushalkhemka for spotting this bug - it would mean we ended up serving the wrong payload to paths like `//x/_payload.json`, which doesn't have any user-facing issue except for misconfigured CDN layers, but did mean people would get a broken page",
+      "files": [
+        "packages/nuxt/src/runtime/server/renderer/index.ts (+3 -13)",
+        "packages/nuxt/src/runtime/server/renderer/url.ts (+30 -0)",
+        "packages/nuxt/test/renderer/url.test.ts (+30 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36413,
+      "title": "fix(nuxt): reject sealed values not issued by nuxt sessions",
+      "url": "https://github.com/nuxt/nuxt/pull/36413",
+      "author": "danielroe",
+      "mergedAt": "2026-09-25T21:48:42Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis guards the new `nuxt/server` session utils for the upcoming 2.1 release of https://github.com/brc-dd/iron-webcrypto (namely, to prevent users from losing their sessions)",
+      "files": [
+        "packages/nuxt/src/server/session.ts (+14 -4)",
+        "docs/3.guide/6.going-further/5.server-imports.md (+4 -0)",
+        "packages/nuxt/test/server-session.test.ts (+55 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36395,
+      "title": "fix(nuxt): reuse pending transition promise in layout `onBeforeLeave`",
+      "url": "https://github.com/nuxt/nuxt/pull/36395",
+      "author": "mgschwend",
+      "mergedAt": "2026-09-26T14:29:48Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36394\n\n### 📚 Description\n\nWhen a navigation switches layout and the incoming page's suspense goes pending, `NuxtPage`'s `onPending` creates `nuxtApp['~transitionPromise']`. The leaving page's head entries defer their `dispose()` onto that promise (#35016). Then `NuxtLayout`'s `onBeforeLeave` replaces the promise with a new one, and `onAfterLeave` resolves only the new one, so the first promise never settles and the leaving page's head entries are never removed (stale title and meta, and the entry list grows per navigation).\n\nThis makes `onBeforeLeave` reuse a pending promise (`||=`), mirroring the guard in `NuxtPage`'s `onPending`. `onAfterLeave` then resolves that promise, still at the end of the layout leave, so the scroll timing from #34206 is unchanged (its cross-layout test still passes).\n\nAdded a runtime test in `test/nuxt/nuxt-layout.test.ts`: switch layout from a page that sets a title to a page with async setup, and assert that the old title's entry is removed. It fails without the change.\n\nRan `pnpm test:runtime` (946 passed), `pnpm typecheck` and eslint on the changed files.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+      "files": [
+        "packages/nuxt/src/app/components/nuxt-layout.ts (+3 -10)",
+        "packages/nuxt/src/app/components/utils.ts (+13 -0)",
+        "packages/nuxt/src/pages/runtime/page.ts (+4 -8)",
+        "test/nuxt/nuxt-layout.test.ts (+64 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 36402,
+      "title": "fix(kit): resolve symlinked layer directories to their real path",
+      "url": "https://github.com/nuxt/nuxt/pull/36402",
+      "author": "silverbackdan",
+      "mergedAt": "2026-09-26T14:29:49Z",
+      "labels": [
+        "🐛 bug",
+        "5.x",
+        "possible bot"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nResolves #36401\n\n### 📚 Description\n\nThe `build:manifest` hook in `packages/nuxt/src/pages/module.ts` filters page chunks out of the entry chunk's `dynamicImports` by comparing `relative(srcDir, page.file)` against the Vite manifest keys. Vite resolves symlinks when it builds those keys, so a page in a layer reached through a symlink never matches, and is prefetched on every route.\n\nBoth sides of the comparison are now resolved through `realpath`, not just `page.file`. That distinction matters, because **which** side carries the symlink depends on `resolve.preserveSymlinks`:\n\n| `resolve.preserveSymlinks` | Vite manifest key | `relative(srcDir, page.file)` | today |\n|---|---|---|---|\n| `false` (default) | real path | symlink path | they differ — **the bug** |\n| `true` | symlink path | symlink path | they agree — **works** |\n\nSo resolving only `page.file` would fix the default case and break the `preserveSymlinks: true` one, which works today. Resolving both is what makes the comparison independent of the setting. I checked both against the reproduction, before and after.\n\n(That also makes `vite: { resolve: { preserveSymlinks: true } }` a workaround on current versions, for anyone who finds this before it's released.)\n\nA path that can't be resolved falls back to itself, so virtual ids in `dynamicImports` — which `join(srcDir, id)` can't turn into a real file — are treated exactly as they are now.\n\nThe same hook's server-only-page comparison has the same sha\n…(truncated)",
+      "files": [
+        "packages/kit/src/loader/config.ts (+17 -2)",
+        "packages/kit/test/load-nuxt-config.test.ts (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36403,
+      "title": "fix(kit): do not warn when updateRuntimeConfig runs before nitro exists",
+      "url": "https://github.com/nuxt/nuxt/pull/36403",
+      "author": "Neekoras",
+      "mergedAt": "2026-09-26T15:22:01Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nFixes #36396\n\n### 📚 Description\n\n`updateRuntimeConfig()` called from a module's `setup()` prints this on every `nuxt dev` and `nuxt build` since 4.5:\n\n```\nWARN  [NUXT_B8003] Nitro is not initialized yet: useNitro() was called before the ready hook ran.\n```\n\nThe config is still applied, so the warning is noise, and it names an API the module author never called.\n\n`updateRuntimeConfig` merges into `nuxt.options.nitro.runtimeConfig` and then calls `useNitro().updateConfig()` inside a `try`/`catch`, since Nitro does not exist yet during module setup. After the diagnostics rework, building `NUXT_B8003` reports it through its console reporter, so the warning is printed as the error is constructed and the `catch` cannot suppress it.\n\nThis calls `tryUseNitro()?.updateConfig()` instead, which is the documented helper for exactly this case, so no diagnostic is constructed. It also covers the other case `tryUseNitro` documents, a `server.builder` that is not backed by Nitro, where the old code was relying on a throw for normal control flow. Behaviour is otherwise unchanged: the merge above is what Nitro reads when it is created.\n\nVerified in `playground` with the module from the issue: before, `nuxt build` prints the warning once; after, the build output has no `NUXT_B8003`.\n\nTests in `packages/kit/test/runtime-config.test.ts` cover the three cases: the merge, `updateConfig` being called when there is a Nitro instance, and no `console.warn` when there is not. The l\n…(truncated)",
+      "files": [
+        "packages/kit/src/runtime-config.ts (+2 -6)",
+        "packages/kit/test/runtime-config.test.ts (+40 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36035,
+      "title": "fix(nuxt): avoid mutating options when stripping never-hydrated data",
+      "url": "https://github.com/nuxt/nuxt/pull/36035",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T16:07:20Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis keeps `serialize: false` scoped locally rather than potentially affecting a shared options object. it's context dependent (based on whether it's called inside a `hydrate-never` boundary) so this is unsafe",
+      "files": [
+        "packages/nuxt/src/app/composables/asyncData.ts (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36034,
+      "title": "fix(nuxt): respect base URL and clear middleware flags without `pages/`",
+      "url": "https://github.com/nuxt/nuxt/pull/36034",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T16:51:43Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis handles a couple of undetected bugs in the non-pages router",
+      "files": [
+        "packages/nuxt/src/app/plugins/router.ts (+18 -5)",
+        "test/bundle.test.ts (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36208,
+      "title": "fix(vite): pre-bundle deps of layers installed in `node_modules`",
+      "url": "https://github.com/nuxt/nuxt/pull/36208",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T17:12:59Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36135\n\n### 📚 Description\n\nthis cleans up some dead code that wasn't running, and improves how we optimise layer dependencies.\n\n1. we explicitly scan layer entries entries to make things just work out of the box. the cost here is ~200ms per 300 scanned files in layers (in my measurements)...\n2. ... and where users have provided `optimizeDeps` which are not installed in the user directory, we make these resolvable under pnpm.",
+      "files": [
+        "packages/vite/src/plugins/layer-dep-optimize.ts (+0 -41)",
+        "packages/vite/src/plugins/optimize-deps.ts (+48 -0)",
+        "packages/vite/src/utils/optimize-deps.ts (+75 -0)",
+        "packages/vite/src/vite.ts (+2 -2)",
+        "packages/vite/test/optimize-deps.test.ts (+215 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36262,
+      "title": "docs: adjust spacing",
+      "url": "https://github.com/nuxt/nuxt/pull/36262",
+      "author": "iiio2",
+      "mergedAt": "2026-09-26T17:12:59Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 32356,
+      "title": "feat(nuxt,schema): add top-level `prerender` alias for `nitro.prerender`",
+      "url": "https://github.com/nuxt/nuxt/pull/32356",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T17:44:10Z",
+      "labels": [
+        "✨ enhancement",
+        "3.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves https://github.com/nuxt/nuxt/issues/15440\n\n### 📚 Description\n\nthis adds a new top-level `prerender` optioni, which is an alias for `nitro.prerender`, much as nuxt also has a top-level `runtimeConfig` and `routeRules`. It will also be a place we can add nuxt-specific prerendering options in future.",
+      "files": [
+        "packages/nuxt/src/core/nuxt.ts (+1 -0)",
+        "packages/schema/src/config/nitro.ts (+9 -0)",
+        "packages/schema/src/index.ts (+1 -1)",
+        "packages/schema/src/types/nitro.ts (+11 -1)",
+        "packages/schema/src/types/schema.ts (+10 -1)",
+        "packages/vite-server/src/index.ts (+4 -5)",
+        "packages/vite-server/src/prerender.ts (+4 -3)",
+        "docs/1.getting-started/15.prerendering.md (+9 -15)",
+        "docs/2.directory-structure/1.app/1.pages.md (+1 -1)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 36416,
+      "title": "fix(schema): deprecate `nitro.*` options duplicated at the top level",
+      "url": "https://github.com/nuxt/nuxt/pull/36416",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T18:48:54Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis points users/module authors towards top-level options, when nuxt provides them, which are cross builder",
+      "files": [
+        "packages/kit/src/pages.ts (+2 -2)",
+        "packages/kit/src/runtime-config.ts (+4 -2)",
+        "packages/nitro-server/src/index.ts (+3 -3)",
+        "packages/nuxt/src/core/nuxt.ts (+2 -2)",
+        "packages/nuxt/src/core/templates.ts (+2 -2)",
+        "packages/schema/src/types/nitro.ts (+28 -0)",
+        "packages/schema/src/types/schema.ts (+2 -2)",
+        "docs/2.directory-structure/3.tsconfig.md (+1 -1)",
+        "docs/4.api/6.nuxt-config.md (+4 -6)",
+        "packages/kit/test/load-nuxt-config.spec.ts (+2 -2)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 36417,
+      "title": "fix(kit): widen peer dependency ranges to supported versions",
+      "url": "https://github.com/nuxt/nuxt/pull/36417",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T18:59:08Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\npeer deps shouldn't track the _latest_ version of each of these packages\n\nhere I've widened them to the version we _actually_ require, e.g. `c12` accepts any version of `dotenv`, etc.",
+      "files": [
+        "packages/kit/package.json (+6 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36415,
+      "title": "fix(nuxt): skip browser notices without error in dev overlay",
+      "url": "https://github.com/nuxt/nuxt/pull/36415",
+      "author": "saini-25",
+      "mergedAt": "2026-09-26T19:35:13Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Resolves #36405\n\nBrowser notices (like the ResizeObserver loop limit) emit an ErrorEvent with `event.error === null`. Adding a null check in `dev-error-overlay.client.ts` stops them from opening the full-screen error overlay.\n\nIncluded an automated Playwright test in `test/e2e/dev-error-client.test.ts`.",
+      "files": [
+        "packages/nuxt/src/app/plugins/dev-error-overlay.client.ts (+5 -1)",
+        "test/e2e/dev-error-client.test.ts (+34 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36169,
+      "title": "feat(nuxt): serve unmatched public asset paths on client-side navigation",
+      "url": "https://github.com/nuxt/nuxt/pull/36169",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T20:47:48Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nsometimes users link to public files. they 'should' use the `external` attribute to opt out of client-side routing, but sometimes this isn't intuitive or workable (e.g. [with nuxt/content in markdown](https://github.com/nuxt/content/issues/3831))\n\nthe best behaviour would be for this to be detected _statically_ and an `<a>` link to be rendered (watch this space!) but in the intervening time we can 'fall through' to a hard reload when vue router is unaware of any such link\n\n~~we can use a bloom filter to reduce false positives (thanks to the great @samwho for [this amazing explainer](https://samwho.dev/bloom-filters))~~\n\n**update: I decided to opt-out of the bloom filter for now, and enable this by default**\n\n**key question**: I would love feedback on how we decide to do a hard-reload vs show a client-side 404 error:\n1. ~~this approach (bloom filter)~~\n2. ~~always making a HEAD request (find if a file exists)~~\n3. just always do a hard-reload\n\na bloom filter is most complex but is a best effort at better user experience.\n\n... the latter two options are simpler but means at least 1 network round-trip. (on the other hand, links to client-side 404s are rare, so potentially the simplicity is worth it?)",
+      "files": [
+        "packages/nuxt/src/app/components/error-404.vue (+1 -1)",
+        "packages/nuxt/src/core/templates.ts (+1 -0)",
+        "packages/nuxt/src/pages/runtime/plugins/router.ts (+17 -1)",
+        "packages/schema/src/config/experimental.ts (+3 -0)",
+        "packages/schema/src/types/schema.ts (+8 -0)",
+        "packages/ui-templates/templates/error-404/index.html (+1 -1)",
+        "pnpm-lock.yaml (+20 -0)",
+        "vitest.config.ts (+1 -0)",
+        "docs/3.guide/6.going-further/1.experimental-features.md (+18 -0)",
+        "test/bundle.test.ts (+32 -1)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 36165,
+      "title": "fix(nuxt): refresh component imports after rename",
+      "url": "https://github.com/nuxt/nuxt/pull/36165",
+      "author": "oritwoen",
+      "mergedAt": "2026-09-26T21:01:22Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nFixes #31569\ncloses https://github.com/nuxt/nuxt/pull/34628\n\n### 📚 Description\n\nThis is a minimal and clean alternative to the overly complicated https://github.com/nuxt/nuxt/pull/34628. The loader already contains all the data; there’s no need for timeouts or additional observations.\n\nAdding a Set that stores the identifiers of the modules modified by the loader is sufficient for development. The problem was that renaming a component left the modules with an import of the deleted file. Now, when a component is added or removed registry is refreshed, and then the transformation of modules from object identifiers is re-executed.",
+      "files": [
+        "packages/nuxt/src/components/module.ts (+54 -12)",
+        "packages/nuxt/src/components/plugins/loader.ts (+57 -1)",
+        "packages/nuxt/test/component-loader.test.ts (+62 -0)",
+        "test/e2e/hmr.test.ts (+14 -9)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 35797,
+      "title": "feat(nuxt): add addon support to `createUseFetch` and `createUseAsyncData`",
+      "url": "https://github.com/nuxt/nuxt/pull/35797",
+      "author": "cernymatej",
+      "mergedAt": "2026-09-26T22:40:54Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolve #15181\nresolve #26018\nresolve #28792\nresolve #31743\nresolve #34308\nresolve #29064 (PR #30181)\nresolve #29565\nresolve #31743\nresolve #34531\npotentially #26017 (PR #35698)\npotentially #31556 (PR #35820)\n\n### 📚 Description\n\nThis adds an `addons` option to the `createUseFetch` / `createUseAsyncData` factories.\n\nAddons extend the functionality of `useAsyncData` and `useFetch` in user land.\nThey can declare custom call-site options, mutate the merged options, wrap the handler with `middleware`, extend the composable's return value, and add additional logic through watchers, for example. They are also meant to be reusable for multiple custom instances.\n\nThis should resolve a lot of user-specific requests for new features to `useAsyncData` and `useFetch`, while keeping the core composables unopinionated.\n\nAn example of an addon:\n\n```ts\nconst refreshOnFocus = defineUseFetchAddon({\n  // augment the call-site options for the custom useFetch instance 👇\n  setup: (options: UseFetchAddonOptions<{ refreshOnFocus?: boolean }>) => {\n    // 👈 run code *before* calling `useAsyncData` in `useFetch` internally\n\n    if (import.meta.server) { return }\n\n    return (asyncData) => {\n      // 👈 run code *after* calling `useAsyncData` in `useFetch` internally\n\n      const focused = useWindowFocus()\n      watch(focused, f => f && options.refreshOnFocus && asyncData.refresh())\n\n      // 👇 add new properties returned from the custom `useFetch`, or override existing ones\n   \n…(truncated)",
+      "files": [
+        "packages/nuxt/src/app/composables/addons.ts (+192 -0)",
+        "packages/nuxt/src/app/composables/asyncData.ts (+85 -38)",
+        "packages/nuxt/src/app/composables/fetch.ts (+94 -61)",
+        "packages/nuxt/src/app/composables/index.ts (+3 -1)",
+        "packages/nuxt/src/app/index.ts (+2 -2)",
+        "packages/nuxt/src/app/utils.ts (+3 -0)",
+        "packages/nuxt/src/imports/presets.ts (+4 -0)",
+        "docs/4.api/2.composables/create-use-async-data.md (+45 -2)",
+        "docs/4.api/2.composables/create-use-fetch.md (+45 -3)",
+        "docs/4.api/2.composables/use-async-data.md (+5 -0)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 36418,
+      "title": "fix(kit,nuxt): preserve types when building into a relocated build dir",
+      "url": "https://github.com/nuxt/nuxt/pull/36418",
+      "author": "danielroe",
+      "mergedAt": "2026-09-26T23:03:41Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves https://github.com/nuxt/nuxt/issues/36406\n\n### 📚 Description",
+      "files": [
+        "packages/kit/src/template.ts (+7 -0)",
+        "packages/nuxt/src/core/schema.ts (+3 -2)",
+        "packages/kit/test/generate-types.spec.ts (+44 -1)",
+        "packages/nuxt/test/load-nuxt.test.ts (+18 -0)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": []
+}
