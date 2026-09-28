@@ -1,9 +1,16 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-09-24
+updated: 2026-09-28
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-09-28
+
+- 期間: 2026-09-24T08:15:52Z 〜 2026-09-27T23:50:38Z（`2026-09-28-pnpm-pnpm.json`）、2026-09-27T22:28:29Z 〜 2026-09-28T07:23:10Z（`2026-09-28-pnpm-pnpm-2.json`）の 2 回分をまとめて処理
+- PR 344 件（337 件 + 7 件、重複なし。詳しく 37 件 / 1 行 307 件）、Release 3 件（安定版 2 件: v12.7.0, v11.28.0 / プレリリース 1 件: pnpr@0.1.0-alpha.13）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-09-28|changes]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/インストール|インストール（新規）]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース（新規）]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開（新規）]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ（新規）]]、[[repos/pnpm-pnpm/releases/v12.7.0|v12.7.0]]、[[repos/pnpm-pnpm/releases/v11.28.0|v11.28.0]]、[[repos/pnpm-pnpm/index|index]]
+- エラー: なし
 
 ## 2026-09-24
 
