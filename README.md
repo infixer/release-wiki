@@ -13,8 +13,9 @@
    │  GitHub API: マージ済み PR・変更ファイル・Release・収録状況
    │  ブログ: RSS や一覧ページの新着記事（本文テキスト）
    │  新しいものがあれば digest/inbox/*.json に保存して commit
+   │  inbox に JSON があればルーチンを API で起動
    ▼
-月・水・金 08:00 JST  Claude ルーチン              ← トークンを使うのはここだけ
+collect の直後      Claude ルーチン              ← トークンを使うのはここだけ
    │  inbox が空なら何もせず終了
    │  digest/INSTRUCTIONS.md に従い、inbox の JSON だけを読んで content/ の Wiki を更新
    │  処理済みの inbox を削除して commit & push
@@ -31,7 +32,7 @@ push をきっかけに  GitHub Actions「deploy」    ← トークン消費 0
 | `digest/inbox/` | 未処理のデータ（collect が追加し、ルーチンが削除） |
 | `digest/INSTRUCTIONS.md` | ルーチン用の手順書（Wiki の書き方） |
 | `scripts/collect.mjs` | データ収集スクリプト（Node 22） |
-| `.github/workflows/collect.yml` | 月・水・金 06:17 JST と手動実行で collect を動かす |
+| `.github/workflows/collect.yml` | 月・水・金 06:17 JST と手動実行で collect を動かし、終わったらルーチンを起動する |
 | `.github/workflows/deploy.yml` | main への push で Quartz をビルドして Pages に公開 |
 | `quartz/`, `quartz.config.ts`, `quartz.layout.ts` | [Quartz v4](https://quartz.jzhao.xyz/)（サイト生成） |
 
@@ -88,7 +89,8 @@ blogs:
 
 - **collect**: GitHub の Actions → collect → Run workflow（main を選ぶ）。
   `digest/inbox/` に JSON ができたことを確認します。新着が無ければ何も commit しません。
-- **Wiki の更新**: Claude のルーチンを「今すぐ実行」します。
+  inbox に未処理の JSON があれば、最後にルーチンも起動します。
+- **Wiki の更新**: Claude のルーチンを「今すぐ実行」します（collect を手動実行しても起動されます）。
 - **サイトの公開**: `content/` に push すると自動で動きます。Actions → deploy → Run workflow でも実行できます。
 
 ## ローカルで動かす
@@ -111,16 +113,21 @@ GITHUB_TOKEN=$(gh auth token) node scripts/collect.mjs
 1. Settings → Pages → Build and deployment → Source を **GitHub Actions** にする。
 2. Settings → Actions → General → Workflow permissions を **Read and write permissions** にする。
 3. Claude のルーチンを作る（下記）。
+4. ルーチンの API トリガーの URL とトークンを、Settings → Secrets and variables → Actions に
+   `CLAUDE_ROUTINE_URL` と `CLAUDE_ROUTINE_TOKEN` として登録する。
 
 ### Claude ルーチン
 
 | 項目 | 値 |
 |---|---|
 | 名前 | Release Wiki |
-| リポジトリ | `infixer/release-wiki` |
-| スケジュール | 月曜・水曜・金曜 8:00 JST（UTC の cron なら `0 23 * * 0,2,4`） |
+| リポジトリ | `infixer/release-wiki`（main への push を許可する） |
+| トリガー | **API**（スケジュールは付けない。collect が起動する） |
 | モデル | Sonnet 系を推奨 |
 | コネクタ | なし |
+
+API トリガーは https://claude.ai/code/routines でルーチンを開き、Edit → Select a trigger → Add another trigger → API で追加します。
+表示される URL（`https://api.anthropic.com/v1/claude_code/routines/.../fire`）と、Generate token で作ったトークンを上の Secret に入れます。トークンはその場でしか表示されません。
 
 プロンプト:
 
@@ -134,6 +141,7 @@ GitHub API・Web 取得・リポジトリの clone は使わないでくださ�
 
 ## 補足
 
-- Actions の定時実行は数十分遅れることがあります。遅れてもルーチンが空振りして、次の回に 2 回分まとめて処理されるだけで取りこぼしはありません（inbox は削除されるまで残ります）。
+- Actions の定時実行は数時間遅れることがあります（2026-09-28 は 2 時間半遅れ）。ルーチンは collect の後に起動されるので、遅れても順番は崩れません。
+- ルーチンの起動に失敗すると collect の実行が失敗扱いになります。inbox は削除されるまで残るので、ルーチンを「今すぐ実行」するか collect を再実行すれば取り戻せます。
 - 1 つのリポジトリやブログで取得に失敗しても他は続行し、エラーは inbox の JSON の `errors` に入ります。ルーチンはそれを `log.md` に記録します。
 - Quartz は MIT ライセンスです（`LICENSE.txt`）。
