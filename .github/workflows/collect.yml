@@ -1,7 +1,8 @@
 name: collect
 
 # 追跡しているリポジトリとブログの新着を digest/inbox/ に集める（LLM は使わない）。
-# JST の月・水・金 06:17 に実行。Claude ルーチン（08:00）より前に終わるよう余裕を持たせている。
+# JST の月・水・金 06:17 に実行。終わったら inbox に JSON があるときだけ Claude ルーチンを API で起動する
+# （定時実行は数時間遅れることがあるので、ルーチン側を時刻で待たせない）。
 on:
   schedule:
     - cron: "17 21 * * 0,2,4" # UTC の日・火・木 21:17 = JST の月・水・金 06:17
@@ -57,3 +58,24 @@ jobs:
             sleep 10
           done
           exit 1
+
+      # 今回の新着に限らず、未処理の inbox が残っていれば起動する
+      - name: Trigger Claude routine
+        env:
+          ROUTINE_URL: ${{ secrets.CLAUDE_ROUTINE_URL }}
+          ROUTINE_TOKEN: ${{ secrets.CLAUDE_ROUTINE_TOKEN }}
+        run: |
+          if [ -z "$(git ls-tree --name-only HEAD digest/inbox/ | grep '\.json$')" ]; then
+            echo "inbox が空なのでルーチンは起動しない"
+            exit 0
+          fi
+          if [ -z "$ROUTINE_URL" ] || [ -z "$ROUTINE_TOKEN" ]; then
+            echo "::warning::Secret CLAUDE_ROUTINE_URL / CLAUDE_ROUTINE_TOKEN が無いのでルーチンを起動できません"
+            exit 0
+          fi
+          curl -sS --fail-with-body --retry 3 -X POST "$ROUTINE_URL" \
+            -H "Authorization: Bearer $ROUTINE_TOKEN" \
+            -H "anthropic-beta: experimental-cc-routine-2026-04-01" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "Content-Type: application/json" \
+            -d '{}'
