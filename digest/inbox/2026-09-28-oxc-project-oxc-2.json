@@ -1,0 +1,122 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-09-28T07:23:10Z",
+  "range": {
+    "from": "2026-09-27T22:55:33Z",
+    "to": "2026-09-28T07:23:10Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.85.0",
+      "publishedAt": "2026-09-21T15:31:51Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.85.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 27112,
+      "title": "fix(formatter_markdown): keep blank line between HTML and nested list",
+      "url": "https://github.com/oxc-project/oxc/pull/27112",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-28T01:23:33Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Otherwise, output is not idempotent.",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/block.rs (+4 -2)",
+        "crates/oxc_formatter_markdown/DIVERGENCES.md (+31 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/list-after-html-block.md (+30 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/list-after-html-block.md.snap (+104 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27051,
+      "title": "fix(oxfmt): allow repeated CLI calls in the same process",
+      "url": "https://github.com/oxc-project/oxc/pull/27051",
+      "author": "liangmiQwQ",
+      "mergedAt": "2026-09-28T01:40:28Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Calling Oxfmt's `runCli()` more than once in the same Node.js process panics because each call tries to initialize Rayon's global thread pool.\n\nI am working on calling Oxlint and Oxfmt directly within Vite+'s Node.js process to avoid loading the `vite-plus` package again in each child process. See the [discussion on vite-plus#2782](https://github.com/voidzero-dev/vite-plus/pull/2782#pullrequestreview-5292467448) for the profiling context and proposed integration.\n\nThis PR initializes the global thread pool once so subsequent CLI calls reuse it. The first call's thread count remains in effect for the lifetime of the process.\n\nRelated: #21899 addresses the corresponding initialization panics in Oxlint when calling it repeatedly in the same Node.js process.\n\n🤖 Generated with Codex",
+      "files": [
+        "apps/oxfmt/src/cli/init.rs (+36 -29)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27114,
+      "title": "fix(lexer): continue a bounded walk out of the group it stopped in",
+      "url": "https://github.com/oxc-project/oxc/pull/27114",
+      "author": "ShanonJackson",
+      "mergedAt": "2026-09-28T06:23:36Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- a continued walk that stopped inside a group now closed pops to that group's frame and steps its closer before resuming on the outer level\n- a walk seeded at an operand anchor stays valid only inside the construct it opens\n- fixes o = { a: f({} / 2), b: {} / 3 } lexing the last slash as a regex and await read as a keyword after an async function, main set neutral",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/anchor.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/frame.rs (+2 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/scan.rs (+36 -14)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/tests.rs (+13 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/walker.rs (+31 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 27115,
+      "title": "test(lexer): check the walk without the > run rules in every test",
+      "url": "https://github.com/oxc-project/oxc/pull/27115",
+      "author": "ShanonJackson",
+      "mergedAt": "2026-09-28T06:27:42Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 4
+    },
+    {
+      "number": 27119,
+      "title": "fix(formatter): skip test-call layout when arguments have comments",
+      "url": "https://github.com/oxc-project/oxc/pull/27119",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-28T07:16:34Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #24960, closes #26926.",
+      "files": [
+        "crates/oxc_formatter/src/print/call_like_expression/arguments.rs (+1 -1)",
+        "crates/oxc_formatter/src/print/call_like_expression/mod.rs (+1 -1)",
+        "crates/oxc_formatter/src/print/parameters.rs (+1 -1)",
+        "crates/oxc_formatter/src/print/type_parameters.rs (+1 -1)",
+        "crates/oxc_formatter/src/utils/call_expression.rs (+22 -3)",
+        "crates/oxc_formatter/DIVERGENCES.md (+34 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/calls/test-call-comment-order.js (+41 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/calls/test-call-comment-order.js.snap (+180 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/arguments/test-call-type-arguments-comment.ts (+3 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/arguments/test-call-type-arguments-comment.ts.snap (+24 -0)"
+      ],
+      "filesTotal": 10
+    }
+  ],
+  "errors": []
+}

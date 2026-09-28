@@ -1,0 +1,33 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-09-28T07:23:10Z",
+  "range": {
+    "from": "2026-09-25T09:21:15Z",
+    "to": "2026-09-28T07:23:10Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 12981,
+      "title": "Pass initialInsertion when navigating an iframe",
+      "url": "https://github.com/whatwg/html/pull/12981",
+      "author": "shannonbooth",
+      "mergedAt": "2026-09-28T06:17:18Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Processing the iframe attributes did not pass initialInsertion to\n\"navigate an iframe or frame\", so inserting an iframe whose javascript:\nURL src produces no document did not fire a load event, unlike\nimplementations.\n\nFrames did pass it, but the load event step of \"navigate to a\njavascript: URL\" ran the iframe load event steps, which only apply to\niframe elements. Fire a plain load event at a frame instead.\n\nFollow up to #12978 and #12959\n\n- [x] At least two implementers are interested (and none opposed):\n   * Firefox (implements)\n   * Webkit (implements)\n   * Chromium (implements, modulo the linked issue from when initial insertion flag was first introduced)\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/blob/master/html/semantics/embedded-content/the-iframe-element/iframe_javascript_url_initial_insertion.html\n   * trusted-types/navigate-to-javascript-url-009.html\n   * https://github.com/web-platform-tests/wpt/pull/62993\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: https://issues.chromium.org/issues/417176295\n   * Gecko: N/A\n   * WebKit: N/A\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs: N/A\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed\n…(truncated)",
+      "files": [
+        "source (+22 -12)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

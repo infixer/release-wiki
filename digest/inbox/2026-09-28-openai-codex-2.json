@@ -1,0 +1,181 @@
+{
+  "kind": "repo",
+  "repo": "openai/codex",
+  "branch": "main",
+  "collectedAt": "2026-09-28T07:23:10Z",
+  "range": {
+    "from": "2026-09-27T23:41:17Z",
+    "to": "2026-09-28T07:23:10Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "rust-v0.158.0",
+      "publishedAt": "2026-09-28T05:07:23Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "rust-v0.159.0-alpha.11",
+      "name": "0.159.0-alpha.11",
+      "publishedAt": "2026-09-28T00:20:35Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.11",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0-alpha.15.4",
+      "name": "0.158.0-alpha.15.4",
+      "publishedAt": "2026-09-28T01:46:24Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0-alpha.15.4",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.159.0-alpha.12",
+      "name": "0.159.0-alpha.12",
+      "publishedAt": "2026-09-28T03:18:46Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.12",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.158.0",
+      "name": "0.158.0",
+      "publishedAt": "2026-09-28T05:07:23Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0",
+      "prerelease": false,
+      "body": "## New Features\n\n- Configure copy-on-select and right-click paste in the fullscreen TUI. Copied transcript selections now preserve Markdown formatting. (#47639, #47896, #48118)\n- Connect to MCP servers that require pre-registered OAuth client secrets, including through `codex mcp add --oauth-client-secret`. (#47891)\n- Secure direct exec-server WebSocket connections with bearer tokens, including connections configured through app-server. (#47601, #47648)\n- Image generation and editing can explicitly request transparent backgrounds, and edits now accept file-backed conversation images. (#47484, #47956)\n- Terminal input approval is enabled by default for commands running with elevated permissions; runtime-only grants no longer cause unnecessary reviews. (#47799, #48073)\n\n## Bug Fixes\n\n- Fixed Windows sandbox failures involving ordinary Windows 10 paths, rejected stored credentials, and large permission policies. (#47672, #47695, #47919)\n- Fixed Linux sandbox startup with nested writable roots and preserved Git metadata protections across writable roots on Linux and macOS. (#47623, #47974)\n- macOS patch operations now recognize system path aliases covered by existing permissions, avoiding unnecessary approval prompts. (#47879)\n- Approval reviews now retry when new user input arrives, so a status question does not automatically abort a pending action. (#47819)\n- Mermaid flowcharts now render quoted labels and ampersands; unsupported diagrams explain why they fall back to source. (#47572, #47678)\n- Command completion events now include early output and report process-launch failures to clients. (#47529, #47665)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.157.0...rust-v0.158.0\n\n- #47441 Use secondary text styling for the transcript footer shortcut hint @etraut-openai\n- #47447 Extract WebSocket authentication into `codex-websocket-auth` @euroelessar\n- #47458 Parallelize instruction refresh and tool preparation @hlevy-openai\n- #47484 Add explicit background control to image generation @alicec-oai\n- #47520 Route session agent operations through `AgentControl` @jif-oai\n- #47529 Emit command lifecycle events for unified exec launch failures @steipete-oai\n- #47536 Route agent lookups and V2 context through `AgentControl` @jif-oai\n- #47539 Test interrupted one-shot command launch failure persistence @jif-oai\n- #47540 Add an option to disable multi-agent v2 direct messaging @jif-oai\n- #47565 Classify rollout read failures by reason and progress @jif-oai\n- #47568 Record sandbox backends in command execution analytics @iceweasel-oai\n- #47571 Wait for idle before injecting remote compaction test history @felixxia-oai\n- #47572 Explain Mermaid rendering fallbacks in the TUI @etraut-openai\n- #47582 Retain assistant context for Guardian authorization reviews @felixxia-oai\n- #47584 Preserve streamed assistant message order in retained context @felixxia-oai\n- #47585 Preserve delivered assistant messages in Guardian retained context @fe\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 48819,
+      "title": "Use explicit histogram buckets for tool and skill context metrics",
+      "url": "https://github.com/openai/codex/pull/48819",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-28T00:06:08Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Use explicit histogram buckets for tool and skill context metrics\n\n## What changed\n\n- Give tool fragment sizes and namespace counts logarithmic boundaries through 32,768.\n- Give enabled and kept skill counts integer boundaries from 0 through 512, removed description characters logarithmic boundaries through 131,072, and skill truncation flags boundaries at 0 and 1.\n- Record these metrics with explicit boundaries, separating zero values and retaining overflow buckets above each range.\n\n## Testing\n\nExtend tool and skill metric tests to assert explicit boundaries. Add an export test covering zero, one, the upper boundary, and overflow, including bucket counts, ordering, and sample totals.",
+      "files": [
+        "codex-rs/core/src/context/world_state/tools.rs (+4 -3)",
+        "codex-rs/core/src/context/world_state/tools_tests.rs (+23 -10)",
+        "codex-rs/ext/skills/src/render_observability.rs (+9 -2)",
+        "codex-rs/ext/skills/src/render_observability_tests.rs (+16 -10)",
+        "codex-rs/otel/src/metrics/names.rs (+24 -3)",
+        "codex-rs/otel/tests/suite/send.rs (+64 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 48824,
+      "title": "Keep voice RTP timestamps aligned to 20 ms packets",
+      "url": "https://github.com/openai/codex/pull/48824",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-28T00:43:17Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Keep voice RTP timestamps aligned to 20 ms packets\n\n## Why\n\nCapture jitter and mute transitions can shift RTP timestamps off the 20 ms source grid, causing receivers that assemble fixed-duration frames to reject subsequent audio.\n\n## What changed\n\nAdvance elapsed gaps in whole 20 ms packets and keep the track clock on that grid. Bias empty gap durations by 1 ns to avoid losing an RTP tick to floating-point truncation.\n\n## Testing\n\nUpdate jitter and mute tests to assert exact clock advancement, including a 580 ms gap, and verify that resumed RTP timestamps stay aligned to 960-sample packets.",
+      "files": [
+        "codex-rs/voice-host/src/audio_track.rs (+15 -5)",
+        "codex-rs/voice-host/src/audio_track_tests.rs (+3 -3)",
+        "codex-rs/voice-host/src/capture_worker_tests.rs (+12 -3)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 48827,
+      "title": "Show a hand pointer over transcript links in Ghostty and Kitty",
+      "url": "https://github.com/openai/codex/pull/48827",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-28T00:53:19Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Show a hand pointer over transcript links in Ghostty and Kitty\n\n## What changed\n\n- Show a hand pointer over actionable transcript links while Codex captures mouse input in Ghostty and Kitty, excluding sessions inside terminal multiplexers.\n- Share link hit testing between hover and click activation, and refresh hover after rendering so scrolling and live output cannot leave a stale hand pointer.\n- Suppress link hover during mouse presses and drags, overlays, and popups, and clear remembered mouse coordinates on focus loss, resize, and resume.\n- Restore the terminal's pointer policy when releasing mouse capture, releasing Kitty's override and using a text pointer in Ghostty. Deduplicate pointer updates and preserve cleanup after write failures.\n\n## Testing\n\nAdd tests for wrapped links containing wide characters, hover/click target agreement, scrolling, pointer transitions and restoration, write-failure retries, and hover invalidation.",
+      "files": [
+        "codex-rs/tui/src/app.rs (+3 -0)",
+        "codex-rs/tui/src/app/link_hover.rs (+26 -0)",
+        "codex-rs/tui/src/app/owned_transcript.rs (+1 -0)",
+        "codex-rs/tui/src/transcript_view/input.rs (+13 -17)",
+        "codex-rs/tui/src/transcript_view/input_tests.rs (+44 -0)",
+        "codex-rs/tui/src/tui.rs (+4 -0)",
+        "codex-rs/tui/src/tui/alternate_screen.rs (+15 -1)",
+        "codex-rs/tui/src/tui/link_pointer.rs (+110 -0)",
+        "codex-rs/tui/src/tui/link_pointer_tests.rs (+129 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 48828,
+      "title": "Allow archiving threads before their first turn",
+      "url": "https://github.com/openai/codex/pull/48828",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-28T00:59:09Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Allow archiving threads before their first turn\n\n## Why\n\nFresh threads have no rollout until their first turn, so archiving them previously failed with a missing-rollout error.\n\n## What changed\n\nPersist loaded, non-ephemeral threads before looking them up for archival. This lets a newly started thread be archived without creating a user turn.\n\n## Testing\n\nUpdate the archive regression test to cover threads with no turns in both legacy and paginated history modes. Verify the archive notification, empty turn history, `NotLoaded` status, and archived rollout path.",
+      "files": [
+        "codex-rs/app-server/src/request_processors/thread_processor.rs (+11 -0)",
+        "codex-rs/app-server/tests/suite/v2/thread_archive.rs (+24 -54)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 48829,
+      "title": "Wait briefly for the Windows sandbox provisioning service to start",
+      "url": "https://github.com/openai/codex/pull/48829",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-28T00:59:33Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Wait briefly for the Windows sandbox provisioning service to start\n\n## Why\n\nAllow the provisioning service time to start without holding up desktop readiness checks for the full provisioning timeout.\n\n## What changed\n\n- Poll service status while startup is pending, waiting up to five seconds within the caller's deadline. Treat absent, deletion-pending, or other non-running service states as unavailable.\n- Preserve the original provisioning deadline for pipe availability and request processing, and reject requests whose deadline expires during server authentication.\n- Recheck service status when the pipe disappears while waiting for an available instance.",
+      "files": [
+        "codex-rs/windows-sandbox-rs/src/provisioning_client.rs (+42 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 48830,
+      "title": "Show a short, neutral TUI interruption notice",
+      "url": "https://github.com/openai/codex/pull/48830",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-28T01:10:40Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Show a short, neutral TUI interruption notice\n\n## What changed\n\nRender interrupted turns with secondary text styling and shorter wording,\nremoving the suggestion to tell the model what to do differently.\n\n## Testing\n\nUpdate interruption snapshots and assert that the notice uses secondary text\nstyling.",
+      "files": [
+        "codex-rs/tui/src/chatwidget/input_restore.rs (+11 -3)",
+        "codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__interrupt_preserves_unified_exec_wait_streak.snap (+2 -2)",
+        "codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__interrupted_turn_error_message.snap (+2 -2)",
+        "codex-rs/tui/src/chatwidget/turn_runtime.rs (+0 -8)",
+        "codex-rs/tui/src/app/tests/snapshots/codex_tui__app__tests__math_interruption_tests__answer_math_narrow.snap (+1 -1)",
+        "codex-rs/tui/src/app/tests/snapshots/codex_tui__app__tests__math_interruption_tests__plan_math_narrow.snap (+1 -1)",
+        "codex-rs/tui/src/chatwidget/tests/composer_submission.rs (+1 -1)",
+        "codex-rs/tui/src/chatwidget/tests/review_mode.rs (+13 -7)",
+        "codex-rs/tui/src/chatwidget/tests/side.rs (+1 -1)",
+        "codex-rs/tui/src/chatwidget/tests/snapshots/codex_tui__chatwidget__tests__composer_submission__output_free_ctrl_c_interrupt_keeps_prompt_and_blank_composer.snap (+1 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 48895,
+      "title": "Expand native Mermaid flowchart syntax support",
+      "url": "https://github.com/openai/codex/pull/48895",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-09-28T06:31:08Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Expand native Mermaid flowchart syntax support\n\n## What changed\n\n- Default `flowchart` and `graph` to top-down layout when no direction is specified.\n- Support solid and dashed edges with directed, undirected, or bidirectional endpoints: `-->`, `---`, `<-->`, `-.->`, `-.-`, and `<-.->`.\n- Accept pipe labels on these edges and spaced directed infix labels such as `A -- send --> B` and `A -. retry .-> B`.\n- Expand `&` groups into all source-to-target edges, including in chains. For example, `A & B --> C & D` creates four edges. Enforce the 24-edge limit after expansion and cap each group at 24 node references.\n\n## Testing\n\nAdd coverage for equivalent syntax, edge styles and endpoints, malformed input, and expansion limits. Extend rendering snapshots across all four directions and the TUI native-renderer test with the new syntax.",
+      "files": [
+        "codex-rs/mermaid/src/families_tests.rs (+28 -1)",
+        "codex-rs/mermaid/src/parse.rs (+78 -17)",
+        "codex-rs/mermaid/src/snapshots/codex_mermaid__tests__stadiums_with_other_shapes_in_every_direction.snap (+89 -56)",
+        "codex-rs/mermaid/src/tests.rs (+66 -5)",
+        "codex-rs/tui/src/markdown_render/mermaid_tests.rs (+1 -0)",
+        "codex-rs/mermaid/README.md (+3 -3)"
+      ],
+      "filesTotal": 6
+    }
+  ],
+  "errors": []
+}

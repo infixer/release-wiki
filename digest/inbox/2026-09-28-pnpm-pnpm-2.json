@@ -1,0 +1,185 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-09-28T07:23:10Z",
+  "range": {
+    "from": "2026-09-27T22:28:29Z",
+    "to": "2026-09-28T07:23:10Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.6.0",
+      "publishedAt": "2026-09-22T17:08:42Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.6.0"
+    },
+    "prerelease": {
+      "tag": "pnpr@0.1.0-alpha.13",
+      "publishedAt": "2026-09-25T10:40:06Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.13"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 16286,
+      "title": "perf(install): fast sharedWorkspaceLockfile: false installs",
+      "url": "https://github.com/pnpm/pnpm/pull/16286",
+      "author": "rubnogueira",
+      "mergedAt": "2026-09-28T00:42:29Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Speeds up `pnpm install` in workspaces with `sharedWorkspaceLockfile: false`, and fixes two global-virtual-store bugs that made that mode slow and flaky. Refs #14480.\n\nEach project still resolves against its own lockfile with the same algorithm, so the per-project lockfiles don't change. On a real 28-project monorepo, all 28 lockfiles are byte-identical to upstream's.\n\n## Changes\n\n**1. `fix(config)`: each dedicated project keeps its own internal `.pnpm` under a global virtual store.**\nWith `enableGlobalVirtualStore`, anchoring a project did not move `virtual_store_dir`, which under GVS is the project-local dir that holds the current lockfile and the hidden hoisted modules. Every project wrote them to the workspace root's `node_modules/.pnpm`. Each install then read the other projects' packages as its own, so every repeat install churned (`Packages: +2 -992`). Since the concurrent installs of #16263, repeat installs could also fail with `EEXIST` on the hidden hoist symlinks. v11 already uses `<modulesDir>/.pnpm` per project (`internalPnpmDir`).\n\n**2. `fix(deps-restorer)`: a global virtual store slot an earlier install built is not built again.**\nAn install into a fresh `node_modules` re-ran the build scripts of every dependency that needs a build, even when its GVS slot was already built. v11 skips these, since a GVS import reports `isBuilt` through `safeToSkip`. A slot is imported with `.pnpm-needs-build` whenever it needs a build, and a finished build removes the marker, so \n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/add/execution.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/fetch.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_lockfile.rs (+2 -0)",
+        "pnpm/crates/cli/src/cli_args/patch_remove/tests.rs (+2 -0)",
+        "pnpm/crates/cli/src/cli_args/pipelines.rs (+13 -133)",
+        "pnpm/crates/cli/src/cli_args/pipelines/dedicated_runs.rs (+155 -0)",
+        "pnpm/crates/cli/src/cli_args/pipelines/install.rs (+6 -3)",
+        "pnpm/crates/cli/src/cli_args/pipelines/maintenance.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/pipelines/mutation.rs (+6 -3)",
+        "pnpm/crates/cli/src/cli_args/pipelines/pipelined_runs.rs (+252 -0)"
+      ],
+      "filesTotal": 65
+    },
+    {
+      "number": 16304,
+      "title": "fix(resolver): prefer mature time-based fallback versions",
+      "url": "https://github.com/pnpm/pnpm/pull/16304",
+      "author": "BearCooder",
+      "mergedAt": "2026-09-28T01:33:02Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFix time-based resolution choosing an immature maintenance release when a mature version satisfies the same range. A fresh install can choose immature `1.0.2` and fail strict release-age validation even though mature `1.1.0` satisfies `^1.0.2`.\n\nPreserve the initial time-based selection. If it has no match, try the lowest match allowed by the original release-age cutoff before using the existing unrestricted fallback. Both TypeScript and Rust reuse their existing picker and preserve preferred versions, exclusions and version guards. Rust resolved-edge cache keys include both cutoffs.\n\nCloses https://github.com/pnpm/pnpm/issues/16298\n\nThis follows [zkochan's request for a separate fix](https://github.com/pnpm/pnpm/pull/16207#issuecomment-5854796078). Kept in draft for human review.\n\n## Squash Commit Body\n\n```text\nCarry the original minimumReleaseAge cutoff alongside the tighter time-based\nselection cutoff. If the first pick finds no match, search for the lowest\nage-eligible match before falling back without the cutoff.\n\nReuse the existing picker so preferred versions, exclusions and version\nguards remain effective. Include both cutoffs in Rust resolved-edge cache\nkeys. Preserve the original first choice and the existing violation handling\nwhen every matching version is immature.\n\nFixes https://github.com/pnpm/pnpm/issues/16298\n```\n\n## Validation\n\n- TypeScript regression fails with the original picker and passes with the fix. The highest-mode control also passes.\n- \n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/add/registry.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/resolve.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/resolve_latest.rs (+18 -9)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/tree_ctx.rs (+3 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/edge_resolution.rs (+1 -1)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/warm_children.rs (+1 -1)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/workspace_ctx/cache_keys.rs (+2 -2)",
+        "pnpm/crates/resolving-npm-resolver/src/npm_resolver/guarded_pick.rs (+1 -0)",
+        "pnpm/crates/resolving-npm-resolver/src/pick_package/options.rs (+3 -0)",
+        "pnpm/crates/resolving-npm-resolver/src/pick_package/state.rs (+1 -0)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 16307,
+      "title": "fix: stop shipping the crashing arm64 musl pnpm 11 executable",
+      "url": "https://github.com/pnpm/pnpm/pull/16307",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T05:16:06Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#10443.\n\nOn arm64 musl Linux (Alpine on ARM), pnpm 11's standalone executable, `@pnpm/linuxstatic-arm64`, segfaults at startup. Version switching resolves that package correctly, but the binary it links cannot run. In a `node:24-alpine` linux/arm64 container:\n\n| Binary | Result |\n|---|---|\n| `@pnpm/linuxstatic-arm64@11.26.0` and `@11.28.0` | SIGSEGV, exit 139 |\n| Node.js `v26.0.0-linux-arm64-musl` (the runtime embedded in that binary) | runs |\n| `@pnpm/exe.linux-arm64-musl@12.6.0` | runs |\n| JavaScript `pnpm@11.26.0` on the image's Node.js | runs |\n\nThe embedded Node.js runs on its own, so the SEA injection for this target is what breaks the binary. That's the same class of failure that made darwin-x64 unsupported (pnpm/pnpm#11423). This PR handles it the same way:\n\n- **pnpm 11:** stop building and publishing `@pnpm/linuxstatic-arm64` and the `pnpm-linux-arm64-musl` release tarball. `@pnpm/exe`'s preinstall on that platform now fails with a message that suggests `npm install -g pnpm` or pnpm 12.\n- **pnpm 12:** switching or self-updating to a pnpm below 12 on arm64 musl Linux installs the JavaScript `pnpm` package. Already-published 11.x versions still carry the broken platform package, so this is the fix for projects that pin one today.\n\nThe pnpm 11 JavaScript CLI needs no switching change. It keeps the running package's identity, and only the JavaScript `pnpm` can run on that host.\n\nDocs: pnpm/pnpm.io#968.\n\nFollow-up (pnpm/tasks#49): get.pnpm.io's\n…(truncated)",
+      "files": [
+        ".meta-updater/src/index.ts (+0 -1)",
+        "pnpm-lock.yaml (+0 -9)",
+        "pnpm-workspace.yaml (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/self_update/install_pnpm.rs (+24 -1)",
+        "pnpm/crates/cli/src/cli_args/self_update/install_pnpm/tests.rs (+42 -1)",
+        "pnpm11/__utils__/scripts/src/copy-artifacts.ts (+4 -3)",
+        "pnpm11/pnpm/artifacts/exe/package.json (+0 -1)",
+        "pnpm11/pnpm/artifacts/exe/platform-pkg-name.js (+23 -4)",
+        "pnpm11/pnpm/artifacts/exe/scripts/build-artifacts.ts (+3 -2)",
+        "pnpm11/pnpm/artifacts/exe/setup.js (+10 -21)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 16310,
+      "title": "fix(resolver): keep an npm alias when re-resolving a reused child",
+      "url": "https://github.com/pnpm/pnpm/pull/16310",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T06:13:35Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16309.\n\nWhen pnpm v12 reuses a locked node, it walks the node's children from the lockfile snapshot. Each child got a bare specifier holding only the locked version. If the child itself could not be reused, it fell through to a fresh resolve of `<alias>@<version>`. That happens when the child depends on a direct dependency that changed, as `@types/node` does in the issue. For an `npm:` alias written by an override (`vite@*: npm:@voidzero-dev/vite-plus-core@0.3.3`), this asked the registry for `vite@0.3.3`. The install then failed with `ERR_PNPM_NO_MATCHING_VERSION`, or silently locked an unrelated release of `vite` when that version existed.\n\nThe child's specifier now names the real package: `npm:<name>@<version>`, or `<registry>:<name>@<version>` for a named-registry entry. An unaliased child keeps the bare version.\n\npnpm v11 is not affected: 11.28.0 produces the expected lockfile, per the issue.\n\nVerified against the issue's reproduction repo. `pnpm add -D @types/node@25.9.8 --lockfile-only` now succeeds and writes `vite: '@voidzero-dev/vite-plus-core@0.3.3(@types/node@25.9.8)'`, the lockfile the issue expects.\n\n## Squash Commit Body\n\n```text\nA reused node walks its children from the lockfile snapshot and seeded\neach child's bare specifier with the locked version alone. When the\nchild could not be reused itself (for example because it depends on a\ndirect dependency that changed), it fell through to a fresh resolve of\n`<alias>@<version>`. For an \n…(truncated)",
+      "files": [
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/reuse/snapshot_children.rs (+20 -3)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/reuse/tests.rs (+29 -0)",
+        ".changeset/aliasing-override-survives-re-resolve.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/lockfile_resolution_reuse/overrides.rs (+59 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16303,
+      "title": "fix(executor): end a Windows script child that outlives Ctrl+C",
+      "url": "https://github.com/pnpm/pnpm/pull/16303",
+      "author": "cnZary",
+      "mergedAt": "2026-09-28T06:29:17Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#14860.\n\nOn Windows, interrupting a script that runs through a batch shim — as `vite dev` does via `node_modules/.bin/vite.CMD` — left the terminal unusable. The console's Ctrl+C reaches every attached process at once; `cmd.exe` answers it with a \"Terminate batch job (Y/N)?\" prompt that waits on an answer forever, and pnpm (since pnpm/pnpm#14735) waits for `cmd.exe`. Every keystroke after that went to the prompt, so the shell never came back.\n\npnpm now ends the script's shell itself once the child has outlived a one second grace after the first interrupt, and at once on a second interrupt. A child that exits on its own during the grace — a script shutting down cleanly, the case pnpm/pnpm#14735 added the wait for — is left alone. The child is ended with `STATUS_CONTROL_C_EXIT`, so it reports the same exit code as a process the interrupt ended on its own, and pnpm exits the way it already does for a non-batch script: `ELIFECYCLE Command failed with exit code -1073741510`.\n\nThis matches pnpm v11's Windows behavior, where the `SIGINT` handler terminates the child process. The bug is v12-only, so only the Rust CLI changes.\n\n## How this was tested\n\n- New unit tests in `pnpm/crates/executor/src/interrupt/tests.rs` drive the console event handler directly: a child that never exits is terminated after the grace with `STATUS_CONTROL_C_EXIT`; a child exiting during the grace keeps its own exit code; a second interrupt terminates immediately. The two terminati\n…(truncated)",
+      "files": [
+        "pnpm/crates/executor/Cargo.toml (+3 -0)",
+        "pnpm/crates/executor/src/interrupt.rs (+107 -41)",
+        "pnpm/crates/executor/src/interrupt/windows.rs (+282 -0)",
+        "pnpm/crates/executor/src/interrupt/windows/tests.rs (+185 -0)",
+        ".changeset/windows-interrupt-stuck-batch-shell.md (+5 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 16312,
+      "title": "chore(release): 11.28.1, pacquet 12.8.0, pnpr 0.1.0-alpha.14",
+      "url": "https://github.com/pnpm/pnpm/pull/16312",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T06:57:31Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 860
+    },
+    {
+      "number": 16315,
+      "title": "fix(release): park the Rust products' changelogs after the bump",
+      "url": "https://github.com/pnpm/pnpm/pull/16315",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T07:23:07Z",
+      "labels": [
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThe pnpm 11.28.1 / 12.8.0 release (pnpm/pnpm#16312) was the first bumped with pnpm 12.7.0, which includes pnpm/pnpm#14934: private projects get their changelog committed to `CHANGELOG.md`. The npm wrappers of pnpm 12 (`pacquet`, `@pnpm/napi`) and pnpr (`@pnpm/pnpr`) are private in-repo but published, and both `release.yml` (GitHub release body) and the publish-time changelog composer (npm tarball `CHANGELOG.md`) read their parked section in `.changeset/changelogs/`. That release had to be fixed by hand.\n\nThis makes `bump.ts` move those three wrappers' fresh `CHANGELOG.md` to the parked section after `pnpm version -r`. The engine's behavior for private packages is correct for users, so it is left alone; the mismatch is this repo using `private` as a publish guard.\n\nVerified on the real output of the release commit a39771b8a0: the function produces parked files byte-identical to the manual fix.\n\nRelated to pnpm/tasks#38.\n\n## Squash Commit Body\n\n```text\npnpm/pnpm#14934 (in pnpm 12.7.0) gives every private project\n`repository` changelog storage: `pnpm version -r` commits its section to\nCHANGELOG.md. That is right for packages that are never published, but\nthe npm wrappers of the Rust products (pacquet, `@pnpm/napi`,\n`@pnpm/pnpr`) are private in-repo only to keep a workspace-wide publish\nfrom shipping them. Their generate-packages scripts drop the flag when\nthey are published for real.\n\nThe first release bumped with pnpm 12.7.0 (pnpm/pnpm#16312) therefore\ncommitted the\n…(truncated)",
+      "files": [
+        "pnpm11/__utils__/scripts/src/bump.ts (+39 -0)",
+        "pnpm11/__utils__/scripts/test/bump.ts (+59 -1)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}
