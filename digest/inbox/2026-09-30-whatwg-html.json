@@ -1,0 +1,50 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-09-30T00:33:17Z",
+  "range": {
+    "from": "2026-09-28T06:17:18Z",
+    "to": "2026-09-30T00:33:17Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 12263,
+      "title": "Keep all descendant selectedcontent elements up to date",
+      "url": "https://github.com/whatwg/html/pull/12263",
+      "author": "josepharhar",
+      "mergedAt": "2026-09-28T08:43:35Z",
+      "labels": [
+        "topic: select"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Previously only the first selectedcontent descendant of a select element was kept up to date. Removing it meant updating the next one from the removing steps, which mutates the tree while it is in an inconsistent state. Now every descendant selectedcontent element that is not disabled is kept up to date, and removing one has no effect on the others. Whether a selectedcontent element is disabled is now determined when it is inserted, so selectedcontent elements nested inside each other are never updated.\n\nAs removing and moving steps cannot mutate the tree, the updates that result from removing or moving an option element, or from moving a selectedcontent element, happen in a microtask. Inserting a selected option element or a selectedcontent element still updates synchronously.\n\nIn addition:\n* The select element's reset algorithm and the option element's selected setter now update selectedcontent elements.\n* Changing a select element's multiple or size attribute, an option or optgroup element's disabled attribute, or an option element's selected attribute now runs the selectedness setting algorithm and updates selectedcontent elements as needed. Removing the multiple attribute keeps the first selected option.\n* Removing an ancestor of a select element no longer disassociates its option elements from it.\n* HTMLSelectElement's selectedIndex and value, HTMLOptionsCollection's selectedIndex, and HTMLOptionElement's selected now have [CEReactions], as setting them can clone custom\n…(truncated)",
+      "files": [
+        "source (+343 -175)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 12972,
+      "title": "Don't delay the load event for lazy-loading media on source insertion",
+      "url": "https://github.com/whatwg/html/pull/12972",
+      "author": "zcorpan",
+      "mergedAt": "2026-09-29T08:39:00Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "When a `source` element is inserted while the resource selection algorithm is waiting for one, the delaying-the-load-event flag was set unconditionally, and the lazy branch of the resource fetch algorithm never cleared it.\n\nFixes #12971.\n\n- [x] At least two implementers are interested (and none opposed):\n   * Bug fix to the recently added media `loading` attribute (#11980); Chromium already passes the test.\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/62832\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: N/A\n   * Gecko: not needed, `loading` on media elements isn't implemented yet\n   * WebKit: not needed, `loading` on media elements isn't implemented yet\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs: N/A\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A\n- [x] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)",
+      "files": [
+        "source (+5 -3)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

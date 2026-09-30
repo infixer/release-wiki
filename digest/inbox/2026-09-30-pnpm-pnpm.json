@@ -1,0 +1,806 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-09-30T00:33:17Z",
+  "range": {
+    "from": "2026-09-28T07:23:07Z",
+    "to": "2026-09-30T00:33:17Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.8.1",
+      "publishedAt": "2026-09-28T17:40:12Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.8.1"
+    },
+    "prerelease": {
+      "tag": "pnpr@0.1.0-alpha.14",
+      "publishedAt": "2026-09-28T17:40:25Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.14"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v11.28.1",
+      "name": "pnpm 11.28.1",
+      "publishedAt": "2026-09-28T07:31:11Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v11.28.1",
+      "prerelease": false,
+      "body": "pnpm 11.28.1 makes `pnpm install` work in StackBlitz WebContainers, repairs lockfiles whose patch hashes disagree with `patchedDependencies`, and fixes many bugs in Windows command shims, injected workspace dependencies, and `pnpm deploy`.\n\n### Patch Changes\n\n#### Installing packages\n\n* `pnpm install` now works in StackBlitz WebContainers. On projects without a lockfile, it used to fail with `ENOENT ... pnpm-lock.yaml`, because pnpm did not recognize the errors that WebContainers return from asynchronous file system calls. It also failed with \"this.db.exec is not a function\", because `node:sqlite` there lacks `DatabaseSync.exec`. When `node:sqlite` cannot prepare statements either, pnpm stores the index in `index.fallback` [#15649](https://github.com/pnpm/pnpm/issues/15649).\n\n* `pnpm install` now completes after downloading a Node.js runtime specified by `devEngines.runtime` when pnpm runs on Node.js 24.4.x [#14667](https://github.com/pnpm/pnpm/issues/14667).\n\n* `pnpm install` no longer fails when a package from the registry declares a `file:` dependency on a directory inside itself, such as `\"@types/css-tree\": \"file:./typings/css-tree\"`. pnpm links that dependency to the directory inside the package, as npm and Yarn do. The lockfile records it as `link:<root>/typings/css-tree` [#9141](https://github.com/pnpm/pnpm/issues/9141).\n\n* Installing a git-hosted dependency that has to be built no longer fails when that dependency's own dependencies have build scripts nobody approved. pnpm skips those builds while preparing the dependency, as it does without `strictDepBuilds` [#9764](https://github.com/pnpm/pnpm/issues/9764).\n\n* pnpm now uses pnpm to prepare a git-hosted dependency that is a pnpm workspace without a committed lockfile. It used npm before, which could skip the dependency's build [#14011](https://github.com/pnpm/pnpm/issues/14011).\n\n* When installing a git dependency over SSH fails with `Permission denied (publickey)`, pnpm suggests checking the loaded keys with `ssh-add -l`. Resolving an SSH URL that refuses the key also shows a local HTTPS rewrite that leaves the recorded URL alone [#13743](https://github.com/pnpm/pnpm/issues/13743).\n\n* `pnpm install --dev` and `pnpm fetch --dev` now install the optional dependencies of devDependencies, such as the platform binaries of Biome and oxlint. The project's own `optionalDependencies` are still skipped [#9678](https://github.com/pnpm/pnpm/issues/9678).\n\n* `pnpm install --frozen-lockfile` now works on a detached HEAD when `gitBranchLockfile` is enabled. The install now reads the lockfiles of the local and remote-tracking branches that contain the checked-out commit. It still writes the shared `pnpm-lock.yaml` [#7672](https://github.com/pnpm/pnpm/issues/7672).\n\n* `pnpm install` on CI now fails on an outdated lockfile when `preferFrozenLockfile` is explicitly set to `true`. Setting it to `true` used to let CI update the lockfile [#9072](https://github.com/pnpm/pnpm/pull/9072).\n\n* `pnpm install` now \n…(truncated)"
+    },
+    {
+      "tag": "v12.8.0",
+      "name": "pnpm 12.8",
+      "publishedAt": "2026-09-28T07:35:50Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.8.0",
+      "prerelease": false,
+      "body": "pnpm 12.8.0 warns when `pnpm pack` or `pnpm publish` would ship a `.env` file that `files` does not list, installs `sharedWorkspaceLockfile: false` workspaces concurrently, applies every setting passed as `--config.<name>=<value>`, and no longer leaves the Windows terminal stuck after Ctrl+C in a script.\n\n### Minor Changes\n\n- `pnpm pack` and `pnpm publish` now warn when the tarball includes a `.env` or `.env.*` file that the `files` field of `package.json` does not list. Templates such as `.env.example` are not reported. List the file in `files` to publish it on purpose, or exclude it in `.npmignore` or `.gitignore` [#7826](https://github.com/pnpm/pnpm/issues/7826).\n\n- `pnpm pack` now honors `--silent`, `--reporter=silent`, and `--loglevel=silent` to hide the tarball contents and summary. With `--json`, lifecycle script output and the final JSON output remain visible [#10297](https://github.com/pnpm/pnpm/issues/10297).\n\n### Patch Changes\n\n#### Installing packages\n\n- Installing through a `pnpr` server now records the pnpmfile checksum in the lockfile, so a later `pnpm install --frozen-lockfile` accepts that lockfile [#14460](https://github.com/pnpm/pnpm/issues/14460). A frozen install through the pnpr server now fails if the pnpmfile changed. If the pnpmfile defines a `readPackage`, `afterAllResolved` or `preResolution` hook or custom resolvers, pnpm resolves dependencies locally and prints a warning that the pnpr server was not used.\n\n  Installing through a `pnpr` server also links a workspace project at the directory its `publishConfig.directory` names. A server that does not forward the setting makes the install fail with `ERR_PNPM_PNPR_PUBLISH_DIRECTORY_MISMATCH`, so pnpm never writes a lockfile that points at the wrong directory. The server rejects a `publishConfig.directory` that points outside its project.\n\n- Installing a git-hosted dependency that has to be built no longer fails when that dependency's own dependencies have build scripts nobody approved. pnpm skips those builds while preparing the dependency, as it does without `strictDepBuilds` [#9764](https://github.com/pnpm/pnpm/issues/9764).\n\n- A git-hosted dependency that is a pnpm workspace with no committed lockfile is now detected as a pnpm project [#14011](https://github.com/pnpm/pnpm/issues/14011).\n\n- `pnpm install --dev` and `pnpm fetch --dev` now install the optional dependencies of devDependencies, such as the platform binaries of Biome and oxlint. The project's own `optionalDependencies` are still skipped [#9678](https://github.com/pnpm/pnpm/issues/9678).\n\n- `pnpm install --offline` and `pnpm add --offline` now resolve a version range to the newest matching version whose tarball is already in the store. They used to pick the newest version in the cached metadata and fail with `ERR_PNPM_NO_OFFLINE_TARBALL` when its tarball was missing [#10715](https://github.com/pnpm/pnpm/issues/10715).\n\n- If an offline install fails because the registry metadata cache uses the layout from befo\n…(truncated)"
+    },
+    {
+      "tag": "v12.8.1",
+      "name": "pnpm 12.8.1",
+      "publishedAt": "2026-09-28T17:40:12Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.8.1",
+      "prerelease": false,
+      "body": "pnpm 12.8.1 fixes `pnpm install --frozen-lockfile` rejecting lockfiles with injected workspace packages that have peers, restores the executable bit on files of local directory dependencies, makes `pnpm dedupe` converge, and uses less CPU on many-core machines.\n\n### Patch Changes\n\n- `pnpm install --frozen-lockfile` no longer rejects a freshly generated lockfile when an injected workspace package has peer dependencies [#16332](https://github.com/pnpm/pnpm/issues/16332).\n\n- Executable files in a `file:` directory dependency or an injected workspace package keep their executable bit again. Since 12.8.0, pnpm installed these files without the permissions they have in their project.\n\n- `pnpm dedupe` now reaches a stable lockfile when a package's peer suffix is long enough to be hashed. Before, each run could switch that package's key between the hashed and the spelled-out suffix, so `pnpm dedupe --check` always failed [#16331](https://github.com/pnpm/pnpm/issues/16331).\n\n- `pnpm install --frozen-lockfile`, the default in CI, now uses less CPU on machines with more than 8 cores. Warm installs on many-core Windows machines got up to 10% faster. Frozen installs now link with at most 16 worker threads.\n\n- `verifyDepsBeforeRun` no longer reports dependencies as outdated after a filtered install just because `pnpm-lock.yaml` has a newer modification time. It checks the lockfile against the packages that install put in place. Before, `pnpm run` reinstalled the whole workspace with lifecycle scripts on, for example after a Docker `COPY` brought in a lockfile with a newer mtime [#16322](https://github.com/pnpm/pnpm/issues/16322).\n\n  After a filtered install, `verifyDepsBeforeRun` now also checks that the install put the selected projects' dependencies in place. A `node_modules` directory alone no longer counts as proof.\n\n- `pnpm run` and `pnpm exec` no longer install a project that has never been installed and has nothing to install. Such a project declares no dependencies, no peer dependencies that `autoInstallPeers` would fetch, and no install lifecycle scripts. The command now runs without writing `node_modules` or `pnpm-lock.yaml` [#16313](https://github.com/pnpm/pnpm/issues/16313).\n\n- `pnpm update -g --latest` now upgrades globally installed packages beyond their saved version ranges [#16320](https://github.com/pnpm/pnpm/issues/16320).\n\n## Platinum Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://bit.cloud/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/bit.svg\" width=\"80\" alt=\"Bit\"></a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://openai.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/openai_dark.svg\" />\n            <source media=\"(prefers-colo\n…(truncated)"
+    },
+    {
+      "tag": "pnpr@0.1.0-alpha.14",
+      "name": "pnpr 0.1.0-alpha.14",
+      "publishedAt": "2026-09-28T17:40:25Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.14",
+      "prerelease": true
+    },
+    {
+      "tag": "v11.28.2",
+      "name": "pnpm 11.28.2",
+      "publishedAt": "2026-09-28T17:40:47Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v11.28.2",
+      "prerelease": false,
+      "body": "pnpm 11.28.2 fixes `pnpm install` skipping every workspace project whose common ancestor is the filesystem root, and stops `pnpm run` from reinstalling or installing when nothing needs it.\n\n### Patch Changes\n\n* `pnpm install` reported success without installing anything when the workspace projects' common ancestor was the filesystem root, such as `/` or a drive root like `C:\\`. It now installs these projects [#16328](https://github.com/pnpm/pnpm/issues/16328).\n\n* `verifyDepsBeforeRun` no longer reports dependencies as outdated after a filtered install just because `pnpm-lock.yaml` has a newer modification time. It checks the lockfile against the packages that install put in place. Before, `pnpm run` reinstalled the whole workspace with lifecycle scripts on, for example after a Docker `COPY` brought in a lockfile with a newer mtime [#16322](https://github.com/pnpm/pnpm/issues/16322).\n\n  After a filtered install, `verifyDepsBeforeRun` now also checks that the install put the selected projects' dependencies in place. A `node_modules` directory alone no longer counts as proof.\n\n* `pnpm run` and `pnpm exec` no longer install a project that has never been installed and has nothing to install. Such a project declares no dependencies, no peer dependencies that `autoInstallPeers` would fetch, and no install lifecycle scripts. The command now runs without writing `node_modules` or `pnpm-lock.yaml` [#16313](https://github.com/pnpm/pnpm/issues/16313).\n\n## Platinum Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://bit.cloud/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/bit.svg\" width=\"80\" alt=\"Bit\"></a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://openai.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/openai_dark.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/openai_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/openai_dark.svg\" width=\"160\" alt=\"OpenAI\" />\n          </picture>\n        </a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://notion.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/notion.svg\" width=\"80\" alt=\"Notion\"></a>\n      </td>\n    </tr>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://coderabbit.ai/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/coderabbit.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/coderabbit_light.svg\" />\n         \n…(truncated)"
+    },
+    {
+      "tag": "v10.34.6",
+      "name": "v10.34.6",
+      "publishedAt": "2026-09-29T15:44:40Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v10.34.6",
+      "prerelease": false,
+      "body": "### Patch Changes\n\n*   e7888e5: `pnpm self-update` now resolves and verifies pnpm through registry, authentication, proxy, and TLS settings from trusted non-project configuration. Project configuration and the default project pnpmfile can no longer redirect the pnpm download or disable engine identity verification.\n\n*   46bc7c9: pnpm no longer tells you to update itself with Corepack or with `pnpm add -g`:\n\n    *   The update notification now suggests `pnpm self-update`, or the [standalone install script](https://pnpm.io/installation) when pnpm is running under Corepack. It used to suggest `corepack use pnpm@<version>`, or `pnpm add -g pnpm` / `pnpm add -g @pnpm/exe` when pnpm was not installed by the standalone script — but `pnpm add -g` refuses to install pnpm and points at `pnpm self-update` anyway, and `@pnpm/exe` is not published for pnpm v12 or newer, where the unscoped `pnpm` package is itself the native executable.\n    *   `pnpm self-update` under Corepack now points at the standalone install script too, instead of telling you to update pnpm with Corepack.\n\n*   46bc7c9: Updated `adm-zip` to v0.6.0, which fixes [a memory-exhaustion vulnerability](https://github.com/advisories/GHSA-xcpc-8h2w-3j85) where a crafted ZIP file could make it allocate 4 GB of memory. `adm-zip` is used to extract the Node.js, Bun, and Deno archives that pnpm downloads on Windows.\n\n*   Updated the embedded Node.js release keys to the current canonical `nodejs/release-keys` list.\n\n*   Updated the embedded npm registry signing keys to the set currently advertised by npm.\n\n*   702ad5f: Update the embedded Node.js release keys with the new key added to [nodejs/release-keys](https://github.com/nodejs/release-keys) (Stewart X Addison, `655F3B5C1FB3FA8D1A0CA6BDE4A7D232B936D2FD`).\n\n## Platinum Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://bit.cloud/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\"><img src=\"https://pnpm.io/img/users/bit.svg\" width=\"80\" alt=\"Bit\"></a>\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n## Gold Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://sanity.io/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/sanity.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/sanity_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/sanity.svg\" width=\"120\" alt=\"Sanity\" />\n          </picture>\n        </a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://discord.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/discord.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/dis\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 16314,
+      "title": "fix: build the Rust docs on Windows and check them there in CI",
+      "url": "https://github.com/pnpm/pnpm/pull/16314",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T07:52:41Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "`create_dir_all_inheriting_mode` and `inherited_dir_bits` are documented on every platform, but their doc comments linked to `grant_inherited_dir_mode`, which is `#[cfg(unix)]`. rustdoc resolves intra-doc links only in the code compiled for the target, so on Windows the links are broken and `RUSTDOCFLAGS=\"-D warnings\" cargo doc --document-private-items` fails. That breaks the pre-push hook (`pnpm/scripts/pre-push-rust.sh`) for anyone pushing from Windows.\n\nCI didn't catch it because the `Rust CI / Doc` job ran on Ubuntu only, where the function exists.\n\n- The two shared doc comments now describe the inherited bits without naming the Unix-only function. Writing the name unlinked doesn't work: on Linux, dylint's `bare_identifier_reference` requires an in-scope name to be an intra-doc link, and that same link fails rustdoc on Windows. Doc comments only; no behavior change.\n- The doc job gets the same Ubuntu + Windows matrix as Clippy, so a link like this fails in CI. The required `Rust CI / Success` gate depends on the job id `doc`, so renaming the check to `Rust CI / Doc / <os>` doesn't affect branch protection.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n## Summary by CodeRabbit\n\n* **Documentation**\n  * Clarified that newly created directories inherit group permission and setgid bits from the nearest existing ancestor.\n* **Chores**\n  * Expanded documentation checks to run on both Ubuntu and Windows. These checks continue to use the existing Rust CI trigge\n…(truncated)",
+      "files": [
+        "pnpm/crates/fs/src/file_mode.rs (+3 -4)",
+        ".github/workflows/pacquet-ci.yml (+13 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 16318,
+      "title": "fix(deps-restorer): keep the modes of local-directory dependency files",
+      "url": "https://github.com/pnpm/pnpm/pull/16318",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T10:11:07Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "## Summary\n\npnpm 12.8.0 installs a file of a `file:` directory dependency, or of an injected workspace package, without its executable bit. pnpm/pnpm#15646 made the importer materialize every file at the mode a fresh store write under the current umask would produce, and it takes executability from the CAS `-exec` suffix. A local-directory dependency is imported from its project's own files, which never carry that suffix, so a `0755` script lands as `0644`. A hardlink falls back to that copy too, because the project file's mode never matches the store-entry mode it is compared against.\n\nThis surfaced in pnpm/pnpm#15869, where bumping the repo's `packageManager` to 12.8.0 makes two `pnpm/npm/pnpm/test/install.test.mjs` cases fail with `EACCES`: the fixture's native binary is a `file:` optional dependency.\n\nThe fix ports pnpm 11's `isCafsFile` check. Only a source with the CAFS layout `files/<2 hex>/<digest>[-exec]` gets the store-entry mode. Any other source keeps its own mode and can be hardlinked whatever that mode is. pnpm 11 already behaves this way, so it needs no change.\n\nReproduction on Linux, umask `022`: a `file:../dep` dependency whose `run` is `0755` installs as `-rwxr-xr-x` with 12.7.0 and as `-rw-r--r--` with 12.8.0. With this branch it is `-rwxr-xr-x` again.\n\n## Squash Commit Body\n\n```text\npnpm 12.8.0 materialized every imported file at the mode a fresh store\nwrite under the current umask would produce, deriving executability from\nthe CAS `-exec` suffix. A `file:\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/link_file.rs (+4 -55)",
+        "pnpm/crates/deps-restorer/src/link_file/target_mode.rs (+66 -0)",
+        "pnpm/crates/deps-restorer/src/link_file/tests.rs (+8 -0)",
+        "pnpm/crates/fs/src/file_mode.rs (+32 -0)",
+        "pnpm/crates/fs/src/file_mode/tests.rs (+19 -1)",
+        ".changeset/local-directory-deps-keep-exec-bit.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/umask.rs (+40 -0)",
+        "pnpm/crates/deps-restorer/src/link_file/tests/installation.rs (+61 -18)"
+      ],
+      "filesTotal": 8
+    },
+    {"number":16316,"title":"perf(cli): cap rayon's global pool at 16 threads","hint":"unknown","release":"📦 v12.8.1","brief":true},
+    {
+      "number": 16317,
+      "title": "fix: skip the pre-run install for a project with nothing to install",
+      "url": "https://github.com/pnpm/pnpm/pull/16317",
+      "author": "neonsid",
+      "mergedAt": "2026-09-28T13:19:45Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "## Summary\n\n`pnpm run` and `pnpm exec` spawn an install when no workspace state file exists. For a project that has nothing to install, that install only writes `node_modules` and `pnpm-lock.yaml`. After pnpm/pnpm#15125, this became visible in directories that the workspace `packages` patterns leave out (pnpm/pnpm#16313). The same was already true for any standalone scripts-only project.\n\nThe verify-deps gate now reports \"up to date\" when no state file exists and no project the install would cover has install work. Install work means any of these:\n\n- a dependency in `dependencies`, `devDependencies` or `optionalDependencies`, including `engines.runtime` / `devEngines.runtime`, which both CLIs fold into the dependencies when they read the manifest;\n- a required peer, when `autoInstallPeers` is on;\n- an install lifecycle script (`preinstall` through `postprepare`, or the implicit `node-gyp rebuild` for a `binding.gyp`), unless `ignoreScripts` is set. `pnpm:devPreinstall` counts only in the workspace root. A project with such a script still installs on its first run, so the script keeps running on first use.\n- a pnpmfile the install would load, because its `readPackage` hook can add dependencies. The gate can't tell which hooks a pnpmfile defines without loading it. A workspace that can't be read, or a `lockfileDir` pinned away from the project, also counts as install work.\n\nUnder a shared lockfile, the check covers every workspace project. With separate lockfiles, it covers onl\n…(truncated)",
+      "files": [
+        "pnpm-lock.yaml (+3 -0)",
+        "pnpm/crates/package-manager/src/install/workspace_state.rs (+2 -0)",
+        "pnpm/crates/package-manager/src/install/workspace_state/discovery.rs (+49 -15)",
+        "pnpm/crates/package-manager/src/install/workspace_state/nothing_to_install.rs (+95 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install.rs (+1 -1)",
+        "pnpm11/exec/commands/package.json (+1 -0)",
+        "pnpm11/exec/commands/src/runDepsStatusCheck.ts (+109 -4)",
+        "pnpm11/exec/commands/tsconfig.json (+3 -0)",
+        ".changeset/run-skips-install-when-nothing-to-install.md (+7 -0)",
+        "pnpm/crates/cli/tests/suite/loglevel.rs (+16 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 16335,
+      "title": "fix(deps-resolver): pin the same peers for hashed and explicit suffixes",
+      "url": "https://github.com/pnpm/pnpm/pull/16335",
+      "author": "altaywtf",
+      "mergedAt": "2026-09-28T14:41:53Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16331.\n\n`pnpm dedupe` alternated between two lockfiles when a package's peer suffix was long enough to be hashed. The locked peer pins read from the wanted lockfile differed depending on whether a key was spelled out or hashed. An explicit suffix pins every segment, including peers a descendant resolved, and recurses into each provider's own suffix. A hashed suffix recovered only the package's declared peers.\n\nIn the reported workspace, two importers produce equally sized variants of `@react-native-firebase/app`, and `dedupe_peer_dependents` breaks the tie by dep path, sometimes toward the hashed spelling. From the hashed spelling, the next run lost the transitive `@react-native-async-storage/async-storage` pin for one importer. That shrank its variant, flipped the collapse winner and the key spelling, and the cycle repeated.\n\nA hashed suffix now recovers the same pins: the peers listed in the snapshot's `transitivePeerDependencies`, read from the descendants that declare them, plus each peer provider's own peers. A visited set bounds both walks.\n\npnpm v11 is not affected. It never resolves `@react-native-firebase/app` in this workspace under `autoInstallPeers: false`, and a fresh pnpm v12 resolve doesn't either. The variants only exist because v12 keeps peers the existing lockfile pinned.\n\nNot addressed here: after `dedupe_peer_dependents` rewrites a surviving variant's edges, its hashed key can still encode the peer it had before the rewrite. Th\n…(truncated)",
+      "files": [
+        "pnpm/crates/resolving-deps-resolver/src/resolve_importer/locked_peers.rs (+52 -46)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_importer/locked_peers/hashed_suffix.rs (+117 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_importer/tests.rs (+2 -0)",
+        ".changeset/dedupe-hashed-peer-suffix-converges.md (+5 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_importer/tests/hashed_peer_suffix.rs (+76 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 16334,
+      "title": "fix: recursive install skipping every project when the repository root is the filesystem root",
+      "url": "https://github.com/pnpm/pnpm/pull/16334",
+      "author": "cnZary",
+      "mergedAt": "2026-09-28T14:44:44Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16328.\n\nFor a workspace with a shared lockfile, the recursive installer (`pnpm install`/`add`/`remove`/`update`/`import`) filters the selected importers with `is-subdir` against the calculated repository root. `is-subdir@2.0.0` appends a path separator to the resolved parent directory, so when that root is the filesystem root the parent becomes `//` on POSIX or `C:\\\\` on Windows, and no real project path starts with it. Every importer is filtered out, and the command reports success (`Scope: all N workspace projects` / `Done`) without installing anything.\n\nThe fix ships in `is-subdir@2.0.1`, which no longer appends a second separator when the parent already ends with one, and this PR takes the bump (with a changeset). Cross-volume exclusion on Windows and path resolution semantics are unchanged.\n\nOnly the TypeScript pnpm v11 CLI is affected; the reporter's matrix and my own check on Windows show pnpm 12 (pacquet) handles both layouts correctly, so per the repo's version policy only v11 is fixed.\n\nIn addition to the reporter's POSIX case, this reproduces on Windows when the projects' common ancestor is a drive root (e.g. an app at `C:\\app` with workspace members at `C:\\external\\projects/*`), which the issue's reproduction script explicitly excludes. Verified before/after on this layout.\n\n## Squash Commit Body\n\n```text\nFor a workspace with a shared lockfile, the recursive installer filters the\nselected importers with is-subdir against the calculated\n…(truncated)",
+      "files": [
+        "pnpm-lock.yaml (+26 -26)",
+        "pnpm-workspace.yaml (+1 -1)",
+        ".changeset/recursive-install-filesystem-root.md (+6 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16325,
+      "title": "fix(cli): honor `--latest` beyond saved global ranges",
+      "url": "https://github.com/pnpm/pnpm/pull/16325",
+      "author": "smith558",
+      "mergedAt": "2026-09-28T15:38:30Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "## Summary\n\n`pnpm update -g --latest` seeds its candidate with the existing global manifest. A bare package selector can keep the saved range, causing the lockfile comparison to report `Already up to date` despite an eligible newer version. Use an explicit `@latest` selector for plain registry specs while preserving non-registry specs and downgrade pins.\n\nThe mocked-registry regression test fails before the fix and passes after it. I also reproduced the upgrade with Codex `0.156.1` to `0.157.1` in an isolated global install.\n\nCloses pnpm/pnpm#16320.\n\n## Squash Commit Body\n\n```text\nGlobal update candidates start with the installed group's manifest. Resolving\nplain registry dependencies by bare name keeps the saved range during the\nlockfile-only comparison and can make an available update look unchanged.\n\nResolve those dependencies through the latest dist-tag. Preserve the source\nof non-registry dependencies and keep downgrade pins. Cover the saved-range\ncase with a mocked-registry regression test.\n\nCloses pnpm/pnpm#16320\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published package.\n- [x] Added or updated tests.\n\n---\nWritten with help from Codex (GPT-6).\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * `pnpm update -g\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/global/install.rs (+4 -7)",
+        "pnpm/crates/cli/src/cli_args/global/selectors.rs (+4 -6)",
+        "pnpm/crates/cli/src/cli_args/global/tests.rs (+7 -4)",
+        ".changeset/global-update-latest-saved-range.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/global.rs (+43 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 16346,
+      "title": "fix(install): accept an injected dependency's peer resolved to a workspace link",
+      "url": "https://github.com/pnpm/pnpm/pull/16346",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T16:13:00Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16332.\n\nSince 12.7.0, `pnpm install --frozen-lockfile` rejects the lockfile it just wrote when an injected workspace package declares a peer dependency that the consumer provides from the workspace (`local dependency \"lib\" at \"lib\" is outdated`).\n\nThe freshness check for injected/directory dependencies (added in pnpm/pnpm#15356) re-tested each resolved peer in the snapshot against the declared range. A workspace-provided peer is recorded as `link:<dir>`, which never satisfies a range spec. An unmet peer (a version outside the range, which pnpm only warns about) failed the same way.\n\nThe resolved peers are the parent's choice and say nothing about staleness, so the check now compares only the declared peer ranges and `peerDependenciesMeta` against the ones recorded in `packages:`. Those comparisons already existed and still catch every edit to the injected package's peers.\n\npnpm v11 is not affected: the reporter's script and the unmet-peer variant both pass on 11.28.0, so this is a v12-only fix.\n\n## Squash Commit Body\n\n```text\nA frozen install rejected a freshly generated lockfile when an injected\nworkspace package declared a peer dependency that the consuming project\nprovides from the workspace. The lockfile snapshot records that peer as\n`link:<dir>`, and the freshness check re-tested every resolved peer against\nthe declared range, which never matches a `link:` ref. The same test also\nfailed for an unmet peer, which pnpm only warns about.\n\nThe res\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_deps.rs (+6 -28)",
+        ".changeset/frozen-injected-peer-link.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/inject_workspace_packages.rs (+83 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16324,
+      "title": "fix: accept a touched lockfile in verifyDepsBeforeRun after a filtered install",
+      "url": "https://github.com/pnpm/pnpm/pull/16324",
+      "author": "neonsid",
+      "mergedAt": "2026-09-28T16:21:45Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.8.1",
+      "body": "## Summary\n\nClose pnpm/pnpm#16322\n\nAfter a filtered install, `verifyDepsBeforeRun` treated the dependencies as outdated as soon as `pnpm-lock.yaml` got a newer mtime than `lastValidatedTimestamp`, even with byte-identical contents. With the default `install` action, `pnpm run` then reinstalled the whole workspace with scripts on. The issue hits this in Docker multi-stage builds, where the root `prepare` fails for lack of git.\n\n**Root cause.** When the wanted lockfile is newer than the last validation, both stacks assert that it equals the current lockfile in `node_modules/.pnpm/lock.yaml`. A filtered install only materializes the projects it selected, so its current lockfile never has the packages of the other projects. That makes the equality impossible, and the gate fails with \"the installed dependencies are not up to date with the lockfile\". The mtime check is fine. The comparison that runs after it is wrong for filtered installs.\n\n**Fix.** When the workspace state records `filteredInstall`, the gate compares the current lockfile against what that install actually put in place:\n\n- pnpm v12 builds the materialization closure of the wanted lockfile rooted at the importers the current lockfile lists (`materialization_closure`, the same function the install uses), then compares.\n- pnpm v11's current lockfile keeps every importer and drops only packages. So `assertLockfilesEqual` accepts it when everything except `packages` is equal and every package it records equals the wante\n…(truncated)",
+      "files": [
+        "pnpm-lock.yaml (+3 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/current_lockfile.rs (+32 -1)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/deps_status.rs (+36 -18)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/manifest_agreement.rs (+18 -7)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/modules_dirs.rs (+38 -1)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests.rs (+178 -0)",
+        "pnpm11/deps/status/package.json (+1 -0)",
+        "pnpm11/deps/status/src/assertLockfilesEqual.ts (+28 -3)",
+        "pnpm11/deps/status/src/checkDepsStatus.ts (+88 -3)"
+      ],
+      "filesTotal": 16
+    },
+    {"number":16349,"title":"chore(release): 11.28.2, pacquet 12.8.1","hint":"other","release":"📦 v12.8.1","brief":true},
+    {"number":15869,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16344,"title":"perf(cli): size the rayon pool before the install fast path","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16359,
+      "title": "fix(deps-resolver): rename peer dependents after collapsing a variant",
+      "url": "https://github.com/pnpm/pnpm/pull/16359",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T22:43:45Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16356.\n\n`pnpm dedupe` was not idempotent: `pnpm dedupe --check` failed right after `pnpm dedupe` (first bad release 12.4.2).\n\n**Root cause.** A lockfile key is the package id plus a peer suffix that spells out the keys of the peers it resolved. `dedupe_peer_dependents` runs after those keys are built. When it collapses a variant into a larger compatible one, it rewrites the edges that pointed at the collapsed variant, but it keeps every other node's key. In the reporter's repro, `@babel/core@7.29.7` collapses into `@babel/core@7.29.7(supports-color@5.5.0)`. That leaves two `babel-plugin-styled-components` variants with identical edges, and the dep-path tie-break keeps the one whose key still names the collapsed `@babel/core`. The lockfile after the first and second `dedupe` has identical snapshot contents. Only two keys differ. Even the fresh `install` lockfile names a `styled-components` variant that does not exist in it.\n\npnpm v12 reads locked peer versions back from those keys, so the next resolution starts from the stale names and produces a different graph. `#14810` (12.4.2) made the collapse fire far more often, which is why the problem surfaced then. The recent convergence fixes (`#14898`, `#15600`, `#15740`, `#16335`) each made one way of reading the lockfile back less lossy. This PR fixes the writing side instead: a key's peer suffix now names the peers the node actually resolves to.\n\n**Fix.** After the collapse, every surviving node is r\n…(truncated)",
+      "files": [
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents.rs (+12 -1)",
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents/survivor_names.rs (+177 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents/tests.rs (+440 -12)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers.rs (+25 -5)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers/finalize.rs (+3 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers/finalize/final_paths.rs (+30 -37)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers/finalize/graph_edges.rs (+1 -1)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers/walker.rs (+1 -1)",
+        ".changeset/dedupe-renames-peer-suffix-after-collapse.md (+5 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 16360,
+      "title": "fix: hand an unknown option to the pinned pnpm before rejecting it",
+      "url": "https://github.com/pnpm/pnpm/pull/16360",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T23:00:12Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nIn a project that pins another pnpm version, both CLIs rejected an option they did not know before switching to the pinned pnpm. So `pnpm install --auto-dedupe` failed in a global pnpm 11, even though the project's pinned pnpm 12 supports it. `pnpm -v` still printed the pinned version, because that path does go through the switch. The mirror case (global pnpm 12, project pinned to 11, a v11-only option such as `--resolution-only`) failed in clap the same way.\n\n- **pnpm v11** (`pnpm11/pnpm/src/main.ts`) now reports unknown options only once no switch to the pinned pnpm has happened.\n- **pnpm v12** (`pnpm/crates/cli`) retries the pin dispatch from argv when clap reports an unknown argument. It acts only on a switch plan.\n\nCloses pnpm/pnpm#16353\n\n## Squash Commit Body\n\n```text\nIn a project that pins another pnpm, both CLIs rejected an option they\ndid not know before they switched to the pinned version. The option\ncould belong to the pinned pnpm, so the command failed although the\npinned pnpm supports it. pnpm v11 checked unknown options right after\nparsing, ahead of switchCliVersion. pnpm v12 let clap exit on an\nunknown argument before the pre-command dispatch. `pnpm --version`\nwent through the switch, so it reported the pinned version while\n`pnpm install --auto-dedupe` failed in the global pnpm 11.\n\npnpm v11 now strips the unknown options from the config it reads,\nruns the package manager handling, and reports them only when no\nswitch happened. The env lockfile sync\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/pre_command.rs (+3 -24)",
+        "pnpm/crates/cli/src/cli_args/pre_command/argv_plans.rs (+67 -0)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input.rs (+5 -40)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input/argv_scan.rs (+220 -0)",
+        "pnpm/crates/cli/src/cli_args/pre_command/tests.rs (+110 -1)",
+        "pnpm/crates/cli/src/lib.rs (+46 -7)",
+        "pnpm11/pnpm/src/main.ts (+20 -9)",
+        ".changeset/unknown-option-reaches-pinned-pnpm.md (+6 -0)",
+        "pnpm/crates/cli/tests/suite/version.rs (+48 -0)",
+        "pnpm11/pnpm/test/switchingVersions.test.ts (+13 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 16361,
+      "title": "fix(deps-resolver): dedupe injected workspace deps after peer variants merge",
+      "url": "https://github.com/pnpm/pnpm/pull/16361",
+      "author": "zkochan",
+      "mergedAt": "2026-09-28T23:26:25Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith `injectWorkspacePackages: true`, a fresh `pnpm install` recorded some workspace dependencies in `importers` as peer-suffixed `file:` copies where pnpm 11 records `link:`.\n\nThe injected copy resolves an optional peer (`supports-color` for `debug` in both fixtures) from its consumer, while the target project's own dependencies were walked without it. pnpm 12 ran the injected-deps dedupe *before* peer-dependent dedupe, so it compared the injected children with the project's peer-free variants, found no match, and kept the `file:` copy. Peer-dependent dedupe later merged those variants anyway, which is why `pnpm dedupe` on an existing lockfile removed the copies.\n\nThis PR runs peer-dependent dedupe first. The injected copy's children then equal the project's direct deps and the edge becomes `link:`.\n\nThis differs from pnpm/pnpm#16299, which made the child check accept an injected child that carries *more* peers than the project. That would link an injected copy whose peer context is genuinely richer than the project's. Reordering only links edges whose variants peer-dependent dedupe already treats as interchangeable.\n\npnpm 11 does not have the bug (its peer cache hands the project the same variants), so this is a v12-only fix.\n\nVerified against both fixtures from the issue with `install --lockfile-only`:\n- `omril1/pnpm-dedupe-link-injection-repro` (`spurious-suffix/`): lockfile is byte-identical to pnpm 11.28.2.\n- `omril1/pnpm-workspace-link-corruption-repro`: `@\n…(truncated)",
+      "files": [
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents.rs (+2 -3)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers.rs (+8 -3)",
+        ".changeset/injected-workspace-peer-link.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/dedupe_injected_deps.rs (+86 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16363,
+      "title": "fix(deps): update undici to 7.29.1",
+      "url": "https://github.com/pnpm/pnpm/pull/16363",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T00:24:08Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n[GHSA-3wwx-pv8p-q78v](https://github.com/advisories/GHSA-3wwx-pv8p-q78v) (moderate, undici `>=7.28.0 <7.29.1`) was published, and the lockfile on `main` pins undici 7.29.0. The `Audit dependencies` job now fails on every pull request, for example pnpm/pnpm#16357, which touches no JavaScript dependency.\n\nThis raises the catalog range to `^7.29.1` and refreshes the lockfile. The lockfile diff only moves undici from 7.29.0 to 7.29.1. The Rust CLI does not use undici. The TypeScript CLI bundles it, so the changeset targets `pnpm` and the four published packages that depend on it.\n\n## Squash Commit Body\n\n```text\nGHSA-3wwx-pv8p-q78v covers undici >=7.28.0 <7.29.1, and the lockfile\npinned 7.29.0, so the audit job failed on every pull request. Raise the\ncatalog range to ^7.29.1. undici stays on 7.x because 8.x requires a newer\nNode.js than pnpm supports.\n```\n\n## Checklist\n\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it becomes a release note.\n\n---\nWritten by an agent (Claude Code, claude-opus-5-5).\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16363?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v2.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-as\n…(truncated)",
+      "files": [
+        "pnpm-lock.yaml (+10 -10)",
+        "pnpm-workspace.yaml (+1 -1)",
+        ".changeset/undici-7-29-1.md (+6 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":16351,"title":"perf(registry): cut repeated version-pick time by 66–82%","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16362,
+      "title": "fix(cli): canonicalize aliases and read clustered -g in the unparsed scan",
+      "url": "https://github.com/pnpm/pnpm/pull/16362",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T00:49:19Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFollow-up to pnpm/pnpm#16360, fixing three findings from its last review round, which landed after it merged. Each one is in the argv scan pnpm v12 uses to hand a command line with an unknown option to the pinned pnpm.\n\n- The `c` alias of `config` slipped past the config-command exclusion. The fallback could then switch a config command to the pinned pnpm, which the parsed path does only for `--location project`.\n- The `ic`, `clean-install`, and `install-clean` aliases of `ci` were not treated as frozen.\n- `-g` inside a short cluster (`pnpm add -gE pkg --unknown`) was not read as global. So the fallback could switch a global command to the project's pinned pnpm.\n\nThe scan now resolves aliases to the command's own name through the clap grammar. It reads `--global`, `-g` in a short cluster, and `--location` in its own pass, which steps over the values of declared options. A scope flag right after an option this pnpm does not declare may be that option's value, so the scan declines and the rejection stands. End-to-end tests cover a switch through the `i` alias, and the rejection that stays for the `c` alias and for `add -gE`. The unit tests add a Windows drive path attached to a clustered `-C`.\n\nNo changeset: pnpm/pnpm#16360 is not released yet.\n\n## Squash Commit Body\n\n```text\nThe unparsed scan kept the command name as typed, so the `c` alias\nslipped past the config-command exclusion, and the `ic`,\n`clean-install` and `install-clean` aliases of `ci` were not treated\n\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/pre_command/argv_plans.rs (+7 -6)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input/argv_scan.rs (+108 -47)",
+        "pnpm/crates/cli/src/cli_args/pre_command/tests.rs (+65 -14)",
+        "pnpm/crates/cli/src/flag_relocation.rs (+8 -0)",
+        "pnpm/crates/cli/tests/suite/version.rs (+60 -20)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 16357,
+      "title": "fix(cargo): reject a stale Cargo.lock in frozen installs",
+      "url": "https://github.com/pnpm/pnpm/pull/16357",
+      "author": "arturict",
+      "mergedAt": "2026-09-29T11:29:18Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16355\n\nWith `cargo.enabled: true`, `pnpm install --frozen-lockfile` succeeded even when `Cargo.lock` no longer satisfied a dependency requirement in `Cargo.toml`. `cargo --locked` rejected the same pair right afterwards with exit code 101.\n\n**Root cause.** `read_or_resolve_lockfile` returns an existing `Cargo.lock` as it is. Nothing compared it with the workspace manifests, so `--frozen-lockfile` only checked that the file exists.\n\n**Fix.** Before a frozen install continues, every registry and git dependency of each workspace member is checked against that member's dependency edges in `Cargo.lock`, and every edge must be required by one of the member's declared dependencies. The install fails with `ERR_PNPM_OUTDATED_LOCKFILE`, naming the member, the crate, its requirement and the locked versions, for example:\n\n```text\nError:   × Cargo.lock is out of date, but --frozen-lockfile forbids updating it\n  ╰─▶ app depends on demo =1.0.1, but Cargo.lock locks demo 1.0.0\n```\n\nThe check is `pnpm_cargo_resolver::verify_lockfile`, a pure function over the `cargo metadata --no-deps` document and the lockfile. `discover_workspace_roots` now also returns the metadata document it already fetched, so a frozen install runs no additional `cargo metadata` (the existing test `reuses_workspace_metadata_with_aliased_paths_and_nested_workspaces` still passes unchanged).\n\n**Scope.** The Cargo integration exists only in the Rust pnpm v12 CLI, so nothing changes in `pnpm11/`\n…(truncated)",
+      "files": [
+        "pnpm/crates/cargo-resolver/src/freshness.rs (+156 -0)",
+        "pnpm/crates/cargo-resolver/src/lib.rs (+2 -0)",
+        "pnpm/crates/cargo-resolver/src/tests.rs (+1 -0)",
+        "pnpm/crates/cli/src/cargo_deps.rs (+9 -2)",
+        "pnpm/crates/cli/src/cargo_deps/lockfile.rs (+44 -10)",
+        "pnpm/crates/cli/src/cargo_deps/tests.rs (+14 -11)",
+        ".changeset/frozen-cargo-lockfile-out-of-date.md (+5 -0)",
+        "pnpm/crates/cargo-resolver/src/tests/freshness.rs (+210 -0)",
+        "pnpm/crates/cli/tests/suite/cargo_install.rs (+68 -3)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 16367,
+      "title": "fix(network): keep NODE_EXTRA_CA_CERTS additive on a system without CA certificates",
+      "url": "https://github.com/pnpm/pnpm/pull/16367",
+      "author": "lazerg",
+      "mergedAt": "2026-09-29T11:30:50Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16365.\n\nOn a Linux system with no CA certificates, such as `node:24-slim`, setting `NODE_EXTRA_CA_CERTS` made registry requests fail with `UnknownIssuer`. `rustls-platform-verifier` only rejects an empty system store when it gets no extra roots. The extra CA alone kept the platform client buildable, so the bundled-roots fallback from pnpm/pnpm#13593 never ran and the client trusted only that one CA.\n\nThe platform build now first checks the system store without the extra roots. When that fails, the client falls back to the bundled Mozilla roots, with the extra roots still added. Nothing changes when the system store loads or when `ca`/`cafile` is set in `.npmrc`.\n\nLocal check: I ran the issue's repro in a `debian:trixie` container (no `ca-certificates`) with Linux debug builds. `pnpm add is-number@7.0.0` with `NODE_EXTRA_CA_CERTS` failed with `UnknownIssuer` before the change and succeeds after it.\n\n## Squash Commit Body\n\n```text\nrustls-platform-verifier only fails on an empty system trust store when\nit gets no extra roots. With NODE_EXTRA_CA_CERTS set, the extra CA kept\nthe platform client buildable on a system without CA certificates, so\nthe bundled-roots fallback never ran and the client trusted only that\nCA. Registry requests then failed with UnknownIssuer.\n\nBuild the platform client without the extra roots first, and fall back\nto the bundled roots (with the extra roots added) when that fails.\n\nCloses pnpm/pnpm#16365\n```\n\n## Checklist\n\n- [x] I \n…(truncated)",
+      "files": [
+        "pnpm/crates/network/src/client_builder.rs (+25 -7)",
+        ".changeset/node-extra-ca-certs-without-system-certificates.md (+5 -0)",
+        "pnpm/crates/network/src/tests/manifests.rs (+35 -2)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16382,
+      "title": "fix(git-fetcher): respect pmOnFail when preparing git-hosted deps",
+      "url": "https://github.com/pnpm/pnpm/pull/16382",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T11:38:08Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nGit-hosted dependencies now respect `pmOnFail`. Closes pnpm/pnpm#16376.\n\nWhen a git-hosted dependency pins a pnpm version (`packageManager: pnpm@x`), pnpm prepares it by running `pnpm dlx --package pnpm@x pnpm install`. It did this even when the install ran with `--pm-on-fail=ignore`. On NixOS the downloaded generic binary cannot start, and `pmOnFail=ignore` is how users keep the nixpkgs build. As a result, such dependencies could not be installed at all.\n\nWith this PR, the install's `pmOnFail` reaches the git fetcher:\n\n- If it is set to anything other than `download`, a dependency that wants pnpm gets a `pnpm` shim that runs the running pnpm directly. Nothing is downloaded.\n- The setting is also passed to the nested `pnpm install` as `pnpm_config_pm_on_fail`. Without it, a CLI flag would never reach that install, and it would switch to the dependency's pin on its own.\n\nWith `error` or `warn`, the nested install applies that policy to the dependency's pin. It fails or warns instead of downloading the pinned pnpm. Pins for other package managers (npm, Yarn, Bun) are unaffected.\n\npnpm v11 does not provision package managers for git-hosted dependencies, so the fix is v12-only.\n\n## Squash Commit Body\n\n```text\nA git-hosted dependency that pinned a pnpm version was always prepared by\nthat version, provisioned through `pnpm dlx --package pnpm@<pin>`, even\nwhen the install ran with `pmOnFail=ignore`. On NixOS the downloaded\ngeneric Linux binary cannot start, and `pmOnFail\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/fetch/sources.rs (+23 -20)",
+        "pnpm/crates/git-fetcher/src/fetcher/tests.rs (+1 -1)",
+        "pnpm/crates/git-fetcher/src/lib.rs (+1 -1)",
+        "pnpm/crates/git-fetcher/src/options.rs (+12 -1)",
+        "pnpm/crates/git-fetcher/src/pm_shims.rs (+46 -0)",
+        "pnpm/crates/git-fetcher/src/pm_shims/tests.rs (+12 -1)",
+        "pnpm/crates/git-fetcher/src/prepare_package.rs (+26 -6)",
+        "pnpm/crates/git-fetcher/src/prepare_package/tests.rs (+55 -3)",
+        "pnpm/crates/git-fetcher/src/tarball_fetcher/tests.rs (+13 -13)",
+        "pnpm/crates/package-manager/src/patch.rs (+1 -1)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 16381,
+      "title": "fix(deploy): bind the peer of a deduped injected workspace package",
+      "url": "https://github.com/pnpm/pnpm/pull/16381",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T12:10:02Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith `injectWorkspacePackages: true`, `pnpm deploy` fails with `ERR_PNPM_DEPLOY_AMBIGUOUS_PEER` when a workspace package lists its peer as a dev dependency too and the deployed graph holds a second version of that peer.\n\nThe cause is not the hard-coded `injectWorkspacePackages: false` in the deploy manifest the issue points at, which is intended: the injected snapshots are copied into the deploy lockfile. The actual chain:\n\n1. `dedupeInjectedDeps` turns an injected workspace dependency into `link:` when the injected children are a subset of the target project's importer, **dev dependencies included**. So a package whose peer is also its dev dependency is linked, not injected.\n2. Deploy synthesizes the snapshot of a linked workspace package from its importer's prod/optional dependencies only, so that peer binding is lost.\n3. `bindSingletonPeers` then sees every version of the peer in the deployed graph and throws.\n\nIn an injected workspace, deploy now binds such a peer to the package's own dev-dependency resolution, but only when the deployed graph contains it. Dedupe guarantees this is the resolution the injected snapshot would have carried. Non-injected workspaces keep the existing behavior (bind what injection would choose, refuse when ambiguous). An existing v12 test depends on that: `lib`'s dev dependency is a different version there.\n\nImplemented in both the TypeScript CLI (`createDeployFiles.ts`) and pacquet (`deploy/peers.rs`, `deploy/lockfile.rs`), with a \n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/deploy.rs (+5 -5)",
+        "pnpm/crates/cli/src/cli_args/deploy/lockfile.rs (+15 -6)",
+        "pnpm/crates/cli/src/cli_args/deploy/peers.rs (+69 -8)",
+        "pnpm/crates/cli/src/cli_args/deploy/resolution.rs (+1 -1)",
+        "pnpm11/releasing/commands/src/deploy/createDeployFiles.ts (+40 -6)",
+        ".changeset/deploy-injected-deduped-peer.md (+7 -0)",
+        "pnpm/crates/cli/tests/suite/deploy/peers.rs (+130 -0)",
+        "pnpm11/releasing/commands/test/deploy/deploy.test.ts (+64 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 16384,
+      "title": "fix(release): prevent ppc64le startup crashes",
+      "url": "https://github.com/pnpm/pnpm/pull/16384",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T12:18:08Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFix the Linux ppc64le release binary crashing before `pnpm --version` can print anything. Use Rust's bundled LLD for this target while keeping the existing cross compiler and glibc baseline. Add a release smoke test under QEMU with a newer libc.\n\nCloses pnpm/pnpm#16380.\n\n## Squash Commit Body\n\n```text\nThe cross 0.2.5 ppc64le image uses binutils 2.26.1. It mislinks\ncalls to optional libc functions absent from its sysroot: the\npublished binary tests the dynamically resolved gettid address,\nthen branches to an unmapped address instead of calling it.\n\nLet GCC retain its sysroot and library selection, but route its\nlinker invocation to the LLD bundled with the pinned Rust toolchain.\nThis fixes the weak-symbol calls without raising the glibc baseline\nor adding another linker download. Scope the setting to ppc64le.\n\nSmoke-test the actual release binary against a newer libc, where\ngettid is present. Testing only against the build sysroot misses\nthe bug because Rust takes its syscall fallback there.\n\nCloses pnpm/pnpm#16380.\n```\n\n## Validation\n\n- Reproduced the published v12.8.1 crash under QEMU and traced it to the invalid `gettid` call.\n- A minimal Rust startup/threading reproducer fails with the original linker and passes with LLD on glibc 2.23 and 2.36.\n- Full ppc64le release build passes `--version` under QEMU with glibc 2.23, 2.36, and Ubuntu 24.04's 2.39. An offline local-package install on 2.39 succeeds and the installed module loads correctly.\n- TypeScript compilat\n…(truncated)",
+      "files": [
+        ".cargo/config.toml (+5 -0)",
+        ".changeset/fix-ppc64le-startup.md (+5 -0)",
+        ".github/scripts/rust-lld/ld (+5 -0)",
+        ".github/workflows/release.yml (+14 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16371,
+      "title": "fix(executor): read only PATH, not Path, for scripts outside Windows",
+      "url": "https://github.com/pnpm/pnpm/pull/16371",
+      "author": "officialaritro",
+      "mergedAt": "2026-09-29T12:35:31Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nOn macOS and Linux, lifecycle scripts and `pnpm run` now always get `PATH` from the `PATH` variable. Before, a `Path` variable could supply it.\n\npnpm 12 matched `PATH` case-insensitively on every platform. `path_value` in `pnpm/crates/executor/src/make_env.rs` returned the first key of the environment map that matched, and the spawns in `lifecycle.rs` and `run_script.rs` dropped every matching key before they set `PATH`. Environment names are case-sensitive outside Windows, so `Path` is a variable of its own there. When the environment held both, the `HashMap` order decided which value a script got. Each script builds its own map, so two scripts in one install could get different values.\n\nThis is the cause of pnpm/pnpm#16308. The reporter's shell has a full `PATH` and a `Path` that holds only the system directories. Scripts that got `Path` failed with `exec: node: not found`, while other scripts in the same install worked. pnpm 11 is not affected, because Node.js reads `process.env.PATH` case-sensitively on macOS and Linux.\n\nThe new `is_path_key` matches `PATH` exactly outside Windows and keeps the case-insensitive match on Windows. The lookup and both spawns use it, so `Path` neither supplies `PATH` nor gets dropped.\n\n`set_command_path` in `pnpm/crates/cli/src/path_env.rs`, which `pnpm exec` and the other CLI spawn sites use, removed `Path` along with `PATH` on every platform. It now removes `Path` only on Windows, so a POSIX `Path` reaches those children unchang\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/path_env.rs (+5 -2)",
+        "pnpm/crates/cli/src/path_env/tests.rs (+14 -0)",
+        "pnpm/crates/executor/src/lifecycle.rs (+2 -4)",
+        "pnpm/crates/executor/src/lifecycle/tests.rs (+70 -0)",
+        "pnpm/crates/executor/src/make_env.rs (+11 -5)",
+        "pnpm/crates/executor/src/make_env/tests.rs (+14 -1)",
+        "pnpm/crates/executor/src/run_script.rs (+2 -2)",
+        ".changeset/lifecycle-path-case.md (+5 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 16379,
+      "title": "fix(cmd-shim): fall back to PATH for shim helpers",
+      "url": "https://github.com/pnpm/pnpm/pull/16379",
+      "author": "Newspicel",
+      "mergedAt": "2026-09-29T13:12:26Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Shims fall back to the filtered `PATH` when `command -p` finds no helper, as in a Nix build sandbox.\n\nA helper comes from `PATH` only when `PATH` has it, because the bash 3.2 that macOS ships as `sh` answers `command -p -v` from `PATH`.\n\nCloses pnpm/pnpm#16377\n\n---\nHelped by an agent (Claude-Code, opus5.5)\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16379?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v2.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v2.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1793270797&installation_model_id=426870&pr_number=16379&ref=codesmith_pr_footer&repository=pnpm%2Fpnpm&return_to=https%3A%2F%2Fgithub.com%2Fpnpm%2Fpnpm%2Fpull%2F16379&signature=d541564d3948278e296ae0a36e5bb8ad92d2eb2b232d2fe98a445529c45d6685\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/autofix-with-codesmith-dark.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/autofix-with-codesmith-light.svg\"></picture></a>\n<sup>Need help on this PR? Tag <code>@codesmith-bot</code> with what you need. Autofix is disabled.</sup>\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * POSIX launchers and\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/setup.rs (+8 -4)",
+        "pnpm/crates/cli/src/cli_args/setup/tests.rs (+36 -0)",
+        "pnpm/crates/cmd-shim/src/shim/sh.rs (+12 -8)",
+        "pnpm/crates/cmd-shim/src/shim/tests.rs (+58 -14)",
+        "pnpm/npm/pnpm/pn (+8 -4)",
+        "pnpm/npm/pnpm/pnpm (+8 -4)",
+        "pnpm/npm/pnpm/pnpx (+8 -4)",
+        "pnpm/npm/pnpm/pnx (+8 -4)",
+        "pnpm11/bins/cmd-shim/src/index.ts (+10 -6)",
+        "pnpm11/bins/linker/src/index.ts (+2 -2)"
+      ],
+      "filesTotal": 24
+    },
+    {"number":16385,"title":"docs: move product documentation beside its implementation","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16389,
+      "title": "fix: skip documentation push when content is unchanged",
+      "url": "https://github.com/pnpm/pnpm/pull/16389",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T14:36:48Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nSkip the credentialed push when the generated documentation has no changes. The first manual sync built and validated the site successfully, then failed on the missing `DOCS_SYNC_TOKEN` even though the commit step had exited without creating a commit.\n\nThe commit step now emits an output only after creating a commit, and the push step requires that output. Actual documentation changes still require `DOCS_SYNC_TOKEN` in the `docs-sync` environment.\n\nObserved run: https://github.com/pnpm/pnpm/actions/runs/36582420805/job/109454508022\n\n## Squash Commit Body\n\n```text\nGate documentation publication on creation of a generated commit.\n\nAn unchanged import exits the commit step successfully, but must also skip\ncredential lookup and pushing. Emit changed=true after a successful commit\nand use it as the condition for the push step.\n```\n\n## Checklist\n\n- [x] Added a permanent regression test that executes the actual workflow commit script in an isolated Git repository for unchanged and changed documentation, checks the commit output, and verifies the push condition. The existing Documentation job runs this test. All 11 documentation script tests passed.\n- [x] Workflow lint and security checks passed.\n\nNo published package behavior changes; no changeset is required. Existing setup documentation already describes the required credential.\n\n---\nWritten by an agent (Codex, GPT-6).\n\n## Summary by CodeRabbit\n\n* **Documentation**\n  * Documentation updates are pushed when the publishe\n…(truncated)",
+      "files": [
+        ".github/scripts/copy-docs-artifact.test.mjs (+32 -0)",
+        ".github/workflows/sync-docs.yml (+3 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":16345,"title":"perf(resolver): share package ids across the walk and the peer pass","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":16393,"title":"docs: consolidate migrated documentation contributions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16372,
+      "title": "fix(executor): stop waiting for zombies left in a script's process group",
+      "url": "https://github.com/pnpm/pnpm/pull/16372",
+      "author": "huuyafwww",
+      "mergedAt": "2026-09-29T15:47:41Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nHi, and thanks for maintaining pnpm. We start our job containers with pnpm as PID 1 (`CMD [\"pnpm\", \"start\"]`), and the script there runs `pnpm` again. While preparing our move from pnpm 11 to 12, we found that from 12.6.0 on these containers no longer stop on `SIGTERM`: the script shuts down, but pnpm keeps running until the runtime sends `SIGKILL`. With the nested setup below as the container's command, `docker stop -t 10` waits the full 10 seconds and the container exits 137 on 12.6.0 through 12.8.1. With a build of this branch it returns in 1.2 to 1.7 seconds with exit code 143, within 50 ms of the script finishing its one-second shutdown.\n\n```json\n{ \"scripts\": { \"outer\": \"pnpm run inner\", \"inner\": \"sh server.sh\" } }\n```\n\nSome background on how we got here. Since pnpm/pnpm#15119, a script that pnpm runs without a terminal gets a process group of its own, and after relaying a signal `SpawnedChild::wait` calls `wait_for_process_group` until `kill(-pgid, 0)` reports the group empty, reaping its own children with `waitpid(-pgid, WNOHANG)` along the way. dash, the `sh` of Debian and of the Debian-based `node` images, stays the parent of the command it runs, and since pnpm/pnpm#15854 the `INT` trap that pnpm prepends keeps busybox `ash` from exec'ing it as well. So the relayed `SIGTERM` ends both shells of a nested run at once, and the inner pnpm and the script become children of PID 1, the outer pnpm. The script exits, but only the outer pnpm can reap it, and the ou\n…(truncated)",
+      "files": [
+        "pnpm/crates/executor/src/interrupt.rs (+3 -3)",
+        "pnpm/crates/executor/src/process_tracker.rs (+30 -19)",
+        "pnpm/crates/executor/src/process_tracker/process_table.rs (+107 -0)",
+        "pnpm/crates/executor/src/process_tracker/tests.rs (+182 -3)",
+        ".changeset/nested-run-exits-on-sigterm.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/interrupt.rs (+71 -9)"
+      ],
+      "filesTotal": 6
+    },
+    {"number":16400,"title":"docs: flatten the Introduction category in the v11 and v12 sidebars","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16370,"title":"perf(deps-resolver): run concurrent first misses once per wanted key","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16369,
+      "title": "fix(config): default childConcurrency to 5",
+      "url": "https://github.com/pnpm/pnpm/pull/16369",
+      "author": "tunglambk",
+      "mergedAt": "2026-09-29T17:07:18Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`childConcurrency` defaults to `min(4, availableParallelism())` in pacquet, but pnpm 11 and [`docs/settings/build.md`](https://pnpm.io/settings/build#childconcurrency) say 5. On this 48-core machine pacquet runs at most four build children where pnpm 11 runs five.\n\nThe commit that added the setting (`2291bc6c2e`, \"feat: build concurrency, unsafe-perm, scriptsPrependNodePath\") says it uses \"the upstream-matching default `min(4, availableParallelism())`\" and points at `getWorkspaceConcurrency`. That is pnpm's workspace-concurrency resolver, whose default really is `min(4, cores)`. The child default is applied elsewhere: `extendInstallOptions.ts:327` and `extendBuildOptions.ts:75` both set `childConcurrency: 5`, the deps-restorer falls back with `?? 5`, and after-install uses `|| 5`. I could not find a comment, commit, or task entry saying the 4 is a deliberate v12 divergence, so I treated it as a mis-port rather than a choice. If the cap is deliberate, then the docs and the v11 comparison are what need revisiting instead, and I'll drop this.\n\nThe fix gives `default_child_concurrency` its documented 5 and leaves `default_workspace_concurrency` on the scaled, capped `min(4, cores)` formula, renaming the parallelism helper so it names the setting it belongs to. A test asserts the child default is 5 and that the workspace default still caps at 4. I confirmed the test fails on the unfixed tree (`4 != 5` on this host) and passes after.\n\nThis is a pnpm v12 bug. pnpm 11 alr\n…(truncated)",
+      "files": [
+        "pnpm/crates/config/src/defaults.rs (+16 -17)",
+        "pnpm/crates/config/src/defaults/tests.rs (+20 -17)",
+        "pnpm/crates/config/src/settings.rs (+1 -1)",
+        ".changeset/child-concurrency-default-is-five.md (+5 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16368,
+      "title": "fix(config): ignore globalShims in a project manifest",
+      "url": "https://github.com/pnpm/pnpm/pull/16368",
+      "author": "tunglambk",
+      "mergedAt": "2026-09-29T17:08:49Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nA project's `pnpm-workspace.yaml` can set `globalShims`, even though the [`globalShims` docs](https://pnpm.io/settings/other#globalshims) say a project file is ignored. `apply_workspace_settings` zeroes the fields a repository must not control (`ci`, `stateDir`, `scope`, `globalDir`, `globalBinDir`, `macosBackup`, and `tools`) but not `globalShims`, so `settings.apply_to` merged the project layer into `Config.global_shims`.\n\nI reproduced it with a config test. A project manifest carrying `globalShims: false` cleared the built-in `node`, `deno`, and `bun` defaults, and `globalShims: { typescript: true }` added an entry. Both assertions fail on the current `main` and pass with the fix. The same value is what `pnpm config get globalShims`, `pnpm shim list`, and a global install's shim handling read. The dispatcher already loads its own trusted configuration, so this was a reporting leak rather than a way for a project to choose what runs.\n\nOnly a project's manifest is dropped. A global command anchors its config at the pnpm home, so a `pnpm-workspace.yaml` there is one of the trusted locations the docs name. My first cut zeroed the field unconditionally, which also dropped that layer, and `Rust CI / Test / macos` caught it: `global_shims_all_prefers_local_bins` failed because `pnpm add -g` stopped writing a context-aware shim. The drop is now conditional on the manifest not being the pnpm home's own, and a config test covers the pnpm-home layer alongside the two proj\n…(truncated)",
+      "files": [
+        "pnpm/crates/config/src/workspace_settings.rs (+13 -1)",
+        ".changeset/global-shims-ignored-in-project-manifest.md (+5 -0)",
+        "pnpm/crates/config/src/tests/workspace_settings_json_env_env_default.rs (+58 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":16402,"title":"docs(changeset): add patch release note for pnpm/pnpm#16370","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16401,"title":"test(package-manager): pin declared and undeclared importers outside the lockfile dir","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16399,"title":"perf(package-manager): use the directory-clone cache for fresh hoisted installs","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16387,
+      "title": "fix(store): prune expired dlx cache entries before the store",
+      "url": "https://github.com/pnpm/pnpm/pull/16387",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T18:46:22Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm store prune` removes expired `pnpm dlx` cache entries (older than `dlxCacheMaxAge`, one day by default), but it did so only after pruning the store. While the store was being pruned, those entries still held hard links to the store files. In v11 they were also still registered as store projects, because v11 dlx installs through the global virtual store. So the packages that only they used survived until the next `pnpm store prune`. Both CLIs now clean the dlx cache first.\n\nEntries that have not expired are still kept. That is intended; see the discussion.\n\nRelated to https://github.com/pnpm/pnpm/discussions/16383\n\nKnown limit (v11 only): the global virtual store sweep skips when no live project is registered. If the expired dlx entries were the store's only registered projects, their packages still stay. The guard also keeps the slots of projects that use the global virtual store without being registered (frozen-store installs, failed registry writes), so relaxing it needs more work. Tracked in https://github.com/pnpm/tasks/issues/57. v12 dlx installs without the global virtual store, so it is not affected, and the changesets are split to say so.\n\n## Squash Commit Body\n\n```text\n`pnpm store prune` removed the dlx cache entries older than dlxCacheMaxAge\nonly after it had pruned the store. While the store was pruned, those\nentries still held hard links to the store files and (in v11, where dlx\ninstalls into the global virtual store) still registered their insta\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/store.rs (+5 -2)",
+        "pnpm11/store/commands/src/store/storePrune.ts (+5 -2)",
+        ".changeset/dlx-cache-prune-order-v11.md (+6 -0)",
+        ".changeset/dlx-cache-prune-order.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/store.rs (+42 -0)",
+        "pnpm11/store/commands/test/store/storePrune.ts (+40 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 16404,
+      "title": "fix(install): keep the repeat-install fast path for injected workspace deps",
+      "url": "https://github.com/pnpm/pnpm/pull/16404",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T19:07:59Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nSince v12.7.0 (#15356), a workspace that injects its own projects (`injectWorkspacePackages: true` or `dependenciesMeta.*.injected`) never takes the repeat-install fast path. Every `pnpm install` runs the full install and copies the injected projects again. Bit found this: its \"repeat install with nothing changed\" test expects \"Already up to date\" and now gets `Progress: ... added 1`.\n\n#15356 added three checks, and each one rejects this setup:\n\n1. **Optimistic repeat-install check**: it skipped whenever a project declared an injected workspace dependency. Now it skips only with `sharedWorkspaceLockfile: false`, the case #7209 is about. With a shared lockfile the injected project is an importer of the same lockfile, and the existing per-project manifest comparison already catches a change to its dependencies.\n2. **Directory freshness check** (`check_directory_dependencies_freshness`): it read the injected project's `package.json` from disk. A Node-API embedder passes manifests in memory, and the directory may have no `package.json`, so the check reported the dependency outdated. It now looks up the project's manifest from the install's project list first and falls back to the disk.\n3. **`linked_dep_is_up_to_date`**: it reported every `file:` importer version as out of date. For an injected workspace project, the directory freshness check that runs just before it has already compared the project's dependencies with its snapshot, so the function returns up to date a\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install.rs (+3 -2)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness.rs (+14 -4)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_deps.rs (+23 -4)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/manifest.rs (+14 -2)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/tests.rs (+4 -1)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/local_file_deps.rs (+28 -16)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/manifest_agreement.rs (+20 -40)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/manifest_agreement/settings_drift.rs (+48 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests.rs (+2 -0)",
+        ".changeset/repeat-install-injected-workspace-deps.md (+6 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 16235,
+      "title": "fix(workspace): enable zlib-rs at flate2",
+      "url": "https://github.com/pnpm/pnpm/pull/16235",
+      "author": "oech3",
+      "mergedAt": "2026-09-29T19:11:24Z",
+      "labels": [
+        "state: automerge",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nEnable `zlib-rs` feature on the `flate2` crate for faster gzip/tarball package decompression.\nReference: https://github.com/rust-lang/flate2-rs#backends\n\n## Squash Commit Body\n\n```text\nEnable `zlib-rs` feature for `flate2` decompression backend to improve package extraction performance.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published package. Keep it short and written for pnpm users — it becomes a release note.\n- [ ] Added or updated tests.\n- [x] Updated the documentation if needed.\n\n## Summary by CodeRabbit\n\n* **Chores**\n  * Updated the app’s underlying compression configuration. This change does not add or remove any user-facing features, and no visible behavior changes are expected.",
+      "files": [
+        "Cargo.toml (+1 -1)",
+        ".changeset/flate2-zlib-rs.md (+6 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 16396,
+      "title": "fix: stop the pre-run install for a dedupe baseline a frozen install cannot record",
+      "url": "https://github.com/pnpm/pnpm/pull/16396",
+      "author": "cnZary",
+      "mergedAt": "2026-09-29T21:34:14Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16374.\n\nWith `autoDedupe: true`, a workspace installed with a frozen lockfile made\n`verifyDepsBeforeRun` (the default `install` action) spawn an install before\nevery `pnpm run` / `pnpm exec`. On CI that spawned install runs frozen too, so\nthe drift it was reacting to could never be cleared and the cycle repeated on\nevery run.\n\nTwo paths kept the recorded dedupe baseline from ever matching:\n\n- `refresh_up_to_date_workspace` (`install/prepare_modules_state/up_to_date.rs`)\n  rebuilds the workspace state through `build_workspace_state`, which clears\n  `autoDedupe`; only a resolving install sets it again. Its two sibling\n  refresh paths carry the recorded value forward\n  (`install/optimistic_repeat_install/settle.rs` and\n  `install/optimistic_repeat_install/deps_status.rs`), so a no-op\n  `pnpm install --frozen-lockfile` — the \"Lockfile is up to date, resolution\n  step is skipped\" path — dropped a baseline a previous install had recorded.\n- The pre-run gate then read the missing baseline as settings drift and\n  spawned `pnpm install`. On CI that install is frozen\n  (`InstallArgs::resolve_frozen_lockfile`: CI plus a non-empty lockfile), and a\n  frozen install never re-resolves, so it cannot record the baseline the gate\n  was asking for.\n\nThe fix carries the recorded `autoDedupe` through the up-to-date refresh, and\nmakes the gate skip that key when the install it would spawn runs frozen.\nOutside CI (or with `frozenLockfile: false` / `--no-prefer-frozen-lo\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/prepare_modules_state.rs (+18 -3)",
+        "pnpm/crates/package-manager/src/install/prepare_modules_state/up_to_date.rs (+15 -2)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/deps_status.rs (+20 -2)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/settle.rs (+9 -0)",
+        ".changeset/frozen-install-keeps-the-dedupe-baseline.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/auto_dedupe.rs (+137 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests/auto_dedupe.rs (+34 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 16407,
+      "title": "fix(resolver): let a too-new latest fall back to a prerelease of its major",
+      "url": "https://github.com/pnpm/pnpm/pull/16407",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T21:40:59Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWhen `minimumReleaseAge` hides the version a stable dist-tag points to, the tag was only allowed to move to other stable versions. For a package that shipped `1.0.0` after months of `1.0.0-beta.x` releases tagged `latest`, `latest` fell back to `0.0.1` during the release-age window (see cloudflare/vinext#3567, where `pnpm create vinext-app@latest` failed with `ERR_PNPM_DLX_NO_BIN`).\n\nCandidates for a dropped tag are now ranked in tiers, compared before the version:\n\n1. same prerelease-ness as the target, on its major (unchanged)\n2. a prerelease of the stable target's major, below the target (new)\n3. same prerelease-ness on a lower major, `latest` only (unchanged)\n\nNon-deprecated versions still win over deprecated ones. Without a tier-2 candidate the tiers follow version order, so nothing else changes. A stable version of the same major still beats a prerelease (`1.5.0` too new → `1.4.0`, not `1.5.0-rc.1`).\n\nThe bug is in both stacks: fixed in the Rust resolver (`best_tag_candidate`) and in v11's `filterPkgMetadataVersions`.\n\nCloses pnpm/pnpm#16388\n\n## Squash Commit Body\n\n```text\nWhen minimumReleaseAge drops the version a stable dist-tag points to, the\ntag could only move to stable versions, so `latest` on a freshly released\n1.0.0 fell back to an ancient 0.0.1 even though 1.0.0-beta.4 had been\n`latest` until then. A prerelease of the target's major that precedes it\nnow ranks above a stable version of a lower major. A stable version of the\nsame major still wins, and\n…(truncated)",
+      "files": [
+        "pnpm/crates/resolving-npm-resolver/src/pick_package_from_meta/release_age.rs (+61 -19)",
+        "pnpm/crates/resolving-npm-resolver/src/pick_package_from_meta/tests.rs (+59 -0)",
+        "pnpm11/resolving/registry/pkg-metadata-filter/src/index.ts (+46 -10)",
+        ".changeset/latest-falls-back-to-major-prerelease.md (+7 -0)",
+        "pnpm11/resolving/registry/pkg-metadata-filter/test/index.ts (+67 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 16406,
+      "title": "fix(store): put per-user lock files under XDG_RUNTIME_DIR when set",
+      "url": "https://github.com/pnpm/pnpm/pull/16406",
+      "author": "zkochan",
+      "mergedAt": "2026-09-29T22:16:23Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nOn Unix, pnpm v12 keeps its per-user lock files in `/tmp`. Those are the store operation locks, the directory-lock held files, and the verify-deps install locks. A sandbox that only allows writes to a per-session directory, such as the macOS Seatbelt profiles coding agents use, therefore can't run any command that touches the store (`ERR_PNPM_STORE_DIR_OPEN_OPERATION_LOCK`).\n\nThis PR puts that lock root in `$XDG_RUNTIME_DIR` when the variable holds an absolute path to a directory the current effective user owns, which is the issue's main proposal. The ownership check covers `su` and `sudo --preserve-env`, which pass on the caller's `/run/user/<uid>`. A directory that the owner cannot write to, or that other users can write to, is also rejected. In the second case another user could rename a held lock directory or pre-create one. Without the variable it stays in `/tmp` (on Android, `HOME/.cache`). `TMPDIR` is still ignored on purpose, because it varies per process. Windows is unchanged and keeps using `LocalAppData`.\n\nThe trade-off: two processes coordinate only if they resolve the same directory. So a process with `XDG_RUNTIME_DIR` (a login shell) and one without it (a cron job running `pnpm store prune`) no longer wait for each other. On Linux, login sessions all get the same `/run/user/<uid>`, so this only affects processes that run outside a session. The storeDir docs now say this.\n\nThis is v12 only. pnpm v11 has no store operation locks.\n\nCloses pnpm/pnpm#1639\n…(truncated)",
+      "files": [
+        "pnpm/crates/fs/src/secure_temp_lock.rs (+35 -2)",
+        "pnpm/crates/fs/src/secure_temp_lock/tests.rs (+78 -0)",
+        ".changeset/store-locks-follow-xdg-runtime-dir.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/store.rs (+27 -0)",
+        "pnpm/docs/settings/store.md (+9 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":16392,"title":"fix(npm-lifecycle): keep waiting for a zombie whose other threads still run","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16398,"title":"fix: validate allowBuilds setting","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16391,"title":"docs: note that a configured scriptShell takes precedence over shellEmulator","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16260,"title":"test: run pnpm in a StackBlitz WebContainer on the ecosystem e2e cron","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16366,"title":"fix(cli): refuse machine-level settings in a project manifest","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16352,"title":"fix(publish): recognize npm README file names","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16405,"title":"fix(deploy): don't copy the workspace root's package manager pin into the deployed manifest","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16412,"title":"chore(release): pacquet 12.8.2","hint":"other","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}

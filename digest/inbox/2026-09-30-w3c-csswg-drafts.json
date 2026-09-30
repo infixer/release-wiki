@@ -1,0 +1,256 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-09-30T00:33:17Z",
+  "range": {
+    "from": "2026-09-25T09:55:09Z",
+    "to": "2026-09-30T00:33:17Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14019,
+      "title": "[css-fonts-5][editorial] Add more meta text scale examples",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14019",
+      "author": "davidsgrogan",
+      "mergedAt": "2026-09-28T18:21:53Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Follow up to offline June 1 convo.",
+      "files": [
+        "css-fonts-5/Overview.bs (+80 -2)",
+        "css-fonts-5/images/text-scale-example.png (+0 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 14354,
+      "title": "[css-scroll-snap-1] Support scroll snap for single-axis scroll containers #14018 ",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14354",
+      "author": "lcdavid94",
+      "mergedAt": "2026-09-28T22:49:05Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "[css-scroll-snap-1] Support scroll snap for single-axis scroll containers #14018\n\nClarify scroll snapping behavior when an intermediate container is a single-axis scroll container:\n- A single-axis scroll container only establishes snap positions in its scrollable axis; specifying `scroll-snap-type` in a non-scrollable axis has no effect.\n- Snap position capturing and snap container resolution are evaluated per-axis, allowing unconsumed snap axes to propagate to ancestor scroll containers.",
+      "files": [
+        "css-scroll-snap-1/Overview.bs (+15 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14301,
+      "title": "[css-highlight-1][css-pseudo-4] Add ::highlight(*)",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14301",
+      "author": "DevSDK",
+      "mergedAt": "2026-09-29T19:19:01Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "[css-highlight-1], [css-pseudo-4] add `::highlight(*)` selector as per https://github.com/w3c/csswg-drafts/issues/9091",
+      "files": [
+        "css-highlight-api-1/Overview.bs (+1 -1)",
+        "css-pseudo-4/Overview.bs (+20 -4)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-09-26T18:43:50Z",
+    "to": "2026-09-30T00:33:17Z"
+  },
+  "commits": [
+    {
+      "sha": "af8f28f",
+      "url": "https://github.com/w3c/csswg-drafts/commit/af8f28fb7f421ac345ae19247bc15ba74254a29d",
+      "author": "davidsgrogan",
+      "committedAt": "2026-09-28T18:21:52Z",
+      "title": "tabs spaces 2",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-5/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "00e1728",
+      "url": "https://github.com/w3c/csswg-drafts/commit/00e172809a6714918ce47ef491e46f8a62e1b3f0",
+      "author": "davidsgrogan",
+      "committedAt": "2026-09-28T18:21:52Z",
+      "title": "tabs spaces",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-5/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "ff5c229",
+      "url": "https://github.com/w3c/csswg-drafts/commit/ff5c2295efcbe4b9fd56d0530847bcd6208ce4cc",
+      "author": "davidsgrogan",
+      "committedAt": "2026-09-28T18:21:52Z",
+      "title": "and the text changes",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-5/Overview.bs (+39 -13)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "46a35a2",
+      "url": "https://github.com/w3c/csswg-drafts/commit/46a35a2cdcf3a29655a8d21027cf7ad141404540",
+      "author": "davidsgrogan",
+      "committedAt": "2026-09-28T18:21:52Z",
+      "title": "fixes from review",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Included the image showing scaling rate changes from pdr",
+      "files": [
+        "css-fonts-5/images/text-scale-example.png (+0 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "1d0d5ef",
+      "url": "https://github.com/w3c/csswg-drafts/commit/1d0d5efcdb167baa6be4d5c9b203db55993d5589",
+      "author": "davidsgrogan",
+      "committedAt": "2026-09-28T18:21:52Z",
+      "title": "Apply suggestion from @JoshTumath",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Co-authored-by: Josh Tumath <josh.tumath@bbc.co.uk>",
+      "files": [
+        "css-fonts-5/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "b78b59c",
+      "url": "https://github.com/w3c/csswg-drafts/commit/b78b59c1f26aedc46499c756465b6b234ad0fed7",
+      "author": "davidsgrogan",
+      "committedAt": "2026-09-28T18:21:52Z",
+      "title": "[css-fonts-5] Add more meta text scale examples",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-5/Overview.bs (+53 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "528b2e3",
+      "url": "https://github.com/w3c/csswg-drafts/commit/528b2e31b905ff8fd150ab8623a2b300503a2cca",
+      "author": "tabatkins",
+      "committedAt": "2026-09-28T21:52:45Z",
+      "title": "[css-scroll-snap-1] Only scroll containers capture snap positions. #14445",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-scroll-snap-1/Overview.bs (+8 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "d603df8",
+      "url": "https://github.com/w3c/csswg-drafts/commit/d603df842a61e072a11cf7847c54a7ff2d46262c",
+      "author": "lcdavid94",
+      "committedAt": "2026-09-28T22:49:04Z",
+      "title": "[css-scroll-snap-1] Single axis scroll snap",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-scroll-snap-1/Overview.bs (+12 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "9c3f608",
+      "url": "https://github.com/w3c/csswg-drafts/commit/9c3f60869c2ac4c29b28ed1208ce72cbbf4f30ae",
+      "author": "DevSDK",
+      "committedAt": "2026-09-29T19:19:00Z",
+      "title": "apply minors",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-highlight-api-1/Overview.bs (+1 -1)",
+        "css-pseudo-4/Overview.bs (+12 -7)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "sha": "dbe47b3",
+      "url": "https://github.com/w3c/csswg-drafts/commit/dbe47b3f7b63f77430edb3dfefb3bd0f78bb882e",
+      "author": "DevSDK",
+      "committedAt": "2026-09-29T19:19:00Z",
+      "title": "remove particular note",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-highlight-api-1/Overview.bs (+0 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "8a31421",
+      "url": "https://github.com/w3c/csswg-drafts/commit/8a31421288e137435d0271c151fcadd851d6d134",
+      "author": "DevSDK",
+      "committedAt": "2026-09-29T19:19:00Z",
+      "title": "Revert note change and add specific example *",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-highlight-api-1/Overview.bs (+7 -8)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "568abd3",
+      "url": "https://github.com/w3c/csswg-drafts/commit/568abd3523753be7373a81a35fc0df3833f568ee",
+      "author": "DevSDK",
+      "committedAt": "2026-09-29T19:19:00Z",
+      "title": "Add ::highlight(*)",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "as per https://github.com/w3c/csswg-drafts/issues/9091",
+      "files": [
+        "css-highlight-api-1/Overview.bs (+21 -4)",
+        "css-pseudo-4/Overview.bs (+6 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "sha": "29f1bc4",
+      "url": "https://github.com/w3c/csswg-drafts/commit/29f1bc46c89b0fcee23a956f990e2ae4dd499e4e",
+      "author": "svgeesus",
+      "committedAt": "2026-09-29T19:22:32Z",
+      "title": "[css-syntax-3][editorial] Add required link to implementation report",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+4 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "4a29e09",
+      "url": "https://github.com/w3c/csswg-drafts/commit/4a29e09e9a2dbb09f505fbce7d145875ec25b1de",
+      "author": "svgeesus",
+      "committedAt": "2026-09-29T19:22:34Z",
+      "title": "[css-syntax-3][editorial] Add WPT annotations",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+124 -4)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

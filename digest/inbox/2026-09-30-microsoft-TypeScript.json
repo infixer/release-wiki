@@ -1,0 +1,700 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-09-30T00:33:17Z",
+  "range": {
+    "from": "2026-09-25T23:51:52Z",
+    "to": "2026-09-30T00:33:17Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64454,
+      "title": "Replace vscode l10n-dev with local localization generator",
+      "url": "https://github.com/microsoft/TypeScript/pull/64454",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-28T17:10:21Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The extension only needs string extraction and pseudo-localization, but `@vscode/l10n-dev` pulls in a large dependency tree. Generate these resources with existing repository tooling instead, which is close enough for us, I think!\n\nDeletes 85 deps and an npm warning.",
+      "files": [
+        "Herebyfile.mjs (+2 -2)",
+        "package-lock.json (+6 -1091)",
+        "packages/vscode-typescript/l10n/bundle.l10n.json (+60 -60)",
+        "packages/vscode-typescript/package.json (+2 -3)",
+        "tools/scripts/gen/extensionLocalization.mts (+101 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64455,
+      "title": "Add getJSDocCommentsAndTags back with functionality of 6.0",
+      "url": "https://github.com/microsoft/TypeScript/pull/64455",
+      "author": "dragomirtitian",
+      "mergedAt": "2026-09-28T17:27:02Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64394",
+      "files": [
+        "packages/typescript/src/ast/jsdoc.ts (+17 -11)",
+        "packages/typescript/test/async/api.test.ts (+152 -0)",
+        "packages/typescript/test/sync/api.test.ts (+152 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64504,
+      "title": "Avoid npm bin relinking during extension version bump",
+      "url": "https://github.com/microsoft/TypeScript/pull/64504",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-28T18:58:29Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 64096,
+      "title": "feat: add es2026 as a valid target and lib",
+      "url": "https://github.com/microsoft/TypeScript/pull/64096",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-09-28T18:58:56Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #63704",
+      "files": [
+        "packages/typescript/src/enums/scriptTarget.enum.ts (+1 -0)",
+        "packages/typescript/src/enums/scriptTarget.ts (+1 -0)",
+        "tsc/internal/bundled/embed_generated.go (+27 -12)",
+        "tsc/internal/bundled/libs/lib.es2026.array.d.ts (+2 -2)",
+        "tsc/internal/bundled/libs/lib.es2026.collection.d.ts (+0 -0)",
+        "tsc/internal/bundled/libs/lib.es2026.d.ts (+24 -0)",
+        "tsc/internal/bundled/libs/lib.es2026.error.d.ts (+0 -0)",
+        "tsc/internal/bundled/libs/lib.es2026.full.d.ts (+22 -0)",
+        "tsc/internal/bundled/libs/lib.es2026.iterator.d.ts (+25 -0)",
+        "tsc/internal/bundled/libs/lib.es2026.json.d.ts (+54 -0)"
+      ],
+      "filesTotal": 560
+    },
+    {
+      "number": 64485,
+      "title": "Report unused locals in class static blocks",
+      "url": "https://github.com/microsoft/TypeScript/pull/64485",
+      "author": "Andarist",
+      "mergedAt": "2026-09-28T18:58:56Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "fixes https://github.com/microsoft/TypeScript/issues/64484",
+      "files": [
+        "tsc/internal/checker/checker.go (+4 -1)",
+        "tsc/testdata/baselines/reference/compiler/unusedLocalsAndParameters.errors.txt (+18 -5)",
+        "tsc/testdata/baselines/reference/compiler/unusedLocalsAndParameters.js (+13 -0)",
+        "tsc/testdata/baselines/reference/compiler/unusedLocalsAndParameters.symbols (+13 -3)",
+        "tsc/testdata/baselines/reference/compiler/unusedLocalsAndParameters.types (+11 -0)",
+        "tsc/testdata/tests/cases/compiler/unusedLocalsAndParameters.ts (+7 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64499,
+      "title": "Only check properties with multiple declarations for never-reduction",
+      "url": "https://github.com/microsoft/TypeScript/pull/64499",
+      "author": "ahejlsberg",
+      "mergedAt": "2026-09-28T18:58:56Z",
+      "labels": [
+        "Author: Team",
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Inspired by #64476, this PR optimizes `getReducedType` by checking only properties with declarations in multiple intersection constituents for reduction to `never`. The implementation is simpler than #64476 but should have the same effect.\n\nFixes #64474.",
+      "files": [
+        "tsc/internal/checker/checker.go (+20 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64507,
+      "title": "Restore OneLoc LCL files for localization onboarding",
+      "url": "https://github.com/microsoft/TypeScript/pull/64507",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-28T18:58:56Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The loc team wants these back for onboarding; restore them. will delete them later.",
+      "files": [
+        "tools/loc/cs-CZ/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19580 -0)",
+        "tools/loc/de-DE/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19529 -0)",
+        "tools/loc/es-ES/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19583 -0)",
+        "tools/loc/fr-FR/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19583 -0)",
+        "tools/loc/it-IT/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19535 -0)",
+        "tools/loc/ja-JP/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19571 -0)",
+        "tools/loc/ko-KR/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19571 -0)",
+        "tools/loc/pl-PL/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19558 -0)",
+        "tools/loc/pt-BR/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19561 -0)",
+        "tools/loc/ru-RU/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+19534 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 64503,
+      "title": "Fix AST generation of diamond inheritance and add missing DeclarationBase extends",
+      "url": "https://github.com/microsoft/TypeScript/pull/64503",
+      "author": "andrewbranch",
+      "mergedAt": "2026-09-28T19:07:13Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes https://github.com/microsoft/TypeScript/pull/64439#discussion_r4108861535",
+      "files": [
+        "packages/typescript/src/ast/ast.generated.ts (+3 -3)",
+        "tools/scripts/tsc/ast.json (+9 -3)",
+        "tools/scripts/tsc/generate-go-ast.ts (+49 -16)",
+        "tsc/internal/ast/ast_generated.go (+2 -0)",
+        "packages/typescript/test/sync/ast.test.ts (+27 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64194,
+      "title": "fix(checker): cap template literal type size to avoid unbounded growth",
+      "url": "https://github.com/microsoft/TypeScript/pull/64194",
+      "author": "ekalinin",
+      "mergedAt": "2026-09-28T20:07:01Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #63271\n\nThe repro from the issue is a recursive conditional type whose check type becomes `any` after a few iterations:\n\n```ts\ntype Dec<N extends number> =\n    N extends 5 ? 4 : N extends 4 ? 3 : N extends 3 ? 2 :\n    N extends 2 ? any :\n    N extends 1 ? 0 : 0;\n\ntype Recur<N extends number, S extends string> =\n    N extends 0 ? S : Recur<Dec<N>, `${S}_${S}`>;\n\ntype Explode = {\n    [P in Recur<5, \"a\"> as `${P}_key`]: any;\n};\n```\n\nWith `N = any`, `getConditionalType` includes both branches and keeps tail-recursing with `Dec<any> = any`, while `S` doubles on every iteration. The tail recursion limit of 1000 iterations is never reached, because the string grows exponentially and memory runs out first.\n\nThe JS compiler threw `RangeError: Invalid string length`. The Go port has no string length limit, so it never terminates: after 45 seconds the process was at 9.8 GB RSS and still growing.\n\n## Fix\n\n`getTemplateLiteralType` now bounds the size of the type it produces and reports TS2589 (`Type instantiation is excessively deep and possibly infinite`) when a limit is exceeded, returning `errorType`. This mirrors how `checkCrossProductUnion` bounds union sizes.\n\nTwo limits are needed:\n\n- **Text length** (50,000,000 characters). This is the case from the issue.\n- **Number of placeholders** (100,000). Once the length guard returns `errorType`, `any` is a valid placeholder, so `${any}_${any}` starts doubling the number of spans instead of the text. The same growth happens in tsc.js\n…(truncated)",
+      "files": [
+        "tsc/internal/checker/checker.go (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/templateLiteralTypeExcessiveLength.errors.txt (+48 -0)",
+        "tsc/testdata/baselines/reference/compiler/templateLiteralTypeExcessiveLength.js (+45 -0)",
+        "tsc/testdata/baselines/reference/compiler/templateLiteralTypeExcessiveLength.symbols (+109 -0)",
+        "tsc/testdata/baselines/reference/compiler/templateLiteralTypeExcessiveLength.types (+58 -0)",
+        "tsc/testdata/tests/cases/compiler/templateLiteralTypeExcessiveLength.ts (+37 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64481,
+      "title": "Don't reduce intersections of mappings of the same object type",
+      "url": "https://github.com/microsoft/TypeScript/pull/64481",
+      "author": "ahejlsberg",
+      "mergedAt": "2026-09-28T22:12:38Z",
+      "labels": [
+        "Author: Team",
+        "For Backlog Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "With this PR, when a mapped type is applied to an intersection of homomorphic mappings of the same object type, we longer attempt to reduce the intersection. This in turn means that we don't eagerly resolve the members of the target object type, which helps enable creation of recursive schemas in Zod and similar libraries.\n\nFixes #64415.",
+      "files": [
+        "tsc/internal/checker/checker.go (+15 -1)",
+        "tsc/testdata/baselines/reference/compiler/recursiveTypeInference.types (+2 -2)",
+        "tsc/testdata/baselines/reference/compiler/recursiveTypeInference2.symbols (+313 -0)",
+        "tsc/testdata/baselines/reference/compiler/recursiveTypeInference2.types (+152 -0)",
+        "tsc/testdata/tests/cases/compiler/recursiveTypeInference2.ts (+48 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64471,
+      "title": "Fix crash in `isolatedDeclarations` on `this.x = …` assignments",
+      "url": "https://github.com/microsoft/TypeScript/pull/64471",
+      "author": "Andarist",
+      "mergedAt": "2026-09-28T23:37:35Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes a crash reported here: https://github.com/microsoft/TypeScript/issues/64458#issuecomment-5841264031 (fallout from https://github.com/microsoft/typescript-go/pull/4513)",
+      "files": [
+        "tsc/internal/transformers/declarations/tracker.go (+7 -1)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsJsThisPropertyAssignmentInference.errors.txt (+15 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsJsThisPropertyAssignmentInference.symbols (+18 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsJsThisPropertyAssignmentInference.types (+21 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsNonIdentifierAssignmentInference(isolateddeclarations=false).js (+38 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsNonIdentifierAssignmentInference(isolateddeclarations=false).symbols (+55 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsNonIdentifierAssignmentInference(isolateddeclarations=false).types (+75 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsNonIdentifierAssignmentInference(isolateddeclarations=true).errors.txt (+34 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsNonIdentifierAssignmentInference(isolateddeclarations=true).symbols (+55 -0)",
+        "tsc/testdata/baselines/reference/compiler/isolatedDeclarationsNonIdentifierAssignmentInference(isolateddeclarations=true).types (+75 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 64514,
+      "title": "Cache Go modules in CI",
+      "url": "https://github.com/microsoft/TypeScript/pull/64514",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-28T23:46:06Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The Go module proxy is flaky; Go 1.28 might add some retries that help, but for now I think we should just re-add caching to workflows/pipelines which don't use the internal proxy to avoid these spurious and annoying failures.\n\nYes, I realize this is a bit of a flip flop, since we had no caching, then added caching, then made caching very fine grained, then no caching, and now caching again, but I think the added time it takes to restore/save is worth not having flakes. Of course, so long as GHA caching doesn't flake.",
+      "files": [
+        "tools/pipelines/localization-update.yml (+19 -0)",
+        ".github/actions/setup-go/action.yml (+6 -0)",
+        ".github/workflows/ci.yml (+0 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64372,
+      "title": "Restore idempotency to `resolveObjectTypeMembers`",
+      "url": "https://github.com/microsoft/TypeScript/pull/64372",
+      "author": "ahejlsberg",
+      "mergedAt": "2026-09-29T03:00:26Z",
+      "labels": [
+        "Author: Team",
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "With this PR we restore idempotent behavior to `resolveObjectTypeMembers` as was originally intended. In #20400 we allowed type arguments to base types of a class or interface to observe the partially resolved set of members of that class or interface. This ends up being a source of ghost errors as for example observed in #62180. We really shouldn't do this and I think it is perfectly acceptable to disallow base class type arguments from eagerly obtaining the resolved set of members of the class or interface being declared.\n\nThe PR also improves error reporting for infinitely circular type instantiations. In the example\n\n```ts\nclass Model<Attributes = any> {\n    public createdAt: Date;\n}\n\ntype ModelAttributes<T> = Omit<T, keyof Model>;\n\nclass AutoModel<T> extends Model<ModelAttributes<T>> {}\n\nclass PersonModel extends AutoModel<PersonModel> {\n    public age: number;\n}\n```\n\nwe now report the following error in the declaration of `PersonModel`:\n\n```\nInstantiations of the following types are infinitely circular: 'Model', 'ModelAttributes', 'Exclude'.\n```\n\nwhich highlights the infinitely circular instantiation that results from `AutoModel<PersonModel>`.\n\nFixes #62180.",
+      "files": [
+        "packages/typescript/src/enums/objectFlags.enum.ts (+1 -2)",
+        "packages/typescript/src/enums/objectFlags.ts (+1 -2)",
+        "tsc/internal/api/enum_values_generated.go (+0 -1)",
+        "tsc/internal/checker/checker.go (+41 -16)",
+        "tsc/internal/checker/types.go (+1 -2)",
+        "tsc/internal/checker/utilities.go (+4 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.generated.json (+2 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.json (+8 -0)",
+        "tsc/internal/diagnostics/diagnostics_generated.go (+6 -0)",
+        "tsc/testdata/baselines/reference/compiler/keyofGenericExtendingClassDoubleLayer.errors.txt (+4 -1)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 64470,
+      "title": "Fixed a crash on JSX emit trying to emit unexpectedly recovered `BinaryExpression` in a JSX attribute",
+      "url": "https://github.com/microsoft/TypeScript/pull/64470",
+      "author": "Andarist",
+      "mergedAt": "2026-09-29T04:37:38Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes a crash reported here https://github.com/microsoft/TypeScript/issues/64458#issuecomment-5841264031",
+      "files": [
+        "tsc/internal/parser/parser.go (+3 -1)",
+        "tsc/testdata/baselines/reference/compiler/jsxAttributeInitializerMultipleElementsNoCrash(jsx=react).errors.txt (+20 -0)",
+        "tsc/testdata/baselines/reference/compiler/jsxAttributeInitializerMultipleElementsNoCrash(jsx=react).js (+12 -0)",
+        "tsc/testdata/baselines/reference/compiler/jsxAttributeInitializerMultipleElementsNoCrash(jsx=react-jsx).errors.txt (+32 -0)",
+        "tsc/testdata/baselines/reference/compiler/jsxAttributeInitializerMultipleElementsNoCrash(jsx=react-jsx).js (+12 -0)",
+        "tsc/testdata/baselines/reference/compiler/jsxAttributeValueBinaryExpression.errors.txt (+13 -4)",
+        "tsc/testdata/baselines/reference/compiler/jsxAttributeValueBinaryExpression.js (+2 -1)",
+        "tsc/testdata/tests/cases/compiler/jsxAttributeInitializerMultipleElementsNoCrash.tsx (+7 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 64493,
+      "title": "Don't let `append` overwrite sibling results in `tspath.GetCommonParents`",
+      "url": "https://github.com/microsoft/TypeScript/pull/64493",
+      "author": "auvred",
+      "mergedAt": "2026-09-29T08:08:19Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64492\n\nCause: `group.head` is a subslice of an input path's components that still has spare capacity, so when a group has more than one sub-result, they overwrite each other in the shared backing array. One directory comes out twice (or as a nonexistent path), and another is dropped.",
+      "files": [
+        "tsc/internal/tspath/path.go (+5 -1)",
+        "tsc/internal/tspath/path_test.go (+9 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64521,
+      "title": "check intersection props for never-reduction in a stable order",
+      "url": "https://github.com/microsoft/TypeScript/pull/64521",
+      "author": "maschwenk",
+      "mergedAt": "2026-09-29T14:53:23Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "follow up to:\n\n- #64499\n\n`somePropertyReducesToNever` ranges over a map, so the order it builds the combined properties in is random. when an intersection has more than one candidate, which ones get built before it returns changes from run to run, so the same program does slightly different work each time\n\non vscode from typescript-benchmarking with `--singleThreaded`, the symbol count comes out 8557485 / 8557513 / 8557486 on main, and 8557373 every time with this. before that PR it was stable too\n\ndiagnostics were the same in everything i ran (the 6 typescript-benchmarking tsc projects give the same output with and without this), but different work run to run is how order dependent output sneaks in, and it makes perf comparisons noisy\n\nthis keeps the counts in a `collections.OrderedMap` so the names are checked in the order they were found\n\n- [x] up to date with main\n- [x] tests pass (`go test ./...` in `tsc`), except `TestFSEventsWatchFileDifferentCasing`, a macOS file watcher test that fails for me under load and passes on its own\n- [x] `hereby lint`\n- [x] `hereby check:format`\n\nused claude code to help write this, ive reviewed it",
+      "files": [
+        "tsc/internal/checker/checker.go (+4 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64447,
+      "title": "[api] Improve callback FS",
+      "url": "https://github.com/microsoft/TypeScript/pull/64447",
+      "author": "andrewbranch",
+      "mergedAt": "2026-09-29T17:19:03Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Prior to #64115, we had\n\n```ts\nconst api = new API({\n  fs: createVirtualFileSystem({\n    \"/tsconfig.json\": \"{}\"\n  })\n});\n```\n\nwhich worked by registering callbacks for `readFile`, `fileExists`, `getAccessibleEntries`, etc. for the server to call back to the client with.\n\nOne piece of feedback that surfaced with the callbacks was that if you supplied your own, rather than using `createVirtualFileSystem`, any callbacks you omitted silently resulted in the server using the OS file system for those callbacks, making it easy to create an inconsistency where you supply `readFile` but forget to supply `fileExists`.\n\nAdditionally, now that we have #64115, file system callbacks might still be useful, but they shouldn't be used to serve up a complete in-memory file system. Using #64115 accomplishes the same thing with _much_ better performance, since the server avoids a round trip per FS call.\n\nSo, this PR\n\n- removes `createVirtualFileSystem` (or rather, moves it to test utilities so we can keep relying on it for testing)\n- changes the callback-based file system to enforce specifying an implementation for every function.\n\nYou don't have to implement a _callback_ for every function—there are symbols that represent a few possible server-side implementations. For example, if I want to override `readFile` only, and let everything else use the OS, previously I would have specified _only_ `readFile`. Now, that looks like this:\n\n```ts\nimport { API } from \"typescript/unstable/sync\";\nimport { s\n…(truncated)",
+      "files": [
+        "packages/typescript/src/api/async/client.ts (+27 -35)",
+        "packages/typescript/src/api/fs.ts (+76 -144)",
+        "packages/typescript/src/api/fsCallbacks.ts (+144 -0)",
+        "packages/typescript/src/api/options.ts (+16 -3)",
+        "packages/typescript/src/api/sync/client.ts (+13 -25)",
+        "tsc/cmd/tsc/api.go (+13 -9)",
+        "tsc/internal/api/callbackfs.go (+265 -35)",
+        "tsc/internal/api/callbackfs_test.go (+273 -0)",
+        "tsc/internal/api/server.go (+5 -3)",
+        "packages/typescript/test/async/api.test.ts (+221 -47)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 64523,
+      "title": "Fix regression reporting TS2565 for inherited class fields reassigned in JS",
+      "url": "https://github.com/microsoft/TypeScript/pull/64523",
+      "author": "Andarist",
+      "mergedAt": "2026-09-29T17:20:10Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes https://github.com/microsoft/TypeScript/issues/64520",
+      "files": [
+        "tsc/internal/checker/checker.go (+6 -5)",
+        "tsc/testdata/baselines/reference/compiler/thisPropertyAssignmentUsedBeforeAssignedJs1.symbols (+45 -0)",
+        "tsc/testdata/baselines/reference/compiler/thisPropertyAssignmentUsedBeforeAssignedJs1.types (+51 -0)",
+        "tsc/testdata/tests/cases/compiler/thisPropertyAssignmentUsedBeforeAssignedJs1.ts (+23 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 64468,
+      "title": "Prevent getTypeAtLocation crash on type-only import clause",
+      "url": "https://github.com/microsoft/TypeScript/pull/64468",
+      "author": "lsh4711",
+      "mergedAt": "2026-09-29T17:36:48Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64467\n\n## Context\n\nI'm building syscript, a compiler that compiles TypeScript syntax to C for systems\nprogramming. It uses the TypeScript 7 API to type-check the program and then walks\nevery node, requesting its type in a batch with `getTypeAtLocation`. That walk crashed\nthe API server on the first file that used `import type`.\n\n## Problem\n\n`checker.GetTypeAtLocation` panics with a nil pointer dereference when called on the\n`ImportClause` of a type-only import without a default binding:\n\n```ts\n// types.ts\nexport type U = number;\n// main.ts\nimport type { U } from \"./types\";\nimport type * as types from \"./types\";\n```\n\n```\npanic: runtime error: invalid memory address or nil pointer dereference\nchecker.(*Checker).tryGetDeclaredTypeOfSymbol\nchecker.(*Checker).getDeclaredTypeOfSymbol\nchecker.(*Checker).getTypeOfNode\nchecker.(*Checker).GetTypeAtLocation\n```\n\nIt reproduces with the latest nightly (`typescript@7.1.0-dev.20260926.1`).\n\n## Cause\n\n`ast.IsTypeDeclaration` returns true for a type-only `ImportClause`, so `getTypeOfNode`\ntakes the type-declaration branch and passes the result of `getSymbolOfDeclaration`\nstraight to `getDeclaredTypeOfSymbol`. An import clause only has a symbol when it has\na default binding (`import type X from \"...\"`), so for `import type { U }` and\n`import type * as ns` the symbol is nil.\n\nThe missing check looks historical rather than intentional. When this branch was\nwritten, `isTypeDeclaration` only covered type parameters, classes, interfaces, typ\n…(truncated)",
+      "files": [
+        "tsc/internal/ast/utilities.go (+1 -1)",
+        "tsc/internal/checker/checker_test.go (+56 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64422,
+      "title": "fix(64421): convert nested rest bindings to assignment targets",
+      "url": "https://github.com/microsoft/TypeScript/pull/64422",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-09-29T18:43:17Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64421",
+      "files": [
+        "tsc/internal/transformers/utilities.go (+2 -2)",
+        "tsc/testdata/baselines/reference/compiler/exportDestructuringIterator.js (+7 -1)",
+        "tsc/testdata/baselines/reference/compiler/exportDestructuringIterator.symbols (+14 -0)",
+        "tsc/testdata/baselines/reference/compiler/exportDestructuringIterator.types (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/usingDeclarationsNestedRest.js (+26 -0)",
+        "tsc/testdata/baselines/reference/compiler/usingDeclarationsNestedRest.symbols (+23 -0)",
+        "tsc/testdata/baselines/reference/compiler/usingDeclarationsNestedRest.types (+34 -0)",
+        "tsc/testdata/tests/cases/compiler/exportDestructuringIterator.ts (+3 -0)",
+        "tsc/testdata/tests/cases/compiler/usingDeclarationsNestedRest.ts (+8 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 64537,
+      "title": "Verify VSIX signatures with vsce",
+      "url": "https://github.com/microsoft/TypeScript/pull/64537",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-29T18:45:37Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Check this with vsce post-sign instead of trying to hope OpenSSL accepts the weird VSIX signing.",
+      "files": [
+        "Herebyfile.mjs (+17 -0)",
+        "tools/pipelines/vscode-typescript-build.yml (+1 -19)",
+        "tools/pipelines/vscode-typescript-publish.yml (+0 -6)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64519,
+      "title": "Better manage Program options lifetimes",
+      "url": "https://github.com/microsoft/TypeScript/pull/64519",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-29T19:28:54Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is intended to replace #64466 with something that prevents us from making this mistake in the future.\n\n`ProgramOptions` is split into three pieces:\n\n- `ProgramConfig` - data only bits like the compiler options, `SingleThreaded`, etc, that can be carried between programs as they are reused.\n- `ProgramHosts` - hosts like `CompilerHost` and `Tracing` that are specific to a program but should not be carried over as new programs have different contexts.\n- `ProgramFactories` - funcs to create checker pools or module resolvers which are only called on construction\n\nSplitting these up allows us to only persist the right ones over time and discard them when no longer needed, making it harder to accidentally retain old state.\n\nAdditionally, this PR fixes diags that are kept alive between programs (which can end up referencing old data), and tweaks the module resolver so it too has a data holding value that can be carried between.\n\nFixes #64465\nCloses #64466",
+      "files": [
+        "tsc/internal/api/module_resolution.go (+5 -20)",
+        "tsc/internal/api/session.go (+2 -2)",
+        "tsc/internal/api/session_module_resolution_test.go (+35 -4)",
+        "tsc/internal/compiler/emitHost.go (+0 -5)",
+        "tsc/internal/compiler/fileInclude.go (+22 -29)",
+        "tsc/internal/compiler/fileloader.go (+71 -71)",
+        "tsc/internal/compiler/filesparser.go (+27 -29)",
+        "tsc/internal/compiler/includeprocessor.go (+14 -13)",
+        "tsc/internal/compiler/processingDiagnostic.go (+10 -8)",
+        "tsc/internal/compiler/program.go (+71 -61)"
+      ],
+      "filesTotal": 24
+    },
+    {
+      "number": 63969,
+      "title": "Avoid cloning cached declaration types after truncation",
+      "url": "https://github.com/microsoft/TypeScript/pull/63969",
+      "author": "butros10games",
+      "mergedAt": "2026-09-29T21:15:35Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #63966\n\n## Context\n\nWhen declaration emit serializes an inferred type, cached type nodes are\ndeep-cloned when they are reused. The cache avoids recomputing each type, but\nevery cache hit still materializes a fresh copy of the cached AST subtree.\n\nFor deeply shared structural types, those copies can grow exponentially even\nafter declaration serialization has exceeded its hard limit and will report\nTS7056.\n\n## This PR\n\nType serialization now checks the existing node-builder truncation state before\nvisiting a type. Once the length limit has been reached, it uses the existing\nelided-information placeholder instead of building or cloning another subtree.\n\nCache hits reached before truncation still replay tracked symbols and add their\ncached length. If a cached node activates truncation, that node is cloned with\nits existing inner elision; subsequent type visits return the placeholder\nimmediately.\n\nThe check lives in the shared type visitor rather than a declaration-specific\nmode, matching existing node-builder truncation semantics. Existing compiler\nand quick-info expectations are updated where the earlier check changes the\nlocation or shape of the terminal placeholder.\n\nA compiler test covers the issue reproduction without emitting JavaScript or\ngenerating unnecessary type and symbol baselines.\n\n## Performance\n\nMeasured on the issue reproduction using native `tsc --declaration`:\n\n| Metric | `main` | This PR | Change |\n| --- | ---: | ---: | ---: |\n| Wall time | 12.32 s | 1.4\n…(truncated)",
+      "files": [
+        "tsc/internal/checker/nodebuilderimpl.go (+4 -0)",
+        "tsc/testdata/baselines/reference/compiler/crossProductUnionIntersectionRepeatedPropDeclarationsNoOOM1.types (+2 -2)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitOversizedCachedType.errors.txt (+22 -0)",
+        "tsc/testdata/baselines/reference/compiler/hugeDeclarationOutputGetsTruncatedWithError.types (+4 -4)",
+        "tsc/testdata/baselines/reference/compiler/nestedSpreadsAndWidening.types (+1 -1)",
+        "tsc/testdata/baselines/reference/compiler/unionElementErrorTruncation.errors.txt (+8 -8)",
+        "tsc/testdata/baselines/reference/fourslash/quickInfo/quickinfoVerbosityToplevelTruncation1.baseline (+2 -2)",
+        "tsc/testdata/baselines/reference/fourslash/quickInfo/quickinfoVerbosityToplevelTruncation2.baseline (+2 -2)",
+        "tsc/internal/fourslash/tests/codeFixClassImplementInterfaceNoTruncationProperties_test.go (+1 -1)",
+        "tsc/internal/fourslash/tests/quickInfoCanBeTruncated_test.go (+1 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 64460,
+      "title": "Fix declaration maps for export assignment expressions",
+      "url": "https://github.com/microsoft/TypeScript/pull/64460",
+      "author": "maricastroc",
+      "mergedAt": "2026-09-29T21:16:32Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64433\n\n## Analysis\n\nFor `export default <expr>` / `export = <expr>` with a non-identifier expression, declaration emit produces a synthesized `declare const _default: ...;` followed by `export default _default;` (or `export = _default;`). `transformExportAssignment` builds that export assignment with `NewExportAssignment`, so the synthesized export assignments were missing source-map ranges and the printer emitted no mapping for them. Before the logic moved into the shared `transformExportAssignment` in microsoft/typescript-go#3388, it used `UpdateExportAssignment(input, ...)`, which kept the range.\n\n```ts\nconst b = 1;\nconst d = 2;\nexport default { b, d };\n```\n\nTypeScript 6.0 emits `\"mappings\":\";;;;AAEA,wBAAwB\"` for this file; before this change the `.d.ts.map` had `\"mappings\":\"\"`. The identifier form (`export = m2;` in `declarationMaps`) also lost its statement-level start/end mappings.\n\n## Fix\n\nAssign the original statement's source-map range to each synthesized export assignment in `transformExportAssignment` via `EmitContext().AssignSourceMapRange(exportAssignment, input)`. Only the source-map range is copied, not `Loc` or the original node, so declaration output is unchanged. Copying `Loc` was considered, but it reattaches source comments to the synthesized node (e.g. `export default /** @type {P} */ _default;` in `declarationEmitCastReusesTypeNode4`).\n\n- Added `declarationMapsExportAssignmentExpression.ts`, covering a non-identifier `export default` and the share\n…(truncated)",
+      "files": [
+        "tsc/internal/transformers/declarations/transform.go (+4 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationMaps.js.map (+2 -2)",
+        "tsc/testdata/baselines/reference/compiler/declarationMaps.sourcemap.txt (+13 -7)",
+        "tsc/testdata/baselines/reference/compiler/declarationMapsExportAssignmentExpression.js (+61 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationMapsExportAssignmentExpression.js.map (+15 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationMapsExportAssignmentExpression.sourcemap.txt (+117 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationMapsExportAssignmentExpression.symbols (+32 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationMapsExportAssignmentExpression.types (+41 -0)",
+        "tsc/testdata/tests/cases/compiler/declarationMapsExportAssignmentExpression.ts (+20 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 64541,
+      "title": "Use package feed proxy for global npm installs",
+      "url": "https://github.com/microsoft/TypeScript/pull/64541",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-29T21:17:21Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The global install does not respect the local `.npmrc`, so we reach out to npm. The only reason this hasn't broken everything is because this task's script does not actually exit on error. Yay powershell.",
+      "files": [
+        "tools/pipelines/steps/setup-node-npm-ci.yml (+3 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64366,
+      "title": "Watch projects and program files close to the filesystem root",
+      "url": "https://github.com/microsoft/TypeScript/pull/64366",
+      "author": "Generalsimus",
+      "mergedAt": "2026-09-29T21:20:09Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64425.\n\n`tsc --watch` and `tsc -b --watch` never rebuild when the project lives close to the filesystem root, for example `/app`, `/srv/app`, `/server` (a common Docker `WORKDIR`) or `/home/user/project`. The same happens for a file the project imports from such a directory, for example `/shared` next to `/app`. Nothing is printed. TypeScript 6.0 rebuilds in the same setup.\n\nThis is a regression from microsoft/typescript-go#4026 (\"Rebuilt CLI watcher around new `fswatch` package\", merged 2026-06-12). Published builds show it: `@typescript/native-preview@7.0.0-dev.20260612.1`, 6.0.3 and 5.9.3 rebuild the repro below, while `7.0.0-dev.20260613.1`, `7.0.1-rc` and `7.0.2` do not.\n\n## Reproduce\n\n```sh\nmkdir /app && cd /app        # any path with fewer than 5 components, e.g. /home/user/project\necho '{\"compilerOptions\":{\"outDir\":\"out\"},\"include\":[\"*.ts\"]}' > tsconfig.json\necho 'export const x = \"AAA\";' > a.ts\nTS_WATCH_DEBUG=1 tsc --watch  # then edit a.ts\n```\n\n`TS_WATCH_DEBUG=1` shows why nothing happens:\n\n```\n[watch] no watchable ancestor for /app\n```\n\n## Cause\n\n`CanWatchDirectory` requires at least 5 path components (`/a/b/c/d`). It is applied in three places:\n\n- `WatchManager.ResolveDesiredDirs`, to every directory it is given, including the ones the project itself declares: the wildcard directories from `include`, the tsconfig directory and the cwd.\n- `Watcher.computeDesiredWatches` (`tsc --watch`), to the directory of every file the build read. That list mixes program f\n…(truncated)",
+      "files": [
+        "tsc/internal/execute/build/orchestrator.go (+10 -8)",
+        "tsc/internal/execute/tsctests/watch_shallow_test.go (+134 -0)",
+        "tsc/internal/execute/watcher.go (+14 -1)",
+        "tsc/internal/execute/watchmanager/watchmanager.go (+11 -1)",
+        "tsc/internal/execute/watchmanager/watchmanager_test.go (+63 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64479,
+      "title": "Fix flaky diagnostic added by declaration emit for untyped module imports",
+      "url": "https://github.com/microsoft/TypeScript/pull/64479",
+      "author": "Andarist",
+      "mergedAt": "2026-09-29T21:40:55Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes crash reported here: https://github.com/microsoft/TypeScript/issues/64458#issuecomment-5841267766",
+      "files": [
+        "tsc/internal/checker/checker.go (+4 -1)",
+        "tsc/internal/fourslash/fourslash.go (+8 -4)",
+        "tsc/internal/testutil/harnessutil/harnessutil.go (+3 -3)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsUntypedModule1.js (+16 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsUntypedModule1.symbols (+9 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsUntypedModule1.types (+9 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsUntypedModule2.js (+18 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsUntypedModule2.symbols (+10 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsUntypedModule2.types (+10 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsUntypedModule3.js (+18 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 64542,
+      "title": "Fix extension publisher approval job compilation",
+      "url": "https://github.com/microsoft/TypeScript/pull/64542",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-29T22:39:15Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "MicroBuild injects a publish authorization task into the agentless approval job, which 1ES rejects before the publisher can be queued. Nowhere in the UI does this show up.\n\nDisable that injection for the approval job, making the yaml pass validation (and therefore queueing works).",
+      "files": [
+        "tools/pipelines/vscode-typescript-publish.yml (+4 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64518,
+      "title": "[api] Make binder-produced symbols owned by SourceFiles in the client, like the server and 6.0",
+      "url": "https://github.com/microsoft/TypeScript/pull/64518",
+      "author": "andrewbranch",
+      "mergedAt": "2026-09-29T22:48:45Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is the first follow-up to #64434. One more to come on top of this.\n\nIn short, this makes it so that when the API returns a Symbol that was produced by the binder (i.e., the Symbol belongs to a SourceFile), it gets stored in the client-side SourceFileCache, so that binder Symbols can have reference equality across different Snapshots.\n\nThis improves cache reuse, but also opens the door to getting source file responses with attached symbols, or getting the symbol of a declaration node, without any snapshot/project/checker context at all, e.g. with `api.createSourceFile()`. This is the next follow-up.\n\nSymbol IDs in request params and responses now indicate whether the symbol can be looked up against a file (true for binder-created symbols) or against project/snapshot data (true for transient symbols).",
+      "files": [
+        "packages/typescript/src/api/async/api.ts (+251 -132)",
+        "packages/typescript/src/api/node/node.infrastructure.ts (+9 -0)",
+        "packages/typescript/src/api/node/node.ts (+21 -3)",
+        "packages/typescript/src/api/path.ts (+3 -0)",
+        "packages/typescript/src/api/proto.generated.ts (+82 -33)",
+        "packages/typescript/src/api/proto.ts (+49 -3)",
+        "packages/typescript/src/api/sourceFileCache.ts (+124 -32)",
+        "packages/typescript/src/api/sync/api.ts (+410 -225)",
+        "packages/typescript/src/enums/symbolOwnerKind.enum.ts (+6 -0)",
+        "packages/typescript/src/enums/symbolOwnerKind.ts (+6 -0)"
+      ],
+      "filesTotal": 32
+    },
+    {
+      "number": 64543,
+      "title": "Enforce exclusive checker acquisition",
+      "url": "https://github.com/microsoft/TypeScript/pull/64543",
+      "author": "jakebailey",
+      "mergedAt": "2026-09-29T23:13:32Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is a replacement for #64513.\n\nI think it's probably not worth trying to be clever about allowing checker reuse reentrancy through request chains; as seen in the linked PR and crashes, it's easy to get into situations where the checker becomes concurrently used or mismanaged.\n\nDropping this is in some ways a simplification, but is generally a noop, because often the context was being passed just to eventually ask for a checker anyway. We can still reuse checkers we previously released if they're there.\n\nCloses #64513",
+      "files": [
+        "tsc/internal/compiler/checkerpool.go (+2 -0)",
+        "tsc/internal/ls/codeactions_fixclassincorrectlyimplementsinterface.go (+3 -1)",
+        "tsc/internal/ls/codeactions_fixmissingtypeannotation.go (+2 -1)",
+        "tsc/internal/ls/codeactions_importfixes.go (+8 -8)",
+        "tsc/internal/ls/findallreferences.go (+4 -7)",
+        "tsc/internal/ls/inlay_hints.go (+16 -14)",
+        "tsc/internal/lsp/server_flakydiagnostics_test.go (+71 -0)",
+        "tsc/internal/project/checkerpool.go (+11 -39)",
+        "tsc/internal/project/checkerpool_test.go (+59 -7)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/contentMapperInlayHintsReleaseEachRange.baseline (+28 -0)"
+      ],
+      "filesTotal": 11
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "typescript-automation[bot]": 2,
+      "Copilot": 1
+    }
+  }
+}

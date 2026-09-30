@@ -1,0 +1,76 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-09-30T00:33:17Z",
+  "range": {
+    "from": "2026-09-26T23:03:41Z",
+    "to": "2026-09-30T00:33:17Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.5.2",
+      "publishedAt": "2026-08-05T16:19:44Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.5.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36423,
+      "title": "feat(nuxt,vite): add `hook`, `bundler` and `middleware` tracing channels",
+      "url": "https://github.com/nuxt/nuxt/pull/36423",
+      "author": "danielroe",
+      "mergedAt": "2026-09-28T15:46:43Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nultimately this should be implemented in https://github.com/unjs/hookable/pull/169 and upstream in vite in something like https://github.com/vitejs/vite/pull/23599\n\nthis exposes tracing channels for hooks, bundler plugins + transforms, as well as nuxt middleware; we'll use it in nuxt/cli to display the data, and we can do the same in nuxt/devtools (cc: @antfu)",
+      "files": [
+        "packages/nuxt/src/app/composables/router.ts (+4 -0)",
+        "packages/nuxt/src/app/internal/tracing.ts (+5 -1)",
+        "packages/nuxt/src/app/nuxt.ts (+6 -1)",
+        "packages/nuxt/src/app/plugins/router.ts (+13 -1)",
+        "packages/nuxt/src/pages/runtime/plugins/router.ts (+12 -2)",
+        "packages/schema/src/types/nitro.ts (+1 -1)",
+        "packages/vite/src/plugins/perf.ts (+51 -15)",
+        "packages/vite/src/utils/tracing.ts (+25 -0)",
+        "packages/nuxt/test/tracing-channel.test.ts (+44 -0)",
+        "packages/vite/test/perf.test.ts (+86 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 36434,
+      "title": "perf(kit): use `package-manager-detector` to install packages",
+      "url": "https://github.com/nuxt/nuxt/pull/36434",
+      "author": "danielroe",
+      "mergedAt": "2026-09-29T12:51:21Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nhttps://github.com/nuxt/cli/pull/1580\n\n### 📚 Description\n\nthis migrates us to `package-manager-detector`, which is a [tiny library](https://npmx.dev/package/package-manager-detector) for resolving pms + install commands and isn't dependent on corepack, so it plays nice with node 26+\n\n... and just like nypm, it supports `npm`, `yarn`, `pnpm`, `deno`, `bun`, `nub`, and `aube`...",
+      "files": [
+        "packages/kit/package.json (+2 -1)",
+        "packages/kit/src/dependency.ts (+32 -8)",
+        "pnpm-lock.yaml (+11 -5)",
+        "pnpm-workspace.yaml (+2 -1)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 4
+    }
+  }
+}

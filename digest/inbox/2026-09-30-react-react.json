@@ -1,0 +1,41 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-09-30T00:33:17Z",
+  "range": {
+    "from": "2026-09-22T17:27:00Z",
+    "to": "2026-09-30T00:33:17Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.0",
+      "publishedAt": "2026-09-09T18:01:33Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 37699,
+      "title": "[compiler] Remove unused collections in HIR passes",
+      "url": "https://github.com/react/react/pull/37699",
+      "author": "irontaek",
+      "mergedAt": "2026-09-29T12:55:50Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRemove two collections that are populated but never read during React Compiler passes:\n\n- `terminalPreds` in `propagateNonNull`\n- `placeScopes` in `alignReactiveScopesToBlockScopesHIR`\n\nThis avoids allocating and updating unused state while leaving the passes' outputs unchanged.\n\nSupersedes #37698, which was opened from the wrong GitHub account.\n\n## How did you test this change?\n\n- `env -u FORCE_COLOR -u NO_COLOR yarn workspace babel-plugin-react-compiler test` — 1,827 tests passed.\n- Prettier check passed for both changed files.",
+      "files": [
+        "compiler/packages/babel-plugin-react-compiler/src/HIR/CollectHoistablePropertyLoads.ts (+0 -4)",
+        "compiler/packages/babel-plugin-react-compiler/src/ReactiveScopes/AlignReactiveScopesToBlockScopesHIR.ts (+0 -5)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}

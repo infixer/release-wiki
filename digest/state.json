@@ -2,13 +2,13 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-09-22T17:27:00Z",
+      "lastMergedAt": "2026-09-29T12:55:50Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-09-28T02:10:57Z",
-      "lastReleaseAt": "2026-09-27T23:49:30Z"
+      "lastMergedAt": "2026-09-29T23:37:03Z",
+      "lastReleaseAt": "2026-09-29T23:51:45Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
@@ -17,37 +17,37 @@
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-09-26T23:03:41Z",
+      "lastMergedAt": "2026-09-29T12:51:21Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-09-25T22:08:31Z",
+      "lastMergedAt": "2026-09-29T16:58:02Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-09-25T23:51:52Z",
+      "lastMergedAt": "2026-09-29T23:13:32Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-09-28T07:16:34Z",
-      "lastReleaseAt": "2026-09-24T08:51:34Z"
+      "lastMergedAt": "2026-09-29T18:01:37Z",
+      "lastReleaseAt": "2026-09-28T10:29:50Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
-      "lastMergedAt": "2026-09-25T18:42:20Z",
-      "lastReleaseAt": "2026-09-25T21:50:12Z"
+      "lastMergedAt": "2026-09-29T19:39:25Z",
+      "lastReleaseAt": "2026-09-29T19:27:30Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-09-28T06:17:18Z",
+      "lastMergedAt": "2026-09-29T08:39:00Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
       "fullName": "w3c/aria",
-      "lastMergedAt": "2026-09-24T16:57:57Z",
+      "lastMergedAt": "2026-09-28T17:00:43Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/wcag": {
@@ -67,30 +67,30 @@
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-09-28T07:23:07Z",
-      "lastReleaseAt": "2026-09-25T10:40:06Z"
+      "lastMergedAt": "2026-09-30T00:17:56Z",
+      "lastReleaseAt": "2026-09-29T15:44:40Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-09-27T12:12:37Z",
+      "lastMergedAt": "2026-09-29T15:03:03Z",
       "lastReleaseAt": "2026-09-25T08:58:17Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-09-25T09:55:09Z",
-      "lastCommitAt": "2026-09-26T18:43:50Z",
+      "lastMergedAt": "2026-09-29T19:19:01Z",
+      "lastCommitAt": "2026-09-29T19:22:34Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
       "fullName": "tc39/proposals",
       "lastMergedAt": "2026-09-22T02:55:19Z",
-      "lastCommitAt": "2026-09-17T08:40:39Z",
+      "lastCommitAt": "2026-09-29T06:43:27Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "openai/codex": {
       "fullName": "openai/codex",
-      "lastReleaseAt": "2026-09-28T05:07:23Z",
-      "lastMergedAt": "2026-09-28T06:31:08Z"
+      "lastReleaseAt": "2026-09-29T23:57:16Z",
+      "lastMergedAt": "2026-09-30T00:23:22Z"
     }
   },
   "blogs": {
@@ -106,12 +106,14 @@
     },
     "firefox": {
       "seen": [
+        "https://www.firefox.com/firefox/157.0/releasenotes/",
         "https://www.firefox.com/firefox/156.0.1/releasenotes/",
         "https://www.firefox.com/firefox/156.0/releasenotes/",
         "https://www.firefox.com/firefox/155.0.1/releasenotes/",
         "https://www.firefox.com/firefox/155.0/releasenotes/",
         "https://www.firefox.com/firefox/154.0.1/releasenotes/",
         "https://www.firefox.com/firefox/154.0/releasenotes/",
+        "https://www.firefox.com/firefox/153.4.0/releasenotes/",
         "https://www.firefox.com/firefox/153.3.0/releasenotes/",
         "https://www.firefox.com/firefox/153.2.0/releasenotes/",
         "https://www.firefox.com/firefox/153.1.0/releasenotes/",
@@ -160,6 +162,7 @@
         "https://www.firefox.com/firefox/141.0.3/releasenotes/",
         "https://www.firefox.com/firefox/141.0.2/releasenotes/",
         "https://www.firefox.com/firefox/141.0/releasenotes/",
+        "https://www.firefox.com/firefox/140.17.0/releasenotes/",
         "https://www.firefox.com/firefox/140.16.0/releasenotes/",
         "https://www.firefox.com/firefox/140.15.0/releasenotes/",
         "https://www.firefox.com/firefox/140.14.0/releasenotes/",
@@ -270,6 +273,7 @@
         "https://www.firefox.com/firefox/116.0.2/releasenotes/",
         "https://www.firefox.com/firefox/116.0.1/releasenotes/",
         "https://www.firefox.com/firefox/116.0/releasenotes/",
+        "https://www.firefox.com/firefox/115.42.0/releasenotes/",
         "https://www.firefox.com/firefox/115.41.0/releasenotes/",
         "https://www.firefox.com/firefox/115.40.0/releasenotes/",
         "https://www.firefox.com/firefox/115.39.0/releasenotes/",
