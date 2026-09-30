@@ -1,6 +1,6 @@
 ---
 title: Diff パネル
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -8,17 +8,18 @@ tags:
 
 ## 概要
 
-`mods/diff` は、ビルトインの diff パネルと同じ見た目・挙動を目指す独立実装。最初の編集でパネルを自動的に開く条件（メインループでの編集かつファイルチェックポイントが有効なときのみ）、幅が確定しないうちにエンジンが開こうとした表示の扱い、ドッキング表示前にリポジトリを読んでおくことで「Loading diff…」を経由しない点、再開・継続したセッションでの表示や `/clear` の挙動、セッション開始時刻の基準など、細かな差分を随時ビルトインに合わせている。読み取り専用のシェルコマンド（`isReadOnly`）の後は diff を再取得せず、`git diff` には常に `--no-color` を付けて git の色設定に左右されないようにしている。フックのマッチャーはリテラルのコマンド名（`'diff'`）と、同梱ビルドでの登録名 `cc-plugin-diff` にも対応する。`/diff` による手動の開閉は影響を受けない。
+`mods/diff` は、ビルトインの diff パネルと同じ見た目・挙動を目指す独立実装。最初の編集でパネルを自動的に開く条件（メインループでの編集かつファイルチェックポイントが有効なときのみ）、幅が確定しないうちにエンジンが開こうとした表示の扱い、ドッキング表示前にリポジトリを読んでおくことで「Loading diff…」を経由しない点、再開・継続したセッションでの表示や `/clear` の挙動、セッション開始時刻の基準など、細かな差分を随時ビルトインに合わせている。読み取り専用のシェルコマンド（`isReadOnly`）の後は diff を再取得しない。`git diff` に常に `--no-color` を付ける変更（[#96363](https://github.com/anthropics/claude-code/pull/96363)）は 2026-09-30 に revert され、以前の挙動に戻っている。フックのマッチャーはリテラルのコマンド名（`'diff'`）と、同梱ビルドでの登録名 `cc-plugin-diff` にも対応する。`/diff` による手動の開閉は影響を受けない。
 
 ## 主な API・オプション
 
 - `/diff` — 手動でのパネル開閉
 - `$.session.usage()` の `startedAt` — セッション開始時刻の基準（返さないエンジンでは mod 自身の起動時刻を使用）
-- `DIFF_LEADING_ARGS` — mod が起動するすべての `git diff` に共通の引数（`--no-color` を含む）
+- `DIFF_LEADING_ARGS` — mod が起動するすべての `git diff` に共通の引数（`--no-color` は revert で外れた）
 - `PLUGIN_NAMES = ['diff', 'cc-plugin-diff']` — `ui.focus` フックがマッチするプラグイン名
 
 ## 変更履歴
 
+- 2026-09-30 — `git diff` に `--no-color` を付ける変更（[#96363](https://github.com/anthropics/claude-code/pull/96363)）を revert し、以前の挙動に戻す（[#98018](https://github.com/anthropics/claude-code/pull/98018)）📦 v2.1.285 · [[repos/anthropics-claude-code/changes/2026-09-30|変更]]
 - 2026-09-28 — `ui.focus` フックが `diff` と `cc-plugin-diff` のどちらの名前の要素にも反応するように（[#96953](https://github.com/anthropics/claude-code/pull/96953)）📦 v2.1.283 · [[repos/anthropics-claude-code/changes/2026-09-28|変更]]
 - 2026-09-28 — `git diff` に `--no-color` を付け、`color.ui=always` などの設定で diff 本文が空（`No diff content`）になる問題を修正（[#96363](https://github.com/anthropics/claude-code/pull/96363)）📦 v2.1.283 · [[repos/anthropics-claude-code/changes/2026-09-28|変更]]
 - 2026-09-28 — 読み取り専用のシェルコマンド（`isReadOnly`）の後は diff を再取得しないように（[#95423](https://github.com/anthropics/claude-code/pull/95423)）📦 v2.1.283 · [[repos/anthropics-claude-code/changes/2026-09-28|変更]]
@@ -29,5 +30,6 @@ tags:
 
 ## 関連
 
+- [[repos/anthropics-claude-code/releases/v2.1.285|v2.1.285]]
 - [[repos/anthropics-claude-code/releases/v2.1.283|v2.1.283]]
 - [[repos/anthropics-claude-code/releases/v2.1.281|v2.1.281]]

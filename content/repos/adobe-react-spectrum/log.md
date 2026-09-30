@@ -1,9 +1,16 @@
 ---
 title: adobe/react-spectrum 取り込み履歴
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/adobe-react-spectrum
 ---
+
+## 2026-09-30
+
+- 期間: 2026-09-25T22:08:31Z 〜 2026-09-30T00:33:17Z
+- PR 7 件（詳しく 6 件 / 1 行 1 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/adobe-react-spectrum/changes/2026-09-30|changes]]、[[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]、[[repos/adobe-react-spectrum/topics/Menu|Menu]]、[[repos/adobe-react-spectrum/topics/SideNav|SideNav]]（新規）
+- エラー: なし
 
 ## 2026-09-28
 

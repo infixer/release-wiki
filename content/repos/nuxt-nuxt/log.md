@@ -1,9 +1,16 @@
 ---
 title: nuxt/nuxt 取り込み履歴
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/nuxt-nuxt
 ---
+
+## 2026-09-30
+
+- 期間: 2026-09-26T23:03:41Z 〜 2026-09-30T00:33:17Z
+- PR 2 件（詳しく 2 件 / 1 行 0 件）、Release 0 件（bot の PR 4 件は collect で除外）
+- 更新したページ: [[repos/nuxt-nuxt/changes/2026-09-30|changes]]、[[repos/nuxt-nuxt/topics/トレーシング|トレーシング]]（新規）、[[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
+- エラー: なし
 
 ## 2026-09-28
 

@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。
+個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。
 
 ## 主な API・オプション
 
@@ -25,9 +25,11 @@ tags:
 - `pnpm init --bare` — `devEngines`・`packageManager`・`type: "module"` だけの `package.json` を作成（Rust 版）
 - `package.json` の空行保持 — `add`/`remove`/`update` で項目間の空行を維持（Rust 版 v12）
 - `pnpm list`/`pnpm ll` — ワークスペースのパッケージ内では `-r`/`--filter` なしなら現在のプロジェクトのみ
+- `pnpm update -g --latest` — レジストリのパッケージを `@latest` で解決（ダウングレードの固定は維持）
 
 ## 変更履歴
 
+- 2026-09-30 — `pnpm update -g --latest` が保存済みの範囲を超えて更新（[#16325](https://github.com/pnpm/pnpm/pull/16325)）📦 v12.8.1 · [[repos/pnpm-pnpm/changes/2026-09-30|変更]]
 - 2026-09-28 — `pnpm install --allow-build` を追加（[#15583](https://github.com/pnpm/pnpm/pull/15583)）📦 pnpr@0.1.0-alpha.13 · [[repos/pnpm-pnpm/changes/2026-09-28|変更]]
 - 2026-09-28 — `pnpm init --bare` を追加（[#15541](https://github.com/pnpm/pnpm/pull/15541)）📦 pnpr@0.1.0-alpha.13 · [[repos/pnpm-pnpm/changes/2026-09-28|変更]]
 - 2026-09-28 — `package.json` の項目間の空行を保持（[#15474](https://github.com/pnpm/pnpm/pull/15474)）📦 pnpr@0.1.0-alpha.13 · [[repos/pnpm-pnpm/changes/2026-09-28|変更]]
@@ -46,6 +48,8 @@ tags:
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-09-30|2026-09-30 の変更]]
+- [[repos/pnpm-pnpm/releases/v12.8.1|v12.8.1]]
 - [[repos/pnpm-pnpm/releases/v12.7.0|v12.7.0]]
 - [[repos/pnpm-pnpm/changes/2026-09-28|2026-09-28 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.6.0|v12.6.0]]

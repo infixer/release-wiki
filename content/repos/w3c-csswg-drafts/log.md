@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-09-30
+
+- 期間: 2026-09-25T09:55:09Z 〜 2026-09-30T00:33:17Z（直接のコミット: 2026-09-26T18:43:50Z 〜 2026-09-30T00:33:17Z）
+- PR 3 件（詳しく 2 件 / 1 行 1 件）、直接のコミット 14 件（詳しく 1 件 / 1 行 13 件。うち 11 件は PR #14019・#14354・#14301 を構成するコミット）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-09-30|changes]]、[[repos/w3c-csswg-drafts/topics/css-highlight-api-1|css-highlight-api-1]]（新規）、[[repos/w3c-csswg-drafts/topics/css-scroll-snap-1|css-scroll-snap-1]]（新規）
+- エラー: なし
 
 ## 2026-09-28
 

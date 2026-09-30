@@ -1,6 +1,6 @@
 ---
 title: w3c/csswg-drafts
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/w3c-csswg-drafts
 ---
@@ -14,6 +14,9 @@ tags:
 
 ## 直近の注目変更
 
+- 2026-09-29 — `::highlight(*)` セレクターを追加（[#14301](https://github.com/w3c/csswg-drafts/pull/14301)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-highlight-api-1|css-highlight-api-1]]
+- 2026-09-28 — 単一軸のスクロールコンテナでのスクロールスナップの挙動を明確化（[#14354](https://github.com/w3c/csswg-drafts/pull/14354)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-scroll-snap-1|css-scroll-snap-1]]
+- 2026-09-28 — スナップ位置を捕捉するのはスクロールコンテナだけと明記（[`528b2e3`](https://github.com/w3c/csswg-drafts/commit/528b2e31b905ff8fd150ab8623a2b300503a2cca)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-scroll-snap-1|css-scroll-snap-1]]
 - 2026-09-25 — `ViewTimelineOptions.subject` を必須メンバーに（[#14526](https://github.com/w3c/csswg-drafts/pull/14526)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/scroll-animations-1|scroll-animations-1]]
 - 2026-09-24 — 暗黙のキーフレームの仕様を簡略化し、easing を明記（[#14519](https://github.com/w3c/csswg-drafts/pull/14519)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/web-animations-1|web-animations-1]]
 - 2026-09-22 — クリックジャッキング攻撃についての記述を追加（[#13846](https://github.com/w3c/csswg-drafts/pull/13846)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/filter-effects-1|filter-effects-1]]
@@ -24,7 +27,9 @@ tags:
 ## トピック
 
 - [[repos/w3c-csswg-drafts/topics/css-forms-1|css-forms-1]] — フォームコントロールの見た目（appearance）を定義する仕様
+- [[repos/w3c-csswg-drafts/topics/css-highlight-api-1|css-highlight-api-1]] — CSS Custom Highlight API（`::highlight()`）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-images-4|css-images-4]] — `image()` など画像関連の値・関数を定義する仕様
+- [[repos/w3c-csswg-drafts/topics/css-scroll-snap-1|css-scroll-snap-1]] — スクロールスナップ（`scroll-snap-type` など）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/filter-effects-1|filter-effects-1]] — CSS フィルターを定義する仕様
 - [[repos/w3c-csswg-drafts/topics/scroll-animations-1|scroll-animations-1]] — スクロール駆動アニメーション（`ViewTimelineOptions` など）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/web-animations-1|web-animations-1]] — Web Animations の基盤となる仕様
@@ -32,4 +37,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-csswg-drafts/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-09-28|2026-09-28]]、[[repos/w3c-csswg-drafts/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-09-30|2026-09-30]]、[[repos/w3c-csswg-drafts/changes/2026-09-28|2026-09-28]]、[[repos/w3c-csswg-drafts/changes/2026-09-24|2026-09-24]]

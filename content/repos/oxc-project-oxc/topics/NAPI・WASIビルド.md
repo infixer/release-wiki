@@ -17,3 +17,4 @@ NAPI パッケージ（パーサー・minify・transform・transform-react・tra
 ## 関連
 
 - [[repos/oxc-project-oxc/changes/2026-09-24|2026-09-24 の変更]]
+- [[repos/oxc-project-oxc/releases/crates_v0.152.0|crates_v0.152.0]]

@@ -24,3 +24,4 @@ TSGolint をバックエンドにした oxlint の型認識（type-aware）lint�
 ## 関連
 
 - [[repos/oxc-project-oxc/changes/2026-09-28|2026-09-28 の変更]]
+- [[repos/oxc-project-oxc/releases/oxlint_v1.86.0|oxlint_v1.86.0]]

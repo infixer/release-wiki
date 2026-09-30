@@ -1,6 +1,6 @@
 ---
 title: AGENTS.md 対応
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-`mods/agents-md` は、`CLAUDE.md` が無いプロジェクトでエンジンと同じ仕組みで `AGENTS.md` を読み込むための mod（`sec-default`・`diff`・`telemetry` と同じ構成で提供される）。`instructionFiles` オプションで `CLAUDE.md` と `AGENTS.md` のどちらを・どう使うかを切り替えられ、`prompt.context` の指示ファイル読み込み、`Read` への `tool.call`、`agent.spawn`、`$.fs.ancestors` など複数の箇所で一貫して振る舞う。`--bare`（`CLAUDE_CODE_SIMPLE`）や `CLAUDE_CODE_DISABLE_ATTACHMENTS` でエンジン自体が指示ファイルの添付を行わない実行では、この mod もネストした `AGENTS.md` を添付しない。ネストした `AGENTS.md` の `Read` がトークン上限で自動的にページ分割された場合（`truncatedByTokenCap` など）は部分的な読み取りとして扱い、次の `Read` でファイル全体を添付する。
+`mods/agents-md` は、`CLAUDE.md` が無いプロジェクトでエンジンと同じ仕組みで `AGENTS.md` を読み込むための mod（`sec-default`・`diff`・`telemetry` と同じ構成で提供される）。`instructionFiles` オプションで `CLAUDE.md` と `AGENTS.md` のどちらを・どう使うかを切り替えられ、`prompt.context` の指示ファイル読み込み、`Read` への `tool.call`、`agent.spawn`、`$.fs.ancestors` など複数の箇所で一貫して振る舞う。`--bare`（`CLAUDE_CODE_SIMPLE`）や `CLAUDE_CODE_DISABLE_ATTACHMENTS` でエンジン自体が指示ファイルの添付を行わない実行では、この mod もネストした `AGENTS.md` を添付しない。ネストした `AGENTS.md` の `Read` がトークン上限で自動的にページ分割された場合を部分的な読み取りとして扱う変更（[#96364](https://github.com/anthropics/claude-code/pull/96364)）は 2026-09-30 に revert され、それ以前の挙動に戻っている。
 
 ## 主な API・オプション
 
@@ -17,12 +17,14 @@ tags:
 
 ## 変更履歴
 
+- 2026-09-30 — 自動でページ分割された `Read` を部分的な読み取りとして扱う変更（[#96364](https://github.com/anthropics/claude-code/pull/96364)）を revert し、以前の挙動に戻す（[#98018](https://github.com/anthropics/claude-code/pull/98018)）📦 v2.1.285 · [[repos/anthropics-claude-code/changes/2026-09-30|変更]]
 - 2026-09-28 — 自動でページ分割された `Read`（`truncatedByTokenCap`、1 行目以外からの開始、行数不足）はネストした `AGENTS.md` を渡し済みと数えず、次の `Read` で全体を添付するように（[#96364](https://github.com/anthropics/claude-code/pull/96364)）📦 v2.1.283 · [[repos/anthropics-claude-code/changes/2026-09-28|変更]]
 - 2026-09-24 — `--bare`（`CLAUDE_CODE_SIMPLE`）や `CLAUDE_CODE_DISABLE_ATTACHMENTS` の実行では、`Read` もネストした `AGENTS.md` を添付しないように（[#95417](https://github.com/anthropics/claude-code/pull/95417)）📦 v2.1.281 · [[repos/anthropics-claude-code/changes/2026-09-24|変更]]
 - 2026-09-24 — `mods/agents-md` のソースを追加：`instructionFiles` オプションで `CLAUDE.md` / `AGENTS.md` の扱いを切り替え可能に（[#95409](https://github.com/anthropics/claude-code/pull/95409)）📦 v2.1.281 · [[repos/anthropics-claude-code/changes/2026-09-24|変更]]
 
 ## 関連
 
+- [[repos/anthropics-claude-code/releases/v2.1.285|v2.1.285]]
 - [[repos/anthropics-claude-code/releases/v2.1.283|v2.1.283]]
 - [[repos/anthropics-claude-code/releases/v2.1.281|v2.1.281]]
 - [[repos/anthropics-claude-code/releases/v2.1.277|v2.1.277]]（ビルトインの AGENTS.md 対応を追加したリリース）

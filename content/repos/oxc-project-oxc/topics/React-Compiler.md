@@ -26,3 +26,5 @@ oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-trans
 ## 関連
 
 - [[repos/oxc-project-oxc/changes/2026-09-28|2026-09-28 の変更]]
+- [[repos/oxc-project-oxc/releases/oxlint_v1.86.0|oxlint_v1.86.0]]
+- [[repos/oxc-project-oxc/releases/crates_v0.152.0|crates_v0.152.0]]

@@ -1,6 +1,6 @@
 ---
 title: openai/codex
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/openai-codex
 ---
@@ -9,21 +9,21 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [rust-v0.158.0](https://github.com/openai/codex/releases/tag/rust-v0.158.0)（2026-09-28）→ [[repos/openai-codex/releases/rust-v0.158.0|まとめ]]
-- プレリリース: なし（安定版より新しいプレリリースは無い。期間内で最後に出たプレリリースは [rust-v0.159.0-alpha.12](https://github.com/openai/codex/releases/tag/rust-v0.159.0-alpha.12)（2026-09-28））
+- 安定版: [rust-v0.159.2](https://github.com/openai/codex/releases/tag/rust-v0.159.2)（2026-09-29）→ [[repos/openai-codex/releases/rust-v0.159.2|まとめ]]（同日に [[repos/openai-codex/releases/rust-v0.159.0|rust-v0.159.0]]、[[repos/openai-codex/releases/rust-v0.159.1|rust-v0.159.1]] も公開）
+- プレリリース: なし（安定版より新しいプレリリースは無い。期間内で最後に出たプレリリースは [rust-v0.161.0-alpha.2](https://github.com/openai/codex/releases/tag/rust-v0.161.0-alpha.2)（2026-09-29））
 
 ## 直近の注目変更
 
-- Mermaid フローチャートの記法サポートを拡充（[#48895](https://github.com/openai/codex/pull/48895)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- Windows サンドボックスのプロビジョニングサービスの起動を少し待つように（[#48829](https://github.com/openai/codex/pull/48829)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/サンドボックス|サンドボックス]]
-- 最初のターン前のスレッドをアーカイブ可能に（[#48828](https://github.com/openai/codex/pull/48828)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]
-- Ghostty・Kitty でトランスクリプトのリンク上にハンドポインタを表示（[#48827](https://github.com/openai/codex/pull/48827)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- 音声の RTP タイムスタンプを 20 ms 単位に揃えるように（[#48824](https://github.com/openai/codex/pull/48824)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/リアルタイム音声|リアルタイム音声]]
-- Windows のターミナルでの SGR マウスレポートを修正（[#48799](https://github.com/openai/codex/pull/48799)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- ローカルの app-server で ChatGPT のブラウザサインインが動くように（[#48502](https://github.com/openai/codex/pull/48502)）📦 rust-v0.159.0-alpha.10 · トピック: [[repos/openai-codex/topics/認証|認証]]
-- macOS のパッチ権限チェックでシステムのパスエイリアスを正しく扱うように（[#47879](https://github.com/openai/codex/pull/47879)）📦 rust-v0.159.0-alpha.10 · トピック: [[repos/openai-codex/topics/サンドボックス|サンドボックス]]
-- Guardian の判定結果を OTLP ログに出力するオプション `otel.log_guardian_assessments` を追加（[#47870](https://github.com/openai/codex/pull/47870)）📦 rust-v0.159.0-alpha.10 · トピック: [[repos/openai-codex/topics/Guardian|Guardian]]
-- レビュー中に新しいユーザー入力が来ても Guardian レビューをやり直すように（[#47819](https://github.com/openai/codex/pull/47819)）📦 rust-v0.159.0-alpha.10 · トピック: [[repos/openai-codex/topics/Guardian|Guardian]]
+- 会話履歴を検索・参照する Guardian レビューのツールを追加（`guardian_conversation_history_tools`、オプトイン）（[#49036](https://github.com/openai/codex/pull/49036)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/Guardian|Guardian]]
+- ハンドオフを考慮した Guardian の root コンテキスト（`guardian_root_handoff_context`、オプトイン）（[#49057](https://github.com/openai/codex/pull/49057)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/Guardian|Guardian]]
+- フォローアップ指示（`:codex-followup[...]`）をラベルとして表示（[#49089](https://github.com/openai/codex/pull/49089)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
+- フルスクリーンのステータス行に Plan mode の切り替えヒントを表示（[#49037](https://github.com/openai/codex/pull/49037)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
+- ログ用 SQLite データベースの空き領域をバックグラウンドで回収（[#49069](https://github.com/openai/codex/pull/49069)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/状態データベース|状態データベース]]
+- サブエージェントの起動時に準備中の環境を引き継ぐように（[#49075](https://github.com/openai/codex/pull/49075)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]
+- 音声カタログの取得失敗を TUI に表示（[#49073](https://github.com/openai/codex/pull/49073)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/リアルタイム音声|リアルタイム音声]]
+- Windows サンドボックスの ACL 修復で長いパスに対応（[#49058](https://github.com/openai/codex/pull/49058)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/サンドボックス|サンドボックス]]
+- Windows の MXC サンドボックスで互換性のある PowerShell にフォールバック（[#49019](https://github.com/openai/codex/pull/49019)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/サンドボックス|サンドボックス]]
+- メッセージボードの通知で完了済みの回答が再開されないように（[#48982](https://github.com/openai/codex/pull/48982)）📦 rust-v0.159.2 · トピック: [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]
 
 ## トピック
 
@@ -33,6 +33,7 @@ tags:
 - [[repos/openai-codex/topics/サンドボックス|サンドボックス]] — Windows・Linux・macOS 向けコマンド実行の隔離と権限チェック
 - [[repos/openai-codex/topics/シェル・コマンド実行|シェル・コマンド実行]] — シェルスナップショットなど、コマンド実行時のシェル環境の扱い
 - [[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]] — サンドボックス設定に紐づくファイルシステムアクセスの内部基盤
+- [[repos/openai-codex/topics/状態データベース|状態データベース]] — スレッドのメタデータ・ログを保存するローカルの SQLite データベース
 - [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]] — スレッドの起動・再開・アーカイブ・状態管理
 - [[repos/openai-codex/topics/デーモン|デーモン]] — app-server の共有デーモン/embedded モードとソケット接続
 - [[repos/openai-codex/topics/認証|認証]] — ChatGPT へのブラウザサインイン
@@ -44,4 +45,4 @@ tags:
 ## 取り込み
 
 - [[repos/openai-codex/log|取り込み履歴]]
-- 最近の変更: [[repos/openai-codex/changes/2026-09-28|2026-09-28]]、[[repos/openai-codex/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/openai-codex/changes/2026-09-30|2026-09-30]]、[[repos/openai-codex/changes/2026-09-28|2026-09-28]]、[[repos/openai-codex/changes/2026-09-24|2026-09-24]]

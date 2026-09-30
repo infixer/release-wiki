@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -14,16 +14,16 @@ tags:
 
 ## 直近の注目変更
 
-- グローバル診断の集め方を Strada に合わせ、エディタでは診断以外のグローバルエラーを出さないように（[#64452](https://github.com/microsoft/TypeScript/pull/64452)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- ビルドオーケストレーター API（`createBuildOrchestrator`）を追加（[#64158](https://github.com/microsoft/TypeScript/pull/64158)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- api-extractor が使う AST ヘルパーを追加（[#64439](https://github.com/microsoft/TypeScript/pull/64439)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- `createSourceFile` が parse キャッシュを使い、破棄可能な lease を返すように（[#64434](https://github.com/microsoft/TypeScript/pull/64434)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- OneLoc パイプラインの不具合を修正（[#64414](https://github.com/microsoft/TypeScript/pull/64414)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]]
-- ローカライズ作業を再開できるようファイル構成を作り直し（[#63987](https://github.com/microsoft/TypeScript/pull/63987)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]]
-- 型キャッシュに関する不具合を2件修正（[#64408](https://github.com/microsoft/TypeScript/pull/64408)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- composite project のルートチェックで正規化済みパスを使うよう修正（[#64407](https://github.com/microsoft/TypeScript/pull/64407)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- モジュール解決をオーバーライドする API を追加（[#64299](https://github.com/microsoft/TypeScript/pull/64299)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- `never` を可変な配列風の型として誤判定していたのを修正（[#64389](https://github.com/microsoft/TypeScript/pull/64389)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- `es2026` を `target` と `lib` に指定できるように（[#64096](https://github.com/microsoft/TypeScript/pull/64096)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- `getJSDocCommentsAndTags` を TS 6.0 と同じ動作で復活（[#64455](https://github.com/microsoft/TypeScript/pull/64455)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- API のコールバック式ファイルシステムで全関数の実装指定が必須に、`createVirtualFileSystem` を削除（破壊的変更）（[#64447](https://github.com/microsoft/TypeScript/pull/64447)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- バインダーが作った Symbol をスナップショット間で同一に（[#64518](https://github.com/microsoft/TypeScript/pull/64518)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- ファイルシステムのルートに近いプロジェクトでも watch が再ビルドするように（[#64366](https://github.com/microsoft/TypeScript/pull/64366)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
+- テンプレートリテラル型のサイズに上限を設け、TS2589 を報告（[#64194](https://github.com/microsoft/TypeScript/pull/64194)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- `resolveObjectTypeMembers` の冪等性を回復し、無限循環するインスタンス化のエラーを改善（[#64372](https://github.com/microsoft/TypeScript/pull/64372)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- 同じオブジェクト型のマップの交差を簡約しないように（Zod などの再帰スキーマ向け）（[#64481](https://github.com/microsoft/TypeScript/pull/64481)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- 宣言出力の打ち切り後にキャッシュ済みの型を複製しないように（[#63969](https://github.com/microsoft/TypeScript/pull/63969)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- チェッカーを排他的に取得するように（[#64543](https://github.com/microsoft/TypeScript/pull/64543)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
 
 ## トピック
 
@@ -36,4 +36,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-09-28|2026-09-28]]、[[repos/microsoft-TypeScript/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-09-30|2026-09-30]]、[[repos/microsoft-TypeScript/changes/2026-09-28|2026-09-28]]、[[repos/microsoft-TypeScript/changes/2026-09-24|2026-09-24]]

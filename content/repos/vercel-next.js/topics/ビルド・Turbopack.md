@@ -1,6 +1,6 @@
 ---
 title: ビルド・Turbopack
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになった。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。
+Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになり、macOS で監視がハングする問題も修正された。遅延 dynamic import は SSR でも使えるようになった。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。
 
 ## 主な API・オプション
 
@@ -19,6 +19,15 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 変更履歴
 
+- 2026-09-30 — turbo-tasks-backend の leaf distance トレースのコンパイルエラーを修正（[#99443](https://github.com/vercel/next.js/pull/99443)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — Turbopack で webpack ローダーのビルド依存ディレクトリを追跡（[#98838](https://github.com/vercel/next.js/pull/98838)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — バンドルアナライザーの空表示から別の環境に切り替えられるように（[#98542](https://github.com/vercel/next.js/pull/98542)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — `additionalRoots` の監視で macOS のコンパイラーが固まる問題を修正（[#99396](https://github.com/vercel/next.js/pull/99396)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — Turbopack のツリーシェイクで空のチャンクがパート ID をずらす不具合を修正（[#95516](https://github.com/vercel/next.js/pull/95516)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — バンドルアナライザーのソース表の Δ での並べ替えを修正（[#99369](https://github.com/vercel/next.js/pull/99369)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — バンドルアナライザーのソース表を仮想化（[#98539](https://github.com/vercel/next.js/pull/98539)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — SSR でも遅延 dynamic import を使えるように（[#98836](https://github.com/vercel/next.js/pull/98836)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
+- 2026-09-30 — 安定版 v16.3.7 に、キャンセルされたタスクへの strongly consistent な読み取りがハングする turbo-tasks-backend の修正をバックポート（[#98931](https://github.com/vercel/next.js/pull/98931)）📦 v16.3.7 · [[repos/vercel-next.js/releases/v16.3.7|v16.3.7]]
 - 2026-09-28 — エクスポート名マングリングのためだけのファサード分割をやめ、シングルトンの二重化を修正（[#99285](https://github.com/vercel/next.js/pull/99285)）📦 v16.4.0-canary.51 · [[repos/vercel-next.js/changes/2026-09-28|変更]]
 - 2026-09-28 — webpack ローダーが依存を読むときにファイルシステムのルートをまたげるように（[#99202](https://github.com/vercel/next.js/pull/99202)）📦 v16.4.0-canary.51 · [[repos/vercel-next.js/changes/2026-09-28|変更]]
 - 2026-09-28 — `next internal trace` サーバーのプロセス名を分かりやすく（[#99257](https://github.com/vercel/next.js/pull/99257)）📦 v16.4.0-canary.51 · [[repos/vercel-next.js/changes/2026-09-28|変更]]
@@ -51,5 +60,7 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 関連
 
+- [[repos/vercel-next.js/changes/2026-09-30|2026-09-30 の変更]]
+- [[repos/vercel-next.js/releases/v16.3.7|v16.3.7]]
 - [[repos/vercel-next.js/changes/2026-09-28|2026-09-28 の変更]]
 - [[repos/vercel-next.js/changes/2026-09-24|2026-09-24 の変更]]

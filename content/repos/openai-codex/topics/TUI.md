@@ -1,6 +1,6 @@
 ---
 title: TUI
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/openai-codex
   - topic
@@ -8,16 +8,23 @@ tags:
 
 ## 概要
 
-ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。
+ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。2026-09-30 の回では、フルスクリーンのステータス行に Plan mode の切り替えヒント（`shift+tab`）が出るようになり、応答中のフォローアップ指示（`:codex-followup[...]`）はラベルとして表示されるようになった。インラインコード内の選択はプレーンテキストでコピーされ、Pro プランの表示名は `Pro 100`・`Pro 200`・`Pro 500` に、起動時のプロモーションはプラットフォーム別のデスクトップアプリの tip に整理された。
 
 ## 主な API・オプション
 
 - Unicode 数式レンダリング — `\hat`・`\bar`・`\tilde`・`\vec`・`\dot`・`\ddot` などのアクセント、物理・関係・集合・論理・矢印・積分などの記号、`\left`/`\right` の名前付きデリミタ（`\left<`・`\right>` を含む）
 - 選択メニュー（ピッカー）共通スタイル — 安定した列幅、狭い場合の説明非表示、キーバインドから生成するコンパクトなヒント
 - Mermaid フローチャート — `-->`・`---`・`<-->`・`-.->`・`-.-`・`<-.->`、パイプラベル・中置ラベル、`&` グループ展開（辺は 24 本まで）。方向未指定は top-down
+- `:codex-followup[label]{prompt="..."}` — 応答中のフォローアップ指示。TUI 表示と応答全体のコピーではラベルだけになる
 
 ## 変更履歴
 
+- 2026-09-30 — 起動時のプロモーションをプラットフォーム別のデスクトップアプリの tip に整理（[#49093](https://github.com/openai/codex/pull/49093)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
+- 2026-09-30 — フォローアップ指示をラベルとして表示（[#49089](https://github.com/openai/codex/pull/49089)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
+- 2026-09-30 — Pro プランの表示名を `Pro 100`・`Pro 200`・`Pro 500` に（表示名の対応表を共通化）（[#49079](https://github.com/openai/codex/pull/49079)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
+- 2026-09-30 — Pro プランの表示名を変更（`Pro Extra` など）（[#49043](https://github.com/openai/codex/pull/49043)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
+- 2026-09-30 — インラインコード内の選択をプレーンテキストでコピー（[#49041](https://github.com/openai/codex/pull/49041)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
+- 2026-09-30 — フルスクリーンのステータス行に Plan mode の切り替えヒントを表示（[#49037](https://github.com/openai/codex/pull/49037)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
 - 2026-09-28 — Mermaid フローチャートの記法サポートを拡充（[#48895](https://github.com/openai/codex/pull/48895)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-28|変更]]
 - 2026-09-28 — TUI の中断通知を短く中立的な表現に（[#48830](https://github.com/openai/codex/pull/48830)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-28|変更]]
 - 2026-09-28 — Ghostty・Kitty でトランスクリプトのリンク上にハンドポインタを表示（[#48827](https://github.com/openai/codex/pull/48827)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-28|変更]]
@@ -37,3 +44,5 @@ tags:
 - [[repos/openai-codex/releases/rust-v0.156.1|rust-v0.156.1]]
 - [[repos/openai-codex/releases/rust-v0.155.1|rust-v0.155.1]]
 - [[repos/openai-codex/changes/2026-09-24|2026-09-24 の変更]]
+- [[repos/openai-codex/changes/2026-09-30|2026-09-30 の変更]]
+- [[repos/openai-codex/releases/rust-v0.159.0|rust-v0.159.0]]

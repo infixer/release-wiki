@@ -1,9 +1,16 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-09-28
+updated: 2026-09-30
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-09-30
+
+- 期間: 2026-09-28T07:23:07Z 〜 2026-09-30T00:33:17Z
+- PR 51 件（詳しく 30 件 / 1 行 21 件）、Release 6 件（安定版 5 件: v11.28.1, v12.8.0, v12.8.1, v11.28.2, v10.34.6 / プレリリース 1 件: pnpr@0.1.0-alpha.14）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-09-30|changes]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/マルチエコシステム設定|マルチエコシステム設定]]、[[repos/pnpm-pnpm/topics/ストア|ストア（新規）]]、[[repos/pnpm-pnpm/releases/v12.8.0|v12.8.0]]、[[repos/pnpm-pnpm/releases/v12.8.1|v12.8.1]]、[[repos/pnpm-pnpm/releases/v11.28.1|v11.28.1]]、[[repos/pnpm-pnpm/releases/v11.28.2|v11.28.2]]、[[repos/pnpm-pnpm/releases/v10.34.6|v10.34.6]]、[[repos/pnpm-pnpm/index|index]]
+- エラー: なし
 
 ## 2026-09-28
 
