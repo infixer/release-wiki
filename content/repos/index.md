@@ -15,6 +15,7 @@ tags:
 - [[repos/microsoft-TypeScript/index|microsoft/TypeScript]]
 - [[repos/nuxt-nuxt/index|nuxt/nuxt]]
 - [[repos/openai-codex/index|openai/codex]]
+- [[repos/openui-open-ui/index|openui/open-ui]]
 - [[repos/oxc-project-oxc/index|oxc-project/oxc]]
 - [[repos/pnpm-pnpm/index|pnpm/pnpm]]
 - [[repos/react-react/index|react/react]]
