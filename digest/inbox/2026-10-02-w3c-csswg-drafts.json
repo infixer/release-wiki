@@ -1,0 +1,78 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-02T00:52:41Z",
+  "range": {
+    "from": "2026-09-29T19:19:01Z",
+    "to": "2026-10-02T00:52:41Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14542,
+      "title": "[css-syntax-3] Correct minor typo",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14542",
+      "author": "Zkaij",
+      "mergedAt": "2026-09-30T18:29:55Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "> a~~n~~ regular expression.\n\nThat's all.",
+      "files": [
+        "css-syntax-3/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-09-29T19:22:34Z",
+    "to": "2026-10-02T00:52:41Z"
+  },
+  "commits": [
+    {
+      "sha": "9c50d37",
+      "url": "https://github.com/w3c/csswg-drafts/commit/9c50d377bb4ccd9f9f513a352d84fa750e6f51b1",
+      "author": "svgeesus",
+      "committedAt": "2026-09-30T20:15:02Z",
+      "title": "[css-color-4] Removed \"If H is missing, a = b = 0\" from LCH and Oklch conversion code, which hindered round-tripping. Fix #14530",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+6 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "f505fd1",
+      "url": "https://github.com/w3c/csswg-drafts/commit/f505fd10877a9c915b5d4a4028c2ad83c76d006f",
+      "author": "SebastianZ",
+      "committedAt": "2026-09-30T20:17:33Z",
+      "title": "[css-scroll-anchoring-1][editorial] Fixed heading closing tag",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-scroll-anchoring-1/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "d06dc03",
+      "url": "https://github.com/w3c/csswg-drafts/commit/d06dc03e286cadddd43e524a7d2edad62d6a225a",
+      "author": "svgeesus",
+      "committedAt": "2026-10-01T14:03:24Z",
+      "title": "[css-syntax-3][editorial] Back to ED",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+3 -4)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

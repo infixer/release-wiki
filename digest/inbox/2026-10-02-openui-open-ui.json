@@ -1,0 +1,49 @@
+{
+  "kind": "repo",
+  "repo": "openui/open-ui",
+  "branch": "main",
+  "collectedAt": "2026-10-02T00:52:41Z",
+  "range": {
+    "from": "2026-09-17T08:29:58Z",
+    "to": "2026-10-02T00:52:41Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 1526,
+      "title": "Update the interest invokers explainer to match the current proposal",
+      "url": "https://github.com/openui/open-ui/pull/1526",
+      "author": "mfreed7",
+      "mergedAt": "2026-10-01T14:58:42Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 1527,
+      "title": "Update decision on checkable menu items.",
+      "url": "https://github.com/openui/open-ui/pull/1527",
+      "author": "dbaron",
+      "mergedAt": "2026-10-01T17:48:56Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 1528,
+      "title": "Address post-merge review comments on #1527.",
+      "url": "https://github.com/openui/open-ui/pull/1528",
+      "author": "dbaron",
+      "mergedAt": "2026-10-01T19:06:56Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

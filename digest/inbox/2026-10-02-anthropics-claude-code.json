@@ -1,0 +1,150 @@
+{
+  "kind": "repo",
+  "repo": "anthropics/claude-code",
+  "branch": "main",
+  "collectedAt": "2026-10-02T00:52:41Z",
+  "range": {
+    "from": "2026-09-29T19:39:25Z",
+    "to": "2026-10-02T00:52:41Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v2.1.287",
+      "publishedAt": "2026-10-01T18:00:22Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v2.1.286",
+      "name": "v2.1.286",
+      "publishedAt": "2026-09-30T19:10:13Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.286",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added a count such as \"2 of 5\" to the permission prompt when several permission requests stack up\n- Added mouse support for the \"N more\" rows of lists in fullscreen mode: click one to jump to that end of the list, with hover and pressed states\n- Fixed several Claude Code processes and IDE extensions each opening a login browser when gcpAuthRefresh or awsAuthRefresh credentials expire\n- Fixed `claude --resume` and `--continue` sometimes losing every turn after a batch of parallel tool calls when the earlier session crashed or was killed\n- Fixed API 400 errors after a tool or hook returned an object, number or boolean instead of text, including in resumed sessions\n- Fixed cloud sessions with very large histories never waking up because the container was stopped while the transcript was still loading\n- Fixed the Claude apps gateway's spend meter pricing 1-hour prompt cache writes at the cheaper 5-minute rate, and counting only the first model call's input tokens on streamed turns that run a server-side tool such as web search\n- Fixed macOS sessions still showing \"Not logged in\" or \"Login expired\" after `/login` succeeds in another Claude Code window when a leftover `~/.claude/.credentials.json` exists\n- Fixed every turn failing when the Anthropic API refuses the model your default or a model alias resolves to: Claude Code now retries once on the previous model of the same tier\n- Fixed Remote Control sessions (including `claude remote-control`) staying connected after your organization's policy turns Remote Control off; they now disconnect with a notice\n- Fixed refusal and `--fallback-model` retries failing when the fallback model can't run fast; they now run at standard speed, with a one-time notice in interactive sessions\n- Fixed headless sessions repeating the \"MCP servers require authentication\" reminder after a successful re-authentication when the MCP discovery cache is enabled\n- Fixed `claude auth status` reporting a Console sign-in's stored API key as `claude.ai`; it now reports `api_key`, and the VS Code extension treats that session as an API key session\n- Fixed `/status` listing an Anthropic profile beside an API key as if both were in effect; the profile is now marked as not in use\n- Fixed Claude not being told when a file attached to a message sent over Remote Control did not arrive, and a file sometimes getting only 10 seconds for its last download try\n- Fixed a Remote Control message that arrived while Claude Code was exiting being marked delivered and then never answered; it now stays queued for the session's next run\n- Fixed MCP error messages showing a credential's value when \"Bearer\" or \"Basic\" came before its key name\n- Fixed percent-encoded Bearer tokens being only partly masked in error messages\n- Fixed redacted logs and transcripts showing a secret whose key name has an invisible character inside, such as a zero-width space\n- Fixed logs and transcripts showing part of a URL password that contains punctuatio\n…(truncated)"
+    },
+    {
+      "tag": "v2.1.287",
+      "name": "v2.1.287",
+      "publishedAt": "2026-10-01T18:00:22Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added Claude Mods: plugins may now modify deeper behavior\n- Added You should know, a built-in mod where a side agent watches your back and flags things you or Claude might miss. Turn it on with `/plugin enable cc-plugin-you-should-know@builtin` (for first-party sessions with telemetry on)\n- Added an `n:<text>` filter to the agents view that matches session names and tasks; a filter now shows matches in collapsed sections and Enter opens the first match\n- Added `prompt_text` to the OpenTelemetry `user_prompt` event, a copy of `prompt` for backends that nest dotted keys; drop or mask it wherever you drop or mask `prompt` (anthropics/claude-code#70763)\n- Added URL prompts from MCP servers on the 2025-11-25 protocol, for example to sign in. If a server no longer connects after this update, add \"bareElicitationCapability\": true to its MCP config entry\n- Windows: Added a startup warning when denying the Bash tool also turns off the PowerShell tool, so Claude has no shell tool\n- Self-hosted runner: Added a built-in `gh api` (REST only) for sessions that use Anthropic-managed git on macOS and Linux machines where the GitHub CLI is not installed\n- Fixed fast mode staying off in remote sessions owned by an agent with no user account, even when the organization allows it\n- Fixed Remote Control not receiving messages for minutes at a time when a reconnect request got no response; it now gives up after 30 seconds and retries\n- Fixed hooks configured with `asyncRewake` waking Claude over and over with \"found issues\" notifications when the hook's script file is missing; the broken hook is now reported once\n- Fixed tool heartbeats not reaching SDK hosts while the model's response stream was stalled with no data arriving\n- Fixed Bedrock and Vertex startup model checks ignoring an enforced `availableModels` list, which could collapse `/model` to one Opus row\n- Fixed the Claude in Chrome browser picker showing a JSON parse error when Chrome could not be reached\n- Fixed picking Fable in `/model` on a claude.ai login saving the current version's id, so your saved default now follows the newest Fable like Opus and Sonnet do\n- Fixed switching between Opus 5.5 and Sonnet 5.5 (`/model`, `opusplan`) rewriting earlier MCP tool announcements, which could drop earlier extended thinking\n- Fixed Amazon Bedrock Guardrails blocks that arrive mid-response ending the turn with an API error instead of the guardrail's message when the reply began with thinking\n- Fixed a dangerous `rm` (such as one on `/` or the home directory) losing its always-ask safeguard when the same command also redirected output to a `~` or wildcard path\n- Fixed `claude -p` and SDK sessions repeating a model fallback on every later message after the model was switched while a reply was running\n- Fixed a folder's CLAUDE.md being attached a second time after resuming a session or after a compaction\n- Fixed background sessions that could not be reopened from `claude agents` after the agent e\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 98275,
+      "title": "agents-md: send the AGENTS.md loaded line to the debug log",
+      "url": "https://github.com/anthropics/claude-code/pull/98275",
+      "author": "poteat",
+      "mergedAt": "2026-09-30T01:03:20Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.287",
+      "body": "## Summary\n\n> TLDR: a project with AGENTS.md and no CLAUDE.md starts with no new transcript row; the loaded line goes to the debug log\n\nThe `no CLAUDE.md found; AGENTS.md loaded: <paths>` line is sent with `{ to: 'debug' }`. This mirrors the change built into Claude Code 2.1.286.\n\n## Notes\n\n- In a project that has `AGENTS.md` and no `CLAUDE.md`, the first `prompt.context` after the mod loads wrote a transcript row naming the files it loaded, once per project root. That is a healthy start, and a healthy start shows nothing new on screen. The same words now go to the debug log (`claude --debug`), once per root and again after a move to another root.\n- What the model receives is unchanged: the files still join the instruction files behind `claudeMd`.\n- `/memory` lists the `AGENTS.md` files the current context was built with, and `/context all` names them.\n- The README's two sentences about the line now say where it goes.\n- The \"Mod tests\" check is expected red until 2.1.286 is the public `latest`: the published test kit trails this folder.\n\n## Test Plan\n\n- [x] `claude plugin test mods/agents-md` against the build this mirrors: 5 of 5. \"by default a project with AGENTS.md alone gets it\" expects the transcript's lines to be empty and the debug log's lines to be the one line; \"by default a project with a CLAUDE.md is left to the engine\" expects both empty. The `startedOf` fixture splits a `ui.log` by its `to`.\n- [x] Revert-proof: with the old `hooks/register.ts` under the new test,\n…(truncated)",
+      "files": [
+        "mods/agents-md/hooks/register.ts (+1 -0)",
+        "mods/agents-md/README.md (+6 -6)",
+        "mods/agents-md/tests/fixtures/started-of.ts (+10 -4)",
+        "mods/agents-md/tests/fixtures/types/started/started.ts (+3 -2)",
+        "mods/agents-md/tests/register.test.ts (+3 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 97952,
+      "title": "ci: security hardening for GitHub Actions workflows that call Claude",
+      "url": "https://github.com/anthropics/claude-code/pull/97952",
+      "author": "qing-ant",
+      "mergedAt": "2026-09-30T06:30:05Z",
+      "hint": "other",
+      "release": "📦 v2.1.287",
+      "filesTotal": 7
+    },
+    {
+      "number": 98374,
+      "title": "diff: the pane reads the diff again after a rebase that finished",
+      "url": "https://github.com/anthropics/claude-code/pull/98374",
+      "author": "poteat",
+      "mergedAt": "2026-09-30T19:35:44Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.287",
+      "body": "## Summary\n\n> TLDR: after a rebase that finished, the diff pane shows the diff again instead of \"Diff unavailable\"\n\nA file git leaves behind a finished rebase no longer reads as a rebase under way.\n\n## Notes\n\n- git keeps `REBASE_HEAD` after a rebase that stopped on a conflict in its last commit and was then continued or skipped (seen on git 2.43 and 2.50). The pane read that file alone as a rebase under way, so every read failed and the pane said \"Diff unavailable\" until the file went, which could be hours.\n- git's manual defines `REBASE_HEAD` as the commit \"at which the operation is currently stopped\" during a rebase (gitrevisions). By what git does when run: with that file alone `git status` reports nothing to commit, and it reports a rebase while the folder `rebase-merge` or `rebase-apply` is there.\n- A rebase now counts as under way while `REBASE_HEAD` is there beside one of a rebase's folders: `rebase-merge`, or `rebase-apply` holding `rebasing`, which is how that folder differs from the one a stopped `git am` keeps.\n- This only narrows what counts. Whatever showed a diff before still shows it: a stopped `git am`, a rebase paused at a `break` or at a failed `exec`. A merge, a cherry-pick and a revert under way read as before; none of them was seen to leave its file behind.\n- A symbolic link by any of those names counts as nothing, as before.\n- The pane picks the diff up at its next read: the next edit or command.\n\n## Test Plan\n\n- [ ] `claude plugin test mods/diff` passes\n…(truncated)",
+      "files": [
+        "mods/diff/hooks/git/probes/index.ts (+1 -0)",
+        "mods/diff/hooks/git/probes/is-transient.ts (+21 -5)",
+        "mods/diff/hooks/git/probes/rebase-marks/index.ts (+3 -0)",
+        "mods/diff/hooks/git/probes/rebase-marks/rebase-marks.ts (+14 -0)",
+        "mods/diff/hooks/git/probes/transient-state-files/transient-state-files.ts (+2 -3)",
+        "mods/diff/tests/fixtures/fetch-diff/apply-mailing.ts (+9 -0)",
+        "mods/diff/tests/fixtures/fetch-diff/apply-rebasing.ts (+9 -0)",
+        "mods/diff/tests/fixtures/fetch-diff/index.ts (+8 -0)",
+        "mods/diff/tests/fixtures/fetch-diff/mailing.ts (+9 -0)",
+        "mods/diff/tests/fixtures/fetch-diff/rebase-applying.ts (+10 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 98445,
+      "title": "diff: the pane reads every file's hunks with one git process, where it started one per file",
+      "url": "https://github.com/anthropics/claude-code/pull/98445",
+      "author": "poteat",
+      "mergedAt": "2026-09-30T19:36:23Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.287",
+      "body": "## Summary\n\n> TLDR: the diff pane starts one git process to read a change's hunks, where it started one per file\n\nUp to fifty processes after every tool call become one. It matters most where starting a process is slow, as on Windows: one process can fail or run out of time where up to fifty could.\n\n## Notes\n\n- One `git diff --raw -z -p` over the drawn files' literal paths prints their names, NUL-ended and unquoted, then every patch. The n-th patch is the n-th name's; no name is read out of a line, so a space, a quote, a newline, letters outside ASCII or ` b/` in a name cannot move a body.\n- Each file's text goes through the same parse as before: the 400-line cut, \"Large file\" past 1 MB, binary, renamed, untracked and staged-then-edited rows read as they did.\n- A failed read now blanks all the hunks (\"Diff unavailable\" on every file) where it blanked only the failed file's; the list and totals stay. One process can fail or run out of time where up to fifty could.\n- The output limit (4 MiB) and the 5 s limit are one process's. Past the output limit, files that arrived whole keep their hunks and the rest are read by a second process; so are paths too long for one command line (12,000 characters a process).\n- Seen on git 2.43, 2.50 and 2.53, not stated by git's manual: an empty field parts names from patches, and both come in one order. An opening line that git did not quote must equal the one its name gives, or the read fails; never a body under another name.\n- A conflicted fil\n…(truncated)",
+      "files": [
+        "mods/diff/hooks/backend/types/backend/backend.ts (+5 -4)",
+        "mods/diff/hooks/git/argv/hunks-args/hunks-args.ts (+17 -0)",
+        "mods/diff/hooks/git/argv/hunks-args/index.ts (+3 -0)",
+        "mods/diff/hooks/git/argv/index.ts (+1 -0)",
+        "mods/diff/hooks/git/fetch-file-hunks/fetch-file-hunks.ts (+0 -51)",
+        "mods/diff/hooks/git/fetch-hunks/fetch-hunks.ts (+87 -0)",
+        "mods/diff/hooks/git/fetch-hunks/index.ts (+1 -1)",
+        "mods/diff/hooks/git/fetch-hunks/is-last-of-diff/index.ts (+0 -0)",
+        "mods/diff/hooks/git/fetch-hunks/is-last-of-diff/is-last-of-diff.ts (+0 -0)",
+        "mods/diff/hooks/git/fetch-hunks/with-closing-line/index.ts (+0 -0)"
+      ],
+      "filesTotal": 50
+    },
+    {
+      "number": 98357,
+      "title": "diff: the pane notices a finished merge by itself, and stays quiet on an unusual branch name",
+      "url": "https://github.com/anthropics/claude-code/pull/98357",
+      "author": "poteat",
+      "mergedAt": "2026-09-30T19:36:32Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.287",
+      "body": "## Summary\n\n> TLDR: the diff pane notices a merge finished elsewhere, and no longer starts git every two seconds on some branches\n\nThree places where the open pane now behaves as the built-in panel does, or costs less while nothing is happening.\n\n## Notes\n\n- The pane watches the repository's HEAD from the moment it opens, not from its first successful read. A merge finished in another terminal, or a rebase aborted there, clears \"Diff unavailable\" by itself within a few seconds, with no edit and no command, however soon after the pane opened.\n- An open pane no longer starts git every two seconds on a branch with an unusual name (a `#` in it, or letters outside ASCII). It dates HEAD's own log instead, and a commit or checkout made elsewhere is still noticed. Where that log is absent nothing changes. A ref written without git on such a branch waits for the next edit or command.\n- A conversation started over with `/clear` under an open pane counts the pane as shown once for the new conversation, as the person's own.\n- Nothing looks at HEAD for a pane nobody sees.\n- The diff also tidies names and comments in the files it touches: test titles shortened to fit the line, a doc comment shortened, a redundant annotation dropped. No other behaviour changes.\n\n## Test Plan\n\n- [ ] `claude plugin test mods/diff` passes\n- [ ] Start a merge that conflicts, open `/diff` (it reads \"Diff unavailable\"), finish the merge in another terminal right away: the pane shows the diff within a few seconds \n…(truncated)",
+      "files": [
+        "mods/diff/hooks/git/probes/head-key-of/head-key-of.ts (+8 -5)",
+        "mods/diff/hooks/register.ts (+45 -21)",
+        "mods/diff/tests/git/probes/head-key-of.test.ts (+54 -1)",
+        "mods/diff/tests/register.test.ts (+125 -20)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 98555,
+      "title": "diff: the dialog opens every file it lists, and says nothing when closed",
+      "url": "https://github.com/anthropics/claude-code/pull/98555",
+      "author": "poteat",
+      "mergedAt": "2026-10-01T05:23:05Z",
+      "hint": "unknown",
+      "release": "📦 v2.1.287",
+      "body": "## Summary\n\n> TLDR: in the /diff dialog every listed file opens its diff; closing the dialog prints nothing\n\n## Notes\n\nWithout the fullscreen layout `/diff` opens a dialog that lists every changed file. A file edited before the session began, or a test or generated file such as a lockfile, stayed on \"Loading diff…\" when opened there. Closing the dialog with Esc printed \"Diff dialog dismissed\" under the plugin's name.\n\n- The dialog lists every changed file, but hunks were read only for the rows the docked pane draws: the session's files, and the earlier ones once their section is opened. The dialog has no such section to open, so those rows were never read.\n- Hunks are now read for the rows the pane's seat lists. Docked, nothing changes. In the dialog that is the five rows in view, read again as the selection moves the view; a row already read, or being read, is not asked for again.\n- Walking a dialog of twelve files from the first row to the last starts git eight times for hunks: once for the first five rows, once for each row that comes into view. No file is read twice.\n- A person closing the dialog prints nothing. `/diff` typed while the dialog is open still answers \"Diff dialog dismissed\".\n- The `oldFiles` test fixture takes the file names it answers for; its three existing callers are unchanged.\n\n## Test Plan\n\n- [x] `claude plugin test mods/diff` passes: 210 pass, 0 fail\n- [x] Without the fullscreen layout, in a repository with one file edited before the session and one a\n…(truncated)",
+      "files": [
+        "mods/diff/hooks/drawn-files-of/drawn-files-of.ts (+20 -10)",
+        "mods/diff/hooks/register.ts (+17 -6)",
+        "mods/diff/tests/fixtures/index.ts (+1 -0)",
+        "mods/diff/tests/fixtures/old-files.ts (+13 -7)",
+        "mods/diff/tests/fixtures/with-lockfile.ts (+10 -0)",
+        "mods/diff/tests/views.test.ts (+91 -0)"
+      ],
+      "filesTotal": 6
+    }
+  ],
+  "errors": []
+}

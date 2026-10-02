@@ -1,0 +1,655 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-10-02T00:52:41Z",
+  "range": {
+    "from": "2026-09-29T18:01:37Z",
+    "to": "2026-10-02T00:52:41Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.86.0",
+      "publishedAt": "2026-09-28T10:29:50Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.86.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 27211,
+      "title": "perf(formatter_core): avoid exponential `will_break` check on nested interned",
+      "url": "https://github.com/oxc-project/oxc/pull/27211",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-30T01:52:36Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Remove redundant and also inefficient check.",
+      "files": [
+        "crates/oxc_formatter_core/src/format_element/document.rs (+27 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27212,
+      "title": "refactor(formatter): remove unreachable empty-line check in member chain",
+      "url": "https://github.com/oxc-project/oxc/pull/27212",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-30T01:53:01Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This check is already covered by `has_new_line_or_comment_between` above, so unreachable.",
+      "files": [
+        "crates/oxc_formatter/src/utils/member_chain/mod.rs (+2 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27209,
+      "title": "perf(minifier): avoid conversion from ident to str when for substitute symbols",
+      "url": "https://github.com/oxc-project/oxc/pull/27209",
+      "author": "armano2",
+      "mergedAt": "2026-09-30T02:26:40Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "```js\nprev_decl_id.name // value is ident\nsubstitute_single_use_symbol_in_expression // value is str\nif id.name == search_for // compare ident to str that has been converted from ident\n```",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27216,
+      "title": "fix(formatter): handle `quoteProps: consistent` for patterns and computed keys",
+      "url": "https://github.com/oxc-project/oxc/pull/27216",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-30T03:28:34Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "closes #27213, closes #27214\n\n- Apply consistent quoting to object destructuring and assignment patterns\n- Normalize quoted keys in object assignment patterns as well\n- Ignore computed keys (and also TS enum) when deciding whether sibling keys need quotes",
+      "files": [
+        "crates/oxc_formatter/src/print/class.rs (+4 -9)",
+        "crates/oxc_formatter/src/print/mod.rs (+26 -25)",
+        "crates/oxc_formatter/src/print/object_pattern_like.rs (+20 -0)",
+        "crates/oxc_formatter/src/utils/object.rs (+9 -3)",
+        "tasks/track_memory_allocations/allocs_formatter.yaml (+2 -2)",
+        "crates/oxc_formatter/tests/fixtures/js/quote-props/computed.js (+11 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/quote-props/computed.js.snap (+138 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/quote-props/destructuring.js (+11 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/quote-props/destructuring.js.snap (+162 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/quote-props/computed.ts (+7 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 27218,
+      "title": "fix(formatter): decide embedded template layout from AST, not source shape",
+      "url": "https://github.com/oxc-project/oxc/pull/27218",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-30T05:48:34Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #21908\n\nThe layout of an embedded template (`` css`...` ``, etc) as a sole call argument or an arrow body was decided by its source shape.\nSince the content is rewritten, the same input could get different layouts depending on how it was formatted, and some cases were not idempotent.\n\nNow:\n- `embeddedLanguageFormatting: off`: verbatim template rule, as before\n  - whitespace-only embedded templates are also now kept as-is, like Prettier\n- Otherwise, an embed target is detected from the AST (`embed_hug()`), regardless of whether its content formats\n  - Sole argument: last-arg expansion (hug if the first line fits, otherwise break the args)\n  - Arrow body: hug (except whitespace-sensitive HTML)\n\nNOTE: `openclaw` repo in ecosystem-ci report a lot of diffs like:\n\n```ts\n// main\n(entry) => html`<li>\n  ...\n</li>`,\n\n// This PR\n(entry) =>\n  html`<li>\n    ...\n  </li>`,\n```\n\nBut this is the same behavior with Prettier 3.9.9.",
+      "files": [
+        "crates/oxc_formatter/src/print/arrow_function_expression.rs (+3 -69)",
+        "crates/oxc_formatter/src/print/call_like_expression/arguments.rs (+26 -36)",
+        "crates/oxc_formatter/src/print/call_like_expression/mod.rs (+5 -12)",
+        "crates/oxc_formatter/src/print/mod.rs (+1 -0)",
+        "crates/oxc_formatter/src/print/template/embed/mod.rs (+143 -41)",
+        "crates/oxc_formatter/src/print/template/mod.rs (+3 -14)",
+        "crates/oxc_formatter/src/utils/assignment_like.rs (+6 -4)",
+        "crates/oxc_formatter_core/src/session/mod.rs (+6 -0)",
+        "tasks/track_memory_allocations/allocs_formatter.yaml (+12 -12)",
+        "apps/oxfmt/DIVERGENCES.md (+65 -0)"
+      ],
+      "filesTotal": 23
+    },
+    {"number":27221,"title":"docs(formatter_markdown): record setext heading wrap divergence","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27220,
+      "title": "fix(parser): reject module syntax in script",
+      "url": "https://github.com/oxc-project/oxc/pull/27220",
+      "author": "leaysgur",
+      "mergedAt": "2026-09-30T07:53:35Z",
+      "labels": [
+        "A-parser",
+        "A-semantic",
+        "A-transformer",
+        "A-codegen"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #25187, closes #25204.\n\nPreviously, this check was performed by semantic phase, but since it can be detected in advance, it has been moved to the parser as per our previous policy.\n\n[Babel](https://ast-explorer.dev/#eNotjDEOwjAMRa8See4JunIFNsLgRgaC0thKXASKcnfcNtt/78lukGCGN36whhJFYQIxseBCyXawTV/hoq51YzZuPjvnofJWAl1/Qh7mnY97D9OZJW3PmOvebvfhEgfUyKd9YKo0AqpieF14XSnbixF97tD/NgY0iA==) also reports this in the parser.\n\nConformance test harness also updated:\n\n- codegen: `if() { import }` is now invalid input\n  - => use `declare module {}` for indent instead\n- transformer: Revert #26495 change\n  - => defaults to `unambiguous` (Correct me if I'm wrong 🙏🏻)",
+      "files": [
+        "crates/oxc_parser/src/context.rs (+4 -1)",
+        "crates/oxc_parser/src/diagnostics.rs (+11 -0)",
+        "crates/oxc_parser/src/js/module.rs (+19 -1)",
+        "crates/oxc_parser/src/js/statement.rs (+9 -5)",
+        "crates/oxc_parser/src/lib.rs (+1 -1)",
+        "crates/oxc_semantic/src/checker/javascript.rs (+2 -40)",
+        "crates/oxc_semantic/src/checker/mod.rs (+1 -5)",
+        "crates/oxc_semantic/src/diagnostics.rs (+0 -13)",
+        "tasks/coverage/misc/fail/decorated-export-in-block.mjs (+3 -0)",
+        "tasks/coverage/snapshots/lexer_misc.snap (+2 -2)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 27107,
+      "title": "feat(minifier): minimize bitwise binary expressions",
+      "url": "https://github.com/oxc-project/oxc/pull/27107",
+      "author": "armano2",
+      "mergedAt": "2026-09-30T08:18:53Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "implement missing optimizations for bitwise binnary expressions\n- `(a OP b) | 0` -> `a OP b`\n- `a & 0xffffffff` -> `a | 0`.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_binary_expression.rs (+79 -0)",
+        "crates/oxc_minifier/src/peephole/mod.rs (+2 -0)",
+        "tasks/minsize/minsize.snap (+1 -1)",
+        "crates/oxc_minifier/tests/peephole/fold_constants.rs (+4 -8)",
+        "crates/oxc_minifier/tests/peephole/minimize_binary_expression.rs (+77 -0)",
+        "crates/oxc_minifier/tests/peephole/mod.rs (+1 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 27194,
+      "title": "perf(minifier): update nodes in place in `wrap_to_avoid_ambiguous_else`",
+      "url": "https://github.com/oxc-project/oxc/pull/27194",
+      "author": "armano2",
+      "mergedAt": "2026-09-30T08:24:33Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "wrap body in place without creating empty nodes in `wrap_to_avoid_ambiguous_else`",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_if_statement.rs (+3 -7)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+5 -5)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27061,
+      "title": "perf(lexer): make `run == 3` operator arm branchless",
+      "url": "https://github.com/oxc-project/oxc/pull/27061",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:02:43Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\nWhen `coalesce` meets a run of exactly 3 operator characters, it has to decide between 4 outcomes:\n\n1. One 3-byte operator.\n2. 2-byte operator then a 1-byte one.\n3. 1-byte operator then a 2-byte one.\n4. Three 1-byte operators.\n\nPreviously it worked out how far to advance with a chain of `if`s, which the compiler turned into a branch on whether the 3-byte lookup matched. That's unpredictable in minified code (`===` and `...` match, `&&!` and `||!` don't).\n\nThis PR rewrites the selection as two booleans. \"the token at `p` covers `p + 1`\" and \"`p + 2` is inside a multi-byte token\".\n\nThe cursor then becomes `p + 2 + c2`. The branch disappears and the block is roughly 20 instructions shorter on x86_64.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+9 -11)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27062,
+      "title": "perf(lexer): unroll loop in `opmap_longest`",
+      "url": "https://github.com/oxc-project/oxc/pull/27062",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:03:13Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\n`opmap_longest` tried lengths 4, 3 and 2 in a loop, using the hash table for each.\n\nThere's only one 4-byte operator (`>>>=`), so check for it with a plain 4-byte compare, then do the 3-byte and 2-byte lookups explicitly, instead of looping.\n\nThis has 3 effects:\n\n- Removes branches wherever `opmap_longest` is inlined (2 in `munch_walk`, 11 in `step_op`),\n- Simplifies the perfect hash checks, since there are no longer any 4-byte cases to guard against.\n- `len` is now statically known everywhere in `opmap_lookup`, so the mask in `op_key` is an immediate value, not calculated.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/operators.rs (+52 -106)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27063,
+      "title": "perf(lexer): remove cap on `max_len` for `opmap_longest`",
+      "url": "https://github.com/oxc-project/oxc/pull/27063",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:03:53Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Small perf optimization.\n\n#27062 removed the loop from `opmap_longest`, so it doesn't calculate `len` from `max_len` any more. There's no longer a need for callers to clamp the value to max 4, so remove that code.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+1 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/operators.rs (+5 -3)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27064,
+      "title": "perf(lexer): do not include length in operator hash map key",
+      "url": "https://github.com/oxc-project/oxc/pull/27064",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:04:38Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\nThe hash key for operators hash table included the candidate's length in its top byte.\n\n#27062 made `opmap_lookup` no longer handle 4-bytes operators via the hash table, so now storing the length in the key is redundant. An operator's bytes already tell you its length, as 2-byte operators are stored with a zero 3rd byte, and no 3-byte operator contains a zero byte.\n\nDropping it saves an instruction per key in `coalesce`'s hot path.\n\nThe one catch is that a 3-byte candidate whose 3rd byte is `\\0` now has exactly the same key as the matching 2-byte operator (e.g. `==\\0` and `==`), so `opmap_lookup` rejects that case explicitly. It can only happen with a `\\0` byte in the source, which is a syntax error anyway, so the branch is never taken in practice.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+4 -4)",
+        "crates/oxc_lexer/src/pipeline/operators.rs (+30 -45)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27065,
+      "title": "refactor(lexer): introduce `OpTable` abstraction",
+      "url": "https://github.com/oxc-project/oxc/pull/27065",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:05:15Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor.\n\nIntroduce `OpTable` struct which stores the hash table's data and multiplier. Move lookup logic into methods of this type.\n\nThe table data lives in a `static` (`OpTableData`), and `OpTable` is a `const` that points to it, so the multiplier compiles down to a constant at usage sites, and it doesn't take up any space in the binary.\n\nThis prepares the way for the next 2 PRs - #27066 and #27067.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/operators.rs (+143 -129)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27066,
+      "title": "perf(lexer): align operator hash table to cache lines",
+      "url": "https://github.com/oxc-project/oxc/pull/27066",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:05:53Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Small perf optimization.\n\nAlign the operator hash table to 128 bytes, so it occupies the fewest possible cache lines:\n\n- 2 x 128-byte lines on Apple Silicon.\n- 2 x aligned pairs of 64-byte lines on x86_64 (where the CPU fetches lines in pairs).",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/operators.rs (+4 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27067,
+      "title": "perf(lexer): split operator hash table into two",
+      "url": "https://github.com/oxc-project/oxc/pull/27067",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:06:37Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\nSplit the operator hash table into 2 separate tables for 2-byte and 3-byte operators.\n\n- 2-byte table = 32 slots = 128 bytes.\n- 3-byte table = 16 slots = 64 bytes.\n\nTotal is 192 bytes, down from 256. Each table is aligned so it fills whole cache lines.\n\nBecause each table now only holds operators of a specific length, a lookup can never match an operator of a different length. That makes the `\\0` check added in #27064 unnecessary, so it can be removed.\n\nIt also lets `coalesce` compare 2-byte operators with a single 16-bit comparison. This turns 3 x 2-byte operator checks in `coalesce` from 3 instructions (copy, mask, compare) into 1 (`cmp cx, ax`).",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+8 -8)",
+        "crates/oxc_lexer/src/pipeline/operators.rs (+120 -81)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27068,
+      "title": "perf(lexer): reduce branches in `opmap_longest`",
+      "url": "https://github.com/oxc-project/oxc/pull/27068",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T09:07:14Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization.\n\nMake `OpTable::lookup` return `Option<u32>` instead of using 0 to mean \"not found\".\n\n`opmap_longest` can then branch on whether the lookup matched, rather than testing the kind for 0 again afterwards.\n\n- `opmap_longest` goes from 7 branches to 4.\n- `munch_walk` is 3 instructions shorter.\n- `step_op` is ~200 instructions shorter (compiler was duplicating code to work around the branch structure).\n\nFor this to be correct, a lookup must never report an empty slot as a match. The only key that could do that is all zeros, which always hashes to slot 0. `test_perfect_hash` test checks that slot 0 is occupied in both tables, so the \"matched\" branch can never produce `0` as the kind.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/operators.rs (+30 -13)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27222,
+      "title": "fix(parser): validate TypeScript type member separators",
+      "url": "https://github.com/oxc-project/oxc/pull/27222",
+      "author": "camc314",
+      "mergedAt": "2026-09-30T09:54:37Z",
+      "labels": [
+        "A-linter",
+        "A-parser"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Type members without an explicit comma or semicolon must end before a line break, `}`, or EOF. The shared helper previously accepted adjacent same-line members such as `type T = { (): void next: string }` without a diagnostic.\n\nUse the existing ASI check after accepting a comma, matching TypeScript's `parseTypeMemberSemicolon`. Valid comma, semicolon, newline, and closing-brace cases remain accepted. Add focused signature and comment-line-break fixtures, reuse upstream property/index regressions, and update the expected diagnostics.",
+      "files": [
+        "crates/oxc_linter/src/rules/typescript/no_explicit_any.rs (+2 -2)",
+        "crates/oxc_linter/src/snapshots/typescript_no_explicit_any.snap (+0 -12)",
+        "crates/oxc_parser/src/ts/types.rs (+1 -1)",
+        "tasks/coverage/misc/fail/ts-type-member-call-missing-separator.ts (+1 -0)",
+        "tasks/coverage/misc/fail/ts-type-member-construct-missing-separator.ts (+1 -0)",
+        "tasks/coverage/misc/fail/ts-type-member-getter-missing-separator.ts (+1 -0)",
+        "tasks/coverage/misc/fail/ts-type-member-method-missing-separator.ts (+1 -0)",
+        "tasks/coverage/misc/fail/ts-type-member-setter-missing-separator.ts (+1 -0)",
+        "tasks/coverage/misc/pass/ts-type-member-comment-line-break.ts (+9 -0)",
+        "tasks/coverage/snapshots/codegen_misc.snap (+2 -2)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 27195,
+      "title": "refactor(linter): use `is_const_type_reference` consistently",
+      "url": "https://github.com/oxc-project/oxc/pull/27195",
+      "author": "camchenry",
+      "mergedAt": "2026-09-30T10:09:53Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "<sub>Stack created with <a href=\"https://github.com/github/gh-stack\">GitHub Stacks CLI</a> • <a href=\"https://gh.io/stacks-feedback\">Give Feedback 💬</a></sub>",
+      "files": [
+        "crates/oxc_linter/src/rules/typescript/consistent_type_assertions.rs (+4 -19)",
+        "crates/oxc_linter/src/rules/typescript/explicit_function_return_type.rs (+3 -17)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27196,
+      "title": "refactor(linter): use `ImportOrExportKind::is_type`/`ImportOrExportKind::is_value` consistently",
+      "url": "https://github.com/oxc-project/oxc/pull/27196",
+      "author": "camchenry",
+      "mergedAt": "2026-09-30T10:18:20Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "<sub>Stack created with <a href=\"https://github.com/github/gh-stack\">GitHub Stacks CLI</a> • <a href=\"https://gh.io/stacks-feedback\">Give Feedback 💬</a></sub>",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_restricted_imports.rs (+2 -3)",
+        "crates/oxc_linter/src/rules/eslint/no_useless_rename.rs (+16 -19)",
+        "crates/oxc_linter/src/rules/import/no_named_default.rs (+2 -7)",
+        "crates/oxc_linter/src/rules/typescript/no_import_type_side_effects.rs (+3 -6)",
+        "crates/oxc_linter/src/rules/unicorn/prefer_export_from.rs (+13 -18)",
+        "crates/oxc_linter/src/rules/vitest/no_importing_vitest_globals.rs (+3 -3)",
+        "crates/oxc_linter/src/rules/vitest/prefer_importing_vitest_globals.rs (+2 -2)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 27069,
+      "title": "perf(lexer): `opmap_longest` return `Option<TokenKind>`",
+      "url": "https://github.com/oxc-project/oxc/pull/27069",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T11:40:36Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Small perf optimization.\n\nContinuation of #27068. Make `opmap_longest` return `Option<TokenKind>` instead of a `u32`.\n\nEach return path then tells the compiler whether an operator was found, so `munch_walk` no longer has to test the kind for 0 after the call.\n\n`munch_walk` loses 2 branches and 5 instructions.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/operators.rs (+20 -16)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27077,
+      "title": "perf(lexer): reduce branches in `op_len`",
+      "url": "https://github.com/oxc-project/oxc/pull/27077",
+      "author": "overlookmotel",
+      "mergedAt": "2026-09-30T11:41:28Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Tiny optimization.\n\n`op_len` calls `opmap_longest` to find out if 4 bytes at a position `pos` comprise an operator. It capped the operator search to `self.n - pos` bytes, where `self.n` is the length of source (unpadded length).\n\nThe cap is always >= 4 except at the very end of source, when some of `bytes` contains `\\0` padding bytes after end of source.\n\nRemove the cap, and just pass `4` as `max_len`. `opmap_longest` then unconditionally checks for 4-byte, 3-byte, and 2-byte operators. The result is the same - when at end of source, `bytes` contains some `\\0` padding bytes, which can't match any operator.\n\nThis reduces work in the common case where _not_ at the end of source, in return for a few more operations in the very uncommon case of being at very end of source.\n\nThis removes 8 instructions, 1 load (`self.n`), and 1 branch from `op_len`.\n\nNote: We can't do the same at `opmap_longest`'s other call site in `munch_walk`, as there passing the correct `max_len` is required for correctness (avoid incorrectly combining `>`s in some cases).\n\nThis is cold path code, so makes little practical difference, but why not?",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+5 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 25533,
+      "title": "feat(minifier): merge import and export statements against the same module",
+      "url": "https://github.com/oxc-project/oxc/pull/25533",
+      "author": "sapphi-red",
+      "mergedAt": "2026-09-30T13:26:40Z",
+      "labels": [
+        "A-minifier",
+        "A-ast"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Compress\n```js\nimport { b, g } from \"./res-SWvxTGCX.js\";\nexport { g as load_css, b as start };\n```\nto\n```js\nexport { g as load_css, b as start } from \"./res-SWvxTGCX.js\";\n```\n\nSome combinations (e.g. namespace + named specifier) are not allowed in `export`s while it's allowed in `import`s, so that part should be reviewed with caution.\n\nNote that `just minsize` result does not change because the input does not contain any import / exports.\n\nclose https://github.com/oxc-project/oxc/issues/13047\n\nI used AI to generate the code and then reviewed the code and fixed the behavior & added a bunch of tests.",
+      "files": [
+        "crates/oxc_ast/src/ast_impl/js.rs (+5 -0)",
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+236 -1)",
+        "crates/oxc_minifier/src/peephole/mod.rs (+2 -1)",
+        "crates/oxc_minifier/src/peephole/remove_unused_declaration.rs (+12 -2)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+12 -12)",
+        "crates/oxc_minifier/tests/peephole/merge_import_export.rs (+84 -0)",
+        "crates/oxc_minifier/tests/peephole/mod.rs (+1 -0)",
+        "crates/oxc_minifier/tests/peephole/remove_unused_declaration.rs (+8 -1)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 25534,
+      "title": "feat(minifier): merge import statements against the same module",
+      "url": "https://github.com/oxc-project/oxc/pull/25534",
+      "author": "sapphi-red",
+      "mergedAt": "2026-09-30T13:45:01Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Merge compatible import declarations for the same module, including declarations separated by imports from other modules:\n\n```js\nimport { b } from \"./res-SWvxTGCX.js\";\nimport { g } from \"./res-SWvxTGCX.js\";\n// becomes\nimport { b, g } from \"./res-SWvxTGCX.js\";\n```\n\nPreserve separate declarations when import attributes, phases, type/value modes, or namespace specifiers prevent merging. Combine multiple default bindings using named `default` imports. Keep source-phase imports separate because their syntax permits only one binding; a regression test checks that they remain parseable and idempotent.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+141 -0)",
+        "crates/oxc_minifier/src/peephole/mod.rs (+1 -0)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+8 -8)",
+        "crates/oxc_minifier/tests/peephole/merge_import_export.rs (+4 -0)",
+        "crates/oxc_minifier/tests/peephole/merge_imports.rs (+53 -0)",
+        "crates/oxc_minifier/tests/peephole/mod.rs (+1 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 27226,
+      "title": "perf(minifier): update expressions in place in `merge_import_export`",
+      "url": "https://github.com/oxc-project/oxc/pull/27226",
+      "author": "armano2",
+      "mergedAt": "2026-09-30T14:23:11Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "this is a refactor that lets us avoid creation of temporary empty statement and temporary dummy expr",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+51 -58)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27206,
+      "title": "fix(linter/unicorn/no-zero-fractions): parenthesize separator and large integers in fixer",
+      "url": "https://github.com/oxc-project/oxc/pull/27206",
+      "author": "breken-ai",
+      "mergedAt": "2026-09-30T14:34:45Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### Bug\n\nWhen `unicorn/no-zero-fractions` removes the fraction from a number that is the object of a member access, the fix adds parentheses so the result stays valid (`1.00.toFixed(2)` becomes `(1).toFixed(2)`). It decides whether parentheses are needed with `fmt.parse::<i64>()`, which fails for integers that contain numeric separators or don't fit in an `i64`. Those cases get no parentheses, so the fix produces a syntax error:\n\n```js\n1_000.0.toFixed(2)                   // fixed to `1_000.toFixed(2)`: SyntaxError\n10000000000000000000.0.toFixed(2)    // fixed to `10000000000000000000.toFixed(2)`: SyntaxError\n```\n\nThe linter's own fixer test catches this: `Linter fixer produced invalid syntax ... Invalid characters after number`.\n\n### Fix\n\nA literal needs the parentheses when the fixed text is only digits and `_`. That matches the decimal-integer check in eslint-plugin-unicorn, which accepts separators. Exponent forms such as `1e10.toFixed()` stay unparenthesized, as they are today.\n\n### Tests\n\nI added two `expect_fix` cases (`1_000.0.toFixed(2)` and a 20-digit integer). Both fail on `main` with the invalid-syntax panic and pass with the fix. `cargo test -p oxc_linter --lib unicorn` passes (148 tests) and `cargo clippy -p oxc_linter --lib --tests -- -D warnings` is clean.\n\nI used AI assistance (Claude) to prepare this change, then reviewed and tested it myself.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_zero_fractions.rs (+3 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27207,
+      "title": "fix(linter/unicorn/numeric-separators-style): report misgrouped BigInt literals",
+      "url": "https://github.com/oxc-project/oxc/pull/27207",
+      "author": "breken-ai",
+      "mergedAt": "2026-09-30T14:45:12Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### Bug\n\n`unicorn/numeric-separators-style` checks number literals with `formatted != raw`, but for BigInt literals it only compares lengths: `formatted.len() != number.span.size()`. A BigInt with the same number of separators in the wrong places has the same length as the correct form, so it is never reported:\n\n```js\nconst a = 12_34_567;   // reported, fixed to 1_234_567\nconst b = 12_34_567n;  // not reported (should become 1_234_567n)\nconst c = 0xA_BCDn;    // not reported (should become 0xAB_CDn)\n```\n\n### Fix\n\nCompare the formatted BigInt with its raw text, as the number branch already does. `format_bigint` keeps the prefix, digit case and `n` suffix as they were, so a correctly grouped literal still matches exactly.\n\n### Tests\n\nI added `12_34_567n` and `0xA_BCDn` to the fail and fix cases and updated the snapshot. On `main` both are \"expected to fail, but passed\" with no fix applied. With this change they are reported and fixed. `cargo test -p oxc_linter --lib unicorn` passes (148 tests) and `cargo clippy -p oxc_linter --lib --tests -- -D warnings` is clean.\n\nI used AI assistance (Claude) to prepare this change, then reviewed and tested it myself.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/numeric_separators_style.rs (+5 -1)",
+        "crates/oxc_linter/src/snapshots/unicorn_numeric_separators_style.snap (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27234,
+      "title": "fix(parser): remove type-dependent tuple rest diagnostics",
+      "url": "https://github.com/oxc-project/oxc/pull/27234",
+      "author": "camc314",
+      "mergedAt": "2026-09-30T20:46:35Z",
+      "labels": [
+        "A-parser"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "TS1265 and TS1266 depend on the resolved types of tuple rest elements. The parser cannot reliably distinguish concrete arrays from tuple aliases or variadic type parameters. Its spelling-based `Array` check rejects valid code such as:\n\n```ts\n// Array shadows the built-in name and is a variadic type parameter.\n// Both are valid, but the parser incorrectly reported TS1265 / TS1266.\ntype X<Array extends unknown[]> = [...Array, ...Array];\ntype Y<Array extends unknown[]> = [...Array, number?];\n```\n\n```ts\ntype Pair = [string, number];\ntype Items = string[];\n\n// Valid: spreading Pair contributes two fixed elements, then an optional one.\ntype Fixed = [...Pair, boolean?];\n\n// Invalid: Items is an unbounded array rest, but the parser cannot resolve it.\ntype OptionalAfterArray = [...Items, boolean?]; // TS1266\n// Invalid: two unbounded array rests; also requires resolving the alias.\ntype TwoArrays = [...Items, ...Items]; // TS1265\n```\n\n```ts\n// Invalid: the unconstrained type parameter might not be an array.\n// TypeScript reports TS2574, but the parser incorrectly reported TS1265.\ntype Unconstrained<Array> = [...Array, ...Array];\n\n// Invalid: the built-in Array requires a type argument.\n// TypeScript reports TS2314, but the parser incorrectly reported TS1265.\ntype MissingArguments = [...Array, ...Array];\n```\n\nRemove both diagnostics and their parser checks rather than retaining partial syntax-based reporting. Resolving aliases, checking generic constraints, and validating rest types bel\n…(truncated)",
+      "files": [
+        "crates/oxc_parser/src/diagnostics.rs (+0 -14)",
+        "crates/oxc_parser/src/ts/types.rs (+0 -35)",
+        "tasks/coverage/misc/fail/tuple-named-rest.ts (+0 -4)",
+        "tasks/coverage/snapshots/lexer_misc.snap (+2 -2)",
+        "tasks/coverage/snapshots/parser_misc.snap (+1 -39)",
+        "tasks/coverage/snapshots/parser_typescript.snap (+0 -60)"
+      ],
+      "filesTotal": 6
+    },
+    {"number":27239,"title":"refactor(formatter_core): share Tailwind class scope through `FormatSession`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27237,
+      "title": "fix(oxfmt): do not re-include a file below an excluded directory with a negated pattern",
+      "url": "https://github.com/oxc-project/oxc/pull/27237",
+      "author": "KuSh",
+      "mergedAt": "2026-10-01T05:20:57Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nA negated pattern no longer re-includes a file whose parent directory is excluded, for explicit paths, `--stdin-filepath` and the language server. This is what the directory walk, Git and Prettier already do.\n\nWith `.prettierignore`:\n\n```\nvendor/\n!vendor/keep.ts\n```\n\n`oxfmt .` skips `vendor/keep.ts` (the walk prunes `vendor/`), but `oxfmt vendor/keep.ts`, `--stdin-filepath vendor/keep.ts` and format-on-save formatted it. The explicit-path checks call `Gitignore::matched_path_or_any_parents()`, which matches the path itself first: `!vendor/keep.ts` is a whitelist match and the parent directory is never consulted. The same applied to `ignorePatterns` in `.oxfmtrc.json`.\n\nGit documents the rule: \"It is not possible to re-include a file if a parent directory of that file is excluded.\"\n\n## Measured behaviour\n\nFormatted = the file is formatted, ignored = it is skipped. Git column is `git check-ignore` with the same patterns as `.gitignore`. Prettier is 3.9.9 (the version pinned in `apps/oxfmt/package.json`).\n\n| Patterns (`.prettierignore`) | File | git | CLI walk | CLI explicit / stdin / LSP, before | CLI explicit / stdin / LSP, after | Prettier `.` / explicit |\n| --- | --- | --- | --- | --- | --- | --- |\n| A: `vendor/`, `!vendor/keep.ts` | `vendor/keep.ts` | ignored | ignored | formatted | ignored | ignored / ignored |\n| B: `vendor/*`, `!vendor/keep.ts` | `vendor/keep.ts` | not ignored | formatted | formatted | formatted | formatted / formatted |\n| C: `*.gen.ts`, `!kee\n…(truncated)",
+      "files": [
+        "apps/oxfmt/src/core/config/mod.rs (+2 -5)",
+        "apps/oxfmt/src/core/global_ignore.rs (+23 -15)",
+        "apps/oxfmt/test/cli/config_ignore_patterns/4.snap.md (+48 -0)",
+        "apps/oxfmt/test/cli/config_ignore_patterns/fixtures/basic/.oxfmtrc.json (+1 -1)",
+        "apps/oxfmt/test/cli/config_ignore_patterns/options.json (+4 -0)",
+        "apps/oxfmt/test/cli/ignore_and_override/6.snap.md (+35 -0)",
+        "apps/oxfmt/test/cli/ignore_and_override/options.json (+5 -1)",
+        "apps/oxfmt/test/cli/ignore_patterns/4.snap.md (+44 -0)",
+        "apps/oxfmt/test/cli/ignore_patterns/fixtures/.prettierignore (+1 -0)",
+        "apps/oxfmt/test/cli/ignore_patterns/options.json (+2 -1)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 27241,
+      "title": "fix(formatter,oxfmt): embed only original JSDoc plugin supported languages",
+      "url": "https://github.com/oxc-project/oxc/pull/27241",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-01T05:53:34Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "May support more languages in the future, but for now embed only css / less / scss / json / yaml / html, as original (`parserSynonyms`) does.\nsrc/descriptionFormatter.ts#L16",
+      "files": [
+        "apps/oxfmt/src/core/embed/mod.rs (+1 -2)",
+        "apps/oxfmt/src/core/embed/prettier_string.rs (+1 -1)",
+        "crates/oxc_formatter/src/formatter/jsdoc/embedded.rs (+4 -2)",
+        "crates/oxc_formatter/src/formatter/jsdoc/mdast_serialize/nodes.rs (+10 -3)",
+        "apps/oxfmt/AGENTS.md (+2 -2)",
+        "apps/oxfmt/test/api/jsdoc.test.ts (+18 -27)",
+        "crates/oxc_formatter/AGENTS.md (+2 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {"number":27243,"title":"refactor(linter): delete some commented code","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27236,"title":"refactor(minifier): use take in instead of manually creating new vec","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27238,"title":"perf(minifier): small performance improvement when merging imports","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27197,"title":"refactor(linter): use `Expression::is_undefined` consistently","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27198,"title":"refactor(linter): use `is_void` consistently","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27203,"title":"refactor(linter): apply `is_number_value` consistently","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27201,"title":"refactor(linter): use `is_null` consistently","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27245,
+      "title": "feat(linter/unicorn/no-useless-switch-case): implement suggestion",
+      "url": "https://github.com/oxc-project/oxc/pull/27245",
+      "author": "baevm",
+      "mergedAt": "2026-10-01T09:31:32Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "this PR implements suggestion for `unicorn/no-useless-switch-case` rule. Issue #684",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_useless_switch_case.rs (+196 -2)",
+        "crates/oxc_linter/src/snapshots/unicorn_no_useless_switch_case.snap (+18 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27202,"title":"refactor(linter): use helper `is_specific_raw_number_literal` consistently","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27250,"title":"refactor(linter/prefer-expect-assertions): use `scopc_id` accessor","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27251,"title":"refactor(linter): use node ID accessors consistently","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27252,"title":"refactor(linter): use `is_void` consistently","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27253,"title":"refactor(linter/react): use `reference_id` accessors","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27260,"title":"ci(doc): update nightly toolchain to 2026-09-30","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27265,"title":"chore(rust): bump MSRV to 1.97.0","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27266,"title":"refactor(ecmascript): use `bit_width` for hexadecimal digit counts","hint":"unknown","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": [
+    "#27198 の変更ファイルを取得できませんでした: fetch failed"
+  ],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 5,
+      "codspeed[bot]": 1
+    }
+  }
+}

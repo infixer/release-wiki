@@ -1,0 +1,47 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-10-02T00:52:41Z",
+  "range": {
+    "from": "2026-09-29T08:39:00Z",
+    "to": "2026-10-02T00:52:41Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 13004,
+      "title": "Retain last rendered size for auto-sizes images when unrendered",
+      "url": "https://github.com/whatwg/html/pull/13004",
+      "author": "noamr",
+      "mergedAt": "2026-10-01T13:55:57Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "When an image with `sizes=\"auto\"` stops being rendered (such as being hidden via setting`display: none` on its parent etc), retain its last rendered width so that subsequent source selections do not fall back to viewport default or trigger wasteful fetches.\n\nThis last rendered width is sticky until the image is either re-rendered or removed.\n\nAlso, do not treat an auto-sizes image stopping being rendered as a relevant mutation.\n\nFixes #12712.\n\n- [x] At least two implementers are interested (and none opposed):\n   * Chromium\n   * Mozilla (already the ground truth apart from `moveBefore` behavior)\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/63095\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: https://issues.chromium.org/issues/535260626\n   * Gecko: https://bugzilla.mozilla.org/show_bug.cgi?id=2076675\n   * WebKit: https://bugs.webkit.org/show_bug.cgi?id=325791\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A, this is an edge case not visible to users.\n- [x] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13004\n…(truncated)",
+      "files": [
+        "source (+22 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13010,
+      "title": "Throw synchronously from string timer Trusted Types checks",
+      "url": "https://github.com/whatwg/html/pull/13010",
+      "author": "shannonbooth",
+      "mergedAt": "2026-10-01T19:14:41Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The timer initialization steps got a Trusted Types compliant string inside the timer task while being able to throw an exception. As seen with WPT, all implementations are throwing synchronously, so move the conversion before the task is created so that it matches.\n\n- [x] At least two implementers are interested (and none opposed):\n   * All seem to implement\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * trusted-types/support/block-string-assignment-to-DOMWindowTimers-setTimeout-setInterval.js#L16\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Seems N/A\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A\n- [x] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13010/timers-and-user-prompts.html\" title=\"Last updated on Oct 1, 2026, 7:06 PM UTC (632bd2e)\">/timers-and-user-prompts.html</a>  ( <a href=\"https://whatpr.org/html/13010/92f2480...632bd2e/timers-and-user-prompts.html\" title=\"Last updated on Oct 1, 2026, 7:06 PM UTC (632bd2e)\">diff</a> )",
+      "files": [
+        "source (+21 -21)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,88 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-02T00:52:41Z",
+  "range": {
+    "from": "2026-09-29T12:51:21Z",
+    "to": "2026-10-02T00:52:41Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.5.2",
+      "publishedAt": "2026-08-05T16:19:44Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.5.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36441,
+      "title": "fix(nitro): register route-less handlers as global middleware",
+      "url": "https://github.com/nuxt/nuxt/pull/36441",
+      "author": "danielroe",
+      "mergedAt": "2026-09-30T06:01:55Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\na missing piece in our compat story for v2-style server handlers running as middleware",
+      "files": [
+        "packages/nitro-server/src/compat.ts (+7 -0)",
+        "packages/nitro-server/src/diagnostics.ts (+1 -1)",
+        "packages/nitro-server/test/compat.test.ts (+19 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36442,
+      "title": "feat(nitro): improve scanning + reporting for nitro v2-style code",
+      "url": "https://github.com/nuxt/nuxt/pull/36442",
+      "author": "danielroe",
+      "mergedAt": "2026-09-30T11:51:05Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis ignores type imports when detecting if code uses nitro v2 pattern, and also logs when user code relies on it",
+      "files": [
+        "packages/nitro-server/package.json (+1 -0)",
+        "packages/nitro-server/src/compat.ts (+102 -59)",
+        "packages/nitro-server/src/diagnostics.ts (+5 -0)",
+        "pnpm-lock.yaml (+3 -0)",
+        "docs/1.getting-started/18.upgrade.md (+1 -1)",
+        "docs/3.guide/4.modules/9.server-compatibility.md (+1 -1)",
+        "packages/nitro-server/test/compat.test.ts (+96 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36445,
+      "title": "feat(kit): add `resolveServerVariant` + `addServerImports` variant support",
+      "url": "https://github.com/nuxt/nuxt/pull/36445",
+      "author": "danielroe",
+      "mergedAt": "2026-10-01T08:24:26Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis adds a couple of missing utils that will be useful for module authors migrating to `nuxt/server`",
+      "files": [
+        "packages/kit/src/index.ts (+2 -1)",
+        "packages/kit/src/nitro.ts (+27 -2)",
+        "docs/3.guide/4.modules/9.server-compatibility.md (+32 -3)",
+        "packages/kit/test/nitro.test.ts (+38 -1)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": []
+}

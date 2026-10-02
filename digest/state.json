@@ -7,42 +7,42 @@
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-09-29T23:37:03Z",
-      "lastReleaseAt": "2026-09-29T23:51:45Z"
+      "lastMergedAt": "2026-10-02T00:47:13Z",
+      "lastReleaseAt": "2026-10-02T00:07:46Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
       "lastMergedAt": "2026-09-18T00:54:21Z",
-      "lastReleaseAt": "2026-09-24T08:51:34Z"
+      "lastReleaseAt": "2026-09-30T09:01:06Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-09-29T12:51:21Z",
+      "lastMergedAt": "2026-10-01T08:24:26Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-09-29T16:58:02Z",
+      "lastMergedAt": "2026-10-01T22:09:39Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-09-29T23:13:32Z",
-      "lastReleaseAt": "2026-09-24T08:51:34Z"
+      "lastMergedAt": "2026-10-02T00:09:53Z",
+      "lastReleaseAt": "2026-09-30T19:10:03Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-09-29T18:01:37Z",
+      "lastMergedAt": "2026-10-01T16:25:00Z",
       "lastReleaseAt": "2026-09-28T10:29:50Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
-      "lastMergedAt": "2026-09-29T19:39:25Z",
-      "lastReleaseAt": "2026-09-29T19:27:30Z"
+      "lastMergedAt": "2026-10-01T05:23:05Z",
+      "lastReleaseAt": "2026-10-01T18:00:22Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-09-29T08:39:00Z",
+      "lastMergedAt": "2026-10-01T19:14:41Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
@@ -57,40 +57,40 @@
     },
     "openui/open-ui": {
       "fullName": "openui/open-ui",
-      "lastMergedAt": "2026-09-17T08:29:58Z",
+      "lastMergedAt": "2026-10-01T19:06:56Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/ecma262": {
       "fullName": "tc39/ecma262",
-      "lastMergedAt": "2026-09-20T12:26:14Z",
+      "lastMergedAt": "2026-10-01T08:05:44Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-09-30T00:17:56Z",
-      "lastReleaseAt": "2026-09-29T15:44:40Z"
+      "lastMergedAt": "2026-10-02T00:40:07Z",
+      "lastReleaseAt": "2026-09-30T15:28:07Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-09-29T15:03:03Z",
-      "lastReleaseAt": "2026-09-25T08:58:17Z"
+      "lastMergedAt": "2026-10-01T16:06:19Z",
+      "lastReleaseAt": "2026-09-30T11:25:52Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-09-29T19:19:01Z",
-      "lastCommitAt": "2026-09-29T19:22:34Z",
+      "lastMergedAt": "2026-09-30T18:29:55Z",
+      "lastCommitAt": "2026-10-01T14:03:24Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
       "fullName": "tc39/proposals",
-      "lastMergedAt": "2026-09-22T02:55:19Z",
+      "lastMergedAt": "2026-10-01T02:28:38Z",
       "lastCommitAt": "2026-09-29T06:43:27Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "openai/codex": {
       "fullName": "openai/codex",
-      "lastReleaseAt": "2026-09-29T23:57:16Z",
-      "lastMergedAt": "2026-09-30T00:23:22Z"
+      "lastReleaseAt": "2026-10-01T22:57:00Z",
+      "lastMergedAt": "2026-10-02T00:46:30Z"
     }
   },
   "blogs": {
@@ -928,6 +928,7 @@
     },
     "anthropic": {
       "seen": [
+        "https://www.anthropic.com/news/barclays-scales-claude",
         "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
         "https://www.anthropic.com/news/accenture-embedded-evaluation",
         "https://www.anthropic.com/news/life-sciences-verification-program",
