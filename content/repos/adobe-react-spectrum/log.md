@@ -1,9 +1,16 @@
 ---
 title: adobe/react-spectrum 取り込み履歴
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/adobe-react-spectrum
 ---
+
+## 2026-10-02
+
+- 期間: 2026-09-29T16:58:02Z 〜 2026-10-02T00:52:41Z
+- PR 7 件（詳しく 6 件 / 1 行 1 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/adobe-react-spectrum/changes/2026-10-02|changes]]、[[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]、[[repos/adobe-react-spectrum/topics/SideNav|SideNav]]、[[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]（新規）、[[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]（新規）、[[repos/adobe-react-spectrum/topics/TokenField|TokenField]]（新規）、[[repos/adobe-react-spectrum/topics/ロケール最適化|ロケール最適化]]（新規）
+- エラー: なし
 
 ## 2026-09-30
 

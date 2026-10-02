@@ -1,9 +1,16 @@
 ---
 title: microsoft/TypeScript 取り込み履歴
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/microsoft-TypeScript
 ---
+
+## 2026-10-02
+
+- 期間: 2026-09-29T23:13:32Z 〜 2026-10-02T00:52:41Z
+- PR 23 件（詳しく 18 件 / 1 行 5 件）、Release 1 件（安定版 1 件: vscode-typescript/v1.0.1）
+- 更新したページ: [[repos/microsoft-TypeScript/changes/2026-10-02|changes]]、[[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.1|vscode-typescript/v1.0.1]]（新規）、[[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]、[[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]、[[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]]
+- エラー: なし
 
 ## 2026-09-30
 

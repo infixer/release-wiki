@@ -1,6 +1,6 @@
 ---
 title: Diff パネル
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -8,17 +8,21 @@ tags:
 
 ## 概要
 
-`mods/diff` は、ビルトインの diff パネルと同じ見た目・挙動を目指す独立実装。最初の編集でパネルを自動的に開く条件（メインループでの編集かつファイルチェックポイントが有効なときのみ）、幅が確定しないうちにエンジンが開こうとした表示の扱い、ドッキング表示前にリポジトリを読んでおくことで「Loading diff…」を経由しない点、再開・継続したセッションでの表示や `/clear` の挙動、セッション開始時刻の基準など、細かな差分を随時ビルトインに合わせている。読み取り専用のシェルコマンド（`isReadOnly`）の後は diff を再取得しない。`git diff` に常に `--no-color` を付ける変更（[#96363](https://github.com/anthropics/claude-code/pull/96363)）は 2026-09-30 に revert され、以前の挙動に戻っている。フックのマッチャーはリテラルのコマンド名（`'diff'`）と、同梱ビルドでの登録名 `cc-plugin-diff` にも対応する。`/diff` による手動の開閉は影響を受けない。
+`mods/diff` は、ビルトインの diff パネルと同じ見た目・挙動を目指す独立実装。最初の編集でパネルを自動的に開く条件（メインループでの編集かつファイルチェックポイントが有効なときのみ）、幅が確定しないうちにエンジンが開こうとした表示の扱い、ドッキング表示前にリポジトリを読んでおくことで「Loading diff…」を経由しない点、再開・継続したセッションでの表示や `/clear` の挙動、セッション開始時刻の基準など、細かな差分を随時ビルトインに合わせている。読み取り専用のシェルコマンド（`isReadOnly`）の後は diff を再取得しない。`git diff` に常に `--no-color` を付ける変更（[#96363](https://github.com/anthropics/claude-code/pull/96363)）は 2026-09-30 に revert され、以前の挙動に戻っている。hunk は表示するファイルをまとめて 1 回の `git diff --raw -z -p` で読み（失敗すると全ファイルが「Diff unavailable」になる）、`/diff` のダイアログでは表示中の行の分だけ読み足す。HEAD はパネルを開いた時点から監視し、別のターミナルで終えたマージや中止したリベースを数秒で検知する。リベース中かどうかは `REBASE_HEAD` と `rebase-merge` / `rebase-apply` フォルダの両方で判定する。フックのマッチャーはリテラルのコマンド名（`'diff'`）と、同梱ビルドでの登録名 `cc-plugin-diff` にも対応する。`/diff` による手動の開閉は影響を受けない。
 
 ## 主な API・オプション
 
-- `/diff` — 手動でのパネル開閉
+- `/diff` — 手動でのパネル開閉（フルスクリーンでないレイアウトでは変更ファイル一覧のダイアログ）
 - `$.session.usage()` の `startedAt` — セッション開始時刻の基準（返さないエンジンでは mod 自身の起動時刻を使用）
 - `DIFF_LEADING_ARGS` — mod が起動するすべての `git diff` に共通の引数（`--no-color` は revert で外れた）
 - `PLUGIN_NAMES = ['diff', 'cc-plugin-diff']` — `ui.focus` フックがマッチするプラグイン名
 
 ## 変更履歴
 
+- 2026-10-01 — `/diff` のダイアログで一覧のどのファイルも開けるように（表示中の行の hunk を読む）、閉じても「Diff dialog dismissed」を出さないように（[#98555](https://github.com/anthropics/claude-code/pull/98555)）📦 v2.1.287 · [[repos/anthropics-claude-code/changes/2026-10-02|変更]]
+- 2026-09-30 — パネルを開いた時点から HEAD を監視し、別ターミナルで終えたマージを自動で検知。珍しい名前のブランチで 2 秒ごとに git を起動しないように（[#98357](https://github.com/anthropics/claude-code/pull/98357)）📦 v2.1.287 · [[repos/anthropics-claude-code/changes/2026-10-02|変更]]
+- 2026-09-30 — 全ファイルの hunk を 1 回の `git diff --raw -z -p` で読むように（最大 50 プロセス → 1 プロセス）（[#98445](https://github.com/anthropics/claude-code/pull/98445)）📦 v2.1.287 · [[repos/anthropics-claude-code/changes/2026-10-02|変更]]
+- 2026-09-30 — 完了したリベースが残した `REBASE_HEAD` だけではリベース中とみなさず、「Diff unavailable」が続かないように（[#98374](https://github.com/anthropics/claude-code/pull/98374)）📦 v2.1.287 · [[repos/anthropics-claude-code/changes/2026-10-02|変更]]
 - 2026-09-30 — `git diff` に `--no-color` を付ける変更（[#96363](https://github.com/anthropics/claude-code/pull/96363)）を revert し、以前の挙動に戻す（[#98018](https://github.com/anthropics/claude-code/pull/98018)）📦 v2.1.285 · [[repos/anthropics-claude-code/changes/2026-09-30|変更]]
 - 2026-09-28 — `ui.focus` フックが `diff` と `cc-plugin-diff` のどちらの名前の要素にも反応するように（[#96953](https://github.com/anthropics/claude-code/pull/96953)）📦 v2.1.283 · [[repos/anthropics-claude-code/changes/2026-09-28|変更]]
 - 2026-09-28 — `git diff` に `--no-color` を付け、`color.ui=always` などの設定で diff 本文が空（`No diff content`）になる問題を修正（[#96363](https://github.com/anthropics/claude-code/pull/96363)）📦 v2.1.283 · [[repos/anthropics-claude-code/changes/2026-09-28|変更]]
@@ -30,6 +34,7 @@ tags:
 
 ## 関連
 
+- [[repos/anthropics-claude-code/releases/v2.1.287|v2.1.287]]
 - [[repos/anthropics-claude-code/releases/v2.1.285|v2.1.285]]
 - [[repos/anthropics-claude-code/releases/v2.1.283|v2.1.283]]
 - [[repos/anthropics-claude-code/releases/v2.1.281|v2.1.281]]

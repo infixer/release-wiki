@@ -1,9 +1,16 @@
 ---
 title: vercel/next.js 取り込み履歴
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/vercel-next.js
 ---
+
+## 2026-10-02
+
+- 期間: 2026-09-29T23:37:03Z 〜 2026-10-02T00:52:41Z
+- PR 38 件（詳しく 24 件 / 1 行 14 件）、Release 5 件（安定版 2 件: v16.3.8, v15.5.27、ほか v16.4.0-canary.54〜.56）
+- 更新したページ: [[repos/vercel-next.js/changes/2026-10-02|changes]]、[[repos/vercel-next.js/releases/v16.3.8|v16.3.8]]（新規）、[[repos/vercel-next.js/releases/v15.5.27|v15.5.27]]（新規）、[[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]、[[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]、[[repos/vercel-next.js/topics/AI-アップグレード|AIアップグレード]]、[[repos/vercel-next.js/topics/画像最適化|画像最適化]]（新規）、[[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]、[[repos/vercel-next.js/topics/ルーティング|ルーティング]]
+- エラー: なし
 
 ## 2026-09-30
 

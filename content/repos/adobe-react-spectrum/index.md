@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -14,26 +14,30 @@ tags:
 
 ## 直近の注目変更
 
+- `@react-aria/optimize-locales-plugin` が Turbopack に対応（[#10462](https://github.com/adobe/react-spectrum/pull/10462)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ロケール最適化|ロケール最適化]]
+- TokenField でトークン編集後にスクロールが飛ぶ問題を修正（[#10676](https://github.com/adobe/react-spectrum/pull/10676)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/TokenField|TokenField]]
+- `AttachmentBadge` の追加、`AttachmentPreview` の無効状態、`scrollFade` のエクスポート（[#10594](https://github.com/adobe/react-spectrum/pull/10594)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
+- SideNav の SidePanel 対応の追加修正（アバター・フォーカスリング・スクロール）（[#10678](https://github.com/adobe/react-spectrum/pull/10678)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/SideNav|SideNav]]
+- S2 のスタイルマクロに `scrollbarGutter` を追加（[#10682](https://github.com/adobe/react-spectrum/pull/10682)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
+- Modal・Popover の配置でスクリーンキーボードの開閉を待つように（[#10102](https://github.com/adobe/react-spectrum/pull/10102)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]
 - 仮想化 Menu の区切り線の高さ・サブメニューのインデントを修正（[#10673](https://github.com/adobe/react-spectrum/pull/10673)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Menu|Menu]]
 - React 18 で S2 の SideNav がビルドエラーになる問題を修正（[#10675](https://github.com/adobe/react-spectrum/pull/10675)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/SideNav|SideNav]]
 - PromptField のサイズ計算に layout effect を使用（[#10668](https://github.com/adobe/react-spectrum/pull/10668)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
 - S2 の SideNav を SidePanel 内で折りたためるように（[#10421](https://github.com/adobe/react-spectrum/pull/10421)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/SideNav|SideNav]]
-- Chat API の簡素化とデザイン調整（[#10577](https://github.com/adobe/react-spectrum/pull/10577)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
-- PromptField で生成中も送信ボタンを表示（steering）、S2 Menu の仮想化に対応（[#10614](https://github.com/adobe/react-spectrum/pull/10614)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]、[[repos/adobe-react-spectrum/topics/Menu|Menu]]
-- S2 の AI コンポーネントに `AttachmentGrid` を追加（[#10561](https://github.com/adobe/react-spectrum/pull/10561)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
-- 音声入力中に送信すると PromptField の内容が元に戻る問題を修正（[#10624](https://github.com/adobe/react-spectrum/pull/10624)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
-- 空応答の後に非同期アイテムが届いたとき ComboBox のメニューを再度開くよう修正（[#9823](https://github.com/adobe/react-spectrum/pull/9823)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]
-- コレクション内でキーが重複した場合に例外を投げるように（[#10605](https://github.com/adobe/react-spectrum/pull/10605)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
 
 ## トピック
 
-- [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]] — `@react-spectrum/ai` の PromptField・Chat/Thread・AttachmentList・AttachmentGrid など
+- [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]] — `@react-spectrum/ai` の PromptField・Chat/Thread・AttachmentList・AttachmentGrid・AttachmentBadge など
 - [[repos/adobe-react-spectrum/topics/Collections|Collections]] — コレクションのキー管理（`Document`/`BaseCollection`）
 - [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]] — 非同期アイテム読み込み時の開閉制御
 - [[repos/adobe-react-spectrum/topics/Menu|Menu]] — S2 の Menu（セパレーター表示・仮想化）
 - [[repos/adobe-react-spectrum/topics/SideNav|SideNav]] — S2 の SideNav と SidePanel 内での折りたたみ
+- [[repos/adobe-react-spectrum/topics/TokenField|TokenField]] — トークン入力欄（`useTokenField`）のキャレット位置・スクロール
+- [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]] — Modal・Popover の配置とスクリーンキーボードへの対応
+- [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]] — S2 の `style` マクロとテーマで使えるプロパティ
+- [[repos/adobe-react-spectrum/topics/ロケール最適化|ロケール最適化]] — `@react-aria/optimize-locales-plugin`（Turbopack 対応）
 
 ## 取り込み
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30]]、[[repos/adobe-react-spectrum/changes/2026-09-28|2026-09-28]]、[[repos/adobe-react-spectrum/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-02|2026-10-02]]、[[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30]]、[[repos/adobe-react-spectrum/changes/2026-09-28|2026-09-28]]、[[repos/adobe-react-spectrum/changes/2026-09-24|2026-09-24]]

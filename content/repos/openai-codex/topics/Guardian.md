@@ -1,6 +1,6 @@
 ---
 title: Guardian
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/openai-codex
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Guardian は Codex のエージェント行動を自動でレビュー・承認する仕組み（同期/非同期レビュー、リスクスコアのキャッシュなど）。直近では、レビューが参照する認可の証跡を正確に保つ変更が続いている。ユーザーによる目標（goal）の更新や人間による上書き指示が証跡として保持され、変わらない heartbeat 指示はまとめられるようになった。レビュー中に新しいユーザー入力が来た場合は中止せず最新の証跡で再レビューし、非同期スコアは対象環境の権限（読み取り拒否など）に紐づけてキャッシュされる。端末入力の承認（`write_stdin_approval`）は既定で有効になり、判定結果を OTLP ログへ出力するオプション `otel.log_guardian_assessments` も追加された。2026-09-30 の回では、オプトインの機能として、レビュアーが会話履歴を検索・参照できる `guardian_conversation_history_tools` と、ハンドオフを手がかりにワーカーごとの root 証跡を選ぶ `guardian_root_handoff_context` が追加された。暗号化されたエージェントメッセージもレビューに保持されるようになり、diff 表示の準備でリモートの Git 探索を待たなくなった。
+Guardian は Codex のエージェント行動を自動でレビュー・承認する仕組み（同期/非同期レビュー、リスクスコアのキャッシュなど）。直近では、レビューが参照する認可の証跡を正確に保つ変更が続いている。ユーザーによる目標（goal）の更新や人間による上書き指示が証跡として保持され、変わらない heartbeat 指示はまとめられるようになった。レビュー中に新しいユーザー入力が来た場合は中止せず最新の証跡で再レビューし、非同期スコアは対象環境の権限（読み取り拒否など）に紐づけてキャッシュされる。端末入力の承認（`write_stdin_approval`）は既定で有効になり、判定結果を OTLP ログへ出力するオプション `otel.log_guardian_assessments` も追加された。2026-09-30 の回では、オプトインの機能として、レビュアーが会話履歴を検索・参照できる `guardian_conversation_history_tools` と、ハンドオフを手がかりにワーカーごとの root 証跡を選ぶ `guardian_root_handoff_context` が追加された。暗号化されたエージェントメッセージもレビューに保持されるようになり、diff 表示の準備でリモートの Git 探索を待たなくなった。2026-10-02 の回では、Guardian のセッション初期化でホストのスキル発見を省き、主要な executor がオフラインでもレビューが止まらないようになった。rust-v0.160.0 で会話履歴の参照とハンドオフを考慮した root コンテキスト（いずれもオプトイン）が安定版に入った。
 
 ## 主な API・オプション
 
@@ -22,6 +22,7 @@ Guardian は Codex のエージェント行動を自動でレビュー・承認�
 
 ## 変更履歴
 
+- 2026-10-02 — Guardian レビューでホストのスキル発見を省略（[#49584](https://github.com/openai/codex/pull/49584)）📦 rust-v0.162.0-alpha.1 · [[repos/openai-codex/changes/2026-10-02|変更]]
 - 2026-09-30 — Guardian の diff 表示でリモートの Git 探索をしないように（[#49082](https://github.com/openai/codex/pull/49082)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
 - 2026-09-30 — ハンドオフを考慮した root コンテキストを追加（`guardian_root_handoff_context`、オプトイン）（[#49057](https://github.com/openai/codex/pull/49057)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
 - 2026-09-30 — 暗号化されたエージェントメッセージをレビューに保持（[#49038](https://github.com/openai/codex/pull/49038)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
@@ -45,3 +46,5 @@ Guardian は Codex のエージェント行動を自動でレビュー・承認�
 - [[repos/openai-codex/releases/rust-v0.156.1|rust-v0.156.1]]
 - [[repos/openai-codex/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/openai-codex/changes/2026-09-30|2026-09-30 の変更]]
+- [[repos/openai-codex/changes/2026-10-02|2026-10-02 の変更]]
+- [[repos/openai-codex/releases/rust-v0.160.0|rust-v0.160.0]]

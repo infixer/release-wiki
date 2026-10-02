@@ -1,6 +1,6 @@
 ---
 title: tc39/proposals
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/tc39-proposals
 ---
@@ -9,7 +9,7 @@ tags:
 
 ## 最新リリース
 
-特になし（このリポジトリは README の Stage 別一覧表で提案の状態を管理しており、この回の収集期間に Release の公開はなかった）
+特になし（このリポジトリは README の Stage 別一覧表で提案の状態を管理しており、Release は公開されていない）
 
 ## 直近の注目変更
 
@@ -25,4 +25,4 @@ tags:
 ## 取り込み
 
 - [[repos/tc39-proposals/log|取り込み履歴]]
-- 最近の変更: [[repos/tc39-proposals/changes/2026-09-30|2026-09-30]]、[[repos/tc39-proposals/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/tc39-proposals/changes/2026-10-02|2026-10-02]]、[[repos/tc39-proposals/changes/2026-09-30|2026-09-30]]、[[repos/tc39-proposals/changes/2026-09-24|2026-09-24]]

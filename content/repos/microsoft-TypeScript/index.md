@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -11,23 +11,24 @@ tags:
 
 - 安定版: [v7.0.2](https://github.com/microsoft/TypeScript/releases/tag/v7.0.2)（2026-08-20）
 - プレリリース: なし
+- その他: [vscode-typescript/v1.0.1](https://github.com/microsoft/TypeScript/releases/tag/vscode-typescript/v1.0.1)（2026-09-30、VS Code 拡張。TypeScript 7.0.2 を同梱）→ [[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.1|まとめ]]
 
 ## 直近の注目変更
 
-- `es2026` を `target` と `lib` に指定できるように（[#64096](https://github.com/microsoft/TypeScript/pull/64096)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- `getJSDocCommentsAndTags` を TS 6.0 と同じ動作で復活（[#64455](https://github.com/microsoft/TypeScript/pull/64455)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- API のコールバック式ファイルシステムで全関数の実装指定が必須に、`createVirtualFileSystem` を削除（破壊的変更）（[#64447](https://github.com/microsoft/TypeScript/pull/64447)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- バインダーが作った Symbol をスナップショット間で同一に（[#64518](https://github.com/microsoft/TypeScript/pull/64518)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- ファイルシステムのルートに近いプロジェクトでも watch が再ビルドするように（[#64366](https://github.com/microsoft/TypeScript/pull/64366)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
-- テンプレートリテラル型のサイズに上限を設け、TS2589 を報告（[#64194](https://github.com/microsoft/TypeScript/pull/64194)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- `resolveObjectTypeMembers` の冪等性を回復し、無限循環するインスタンス化のエラーを改善（[#64372](https://github.com/microsoft/TypeScript/pull/64372)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- 同じオブジェクト型のマップの交差を簡約しないように（Zod などの再帰スキーマ向け）（[#64481](https://github.com/microsoft/TypeScript/pull/64481)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- 宣言出力の打ち切り後にキャッシュ済みの型を複製しないように（[#63969](https://github.com/microsoft/TypeScript/pull/63969)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- チェッカーを排他的に取得するように（[#64543](https://github.com/microsoft/TypeScript/pull/64543)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
+- `esnext` に `Promise.allKeyed` / `Promise.allSettledKeyed` を追加（[#64093](https://github.com/microsoft/TypeScript/pull/64093)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- API に `getSymbol(decl)` を追加（TS 6 の `declaration.symbol` 相当）（[#64571](https://github.com/microsoft/TypeScript/pull/64571)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- コンパイラオプションをコード生成し、`tsconfig.schema.json` をパッケージに同梱（[#64457](https://github.com/microsoft/TypeScript/pull/64457)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]]
+- `verbatimModuleSyntax` でデフォルト import の横の空の `{}` を出力しないように（[#64578](https://github.com/microsoft/TypeScript/pull/64578)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- `export=` のクラスとトップレベルの `export type` が並ぶときの可視性を修正（[#64573](https://github.com/microsoft/TypeScript/pull/64573)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- 型引数からの推論をキャッシュし、推論の欠落を修正（[#64553](https://github.com/microsoft/TypeScript/pull/64553)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- 宣言出力で循環構造と打ち切りをエラーとして報告（`/* elided */ any` を黙って出さない）（[#64461](https://github.com/microsoft/TypeScript/pull/64461)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- API が返す補完の Symbol を常に現在のスナップショットのものに（[#64554](https://github.com/microsoft/TypeScript/pull/64554)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- `with` 文で CommonJS 出力がクラッシュする不具合を修正（[#64574](https://github.com/microsoft/TypeScript/pull/64574)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- マージされた宣言の診断位置を決定的に（DefinitelyTyped での非決定性を解消）（[#64566](https://github.com/microsoft/TypeScript/pull/64566)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 
 ## トピック
 
-- [[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]] — tsgo（TypeScript 7）を支えるビルド・CI・コード生成・ローカライズのインフラ整備
+- [[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]] — tsgo（TypeScript 7）を支えるビルド・CI・コード生成（コンパイラオプション・JSON スキーマ）・ローカライズのインフラ整備
 - [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]] — 型チェッカー（`tsc/internal/checker`）の正しさの修正とパフォーマンス改善
 - [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]] — エディタ向け補完・LSP まわりの不具合修正
 - [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]] — `tsc -b` のビルドスケジューリングとファイル監視（watch）の改善
@@ -36,4 +37,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-09-30|2026-09-30]]、[[repos/microsoft-TypeScript/changes/2026-09-28|2026-09-28]]、[[repos/microsoft-TypeScript/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-02|2026-10-02]]、[[repos/microsoft-TypeScript/changes/2026-09-30|2026-09-30]]、[[repos/microsoft-TypeScript/changes/2026-09-28|2026-09-28]]、[[repos/microsoft-TypeScript/changes/2026-09-24|2026-09-24]]

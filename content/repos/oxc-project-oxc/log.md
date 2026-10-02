@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-02
+
+- 期間: 2026-09-29T18:01:37Z 〜 2026-10-02T00:52:41Z
+- PR 47 件（詳しく 30 件 / 1 行 17 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-02|changes]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: #27198 の変更ファイルを取得できませんでした: fetch failed
 
 ## 2026-09-30
 

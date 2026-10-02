@@ -1,6 +1,6 @@
 ---
 title: プログラム的API
-updated: 2026-09-30
+updated: 2026-10-02
 tags:
   - repo/microsoft-TypeScript
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScript 7）向けに、プログラムから使う API（`packages/typescript/src/api`、Go 側の `tsc/internal/api`）が急速に整備されている。中心は「スナップショット」の概念で、`api.createSnapshot(changes?)`（常に使える）と `api.getCurrentLanguageServerSnapshot(changes?)`（LSP モード専用）でスナップショットを作り、`snapshot.update(changes)` で新しいスナップショットへ更新する。`changes` にはプログラムの作成（`createPrograms`）・再設定（`reconfigurePrograms`）・最新化（`ensurePrograms`）を渡せる。以前あった `api.updateSnapshot()` や `oldProgram` オプションは廃止された。プロジェクトには Configured・Inferred・Synthetic の種別ごとに専用の型付き ID が導入され、`createProgram` は `compilerOptions` を第2引数のトップレベルに取るようになった。ソースファイルの生成（`createSourceFile` 系）、プリンター（`printFile`）、子ノードの列挙（`childrenIter`）、モジュール解決のオーバーライド（`createModuleResolver`）なども順次移植・追加されている。typescript-eslint からの要望（tsconfig の `plugins` 解析、`MappedType` プロパティの公開）にも対応した。`createSourceFile` 系は parse キャッシュから取得して破棄可能な lease を返すようになり（戻り値の変更）、同じファイル・テキストなら同一のソースファイルになる。TS 6 より前の `SolutionBuilder` に相当する `createBuildOrchestrator`（`BuildOrchestrator`）や、api-extractor 向けの AST ヘルパーも追加された。コールバック式のファイルシステムは、`createVirtualFileSystem` が公開 API から外れ、すべての関数について実装（コールバックか、サーバー側の実装を表すシンボル）の指定が必須になった（破壊的変更）。バインダーが作った Symbol はクライアント側でも SourceFile のキャッシュに保存され、スナップショットをまたいで同一になった。`getJSDocCommentsAndTags` も 6.0 と同じ動作で復活した。
+tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScript 7）向けに、プログラムから使う API（`packages/typescript/src/api`、Go 側の `tsc/internal/api`）が急速に整備されている。中心は「スナップショット」の概念で、`api.createSnapshot(changes?)`（常に使える）と `api.getCurrentLanguageServerSnapshot(changes?)`（LSP モード専用）でスナップショットを作り、`snapshot.update(changes)` で新しいスナップショットへ更新する。`changes` にはプログラムの作成（`createPrograms`）・再設定（`reconfigurePrograms`）・最新化（`ensurePrograms`）を渡せる。以前あった `api.updateSnapshot()` や `oldProgram` オプションは廃止された。プロジェクトには Configured・Inferred・Synthetic の種別ごとに専用の型付き ID が導入され、`createProgram` は `compilerOptions` を第2引数のトップレベルに取るようになった。ソースファイルの生成（`createSourceFile` 系）、プリンター（`printFile`）、子ノードの列挙（`childrenIter`）、モジュール解決のオーバーライド（`createModuleResolver`）なども順次移植・追加されている。typescript-eslint からの要望（tsconfig の `plugins` 解析、`MappedType` プロパティの公開）にも対応した。`createSourceFile` 系は parse キャッシュから取得して破棄可能な lease を返すようになり（戻り値の変更）、同じファイル・テキストなら同一のソースファイルになる。TS 6 より前の `SolutionBuilder` に相当する `createBuildOrchestrator`（`BuildOrchestrator`）や、api-extractor 向けの AST ヘルパーも追加された。コールバック式のファイルシステムは、`createVirtualFileSystem` が公開 API から外れ、すべての関数について実装（コールバックか、サーバー側の実装を表すシンボル）の指定が必須になった（破壊的変更）。バインダーが作った Symbol はクライアント側でも SourceFile のキャッシュに保存され、スナップショットをまたいで同一になった。`getJSDocCommentsAndTags` も 6.0 と同じ動作で復活した。Declaration ノードからバインダーが作った Symbol を取り出す `getSymbol(decl)`（TS 6 の `declaration.symbol` 相当）が追加され、型チェッカーなしで `createSourceFile` で作ったファイルの Symbol も取れるようになった。補完 API が返す Symbol は常に現在のスナップショットのものになった。型付きパスの導入（#64159）に向けたバグ修正も先行して入っている。
 
 ## 主な API・オプション
 
@@ -23,9 +23,13 @@ tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScr
 - `isExternalModule(sourceFile)` / `getCombinedModifierFlags(declaration)` / `getNameOfDeclaration(declaration)` — api-extractor 向けの AST ヘルパー
 - `new API({ fs })` — コールバック式ファイルシステム。すべての関数の実装指定が必須に（`createVirtualFileSystem` はテスト用ユーティリティへ移動）
 - `getJSDocCommentsAndTags` — TS 6.0 と同じ動作で復活
+- `api.getSymbol(decl)` / トップレベルの `getSymbol(decl)`（`typescript/async` など）— Declaration からマージ前のバインダー Symbol を取得
 
 ## 変更履歴
 
+- 2026-10-02 — 型付きパスの準備のためのバグ修正（#64159 から切り出し）（[#64544](https://github.com/microsoft/TypeScript/pull/64544)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-02|変更]]
+- 2026-10-02 — `getSymbol(decl)` を追加（TS 6 の `declaration.symbol` 相当）（[#64571](https://github.com/microsoft/TypeScript/pull/64571)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-02|変更]]
+- 2026-10-02 — API が返す補完の Symbol を常に現在のスナップショットのものに（[#64554](https://github.com/microsoft/TypeScript/pull/64554)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-02|変更]]
 - 2026-09-30 — バインダーが作った Symbol をクライアント側の `SourceFileCache` に保存し、スナップショット間で参照を同一に（[#64518](https://github.com/microsoft/TypeScript/pull/64518)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-09-30|変更]]
 - 2026-09-30 — type-only の import 句で `getTypeAtLocation` がクラッシュする不具合を修正（[#64468](https://github.com/microsoft/TypeScript/pull/64468)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-09-30|変更]]
 - 2026-09-30 — コールバック式ファイルシステムで全関数の実装指定を必須にし、`createVirtualFileSystem` を公開 API から削除（破壊的変更）（[#64447](https://github.com/microsoft/TypeScript/pull/64447)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-09-30|変更]]
