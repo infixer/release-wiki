@@ -1,9 +1,16 @@
 ---
 title: microsoft/TypeScript 取り込み履歴
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/microsoft-TypeScript
 ---
+
+## 2026-10-05
+
+- 期間: 2026-10-02T00:09:53Z 〜 2026-10-04T23:59:17Z
+- PR 8 件（詳しく 6 件 / 1 行 2 件）、Release 0 件（bot の PR 3 件は collect で除外: Copilot 1・dependabot[bot] 1・typescript-automation[bot] 1）
+- 更新したページ: [[repos/microsoft-TypeScript/changes/2026-10-05|changes]]、[[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]、[[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]、[[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- エラー: なし
 
 ## 2026-10-02
 

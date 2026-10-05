@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -14,31 +14,31 @@ tags:
 
 ## 直近の注目変更
 
+- `--changed` がセットアップファイル・設定の依存・`__mocks__` なども追跡（[#11432](https://github.com/vitest-dev/vitest/pull/11432)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]
+- キャッシュの実装を整理し、プロジェクト名の `:` に対応・`results` キャッシュの形を変更（[#11453](https://github.com/vitest-dev/vitest/pull/11453)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
+- 一部のマッチャーで `Map`・`Set` の深い比較が効いていなかったのを修正（[#11402](https://github.com/vitest-dev/vitest/pull/11402)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
+- HTML レポートのモジュールグラフを環境ごとに 1 回だけ保存（レポートの肥大・クラッシュを解消）（[#11421](https://github.com/vitest-dev/vitest/pull/11421)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/UI|UI]]、[[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
+- セットアップに失敗したフィクスチャをキャッシュしないよう修正（[#11238](https://github.com/vitest-dev/vitest/pull/11238)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
+- `toTestSpecification` で typecheck のモジュールに `typescript` プールを使うよう修正（[#11451](https://github.com/vitest-dev/vitest/pull/11451)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
+- UI: エクスプローラーの絞り込みを整理し、suite に一致したときの入れ子のテストを修正（[#11262](https://github.com/vitest-dev/vitest/pull/11262)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/UI|UI]]
+- JUnit レポーターが XML の属性値からも ANSI シーケンスを除去（[#11407](https://github.com/vitest-dev/vitest/pull/11407)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
+- `pretty-format` で boxed symbol を表示できるよう修正（[#11446](https://github.com/vitest-dev/vitest/pull/11446)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
 - `--changed` の実行時に、影響を受けたテストの数と総数を表示（experimental）（[#11424](https://github.com/vitest-dev/vitest/pull/11424)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]
-- browser: `toHaveTextContent` を引数なしで使えるように（[#11425](https://github.com/vitest-dev/vitest/pull/11425)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]、[[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
-- `fsModuleCache` をデフォルトで有効に（[#11435](https://github.com/vitest-dev/vitest/pull/11435)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
-- git のエラーと位置指定フィルタのエラーで実行を失敗（終了コード 1）させる（[#11430](https://github.com/vitest-dev/vitest/pull/11430)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]
-- browser: モックのルートのインターセプトの競合を解消（Chromium でモックがランダムに効かない問題）（[#11083](https://github.com/vitest-dev/vitest/pull/11083)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/モック|モック]]
-- API トークンをアトミックに公開（空トークンで接続タイムアウトする問題を修正）（[#11323](https://github.com/vitest-dev/vitest/pull/11323)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
-- `vitest --ui` でタブが 2 つ開く不具合を修正（[#11358](https://github.com/vitest-dev/vitest/pull/11358)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/UI|UI]]
-- vm プールで Vite の環境をまたいでスクリプトを再利用しないように（[#11395](https://github.com/vitest-dev/vitest/pull/11395)）📦 v5.0.3 · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
-- `expect.extend` の非対称マッチャーにも現在の等価性テスターを渡す（[#11401](https://github.com/vitest-dev/vitest/pull/11401)）📦 v5.0.3 · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
-- `why-is-node-running` を `3.2.1` に固定し `ERR_PNPM_TRUST_DOWNGRADE` を回避（[#11403](https://github.com/vitest-dev/vitest/pull/11403)）📦 v5.0.3 · トピック: [[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
 
 ## トピック
 
-- [[repos/vitest-dev-vitest/topics/UI|UI]] — Vitest UI のレイアウト・認証
-- [[repos/vitest-dev-vitest/topics/アサーション|アサーション]] — `expect` の matcher 実装（`toMatchScreenshot` を含む）
-- [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]] — モジュール変換結果のキャッシュ（`fsModuleCache`、デフォルトで有効）と一時ディレクトリ
+- [[repos/vitest-dev-vitest/topics/UI|UI]] — Vitest UI のレイアウト・認証・エクスプローラーの絞り込み・HTML レポートのモジュールグラフ
+- [[repos/vitest-dev-vitest/topics/アサーション|アサーション]] — `expect` の matcher 実装と等価性（`toMatchScreenshot`・`pretty-format` を含む）
+- [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]] — モジュール変換結果のキャッシュ（`fsModuleCache`、デフォルトで有効）、results キャッシュ（`VitestCache`）と一時ディレクトリ
 - [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]] — `--changed` / `--related` や位置指定フィルタによるテストの絞り込み
 - [[repos/vitest-dev-vitest/topics/テスト環境|テスト環境]] — jsdom などのテスト環境の統合
 - [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]] — ブラウザモードのサーバー・環境設定・Playwright 連携
-- [[repos/vitest-dev-vitest/topics/プール|プール]] — ワーカーのプール（vm プール・`VITEST_POOL_ID`）
+- [[repos/vitest-dev-vitest/topics/プール|プール]] — ワーカーのプール（vm プール・`VITEST_POOL_ID`・typecheck の `typescript` プール）
 - [[repos/vitest-dev-vitest/topics/モック|モック]] — `vi.spyOn` などモック・スパイ、モックのインターセプター
-- [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]] — テストを動かすランタイム（`process` の扱い・非同期リーク検出・`repeats` / `retry`）
-- [[repos/vitest-dev-vitest/topics/レポーター|レポーター]] — レポーター実装とオプション
+- [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]] — テストを動かすランタイム（`process` の扱い・非同期リーク検出・`repeats` / `retry`・フィクスチャ）
+- [[repos/vitest-dev-vitest/topics/レポーター|レポーター]] — レポーター実装とオプション（JUnit・HTML を含む）
 
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-02|2026-10-02]]、[[repos/vitest-dev-vitest/changes/2026-09-30|2026-09-30]]、[[repos/vitest-dev-vitest/changes/2026-09-28|2026-09-28]]、[[repos/vitest-dev-vitest/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-05|2026-10-05]]、[[repos/vitest-dev-vitest/changes/2026-10-02|2026-10-02]]、[[repos/vitest-dev-vitest/changes/2026-09-30|2026-09-30]]、[[repos/vitest-dev-vitest/changes/2026-09-28|2026-09-28]]、[[repos/vitest-dev-vitest/changes/2026-09-24|2026-09-24]]

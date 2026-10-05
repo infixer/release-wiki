@@ -1,6 +1,6 @@
 ---
 title: w3c/csswg-drafts
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/w3c-csswg-drafts
 ---
@@ -39,4 +39,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-csswg-drafts/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-10-02|2026-10-02]]、[[repos/w3c-csswg-drafts/changes/2026-09-30|2026-09-30]]、[[repos/w3c-csswg-drafts/changes/2026-09-28|2026-09-28]]、[[repos/w3c-csswg-drafts/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-10-05|2026-10-05]]、[[repos/w3c-csswg-drafts/changes/2026-10-02|2026-10-02]]、[[repos/w3c-csswg-drafts/changes/2026-09-30|2026-09-30]]、[[repos/w3c-csswg-drafts/changes/2026-09-28|2026-09-28]]、[[repos/w3c-csswg-drafts/changes/2026-09-24|2026-09-24]]

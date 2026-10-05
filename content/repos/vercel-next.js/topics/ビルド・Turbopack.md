@@ -1,6 +1,6 @@
 ---
 title: ビルド・Turbopack
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになり、macOS で監視がハングする問題も修正された。遅延 dynamic import は SSR でも使えるようになった。16.4 に向けて、`experimental.turbopackSharedRuntime` が既定で有効になり、`experimental.turbopackMangleExportNames` も本番ビルドで既定有効になった。turbo-persistence はコンパクションを刷新して永続キャッシュの肥大化を抑えている。`generateBuildId` を明示した場合はスキュー保護が有効でも常に使われる。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。
+Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになり、macOS で監視がハングする問題も修正された。遅延 dynamic import は SSR でも使えるようになった。16.4 に向けて、`experimental.turbopackSharedRuntime` が既定で有効になり、`experimental.turbopackMangleExportNames` も本番ビルドで既定有効になった。turbo-persistence はコンパクションを刷新して永続キャッシュの肥大化を抑えている。`generateBuildId` を明示した場合はスキュー保護が有効でも常に使われる。アナライザーはトップがルートのサマリー画面になり、比較ツリーマップではモジュールの増減を表示する。マングリングは facade を使う方式を `experimental.turbopackMangleViaMaterializedNamespaceObject` でオプトインできる。turbo-tasks では不要な再実行や永続化データの破損を防ぐ修正が続き、trace-server の MCP はメモリ調査に使えるようになった。React Compiler の `enablePreserveExistingMemoizationGuarantees` も next.config から指定できる。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。
 
 ## 主な API・オプション
 
@@ -17,11 +17,25 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 - `additionalRoots`（Turbopack の設定）— デプロイアダプター（`vc deploy` など）でも利用可能に
 - `experimental.turbopackSharedRuntime` — Turbopack の共有ランタイム。既定で有効（`false` で無効化可、将来削除予定）
 - `experimental.turbopackMangleExportNames` — エクスポート名のマングリング。既定は `next dev` で `false`、ビルドで `true`
+- `experimental.turbopackMangleViaMaterializedNamespaceObject` — facade を使ったマングリングのオプトイン。未指定時は `turbopackMangleExportNames` を明示的に `true` にしたときだけ有効
+- `reactCompiler.enablePreserveExistingMemoizationGuarantees` — React Compiler のオプション（Babel・Turbopack の Rust コンパイラの両方に渡される）
 - `generateBuildId` — 明示すれば `deploymentId` 設定時も常に使われる
 - `experimental.turbopack.resolveAlias` — `false` を指定してモジュールを空スタブに解決可能に
 
 ## 変更履歴
 
+- 2026-10-05 — バンドルアナライザーにルートのサマリー画面を追加（ルート別の分析は `/analyze` へ）（[#98787](https://github.com/vercel/next.js/pull/98787)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — 比較ツリーマップでバンドルの増減を表示（[#98837](https://github.com/vercel/next.js/pull/98837), [#99607](https://github.com/vercel/next.js/pull/99607)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — facade を使ったエクスポート名マングリングをオプトインで有効にできるように（[#99309](https://github.com/vercel/next.js/pull/99309)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — React Compiler のオプション `enablePreserveExistingMemoizationGuarantees` を追加（[#98589](https://github.com/vercel/next.js/pull/98589)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — trace-server の MCP にメモリ・アロケーションの情報を追加（[#98546](https://github.com/vercel/next.js/pull/98546)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — additional roots 内の `import.meta.url` でパニックしないよう修正（[#99511](https://github.com/vercel/next.js/pull/99511)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — Turbopack のモジュールキャッシュを `Map` で保持（[#98947](https://github.com/vercel/next.js/pull/98947)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — ESM エクスポートの受け渡しプロトコルを変えて出力を縮小（[#98932](https://github.com/vercel/next.js/pull/98932)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — turbo-tasks: `outdated_collectibles` を正しく維持し、不要な再実行を防止（[#99386](https://github.com/vercel/next.js/pull/99386)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — turbo-tasks: 永続化データが空で上書きされる問題を修正（[#99581](https://github.com/vercel/next.js/pull/99581)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — turbo-tasks: ディスク読み込みで存在しないタスクの扱いを統一（[#99249](https://github.com/vercel/next.js/pull/99249)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
+- 2026-10-05 — Docker のサンプルで pnpm 11 のインストールが失敗する問題を修正（[#97352](https://github.com/vercel/next.js/pull/97352)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
 - 2026-10-02 — Turbopack のエクスポート名マングリングを本番ビルドで既定有効に（[#99362](https://github.com/vercel/next.js/pull/99362)）📦 v16.4.0-canary.56 · [[repos/vercel-next.js/changes/2026-10-02|変更]]
 - 2026-10-02 — バンドルアナライザー UI のフィルターを URL に保存（[#98780](https://github.com/vercel/next.js/pull/98780)）📦 v16.4.0-canary.56 · [[repos/vercel-next.js/changes/2026-10-02|変更]]
 - 2026-10-02 — `generateBuildId` を明示したときは常にそれを使うように（[#99147](https://github.com/vercel/next.js/pull/99147)）📦 v16.4.0-canary.56 · [[repos/vercel-next.js/changes/2026-10-02|変更]]
@@ -69,6 +83,7 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 関連
 
+- [[repos/vercel-next.js/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/vercel-next.js/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/vercel-next.js/releases/v16.3.7|v16.3.7]]

@@ -1,9 +1,17 @@
 ---
 title: openai/codex 取り込み履歴
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/openai-codex
 ---
+
+## 2026-10-05
+
+- 期間: 2026-10-02T00:46:30Z 〜 2026-10-04T23:59:17Z
+- PR 91 件（詳しく 26 件 / 1 行 65 件）、Release 12 件（安定版 0 件。プレリリース rust-v0.162.0-alpha.2〜alpha.13）
+- 更新したページ: [[repos/openai-codex/changes/2026-10-05|changes]]、[[repos/openai-codex/topics/TUI|TUI]]、[[repos/openai-codex/topics/MCP|MCP]]、[[repos/openai-codex/topics/シェル・コマンド実行|シェル・コマンド実行]]、[[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]、[[repos/openai-codex/topics/デーモン|デーモン]]、[[repos/openai-codex/topics/フィードバック・診断|フィードバック・診断]]、[[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]、[[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]、[[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]]
+- 備考: PR 数が `maxPrs`（30）を超えたため、`brief: true` の 61 件はタイトルから領域ごとにまとめて「その他」に記載した。本文のある 30 件のうち、依存関係・計測・内部実装・開発中の機能フラグの 4 件も「その他」に 1 行で記載
+- エラー: なし
 
 ## 2026-10-02
 

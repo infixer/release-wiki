@@ -1,6 +1,6 @@
 ---
 title: sec-default
-updated: 2026-09-30
+updated: 2026-10-05
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -24,5 +24,6 @@ tags:
 
 ## 関連
 
+- [[repos/anthropics-claude-code/releases/v2.1.289|v2.1.289]]（managed なマシンで、個人がインストールした mod の承認より deny / ask ルールを優先させる修正などを含むリリース）
 - [[repos/anthropics-claude-code/releases/v2.1.285|v2.1.285]]
 - [[repos/anthropics-claude-code/topics/AGENTS.md対応|AGENTS.md 対応]]

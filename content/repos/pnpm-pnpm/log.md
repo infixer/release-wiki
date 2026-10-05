@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-10-05
+
+- 期間: 2026-10-02T00:40:07Z 〜 2026-10-04T23:59:17Z
+- PR 44 件（詳しく 30 件 / 1 行 14 件）、Release 3 件（安定版 3 件: v12.9.0, v12.9.1, v11.28.4）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-10-05|changes]]、[[repos/pnpm-pnpm/topics/WebContainers|WebContainers（新規）]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/releases/v12.9.0|v12.9.0]]、[[repos/pnpm-pnpm/releases/v12.9.1|v12.9.1]]、[[repos/pnpm-pnpm/releases/v11.28.4|v11.28.4]]、[[repos/pnpm-pnpm/releases/v12.8.2|v12.8.2]]・[[repos/pnpm-pnpm/releases/v11.28.3|v11.28.3]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/index|index]]
+- 備考: 3 つのリリースノート本文はいずれも途中で切れている。v12.9.0 に載っている内容の PR も inbox では 📦 v12.9.1 と表記されており、そのまま書いた
+- エラー: なし
 
 ## 2026-10-02
 

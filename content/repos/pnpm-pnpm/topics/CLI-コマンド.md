@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。
+個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。v12.9.1 では再帰的な `pnpm update --interactive` の `Workspace` 列が 30 桁に収まり（超えた分は `+N more`）、未リリースの修正で `pnpm runtime --help` が `set <name> [<version>]` を示すようになった。
 
 ## 主な API・オプション
 
@@ -27,9 +27,12 @@ tags:
 - `pnpm list`/`pnpm ll` — ワークスペースのパッケージ内では `-r`/`--filter` なしなら現在のプロジェクトのみ
 - `pnpm update -g --latest` — レジストリのパッケージを `@latest` で解決（ダウングレードの固定は維持）
 - `pnpm update --global`（旧グローバルインストールの移行）— 旧パッケージが宣言する実行ファイルとファイルの同一性で一致するハードリンクも削除（v11・v12、未リリース）
+- `pnpm update --interactive`（再帰）— `Workspace` 列は 30 桁まで。入りきらない分は `app, web, +10 more` のように数で示す（v12.9.1）
 
 ## 変更履歴
 
+- 2026-10-05 — 対話的な `pnpm update` の Workspace 列を 30 桁に制限（[#16519](https://github.com/pnpm/pnpm/pull/16519)）📦 v12.9.1 · [[repos/pnpm-pnpm/changes/2026-10-05|変更]]
+- 2026-10-05 — `pnpm runtime --help` に `set` サブコマンドを表示（[#16581](https://github.com/pnpm/pnpm/pull/16581)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-05|変更]]
 - 2026-10-02 — 旧グローバルインストールの移行でハードリンクされた実行ファイルを削除（[#16425](https://github.com/pnpm/pnpm/pull/16425)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-02|変更]]
 - 2026-09-30 — `pnpm update -g --latest` が保存済みの範囲を超えて更新（[#16325](https://github.com/pnpm/pnpm/pull/16325)）📦 v12.8.1 · [[repos/pnpm-pnpm/changes/2026-09-30|変更]]
 - 2026-09-28 — `pnpm install --allow-build` を追加（[#15583](https://github.com/pnpm/pnpm/pull/15583)）📦 pnpr@0.1.0-alpha.13 · [[repos/pnpm-pnpm/changes/2026-09-28|変更]]
@@ -50,6 +53,8 @@ tags:
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-10-05|2026-10-05 の変更]]
+- [[repos/pnpm-pnpm/releases/v12.9.1|v12.9.1]]
 - [[repos/pnpm-pnpm/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/pnpm-pnpm/topics/設定|設定]]（`--config.<setting>` と `pnpm config get`/`list`）
 - [[repos/pnpm-pnpm/changes/2026-09-30|2026-09-30 の変更]]

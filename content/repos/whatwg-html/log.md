@@ -1,9 +1,16 @@
 ---
 title: whatwg/html 取り込み履歴
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/whatwg-html
 ---
+
+## 2026-10-05
+
+- 期間: 2026-10-01T19:14:41Z 〜 2026-10-04T23:59:17Z
+- PR 9 件（詳しく 6 件 / 1 行 3 件）、Release 0 件
+- 更新したページ: [[repos/whatwg-html/changes/2026-10-05|changes]]、[[repos/whatwg-html/topics/イベントハンドラ|イベントハンドラ]]、[[repos/whatwg-html/topics/MessagePort|MessagePort]]（新規）、[[repos/whatwg-html/topics/Navigation-API|Navigation-API]]（新規）、[[repos/whatwg-html/topics/COOP-COEP|COOP-COEP]]（新規）、[[repos/whatwg-html/topics/XMLパーサー|XMLパーサー]]（新規）
+- エラー: なし
 
 ## 2026-10-02
 

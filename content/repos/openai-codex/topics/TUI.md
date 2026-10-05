@@ -1,6 +1,6 @@
 ---
 title: TUI
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/openai-codex
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。2026-09-30 の回では、フルスクリーンのステータス行に Plan mode の切り替えヒント（`shift+tab`）が出るようになり、応答中のフォローアップ指示（`:codex-followup[...]`）はラベルとして表示されるようになった。インラインコード内の選択はプレーンテキストでコピーされ、Pro プランの表示名は `Pro 100`・`Pro 200`・`Pro 500` に、起動時のプロモーションはプラットフォーム別のデスクトップアプリの tip に整理された。2026-10-02 の回では、コマンドセンターに会話のフォーク（`f`、`agents.fork`）が追加され、既定の検索ショートカットは `F3` と `/` に移った。権限の設定は接続先サーバーの定義に従うようになり、描画されたファイルパスの選択はプレーンテキストでコピーされる。
+ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。2026-09-30 の回では、フルスクリーンのステータス行に Plan mode の切り替えヒント（`shift+tab`）が出るようになり、応答中のフォローアップ指示（`:codex-followup[...]`）はラベルとして表示されるようになった。インラインコード内の選択はプレーンテキストでコピーされ、Pro プランの表示名は `Pro 100`・`Pro 200`・`Pro 500` に、起動時のプロモーションはプラットフォーム別のデスクトップアプリの tip に整理された。2026-10-02 の回では、コマンドセンターに会話のフォーク（`f`、`agents.fork`）が追加され、既定の検索ショートカットは `F3` と `/` に移った。権限の設定は接続先サーバーの定義に従うようになり、描画されたファイルパスの選択はプレーンテキストでコピーされる。2026-10-05 の回では、TUI に管理された Git worktree のツール（`create_worktree` など）が追加され、トランスクリプトのマウススクロール速度は `tui.mouse_scroll_speed` で設定できるようになった（既定は 1 イベント 1 行に変更）。`Ctrl+Insert` でのコピー、権限ショートカットのサーバーのカタログへの準拠、ストリーミング中の確定した表のスクロールバックへの出力、設定したキー割り当てとページャーの割り当ての優先、GNU Screen での ASCII タイトル、tmux の確認の 1 秒での打ち切りなども入った。
 
 ## 主な API・オプション
 
@@ -18,9 +18,27 @@ tags:
 - `:codex-followup[label]{prompt="..."}` — 応答中のフォローアップ指示。TUI 表示と応答全体のコピーではラベルだけになる
 - `agents.fork`（TUI のキーマップ）— コマンドセンターで選んだ会話をフォーク（既定 `f`）。検索の既定は `F3` と `/`
 - 権限プロファイル — 接続先サーバーから取得し、`thread/settings/update` で適用（カスタムプロファイルを含む）
+- `create_worktree` / `get_worktree_creation_status` / `list_worktrees` — worktrees 機能が有効な信頼済みローカルプロジェクトで MCP 経由で公開される管理された worktree のツール
+- `tui.mouse_scroll_speed` — トランスクリプトのマウスホイールのスクロール倍率（正の有限値、小数可。既定は 1 行、以前の速さは `3.0`）
+- `Ctrl+Insert` — トランスクリプト・コンポーザーの選択範囲をコピー
 
 ## 変更履歴
 
+- 2026-10-05 — `/new`・`/fork` の Git worktree の選択肢の表記を明確に（[#50416](https://github.com/openai/codex/pull/50416)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — エージェント一覧のプレビューで端末のハイパーリンクを保持（[#50431](https://github.com/openai/codex/pull/50431)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — `PageUp`・`PageDown` をページャーの割り当てに従わせる（[#50396](https://github.com/openai/codex/pull/50396)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — 設定したキー割り当てをトランスクリプトの操作より優先（[#50389](https://github.com/openai/codex/pull/50389)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — GNU Screen の中では端末のタイトルを印字可能な ASCII に（[#50375](https://github.com/openai/codex/pull/50375)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — フックのシステムメッセージの ANSI スタイルを描画（[#50359](https://github.com/openai/codex/pull/50359)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — サブエージェントのピッカーをスレッドのアーカイブ状態と一致させる（[#50345](https://github.com/openai/codex/pull/50345)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — tmux のオプション確認を 1 秒で打ち切る（[#50219](https://github.com/openai/codex/pull/50219)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — コマンドセンターのタスク名の変更に共通のテキストエディタを使用（[#50216](https://github.com/openai/codex/pull/50216)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — 選択範囲を `Ctrl+Insert` でコピー（[#50215](https://github.com/openai/codex/pull/50215)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — トランスクリプトのマウススクロール速度を `tui.mouse_scroll_speed` で設定可能に（既定を 3 行→1 行に変更）（[#50209](https://github.com/openai/codex/pull/50209)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — ストリーミング中に確定した Markdown の表をスクロールバックへ出すように（[#50207](https://github.com/openai/codex/pull/50207)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — アカウント更新後も `/status` にメールアドレスを表示（[#50199](https://github.com/openai/codex/pull/50199)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — 管理された Git worktree のツールを追加（[#50148](https://github.com/openai/codex/pull/50148)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
+- 2026-10-05 — 権限ショートカットもサーバーの権限カタログに従うように（[#50140](https://github.com/openai/codex/pull/50140)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
 - 2026-10-02 — TUI のコマンドセンターに会話のフォーク操作を追加（[#49517](https://github.com/openai/codex/pull/49517)）📦 rust-v0.162.0-alpha.1 · [[repos/openai-codex/changes/2026-10-02|変更]]
 - 2026-10-02 — TUI の権限設定を接続先サーバーの定義に従うように（[#49472](https://github.com/openai/codex/pull/49472)）📦 rust-v0.162.0-alpha.1 · [[repos/openai-codex/changes/2026-10-02|変更]]
 - 2026-10-02 — 選択したファイルパスをプレーンテキストでコピー（[#49564](https://github.com/openai/codex/pull/49564)）📦 rust-v0.162.0-alpha.1 · [[repos/openai-codex/changes/2026-10-02|変更]]
@@ -53,3 +71,4 @@ tags:
 - [[repos/openai-codex/releases/rust-v0.159.0|rust-v0.159.0]]
 - [[repos/openai-codex/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/openai-codex/releases/rust-v0.160.0|rust-v0.160.0]]
+- [[repos/openai-codex/changes/2026-10-05|2026-10-05 の変更]]

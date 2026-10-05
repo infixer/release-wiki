@@ -1,6 +1,6 @@
 ---
 title: anthropics/claude-code
-updated: 2026-10-02
+updated: 2026-10-05
 tags:
   - repo/anthropics-claude-code
 ---
@@ -9,7 +9,7 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v2.1.287](https://github.com/anthropics/claude-code/releases/tag/v2.1.287)（2026-10-01）→ [[repos/anthropics-claude-code/releases/v2.1.287|まとめ]]
+- 安定版: [v2.1.289](https://github.com/anthropics/claude-code/releases/tag/v2.1.289)（2026-10-04）→ [[repos/anthropics-claude-code/releases/v2.1.289|まとめ]]
 - プレリリース: なし
 
 ## 直近の注目変更
@@ -35,4 +35,4 @@ tags:
 ## 取り込み
 
 - [[repos/anthropics-claude-code/log|取り込み履歴]]
-- 最近の変更: [[repos/anthropics-claude-code/changes/2026-10-02|2026-10-02]]、[[repos/anthropics-claude-code/changes/2026-09-30|2026-09-30]]、[[repos/anthropics-claude-code/changes/2026-09-28|2026-09-28]]、[[repos/anthropics-claude-code/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/anthropics-claude-code/changes/2026-10-05|2026-10-05]]、[[repos/anthropics-claude-code/changes/2026-10-02|2026-10-02]]、[[repos/anthropics-claude-code/changes/2026-09-30|2026-09-30]]、[[repos/anthropics-claude-code/changes/2026-09-28|2026-09-28]]、[[repos/anthropics-claude-code/changes/2026-09-24|2026-09-24]]
