@@ -1,0 +1,195 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-10-04T23:59:17Z",
+  "range": {
+    "from": "2026-10-01T22:09:39Z",
+    "to": "2026-10-04T23:59:17Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.21.0",
+      "publishedAt": "2026-09-04T19:44:19Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.21.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10691,
+      "title": "fix: update links to new spectrum docs (#10687)",
+      "url": "https://github.com/adobe/react-spectrum/pull/10691",
+      "author": "misterbrownlee",
+      "mergedAt": "2026-10-02T03:17:25Z",
+      "labels": [
+        "ActionButton",
+        "ToggleButton",
+        "Toast",
+        "Meter",
+        "Button",
+        "TreeView",
+        "release",
+        "S2",
+        "ActionButtonGroup",
+        "Link",
+        "ToggleButtonGroup",
+        "AI"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Per #10687, Spectrum launched a new docs site. There are now RSP specific paths. This PR attempts to replace old links.\n\nCloses #10687\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [x] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\nIt's just documentation changes, so testing is seeing if the links are correct.\n\n## 🧢 Your Project:\n\nSpectrum Engineering",
+      "files": [
+        "examples/rac-spectrum-tailwind/src/spectrum-preset.js (+7 -7)",
+        "packages/@react-spectrum/ai/stories/Chat.stories.tsx (+4 -2)",
+        "packages/@react-spectrum/s2/src/ActionButton.tsx (+2 -2)",
+        "packages/@react-spectrum/s2/src/ActionButtonGroup.tsx (+1 -1)",
+        "packages/@react-spectrum/s2/src/AlertDialog.tsx (+3 -1)",
+        "packages/@react-spectrum/s2/src/Button.tsx (+2 -1)",
+        "packages/@react-spectrum/s2/src/Link.tsx (+2 -1)",
+        "packages/@react-spectrum/s2/src/Meter.tsx (+2 -1)",
+        "packages/@react-spectrum/s2/src/Toast.tsx (+1 -1)",
+        "packages/@react-spectrum/s2/src/ToggleButton.tsx (+1 -1)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 10698,
+      "title": "fix: datefield CLDR crash",
+      "url": "https://github.com/adobe/react-spectrum/pull/10698",
+      "author": "snowystinger",
+      "mergedAt": "2026-10-02T18:00:18Z",
+      "labels": [
+        "small review",
+        "release"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes\n\nLooks like Chrome updated CLDR in the newer version that Chromatic is using\n\nSimilar situation to #9573 though I think the fallback is a better approach\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\n## 🧢 Your Project:",
+      "files": [
+        "packages/react-aria/src/datepicker/useDateSegment.ts (+3 -1)",
+        "packages/react-aria-components/test/DateField.test.js (+15 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10674,
+      "title": "feat: React Aria Sheet component",
+      "url": "https://github.com/adobe/react-spectrum/pull/10674",
+      "author": "devongovett",
+      "mergedAt": "2026-10-02T18:21:06Z",
+      "labels": [
+        "Button",
+        "release",
+        "RAC",
+        "Modal"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "This adds a new `Sheet` component to react-aria-components. A Sheet is a swipeable overlay that slides in from the edge of the viewport. It supports snap points, stacking, gesture-synchronized animations, overscroll padding, and multiple placements and swipe directions.\n\nIt's implemented entirely with native browser scroll gestures, on top of CSS scroll snapping and view timelines, which means it runs at native 120fps without any JavaScript touch handling. Below is a diagram illustrating how it works:\n\nAssuming `position=\"bottom\"`:\n\n* The outer-most scroll container is 200vh tall and hides its scrollbar. Only its top half is visible in the window viewport. This creates the swipable area.\n* The \"stage\" is positioned in the bottom half of the scroll container. It is a flex container which positions its child (the sheet itself) on the edge of the viewport (e.g. bottom).\n* When the sheet enters, we perform a `scrollTo({top: '100vh', behavior: 'smooth'})`. This create the entering animation.\n* The backdrop and the sheet itself support `swipeAnimation`, which is a CSS animation synchronized with the swipe gesture. This uses CSS view-timeline, which tracks how much of an element is visible and uses this to drive a keyframe animation. The timeline ids are defined at the `html` element so that any element on the page can use them, and attached to the `SheetContent` element.\n* Sheets can be stacked with a `stackAnimation`. One or more instances of this animation are applied at once, de\n…(truncated)",
+      "files": [
+        "package.json (+2 -1)",
+        "packages/dev/s2-docs/pages/react-aria/examples/sheet-dark.png (+0 -0)",
+        "packages/dev/s2-docs/pages/react-aria/examples/sheet.png (+0 -0)",
+        "packages/dev/s2-docs/src/ExampleList.tsx (+0 -3)",
+        "packages/react-aria-components/exports/Sheet.ts (+25 -0)",
+        "packages/react-aria-components/exports/index.ts (+9 -0)",
+        "packages/react-aria-components/package.json (+2 -1)",
+        "packages/react-aria-components/src/Modal.tsx (+75 -10)",
+        "packages/react-aria-components/src/Sheet.tsx (+1134 -0)",
+        "packages/react-aria-components/stories/Sheet.css (+84 -0)"
+      ],
+      "filesTotal": 30
+    },
+    {
+      "number": 10700,
+      "title": "fix: action bar stories",
+      "url": "https://github.com/adobe/react-spectrum/pull/10700",
+      "author": "snowystinger",
+      "mergedAt": "2026-10-02T18:44:58Z",
+      "labels": [
+        "ActionBar",
+        "small review",
+        "release",
+        "S2"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\n## 🧢 Your Project:",
+      "files": [
+        "packages/@react-spectrum/s2/chromatic/ActionBar.stories.tsx (+133 -0)",
+        "packages/@react-spectrum/s2/src/ActionBar.tsx (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10701,
+      "title": "chore: Translations Update",
+      "url": "https://github.com/adobe/react-spectrum/pull/10701",
+      "author": "rgeraghty",
+      "mergedAt": "2026-10-02T18:58:59Z",
+      "labels": [
+        "release",
+        "needs translations",
+        "S2",
+        "AI"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 68
+    },
+    {
+      "number": 10693,
+      "title": "chore: Update PromptField aria labels and UserMessage padding",
+      "url": "https://github.com/adobe/react-spectrum/pull/10693",
+      "author": "devongovett",
+      "mergedAt": "2026-10-02T19:06:58Z",
+      "labels": [
+        "release",
+        "needs translations",
+        "ready for review",
+        "AI",
+        "UserMessage"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 6
+    },
+    {
+      "number": 10705,
+      "title": "fix: use type-only import for StoryFn in tailwind Sheet stories",
+      "url": "https://github.com/adobe/react-spectrum/pull/10705",
+      "author": "yihuiliao",
+      "mergedAt": "2026-10-02T23:39:04Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`v-starters` is failing on main. this is the error message\n\n```\nstories/Sheet.stories.tsx:1:20 - error TS1484: 'StoryFn' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.\n\n1 import {type Meta, StoryFn} from '@storybook/react';\n                     ~~~~~~~\n\nFound 1 error in stories/Sheet.stories.tsx:1\n\n```\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\n## 🧢 Your Project:",
+      "files": [
+        "starters/tailwind/stories/Sheet.stories.tsx (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 10685,
+      "title": "fix(RAC): clear PopoverContext in Popover",
+      "url": "https://github.com/adobe/react-spectrum/pull/10685",
+      "author": "reidbarber",
+      "mergedAt": "2026-10-03T00:45:44Z",
+      "labels": [
+        "RAC",
+        "Popover"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/adobe/react-spectrum/issues/10663\n\nAlways clears the PopoverContext inside Popover, so nested Popovers don't incorrectly inherit a parent Popover's context.\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\nSee unit test, or test new story. Smoke test Popover behavior.\n\n## 🧢 Your Project:",
+      "files": [
+        "packages/react-aria-components/src/Popover.tsx (+2 -4)",
+        "packages/react-aria-components/test/Popover.test.js (+36 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}

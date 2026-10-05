@@ -1,0 +1,42 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-10-04T23:59:17Z",
+  "range": {
+    "from": "2026-09-29T12:55:50Z",
+    "to": "2026-10-04T23:59:17Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.0",
+      "publishedAt": "2026-09-09T18:01:33Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 37739,
+      "title": "Fix: Infinite loop caused by uDV + error recovery",
+      "url": "https://github.com/react/react/pull/37739",
+      "author": "acdlite",
+      "mergedAt": "2026-10-02T17:37:08Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "In #36911, we stopped treating a recovery retry that suspends in the shell as a successful recovery, because the tree it produces is incomplete and must not be committed. That fix was correct, but there was an oversight: the branch it skips is also the one that disables error recovery for the lanes that errored. So nothing ever turns error recovery off for those lanes, and the error boundary from the first attempt never commits.\n\nThis causes an infinite render loop with useDeferredValue when the initial value suspends in the shell (no Suspense boundary) and the final value throws:\n\n1. The deferred render shows the final value, which throws. An error boundary catches it.\n2. Before committing the boundary, React retries all pending lanes synchronously. The retry includes the original update, so useDeferredValue shows the initial value, which suspends in the shell. The retry also spawns a new deferred lane.\n3. The retry is incomplete, so it isn't treated as recovered, and error recovery stays enabled. The new deferred lane throws again, and so on.\n\nBefore #36911, this happened to terminate after a few iterations, once the deferred lanes wrapped around to one whose recovery was disabled.\n\nThe fix: when the retry suspends in the shell, disable error recovery for the lanes that errored, plus any deferred lane spawned by the retry. The retry couldn't finish, so it can't tell us whether the error was caused by a data race. The next attempt commits the error boundary. The root still s\n…(truncated)",
+      "files": [
+        "packages/react-reconciler/src/ReactFiberWorkLoop.js (+21 -6)",
+        "packages/react-reconciler/src/__tests__/ReactDeferredValue-test.js (+57 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}
