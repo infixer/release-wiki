@@ -1,6 +1,6 @@
 ---
 title: レンダリング・DevTools
-updated: 2026-10-02
+updated: 2026-10-07
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,10 +8,13 @@ tags:
 
 ## 概要
 
-メタデータのレンダリング経路、オンデマンド生成時のエラーハンドリング、開発オーバーレイ（dev overlay）の表示まわりの実装。ストリーミングとブロッキングでメタデータの扱いを揃える変更に続き、Edge SSR でも Node SSR と同じユーザーエージェントベースのメタデータ方針（HTML 制限ボットにはブロッキング）が使われるようになった。`error.tsx` が正しく使われるようにする修正、開発オーバーレイのハイドレーションエラー表示・レイアウトの改善も含まれる。クライアントコンポーネントの読み込み時間のテレメトリは、HTML を生成するレンダーごとに計測するようになった（非同期モジュールの評価時間も含む）。App Router の開発インジケーターは出力完了時に分類を確定するようになり、OpenTelemetry のトレーサーには正しい Next.js のバージョンが設定される。
+メタデータのレンダリング経路、オンデマンド生成時のエラーハンドリング、開発オーバーレイ（dev overlay）の表示まわりの実装。ストリーミングとブロッキングでメタデータの扱いを揃える変更に続き、Edge SSR でも Node SSR と同じユーザーエージェントベースのメタデータ方針（HTML 制限ボットにはブロッキング）が使われるようになった。`error.tsx` が正しく使われるようにする修正、開発オーバーレイのハイドレーションエラー表示・レイアウトの改善も含まれる。クライアントコンポーネントの読み込み時間のテレメトリは、HTML を生成するレンダーごとに計測するようになった（非同期モジュールの評価時間も含む）。App Router の開発インジケーターは出力完了時に分類を確定するようになり、OpenTelemetry のトレーサーには正しい Next.js のバージョンが設定される。Instant Navigation の検証では、`prefetch()` / `navigation()` による待ちを URL データと区別し、ブロッキングにならない指摘をアンバーの「Instant Insights」として表示するようになった。完全に静的なルートのエラーには、クライアント側での修正方法が加わり、オーバーレイ・ビルドメッセージ・エラーページの説明が揃えられた。
 
 ## 変更履歴
 
+- 2026-10-07 — `prefetch()` / `navigation()` の Instant Insights を追加（[#97801](https://github.com/vercel/next.js/pull/97801)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — 完全に静的なルートのエラーにクライアント側での修正方法を追加（[#99659](https://github.com/vercel/next.js/pull/99659)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — 静的ルートのエラーの説明を改善（ルート本体・`generateMetadata()`・`generateViewport()`）（[#99724](https://github.com/vercel/next.js/pull/99724)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
 - 2026-10-02 — OpenTelemetry のトレーサーに正しい Next.js のバージョンを設定（[#98262](https://github.com/vercel/next.js/pull/98262)）📦 v16.4.0-canary.56 · [[repos/vercel-next.js/changes/2026-10-02|変更]]
 - 2026-10-02 — App Router の開発インジケーターを出力完了時に確定（[#99384](https://github.com/vercel/next.js/pull/99384)）📦 v16.4.0-canary.56 · [[repos/vercel-next.js/changes/2026-10-02|変更]]
 - 2026-09-30 — クライアントコンポーネントの読み込み計測を HTML レンダーごとに（[#99322](https://github.com/vercel/next.js/pull/99322), [#99426](https://github.com/vercel/next.js/pull/99426), [#99427](https://github.com/vercel/next.js/pull/99427)）📦 v16.4.0-canary.53 · [[repos/vercel-next.js/changes/2026-09-30|変更]]
@@ -24,6 +27,7 @@ tags:
 
 ## 関連
 
+- [[repos/vercel-next.js/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/vercel-next.js/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/vercel-next.js/changes/2026-09-28|2026-09-28 の変更]]

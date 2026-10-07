@@ -1,6 +1,6 @@
 ---
 title: Guardian
-updated: 2026-10-02
+updated: 2026-10-07
 tags:
   - repo/openai-codex
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Guardian は Codex のエージェント行動を自動でレビュー・承認する仕組み（同期/非同期レビュー、リスクスコアのキャッシュなど）。直近では、レビューが参照する認可の証跡を正確に保つ変更が続いている。ユーザーによる目標（goal）の更新や人間による上書き指示が証跡として保持され、変わらない heartbeat 指示はまとめられるようになった。レビュー中に新しいユーザー入力が来た場合は中止せず最新の証跡で再レビューし、非同期スコアは対象環境の権限（読み取り拒否など）に紐づけてキャッシュされる。端末入力の承認（`write_stdin_approval`）は既定で有効になり、判定結果を OTLP ログへ出力するオプション `otel.log_guardian_assessments` も追加された。2026-09-30 の回では、オプトインの機能として、レビュアーが会話履歴を検索・参照できる `guardian_conversation_history_tools` と、ハンドオフを手がかりにワーカーごとの root 証跡を選ぶ `guardian_root_handoff_context` が追加された。暗号化されたエージェントメッセージもレビューに保持されるようになり、diff 表示の準備でリモートの Git 探索を待たなくなった。2026-10-02 の回では、Guardian のセッション初期化でホストのスキル発見を省き、主要な executor がオフラインでもレビューが止まらないようになった。rust-v0.160.0 で会話履歴の参照とハンドオフを考慮した root コンテキスト（いずれもオプトイン）が安定版に入った。
+Guardian は Codex のエージェント行動を自動でレビュー・承認する仕組み（同期/非同期レビュー、リスクスコアのキャッシュなど）。直近では、レビューが参照する認可の証跡を正確に保つ変更が続いている。ユーザーによる目標（goal）の更新や人間による上書き指示が証跡として保持され、変わらない heartbeat 指示はまとめられるようになった。レビュー中に新しいユーザー入力が来た場合は中止せず最新の証跡で再レビューし、非同期スコアは対象環境の権限（読み取り拒否など）に紐づけてキャッシュされる。端末入力の承認（`write_stdin_approval`）は既定で有効になり、判定結果を OTLP ログへ出力するオプション `otel.log_guardian_assessments` も追加された。2026-09-30 の回では、オプトインの機能として、レビュアーが会話履歴を検索・参照できる `guardian_conversation_history_tools` と、ハンドオフを手がかりにワーカーごとの root 証跡を選ぶ `guardian_root_handoff_context` が追加された。暗号化されたエージェントメッセージもレビューに保持されるようになり、diff 表示の準備でリモートの Git 探索を待たなくなった。2026-10-02 の回では、Guardian のセッション初期化でホストのスキル発見を省き、主要な executor がオフラインでもレビューが止まらないようになった。rust-v0.160.0 で会話履歴の参照とハンドオフを考慮した root コンテキスト（いずれもオプトイン）が安定版に入った。2026-10-07 の回では、MCP の elicitation のレビューが発行したステップのコンテキスト（その時点で準備のできたリモート環境と権限）を使うようになり、Decisions のリクエストでは信頼済みツールのコンテキストを保持し、専用キーが無ければ `OPENAI_API_KEY` にフォールバックする。レビュアーのコンパクションで証跡が無効になった場合は、親のチェックポイントから新しいセッションで 1 回だけ再開して復旧する。
 
 ## 主な API・オプション
 
@@ -19,9 +19,16 @@ Guardian は Codex のエージェント行動を自動でレビュー・承認�
 - `UserGoalUpdate` — ユーザーの目標更新（objective・status・clear）を認可の証跡として記録
 - `guardian_conversation_history_tools`（既定は無効）— Apps 経由で `user_message.search_messages` / `user_message.read_messages` をレビュアーに公開。`auto_review.experimental_conversation_history_prompt` で指示を上書き、`auto_review.conversation_history_max_output_tokens`（既定は推定 4,000 トークン）で応答量を制限
 - `guardian_root_handoff_context`（既定は無効）— `spawn_agent`・`send_message`・`followup_task` のハンドオフごとに直前の root メッセージ 3 件と最新 3 件を証跡に選ぶ
+- `CODEX_GUARDIAN_DECISIONS_API_KEY` — Guardian Decisions のサンプラーの専用キー。無ければ、プロバイダが `openai` で独自のベース URL が無いときに限り `OPENAI_API_KEY` を使う
+- `ReviewerRequest::requires_fresh_session` / `ReuseIfAvailable`・`FreshParentCheckpoint` — 親のチェックポイントからの復旧ではキャッシュの無い新しいレビュアーのセッションを使う
 
 ## 変更履歴
 
+- 2026-10-07 — 親のチェックポイントからの復旧で新しいセッションを使い、試行ごとに復旧のフラグを分離（[#51139](https://github.com/openai/codex/pull/51139)、[#51140](https://github.com/openai/codex/pull/51140)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
+- 2026-10-07 — レビューを親のチェックポイントから復旧（期限内で 1 回）（[#51137](https://github.com/openai/codex/pull/51137)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
+- 2026-10-07 — Guardian Decisions で `OPENAI_API_KEY` へのフォールバック（[#51133](https://github.com/openai/codex/pull/51133)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
+- 2026-10-07 — Decisions のリクエストで信頼済みツールのコンテキストを保持（[#51070](https://github.com/openai/codex/pull/51070)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
+- 2026-10-07 — MCP の elicitation のレビューで発行したステップのコンテキストを使う（[#51067](https://github.com/openai/codex/pull/51067)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
 - 2026-10-02 — Guardian レビューでホストのスキル発見を省略（[#49584](https://github.com/openai/codex/pull/49584)）📦 rust-v0.162.0-alpha.1 · [[repos/openai-codex/changes/2026-10-02|変更]]
 - 2026-09-30 — Guardian の diff 表示でリモートの Git 探索をしないように（[#49082](https://github.com/openai/codex/pull/49082)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
 - 2026-09-30 — ハンドオフを考慮した root コンテキストを追加（`guardian_root_handoff_context`、オプトイン）（[#49057](https://github.com/openai/codex/pull/49057)）⏳ 未リリース · [[repos/openai-codex/changes/2026-09-30|変更]]
@@ -48,3 +55,4 @@ Guardian は Codex のエージェント行動を自動でレビュー・承認�
 - [[repos/openai-codex/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/openai-codex/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/openai-codex/releases/rust-v0.160.0|rust-v0.160.0]]
+- [[repos/openai-codex/changes/2026-10-07|2026-10-07 の変更]]

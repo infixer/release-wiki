@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-07
+
+- 期間: 2026-10-04T20:16:41Z 〜 2026-10-07T00:47:26Z
+- PR 33 件（詳しく 17 件 / 1 行 16 件、うち brief 3 件）、Release 3 件（安定版 3 件: crates_v0.153.0、oxfmt_v0.72.0、oxlint_v1.87.0）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-07|changes]]、[[repos/oxc-project-oxc/releases/crates_v0.153.0|crates_v0.153.0]]（新規）、[[repos/oxc-project-oxc/releases/oxfmt_v0.72.0|oxfmt_v0.72.0]]（新規）、[[repos/oxc-project-oxc/releases/oxlint_v1.87.0|oxlint_v1.87.0]]（新規）、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/Markdownフォーマッタ|Markdownフォーマッタ]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 10 件、oxc-guard[bot] 2 件）
 
 ## 2026-10-05
 

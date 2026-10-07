@@ -1,9 +1,16 @@
 ---
 title: vitest-dev/vitest 取り込み履歴
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/vitest-dev-vitest
 ---
+
+## 2026-10-07
+
+- 期間: 2026-10-02T16:10:50Z 〜 2026-10-07T00:47:26Z
+- PR 25 件（詳しく 14 件 / 1 行 11 件）、Release 0 件（bot の PR 4 件は collect で除外）
+- 更新したページ: [[repos/vitest-dev-vitest/changes/2026-10-07|changes]]、[[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]（新規）、[[repos/vitest-dev-vitest/topics/UI|UI]]、[[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]、[[repos/vitest-dev-vitest/topics/モック|モック]]、[[repos/vitest-dev-vitest/topics/テスト環境|テスト環境]]、[[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]、[[repos/vitest-dev-vitest/topics/アサーション|アサーション]]、[[repos/vitest-dev-vitest/topics/プール|プール]]
+- エラー: なし
 
 ## 2026-10-05
 

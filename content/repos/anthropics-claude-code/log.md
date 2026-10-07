@@ -1,9 +1,16 @@
 ---
 title: anthropics/claude-code 取り込み履歴
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/anthropics-claude-code
 ---
+
+## 2026-10-07
+
+- 期間: 2026-10-01T05:23:05Z 〜 2026-10-07T00:47:26Z
+- PR 1 件（詳しく 1 件 / 1 行 0 件）、Release 3 件（安定版 3 件: v2.1.290, v2.1.291, v2.1.292）
+- 更新したページ: [[repos/anthropics-claude-code/changes/2026-10-07|changes]]、[[repos/anthropics-claude-code/releases/v2.1.290|v2.1.290]]（新規）、[[repos/anthropics-claude-code/releases/v2.1.291|v2.1.291]]（新規）、[[repos/anthropics-claude-code/releases/v2.1.292|v2.1.292]]（新規）、[[repos/anthropics-claude-code/releases/v2.1.289|v2.1.289]]、[[repos/anthropics-claude-code/topics/Diffパネル|Diff パネル]]
+- エラー: なし
 
 ## 2026-10-05
 

@@ -1,6 +1,6 @@
 ---
 title: プログラム的API
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/microsoft-TypeScript
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScript 7）向けに、プログラムから使う API（`packages/typescript/src/api`、Go 側の `tsc/internal/api`）が急速に整備されている。中心は「スナップショット」の概念で、`api.createSnapshot(changes?)`（常に使える）と `api.getCurrentLanguageServerSnapshot(changes?)`（LSP モード専用）でスナップショットを作り、`snapshot.update(changes)` で新しいスナップショットへ更新する。`changes` にはプログラムの作成（`createPrograms`）・再設定（`reconfigurePrograms`）・最新化（`ensurePrograms`）を渡せる。以前あった `api.updateSnapshot()` や `oldProgram` オプションは廃止された。プロジェクトには Configured・Inferred・Synthetic の種別ごとに専用の型付き ID が導入され、`createProgram` は `compilerOptions` を第2引数のトップレベルに取るようになった。ソースファイルの生成（`createSourceFile` 系）、プリンター（`printFile`）、子ノードの列挙（`childrenIter`）、モジュール解決のオーバーライド（`createModuleResolver`）なども順次移植・追加されている。typescript-eslint からの要望（tsconfig の `plugins` 解析、`MappedType` プロパティの公開）にも対応した。`createSourceFile` 系は parse キャッシュから取得して破棄可能な lease を返すようになり（戻り値の変更）、同じファイル・テキストなら同一のソースファイルになる。TS 6 より前の `SolutionBuilder` に相当する `createBuildOrchestrator`（`BuildOrchestrator`）や、api-extractor 向けの AST ヘルパーも追加された。コールバック式のファイルシステムは、`createVirtualFileSystem` が公開 API から外れ、すべての関数について実装（コールバックか、サーバー側の実装を表すシンボル）の指定が必須になった（破壊的変更）。バインダーが作った Symbol はクライアント側でも SourceFile のキャッシュに保存され、スナップショットをまたいで同一になった。`getJSDocCommentsAndTags` も 6.0 と同じ動作で復活した。Declaration ノードからバインダーが作った Symbol を取り出す `getSymbol(decl)`（TS 6 の `declaration.symbol` 相当）が追加され、型チェッカーなしで `createSourceFile` で作ったファイルの Symbol も取れるようになった。補完 API が返す Symbol は常に現在のスナップショットのものになった。型付きパスの導入（#64159）に向けたバグ修正も先行して入っている。`getSymbol(decl)` の follow-up として、マージされた Symbol を扱うチェッカーのメソッドも API に追加された。型付きパス（#64159）も本体がマージされ、`RootedPath`・`RootedFilePath`・`RootedDirectoryPath` と、旧 `Path` を改名した `PathKey` が導入された。
+tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScript 7）向けに、プログラムから使う API（`packages/typescript/src/api`、Go 側の `tsc/internal/api`）が急速に整備されている。中心は「スナップショット」の概念で、`api.createSnapshot(changes?)`（常に使える）と `api.getCurrentLanguageServerSnapshot(changes?)`（LSP モード専用）でスナップショットを作り、`snapshot.update(changes)` で新しいスナップショットへ更新する。`changes` にはプログラムの作成（`createPrograms`）・再設定（`reconfigurePrograms`）・最新化（`ensurePrograms`）を渡せる。以前あった `api.updateSnapshot()` や `oldProgram` オプションは廃止された。プロジェクトには Configured・Inferred・Synthetic の種別ごとに専用の型付き ID が導入され、`createProgram` は `compilerOptions` を第2引数のトップレベルに取るようになった。ソースファイルの生成（`createSourceFile` 系）、プリンター（`printFile`）、子ノードの列挙（`childrenIter`）、モジュール解決のオーバーライド（`createModuleResolver`）なども順次移植・追加されている。typescript-eslint からの要望（tsconfig の `plugins` 解析、`MappedType` プロパティの公開）にも対応した。`createSourceFile` 系は parse キャッシュから取得して破棄可能な lease を返すようになり（戻り値の変更）、同じファイル・テキストなら同一のソースファイルになる。TS 6 より前の `SolutionBuilder` に相当する `createBuildOrchestrator`（`BuildOrchestrator`）や、api-extractor 向けの AST ヘルパーも追加された。コールバック式のファイルシステムは、`createVirtualFileSystem` が公開 API から外れ、すべての関数について実装（コールバックか、サーバー側の実装を表すシンボル）の指定が必須になった（破壊的変更）。バインダーが作った Symbol はクライアント側でも SourceFile のキャッシュに保存され、スナップショットをまたいで同一になった。`getJSDocCommentsAndTags` も 6.0 と同じ動作で復活した。Declaration ノードからバインダーが作った Symbol を取り出す `getSymbol(decl)`（TS 6 の `declaration.symbol` 相当）が追加され、型チェッカーなしで `createSourceFile` で作ったファイルの Symbol も取れるようになった。補完 API が返す Symbol は常に現在のスナップショットのものになった。型付きパスの導入（#64159）に向けたバグ修正も先行して入っている。`getSymbol(decl)` の follow-up として、マージされた Symbol を扱うチェッカーのメソッドも API に追加された。型付きパス（#64159）も本体がマージされ、`RootedPath`・`RootedFilePath`・`RootedDirectoryPath` と、旧 `Path` を改名した `PathKey` が導入された。非同期 API では、いくつかのオブジェクトが `[Symbol.dispose]()` を使って破棄の Promise を捨てていたのが `[Symbol.asyncDispose]()` に直された。`createPrograms` で作った設定ファイルの無いプログラムでプロジェクト参照の診断が出ると API サーバーごとクラッシュしていた問題が直り（TS6306 を報告）、静的な `moduleResolutions` や `resolveModuleName` コールバックによるカスタマイズしたモジュール解決では、ディスク上の配置に依存する import の診断（TS2876 など）を出さなくなった。
 
 ## 主な API・オプション
 
@@ -25,9 +25,13 @@ tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScr
 - `getJSDocCommentsAndTags` — TS 6.0 と同じ動作で復活
 - `api.getSymbol(decl)` / トップレベルの `getSymbol(decl)`（`typescript/async` など）— Declaration からマージ前のバインダー Symbol を取得
 - パスの型 — `RootedPath`（絶対・スラッシュ正規化済み・末尾 `/` なし）/ `RootedFilePath` / `RootedDirectoryPath` / `PathKey`（旧 `Path`）
+- `[Symbol.asyncDispose]()` — 非同期 API のオブジェクトの破棄（Promise を返す。`await using` で使う）
 
 ## 変更履歴
 
+- 2026-10-07 — カスタマイズしたモジュール解決（`moduleResolutions`・`resolveModuleName`）では、ディスク上の配置に依存する import の診断（TS2846・TS5097・TS2876・TS2877・TS2878）を出さない（[#64638](https://github.com/microsoft/TypeScript/pull/64638)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-07|変更]]
+- 2026-10-07 — 設定ファイルの無いプログラムでプロジェクト参照の診断を出すと API サーバーがクラッシュする問題を修正（#64629）（[#64637](https://github.com/microsoft/TypeScript/pull/64637)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-07|変更]]
+- 2026-10-07 — 非同期 API で dispose の Promise を捨てないように（`[Symbol.asyncDispose]()`）、AsyncDisposable への `using` で `await using` を提案（[#64584](https://github.com/microsoft/TypeScript/pull/64584)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-07|変更]]
 - 2026-10-05 — ファイルパスを強く型付け（`RootedPath`・`PathKey` など）（[#64159](https://github.com/microsoft/TypeScript/pull/64159)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-05|変更]]
 - 2026-10-05 — マージ後の Symbol を扱うチェッカーのメソッドを追加（[#64598](https://github.com/microsoft/TypeScript/pull/64598)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-05|変更]]
 - 2026-10-02 — 型付きパスの準備のためのバグ修正（#64159 から切り出し）（[#64544](https://github.com/microsoft/TypeScript/pull/64544)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-02|変更]]

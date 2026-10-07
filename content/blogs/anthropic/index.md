@@ -1,6 +1,6 @@
 ---
 title: Anthropic News
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - blog/anthropic
 ---
@@ -9,6 +9,7 @@ tags:
 
 ## 記事
 
+- 2026-10-06 — [[blogs/anthropic/posts/2026-10-06-cyber-verification-program|Cyber Verification Program を拡大、3 段階のアクセス階層を導入]] — Project Glasswing と CVP を統合し、Defense・Red Team・Specialized の 3 階層で高度なサイバー能力を提供
 - 2026-10-02 — [[blogs/anthropic/posts/2026-10-02-claude-frontier-academy|Claude Frontier Academy を開始、1 億ドルで 1 万人のエンジニアを育成]] — 2027 年末までに Frontier Deployed Engineer 1 万人を育成する推薦制のレジデンシー
 - 2026-10-01 — [[blogs/anthropic/posts/2026-10-01-barclays-scales-claude|Barclays が Claude の活用を全社に拡大]] — Claude Code を 2027 年までにエンジニアの過半数へ展開、知識アシスタントやメール処理でも活用
 - 2026-09-23 — [[blogs/anthropic/posts/2026-09-23-claude-discovers-novel-enzyme-system|Claude が CRISPR 様の新規酵素システムを発見]] — 新設の生命科学ラボで、Claude が自律的に新規酵素システム「ART」を発見
@@ -19,6 +20,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-10-07 — 記事 1 件。エラー: なし
 - 2026-10-05 — 記事 1 件。エラー: なし
 - 2026-10-02 — 記事 1 件。エラー: なし
 - 2026-09-24 — 記事 5 件。エラー: なし

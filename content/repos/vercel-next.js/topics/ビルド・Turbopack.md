@@ -1,6 +1,6 @@
 ---
 title: ビルド・Turbopack
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになり、macOS で監視がハングする問題も修正された。遅延 dynamic import は SSR でも使えるようになった。16.4 に向けて、`experimental.turbopackSharedRuntime` が既定で有効になり、`experimental.turbopackMangleExportNames` も本番ビルドで既定有効になった。turbo-persistence はコンパクションを刷新して永続キャッシュの肥大化を抑えている。`generateBuildId` を明示した場合はスキュー保護が有効でも常に使われる。アナライザーはトップがルートのサマリー画面になり、比較ツリーマップではモジュールの増減を表示する。マングリングは facade を使う方式を `experimental.turbopackMangleViaMaterializedNamespaceObject` でオプトインできる。turbo-tasks では不要な再実行や永続化データの破損を防ぐ修正が続き、trace-server の MCP はメモリ調査に使えるようになった。React Compiler の `enablePreserveExistingMemoizationGuarantees` も next.config から指定できる。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。
+Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになり、macOS で監視がハングする問題も修正された。遅延 dynamic import は SSR でも使えるようになった。16.4 に向けて、`experimental.turbopackSharedRuntime` が既定で有効になり、`experimental.turbopackMangleExportNames` も本番ビルドで既定有効になった。turbo-persistence はコンパクションを刷新して永続キャッシュの肥大化を抑えている。`generateBuildId` を明示した場合はスキュー保護が有効でも常に使われる。アナライザーはトップがルートのサマリー画面になり、比較ツリーマップではモジュールの増減を表示する。マングリングは facade を使う方式を `experimental.turbopackMangleViaMaterializedNamespaceObject` でオプトインできる。turbo-tasks では不要な再実行や永続化データの破損を防ぐ修正が続き、trace-server の MCP はメモリ調査に使えるようになった。React Compiler の `enablePreserveExistingMemoizationGuarantees` も next.config から指定できる。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。アナライザーは `next analyze --export-graph` で保存済みスナップショットのグラフを JSON Lines（スキーマは `next/analyze/graph-v1.schema.json`）として出力できるようになり、ルートごとのエントリも含む。ESM エクスポートのプロトコル変更（#98932）は remote-components との互換性のため revert された。静的エクスポートでは設定した `distDir` が保持されるようになり、turbo-tasks ではスナップショットの一貫性やタスクの片付けの順序に関する修正が続いている。
 
 ## 主な API・オプション
 
@@ -21,9 +21,20 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 - `reactCompiler.enablePreserveExistingMemoizationGuarantees` — React Compiler のオプション（Babel・Turbopack の Rust コンパイラの両方に渡される）
 - `generateBuildId` — 明示すれば `deploymentId` 設定時も常に使われる
 - `experimental.turbopack.resolveAlias` — `false` を指定してモジュールを空スタブに解決可能に
+- `next analyze --export-graph` — 保存済みスナップショットのグラフを JSON Lines で標準出力へ（`--snapshot-name` / `--snapshot <id>` / `--route` / `--dist-dir`）。`next analyze --output --snapshot-name <name>` はサーバーを起動せずに保存だけ行う
 
 ## 変更履歴
 
+- 2026-10-07 — `next analyze --export-graph` でアナライザーのグラフを JSON Lines で出力（[#99387](https://github.com/vercel/next.js/pull/99387)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — アナライザーの JSON Lines にルートの詳細（`route.entries`）を追加（[#99172](https://github.com/vercel/next.js/pull/99172)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — ESM エクスポートのプロトコル変更（#98932）を revert（[#99704](https://github.com/vercel/next.js/pull/99704)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — 静的エクスポートで設定した出力ディレクトリ（`distDir`）を保持（[#99507](https://github.com/vercel/next.js/pull/99507)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — パスの正規化のキャッシュを turbo-tasks から切り離し、最長の接頭辞から探索（[#99270](https://github.com/vercel/next.js/pull/99270)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — 関係のないファイル変更でファイルシステム待ちのログが出ないように（[#99711](https://github.com/vercel/next.js/pull/99711)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — turbo-tasks-backend: 復元中のピン留めをやめ、存在しないタスクは常に破棄（[#99645](https://github.com/vercel/next.js/pull/99645)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — turbo-tasks-backend: 実行完了を公開する前にタスクの状態を片付ける（[#99729](https://github.com/vercel/next.js/pull/99729)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — turbo-tasks: copy-on-write のスナップショットを bincode でエンコード（[#99644](https://github.com/vercel/next.js/pull/99644)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
+- 2026-10-07 — turbo-tasks: スナップショット取得中に操作を排他する実験（[#99747](https://github.com/vercel/next.js/pull/99747)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
 - 2026-10-05 — バンドルアナライザーにルートのサマリー画面を追加（ルート別の分析は `/analyze` へ）（[#98787](https://github.com/vercel/next.js/pull/98787)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
 - 2026-10-05 — 比較ツリーマップでバンドルの増減を表示（[#98837](https://github.com/vercel/next.js/pull/98837), [#99607](https://github.com/vercel/next.js/pull/99607)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
 - 2026-10-05 — facade を使ったエクスポート名マングリングをオプトインで有効にできるように（[#99309](https://github.com/vercel/next.js/pull/99309)）📦 v16.4.0-canary.60 · [[repos/vercel-next.js/changes/2026-10-05|変更]]
@@ -83,6 +94,7 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 関連
 
+- [[repos/vercel-next.js/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/vercel-next.js/changes/2026-09-30|2026-09-30 の変更]]

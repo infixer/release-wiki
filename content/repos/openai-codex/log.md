@@ -1,9 +1,17 @@
 ---
 title: openai/codex 取り込み履歴
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/openai-codex
 ---
+
+## 2026-10-07
+
+- 期間: 2026-10-04T23:07:26Z 〜 2026-10-07T00:47:26Z
+- PR 106 件（詳しく 25 件 / 1 行 81 件）、Release 6 件（安定版 1 件: rust-v0.160.1。プレリリース rust-v0.162.0-alpha.14〜alpha.17、rust-v0.161.0-alpha.13.1）
+- 更新したページ: [[repos/openai-codex/changes/2026-10-07|changes]]、[[repos/openai-codex/topics/Code-Mode|Code Mode]]、[[repos/openai-codex/topics/Guardian|Guardian]]、[[repos/openai-codex/topics/MCP|MCP]]、[[repos/openai-codex/topics/TUI|TUI]]、[[repos/openai-codex/topics/サンドボックス|サンドボックス]]、[[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]、[[repos/openai-codex/topics/デーモン|デーモン]]、[[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]、[[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]、[[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]]、[[repos/openai-codex/topics/管理要件|管理要件]]、[[repos/openai-codex/topics/インストール|インストール]]（新規）、[[repos/openai-codex/releases/rust-v0.160.1|rust-v0.160.1]]
+- 備考: PR 数が `maxPrs`（30）を超えたため、`brief: true` の 76 件はタイトルから領域ごとにまとめて「その他」に記載した。本文のある 30 件のうち、テスト・計測・ビルドの 5 件も「その他」に 1 行で記載
+- エラー: なし
 
 ## 2026-10-05
 

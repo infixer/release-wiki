@@ -1,6 +1,6 @@
 ---
 title: react/react
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/react-react
 ---
@@ -14,6 +14,8 @@ tags:
 
 ## 直近の注目変更
 
+- Fragment Refs のフィーチャーフラグ 2 つを削除し、有効時の挙動に一本化（[#37732](https://github.com/react/react/pull/37732)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
+- スタックフレームの無いエラーを debug info から復元できない問題を修正（[#37730](https://github.com/react/react/pull/37730)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
 - `useDeferredValue` とエラー回復の組み合わせで起きる無限ループを修正（[#37739](https://github.com/react/react/pull/37739)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
 - Server Reference が任意のオブジェクトを参照できるように（実験的）（[#37636](https://github.com/react/react/pull/37636)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
 - エフェクト内で `await` 後の setState を誤検知しないよう修正（[#36734](https://github.com/react/react/pull/36734)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
@@ -24,10 +26,10 @@ tags:
 ## トピック
 
 - [[repos/react-react/topics/React-Compiler|React Compiler]] — 自動メモ化コンパイラ（Babel / Rust 実装）
-- [[repos/react-react/topics/Reconciler|Reconciler]] — レンダー・コミット処理、レーン、エラー回復
-- [[repos/react-react/topics/Server-Components|Server Components]] — Flight プロトコルと Server Reference
+- [[repos/react-react/topics/Reconciler|Reconciler]] — レンダー・コミット処理、レーン、エラー回復、Fragment Refs
+- [[repos/react-react/topics/Server-Components|Server Components]] — Flight プロトコル、Server Reference、エラーの debug info
 
 ## 取り込み
 
 - [[repos/react-react/log|取り込み履歴]]
-- 最近の変更: [[repos/react-react/changes/2026-10-05|2026-10-05]]、[[repos/react-react/changes/2026-09-30|2026-09-30]]、[[repos/react-react/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/react-react/changes/2026-10-07|2026-10-07]]、[[repos/react-react/changes/2026-10-05|2026-10-05]]、[[repos/react-react/changes/2026-09-30|2026-09-30]]、[[repos/react-react/changes/2026-09-24|2026-09-24]]

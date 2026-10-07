@@ -1,6 +1,6 @@
 ---
 title: Minifier
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,10 +8,13 @@ tags:
 
 ## 概要
 
-`oxc_minifier` と codegen。正しさの修正（ディレクティブを含む IIFE の保持、`arguments` コピーのループ書き換えで兄弟の宣言を残す、`BooleanLiteral` の否定処理、テンプレートリテラルの不要な `$` エスケープ削除など）と並行して、圧縮率を上げる最適化も追加されている。同じ内容の隣接する `if` 文の統合、抜ける `if` ブロックの後続文を else 側へまとめて条件式に畳み込む変換、3 項以上のシーケンスを含む条件式の畳み込み、ビット演算の二項式の簡約、同じモジュールからの import 文の統合や import + export の `export ... from` への統合など。条件式・論理式の中の入れ子のシーケンスの処理は `minimize_sequences.rs` にまとめられ、冪等になるよう修正された。crates_v0.152.0 では、式をその場で書き換えるなどアロケーションを減らす性能改善も多数入った。
+`oxc_minifier` と codegen。正しさの修正（ディレクティブを含む IIFE の保持、`arguments` コピーのループ書き換えで兄弟の宣言を残す、`BooleanLiteral` の否定処理、テンプレートリテラルの不要な `$` エスケープ削除など）と並行して、圧縮率を上げる最適化も追加されている。同じ内容の隣接する `if` 文の統合、抜ける `if` ブロックの後続文を else 側へまとめて条件式に畳み込む変換、3 項以上のシーケンスを含む条件式の畳み込み、ビット演算の二項式の簡約、同じモジュールからの import 文の統合や import + export の `export ... from` への統合など。条件式・論理式の中の入れ子のシーケンスの処理は `minimize_sequences.rs` にまとめられ、冪等になるよう修正された。crates_v0.152.0 では、式をその場で書き換えるなどアロケーションを減らす性能改善も多数入った。委譲しない `yield` の `undefined` 引数も畳み込む（グローバルなら `void 0`）。codegen では、`-` の後の負の `BigIntLiteral` が `--1n` と出力される問題（Minifier の出力でも発生）を Rust・JS の両方で直した（未リリース）。
 
 ## 変更履歴
 
+- 2026-10-07 — `-` の後の負の `BigIntLiteral` の出力を修正（Rust・JS の codegen）（[#27378](https://github.com/oxc-project/oxc/pull/27378)、[#27377](https://github.com/oxc-project/oxc/pull/27377)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]
+- 2026-10-07 — JS codegen: `TSJSDocNonNullableType` の出力時のデバッグアサーション失敗を修正（[#27373](https://github.com/oxc-project/oxc/pull/27373)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]
+- 2026-10-07 — 委譲しない `yield` の `undefined` 引数を畳み込む（[#27324](https://github.com/oxc-project/oxc/pull/27324)） 📦 oxlint_v1.87.0 · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]
 - 2026-10-05 — 入れ子のシーケンスを処理するときの冪等性を修正（条件式・論理代入への変換）（[#27273](https://github.com/oxc-project/oxc/pull/27273)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-05|変更]]
 - 2026-10-02 — 同じモジュールからの import 文をまとめる（[#25534](https://github.com/oxc-project/oxc/pull/25534)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-02|変更]]
 - 2026-10-02 — 同じモジュールから import して export する文を `export ... from` にまとめる（[#25533](https://github.com/oxc-project/oxc/pull/25533)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-02|変更]]
@@ -32,3 +35,5 @@ tags:
 - [[repos/oxc-project-oxc/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/oxc-project-oxc/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/oxc-project-oxc/changes/2026-10-05|2026-10-05 の変更]]
+- [[repos/oxc-project-oxc/releases/crates_v0.153.0|crates_v0.153.0]]
+- [[repos/oxc-project-oxc/changes/2026-10-07|2026-10-07 の変更]]

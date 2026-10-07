@@ -1,6 +1,6 @@
 ---
 title: w3c/aria
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/w3c-aria
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- HTML-AAM の `abbr` 要素の `title` のマッピングから、当てはまらない記述を削除（[#2927](https://github.com/w3c/aria/pull/2927)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - 翻訳対象になる属性についての i18n の考慮事項を追加（[#2862](https://github.com/w3c/aria/pull/2862)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - ARIA Notify の導入文と i18n の例を追加（[#2869](https://github.com/w3c/aria/pull/2869)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - SVG-AAM の ReSpec 設定で ED URL の設定名を `edDraftURI` に修正（[#2913](https://github.com/w3c/aria/pull/2913)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/ビルド・ReSpec設定|ビルド・ReSpec設定]]
@@ -30,4 +31,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-aria/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-aria/changes/2026-10-05|2026-10-05]]、[[repos/w3c-aria/changes/2026-09-30|2026-09-30]]、[[repos/w3c-aria/changes/2026-09-28|2026-09-28]]、[[repos/w3c-aria/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/w3c-aria/changes/2026-10-07|2026-10-07]]、[[repos/w3c-aria/changes/2026-10-05|2026-10-05]]、[[repos/w3c-aria/changes/2026-09-30|2026-09-30]]、[[repos/w3c-aria/changes/2026-09-28|2026-09-28]]、[[repos/w3c-aria/changes/2026-09-24|2026-09-24]]

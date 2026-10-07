@@ -11,24 +11,24 @@ tags:
 
 | リポジトリ | ブランチ | 最新の安定版 | 最終更新 |
 |---|---|---|---|
-| [[repos/adobe-react-spectrum/index\|adobe/react-spectrum]] | main | [react-aria-components@1.21.0](https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.21.0)（2026-09-04） | 2026-10-05 |
-| [[repos/anthropics-claude-code/index\|anthropics/claude-code]] | main | [v2.1.289](https://github.com/anthropics/claude-code/releases/tag/v2.1.289)（2026-10-04）→ [[repos/anthropics-claude-code/releases/v2.1.289\|まとめ]] | 2026-10-05 |
-| [[repos/microsoft-TypeScript/index\|microsoft/TypeScript]] | main | [v7.0.2](https://github.com/microsoft/TypeScript/releases/tag/v7.0.2)（2026-08-20） | 2026-10-05 |
-| [[repos/nuxt-nuxt/index\|nuxt/nuxt]] | main | [v4.5.2](https://github.com/nuxt/nuxt/releases/tag/v4.5.2)（2026-08-05） | 2026-10-05 |
-| [[repos/openai-codex/index\|openai/codex]] | main | [rust-v0.160.0](https://github.com/openai/codex/releases/tag/rust-v0.160.0)（2026-10-01）→ [[repos/openai-codex/releases/rust-v0.160.0\|まとめ]] | 2026-10-05 |
+| [[repos/adobe-react-spectrum/index\|adobe/react-spectrum]] | main | [react-aria-components@1.21.0](https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.21.0)（2026-09-04） | 2026-10-07 |
+| [[repos/anthropics-claude-code/index\|anthropics/claude-code]] | main | [v2.1.292](https://github.com/anthropics/claude-code/releases/tag/v2.1.292)（2026-10-06）→ [[repos/anthropics-claude-code/releases/v2.1.292\|まとめ]] | 2026-10-07 |
+| [[repos/microsoft-TypeScript/index\|microsoft/TypeScript]] | main | [v7.0.2](https://github.com/microsoft/TypeScript/releases/tag/v7.0.2)（2026-08-20） | 2026-10-07 |
+| [[repos/nuxt-nuxt/index\|nuxt/nuxt]] | main | [v4.6.0](https://github.com/nuxt/nuxt/releases/tag/v4.6.0)（2026-10-05）→ [[repos/nuxt-nuxt/releases/v4.6.0\|まとめ]] | 2026-10-07 |
+| [[repos/openai-codex/index\|openai/codex]] | main | [rust-v0.160.1](https://github.com/openai/codex/releases/tag/rust-v0.160.1)（2026-10-05）→ [[repos/openai-codex/releases/rust-v0.160.1\|まとめ]] | 2026-10-07 |
 | [[repos/openui-open-ui/index\|openui/open-ui]] | main | なし | 2026-10-02 |
-| [[repos/oxc-project-oxc/index\|oxc-project/oxc]] | main | [oxlint_v1.86.0](https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.86.0)（2026-09-28）→ [[repos/oxc-project-oxc/releases/oxlint_v1.86.0\|まとめ]] | 2026-10-05 |
-| [[repos/pnpm-pnpm/index\|pnpm/pnpm]] | main | [v12.9.1](https://github.com/pnpm/pnpm/releases/tag/v12.9.1)（2026-10-04）→ [[repos/pnpm-pnpm/releases/v12.9.1\|まとめ]] | 2026-10-05 |
-| [[repos/react-react/index\|react/react]] | main | [v19.3.0](https://github.com/react/react/releases/tag/v19.3.0)（2026-09-09） | 2026-10-05 |
+| [[repos/oxc-project-oxc/index\|oxc-project/oxc]] | main | [oxlint_v1.87.0](https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.87.0)（2026-10-05）→ [[repos/oxc-project-oxc/releases/oxlint_v1.87.0\|まとめ]] | 2026-10-07 |
+| [[repos/pnpm-pnpm/index\|pnpm/pnpm]] | main | [v12.10.1](https://github.com/pnpm/pnpm/releases/tag/v12.10.1)（2026-10-07）→ [[repos/pnpm-pnpm/releases/v12.10.1\|まとめ]] | 2026-10-07 |
+| [[repos/react-react/index\|react/react]] | main | [v19.3.0](https://github.com/react/react/releases/tag/v19.3.0)（2026-09-09） | 2026-10-07 |
 | [[repos/tc39-ecma262/index\|tc39/ecma262]] | main | [es2026-errata](https://github.com/tc39/ecma262/releases/tag/es2026-errata)（2026-07-28） | 2026-10-05 |
 | [[repos/tc39-proposals/index\|tc39/proposals]] | main | なし（README の Stage 表で管理） | 2026-10-02 |
-| [[repos/vercel-next.js/index\|vercel/next.js]] | canary | [v16.3.8](https://github.com/vercel/next.js/releases/tag/v16.3.8)（2026-10-01）→ [[repos/vercel-next.js/releases/v16.3.8\|まとめ]] | 2026-10-05 |
-| [[repos/vitest-dev-vitest/index\|vitest-dev/vitest]] | main | [v5.0.3](https://github.com/vitest-dev/vitest/releases/tag/v5.0.3)（2026-09-30）→ [[repos/vitest-dev-vitest/releases/v5.0.3\|まとめ]] | 2026-10-05 |
+| [[repos/vercel-next.js/index\|vercel/next.js]] | canary | [v16.3.8](https://github.com/vercel/next.js/releases/tag/v16.3.8)（2026-10-01）→ [[repos/vercel-next.js/releases/v16.3.8\|まとめ]] | 2026-10-07 |
+| [[repos/vitest-dev-vitest/index\|vitest-dev/vitest]] | main | [v5.0.3](https://github.com/vitest-dev/vitest/releases/tag/v5.0.3)（2026-09-30）→ [[repos/vitest-dev-vitest/releases/v5.0.3\|まとめ]] | 2026-10-07 |
 | [[repos/vuejs-core/index\|vuejs/core]] | main | [v3.5.43](https://github.com/vuejs/core/releases/tag/v3.5.43)（2026-09-17）→ [[repos/vuejs-core/releases/v3.5.43\|まとめ]] | 2026-10-02 |
-| [[repos/w3c-aria/index\|w3c/aria]] | main | なし | 2026-10-05 |
+| [[repos/w3c-aria/index\|w3c/aria]] | main | なし | 2026-10-07 |
 | [[repos/w3c-csswg-drafts/index\|w3c/csswg-drafts]] | main | なし | 2026-10-05 |
 | [[repos/w3c-wcag/index\|w3c/wcag]] | main | なし | 2026-10-05 |
-| [[repos/whatwg-html/index\|whatwg/html]] | main | なし | 2026-10-05 |
+| [[repos/whatwg-html/index\|whatwg/html]] | main | なし | 2026-10-07 |
 
 各リポジトリのページは [[repos/index|リポジトリ一覧]] から。
 
@@ -36,21 +36,22 @@ tags:
 
 | ブログ | 関連リポジトリ | 最新の記事 |
 |---|---|---|
-| [[blogs/anthropic/index\|Anthropic News]] | — | [[blogs/anthropic/posts/2026-10-02-claude-frontier-academy\|Claude Frontier Academy を開始、1 億ドルで 1 万人のエンジニアを育成]] |
+| [[blogs/anthropic/index\|Anthropic News]] | — | [[blogs/anthropic/posts/2026-10-06-cyber-verification-program\|Cyber Verification Program を拡大、3 段階のアクセス階層を導入]] |
 | [[blogs/chrome/index\|Chrome の新機能]] | — | [[blogs/chrome/posts/2026-10-05-modern-web-guidance\|最新のウェブ ガイダンス]] |
-| [[blogs/firefox/index\|Firefox リリースノート]] | — | [[blogs/firefox/posts/2026-09-29-157.0\|Firefox 157.0]] |
+| [[blogs/firefox/index\|Firefox リリースノート]] | — | [[blogs/firefox/posts/2026-10-06-157.0.1\|Firefox 157.0.1]] |
 | [[blogs/safari/index\|Safari リリースノート]] | — | [[blogs/safari/posts/2026-09-16-safari-27_2-release-notes\|Safari 27.2 Beta リリースノート]] |
 
 各ブログのページは [[blogs/index|ブログ一覧]] から。
 
 ## 最近の更新
 
-- pnpm/pnpm 安定版 [[repos/pnpm-pnpm/releases/v12.9.0|v12.9.0]]（StackBlitz WebContainers に対応、レジストリごとの `networkConcurrency`）・[[repos/pnpm-pnpm/releases/v12.9.1|v12.9.1]]（WebContainer 版を `@pnpm/wasm` に分離、Homebrew 版の `self-update` を拒否）・[[repos/pnpm-pnpm/releases/v11.28.4|v11.28.4]]（認証情報が漏れる経路 2 件を修正）（[[repos/pnpm-pnpm/changes/2026-10-05|2026-10-05 の変更]]）
-- anthropics/claude-code [[repos/anthropics-claude-code/releases/v2.1.288|v2.1.288]]・[[repos/anthropics-claude-code/releases/v2.1.289|v2.1.289]]：mod 向けの `$.ui.selection()` と `agent.spawn`、Ctrl+C で消したプロンプトの復元、`/code-review --max-findings` を追加。managed なマシンで deny / ask ルールが優先されない問題を修正
-- vercel/next.js canary：アップグレードのフラグが `--ai` から `--agent` に。`cacheComponents` で `partialPrefetching` 未指定時に警告、バンドルアナライザーにルートのサマリーと比較ツリーマップ（[[repos/vercel-next.js/changes/2026-10-05|2026-10-05 の変更]]）
-- openai/codex はプレリリース rust-v0.162.0-alpha.13 まで。TUI の Git worktree ツール、`tui.mouse_scroll_speed`、exec-server のファイル書き込みストリーミングなど（[[repos/openai-codex/changes/2026-10-05|2026-10-05 の変更]]、PR 91 件）
-- nuxt/nuxt：エラー時にページは HTML・API ルートは JSON を返すように（破壊的変更）（[[repos/nuxt-nuxt/changes/2026-10-05|変更]]）。vitest-dev/vitest：`--changed` がセットアップファイルや `__mocks__` も追跡、`Map`・`Set` の深い比較を修正（[[repos/vitest-dev-vitest/changes/2026-10-05|変更]]）
-- microsoft/TypeScript：Source Phase Imports に対応、VS Code 拡張 API に `registerLspMiddleware`（[[repos/microsoft-TypeScript/changes/2026-10-05|変更]]）。oxc-project/oxc：JS での TS 専用クラス修飾子を TS8009 として拒否、jsx-a11y 系ルールの修正（[[repos/oxc-project-oxc/changes/2026-10-05|変更]]）
-- tc39/ecma262 に `Iterator.prototype.join` がマージ（[[repos/tc39-ecma262/topics/Iterator|Iterator]]）。whatwg/html で `MessagePort` の `close` イベントを削除、Navigation API の reload でスクロール位置を復元しないように（[[repos/whatwg-html/changes/2026-10-05|変更]]）。w3c/wcag で 2.1.4 の解説を見直し
-- その他：react-spectrum に `Sheet` を追加（[[repos/adobe-react-spectrum/changes/2026-10-05|変更]]）、react で `useDeferredValue` とエラー回復が重なる無限レンダーを修正（[[repos/react-react/changes/2026-10-05|変更]]）
-- ブログ：[[blogs/anthropic/posts/2026-10-02-claude-frontier-academy|Claude Frontier Academy を開始]]、Chrome の [[blogs/chrome/posts/2026-10-05-modern-web-guidance|最新のウェブ ガイダンス]]・[[blogs/chrome/posts/2026-08-26-build-tools|WebMCP ツールの設計ガイド]]
+- pnpm/pnpm 安定版 [[repos/pnpm-pnpm/releases/v12.10.0|v12.10.0]]（実験的な `loaded` リンカー、`lockfile.includeResolutionSettings`、パストラバーサル GHSA-jg5c-8mvg-5wph などのセキュリティ修正）・[[repos/pnpm-pnpm/releases/v12.10.1|v12.10.1]]・[[repos/pnpm-pnpm/releases/v11.28.5|v11.28.5]]（[[repos/pnpm-pnpm/changes/2026-10-07|2026-10-07 の変更]]）
+- nuxt/nuxt 安定版 [[repos/nuxt-nuxt/releases/v4.6.0|v4.6.0]]：Nuxt CLI v4 を同時リリース、`nuxt dev` に対話的なターミナル UI。未リリース分で `nuxt.request` の tracing channel を追加（[[repos/nuxt-nuxt/changes/2026-10-07|変更]]）
+- oxc-project/oxc [[repos/oxc-project-oxc/releases/oxfmt_v0.72.0|oxfmt_v0.72.0]] で Markdown の整形が Prettier から `oxc_formatter_markdown` に（破壊的変更）。[[repos/oxc-project-oxc/releases/oxlint_v1.87.0|oxlint_v1.87.0]]・[[repos/oxc-project-oxc/releases/crates_v0.153.0|crates_v0.153.0]] も公開。未リリース分で TOML フォーマッタを追加（[[repos/oxc-project-oxc/changes/2026-10-07|変更]]）
+- anthropics/claude-code [[repos/anthropics-claude-code/releases/v2.1.290|v2.1.290]]〜[[repos/anthropics-claude-code/releases/v2.1.292|v2.1.292]]：`claude plugin install --marketplace`、Agent ツールの `effort` パラメータ、`claude attach` / `logs <name>` を追加。UNC パスの読み取りで権限プロンプトが出なかった問題などを修正
+- openai/codex 安定版 [[repos/openai-codex/releases/rust-v0.160.1|rust-v0.160.1]]（stdio の MCP サーバーで `SYSTEMROOT`・`TEMP`・`TMP` を保持）。プレリリース rust-v0.162.0-alpha.17 では Code Mode の `as_settled`・`stream_settled`、ランク付きの `tools.tool_search`、`skills.required` など（[[repos/openai-codex/changes/2026-10-07|変更]]、PR 106 件）
+- vercel/next.js canary が v16.5.0-canary.1 に。`forbidden()` / `unauthorized()` の安定化はいったん取り消され experimental のまま。`next analyze --export-graph`、`eslint-config-next` の ESLint 10 対応（[[repos/vercel-next.js/changes/2026-10-07|変更]]）
+- vitest-dev/vitest：`vi.resetAllMocks()` が呼ばれたモックだけをリセットして高速化、`test.ui.theme` を追加、chai の `to.have.returned(value)` が値を確認するように（[[repos/vitest-dev-vitest/changes/2026-10-07|変更]]）
+- microsoft/TypeScript：DOM の型定義を更新（Web Serial・`CloseWatcher`・`Element.setHTML()`・WebGPU など）、API サーバーや decorator metadata の出力のクラッシュを修正（[[repos/microsoft-TypeScript/changes/2026-10-07|変更]]）。react で Flight のスタックの無いエラーの復元を修正（[[repos/react-react/changes/2026-10-07|変更]]）、react-spectrum の `PromptField` で添付だけのプロンプトを送信可能に（[[repos/adobe-react-spectrum/changes/2026-10-07|変更]]）
+- whatwg/html でサニタイザーの安全な既定の設定に MathML の `<a>` を追加、前後に空白のある `type` の script はモジュールにならないと明確化（[[repos/whatwg-html/changes/2026-10-07|変更]]）。w3c/aria は HTML-AAM の編集上の修正（[[repos/w3c-aria/changes/2026-10-07|変更]]）
+- ブログ：[[blogs/anthropic/posts/2026-10-06-cyber-verification-program|Cyber Verification Program を拡大]]、[[blogs/firefox/posts/2026-10-06-157.0.1|Firefox 157.0.1]]（macOS のダウンロード失敗やサイドバーの不具合を修正）

@@ -1,9 +1,16 @@
 ---
 title: w3c/aria 取り込み履歴
-updated: 2026-10-05
+updated: 2026-10-07
 tags:
   - repo/w3c-aria
 ---
+
+## 2026-10-07
+
+- 期間: 2026-10-02T08:38:58Z 〜 2026-10-07T00:47:26Z
+- PR 1 件（詳しく 1 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/w3c-aria/changes/2026-10-07|changes]]、[[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
+- エラー: なし
 
 ## 2026-10-05
 
