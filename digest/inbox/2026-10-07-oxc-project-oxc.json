@@ -1,0 +1,691 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-04T20:16:41Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.87.0",
+      "publishedAt": "2026-10-05T11:04:25Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.87.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "crates_v0.153.0",
+      "name": "oxc crates_v0.153.0",
+      "publishedAt": "2026-10-05T10:18:40Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/crates_v0.153.0",
+      "prerelease": false,
+      "body": "### 🚀 Features\n\n- 61003c7 minifier: Fold undefined argument in non delegating yield (#27324) (Armano)\n- 07833c0 ast: Tie `debug_name` return lifetime to the underlying AST node (#27295) (sadan)\n- adb1139 minifier: Merge import statements against the same module (#25534) (翠)\n- cc82598 minifier: Merge import and export statements against the same module (#25533) (翠)\n- 1c352ce minifier: Minimize bitwise binary expressions (#27107) (Armano)\n- d1a0bcc minifier: Merge statements after terminating if block branches (#26667) (Armano)\n- 7a95376 minifier: Merge adjucent if stmt with the same content (#26445) (Armano)\n\n### 🐛 Bug Fixes\n\n- 6a7d48b parser: Report abstract private field error on modifier (#27314) (camc314)\n- 2ff6fb5 parser: Include generator marker in overload diagnostic span (#27313) (camc314)\n- 4359a66 parser: Reject TypeScript class modifiers in JavaScript (#27312) (camc314)\n- 565d75d minifier: Correct indopedency when processing nested sequences (#27273) (Armano)\n- d0b9372 parser: Remove type-dependent tuple rest diagnostics (#27234) (camc314)\n- 3d61a59 parser: Validate TypeScript type member separators (#27222) (camc314)\n- b2793fa parser: Reject module syntax in script (#27220) (leaysgur)\n- 5914a24 parser: Report `TS1243` for abstract async methods (#27192) (camc314)\n- c6c6e5e parser: Report `TS1242` for interfaces with `abstract` modifier (#27191) (camc314)\n- dd0bbb9 parser: Avoid duplicate index signature modifier diagnostic (#27190) (camc314)\n- 8f61129 regex: Decode escaped capturing group names (#27156) (camc314)\n- da1fed2 minifier: Fold conditional expressions with long sequences (#27083) (Armano)\n- 0c601f4 isolated-declarations: Allow adding undefined to keyof parameter types (#27173) (Dunqing)\n- 4896287 isolated-declarations: Support readonly parameter types (#27009) (sama Pyb)\n- 72d62a1 transformer/explicit-resource-management: Transform classic for loop using declarations (#27148) (camc314)\n- 4cf9ae2 minifier: Preserve sibling declarations in arguments copy rewrite (#27140) (camc314)\n- 24b7015 transformer/explicit-resource-management: Lower using in catch and finally (#27142) (camc314)\n\n### ⚡ Performance\n\n- 99e3c15 minifier: Small performance improvement when merging imports (#27238) (Armano)\n- d37d1db codegen: Pre-allocate sourcemap builder vectors (#27230) (codspeed)\n- 466ef10 minifier: Update expressions in place in `merge_import_export` (#27226) (Armano)\n- 028ffb8 minifier: Update nodes in place in `wrap_to_avoid_ambiguous_else` (#27194) (Armano)\n- 6fcd135 minifier: Avoid conversion from ident to str when for substitute symbols (#27209) (Armano)\n- 0b9799d minifier: Reduce usage of minimize_conditional (#26028) (Armano)\n- 3ca3ded minifier: Short-circuit IfStatement termination on alternate (#25198) (Armano)\n\n### 📚 Documentation\n\n- 335ce79 agents: Scope verification for local and stacked work (#27299) (Dunqing)"
+    },
+    {
+      "tag": "oxfmt_v0.72.0",
+      "name": "oxfmt v0.72.0",
+      "publishedAt": "2026-10-05T11:04:20Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxfmt_v0.72.0",
+      "prerelease": false,
+      "body": "### 💥 BREAKING CHANGES\n\n- e2c68b1 oxfmt: [**BREAKING**] Format `parser:markdown` files by `oxc_formatter_markdown` (#27256) (leaysgur)\n\n### 🚀 Features\n\n- b538e3c formatter_css: Parse embedded CSS as a block's contents (#27284) (leaysgur)\n\n### 🐛 Bug Fixes\n\n- 71e400b formatter_markdown: Fixed remaining issues found by fuzz (#27334) (leaysgur)\n- 7d0e54d formatter_markdown: Preserve line breaks around Chinese/Japanese characters in all `proseWrap` (#27331) (leaysgur)\n- e9ae2d8 formatter_css: Fix layouts found in mdn-content repo (css-in-md) (#27326) (leaysgur)\n- df85b4c oxfmt: Keep blank lines after a line break in Prettier Doc to IR (#27325) (leaysgur)\n- 7f65b75 formatter: Format assignment target property as assignment-like (#27289) (leaysgur)\n- 6c08f2a formatter_css: Apply the `url()` import exception to a lone comma group (#27288) (leaysgur)\n- 1967302 formatter_css: Hug a spaced `ident (` only at the at-rule prelude head (#27283) (leaysgur)\n- 2445064 formatter_markdown: Keep a preserved line break before a delimiter row that opens no table (#27278) (leaysgur)\n- dd72fbf formatter_markdown: Keep container columns as spaces under `useTabs` (#27277) (leaysgur)\n- 1686018 oxfmt: Make one state `conditionalGroup` fit up to first `hardline` (#27275) (leaysgur)\n- fd4ddce formatter_json: Flatten block comment only array|object (#27274) (leaysgur)\n- 267557c formatter,oxfmt: Embed only original JSDoc plugin supported languages (#27241) (leaysgur)\n- 2606c60 oxfmt: Do not re-include a file below an excluded directory with a negated pattern (#27237) (Nicolas Le Cam)\n- c2de02b formatter: Decide embedded template layout from AST, not source shape (#27218) (leaysgur)\n- c9e1224 formatter: Handle `quoteProps: consistent` for patterns and computed keys (#27216) (leaysgur)\n- 36e14df formatter: Keep comments between callee and its opener on the callee side (#27172) (leaysgur)\n- 6da7657 oxfmt: Render diagnostics with source in Stdin mode (#27130) (leaysgur)\n- e9b2ec5 oxfmt/lsp: Reload `.prettierignore` on watched file change (#27129) (leaysgur)\n- 30eb463 oxfmt: Check global ignores before resolving nested config in Stdin mode (#27128) (leaysgur)\n\n### ⚡ Performance\n\n- 72f42a3 formatter_markdown: Pre-allocate the IR buffer (#27333) (leaysgur)\n- cea47e3 formatter_core: Avoid exponential `will_break` check on nested interned (#27211) (leaysgur)\n- 0aba566 oxfmt: Do not resolve root js config from nested context (#27147) (leaysgur)\n\n### 📚 Documentation\n\n- 51506c6 formatter_css: Record divergences found in mdn-content (css-in-md) (#27327) (leaysgur)\n- 656b81c formatter_markdown: Record unclosed fences closing at a directive's closer (#27279) (leaysgur)\n- 66545bf formatter_markdown: Record setext heading wrap divergence (#27221) (leaysgur)\n- af4b269 oxfmt: Document why `format()` API does not take cwd (#27131) (leaysgur)"
+    },
+    {
+      "tag": "oxlint_v1.87.0",
+      "name": "oxlint v1.87.0",
+      "publishedAt": "2026-10-05T11:04:25Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.87.0",
+      "prerelease": false,
+      "body": "### 🚀 Features\n\n- 42dcfd2 linter/react/no-unescaped-entities: Implement suggestion (#27292) (Mikhail Baev)\n- cd4510d linter/unicorn/no-useless-switch-case: Implement suggestion (#27245) (Mikhail Baev)\n- 1a7c902 linter/react/jsx-no-target-blank: Implement suggestion (#27181) (Mikhail Baev)\n\n### 🐛 Bug Fixes\n\n- 176b4b9 linter/jsx-a11y/label-has-associated-control: Validate label attribute values (#27302) (sama Pyb)\n- 7d381c3 linter/jsx-a11y/mouse-events-have-key-events: Handle nullish event handlers (#27306) (sama Pyb)\n- 4e09837 linter/jsx-a11y/lang: Validate lang expression strings (#27304) (sama Pyb)\n- 7d28a66 linter/unicorn/numeric-separators-style: Report misgrouped BigInt literals (#27207) (breken)\n- e928322 linter/unicorn/no-zero-fractions: Parenthesize separator and large integers in fixer (#27206) (breken)\n- 3d61a59 parser: Validate TypeScript type member separators (#27222) (camc314)\n- f08236b linter/eslint/prefer-exponentiation-operator: Preserve autofix precedence (#27150) (camc314)\n- 7d60ae3 linter/valid-title: Continue checks after allowed words (#27146) (Cameron)\n- ad5dd5d linter/eslint/no-unused-vars: Respect disabled argument checks for used ignore patterns (#26925) (camc314)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 27325,
+      "title": "fix(oxfmt): keep blank lines after a line break in Prettier Doc to IR",
+      "url": "https://github.com/oxc-project/oxc/pull/27325",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T00:28:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "",
+      "files": [
+        "apps/oxfmt/src/prettier_compat/from_prettier_doc.rs (+33 -12)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27326,
+      "title": "fix(formatter_css): fix layouts found in mdn-content repo (css-in-md)",
+      "url": "https://github.com/oxc-project/oxc/pull/27326",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T00:29:12Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "- `@supports`: keep `not` on its term's line, open over-wide parenthesized terms\n- custom function prelude: indent the continuation after `returns type(...)`\n- media ratio: print the spacing around `/` as written\n- spaced `/`: glue to its left operand and break after\n- a comment leading a comma list item: measure the item's first chunk\n- `calc()` parenthesized operand: open its parens when over-wide\n- do not follow postcss-values' re-split of a signed word (`Arial, -apple-system`, `-600px`)\n- re-pin DIVERGENCES.md#fill-break-position",
+      "files": [
+        "crates/oxc_formatter_css/src/print/at_rule.rs (+92 -57)",
+        "crates/oxc_formatter_css/src/print/scss.rs (+2 -2)",
+        "crates/oxc_formatter_css/src/print/value.rs (+54 -60)",
+        "apps/oxfmt/conformance/snapshots/conformance.snap.md (+8 -6)",
+        "apps/oxfmt/conformance/snapshots/diffs/less/externals__ng-zorro-antd__components__style__themes__compact.less.md (+0 -657)",
+        "apps/oxfmt/conformance/snapshots/diffs/less/externals__ng-zorro-antd__components__style__themes__default.less.md (+13 -38)",
+        "apps/oxfmt/conformance/snapshots/diffs/less/externals__ng-zorro-antd__components__style__themes__variable.less.md (+13 -38)",
+        "apps/oxfmt/conformance/snapshots/diffs/scss/externals__gitlab__stylesheets__framework__variables.scss.md (+2439 -0)",
+        "crates/oxc_formatter_css/DIVERGENCES.md (+55 -13)",
+        "crates/oxc_formatter_css/tests/fixtures/format/css/at-rule-custom-function.css (+6 -0)"
+      ],
+      "filesTotal": 28
+    },
+    {
+      "number": 27327,
+      "title": "docs(formatter_css): record divergences found in mdn-content (css-in-md)",
+      "url": "https://github.com/oxc-project/oxc/pull/27327",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T00:29:39Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.87.0",
+      "filesTotal": 15
+    },
+    {
+      "number": 27330,
+      "title": "test(oxfmt): use codeload.github.com for download-fixtures",
+      "url": "https://github.com/oxc-project/oxc/pull/27330",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T01:25:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.87.0",
+      "filesTotal": 3
+    },
+    {
+      "number": 27256,
+      "title": "feat(oxfmt)!: format `parser:markdown` files by `oxc_formatter_markdown`",
+      "url": "https://github.com/oxc-project/oxc/pull/27256",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T05:17:36Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "Part of #24607\n\nNow oxfmt formats Markdown files natively with `oxc_formatter_markdown`.\n\nBasically the same output with Prettier 3.9.9, but we already covers some not yet released fixes as well. Please see DIVERGENCES.md.\n\nBefore, Markdown files were formatted by Prettier. So, JS in Markdown code fence was also formatted by Prettier (babel/typescript).\n\nBut now it is handled by `oxc_formatter`, it means `sortImports` and `sortTailwindcss` works.\n\nFor Markdown code fence langauge detection, we uses shiki languages (https://shiki.style/languages).\n\nWe also supports `::: directive` syntax, both VitePress (`::: withspace`) and remark-directive (`:::withoutspace`). (BLOCK only, no LEAF and TEXT position)",
+      "files": [
+        "Cargo.lock (+2 -0)",
+        "Cargo.toml (+1 -0)",
+        "apps/oxfmt/Cargo.toml (+1 -0)",
+        "apps/oxfmt/conformance/download-fixtures.js (+12 -0)",
+        "apps/oxfmt/conformance/run.ts (+25 -0)",
+        "apps/oxfmt/src-js/libs/apis.ts (+12 -14)",
+        "apps/oxfmt/src-js/libs/prettier-plugin-oxfmt/text-to-doc.ts (+2 -2)",
+        "apps/oxfmt/src/api/text_to_doc_api.rs (+4 -4)",
+        "apps/oxfmt/src/core/config/mod.rs (+12 -9)",
+        "apps/oxfmt/src/core/embed/dispatcher.rs (+151 -32)"
+      ],
+      "filesTotal": 75
+    },
+    {
+      "number": 27331,
+      "title": "fix(formatter_markdown): preserve line breaks around Chinese/Japanese characters in all `proseWrap`",
+      "url": "https://github.com/oxc-project/oxc/pull/27331",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T05:18:18Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "Align with Prettier 3.10 (not released) and also dprint and biome.",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/cjk.rs (+27 -66)",
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+17 -40)",
+        "crates/oxc_formatter_markdown/src/print/parts.rs (+2 -6)",
+        "crates/oxc_formatter_markdown/src/print/text.rs (+31 -127)",
+        "apps/oxfmt/conformance/snapshots/conformance.snap.md (+3 -1)",
+        "apps/oxfmt/conformance/snapshots/diffs/markdown/externals__prettier__markdown__splitCjkText__symbolSpaceNewLine.md.md (+179 -0)",
+        "crates/oxc_formatter_markdown/AGENTS.md (+1 -1)",
+        "crates/oxc_formatter_markdown/DIVERGENCES.md (+23 -8)",
+        "crates/oxc_formatter_markdown/tests/fixtures/fingerprint.rs (+1 -28)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/autolink-cjk-space.md (+0 -2)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 27333,
+      "title": "perf(formatter_markdown): pre-allocate the IR buffer",
+      "url": "https://github.com/oxc-project/oxc/pull/27333",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T05:18:51Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "Measured on 19,487 real-world Markdown files (mdn content, oxc-ecosystem-ci repos):\n\n- IR elements / source bytes: median 0.29, p95 0.40, p98 0.46\n- `0.4x` alone covers 94.9% of files without reallocation\n  - With the 1024 floor, 97.6% (small documents have a higher ratio)\n- `0.5x` would reach 99.5%, but over-allocates 96% of the used size instead of 66%",
+      "files": [
+        "crates/oxc_formatter_markdown/src/format.rs (+4 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27334,
+      "title": "fix(formatter_markdown): fixed remaining issues found by fuzz",
+      "url": "https://github.com/oxc-project/oxc/pull/27334",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T07:35:33Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "- keep a lazy HTML block's continuation lines in the list item\n- print a footnote paragraph on its marker line only when it prints as one line",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/block.rs (+23 -37)",
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+0 -17)",
+        "crates/oxc_formatter_markdown/src/print/list.rs (+15 -17)",
+        "crates/oxc_formatter_markdown/src/print/text.rs (+1 -1)",
+        "crates/oxc_formatter_markdown/AGENTS.md (+4 -0)",
+        "crates/oxc_formatter_markdown/DIVERGENCES.md (+45 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/lazy-html-block.md (+20 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/lazy-html-block.md.snap (+62 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/footnote-kept-line-break.md (+8 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/footnote-kept-line-break.md.snap (+97 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 27335,
+      "title": "refactor(oxfmt): simplify `FormatStrategy` and resolution",
+      "url": "https://github.com/oxc-project/oxc/pull/27335",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T07:39:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "also removed redundant structs.",
+      "files": [
+        "apps/oxfmt/src/api/text_to_doc_api.rs (+19 -21)",
+        "apps/oxfmt/src/core/config/mod.rs (+11 -63)",
+        "apps/oxfmt/src/core/embed/dispatcher.rs (+24 -24)",
+        "apps/oxfmt/src/core/format.rs (+130 -572)",
+        "apps/oxfmt/src/core/mod.rs (+1 -4)",
+        "apps/oxfmt/src/core/options/to_prettier.rs (+3 -3)",
+        "apps/oxfmt/src/core/options/validate.rs (+2 -2)",
+        "apps/oxfmt/src/core/support.rs (+87 -268)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 27336,
+      "title": "refactor(codegen): remove unused minified-printing support",
+      "url": "https://github.com/oxc-project/oxc/pull/27336",
+      "author": "camc314",
+      "mergedAt": "2026-10-05T08:14:33Z",
+      "labels": [
+        "A-codegen"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "The JavaScript code generator only supports pretty printing, so padded binary operators already prevent the `",
+      "files": [
+        "packages/codegen/src-js/print/categories.ts (+7 -31)",
+        "packages/codegen/src-js/print/expression.ts (+1 -10)",
+        "packages/codegen/src-js/print/literal.ts (+1 -26)",
+        "packages/codegen/src-js/print/space.ts (+13 -28)",
+        "packages/codegen/src-js/print/write.ts (+10 -30)",
+        "packages/codegen/src-js/state.ts (+0 -5)",
+        "packages/codegen/DESIGN.md (+14 -19)",
+        "packages/codegen/test/print.test.ts (+7 -2)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 27324,
+      "title": "feat(minifier): fold undefined argument in non delegating yield",
+      "url": "https://github.com/oxc-project/oxc/pull/27324",
+      "author": "armano2",
+      "mergedAt": "2026-10-05T08:20:14Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "add missing optimization for `yield undefined`,\n\n`undefined` is substituted for `void 0` if its a global",
+      "files": [
+        "crates/oxc_minifier/src/peephole/mod.rs (+5 -1)",
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+8 -0)",
+        "crates/oxc_minifier/tests/peephole/substitute_alternate_syntax.rs (+13 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27338,
+      "title": "refactor(oxfmt): simplify config loader and napi gate",
+      "url": "https://github.com/oxc-project/oxc/pull/27338",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T08:49:34Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "Intoroduce `ConfigLoader` struct and hold config, editorconfig and `napi` gated JS config loader.",
+      "files": [
+        "apps/oxfmt/src/api/text_to_doc_api.rs (+1 -1)",
+        "apps/oxfmt/src/core/config/mod.rs (+143 -166)",
+        "apps/oxfmt/src/core/config/nested.rs (+10 -50)",
+        "apps/oxfmt/src/core/config/scopes.rs (+11 -31)",
+        "apps/oxfmt/src/core/format.rs (+19 -15)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27339,
+      "title": "refactor(oxfmt): remove useless pub(crate)",
+      "url": "https://github.com/oxc-project/oxc/pull/27339",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-05T08:57:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.87.0",
+      "body": "",
+      "files": [
+        "apps/oxfmt/src/core/config/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27340,
+      "title": "chore(codegen): revert remove unused minified-printing support",
+      "url": "https://github.com/oxc-project/oxc/pull/27340",
+      "author": "camc314",
+      "mergedAt": "2026-10-05T09:07:59Z",
+      "labels": [
+        "A-codegen"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.87.0",
+      "filesTotal": 8
+    },
+    {
+      "number": 27346,
+      "title": "feat(linter/unicorn/prefer-query-selector): add `allowWithVariables` option",
+      "url": "https://github.com/oxc-project/oxc/pull/27346",
+      "author": "baevm",
+      "mergedAt": "2026-10-05T11:13:26Z",
+      "labels": [
+        "A-linter",
+        "A-cli"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "fixes #27344",
+      "files": [
+        "apps/oxlint/src-js/package/config.generated.ts (+9 -1)",
+        "crates/oxc_linter/src/generated/rules_enum.rs (+3 -0)",
+        "crates/oxc_linter/src/rules/unicorn/prefer_query_selector.rs (+194 -52)",
+        "crates/oxc_linter/src/snapshots/unicorn_prefer_query_selector.snap (+112 -0)",
+        "npm/oxlint/configuration_schema.json (+30 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27353,
+      "title": "fix(lexer): context walk line break and type end rules",
+      "url": "https://github.com/oxc-project/oxc/pull/27353",
+      "author": "ShanonJackson",
+      "mergedAt": "2026-10-05T20:39:53Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- != at the start of a line continues the expression and as or satisfies there ends it, as tsc does; a type that ends a line goes on with an initializer or a body, and on one line a type ends at any token that cannot continue it (x as T - 1, c ? x as T : y)\n- simplifies the walk steps and anchors a walk at a function or class only where a declaration starts, disambiguate is 380 code lines shorter\n- every valid input whose tokens change now matches tsc, main set neutral",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/anchor.rs (+19 -134)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/frame.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/jsx.rs (+0 -3)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/mod.rs (+1 -4)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/punct.rs (+112 -245)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/scan.rs (+4 -12)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/step.rs (+37 -61)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/types.rs (+64 -133)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/walker.rs (+6 -10)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/words.rs (+29 -65)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 27354,
+      "title": "refactor(lexer): answer dense context questions with the full walk",
+      "url": "https://github.com/oxc-project/oxc/pull/27354",
+      "author": "ShanonJackson",
+      "mergedAt": "2026-10-05T21:22:15Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- a bounded walk starts fresh at its anchor for every question and keeps nothing between questions, once the bounded walks of a pass have taken as many scan steps as the full walk would the full walk answers the rest\n- drops walk continuation, group leaving and the separator and angle jumps, disambiguate is 247 code lines shorter; also fixes a template in tsx type arguments being lexed as an unterminated JSX element\n- main set about 1% slower, mostly code layout (checker.js runs the same instruction count), ts_zod about 5% slower since its class body questions walk the members again",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/anchor.rs (+0 -19)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/frame.rs (+0 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/mod.rs (+6 -37)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/scan.rs (+63 -211)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/walker.rs (+10 -148)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/mod.rs (+3 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/tests.rs (+2 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/bytes.rs (+5 -5)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 27357,
+      "title": "fix(semantic): visit `TSMethodSignature` computed method keys in enclosing scope",
+      "url": "https://github.com/oxc-project/oxc/pull/27357",
+      "author": "camc314",
+      "mergedAt": "2026-10-05T21:52:35Z",
+      "labels": [
+        "A-semantic",
+        "A-minifier",
+        "A-ast",
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Computed TypeScript method keys must resolve in the enclosing scope. In:\n\n```\ndeclare const x: unique symbol;\ninterface I {\n  [x](x: number): void;\n}\n```\nThe key currently binds to the parameter `x`; this change binds it to the outer constant.",
+      "files": [
+        "crates/oxc_ast/src/ast/ts.rs (+1 -0)",
+        "crates/oxc_ast_visit/src/generated/visit.rs (+1 -1)",
+        "crates/oxc_ast_visit/src/generated/visit_mut.rs (+1 -1)",
+        "crates/oxc_minifier/src/generated/walk.rs (+6 -6)",
+        "crates/oxc_minifier/src/traverse_context/scopes_collector.rs (+1 -0)",
+        "crates/oxc_semantic/src/builder.rs (+1 -1)",
+        "crates/oxc_traverse/src/generated/scopes_collector.rs (+1 -0)",
+        "crates/oxc_traverse/src/generated/walk.rs (+6 -6)",
+        "crates/oxc_semantic/tests/fixtures/oxc/ts/interfaces/computed-method-key-scope.snap (+163 -0)",
+        "crates/oxc_semantic/tests/fixtures/oxc/ts/interfaces/computed-method-key-scope.ts (+14 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {"number":27358,"title":"docs(formatter_markdown): fix DIVERGENCES.md examples and slug to match behavior","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27359,
+      "title": "fix(formatter_core): leave blank frontmatter without dispatcher",
+      "url": "https://github.com/oxc-project/oxc/pull/27359",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-06T03:01:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Always leave FM (in any form) as-is when `embeddedLanguageFormatting: off` (or Rust CLI).",
+      "files": [
+        "crates/oxc_formatter_core/src/envelope/mod.rs (+6 -6)",
+        "crates/oxc_formatter_css/src/format.rs (+1 -1)",
+        "apps/oxfmt/test/api/front_matter.test.ts (+7 -0)",
+        "crates/oxc_formatter_css/tests/conformance.rs (+2 -1)",
+        "crates/oxc_formatter_css/tests/snapshots/conformance__prettier-css.snap (+1 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":27360,"title":"test(oxfmt): remove format tests duplicated by E2E","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27362,"title":"docs(oxfmt): update how `embeddedLanguageFormatting` option works","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27363,
+      "title": "fix(oxlint,oxfmt): set stderr blocking",
+      "url": "https://github.com/oxc-project/oxc/pull/27363",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-06T04:20:05Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-formatter",
+        "A-linter-plugins"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #27361\n\nWe already set blocking mode for stdout/stdin, but not for stderr.\n\n### Repro\n\n1000 files with a parse error (`const a = ;`), so stderr exceeds 64KB.\nThe reader waits 3s before reading, so the pipe fills up:\n\n```sh\nnode dist/cli.js --check . > out.txt 2> >(sleep 3; cat > err.txt)\n```\n\n| | exit | stderr | errors shown |\n|---|---|---|---|\n| stderr to a file (baseline) | 2 | 90739B | 1000/1000 |\n| Before | 2 | 65536B | 723/1000 |\n| After | 2 | 90739B | 1000/1000 |\n\nBefore this fix, the output stops at exactly 64KB, and the final `Error occurred when checking code style...` line is missing too.",
+      "files": [
+        "apps/oxfmt/src-js/cli.ts (+4 -0)",
+        "apps/oxlint/src-js/cli.ts (+6 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27365,
+      "title": "feat(formatter_toml)!: add `oxc_formatter_toml` crate wrapping `oxc-toml`",
+      "url": "https://github.com/oxc-project/oxc/pull/27365",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-06T06:41:22Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "- Before: Oxfmt directly calls `oxc-toml`\n- After: Oxfmt calls `oxc_formatter_toml` as like others\n  - `oxc_formatter_toml` is wrapper for `oxc-toml` but aligned behavior with other formatters\n  - Also embedded TOML (frontmatter, toml-in-markdown) are now formatted\n  - Formatting logic still lives in `oxc-toml` side, not yet ported\n\nAnd by bumping `oxc-toml`, TOML 1.1 syntax is supported.",
+      "files": [
+        "Cargo.lock (+14 -3)",
+        "Cargo.toml (+2 -1)",
+        "apps/oxfmt/Cargo.toml (+1 -1)",
+        "apps/oxfmt/src/core/config/mod.rs (+2 -1)",
+        "apps/oxfmt/src/core/embed/dispatcher.rs (+17 -3)",
+        "apps/oxfmt/src/core/format.rs (+4 -4)",
+        "apps/oxfmt/src/core/options/mod.rs (+3 -3)",
+        "apps/oxfmt/src/core/options/to_oxc_formatter_toml.rs (+30 -0)",
+        "apps/oxfmt/src/core/options/to_oxc_toml.rs (+0 -29)",
+        "apps/oxfmt/src/core/support.rs (+8 -6)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 27367,
+      "title": "refactor(lexer): one entry for bounded context walks",
+      "url": "https://github.com/oxc-project/oxc/pull/27367",
+      "author": "ShanonJackson",
+      "mergedAt": "2026-10-06T07:47:11Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- before, after and the open angle count go through one bounded walk entry, and after starts the scan past the token it is asked about so the scan jumps a closer's group itself\n- drops the scan's angle count, the anchor position check and an always true jump check, none of them changes an answer; disambiguate is 60 code lines shorter\n- no token changes on any input, main set neutral, adversarial about 2% faster",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/scan.rs (+29 -101)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/walker.rs (+2 -5)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27291,
+      "title": "perf(minifier): avoid unecessary import/export merging for cjs/scripts",
+      "url": "https://github.com/oxc-project/oxc/pull/27291",
+      "author": "armano2",
+      "mergedAt": "2026-10-06T08:42:24Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- disable processing of import/export for files that can't contain it\n- if `target_specifiers` are fully consumed we do not have to attempt to drop them",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+2 -5)",
+        "crates/oxc_minifier/src/peephole/mod.rs (+5 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27368,
+      "title": "refactor(oxfmt): use `PrettierLanguage` enum for whole prettier delegation",
+      "url": "https://github.com/oxc-project/oxc/pull/27368",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-06T08:47:36Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Reduce redundant definitions for Prettier handled language and parser names.",
+      "files": [
+        "apps/oxfmt/src/core/config/mod.rs (+10 -5)",
+        "apps/oxfmt/src/core/embed/dispatcher.rs (+3 -46)",
+        "apps/oxfmt/src/core/embed/prettier_doc.rs (+6 -3)",
+        "apps/oxfmt/src/core/format.rs (+13 -9)",
+        "apps/oxfmt/src/core/support.rs (+62 -22)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27369,
+      "title": "fix(oxfmt): load svelte plugin for svelte-in-mdx-in-md",
+      "url": "https://github.com/oxc-project/oxc/pull/27369",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-06T08:49:35Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Rare trigger, but for consistency.\n\n``````\n`````md\n\n## MDX\n\n````mdx\n\n### Svelte\n\n```svelte\n<script>\n// HERE gets formatted\n</script>\n```\n\n````",
+      "files": [
+        "apps/oxfmt/src/core/embed/dispatcher.rs (+4 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27370,
+      "title": "refactor(oxfmt): restructure FileKind around NativeLanguage",
+      "url": "https://github.com/oxc-project/oxc/pull/27370",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-06T08:53:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Now `support.rs` is literaly the source of truth for supported language.",
+      "files": [
+        "apps/oxfmt/src/core/config/mod.rs (+7 -4)",
+        "apps/oxfmt/src/core/embed/dispatcher.rs (+63 -82)",
+        "apps/oxfmt/src/core/format.rs (+11 -11)",
+        "apps/oxfmt/src/core/support.rs (+63 -58)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27372,
+      "title": "refactor(packages/codegen): rename `CAT_OP_LT_THEN_UN_NOT`",
+      "url": "https://github.com/oxc-project/oxc/pull/27372",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-06T11:42:34Z",
+      "labels": [
+        "A-codegen"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure refactor.\n\nRename `CAT_OP_UN_NOT_AFTER_LT` to `CAT_OP_LT_THEN_UN_NOT`. The old name was confusing - it could read as \"not after LT\" whereas what it really means is an operator \"unary not\" _is_ after LT. Rename it to remove this confusion.",
+      "files": [
+        "packages/codegen/src-js/print/categories.ts (+6 -6)",
+        "packages/codegen/src-js/print/expression.ts (+2 -2)",
+        "packages/codegen/src-js/print/space.ts (+7 -7)",
+        "packages/codegen/src-js/print/write.ts (+3 -3)",
+        "packages/codegen/DESIGN.md (+6 -6)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27373,
+      "title": "fix(packages/codegen): fix debug assert fail printing `TSJSDocNonNullableType`",
+      "url": "https://github.com/oxc-project/oxc/pull/27373",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-06T11:43:22Z",
+      "labels": [
+        "A-codegen"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "When printing `<` followed by `!` in a TS type e.g. `Array<!T>`, the `last` category recorded is `CAT_OP_UN_NOT` instead of `CAT_OP_LT_THEN_UN_NOT`, which is the more usual category to record for `<!`.\n\nIn this case, `CAT_OP_UN_NOT` is fine. The purpose of `CAT_OP_LT_THEN_UN_NOT` is to insert a space before printing `--`, which would form an HTML-style comment `",
+      "files": [
+        "packages/codegen/src-js/print/typescript.ts (+10 -1)",
+        "packages/codegen/test/fixtures/jsdoc-non-nullable-after-lt.ts (+5 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27377,
+      "title": "fix(packages/codegen): fix printing negative `BigIntLiteral` after `-`",
+      "url": "https://github.com/oxc-project/oxc/pull/27377",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-06T19:13:35Z",
+      "labels": [
+        "A-codegen"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix printing a negative `BigIntLiteral` after `-`.\n\n```javascript\n// Original\nx = -(-1n);\n// Printed - syntax error\nx = --1n;\n```\n\nThis bug could not be produced by an AST which has come from parser, because parser would parse the input as equivalent to `x = -(-(1n));`. But it could be produced when printing a hand-built AST.",
+      "files": [
+        "packages/codegen/src-js/print/literal.ts (+16 -8)",
+        "packages/codegen/test/print.test.ts (+2 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27378,
+      "title": "fix(codegen): fix printing negative `BigIntLiteral` after `-`",
+      "url": "https://github.com/oxc-project/oxc/pull/27378",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-06T19:14:10Z",
+      "labels": [
+        "A-codegen"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Same fix as #27377, but for Rust `oxc_codegen`.\n\nUnlike the JS codegen, incorrect output could be generated without manual AST manipulation - the minifier also produces such an AST in some cases.\n\n```javascript\n// Input\nx = -~0n;\nx = y - ~1n;\n```\n\n```javascript\n// Minified output before this PR\nx=--1n,x=y--2n;\n```\n\n[Playground](https://playground.oxc.rs/?options=%7B%22run%22%3A%7B%22lint%22%3Afalse%2C%22formatter%22%3Afalse%2C%22transform%22%3Afalse%2C%22isolatedDeclarations%22%3Afalse%2C%22whitespace%22%3Atrue%2C%22mangle%22%3Afalse%2C%22mangleProps%22%3Afalse%2C%22compress%22%3Atrue%2C%22scope%22%3Atrue%2C%22symbol%22%3Atrue%2C%22cfg%22%3Afalse%7D%2C%22parser%22%3A%7B%22extension%22%3A%22js%22%2C%22allowReturnOutsideFunction%22%3Atrue%2C%22preserveParens%22%3Atrue%2C%22allowV8Intrinsics%22%3Atrue%2C%22semanticErrors%22%3Atrue%7D%2C%22linter%22%3A%7B%7D%2C%22formatter%22%3A%7B%22useTabs%22%3Afalse%2C%22tabWidth%22%3A2%2C%22endOfLine%22%3A%22lf%22%2C%22printWidth%22%3A80%2C%22singleQuote%22%3Afalse%2C%22jsxSingleQuote%22%3Afalse%2C%22quoteProps%22%3A%22as-needed%22%2C%22trailingComma%22%3A%22all%22%2C%22semi%22%3Atrue%2C%22arrowParens%22%3A%22always%22%2C%22bracketSpacing%22%3Atrue%2C%22bracketSameLine%22%3Afalse%2C%22objectWrap%22%3A%22preserve%22%2C%22singleAttributePerLine%22%3Afalse%7D%2C%22transformer%22%3A%7B%22target%22%3A%22es2015%22%2C%22useDefineForClassFields%22%3Atrue%2C%22experimentalDecorators%22%3Atrue%2C%22emitDecoratorMetadata%22%3Atrue%2C%22optimizeEnums%22%\n…(truncated)",
+      "files": [
+        "crates/oxc_codegen/src/gen.rs (+15 -8)",
+        "crates/oxc_codegen/tests/integration/js.rs (+87 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 10,
+      "oxc-guard[bot]": 2
+    }
+  }
+}

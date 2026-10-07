@@ -1,0 +1,298 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-03T17:49:31Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64620,
+      "title": "Remove legacy localization handbacks",
+      "url": "https://github.com/microsoft/TypeScript/pull/64620",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-05T17:32:48Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "OneLoc now supplies translations from its localization package. The checked-in LCL handbacks are no longer used by the update pipeline.",
+      "files": [
+        "tools/loc/cs-CZ/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19580)",
+        "tools/loc/de-DE/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19529)",
+        "tools/loc/es-ES/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19583)",
+        "tools/loc/fr-FR/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19583)",
+        "tools/loc/it-IT/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19535)",
+        "tools/loc/ja-JP/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19571)",
+        "tools/loc/ko-KR/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19571)",
+        "tools/loc/pl-PL/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19558)",
+        "tools/loc/pt-BR/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19561)",
+        "tools/loc/ru-RU/tsc/internal/diagnostics/diagnosticMessages.generated.json.lcl (+0 -19534)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 64624,
+      "title": "Fix idle cache clean timer never being stored on Session",
+      "url": "https://github.com/microsoft/TypeScript/pull/64624",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-05T17:32:48Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`scheduleIdleCacheClean` created a timer via `time.AfterFunc` but never assigned it to `s.idleCacheCleanTimer`, only using the local variable for self-identity comparison inside the timer's own callback. As a result, `cancelIdleCacheClean` (called from `Close`) could never find an active timer to stop, so `Close` always blocked until the full 30 second idle delay elapsed and the timer fired naturally, even when no cleanup was actually pending.\n\nThis was discovered while debugging unexpectedly slow `Close` calls in a test exercising real session watch/close behavior.",
+      "files": [
+        "tsc/internal/project/session.go (+4 -0)",
+        "tsc/internal/project/session_test.go (+35 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64632,
+      "title": "Restart a file's imports when a later arrival lowers its node_modules depth",
+      "url": "https://github.com/microsoft/TypeScript/pull/64632",
+      "author": "cplieger",
+      "mergedAt": "2026-10-05T18:06:08Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "When the files parser reaches a file again at a lower depth, it lowers `lowestDepth` and sets `startSubtasks`, but the `startedSubTasks` guard skips the restart because the first arrival already started the file's imports. Those imports keep the first arrival's depth, so a file reached through `node_modules` first and then from a root file without passing through `node_modules` leaves its own imports in `sourceFilesFoundSearchingNodeModules`, and which arrival comes first depends on scheduling.\n\n**Impact:** in a monorepo where a package is reached both by a relative import and through a `node_modules` link, which files count as library files changes between identical runs. The same build can then emit different files (#64498), and an analyzer on the API gives a different answer each run: on vitest, 20 opens of one configuration gave five different counts.\n\nThe change restarts the subtasks whenever the depth drops, even when they were already started. Each restart strictly lowers a file's `lowestDepth`, so the extra work is bounded.\n\nThe compiler test `symlinkedPackageReachedRelativelyIsNotExternalLibrary` has `a.ts` import `./lib/index` and `b.ts` import `lib` through a `node_modules` symlink to `lib/`. Without the change, `lib/util.ts` counts as from an external library and its `util.js` is missing from the emit baseline.\n\nI met this while building deadset-ts, the TypeScript analyzer of [deadset](https://github.com/cplieger/deadset), on the TypeScript 7 API. That work hit a \n…(truncated)",
+      "files": [
+        "tsc/internal/compiler/filesparser.go (+3 -2)",
+        "tsc/testdata/baselines/reference/compiler/symlinkedPackageReachedRelativelyIsNotExternalLibrary.js (+43 -0)",
+        "tsc/testdata/tests/cases/compiler/symlinkedPackageReachedRelativelyIsNotExternalLibrary.ts (+27 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64646,
+      "title": "Fix flaky diagnostic on JS constructor-defined properties",
+      "url": "https://github.com/microsoft/TypeScript/pull/64646",
+      "author": "weswigham",
+      "mergedAt": "2026-10-06T00:18:01Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes a flaky diagnostic reported in the server logs. Only some checker entrypoints would trigger `getTypeOfSymbol` on constructor-declared properties (implicit any errors from widening the auto type), making the diagnostic depend on if emit had occurred already using a given checker or not.\n\nNow we always check them. (Previously, sometimes only their flow type would be calculated - diagnostics wouldn't be issued.)",
+      "files": [
+        "tsc/internal/checker/checker.go (+14 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=false).errors.txt (+147 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=false).js (+310 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=false).symbols (+360 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=false).types (+421 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=true).errors.txt (+156 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=true).js (+310 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=true).symbols (+360 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=false,strictnullchecks=true).types (+421 -0)",
+        "tsc/testdata/baselines/reference/compiler/flakyDiagnosticsJsClassPropertyInitializedToUndefined(noemit=true,strictnullchecks=false).errors.txt (+147 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 64584,
+      "title": "[api] Stop dropping dispose Promises in the async API",
+      "url": "https://github.com/microsoft/TypeScript/pull/64584",
+      "author": "andrewbranch",
+      "mergedAt": "2026-10-06T16:40:00Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "A few objects in the async API accidentally used `[Symbol.dispose]()` instead of `[Symbol.asyncDispose]()`, throwing their disposal Promise away. I think that should be up to the consumer whether to fire and forget.\n\nThe second commit improves our own diagnostic message when you use a `using` on an AsyncDisposable, suggesting you use `await using` instead.",
+      "files": [
+        "packages/typescript/src/api/async/api.ts (+6 -6)",
+        "packages/typescript/src/api/sync/api.ts (+3 -3)",
+        "tsc/internal/checker/checker.go (+11 -2)",
+        "tsc/internal/diagnostics/diagnosticMessages.generated.json (+1 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.json (+4 -0)",
+        "tsc/internal/diagnostics/diagnostics_generated.go (+3 -0)",
+        "tsc/testdata/baselines/reference/compiler/usingAsyncDisposable.errors.txt (+31 -0)",
+        "tsc/testdata/baselines/reference/compiler/usingAsyncDisposable.symbols (+42 -0)",
+        "tsc/testdata/baselines/reference/compiler/usingAsyncDisposable.types (+37 -0)",
+        "packages/typescript/test/async/api.test.ts (+28 -28)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 64604,
+      "title": "Update DOM types",
+      "url": "https://github.com/microsoft/TypeScript/pull/64604",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-06T16:49:26Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- **New APIs:** Web Serial (`navigator.serial`, including worker support), Document Picture-in-Picture (`documentPictureInPicture`), `CloseWatcher`, and `Origin`.\n- **HTML sanitization:** Adds `Element.setHTML()`, sanitizer options for `setHTMLUnsafe()` and `Document.parseHTMLUnsafe()`, and processing-instruction configuration.\n- **WebGPU:** Adds `\"webgpu\"` canvas context overloads, global usage/flag constants, additional device limits, pipeline-layout `immediateSize`, and the `\"snorm10-10-10-2\"` vertex format.\n- **WebTransport:** Adds connection/stream statistics, dedicated receive/send stream interfaces, and reliability/protocol properties.\n- **CSS and animation:** Adds `CSSFontFaceDescriptors`, highlight hit-testing, container-condition information, `CSSStyleValue` support in keyframes, and animation references on animation/transition events.\n- **Other additions:** Brotli compression, `HTMLMediaElement.captureStream()`, `VisualViewport` scroll-end events, fullscreen keyboard-lock options, and resource-timing content/delivery types.\n- **Potential compatibility changes:** `WritableStreamDefaultWriter.write()` and `TransformStreamDefaultController.enqueue()` now require a chunk argument; several SVG geometry APIs use `SVGPoint`, `SVGRect`, and `SVGMatrix` instead of their `DOM*` counterparts; `SVGFilterElement` no longer inherits `SVGURIReference`; and `HTMLImageElement.crossOrigin` is narrowed to `\"anonymous\" | \"use-credentials\" | null`.",
+      "files": [
+        "tsc/internal/bundled/libs/lib.dom.d.ts (+1193 -277)",
+        "tsc/internal/bundled/libs/lib.webworker.d.ts (+418 -26)",
+        "tsc/testdata/baselines/reference/compiler/mappedTypeRecursiveInference.types (+6 -6)",
+        "tsc/testdata/baselines/reference/conformance/globalThisBlockscopedProperties.types (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 64649,
+      "title": "Cache one nodebuilder per emit resolver, make emit resolver emit context scoped",
+      "url": "https://github.com/microsoft/TypeScript/pull/64649",
+      "author": "weswigham",
+      "mergedAt": "2026-10-06T22:35:16Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64625",
+      "files": [
+        "tsc/internal/checker/checker.go (+4 -8)",
+        "tsc/internal/checker/emitresolver.go (+76 -392)",
+        "tsc/internal/checker/emitsupport.go (+336 -0)",
+        "tsc/internal/checker/exports.go (+1 -1)",
+        "tsc/internal/checker/nodebuilderimpl.go (+2 -4)",
+        "tsc/internal/checker/services.go (+2 -4)",
+        "tsc/internal/checker/symbolaccessibility.go (+1 -2)",
+        "tsc/internal/compiler/emitHost.go (+7 -10)",
+        "tsc/internal/compiler/emitter.go (+27 -24)",
+        "tsc/internal/ls/completions.go (+21 -3)"
+      ],
+      "filesTotal": 20
+    },
+    {
+      "number": 64617,
+      "title": "Handle JSDocParameterTag in ast.GetTypeAnnotationNode",
+      "url": "https://github.com/microsoft/TypeScript/pull/64617",
+      "author": "auvred",
+      "mergedAt": "2026-10-06T22:50:01Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "I just randomly noticed that `GetTypeAnnotationNode` calls `Node.Type()`, which handles both JSDoc parameter and property tags:\n\ntsc/internal/ast/ast.go#L669-L670\n\nbut its own switch only includes property tags. So, for consistency, this function must have the parameter tag case missed in https://github.com/microsoft/typescript-go/pull/900. No user-facing change, since the only caller doesn't pass JSDoc tags\n\ntsc/internal/ls/completions.go#L1120-L1127",
+      "files": [
+        "tsc/internal/ast/utilities.go (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64636,
+      "title": "Fix flaky diagnostic added by emit for `typeof import()` type qualifiers",
+      "url": "https://github.com/microsoft/TypeScript/pull/64636",
+      "author": "Andarist",
+      "mergedAt": "2026-10-06T22:51:03Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes the issue reported here: https://github.com/microsoft/TypeScript/issues/64623#issuecomment-5973552907",
+      "files": [
+        "tsc/internal/checker/checker.go (+2 -1)",
+        "tsc/testdata/baselines/reference/compiler/importElisionTypeofImportTypeQualifier.js (+25 -0)",
+        "tsc/testdata/baselines/reference/compiler/importElisionTypeofImportTypeQualifier.symbols (+22 -0)",
+        "tsc/testdata/baselines/reference/compiler/importElisionTypeofImportTypeQualifier.types (+24 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsTypeofImportTypeQualifier1.errors.txt (+8 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsTypeofImportTypeQualifier1.js (+8 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsTypeofImportTypeQualifier1.symbols (+7 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsTypeofImportTypeQualifier1.types (+9 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsTypeofImportTypeQualifier2.errors.txt (+11 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDiagnosticsTypeofImportTypeQualifier2.js (+13 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 64633,
+      "title": "Fix crash in decorator metadata emit for decorated object literal members",
+      "url": "https://github.com/microsoft/TypeScript/pull/64633",
+      "author": "Andarist",
+      "mergedAt": "2026-10-06T23:06:41Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes crash reported here https://github.com/microsoft/TypeScript/issues/64613#issuecomment-5963671259",
+      "files": [
+        "tsc/internal/transformers/tstransforms/metadata.go (+10 -0)",
+        "tsc/testdata/baselines/reference/compiler/decoratorMetadataObjectLiteralMethodNoCrash.errors.txt (+30 -0)",
+        "tsc/testdata/baselines/reference/compiler/decoratorMetadataObjectLiteralMethodNoCrash.js (+49 -0)",
+        "tsc/testdata/baselines/reference/compiler/decoratorMetadataObjectLiteralMethodNoCrash.symbols (+44 -0)",
+        "tsc/testdata/baselines/reference/compiler/decoratorMetadataObjectLiteralMethodNoCrash.types (+47 -0)",
+        "tsc/testdata/tests/cases/compiler/decoratorMetadataObjectLiteralMethodNoCrash.ts (+20 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64637,
+      "title": "[api] Report project reference diagnostics on programs without a config file",
+      "url": "https://github.com/microsoft/TypeScript/pull/64637",
+      "author": "cplieger",
+      "mergedAt": "2026-10-06T23:20:00Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "* [ ] There is an associated issue in the `Backlog` milestone (**required**)\n* [x] Code is up-to-date with the `main` branch\n* [x] You've successfully run `npx hereby test`\n* [x] You've successfully run `npx hereby lint`\n* [x] You've successfully run `npx hereby check:format`\n* [x] There are new or updated tests validating the change\n\nFixes #64629\n\nA program created through `createPrograms` has no configuration file, so its `ParsedCommandLine.ConfigFile` is nil. Any project reference diagnostic on such a program crashes the API server with a nil pointer dereference in `CreateDiagnosticAtReferenceSyntax`.\n\n**Impact:** a tool that builds its own program for a repository that references a non-composite project kills the whole API server process, losing every open snapshot, and the tool sees only an EOF. That is an ordinary monorepo setup, where `tsc -p` reports TS6306 and keeps going, so an analyzer on the API stops on that repository instead of analyzing it.\n\n`CreateDiagnosticAtReferenceSyntax` now returns nil when `ConfigFile` is nil, and its caller in `verifyProjectReferences` already falls back to a compiler diagnostic in that case.\n\n`TestCreateProgramReportsNonCompositeProjectReference` creates such a program with a reference to a non-composite project and expects TS6306 as its only program diagnostic, and it panics without the fix.\n\nI met this while building deadset-ts, the TypeScript analyzer of [deadset](https://github.com/cplieger/deadset), on the TypeScript 7 API. That\n…(truncated)",
+      "files": [
+        "tsc/internal/api/session_createprogram_test.go (+37 -0)",
+        "tsc/internal/tsoptions/tsconfigparsing.go (+3 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64638,
+      "title": "[api] Skip disk-layout import diagnostics for customized module resolutions",
+      "url": "https://github.com/microsoft/TypeScript/pull/64638",
+      "author": "cplieger",
+      "mergedAt": "2026-10-06T23:22:13Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "A resolution answered by a static `moduleResolutions` entry or a `resolveModuleName` callback never sets `ResolvedUsingTsExtension`, so under `rewriteRelativeImportExtensions` a relative `./x.ts` value import it answers raises a false TS2876 where `tsc` reports none.\n\nFollowing the review, customized resolutions now skip the checker diagnostics that rest on how the built-in resolver mapped the specifier onto disk, and `StaticModuleResolution` is unchanged from `main`. `ResolvedModule` gains an internal `IsCustomResolution`, set in `staticModuleResolutionToResolvedModule`, which static entries and callback results both go through and the built-in fallbacks never do. When it is set, the checker skips the [`ResolvedUsingTsExtension` block of `resolveExternalModule`](tsc/internal/checker/checker.go#L15523): TS2846, TS5097, TS2876, TS2877 and TS2878. Only TS2876 could fire for a customized resolution before, and the diagnostics outside that block still apply.\n\n`TestCustomModuleResolutionsSkipUnsafeRewriteDiagnostic` resolves `./b.ts` through a static entry and `./c.ts` through the callback in one program and expects no semantic diagnostics. On `main` it reports two TS2876.\n\nOne related behavior is unchanged: emit still rewrites `./b.ts` to `./b.js` from the specifier text, and with this block skipped the checker no longer verifies that a customized target has the matching output path.\n\nI met this while building deadset-ts, the TypeScript analyzer of [deadset](https://github.com/cp\n…(truncated)",
+      "files": [
+        "tsc/internal/api/module_resolution.go (+2 -1)",
+        "tsc/internal/api/session_module_resolution_test.go (+59 -0)",
+        "tsc/internal/checker/checker.go (+1 -1)",
+        "tsc/internal/module/types.go (+2 -1)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "Copilot": 1
+    }
+  }
+}

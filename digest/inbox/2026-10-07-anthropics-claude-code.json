@@ -1,0 +1,71 @@
+{
+  "kind": "repo",
+  "repo": "anthropics/claude-code",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-01T05:23:05Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v2.1.292",
+      "publishedAt": "2026-10-06T18:59:30Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v2.1.290",
+      "name": "v2.1.290",
+      "publishedAt": "2026-10-05T23:33:17Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.290",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added `serverToolUses` to the result of a mod's `turn.step` hook: the tool calls the API ran itself (the advisor), each with its id, name, input, start and end\n- Added `agentId` to the `tool.check` event of plugin hooks, so a hook can tell a subagent's permission check from the main session's\n- Added `ceiling` to the question and verdict a mod's `tool.check` hook reads, naming the approval an organization requires for a tool\n- Added `ThemeKey` and `Color` types to the plugin hooks typings, so an editor lists the theme colors a mod's drawing can name\n- Added to `claude plugin validate`: each hook a mod registers at a gating site is listed with whether it has a `.catch` (`gatingHooks` under `--json`)\n- Added a Deny button to the Claude apps gateway's sign-in approval page: it ends the pending sign-in, so the waiting terminal stops within seconds\n- Added `claude attach <name>` and `claude logs <name>`: part of a session name works in place of the id\n- Added `/claude-api managed-agents-onboard <url>` to set up the Managed Agents pattern a page describes as `ant apply` files\n- Added `/claude-api managed-agents-onboard <quickstart-name>` to build a Console quickstart template, such as `deep-researcher`, with the `ant` CLI\n- Added a warning when a managed settings file is a link to a file outside the managed settings folder\n- Added a /status and doctor warning when managed settings ignore user-configured sandbox allowRead paths or allowed domains\n- Fixed requests failing behind proxies and gateways that reject one of Claude Code's beta headers with a status other than 400, or together with a second beta\n- Fixed long sessions with hundreds of images getting stuck on \"Request rejected as unprocessable by the model\" errors\n- Fixed a turn ending at once when the API's output content filter stopped a reply while Claude was still thinking; the request is now retried once before the error is shown\n- Fixed resumed subagents and teammates losing their earlier thinking and prompt cache after receiving a message mid-run\n- Fixed WebFetch silently dropping page text past 100,000 characters; it now says how much was unread and takes an `offset` to read on\n- Fixed a crash (\"Maximum call stack size exceeded\") when a response nested lists or quotes thousands of levels deep\n- Fixed `/rewind` not listing a prompt sent while Claude was still working\n- Fixed scheduled tasks (`/loop` with an interval, reminders) silently not coming back on resume once the conversation was compacted; covers compactions made from this version on\n- Fixed scheduled tasks set in the foreground never firing after a ← or `/background` hand-off, and recurring ones firing an extra run on every resume, respawn or fork\n- Fixed headless `--json-schema` runs exiting non-zero with `is_error: true` on a `success` result when the connection dropped after the structured output was already delivered\n- Fixed plan mode letting the auto mode classifier approve non-read-only connector tools t\n…(truncated)"
+    },
+    {
+      "tag": "v2.1.291",
+      "name": "v2.1.291",
+      "publishedAt": "2026-10-06T03:55:19Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts\n- Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting"
+    },
+    {
+      "tag": "v2.1.292",
+      "name": "v2.1.292",
+      "publishedAt": "2026-10-06T18:59:30Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added `--marketplace <source>` to `claude plugin install`: adds the marketplace if needed, under the same policy checks as `claude plugin marketplace add`, then installs the plugin from it\n- Added an `effort` parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for\n- Added `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS` environment variable to set a longer base delay for the backoff when retrying an overloaded (529) request\n- Added `prompt.autocomplete`, an event a mod hooks to add its own rows to the prompt box's autocomplete list\n- Added prompt caching to `$.model.complete` for mods: `prompt` and `system` take blocks of text, and `cache: true` on a block caches the request up to it\n- Added workflow agents to the `agent.spawn` mod hook, with their run and index, so a mod can refuse them\n- Fixed subagent definitions with `permissionMode: auto` entering auto mode when auto mode is unavailable (disabled by settings, circuit breaker, or a model that doesn't support it)\n- Fixed sandboxed commands being able to read the staged file copies of `/ultrareview` uploads under `~/.claude/seed-admin`\n- Fixed a managed sandbox read-deny path (and user ones beside it) that appears or re-points mid-session not dropping project grants inside it or ending credential injection from files it covers\n- Fixed a notebook or PDF read on macOS and Windows being able to return a file outside what was approved, through a link swapped in mid-read\n- Fixed a tampered on-disk cache of server-managed settings being able to switch off or unseat the built-in policy plugin while the settings fetch failed\n- Fixed `rm -rf` on the 8.3 short name or another alternate Windows spelling of the home folder or a drive not being treated as removing it\n- Security: Fixed PreToolUse hook approvals and auto mode bypassing the permission prompt for file reads from network (UNC) paths\n- Fixed a skill's or slash command's `allowed-tools` rule coming back in a later turn when you leave auto mode or plan mode partway through that turn\n- Fixed `NO_PROXY` being ignored for Claude Code's own API requests (sign-in, policy, feedback, artifacts) when `HTTPS_PROXY` is set\n- Fixed an MCP tool with a name longer than 128 characters making every request fail; that tool is now left out and an MCP error names it\n- Fixed `claude plugin` commands such as `marketplace add` and `install` running before an organization's managed settings had loaded on a first run\n- Fixed one-shot `claude -p` and Agent SDK runs stopping a background command 5 seconds after the final result, and one-shot `claude -p` runs dropping a scheduled wakeup; both are now waited for\n- Fixed plan mode not being restored when resuming a session from the `claude --resume` session picker or with `/resume`\n- Fixed saved scheduled tasks created after `/resume`, `/branch` or `/clear` never firing, and saved tasks ignoring later creates and deletes after two writes to the tasks file milliseconds apart\n- F\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 99206,
+      "title": "diff: the docked pane starts at its header, under the engine's own head row",
+      "url": "https://github.com/anthropics/claude-code/pull/99206",
+      "author": "poteat",
+      "mergedAt": "2026-10-07T00:13:58Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n> TLDR: docked, /diff shows one blank row above its header where it showed two.\n\nDocked, `/diff` no longer pads a blank row of its own above its header: the engine now keeps a docked pane's first row for its close mark, and that row is the blank one.\n\n## Notes\n\n| What | Detail |\n| --- | --- |\n| Before | on an engine that keeps the head row, two blank rows stood over the header and the hunks had one row fewer |\n| The change | `PANE_TOP_PAD_ROWS` is removed with its four uses: the tree's `paddingTop`, the row `insetOf` took off, and the row `bodyLayoutOf` counted into `visibleRows` and `listTop` |\n| Kept | the blank last column (`PANE_RIGHT_PAD_COLUMNS`); the inline dialog and the wider-terminal line, which never padded |\n| The rows | header, list, rules and hunks land where the built-in panel draws them, as they did before the engine kept the row |\n| The wheel over the list | `listTop` moves up by one with the list; a scroll's `pointer.row` counts from the body's first row, so the two still agree |\n| An engine without the head row | the header is drawn on the pane's first row and the close mark sits on that row, over the mod's own blank last column: nothing is hidden, and after a turn the mark stands right beside the source picker |\n\n## Test Plan\n\n- `tests/views/pane-view.test.ts`: two new cases (the window takes every row under the list; the list takes the wheel from its first row and not from the margin above it), two rewritten (no top pad; the empty state on the\n…(truncated)",
+      "files": [
+        "mods/diff/hooks/limits/sizes/pane/index.ts (+0 -1)",
+        "mods/diff/hooks/limits/sizes/pane/pane-top-pad-rows.ts (+0 -5)",
+        "mods/diff/hooks/views/body/plan/body-layout-of.ts (+2 -6)",
+        "mods/diff/hooks/views/inset-of/inset-of.ts (+4 -2)",
+        "mods/diff/hooks/views/pane-view.tsx (+1 -5)",
+        "mods/diff/tests/fixtures/index.ts (+2 -0)",
+        "mods/diff/tests/fixtures/pane-view/body-rows.ts (+3 -2)",
+        "mods/diff/tests/fixtures/pane-view/engine-head-rows.ts (+5 -0)",
+        "mods/diff/tests/fixtures/pane-view/index.ts (+1 -0)",
+        "mods/diff/tests/fixtures/wheel-over-list-margin.ts (+12 -0)"
+      ],
+      "filesTotal": 13
+    }
+  ],
+  "errors": []
+}

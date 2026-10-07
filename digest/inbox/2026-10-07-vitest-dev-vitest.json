@@ -1,0 +1,381 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-02T16:10:50Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.0.3",
+      "publishedAt": "2026-09-30T11:25:52Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.3"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 11479,
+      "title": "test: move module-diagnostic test to e2e",
+      "url": "https://github.com/vitest-dev/vitest/pull/11479",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-05T06:27:09Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 11486,
+      "title": "chore: forbid starting vitest from test/unit",
+      "url": "https://github.com/vitest-dev/vitest/pull/11486",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-05T07:52:34Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11448,
+      "title": "chore: update AI policy",
+      "url": "https://github.com/vitest-dev/vitest/pull/11448",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T07:54:43Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 11
+    },
+    {
+      "number": 11485,
+      "title": "fix: keep full `$` string values when `taskTitleValueFormatTruncate` is 0",
+      "url": "https://github.com/vitest-dev/vitest/pull/11485",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-05T07:58:41Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- closes https://github.com/vitest-dev/vitest/issues/11469\n- closes https://github.com/vitest-dev/vitest/pull/11472 supersedes\n\n`taskTitleValueFormatTruncate: 0` is documented to turn off truncation, and it does for `%` placeholders and non-string `$` values, but it was missing for `$` string formatting.",
+      "files": [
+        "packages/vitest/src/runtime/runner/suite.ts (+1 -1)",
+        "test/e2e/test/reporters/default.test.ts (+3 -3)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11417,
+      "title": "fix: resolve node builtins in client environments",
+      "url": "https://github.com/vitest-dev/vitest/pull/11417",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T08:01:03Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Vite resolves node builtins in a client environment to `__vite-browser-external` and drops the module name when `NODE_ENV=production`, so the module runner could not import them. Vitest now resolves them as external builtins in client environments that use the module runner (jsdom, happy-dom, custom environments).\n\nThis also makes `vi.mock('os')` without a factory work in those environments.\n\nFixes #11324",
+      "files": [
+        "packages/vitest/src/node/plugins/config.ts (+4 -2)",
+        "packages/vitest/src/node/plugins/vitestResolver.ts (+24 -0)",
+        "packages/vitest/src/node/viteLogger.ts (+4 -1)",
+        "packages/vitest/src/utils/graph.ts (+5 -0)",
+        "test/e2e/test/client-builtins.test.ts (+102 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 11484,
+      "title": "docs: update `page.mark()` nesting behavior",
+      "url": "https://github.com/vitest-dev/vitest/pull/11484",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-05T08:02:11Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11491,
+      "title": "fix: fix module graph builtin externals after #11421",
+      "url": "https://github.com/vitest-dev/vitest/pull/11491",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-05T11:16:13Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- follow-up to https://github.com/vitest-dev/vitest/pull/11417 and https://github.com/vitest-dev/vitest/pull/11421\n\nMain is broken because #11417 landed after #11421 but was written against the old module graph shape. Those PR didn't cause conflict magically.",
+      "files": [
+        "packages/vitest/src/utils/graph.ts (+1 -2)",
+        "test/e2e/test/client-builtins.test.ts (+5 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11489,
+      "title": "feat(browser): highlight selector multiple matches in trace view",
+      "url": "https://github.com/vitest-dev/vitest/pull/11489",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-05T11:17:39Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### Description\n\n- part of https://github.com/vitest-dev/vitest/issues/10156#issuecomment-4340268670\n\nWhen a trace step's locator matches several elements, the trace view only highlighted the first one, so an ambiguous locator looked like it targeted a single element. Trace snapshots now record every matched element and the viewer highlights all of them. Actions and `expect.element` keep their strict behavior, because only the diagnostic snapshot lookup changes.\n\n```ts\ndocument.body.innerHTML = '<button>One</button><button>Two</button><button>Three</button>'\nawait page.getByRole('button').mark('Render multiple')\n```\n\n| Before | After |\n| --- | --- |\n|  |  |\n\nThe diff is mostly mechanical. The snapshot field changes from `selectorId: number` to `selectorIds: number[]`, the lookup changes from `querySelector` to `querySelectorAll`, and the viewer loops over the ids to draw one overlay each.",
+      "files": [
+        "packages/browser/src/client/tester/trace.ts (+7 -12)",
+        "packages/ui/client/components/trace/TraceView.vue (+16 -14)",
+        "test/ui/fixtures/trace/basic.test.ts (+5 -0)",
+        "test/ui/test/trace.spec.ts (+37 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11197,
+      "title": "perf(spy): reset only mocks that were called or reconfigured",
+      "url": "https://github.com/vitest-dev/vitest/pull/11197",
+      "author": "johan-gorter",
+      "mergedAt": "2026-10-05T13:54:07Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### Description\n\n`vi.resetAllMocks()` iterates `REGISTERED_MOCKS`, which holds a `WeakRef` to every mock ever created in the worker, and calls `mockReset()` on each one that is still alive. Its cost therefore grows with the number of live mocks, not with the number of mocks a test actually touched.\n\nWith `isolate: false` this becomes the dominant cost of a run. One worker executes many test files, so module-level mocks and every `vi.fn()` that is still reachable keep accumulating. `deref()` also adds each mock to the WeakRef \"keep during job\" list, so the mocks a test created cannot be collected until the runner yields to the event loop, which rarely happens inside a file. With `mockReset: true` every test then pays for every mock in the worker.\n\nMeasured on a large suite (364 files, 6733 tests, `pool: 'forks'`, `isolate: false`, `mockReset: true`, coverage off, 4 workers):\n\n| Vitest                             | wall time | `resetAllMocks()` CPU across workers | max mocks visited per reset |\n| ---------------------------------- | --------- | ------------------------------------ | --------------------------- |\n| 4.1.11 (`Set` of strong refs)      | 671 s     | 1838 s                               | ~110,000                    |\n| 5.0.0 (`WeakRef` registry, #11092) | 189 s     | 465 s                                | ~66,000                     |\n| 5.0.0 + this change                | 26 s      | 0.4 s                                | 5 to 50                     |\n\nThe last ro\n…(truncated)",
+      "files": [
+        "packages/spy/src/index.ts (+56 -22)",
+        "test/unit/test/mocking/vi-fn-retention.test.ts (+63 -0)",
+        "test/unit/test/mocking/vi-fn.test.ts (+64 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11461,
+      "title": "feat: tag cache directories with CACHEDIR.TAG",
+      "url": "https://github.com/vitest-dev/vitest/pull/11461",
+      "author": "lifeiscontent",
+      "mergedAt": "2026-10-05T14:00:45Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Closes #11443\n\nWrites a `CACHEDIR.TAG` ([spec](https://bford.info/cachedir/)) into `cacheDir/vitest` and each fs module cache root, so backup tools and task runners know these files are caches that don't affect results. An existing tag is never overwritten, a failed write is ignored, and each directory is tagged once per process (again after the module cache is cleared).\n\nThe new e2e test checks the tag in all three locations, including a project with its own `fsModuleCachePath`, and that an existing tag is left alone.",
+      "files": [
+        "packages/vitest/src/node/cache/cachedirTag.ts (+39 -0)",
+        "packages/vitest/src/node/cache/fsModuleCache.ts (+4 -0)",
+        "packages/vitest/src/node/cache/results.ts (+5 -1)",
+        "test/e2e/test/cachedir-tag.test.ts (+76 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 10852,
+      "title": "fix(browser): apply API options without browser config",
+      "url": "https://github.com/vitest-dev/vitest/pull/10852",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T14:08:53Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Apply programmatic browser options to root configs without affecting workspace isolation.\n\nCloses #9801\nCloses #9938",
+      "files": [
+        "packages/vitest/src/node/plugins/testConfig.ts (+7 -4)",
+        "test/e2e/test/config/browser-configs.test.ts (+37 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11497,
+      "title": "fix(browser): preserve undefined command arguments",
+      "url": "https://github.com/vitest-dev/vitest/pull/11497",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T16:36:30Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Custom commands dropped `undefined` arguments, which shifted the following arguments. A `null` first argument also threw a `TypeError` in the client.\n\nThe browser RPC now keeps `undefined` values at any depth, the same as the forks and threads pools.\n\nFixes #10864\nCloses #10865",
+      "files": [
+        "packages/browser/src/client/client.ts (+3 -2)",
+        "packages/browser/src/client/tester/tester-utils.ts (+4 -2)",
+        "packages/browser/src/node/rpc.ts (+3 -2)",
+        "packages/browser/src/shared/serialization.ts (+10 -0)",
+        "test/browser/test/commands.test.ts (+33 -8)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 11503,
+      "title": "docs: align `mock` guide with the current implementation",
+      "url": "https://github.com/vitest-dev/vitest/pull/11503",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T19:17:17Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 11500,
+      "title": "fix(expect): check value in chai-style returned",
+      "url": "https://github.com/vitest-dev/vitest/pull/11500",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T19:17:33Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`expect(spy).to.have.returned(value)` is typed and documented as the chai-style equivalent of `toHaveReturnedWith(value)` (same as sinon-chai) since #9943, but it called `toHaveReturned` and ignored the value.",
+      "files": [
+        "packages/expect/src/chai-style-assertions.ts (+1 -1)",
+        "test/unit/test/chai-style-assertions.test.ts (+9 -19)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11494,
+      "title": "chore: simplify pull request template",
+      "url": "https://github.com/vitest-dev/vitest/pull/11494",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T19:23:01Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11504,
+      "title": "fix(vm): bind `this` to `module.exports`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11504",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-05T19:54:21Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11501",
+      "files": [
+        "packages/vitest/src/runtime/vm/commonjs-executor.ts (+1 -1)",
+        "test/e2e/test/vm-threads.test.ts (+31 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11466,
+      "title": "fix(coverage): v8 browser memory leak between test files",
+      "url": "https://github.com/vitest-dev/vitest/pull/11466",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-06T05:15:31Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### Description\n\nResolves https://github.com/vitest-dev/vitest/issues/11447\n\nAs V8 coverage starts profiler, we end up collecting stuff between test files that share same V8 instance (tab). Currently we are not toggling coverage on-off between test files, as that used to break the results. It seems that collecting garbage between coverage toggling fixes this.\n\nThis has a performance hit of course, but it's more correct behavior. Running https://github.com/vitest-tests/coverage-large locally on M2 Air:\n\n- `vitest@5.0.3`: 0m36.104s, 0m33.941s\n- This PR on `pkg.pr.new`, `2953e5c`: 0m40.244s, 0m41.833s\n\n### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:\n\n- [x] It's really useful if your PR references an issue where it is discussed ahead of time. If the feature is substantial or introduces breaking changes without a discussion, PR might be closed.\n- [x] Ideally, include a test that fails without this PR but passes with it.\n- [x] Please, don't make changes to `pnpm-lock.yaml` unless you introduce a new test example.\n- [x] Please check [Allow edits by maintainers](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork) to make review process faster. Note that this option is not available for repositories that are owned by Github organizations.\n\n### Tests\n\n- [x] Run the tests with `pnpm test:ci`.\n\n### Documentation\n\n- [ ] If you int\n…(truncated)",
+      "files": [
+        "packages/coverage-v8/src/browser.ts (+6 -2)",
+        "packages/coverage-v8/src/commands.ts (+11 -0)",
+        "test/coverage-test/fixtures/test/memory-leak-1-fixture.test.ts (+6 -0)",
+        "test/coverage-test/fixtures/test/memory-leak-2-fixture.test.ts (+6 -0)",
+        "test/coverage-test/fixtures/test/memory-leak-3-fixture.test.ts (+6 -0)",
+        "test/coverage-test/fixtures/test/memory-leak-4-fixture.test.ts (+6 -0)",
+        "test/coverage-test/test/isolation.test.ts (+32 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 11507,
+      "title": "chore: add `@vitest/ui` to `test/unit`'s `devDependencies`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11507",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-06T06:13:01Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 11508,
+      "title": "test(ui): fix playwright trace source locations",
+      "url": "https://github.com/vitest-dev/vitest/pull/11508",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-06T06:13:30Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11505,
+      "title": "fix: wrap module mocks during in-source testing",
+      "url": "https://github.com/vitest-dev/vitest/pull/11505",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-06T06:22:29Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #8653",
+      "files": [
+        "packages/browser/src/node/plugin.ts (+2 -0)",
+        "packages/mocker/src/node/esmWalker.ts (+2 -2)",
+        "packages/mocker/src/node/hoistMocks.ts (+78 -43)",
+        "test/e2e/test/mocking.test.ts (+50 -0)",
+        "test/e2e/test/no-module-runner.test.ts (+36 -0)",
+        "test/unit/test/injector-mock.test.ts (+165 -3)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 11499,
+      "title": "feat: support `test.ui.theme` option",
+      "url": "https://github.com/vitest-dev/vitest/pull/11499",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-06T06:38:22Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Closes #8947",
+      "files": [
+        "packages/browser/src/node/serverOrchestrator.ts (+1 -0)",
+        "packages/ui/client/components/Navigation.vue (+1 -0)",
+        "packages/ui/client/composables/dark.ts (+7 -1)",
+        "packages/ui/index.html (+4 -2)",
+        "packages/ui/node/index.ts (+1 -1)",
+        "packages/vitest/src/node/cli/cli-config.ts (+2 -0)",
+        "packages/vitest/src/node/config/resolveConfig.ts (+6 -2)",
+        "packages/vitest/src/node/plugins/index.ts (+2 -2)",
+        "packages/vitest/src/node/plugins/testConfig.ts (+7 -2)",
+        "packages/vitest/src/node/plugins/utils.ts (+5 -1)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 11509,
+      "title": "chore: make ui.theme experimental",
+      "url": "https://github.com/vitest-dev/vitest/pull/11509",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-06T06:40:32Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11510,
+      "title": "ci: fail merge reports job on error",
+      "url": "https://github.com/vitest-dev/vitest/pull/11510",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-06T07:33:48Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11512,
+      "title": "chore: support /approve-user in issues",
+      "url": "https://github.com/vitest-dev/vitest/pull/11512",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-06T09:52:21Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 11490,
+      "title": "feat(ui): add fit and zoom controls to trace viewer",
+      "url": "https://github.com/vitest-dev/vitest/pull/11490",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-06T13:07:57Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### Description\n\n- part of https://github.com/vitest-dev/vitest/issues/10156 (\"Revisit tall viewport size being default\")\n\nTrace replay was always shown at 100%, so tall viewports could not be seen at once. This PR adds a zoom popover to the trace viewer header with zoom in/out, fit to pane, and reset. The default stays 100% and the choice persists across reloads.\n\n_Example_\n\nhttps://github.com/user-attachments/assets/cac0dd6c-774c-4d60-b1f6-9d4c086e60ad",
+      "files": [
+        "packages/ui/client/components/trace/TraceView.vue (+25 -7)",
+        "packages/ui/client/components/trace/TraceViewPane.vue (+2 -0)",
+        "packages/ui/client/components/trace/TraceZoomControl.vue (+55 -0)",
+        "packages/ui/client/composables/trace-view.ts (+41 -1)",
+        "packages/ui/client/styles/main.css (+16 -0)",
+        "test/ui/fixtures/trace/basic.test.ts (+41 -0)",
+        "test/ui/test/trace.spec.ts (+67 -2)"
+      ],
+      "filesTotal": 7
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 4
+    }
+  }
+}

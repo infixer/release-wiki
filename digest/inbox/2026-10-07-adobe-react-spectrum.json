@@ -1,0 +1,143 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-03T00:45:44Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.21.0",
+      "publishedAt": "2026-09-04T19:44:19Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.21.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10726,
+      "title": "chore: AttachmentGrid fixes from testing",
+      "url": "https://github.com/adobe/react-spectrum/pull/10726",
+      "author": "yihuiliao",
+      "mergedAt": "2026-10-06T19:53:14Z",
+      "labels": [
+        "release",
+        "S2",
+        "AI"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 10703,
+      "title": "fix: allow users to submit attachment only prompts in PromptField",
+      "url": "https://github.com/adobe/react-spectrum/pull/10703",
+      "author": "LFDanLu",
+      "mergedAt": "2026-10-06T19:53:31Z",
+      "labels": [
+        "small review",
+        "release",
+        "ready for review",
+        "PromptField",
+        "AI"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "from slack feedback, just allows users to submit with attachments only\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\nTest should cover it, but you can try in PromptField by attaching a file -> submit button should become enabled\n\n## 🧢 Your Project:\n\nRSP",
+      "files": [
+        "packages/@react-spectrum/ai/src/PromptField.tsx (+4 -5)",
+        "packages/@react-spectrum/ai/test/PromptField.test.tsx (+21 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10727,
+      "title": "chore: export scrollFade from AI package, move SidePanel to its own file, and other release audit items ",
+      "url": "https://github.com/adobe/react-spectrum/pull/10727",
+      "author": "LFDanLu",
+      "mergedAt": "2026-10-06T19:54:19Z",
+      "labels": [
+        "ComboBox",
+        "ActionButton",
+        "Picker",
+        "ListView",
+        "TreeView",
+        "release",
+        "needs translations",
+        "RAC",
+        "S2",
+        "Menu",
+        "AttachmentList",
+        "ResponseStatus",
+        "PromptField",
+        "Chat",
+        "AI"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 59
+    },
+    {
+      "number": 10725,
+      "title": "chore: remove unused NavigationTreeItem prop focusMode found in audit",
+      "url": "https://github.com/adobe/react-spectrum/pull/10725",
+      "author": "snowystinger",
+      "mergedAt": "2026-10-06T21:27:21Z",
+      "labels": [
+        "release",
+        "RAC",
+        "S2"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 10724,
+      "title": "fix: workaround Safari 27 flex bugs",
+      "url": "https://github.com/adobe/react-spectrum/pull/10724",
+      "author": "snowystinger",
+      "mergedAt": "2026-10-06T22:03:33Z",
+      "labels": [
+        "release",
+        "AttachmentList",
+        "AI"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes\n\nSee screenshot for before and after. The fade mask appears to be an issue with local development, I don't see it on the build for the branch here, nor on main. But I do see it on main locally, so you can ignore that in the screenshot.\nI appeared to have a caching issue earlier, which is why I closed and reopened the PR.\n\nBefore:\n\nAfter:\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\n## 🧢 Your Project:",
+      "files": [
+        "packages/@react-spectrum/ai/src/AttachmentGrid.tsx (+1 -0)",
+        "packages/@react-spectrum/ai/src/AttachmentList.tsx (+1 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10732,
+      "title": "fix: Sheet fixes from testing",
+      "url": "https://github.com/adobe/react-spectrum/pull/10732",
+      "author": "devongovett",
+      "mergedAt": "2026-10-07T00:07:12Z",
+      "labels": [
+        "RAC"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "* Adds `overscroll-behavior: auto` to the Tailwind example to enable scroll chaining so that you can swipe the sheet away when scrolled to the top of the content.\n* Adds `scrollbar-gutter: stable` to the content so that when swiping it away the scrollbar appearing and disappearing does not cause layout shifts.\n* Fixes the exit point on iOS Safari so the sheet travels entirely off the screen when swiping instead of disappearing when it reaches the floating toolbar. The viewport units (even `100lvh`) end above the toolbar, but additional content is still visible behind it. This adds additional padding to the snap points so that you can swipe the sheet entirely off the screen.\n* Improves the snap points example in the docs so it has a fake map and some reviews to demonstrate scrolling behavior inside a sheet.",
+      "files": [
+        "packages/dev/s2-docs/pages/react-aria/Map.tsx (+157 -0)",
+        "packages/react-aria-components/src/Sheet.tsx (+31 -3)",
+        "starters/tailwind/src/Sheet.tsx (+1 -1)",
+        "packages/dev/s2-docs/pages/react-aria/Sheet.mdx (+29 -5)",
+        "starters/docs/src/Sheet.css (+1 -0)"
+      ],
+      "filesTotal": 5
+    }
+  ],
+  "errors": []
+}

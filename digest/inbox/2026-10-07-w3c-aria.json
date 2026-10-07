@@ -1,0 +1,36 @@
+{
+  "kind": "repo",
+  "repo": "w3c/aria",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-02T08:38:58Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 2927,
+      "title": "Editorial: title mapping for abbr element - Remove not applicable statement",
+      "url": "https://github.com/w3c/aria/pull/2927",
+      "author": "spectranaut",
+      "mergedAt": "2026-10-05T16:24:42Z",
+      "labels": [
+        "spec:html-aam"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "🚀 **Netlify Preview**:\n🔄 **this PR updates the following specs**:\n- [html-aam preview](https://deploy-preview-2927--wai-aria.netlify.app/html-aam/index.html) &mdash; [html-aam diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Fhtml-aam%2F&doc2=https%3A%2F%2Fdeploy-preview-2927--wai-aria.netlify.app%2Fhtml-aam%2Findex.html)\n\nThis doesn't close the issue https://github.com/w3c/html-aam/issues/246 because it doesn't describe the mapping of `title` on an `abbr` which I suppose is the whole point of this element -- but at least we can remove this nonsensical line?",
+      "files": [
+        "html-aam/index.html (+0 -8)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

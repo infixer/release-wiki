@@ -1,0 +1,832 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-04T22:51:12Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.9.1",
+      "publishedAt": "2026-10-03T20:48:42Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.9.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v12.10.0",
+      "name": "pnpm 12.10.0",
+      "publishedAt": "2026-10-06T05:24:45Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.10.0",
+      "prerelease": false,
+      "body": "This release adds an experimental `loaded` node linker, lets `pnpm-lock.yaml` record resolution settings, and reads cached registry metadata faster. It also carries several security fixes, including one that stops a dependency version from writing files outside the global virtual store.\n\n### Minor Changes\n\n- Added experimental `nodeLinker: { type: loaded }` installation. Compatible dependencies load directly from the content-addressable store through an automatically registered Node.js loader. `nodeLinker.excluded` selects packages and their dependency trees to install in the global virtual store.\n\n- `lockfile.includeResolutionSettings: true` makes `pnpm-lock.yaml` record `autoDedupe`, `dedupeInjectedDeps`, `dedupePeerDependents` and `linkWorkspacePackages`. Installs then treat a lockfile that records other values as outdated. A lockfile that records `autoDedupe` is reused by later installs on any machine, so `pnpm run` after `pnpm install --frozen-lockfile` no longer starts another install [#16583](https://github.com/pnpm/pnpm/issues/16583).\n\n### Patch Changes\n\n#### Security\n\n- `pnpm install` now prevents dependency versions with path traversal from writing files outside the global virtual store.\n\n- pnpm now verifies locked config dependencies against their registry before installing them. Config dependencies must come from an npm registry. The lockfile can no longer replace the integrity of a config dependency pinned with `version+integrity`.\n\n- Lockfile verification now checks the tarballs inside a `variations` resolution against the registry. A `name@version` lockfile entry with an empty `variations` resolution is now rejected.\n\n- `pnpm audit signatures` now verifies signatures against the integrity recorded in the lockfile. Packages without a recorded integrity cannot pass signature verification.\n\n- `pnpm install` and `pnpm publish` now reject archive metadata larger than 64 MiB before reading it into memory. Publishing a pre-built tarball also rejects manifests and README files larger than 64 MiB.\n\n- Two URL or local path dependencies no longer share a virtual store directory when one URL has `+`, `#`, `:`, or `?` where the other has `/`. Such dependencies, including git dependencies pinned with `#`, now get a hash suffix on their directory name.\n\n- The warning about an ignored project `.npmrc` registry setting no longer prints the username and password of a URL-scoped key such as `//user:password@registry.example.com/${PATH}/:_authToken`.\n\n#### Installing and resolving dependencies\n\n- `pnpm install` now fails with `ERR_PNPM_UNSUPPORTED_PROTOCOL` when a dependency uses a specifier with a protocol pnpm does not support, such as Yarn's `patch:`. On Windows, such a specifier failed with `os error 123`. On other platforms, pnpm linked it to a directory that does not exist. Reading a `package.json` that fails now names the file [#16590](https://github.com/pnpm/pnpm/issues/16590).\n\n- `pnpm install` now fails with `ERR_PNPM_PACKAGE_MANIFEST_INVALI\n…(truncated)"
+    },
+    {
+      "tag": "v11.28.5",
+      "name": "pnpm 11.28.5",
+      "publishedAt": "2026-10-06T05:27:13Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v11.28.5",
+      "prerelease": false,
+      "body": "This release reads cached registry metadata faster and makes `pnpm config get --global` ignore project settings. It also carries several security fixes for package archives, git dependencies, and config dependencies.\n\n### Patch Changes\n\n#### Security\n\n* pnpm now verifies locked config dependencies against their registry before installing them. Config dependencies must come from an npm registry. The lockfile can no longer replace the integrity of a config dependency pinned with `version+integrity`.\n\n* Lockfile verification now checks the tarballs inside a `variations` resolution against the registry. A `name@version` lockfile entry with an empty `variations` resolution is now rejected.\n\n* `pnpm audit signatures` now verifies signatures against the integrity recorded in the lockfile. Packages without a recorded integrity cannot pass signature verification.\n\n* pnpm now rejects a git dependency whose lockfile repository is empty, begins with `-`, or contains a null byte. Git can no longer read such a value as a command-line option [pnpm/tasks#84](https://github.com/pnpm/tasks/issues/84).\n\n* A git dependency with a `#path:` subpath can no longer reach files outside the repository through a symlink in the subpath.\n\n* `pnpm pack`, `pnpm publish`, and installs of git and local directory dependencies now leave out files that a directory symlink or a `bundleDependencies` entry points to outside the package directory [pnpm/tasks#83](https://github.com/pnpm/tasks/issues/83) [pnpm/tasks#93](https://github.com/pnpm/tasks/issues/93).\n\n* `pnpm deploy` with `deployAllFiles` now rejects symlinks that point outside the package directory. Local package installs with this setting apply the same check.\n\n* pnpm no longer hangs on a package archive with a negative PAX record length or an entry of 4 GiB or more [pnpm/tasks#78](https://github.com/pnpm/tasks/issues/78) [pnpm/tasks#79](https://github.com/pnpm/tasks/issues/79).\n\n* Large package downloads and large files inside gzip and bzip2 package archives now use bounded memory during installation. Package manifests and archive metadata larger than 64 MiB are rejected. `pnpm publish` also rejects manifests and README files larger than 64 MiB in pre-built tarballs before reading them into memory.\n\n* Two URL or local path dependencies no longer share a virtual store directory when one URL has `+`, `#`, `:`, or `?` where the other has `/`. Such dependencies, including git dependencies pinned with `#`, now get a hash suffix on their directory name.\n\n* `pnpm licenses` now removes terminal control characters from package metadata in table output.\n\n* The warnings about ignored project `.npmrc` registry and auth settings no longer print the username and password of a URL-scoped key such as `//user:password@registry.example.com/:_authToken`.\n\n#### Installing and resolving dependencies\n\n* Dependency resolution reads cached registry metadata faster. The metadata cache moved to `<cache-dir>/v12/`, so the first install after upgrading\n…(truncated)"
+    },
+    {
+      "tag": "v12.10.1",
+      "name": "pnpm 12.10.1",
+      "publishedAt": "2026-10-06T17:37:30Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.10.1",
+      "prerelease": false,
+      "body": "This release fixes `pnpm install` failures after an `overrides` change and on a filtered frozen install with `catalogPrune`. It also fixes several bugs in the experimental `nodeLinker.type: loaded`, which now keeps its generated files in `node_modules`.\n\n### Patch Changes\n\n- With `nodeLinker.type: loaded`, pnpm now writes its generated files to `node_modules`, which projects already ignore in git. The store manifest and loader are `node_modules/.pnpm/.store-manifest.json` and `node_modules/.pnpm/.store-loader.mjs`. Bin shims are in `node_modules/.bin`.\n\n  Earlier versions wrote `.pnpm-store.json` and `.pnpm-store-loader.mjs` to the project root, and a `.pnpm` directory to the root and to each workspace package. Delete them after reinstalling.\n\n- With `nodeLinker.type: loaded`, packages that ship their own `node_modules` directory, such as `npm` with its bundled dependencies, now load from the store. Before, one such package in the install stopped every Node.js process from starting.\n\n- With `nodeLinker.type: loaded`, scripts can now run a Node.js runtime installed through `devEngines.runtime`. Before, every script that called `node` re-ran its own shim until it failed with \"Argument list too long\".\n\n- With `nodeLinker.type: loaded`, Node.js processes start faster. In a project with 13,000 stored files, the startup overhead per process dropped from 67 ms to 18 ms.\n\n- `pnpm install` no longer fails with `ERR_PNPM_NO_MATCHING_VERSION` after a change to `overrides` when the lockfile resolves an optional peer dependency to an npm alias of another package [#16654](https://github.com/pnpm/pnpm/issues/16654).\n\n- A frozen install with `catalogPrune` no longer removes catalog entries that `pnpm-lock.yaml` still records. Before, `pnpm install --frozen-lockfile --filter` failed with `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH` when some workspace projects were missing from disk [#16638](https://github.com/pnpm/pnpm/issues/16638).\n\n- `pnpm install --fix-lockfile` no longer removes the `deprecated` and `hasBin` fields from lockfile entries [#6600](https://github.com/pnpm/pnpm/issues/6600).\n\n- With `enableGlobalVirtualStore`, an install that updates `node_modules` now repairs a package in the global virtual store that an interrupted install left without some of its dependency links or package files. Before, such an install kept the incomplete package if the project's `node_modules` already recorded it [#16642](https://github.com/pnpm/pnpm/issues/16642).\n\n- `pnpm install` now skips the Cargo and Python projects inside a nested directory that has its own `pnpm-workspace.yaml` or `.git` directory, such as a git worktree of the same workspace or a separate clone.\n\n- The `Request took` warning for package metadata now starts timing when pnpm sends the request. Before, it also counted the time the request waited for a free request slot, so large installs printed it for requests the registry answered quickly.\n\n## Platinum Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"c\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 16587,
+      "title": "fix: print devEngines and packageManager warnings on stderr",
+      "url": "https://github.com/pnpm/pnpm/pull/16587",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T08:03:03Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith `devEngines.runtime.onFail: \"warn\"` (or a `packageManager` / `devEngines.packageManager` mismatch with `onFail: \"warn\"`), the warning was printed on stdout ahead of the command's own output, breaking `pnpm cache path`, `pnpm list --json`, `pnpm run`, `pnpm exec`, and others whose stdout a script reads.\n\nBoth versions had the bug (v11: `cache path`, `run`, `exec`; v12: also every `--json` command). Fixed in both: these pre-command warnings now go to stderr. `--loglevel=error` still hides them. Under `--reporter=ndjson`, v12 still emits them as records; v11 used to drop them (its ndjson sink attaches after the checks) and now prints them on stderr.\n\nCloses pnpm/pnpm#16584\n\n## Squash Commit Body\n\n```text\nThe runtime and package manager checks run before the command and\nwarned through the command's reporter, which writes to stdout. A command\nwhose stdout is a value a script reads, such as `pnpm cache path` or\n`pnpm list --json`, got the warning prepended to its output.\n\nIn v12 the default reporter's pre-command warnings are written to stderr\nwith the same `[WARN]` label, still gated by the log level. The ndjson and\nsilent reporters are unchanged. In v11 the same warnings are printed with\n`formatWarn` to stderr, unless the log level or the silent reporter hides\nthem. They bypass the v11 reporter because its ndjson sink attaches after\nthese checks and used to drop them.\n\nCloses https://github.com/pnpm/pnpm/issues/16584\n```\n\n## Checklist\n\n- [x] I checked the referen\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/config_warnings.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/pre_command.rs (+25 -4)",
+        "pnpm/crates/cli/src/cli_args/pre_command/execute.rs (+4 -4)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/reporter.rs (+2 -2)",
+        "pnpm11/pnpm/src/packageManagerCheck.ts (+25 -13)",
+        ".changeset/devengines-warning-on-stderr.md (+6 -0)",
+        "pnpm/crates/cli/tests/suite/package_manager_check.rs (+2 -1)",
+        "pnpm/crates/cli/tests/suite/package_manager_check/runtime.rs (+37 -1)",
+        "pnpm11/pnpm/test/packageManagerCheck.test.ts (+60 -7)"
+      ],
+      "filesTotal": 10
+    },
+    {"number":16574,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16597,
+      "title": "fix(npm): keep the pnpm wrapper bins shebang-less",
+      "url": "https://github.com/pnpm/pnpm/pull/16597",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T10:31:46Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRestores the shebang-less bins in the pnpm 12 npm wrapper. pnpm 11 releases older than 11.28.4 can then switch to pnpm 12 through `packageManager` again.\n\n**How it regressed again:** pnpm/pnpm#16499 (WebContainers, shipped in 12.9.0) turned all four bins into `#!/usr/bin/env node` launchers so they would run without lifecycle scripts. It also replaced the placeholder's \"carries no shebang\" test with one asserting the Node shebang. It added a forced relink to the in-repo pnpm 11 (11.28.4 works, verified), but the pnpm 11 releases already published can't receive that fix. Reproduced with pnpm 11.25.0 using the issue's script.\n\n**New checks** (test/install.test.mjs, run by the wrapper job on Linux, macOS, and Windows):\n- `every bin is shebang-less` iterates over `package.json#bin`, so it also covers bins added later.\n- `a bin shim linked before the native binary arrived runs the native binary` replays the pnpm 11 switch order. pnpm links the bins with scripts skipped, then install.js puts the native binary in place, and nothing relinks. Unlike the static check, this one tests behaviour, so a workaround such as a polyglot header can't satisfy it.\n\nBoth fail against the 12.9.1 bins. The launcher comment and the test comment both say the constraint comes from published releases, so changes elsewhere in the repo can't remove it.\n\n**Manual check with pnpm 11.25.0's own linker:** I ran `add <tarball> --ignore-scripts`, then the wrapper's `install.js`, then the shims. With \n…(truncated)",
+      "files": [
+        "pnpm/npm/pnpm/install.js (+8 -4)",
+        "pnpm/npm/pnpm/pn (+76 -2)",
+        "pnpm/npm/pnpm/pnpm (+98 -2)",
+        "pnpm/npm/pnpm/pnpx (+76 -2)",
+        "pnpm/npm/pnpm/pnx (+76 -2)",
+        ".changeset/pnpm11-switch-shebangless-bins.md (+5 -0)",
+        "pnpm/npm/pnpm/test/alias-bins.test.mjs (+296 -62)",
+        "pnpm/npm/pnpm/test/install.test.mjs (+46 -9)",
+        "pnpm/npm/pnpm/test/placeholder.test.mjs (+162 -16)",
+        "pnpm/npm/pnpm/test/webcontainer.test.mjs (+4 -3)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 16591,
+      "title": "feat: record resolution settings in the lockfile",
+      "url": "https://github.com/pnpm/pnpm/pull/16591",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T10:33:30Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAlternative to pnpm/pnpm#16588 for pnpm/pnpm#16583. Both stay open until one is chosen.\n\npnpm/pnpm#16588 records in the workspace state that an install ran frozen. This PR instead records in the lockfile the settings that shape a resolution, so any machine can tell how the lockfile was produced.\n\n**The setting.** `lockfile.includeResolutionSettings` (opt-in, default `false`). `lockfile` now also takes a section, the way `sideEffectsCache` does:\n\n```yaml\nlockfile:\n  includeResolutionSettings: true\n```\n\nWhen it is on, `pnpm-lock.yaml` records four settings under their current names:\n\n```yaml\nsettings:\n  autoDedupe: true\n  autoInstallPeers: true\n  dedupeInjectedDeps: true\n  dedupePeerDependents: true\n  excludeLinksFromLockfile: false\n  linkWorkspacePackages: false\n```\n\nKeys in `settings` are written in alphabetical order. The keys pnpm already wrote were in that order, so lockfiles without the opt-in are unchanged.\n\n**Why these four.** A throwaway probe confirmed that `dedupeInjectedDeps`, `dedupePeerDependents` and `linkWorkspacePackages` each change the lockfile a fresh resolution writes. Flipping any of them on an installed project still left the lockfile untouched. `resolvePeersFromWorkspaceRoot` was inconclusive (no difference in my fixture), so it is not included.\n\n**What changes when it is on:**\n- **Freshness.** A lockfile that records other values is outdated. `pnpm install` re-resolves it, and `--frozen-lockfile` fails with `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/install/pnpr_resolution.rs (+10 -0)",
+        "pnpm/crates/config/src/settings.rs (+6 -0)",
+        "pnpm/crates/config/src/workspace_yaml.rs (+5 -5)",
+        "pnpm/crates/config/src/workspace_yaml/apply.rs (+20 -4)",
+        "pnpm/crates/config/src/workspace_yaml/reset.rs (+6 -1)",
+        "pnpm/crates/config/src/workspace_yaml/sections.rs (+16 -0)",
+        "pnpm/crates/config/src/workspace_yaml/settings.rs (+2 -2)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/tests.rs (+4 -0)",
+        "pnpm/crates/deps-restorer/src/install_package_from_registry/tests.rs (+1 -0)",
+        "pnpm/crates/lockfile/src/freshness.rs (+36 -1)"
+      ],
+      "filesTotal": 45
+    },
+    {
+      "number": 16592,
+      "title": "fix: report an unsupported protocol in a dependency specifier",
+      "url": "https://github.com/pnpm/pnpm/pull/16592",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T10:35:49Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nMakes the failure from pnpm/pnpm#16590 actionable.\n\n`@yarnpkg/core@4.9.2` depends on `got` through a Yarn-only `patch:got@npm%3A11.8.2#~/.yarn/patches/...` specifier. The specifier contains a `/`, so both stacks' local resolvers claim it as a path. Before this PR:\n- On Linux and macOS, both stacks warned and linked `got` to a directory that does not exist.\n- On Windows, pnpm v12 failed with a bare `os error 123`. Rust maps `ERROR_INVALID_NAME` to `ErrorKind::InvalidFilename`, so the missing-directory fallback never ran.\n\nnpm rejects the same specifier with `EUNSUPPORTEDPROTOCOL: Unsupported URL Type \"patch:\"`.\n\nChanges:\n- **Unsupported protocol (v11 and v12):** when the local resolver finds that a specifier it claimed by path shape names a missing directory, and the specifier opens with a `<scheme>:` of two or more characters, it now fails with `ERR_PNPM_UNSUPPORTED_PROTOCOL`. The error names the protocol and the specifier, and its hint points to `overrides`. I checked the hint against the issue's reproduction: overriding `got: ^11.8.2` resolves `got@11.8.6`.\n  - The check runs only on the missing-directory branch, so a successful resolution does no extra work. An existing directory whose path looks like a protocol (`scheme:pkg/dir`) still resolves.\n  - In pacquet, `UnsupportedProtocolError` lives in `resolver-base`, next to the other coded resolver errors, and the tree walker recovers it by downcast so the code survives the type-erased chain. Like the other resol\n…(truncated)",
+      "files": [
+        "pnpm/crates/fs/src/is_not_found.rs (+18 -0)",
+        "pnpm/crates/fs/src/is_not_found/tests.rs (+22 -0)",
+        "pnpm/crates/fs/src/lib.rs (+2 -0)",
+        "pnpm/crates/package-manifest/src/project.rs (+1 -1)",
+        "pnpm/crates/package-manifest/src/serialization.rs (+2 -2)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree.rs (+6 -1)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk.rs (+2 -2)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/failed_edge.rs (+1 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/workspace_resolution.rs (+8 -3)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_importer/local_targets.rs (+3 -1)"
+      ],
+      "filesTotal": 24
+    },
+    {"number":16599,"title":"docs(security): clarify that static repository transport config is out of scope","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16482,
+      "title": "feat(install): add loaded linker with GVS exclusions",
+      "url": "https://github.com/pnpm/pnpm/pull/16482",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T11:22:22Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds experimental `nodeLinker: { type: loaded }` installation to pnpm v12. Enable it in `pnpm-workspace.yaml`, optionally list package names in `nodeLinker.excluded`, and use normal install, run, and exec commands. Compatible packages load directly from verified content-addressable store blobs. Selected packages and their complete dependency trees use ordinary global virtual store entries, with their existing graph identities and dependency links.\n\npnpm generates the runtime manifest, embeds and writes the standalone loader, creates JavaScript executable shims, and preloads the loader for scripts and child processes. Store pruning preserves live CAS blobs and materialized GVS trees. Patched packages materialize automatically; packages requiring builds must be selected explicitly, and normal build approval still applies. The default application layout has state and bins under `.pnpm/` and creates no application node_modules.\n\nNode.js 26.10.0 or later is required. This is opt-in and experimental: direct filesystem access and independent tool resolvers can still require additional materialization or resolver integration. Existing node_modules directories must be removed when switching modes. CAS repeat installs regenerate the runtime manifest; the optimistic installation shortcut is disabled. No static analyzer is included.\n\nRelated to https://github.com/pnpm/tasks/issues/64. Future linker-specific settings and nested hoisting configuration are tracked separately in \n…(truncated)",
+      "files": [
+        ".meta-updater/src/index.ts (+5 -6)",
+        ".typos.toml (+2 -0)",
+        "Cargo.lock (+1 -0)",
+        "__patches__/unrs-resolver@1.12.2.patch (+99 -0)",
+        "pnpm-lock.yaml (+22 -6)",
+        "pnpm-workspace.yaml (+2 -0)",
+        "pnpm/crates/cli/src/cli_args/dispatch/configuration.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/exec.rs (+18 -9)",
+        "pnpm/crates/cli/src/cli_args/exec/recursive.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/pipeline/execution.rs (+1 -0)"
+      ],
+      "filesTotal": 129
+    },
+    {
+      "number": 16536,
+      "title": "fix: validate httpProxy and httpsProxy settings",
+      "url": "https://github.com/pnpm/pnpm/pull/16536",
+      "author": "grzdev",
+      "mergedAt": "2026-10-05T11:26:56Z",
+      "labels": [
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Summary\nValidates the httpProxy and httpsProxy settings as strings when read from pnpm-workspace.yaml or global configuration. If either setting is configured with a non-string value or an explicit null, an INVALID_SETTING error is thrown with an informative message.\n\nChanges\n- Validated httpProxy and httpsProxy using assertString\n- Exposed httpProxy and httpsProxy on OptionsFromRootManifest type\n- Added unit test coverage for invalid shapes, null checks, and valid string values in getOptionsFromRootManifest.test.ts\n- Added changeset declaring patch updates for @pnpm/config.reader and pnpm\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16536?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v2.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v2.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1793566986&installation_model_id=426870&pr_number=16536&ref=codesmith_pr_footer&repository=pnpm%2Fpnpm&return_to=https%3A%2F%2Fgithub.com%2Fpnpm%2Fpnpm%2Fpull%2F16536&signature=d44d5a85087d1ae069302dfe2bb866c3374e800b21f0200ac1042645296b0782\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/autofix-with-codesmith-dark.svg\"><source media=\"(prefers-color-scheme:\n…(truncated)",
+      "files": [
+        "pnpm11/config/reader/src/getOptionsFromRootManifest.ts (+8 -0)",
+        ".changeset/validate-proxy-settings.md (+6 -0)",
+        "pnpm11/config/reader/test/getOptionsFromRootManifest.test.ts (+27 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16306,
+      "title": "fix(dlx): report a clear error when --package is given without a command",
+      "url": "https://github.com/pnpm/pnpm/pull/16306",
+      "author": "Dextheking1",
+      "mergedAt": "2026-10-05T11:49:52Z",
+      "labels": [
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm dlx --package=<pkg>` with no command used to install the package and then crash trying to run an empty command. It now throws `ERR_PNPM_DLX_MISSING_COMMAND` (`'pnpm dlx' requires a command to run`), matching what the v12 CLI already reports for the same invocation. Only v11 is affected.\n\n## Squash Commit Body\n\n```text\nfix(dlx): report a clear error when --package is given without a command\n\nRunning `pnpm dlx --package=<pkg>` with no command installed the package\nand then crashed trying to run an empty command. The handler now throws\nERR_PNPM_DLX_MISSING_COMMAND before doing any work, matching the v12\nCLI MissingCommand error for the same invocation. Only v11 is affected;\nv12 already rejects this case.\n```\n\n## Checklist\n\n- [x] Bug fix; only v11 is affected (v12 already reports this error), so no Rust change.\n- [x] Added a changeset for `@pnpm/exec.commands` and `pnpm` (patch).\n- [x] Added tests: fail-before confirmed on the new missing-command test, all 4 dlx tests pass after.\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16306?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v2.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v2.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1793151372&ins\n…(truncated)",
+      "files": [
+        "pnpm11/exec/commands/src/dlx.ts (+5 -2)",
+        ".changeset/dlx-require-command.md (+6 -0)",
+        "pnpm11/exec/commands/test/dlx.ts (+31 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16231,
+      "title": "fix(pull-requests): check the fork remote before a continued rebase pushes",
+      "url": "https://github.com/pnpm/pnpm/pull/16231",
+      "author": "snmsoodan",
+      "mergedAt": "2026-10-05T11:50:38Z",
+      "labels": [
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`resolve-pr-conflicts.sh --continue` resumes a rebase that the script paused. It stays on the detached HEAD instead of running `gh pr checkout`, and it verifies that the paused rebase is rewriting the head branch of the PR named on the command line, so a stale PR number cannot push one PR's rebase onto another PR's branch.\n\nThe push target was still taken on trust. The script chooses the remote named after the head owner and force-pushes there:\n\n```sh\ngit remote get-url \"$HEAD_OWNER\" &>/dev/null && REMOTE=\"$HEAD_OWNER\" || (add it)\ngit push \"$REMOTE\" HEAD:\"$HEAD_BRANCH\" --force-with-lease\n```\n\nThat name is created by `gh pr checkout`, which `--continue` never runs, and `git remote add` fails loudly while `git remote get-url` succeeds on any remote that already holds the name. Three ways for the name to point elsewhere:\n\n- **the fork was renamed**, so `<old owner>` is someone else's repository, or the fork now lives at another repository name;\n- **an unrelated remote already holds the name** (a second fork, a hand-added remote);\n- **the branch check passes but the remote does not** — the two are independent, and only the branch check existed.\n\nThe result is a force-push of the rewritten commits into a repository that is not the PR's fork.\n\n## Changes\n\n- Read the head repository from the PR itself (`headRepository.nameWithOwner`) instead of assuming `<head owner>/pnpm`, and use it for the auto-added remote URL. A renamed fork is no longer looked for, or added, under the wrong re\n…(truncated)",
+      "files": [
+        ".agents/skills/pull-requests/scripts/resolve-pr-conflicts.sh (+75 -2)",
+        ".agents/skills/pull-requests/scripts/resolve-pr-conflicts.test.sh (+259 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 16595,
+      "title": "fix(package-manager): validate version and enforce slot containment in global virtual store",
+      "url": "https://github.com/pnpm/pnpm/pull/16595",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T12:20:22Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes GHSA-jg5c-8mvg-5wph: *pnpm v12 global-virtual-store escape: dependency manifest version path traversal writes files outside the store*.\n\nIn pnpm v12 with `enableGlobalVirtualStore: true`, dependency slot directories are laid out under `<store_dir>/v3/slots/<name>/<version>/...`. If a dependency's package manifest specifies a malicious version containing path traversal components (e.g. `../../escaped` in tarball or git dependencies), slot directory resolution escaped the virtual store and wrote files outside the store directory.\n\nThis change:\n- Adds `is_valid_package_version` in `pnpm_package_name` to reject empty versions, `.`, and traversal sequences (`..`, `/`, `\\`).\n- Validates package versions when constructing slot paths and lockfile entries, rejecting traversal versions.\n- Enforces virtual store slot containment in `validate_virtual_store_slot_containment` and `SlotPaths::create` before creating slot directories.\n- Validates slot containment during fresh lockfile installation (`install_with_fresh_lockfile`) immediately after slot layout.\n\nThis vulnerability affects only pnpm v12. pnpm v11 uses a project-local virtual store (`node_modules/.pnpm`) with different directory layout and resolution mechanics.\n\n## Squash Commit Body\n\n```text\nIn pnpm v12 with global virtual store enabled (`enableGlobalVirtualStore: true`),\nslot paths are laid out in the format `<store_dir>/v3/slots/<name>/<version>/...`.\nA tarball or git dependency whose package manifest contai\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/create_virtual_dir_by_snapshot.rs (+6 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_dir_by_snapshot/tests.rs (+113 -0)",
+        "pnpm/crates/deps-restorer/src/validate_lockfile_paths.rs (+5 -6)",
+        "pnpm/crates/deps-restorer/src/validate_lockfile_paths/tests.rs (+89 -0)",
+        "pnpm/crates/deps-restorer/src/virtual_store_layout.rs (+39 -4)",
+        "pnpm/crates/package-manager/src/dependencies_graph_to_lockfile/packages.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/plan.rs (+57 -18)",
+        "pnpm/crates/package-name/src/lib.rs (+12 -0)",
+        "pnpm/crates/package-name/src/tests.rs (+29 -1)",
+        ".changeset/ghsa-jg5c-gvs-version-traversal.md (+5 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 16600,
+      "title": "fix(loaded): preserve frozen-store installs and prune unused GVS entries",
+      "url": "https://github.com/pnpm/pnpm/pull/16600",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T12:21:22Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes two edge cases in the newly merged loaded linker (https://github.com/pnpm/pnpm/pull/16482).\n\nWhen `storeDir` is a non-hidden directory inside the project, `pnpm store prune` could crawl the store itself and keep unused GVS slots alive. The project scan and dependency walker now exclude the canonical store root, while preserving roots referenced by the loaded manifest. The regression covers both `store` and `node_modules/store` inside the project.\n\nLoaded installs with `frozenStore: true` now skip project registration writes. Writable loaded stores still require successful registration to protect their files from pruning. The loader documentation explains retention for externally managed frozen stores.\n\nValidation: 24 scoped Rust tests passed, covering store pruning and the loaded CLI. The new regressions verify that a non-hidden local store loses unused GVS trees, retains live roots, and permits frozen installation when the store registry cannot be written. The original feature's full 14,570-test Rust run passed before merge. CI passed on `1e6c9482ff816eece2d1cdc597a87e328b09589b`: Rust tests on Linux, macOS, and Windows, all lints, WebContainers, and benchmark checks. All 52 completed checks passed (7 skipped). Required push hooks also passed. CodeRabbit approved this head with no actionable comments. Qodo found no bugs; its Windows-coverage suggestion is answered with passing Windows job evidence in https://github.com/pnpm/pnpm/pull/16600#issuecomment-5994\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/run/fast_path.rs (+4 -0)",
+        "pnpm/crates/store-dir/src/prune.rs (+56 -40)",
+        "pnpm/crates/store-dir/src/prune/tests.rs (+30 -0)",
+        "pnpm/crates/cli/tests/suite/cas_linker.rs (+12 -2)",
+        "pnpm/docs/store-loader.md (+2 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":16603,"title":"docs(security): direct vulnerability reports to public bug tracker","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16605,"title":"revert: \"docs(security): direct vulnerability reports to public bug tracker (#16603)\"","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16601,
+      "title": "fix(config): make --global and --location=global read only the global config",
+      "url": "https://github.com/pnpm/pnpm/pull/16601",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T14:20:01Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16598.\n\nWhen you ran `pnpm config get <key> --global` or `pnpm config list --global` inside a project, the output included settings from the project's `pnpm-workspace.yaml`. The reporter saw the project's `minimumReleaseAge` and took it for their global setting.\n\nThe docs say `--location=global` behaves the same as `--global`. Neither CLI matched that. This PR makes both flags read the same global config in both CLIs.\n\nWhat `config get`/`list` read before this PR (checked against 12.9.1 and 11.28.4):\n\n| | v12 `--global` | v12 `--location=global` | v11 `--global` | v11 `--location=global` |\n|---|---|---|---|---|\n| project `pnpm-workspace.yaml` | read | read | skipped | read |\n| project `.npmrc` auth keys | read | read | read | read |\n| global packages' `pnpm-workspace.yaml` | skipped | skipped | read | skipped |\n| fails if the global bin dir is not in PATH | no | no | yes | no |\n\nAfter this PR, both CLIs behave the same way, and the way npm does. npm's `loadProjectConfig` in `@npmcli/config` skips the project `.npmrc` under `--global` and under `--location=global`. With either flag, `config get`/`list` read none of the project's `pnpm-workspace.yaml`, the project's `.npmrc`, or the global packages' manifest. v11 no longer runs the PATH check for config commands.\n\n- **v12:** `ConfigFlags::is_global` resolves `--global` and `--location` in one place, with `--location` taking precedence, like the handler's `resolve_global`. A scoped `get` or `list` lo\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/cli_command/commands.rs (+13 -3)",
+        "pnpm/crates/cli/src/cli_args/cli_command/options.rs (+8 -0)",
+        "pnpm/crates/cli/src/cli_args/config.rs (+18 -4)",
+        "pnpm/crates/cli/src/cli_args/config/tests.rs (+9 -0)",
+        "pnpm/crates/cli/src/cli_args/dispatch_query/maintenance.rs (+6 -1)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input.rs (+3 -3)",
+        "pnpm/crates/cli/src/lib.rs (+1 -0)",
+        "pnpm11/cli/parse-cli-args/src/index.ts (+8 -2)",
+        "pnpm11/config/reader/src/index.ts (+3 -0)",
+        "pnpm11/config/reader/src/loadNpmrcFiles.ts (+13 -9)"
+      ],
+      "filesTotal": 19
+    },
+    {"number":16602,"title":"perf(deps-restorer): reuse the loaded fetch pass prefetch for GVS materialization","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16245,
+      "title": "fix(deps-resolver): allow wanted dependencies without an alias",
+      "url": "https://github.com/pnpm/pnpm/pull/16245",
+      "author": "everton-dgn",
+      "mergedAt": "2026-10-05T15:20:50Z",
+      "labels": [
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nMake `WantedDependency.alias` optional, matching the values already produced for Git, JSR, and tarball selectors. Share the type between the two manifest readers and expose `ManifestWantedDependency` for results that always have an alias, plus a `hasAlias` type guard that narrows to it.\n\nThe parser and manifest tests no longer need casts to construct an unnamed dependency. Name-based lookups now handle a missing alias explicitly. Catalog promotion still records the resolved package name in `strict` and `prefer` modes, and an unnamed `catalog:` selector retains its existing error.\n\nCloses pnpm/tasks#33.\n\nValidation:\n\n- All 212 tests in `@pnpm/installing.deps-resolver` passed.\n- All 14 tests in `@pnpm/catalogs.resolver` passed.\n- The parser's 16 tests passed, including Git and JSR selectors without aliases.\n- The catalogs, hooks, and catalog fast-update suites passed (104 tests, including both new catalog promotion cases).\n- After the rebase onto main: `tsgo --build` for the whole TypeScript workspace, lint of the touched packages, `@pnpm/installing.deps-resolver` (220 tests), `@pnpm/catalogs.resolver` (14 tests), and the deps-installer `catalogs` and `parseWantedDependencies` suites (80 tests) passed.\n- Package compilation and lint passed. The pre-push hook runs the full TypeScript build, CLI bundle, spelling checks, repository metadata checks, versioning checks, and lint.\n\nThis changes TypeScript package interfaces in v11 only. Rust has no corresponding type chang\n…(truncated)",
+      "files": [
+        "pnpm11/catalogs/resolver/src/resolveFromCatalog.ts (+2 -2)",
+        "pnpm11/installing/deps-installer/src/install/installCase.ts (+4 -4)",
+        "pnpm11/installing/deps-installer/src/install/installSome.ts (+7 -7)",
+        "pnpm11/installing/deps-installer/src/parseWantedDependencies.ts (+9 -5)",
+        "pnpm11/installing/deps-resolver/src/getDepsToResolve.ts (+2 -2)",
+        "pnpm11/installing/deps-resolver/src/getExactSinglePreferredVersions.ts (+2 -2)",
+        "pnpm11/installing/deps-resolver/src/getNonDevWantedDependencies.ts (+3 -29)",
+        "pnpm11/installing/deps-resolver/src/getWantedDependencies.ts (+24 -3)",
+        "pnpm11/installing/deps-resolver/src/index.ts (+3 -1)",
+        "pnpm11/installing/deps-resolver/src/lookUpCatalogEntry.ts (+2 -1)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 16606,
+      "title": "fix(run): accept ECMAScript regex syntax in script selectors",
+      "url": "https://github.com/pnpm/pnpm/pull/16606",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T15:31:39Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm run \"/<regex>/\"` compiled the selector with Rust's `regex` crate, which has no lookaround or backreferences. A pattern such as `/^hello:(?!b).*$/` failed to compile, fell back to being read as a literal script name, and the run failed with `ERR_PNPM_NO_SCRIPT`. pnpm v11 uses a JavaScript `RegExp`, so the same command worked there.\n\nThis switches the selector to [`regress`](https://crates.io/crates/regress), an ECMAScript regex engine, so the syntax and semantics match v11. Script names are matched as UTF-16 code units, as an unflagged JavaScript `RegExp` does, so `/^.$/` does not match a name made of one astral character. The `regex` crate is still used elsewhere in the CLI.\n\nv11 is not affected, so this is a v12-only fix.\n\nCloses pnpm/pnpm#16604\n\n## Squash Commit Body\n\n```text\n`pnpm run \"/<regex>/\"` compiled the pattern with the `regex` crate,\nwhich has no lookaround or backreferences. A selector such as\n`/^hello:(?!b).*$/` failed to compile, fell back to being read as a\nplain script name, and the run failed with ERR_PNPM_NO_SCRIPT. pnpm v11\nuses JavaScript's RegExp, so the same command worked there.\n\nCompile the selector with `regress`, an ECMAScript regex engine, so the\npattern syntax and semantics match v11. Match over UTF-16 code units\nthrough regress's UCS-2 input, since an unflagged JavaScript RegExp\ntreats a surrogate pair as two characters.\n\nCloses pnpm/pnpm#16604\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the \n…(truncated)",
+      "files": [
+        "Cargo.lock (+10 -0)",
+        "Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/run.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/run/listing.rs (+14 -3)",
+        "pnpm/crates/cli/src/cli_args/run/tests.rs (+27 -0)",
+        ".changeset/run-regex-lookaround.md (+5 -0)",
+        "pnpm/docs/cli/run.md (+6 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 16609,
+      "title": "fix(cafs): validate PAX header lengths and avoid 32-bit integer truncation",
+      "url": "https://github.com/pnpm/pnpm/pull/16609",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T15:38:18Z",
+      "labels": [
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nIn `pnpm11/store/cafs/src/parseTarball.ts`:\n- Validate that parsed PAX record lengths are strictly positive and within the remaining buffer bounds, and verify the presence of the space delimiter.\n- In `paddingOf`, compute block padding using modulo arithmetic instead of 32-bit bitwise operators to prevent signed integer truncation on large archives or records with sizes >= 4 GiB.\n- In `parsePaxSize`, verify that size is a safe integer.\n\nFixes https://github.com/pnpm/tasks/issues/78\nFixes https://github.com/pnpm/tasks/issues/79\n\n## Squash Commit Body\n\n```text\nfix(cafs): validate PAX header lengths and avoid 32-bit integer truncation\n\nIn the tarball parser, validate that parsed PAX record lengths are\nstrictly positive and within the remaining buffer bounds, and verify\nthe presence of the space delimiter. In paddingOf, calculate block\npadding using modulo arithmetic instead of 32-bit bitwise operators to\nprevent integer overflow with file sizes >= 4 GiB.\n\nFixes https://github.com/pnpm/tasks/issues/78\nFixes https://github.com/pnpm/tasks/issues/79\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n\n--\n…(truncated)",
+      "files": [
+        "pnpm11/store/cafs/src/parseTarball.ts (+11 -4)",
+        ".changeset/tarball-parser-overflow-pax-validation.md (+6 -0)",
+        "pnpm11/store/cafs/test/index.ts (+70 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16607,
+      "title": "fix(git-fetcher): validate repository argument and pass option terminator",
+      "url": "https://github.com/pnpm/pnpm/pull/16607",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T15:41:40Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nReject git repository values that are empty, start with `-`, or contain null bytes, and pass `--` before the repository argument in `git clone` and `git remote add`. This prevents git argument injection when fetching git-hosted dependencies from lockfile resolutions.\n\nThis matches the behavior of pnpm v12, where `is_safe_repo_arg` and option terminators are already enforced. To keep the two CLIs aligned, this PR also:\n\n- lists every rejected form in the `INVALID_GIT_REPOSITORY` message in both CLIs;\n- changes the v12 diagnostic code from `INVALID_GIT_REPOSITORY` to `ERR_PNPM_INVALID_GIT_REPOSITORY`, the prefix every other git-fetcher error uses;\n- redacts credentials and strips control characters from both values in the v11 `INVALID_GIT_COMMIT` message, and checks the commit before the repository, as v12 does.\n\nFixes https://github.com/pnpm/tasks/issues/84\n\n## Squash Commit Body\n\n```text\nReject git repository values that are empty, start with '-', or contain\nnull bytes, and pass '--' before the repository argument in git clone and\ngit remote add. This prevents git option injection when fetching\ngit-hosted dependencies from unvalidated lockfile resolutions, matching\npnpm v12.\n\nThe INVALID_GIT_REPOSITORY message now lists every rejected form in both\nCLIs, and pnpm v12 reports it as ERR_PNPM_INVALID_GIT_REPOSITORY. The v11\nINVALID_GIT_COMMIT message redacts credentials and strips control\ncharacters.\n\nFixes https://github.com/pnpm/tasks/issues/84\n```\n\n## Checklist\n\n- \n…(truncated)",
+      "files": [
+        "pnpm/crates/git-fetcher/src/error.rs (+5 -4)",
+        "pnpm11/fetching/git-fetcher/src/index.ts (+24 -12)",
+        ".changeset/invalid-git-repository-error-code.md (+5 -0)",
+        ".changeset/validate-git-fetcher-repo-argument.md (+6 -0)",
+        "pnpm11/fetching/git-fetcher/test/index.ts (+67 -2)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 16526,
+      "title": "fix(config): preserve empty `nodeOptions` overrides",
+      "url": "https://github.com/pnpm/pnpm/pull/16526",
+      "author": "Shenrui-Ma",
+      "mergedAt": "2026-10-05T16:30:12Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`--config.node-options=` and `PNPM_CONFIG_NODE_OPTIONS=` currently leave a lower-priority `nodeOptions` value active. An explicit empty value now overrides those pnpm settings without clearing `NODE_OPTIONS` inherited from the parent or supplied by `extraEnv`. `pnpm config get` also reports the empty override, matching pnpm 11.\n\nThis covers the empty-value case left by pnpm/pnpm#16280.\n\n## Squash Commit Body\n\n```text\nRead nodeOptions through the existing allow-empty configuration reader.\nDropping an empty override lets the workspace value survive; converting it\nto null would leave the explicit-settings record inconsistent.\n\nTreat an empty configured value as no override when building child\nNODE_OPTIONS for exec, scripts and dependency lifecycle runs. Preserve\nnonempty replacement, whitespace and loader behavior.\n```\n\n## Validation\n\n```sh\npnpm test:rust -p pnpm-config -p pnpm-cli -E 'test(node_options)'\n```\n\nBuilt and checked on macOS. The regression cases reproduce on unmodified main and pass with the patch. Offline tarball installs verify both fresh and frozen lifecycle environments against pnpm 11.\n\nRelated Rust tests, CLI smoke tests, and Rust/TypeScript checks pass. Native Linux, macOS and Windows regression tests also pass.\n\n## Checklist\n\n- [x] Bug fixes are implemented in every affected version. pnpm 11 already preserves these empty overrides.\n- [x] Added a patch changeset for `pacquet`.\n- [x] Added or updated tests.\n- [x] Updated the `nodeOptions` documenta\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/exec.rs (+1 -1)",
+        "pnpm/crates/config/src/env_overlay.rs (+1 -1)",
+        "pnpm/crates/config/src/env_overlay/string_reader.rs (+2 -0)",
+        "pnpm/crates/config/src/env_overlay/tests.rs (+29 -0)",
+        "pnpm/crates/config/src/layout.rs (+10 -1)",
+        "pnpm/crates/config/src/settings.rs (+1 -1)",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/on_disk.rs (+2 -2)",
+        ".changeset/empty-node-options.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/install_state.rs (+49 -0)",
+        "pnpm/crates/cli/tests/suite/main.rs (+1 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 16610,
+      "title": "fix(setup): name the shell config file when nothing changed",
+      "url": "https://github.com/pnpm/pnpm/pull/16610",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T16:38:05Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWhen `pnpm setup` found nothing to change, it returned early with \"No changes to the environment were made\" and never named the shell config file. The get.pnpm.io installer then prints \"delete ... and the lines pnpm setup added to the shell config file named above\", but no file was named.\n\nBoth the v11 (`pnpm11/engine/pm/commands`) and v12 (`pnpm/crates/cli`) setup commands now print `Configuration already up to date in <file>` before the no-change message, matching the layout of the changed case.\n\nCloses pnpm/pnpm#16608\n\n## Squash Commit Body\n\n```text\nOn a repeated run, `pnpm setup` returned early with \"No changes to the\nenvironment were made\" and dropped the \"Configuration already up to date\nin <file>\" line. The get.pnpm.io installer then printed \"the lines pnpm\nsetup added to the shell config file named above\" with no file named.\n\nReport the config file before the no-change message in both the v11 and\nv12 setup commands. Output without a config file (Windows, GitHub Actions)\nis unchanged.\n\nCloses pnpm/pnpm#16608\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n\n---\nWritten by an agent \n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/setup.rs (+7 -4)",
+        "pnpm/crates/cli/src/cli_args/setup/tests.rs (+13 -0)",
+        "pnpm11/engine/pm/commands/src/setup/setup.ts (+4 -3)",
+        ".changeset/setup-names-unchanged-config.md (+7 -0)",
+        "pnpm11/engine/pm/commands/test/setup/setup.test.ts (+15 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 16269,
+      "title": "fix(workspace): disable asm of sha2 crate also for MinGW",
+      "url": "https://github.com/pnpm/pnpm/pull/16269",
+      "author": "oech3",
+      "mergedAt": "2026-10-05T16:47:10Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nDisable asm feature of `sha2` crate also for MinGW which is already disabled for MSVC.\n\n## Squash Commit Body\n\n```text\nDisable asm feature of `sha2` crate also for MinGW which is already disabled for MSVC.\nMSYS2 failed to build package with the feature.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [ ] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it becomes a release note.\n- [ ] Added or updated tests.\n- [x] Updated the documentation if needed.\n\n## Summary by CodeRabbit\n\n* **Performance**\n  * SHA-2 assembly optimizations are now enabled only on non-Windows platforms. Windows builds, including non-MSVC Windows targets, no longer use these optimizations. Non-Windows platforms continue to receive them, while Windows builds use the standard SHA-2 implementation. This clarifies the platform coverage for SHA-2 assembly optimizations across supported builds.",
+      "files": [
+        "pnpm/crates/crypto-hash/Cargo.toml (+2 -2)",
+        "pnpm/crates/store-dir/Cargo.toml (+4 -6)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 16612,
+      "title": "fix(prepare-package): prevent intermediate symlink traversal in subpath extraction",
+      "url": "https://github.com/pnpm/pnpm/pull/16612",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T17:44:42Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWhen extracting git dependencies with a `#path:` subpath fragment, `safeJoinPath` in `pnpm11/exec/prepare-package` now resolves all symbolic links via `fs.realpathSync` for both the repository root and the target joined path, preventing intermediate symlink traversal outside the repository checkout.\n\nFixes https://github.com/pnpm/tasks/issues/82\n\n## Squash Commit Body\n\n```text\nWhen preparing a git dependency with a `#path:` subpath fragment,\nintermediate symlink segments pointing outside the repository checkout\ncould allow files outside the cloned repository directory to be copied\ninto the store during package preparation.\n\nResolve and canonicalize both the repository root and joined paths using\n`fs.realpathSync` in `safeJoinPath`, verifying containment within the\ncloned checkout. Also add unit tests in TypeScript and Rust (`safe_join_path`)\nto ensure traversal through intermediate symlinks is rejected.\n\nFixes https://github.com/pnpm/tasks/issues/82\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n- [ ] Updated the documentation if needed.\n\n---\n*Generated by Antigravity using Gemini 2.5 Pro*\n\n-\n…(truncated)",
+      "files": [
+        "pnpm/crates/git-fetcher/src/prepare_package/tests.rs (+16 -0)",
+        "pnpm11/exec/prepare-package/src/index.ts (+19 -5)",
+        ".changeset/fix-prepare-package-subpath-symlink.md (+6 -0)",
+        "pnpm11/exec/prepare-package/test/index.ts (+49 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16416,
+      "title": "fix(manifest): reject invalid dependency specifiers during install",
+      "url": "https://github.com/pnpm/pnpm/pull/16416",
+      "author": "tunglambk",
+      "mergedAt": "2026-10-05T17:53:57Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm install --lockfile-only` on a project with `\"dependencies\": {\"is-positive\": 42}` currently exits successfully and writes a lockfile without `is-positive`. A later frozen install also succeeds, so the malformed declaration can go unnoticed in CI.\n\nValidate the specifiers in the four dependency groups after `readPackage` hooks run and before settling the lockfile. A group that is not an object (for example `\"devDependencies\": null`) is still accepted as declaring no dependencies, matching pnpm v11. A malformed declaration bypasses the repeat-install shortcut so a hook can repair it; otherwise installation reports `ERR_PNPM_PACKAGE_MANIFEST_INVALID_ATTRIBUTE`. pnpm v11 already fails on a non-string specifier, so the change applies to the Rust v12 CLI.\n\nThe regression test failed on the target branch and passes with the fix. Added coverage for frozen installs, hook repair, and all four dependency groups. Local checks passed: 142 package-manifest tests, 884 package-manager tests (one ignored), 18 install-configuration integration tests, workspace `cargo check`, workspace `cargo clippy --deny warnings`, and pinned rustfmt.\n\n## Squash Commit Body\n\n```text\nThe Rust install path read dependency specifiers through a filter that skipped non-string values. That made a malformed project manifest appear dependency-free and allowed both lockfile-only and frozen installs to succeed.\n\nCheck dependency specifier types after readPackage hooks have had a chance to correct the m\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/errors.rs (+3 -0)",
+        "pnpm/crates/package-manager/src/install/run.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install/run/execution.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install/run/fast_path.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install/run/manifest_validation.rs (+35 -0)",
+        "pnpm/crates/package-manifest/src/lib.rs (+3 -2)",
+        "pnpm/crates/package-manifest/src/validation.rs (+32 -0)",
+        ".changeset/reject-invalid-dependency-specifiers.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/install/configuration.rs (+78 -0)",
+        "pnpm/crates/package-manifest/src/tests/dependencies.rs (+21 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 11426,
+      "title": "fix: apply nodeDownloadMirrors from workspace config to Node downloads",
+      "url": "https://github.com/pnpm/pnpm/pull/11426",
+      "author": "aayushbaluni",
+      "mergedAt": "2026-10-05T18:53:59Z",
+      "labels": [
+        "area: cli/dlx",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Problem\n`nodeDownloadMirrors` specified in `pnpm-workspace.yaml` is not applied when pnpm downloads Node.js via `pnpm dlx` or `pnpm create`, even though other workspace-level settings are respected.\n\n## Change\nInclude `nodeDownloadMirrors` in `pickDlxConfig` so it is inherited alongside registry and security policy settings when building the effective config for dlx/create commands.\n\nFixes #11281.\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * When running `pnpm dlx`, the workspace-configured Node.js `release` download mirror is now inherited. Workspace `rc` and `nightly` mirrors are not inherited; the target’s existing settings for those channels remain in effect, including mirrors configured globally. This keeps mirror selection for those channels consistent with their prior configuration.",
+      "files": [
+        "pnpm11/config/reader/src/localConfig.ts (+39 -4)",
+        ".changeset/node-download-mirrors-workspace.md (+6 -0)",
+        "pnpm11/config/reader/src/localConfig.test.ts (+54 -4)",
+        "pnpm11/config/reader/test/index.ts (+46 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11868,
+      "title": "fix(workspace.projects-reader): point resolutions warning at pnpm-workspace.yaml overrides",
+      "url": "https://github.com/pnpm/pnpm/pull/11868",
+      "author": "shiminshen",
+      "mergedAt": "2026-10-05T18:55:06Z",
+      "labels": [
+        "state: automerge",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n#11757 reports that the warning shown when a non-root workspace package contains a `\"resolutions\"` field is misleading on pnpm v11. The current message says:\n\n> The field \"resolutions\" was found in <path>/package.json. This will not take effect. You should configure \"resolutions\" at the root of the workspace instead.\n\nBut pnpm v11 doesn't read `resolutions` at the workspace root either — version overrides are wired through the `\"overrides\"` field in `pnpm-workspace.yaml`. Following the warning's advice doesn't fix anything; users still have to discover the real mechanism on their own.\n\nThe maintainer ([@zkochan in #11757](https://github.com/pnpm/pnpm/issues/11757#issuecomment-3559430175)) confirmed: \"pnpm uses the 'overrides' field in 'pnpm-workspace.yaml'.\"\n\n## What changed\n\n- `workspace/projects-reader/src/index.ts`\n  - Convert `uselessNonRootManifestFields` from `Array<keyof ProjectManifest>` to a map of field → fix suggestion, so each useless field can carry its own correction instead of the warning template guessing one fix for all fields. Type-guarded with `satisfies Partial<Record<keyof ProjectManifest, string>>` so the keys are still checked against `ProjectManifest`.\n  - Inline `printNonRootFieldWarning` — the helper was only called from one place and the new map shape gives the suggestion directly, so the extra indirection no longer pays for itself.\n- `workspace/projects-reader/test/index.ts` — update the expected warning string to match.\n- Changeset add\n…(truncated)",
+      "files": [
+        "pnpm11/workspace/projects-reader/src/index.ts (+8 -15)",
+        ".changeset/fix-resolutions-warning-message.md (+6 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 16611,
+      "title": "fix(lockfile): verify the resolutions inside variations wrappers",
+      "url": "https://github.com/pnpm/pnpm/pull/16611",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T19:06:01Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nLockfile verification in both pnpm v11 and v12 now verifies the inner resolutions of a `variations` wrapper against the registry. It also rejects a `name@version` entry whose `variations` resolution is empty, or (in v11) has a variant without a resolution. The verifier cache records carry new markers, so a verdict recorded before these checks existed is not reused.\n\n`custom:*` resolutions under `name@version` keys stay accepted. They are materialized only by a fetcher the project configured, and that fetcher is responsible for what it fetches, `allowBuilds` included. pnpm/tasks#85 is therefore not addressed by this PR.\n\nFixes https://github.com/pnpm/tasks/issues/86\n\n## Squash Commit Body\n\n```text\nLockfile verification in both pnpm v11 and v12 now verifies the inner\nresolutions of a variations wrapper against the registry, and rejects a\nname@version entry whose variations resolution is empty or has a variant\nwithout a resolution. New verifier cache markers keep a verdict recorded\nbefore these checks from being reused.\n\nCustom resolutions under name@version keys stay accepted: a project's\nown custom fetcher owns the trust decision for what it fetches.\n\nFixes https://github.com/pnpm/tasks/issues/86\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset (`pnpm c\n…(truncated)",
+      "files": [
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions.rs (+17 -4)",
+        "pnpm/crates/resolving-npm-resolver/src/create_npm_resolution_verifier.rs (+23 -0)",
+        "pnpm/crates/resolving-npm-resolver/src/create_npm_resolution_verifier/policy_snapshot.rs (+1 -0)",
+        "pnpm/crates/resolving-npm-resolver/src/create_npm_resolution_verifier/tests.rs (+2 -1)",
+        "pnpm/crates/resolving-npm-resolver/src/create_npm_resolution_verifier/trust_check.rs (+8 -4)",
+        "pnpm11/installing/deps-installer/src/install/verifyLockfileResolutions.ts (+10 -4)",
+        "pnpm11/resolving/npm-resolver/src/createNpmResolutionVerifier.ts (+26 -0)",
+        ".changeset/lockfile-verification-variations.md (+8 -0)",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions/tests/lockfile.rs (+37 -0)",
+        "pnpm/crates/resolving-npm-resolver/src/create_npm_resolution_verifier/tests/artifact_binding.rs (+129 -4)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 16613,
+      "title": "fix: harden dependency verification and package handling",
+      "url": "https://github.com/pnpm/pnpm/pull/16613",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T20:09:02Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThis PR fixes verified issues from today's task batch across the affected pnpm versions and pnpr. It verifies configuration dependencies against their registry before installing them, confines package extraction and deployment paths, streams large archive entries, and bounds archive metadata and publishing manifest buffers. It also binds `pnpm audit signatures` to lockfile integrity, keeps distinct URL dependencies in separate virtual store directories, and sanitizes terminal output in `pnpm licenses`.\n\nThe Rust CLI additionally preserves dependency context and structured fatal-error records. Task 72 is excluded from this PR.\n\nConfig dependencies must resolve from an npm registry. They are verified against the registry only when they have to be installed or relinked, so commands that find them already installed make no extra registry requests.\n\nURL and path dependencies get a hashed virtual store directory name only when escaping their name would be ambiguous (`+`, `#`, `:`, `?` and similar after the URL scheme). Registry packages, including versions with build metadata, and plain tarball URLs keep their names.\n\nThe archive metadata fix vendors tar 0.4.46 with a small, opt-in metadata limit because the upstream parser allocates GNU/PAX metadata before pnpm can reject it. Upstream parser source, licenses, and patch provenance are retained. Unused upstream GitHub automation is omitted, and the vendor directory is excluded from pnpm workspace discovery. The generated\n…(truncated)",
+      "files": [
+        ".typos.toml (+4 -0)",
+        "Cargo.lock (+3 -2)",
+        "Cargo.toml (+2 -0)",
+        "cspell.json (+3 -1)",
+        "eslint.config.mjs (+1 -1)",
+        "pnpm-lock.yaml (+23 -11)",
+        "pnpm-workspace.yaml (+3 -1)",
+        "pnpm/crates/cli/Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/audit/importers.rs (+45 -6)",
+        "pnpm/crates/cli/src/cli_args/audit/signatures.rs (+8 -7)"
+      ],
+      "filesTotal": 151
+    },
+    {"number":16616,"title":"refactor(config): keep layout module below file length limit","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 13215,
+      "title": "fix(audit): show the save style in the interactive audit fix picker",
+      "url": "https://github.com/pnpm/pnpm/pull/13215",
+      "author": "AmariahAK",
+      "mergedAt": "2026-10-05T20:47:31Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThe interactive `pnpm audit --fix` picker rendered every patched version in its \"Patched\" column with a caret (`^X.Y.Z`), ignoring `saveExact` and `savePrefix`. The overrides themselves are already written in the configured style (pnpm/pnpm#14150), so the picker showed a different specifier from the one that landed in `pnpm-workspace.yaml`.\n\nThe picker now derives the range spec style from `saveExact` / `savePrefix` with `getRangeSpecStyle()` and formats the column with `patchedRangeForStyle()`, the same helper the override writer uses:\n\n- `saveExact: true` or `savePrefix: ''` → `X.Y.Z`\n- `savePrefix: '~'` → `~X.Y.Z`\n- `savePrefix: '='` → `=X.Y.Z`\n- otherwise → `^X.Y.Z`\n\nThe same fix is applied to the pnpm v12 picker (`advisory_choices` in `pnpm/crates/cli/src/cli_args/audit/fix/update.rs`, using `RangeSpecStyle::from_save_options`). The caret-only helpers (`caretRangeForPatched` / `caret_range_for_patched`) lost their last callers and are removed.\n\nCloses pnpm/pnpm#13209\n\n## Squash Commit Body\n\n```text\nThe interactive pnpm audit --fix picker rendered every patched version\nwith a caret, even though the overrides are written with the\nsaveExact/savePrefix style since pnpm/pnpm#14150. getAuditFixChoices\nand the pacquet advisory_choices now take the range spec style derived\nfrom those settings, so the \"Patched\" column matches the override that\nis written.\n\ncaretRangeForPatched/caret_range_for_patched lost their last callers and\nare removed in favour of patchedRangeFor\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/audit.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/audit/fix.rs (+4 -3)",
+        "pnpm/crates/cli/src/cli_args/audit/fix/update.rs (+7 -6)",
+        "pnpm/crates/cli/src/cli_args/audit/remediation.rs (+12 -6)",
+        "pnpm/crates/cli/src/cli_args/audit/tests.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/audit/version_ranges.rs (+0 -5)",
+        "pnpm11/deps/compliance/commands/src/audit/auditFix.ts (+2 -1)",
+        "pnpm11/deps/compliance/commands/src/audit/fix.ts (+1 -6)",
+        "pnpm11/deps/compliance/commands/src/audit/getAuditFixChoices.ts (+8 -7)",
+        "pnpm11/deps/compliance/commands/src/audit/interactiveAuditFix.ts (+3 -2)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 11306,
+      "title": "fix(config): print config warnings when config loading fails",
+      "url": "https://github.com/pnpm/pnpm/pull/11306",
+      "author": "michkot",
+      "mergedAt": "2026-10-05T20:48:07Z",
+      "labels": [
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to pnpm/pnpm#11298. When config loading fails, pnpm now prints the config warnings it had already collected. For example, an unset `${VAR}` inside an otherwise invalid `_auth` value now shows the \"Failed to replace env in config\" warning next to the `ERR_PNPM_AUTH_INVALID_BASE64` error, which explains the failure.\n\n## What changed\n\n1. `getConfig()` in `@pnpm/config.reader` accepts an optional `warnings` array and pushes warnings into it as they are found, so they survive a thrown error.\n2. The `pnpm` CLI wrapper passes that array and prints it in a `finally` block.\n3. The dlx config path (`onlyInheritDlxSettingsFromLocal`) waits for both of its loads with `Promise.allSettled` before collecting their warnings, and prints a warning the two loads share only once.\n\nThe earlier version of this PR also changed the `ERR_PNPM_AUTH_INVALID_BASE64` hint for values containing `${`. That part was dropped: on current main an unset `${VAR}` expands to an empty string and the credential is skipped, so the original \"Invalid character\" crash no longer reproduces. The only `${` that still reaches credential parsing is an escaped literal `\\${VAR}`, where a hint to set the variable would be wrong.\n\n## Parity note\n\npnpm v12 has the same bug: with `//registry.npmjs.org/:_auth=${UNSET}:not-base64` in the user `.npmrc`, `pnpm install` fails with `ERR_PNPM_AUTH_INVALID_BASE64` and prints no \"Failed to replace env\" warning. The `.npmrc` warnings are collected on `Config::npmrc_warn\n…(truncated)",
+      "files": [
+        "pnpm11/config/reader/src/index.ts (+17 -4)",
+        "pnpm11/config/reader/src/loadNpmrcFiles.ts (+3 -1)",
+        "pnpm11/pnpm/src/getConfig.ts (+24 -20)",
+        ".changeset/auth-config-errors-and-warnings.md (+6 -0)",
+        "pnpm11/config/reader/test/index.ts (+39 -0)",
+        "pnpm11/pnpm/test/getConfig.test.ts (+37 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 16623,
+      "title": "fix(unpublish): enforce path segment boundary when matching registry path",
+      "url": "https://github.com/pnpm/pnpm/pull/16623",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T21:20:29Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nEnsure path-scoped registry URLs enforce a trailing slash boundary when deriving tarball deletion pathnames in unpublish, preventing accidental prefix matching against sibling path segments.\nCloses https://github.com/pnpm/tasks/issues/94\n\n- In v11 (`pnpm11/registry-access/commands/src/unpublish.ts`), normalize `registryPath` with a trailing slash boundary in `getTarballPathname`.\n- In v12 (`pnpm/crates/cli/src/cli_args/unpublish.rs`), normalize `registry_path` with a trailing slash boundary in `tarball_pathname`.\n- Add unit tests verifying sibling prefixes sharing a prefix are not matched in both TypeScript and Rust.\n\n## Squash Commit Body\n\n```text\nEnsure path-scoped registry URLs enforce a trailing slash boundary\nwhen deriving tarball deletion pathnames in unpublish, preventing\naccidental prefix matching against sibling path segments.\n\nCloses https://github.com/pnpm/tasks/issues/94\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n\n---\n*Generated by Antigravity (model: inherit)*\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16623?autoLogin=true&ref=codesmith_pr_footer\"><picture\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/unpublish.rs (+4 -1)",
+        "pnpm/crates/cli/src/cli_args/unpublish/tests.rs (+16 -0)",
+        "pnpm11/registry-access/commands/src/unpublish.ts (+6 -3)",
+        ".changeset/fix-unpublish-registry-path-boundary.md (+7 -0)",
+        "pnpm11/registry-access/commands/test/unpublish.ts (+11 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 16624,
+      "title": "fix(lockfile-verification): accept custom resolutions under name and version keys",
+      "url": "https://github.com/pnpm/pnpm/pull/16624",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T21:21:20Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAllow custom resolutions (`type: \"custom:*\"`) under `name@version` keys during lockfile verification. Previously, `is_registry_shaped_resolution` returned `false` for `LockfileResolution::Custom`, causing installs on fresh machines or CI without a verification cache to fail with `ERR_PNPM_RESOLUTION_SHAPE_MISMATCH`.\n\nCustom resolutions can only be materialized by a project-configured custom fetcher, which owns its own trust decision (`allowBuilds` included). This matches v11's `isRegistryShapedResolution`.\n\nCloses pnpm/tasks#108\n\n## Squash Commit Body\n\n```text\npnpm v12 rejected a name@version lockfile entry backed by a custom:*\nresolution with ERR_PNPM_RESOLUTION_SHAPE_MISMATCH when no cached\nverification verdict existed for the lockfile (e.g. in fresh CI clones).\n\nIn is_registry_shaped_resolution (pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions.rs),\nreturn true for LockfileResolution::Custom, matching v11's\nisRegistryShapedResolution. Custom resolver protocols can only be\nmaterialized by a project-configured custom fetcher, which owns its own\ntrust decision.\n\nAdd a unit test in pnpm-lockfile-verification and update the custom_fetchers\nintegration test to wipe the verification cache before running the frozen install.\n\nCloses pnpm/tasks#108\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemen\n…(truncated)",
+      "files": [
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions.rs (+5 -5)",
+        ".changeset/custom-resolution-shape.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/custom_fetchers.rs (+2 -1)",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions/tests/streaming.rs (+32 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16621,
+      "title": "fix(lockfile): let --fix-lockfile repair importer references with no snapshot",
+      "url": "https://github.com/pnpm/pnpm/pull/16621",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T21:22:15Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm install --fix-lockfile` failed with `ERR_PNPM_LOCKFILE_MISSING_DEPENDENCY` on a lockfile whose importer references a snapshot that does not exist, the damage that error's own hint recommends `--fix-lockfile` for. Regression in 12.8.0 from pnpm/pnpm#15718.\n\nThe fresh install path spawns a pre-resolve verification gate on the loaded lockfile, and that gate runs the importer-snapshot-link check before the repair happens. The gate now takes a `repairs_lockfile` option: for the `FixLockfile` seed policy it skips the snapshot-link check, still rejects invalid dependency names, and still runs the resolution-policy verifiers. Frozen and up-to-date installs keep the full check, so plain `pnpm install` still fails and points at `--fix-lockfile`, which now works.\n\nv11 is unaffected: pnpm/pnpm#15718 changed only the Rust CLI.\n\nCloses pnpm/pnpm#16618\n\n## Squash Commit Body\n\n```text\nThe pre-resolve verification gate ran the offline structural checks,\nincluding the importer-snapshot-link check added in pnpm/pnpm#15718,\nagainst the lockfile that `pnpm install --fix-lockfile` is about to\nrepair. A dangling importer reference, the exact damage the error's\nhint sends users to `--fix-lockfile` for, therefore failed the repair\nwith ERR_PNPM_LOCKFILE_MISSING_DEPENDENCY.\n\n`VerifyLockfileResolutionsOptions` gains `repairs_lockfile`. When set,\nthe gate skips the snapshot-link check but still rejects invalid\ndependency names and runs the resolution-policy verifiers. The fresh\ninstall\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/verification.rs (+1 -0)",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions.rs (+15 -1)",
+        "pnpm/crates/package-manager/src/install.rs (+3 -0)",
+        "pnpm/crates/package-manager/src/install/materialize.rs (+4 -0)",
+        ".changeset/fix-lockfile-repairs-missing-snapshot.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/install/lockfile.rs (+47 -0)",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions/tests/lockfile.rs (+35 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16619,
+      "title": "fix(packlist): prevent escaping directory symlinks and path traversals in bundled dependencies",
+      "url": "https://github.com/pnpm/pnpm/pull/16619",
+      "author": "zkochan",
+      "mergedAt": "2026-10-05T21:32:43Z",
+      "labels": [
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPrevent bundled dependencies from traversing directory symlinks that escape the package root or packaging files outside the root directory.\nCloses https://github.com/pnpm/tasks/issues/83\nCloses https://github.com/pnpm/tasks/issues/93\n\n- Validates bundled dependency names in `buildRootTree` and `getNestedBundledDeps` via `isSafeBundleName`.\n- In `isInternalFileOrSymlink`, ensures non-symlink regular files do not resolve through escaping directory symlinks (`!realTargetEscapes(pkgDir, absPath, false)`).\n- In `getStatIfContained` (`@pnpm/store.cafs`), checks `fs.realpathSync` for files to guarantee they do not resolve outside the package root directory.\n- Note: in pnpm v12 (Rust), `admitted_bundle` already validates `is_safe_bundle_name` and checks `fs::canonicalize(&dep_dir).starts_with(walk.boundary)`, so this fix is specific to v11.\n\n## Squash Commit Body\n\n```text\nValidate bundled dependency names with isSafeBundleName to prevent path traversal in bundleDependencies.\nEnsure files resolving through directory symlinks do not escape the package root in @pnpm/fs.packlist and @pnpm/store.cafs.\n\nCloses https://github.com/pnpm/tasks/issues/83\nCloses https://github.com/pnpm/tasks/issues/93\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if \n…(truncated)",
+      "files": [
+        "pnpm11/fs/packlist/src/index.ts (+12 -12)",
+        "pnpm11/store/cafs/src/addFilesFromDir.ts (+12 -0)",
+        ".changeset/fix-bundled-dependencies-symlink-traversal.md (+7 -0)",
+        "pnpm11/fetching/git-fetcher/test/index.ts (+41 -0)",
+        "pnpm11/store/cafs/test/symlinks.test.ts (+18 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":13512,"title":"perf(resolver): adopt the indexed pnpm-meta-v1 metadata mirror with lazy version hydration","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":16625,"title":"fix(update): apply savePrefix when rewriting a specifier","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16626,"title":"fix(config): print .npmrc warnings when the config fails to load","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16622,"title":"fix: record registry metadata, not the store's package.json, in the lockfile","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16629,"title":"fix(cmd-shim): tolerate dangling target directories","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16631,"title":"fix(network): serve queued metadata before downloads at the maxSockets cap","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16630,"title":"refactor(resolver): drop the unused raw-body field from metadata fetch results","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":9594,"title":"fix: list show correct pkg path when nodeLinker is hoisted","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16617,"title":"fix(manifest-utils): validate saveType to prevent prototype pollution","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16633,"title":"fix(config): redact userinfo in ignored project .npmrc key warnings","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16620,"title":"fix: prune stale download and tarball spill directories","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16634,"title":"fix(executor): allow children to break away from the cleanup job on Windows","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16636,"title":"fix(setup): keep $PNPM_HOME/bin first on PATH in login shells","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16637,"title":"chore(release): 11.28.5, pacquet 12.10.0","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16640,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16644,"title":"fix(loaded-linker): materialize runtimes and ignore bundled node_modules files","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16639,"title":"fix(install): keep catalog entries the lockfile records on a frozen install","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16643,"title":"fix(esm-loader): resolve bundled dependencies of stored packages","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16647,"title":"fix(resolving-npm-resolver): exclude permit queueing from the slow-request warning","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16651,"title":"fix(loaded-linker): keep generated files inside node_modules","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16650,"title":"fix(workspace): skip nested checkouts when discovering Cargo and Python projects","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16649,"title":"fix(install): repair an incomplete global virtual store slot the current lockfile records","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":6784,"title":"fix: keep deprecated and hasBin in the lockfile on install --fix-lockfile","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16648,"title":"fix(switch): relink pnpm bins that an older pnpm linked into the store","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16645,"title":"fix(pnpr-fixtures): accept a fixture tree a racing publisher already removed","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16661,"title":"perf(esm-loader): index a package's files on first use","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":16658,"title":"fix(resolver): don't fail on changed overrides when an optional peer is locked to an npm alias","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16662,"title":"fix(napi): check only the lockfile's patches on rebuild","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16664,"title":"chore(release): pacquet 12.10.1","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16671,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":15505,"title":"chore: set autoDedupe to true","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16673,"title":"fix(esm-loader): stop on Node.js versions the store loader cannot serve","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16665,"title":"fix(cargo): include the vendored sources config as optional","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16674,"title":"fix(deploy): record the deploy's own dedupe settings in its lockfile","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16663,"title":"fix(deps.graph-builder): relink a global virtual store slot the current lockfile records","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16668,"title":"fix(verify): stop lockfile verification from keeping every version's manifest","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16678,"title":"fix: hardlink store files whose mode differs from the umask only in write bits","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16676,"title":"fix(config): switch to the pinned pnpm past unreadable workspace settings","hint":"fix","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}

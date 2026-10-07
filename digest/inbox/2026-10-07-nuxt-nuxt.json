@@ -1,0 +1,327 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-04T21:33:45Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.0",
+      "publishedAt": "2026-10-05T22:11:57Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v4.6.0",
+      "name": "v4.6.0",
+      "publishedAt": "2026-10-05T22:11:57Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.0",
+      "prerelease": false,
+      "body": "> v4.6.0 is the next minor release.\n\n## 📣 Some news\n\n### 🖥️ Nuxt CLI v4\n\nAlongside the release of Nuxt v4.6, today also brings a new major release of the Nuxt CLI: **`@nuxt/cli` v4**. It ships as a dependency of `nuxt`, so you'll get it automatically when you upgrade.\n\nMost of what's new is in `nuxt dev`:\n\n- **an interactive terminal UI**, showing URLs, startup progress and keyboard shortcuts, with panels to dive into error logs, routes, network requests and more\n- **the dev server gives you more info**, such as why it reloaded or restarted, which `nuxt.config` keys changed, where the time went during a slow start or build, and how long each module took to set up\n- **a CLI-level error channel** rendered with `my-bad` (see below), powering things like automatically reloading when a syntax error in `nuxt.config.ts` is fixed\n- **a lock file** in `.nuxt/`, which lets a second `nuxt dev` (say, one started by an agent) take over or defer to the one you started, and powers new `nuxt curl` and `nuxt task` commands that talk to the running server\n\nThere's also a new `nuxt docs \"<query>\"` search, and `nuxt preview --takeover` can replace a running preview server. And in general `nuxt/cli` is a ***lot*** smaller and starts a ***lot*** faster:\n\n| | v3.37 | v4.0 | |\n| --- | --- | --- | --- |\n| `@nuxt/cli` install size | 13.1 MB | 3.5 MB | **-73%** |\n| `@nuxt/cli` dependencies | 70 | 31 | **-56%** |\n| `nuxt dev`: first paint | 330 ms | 50 ms | **6.6x faster** |\n| `nuxt dev`: port bound | 338 ms | 104 ms | **3.2x faster** |\n| `nuxt dev`: memory at rest (Linux) | 630 MB | 440 MB | **-30%** |\n\n<img width=\"903\" height=\"638\" alt=\"nuxt-dev\" src=\"https://github.com/user-attachments/assets/426fe6f8-736e-410b-9129-d179f1043021\" />\n\nAlthough this is a major version, none of the changes should be breaking for Nuxt v4 users: we require Node.js v22.21+, v24.11+ or v26+, we drop `nuxt init` and only support `npm create nuxt@latest`, and Nuxt 2 and `@nuxt/bridge` are no longer supported.\n\n👉 **Check out the full [Nuxt CLI v4 release notes](https://github.com/nuxt/cli/releases/tag/v4.0.0) for everything that's changed.**\n\n### 💡 A server-agnostic Nuxt\n\nThe biggest thing about this release is our move towards making Nuxt server-agnostic.\n\nI feel that freedom of choice is very much a fundamental value of the web, and one that unites the whole Nuxt team.\n\nYou can use `pages/` (with vue-router) or not. You can use Vite, webpack or Rspack to bundle your code. You can pick from dozens of providers to deploy to, pick any image or font provider, choose any database adapter. In every case, the framework is the same.\n\nThe server side was different. `#app` composables imported h3 types, server code imported from `h3` and `nitropack`, and every module that touched the server was tied to whichever major version of those packages Nuxt happened to depend on.\n\nThis has become particularly clear as we have been upgrading to new majors of h3 and nitro, which ship breaking changes with a casc\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 36459,
+      "title": "fix(nuxt): resolve anchor hrefs through the router",
+      "url": "https://github.com/nuxt/nuxt/pull/36459",
+      "author": "danielroe",
+      "mergedAt": "2026-10-05T14:28:02Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis is a bunch of changes that aligns the universal router (when there is no `pages/` directory) and vue-router\n\nit also fixes a couple of issues with the router, and speeds up the common case of rendering non-absolute links (absolute links are slightly more costly)",
+      "files": [
+        "packages/nuxt/src/app/components/nuxt-link.ts (+15 -32)",
+        "packages/nuxt/src/app/composables/router.ts (+8 -8)",
+        "packages/nuxt/src/app/middleware/route-rules.ts (+2 -2)",
+        "packages/nuxt/src/app/plugins/router.ts (+44 -15)",
+        "packages/nuxt/src/app/utils.ts (+50 -0)",
+        "pnpm-lock.yaml (+10 -0)",
+        "packages/nuxt/test/app-url-safety.test.ts (+68 -0)",
+        "test/basic.test.ts (+47 -0)",
+        "test/bundle.test.ts (+3 -3)",
+        "test/fixtures/basic/app/pages/parent/link-state.vue (+30 -0)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 36462,
+      "title": "chore: remove `CLAUDE.md`",
+      "url": "https://github.com/nuxt/nuxt/pull/36462",
+      "author": "iiio2",
+      "mergedAt": "2026-10-06T10:28:30Z",
+      "labels": [
+        "🧹 p1-chore",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 36470,
+      "title": "perf(nuxt): use `@nuxt/devtools-onboard` as a minimal devtools shim",
+      "url": "https://github.com/nuxt/nuxt/pull/36470",
+      "author": "antfu",
+      "mergedAt": "2026-10-06T11:40:20Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\n`@nuxt/devtools-onboard` is a new package with a minimal install footprint (50kb), to make `@nuxt/devtools` easy to opt-in, without paying the full install size (~50MB, including Vite and Vue DevTools).\n\nhttps://github.com/user-attachments/assets/1412381d-095d-43f3-a991-a812e8d498a5",
+      "files": [
+        "knip.json (+1 -1)",
+        "packages/nuxt/package.json (+1 -1)",
+        "packages/nuxt/src/core/nuxt.ts (+2 -2)",
+        "pnpm-lock.yaml (+54 -333)",
+        "pnpm-workspace.yaml (+2 -1)",
+        "packages/kit/test/resolve.test.ts (+1 -1)",
+        "packages/nuxt/test/load-nuxt.test.ts (+1 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36476,
+      "title": "fix(vite): detect enclosing string delimiter in inline style urls",
+      "url": "https://github.com/nuxt/nuxt/pull/36476",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T12:42:30Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves https://github.com/nuxt/nuxt/issues/36471\n\n### 📚 Description\n\nthis uses `js-tokens` to detect the delimiter properly in inline style urls, which should catch backticks",
+      "files": [
+        "packages/vite/src/plugins/public-dirs.ts (+24 -18)",
+        "packages/vite/test/public-dirs.test.ts (+14 -0)",
+        "test/fixtures/dynamic-paths/app/pages/inline-styles.vue (+3 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36478,
+      "title": "fix(nuxt): export types reachable from async data composables",
+      "url": "https://github.com/nuxt/nuxt/pull/36478",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T13:21:58Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\na regression from https://github.com/nuxt/nuxt/pull/35797 - we didn't export types that were required to define/type useAsyncData and useFetch...\n\nspotted in https://github.com/nuxt/module-builder\n\nthis now exports the types we need",
+      "files": [
+        "packages/nuxt/src/app/composables/addons.ts (+3 -3)",
+        "packages/nuxt/src/app/composables/asyncData.ts (+3 -1)",
+        "packages/nuxt/src/app/composables/index.ts (+3 -3)",
+        "packages/nuxt/src/app/index.ts (+1 -1)",
+        "test/fixtures/basic-types/app/app-types.ts (+17 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36479,
+      "title": "fix(kit): align semantic version regexp with nightly version format",
+      "url": "https://github.com/nuxt/nuxt/pull/36479",
+      "author": "KazariEX",
+      "mergedAt": "2026-10-06T13:44:47Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n*none*\n\n### 📚 Description\n\nIt follows up danielroe/uppt#75.",
+      "files": [
+        "packages/kit/src/compatibility.ts (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36480,
+      "title": "fix(nuxt,vite): disable dev error broadcast if `BroadcastChannel` throws",
+      "url": "https://github.com/nuxt/nuxt/pull/36480",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T14:09:01Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\ntogether with https://github.com/nuxt/cli/pull/1600, resolves https://github.com/nuxt/nuxt/issues/36469\n\n### 📚 Description\n\nthis adds handling for BroadcastChannel throwing (which it does on stackblitz)",
+      "files": [
+        "packages/nuxt/src/runtime/server/dev-error/index.ts (+15 -4)",
+        "packages/vite/src/dev-errors.ts (+2 -5)",
+        "packages/nuxt/test/dev-error-broadcast.test.ts (+46 -0)",
+        "packages/vite/test/dev-errors.test.ts (+22 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 36482,
+      "title": "fix(nitro): keep `buildAssetsDir` prefix on requests -> nitro dev handlers",
+      "url": "https://github.com/nuxt/nuxt/pull/36482",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T16:15:55Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nhttps://github.com/nitrojs/nitro/pull/4734\n\n### 📚 Description\n\ndebugging an issue migrating nuxt/fonts.\n\nthe issue is an upstream one in nitro, but this adds a plugin to hotfix it in nuxt, namely a small dev-only vite plugin, registered just ahead of `nitro/vite`, which remembers `req.url` before vite's middlewares run and restores it afterwards, so nitro matches the correct URL ...",
+      "files": [
+        "packages/nitro-server/src/vite.ts (+32 -0)",
+        "test/fixtures/nitro-vite-environment/modules/dev-handlers.ts (+13 -0)",
+        "test/nitro-vite-environment.test.ts (+15 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36487,
+      "title": "fix(schema): ignore `.wrangler` directory",
+      "url": "https://github.com/nuxt/nuxt/pull/36487",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T17:07:44Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nminiflare writes to `.wrangler/state/v3/.../*.sqlite-wal` on every request, which the vite watcher picks up, and `DevErrorsPlugin` clears a runtime report on any `hotUpdate`. so the page sees its report cleared, reloads, renders the error again (and miniflare writes again) ... and so on.\n\nthis now ignores that directory",
+      "files": [
+        "packages/schema/src/config/common.ts (+1 -1)",
+        "packages/kit/test/ignore.test.ts (+10 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36491,
+      "title": "fix(vite-server): work with deploy target plugins in dev",
+      "url": "https://github.com/nuxt/nuxt/pull/36491",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T20:08:03Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nreported by @Barbapapazes\n\n### 📚 Description\n\nusing `@nuxt/vite-server` with the cloudflare plugin, `nuxt dev` didn't serve the app or files in `public/`:\n\nthis was because the cloudflare plugin registered a post middleware that responded to every request reaching it, and the document and public assets were handled _after_ the whole middleware stack of vite...\n\nso we do two things:\n\n1. we handle public assets + (with `ssr: false`) any navigation or request accepting `text/html` ahead of other plugins' post middlewares\n2. in dev, we now resolve `#server-entry` to the same render it does in a build, so the target's environment can run it from its own module graph. Nuxt's runtime deps are excluded from that environment's dep optimizer, as they ship ESM and otherwise get discovered mid-request, triggering a reload",
+      "files": [
+        "packages/vite-server/src/dev-errors.ts (+43 -0)",
+        "packages/vite-server/src/dev.ts (+80 -26)",
+        "packages/vite-server/src/index.ts (+5 -7)",
+        "packages/vite-server/src/runtime/dev-error.ts (+57 -8)",
+        "packages/vite-server/src/runtime/dev-handler.ts (+0 -7)",
+        "packages/vite-server/src/runtime/remote-dev-error.ts (+29 -0)",
+        "packages/vite-server/src/runtime/renderer.ts (+7 -4)",
+        "docs/3.guide/6.going-further/8.builders.md (+2 -0)",
+        "test/fixtures/vite-server-cloudflare/app/pages/boom.vue (+7 -0)",
+        "test/fixtures/vite-server-cloudflare/app/pages/runtime.vue (+9 -0)"
+      ],
+      "filesTotal": 14
+    },
+    {
+      "number": 36490,
+      "title": "fix(nitro): resolve symlinked compat scope paths",
+      "url": "https://github.com/nuxt/nuxt/pull/36490",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T21:01:47Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted that the path matching here in the nitro v2 compat code wasn't right and might lead to bugs when used with symlinks",
+      "files": [
+        "packages/nitro-server/src/compat.ts (+53 -15)",
+        "packages/nitro-server/test/compat.test.ts (+120 -10)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36483,
+      "title": "feat(nuxt): add `nuxt.request` tracing channel",
+      "url": "https://github.com/nuxt/nuxt/pull/36483",
+      "author": "logaretm",
+      "mergedAt": "2026-10-06T21:17:08Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Switching to `@nuxt/vite-server` drops the request spans srvx and h3 used to publish, leaving the `nuxt.*` spans without a parent.\n\nThis PR adds a `nuxt.request` tracing channel around the renderer's `fetch` so it works the same with any server builder or runtime. This means Nitro setups will get one extra span which is harmless, but all other setups will get the same hirarchy self contained within Nuxt events.\n\nI added a renderer test that checks `nuxt.render` nests inside `nuxt.request` and that the app event is the one published.\n\n⚠️ Note: Something to keep in mind is as it currently stands, the vite-server doesn't support api only routes, so the channel may need to move to a different place or re-emitted for these use-cases to cover all HTTP paths.\n\n### Benchmarks\n\nRunning this on the 3 main cases shows that there almost no overhead across configuration, any overhead will come from the subscriber workload when an actual APM is present.\n\nRendering `/` on the standalone renderer fixture, median of 3 runs:\n\n| | mean | req/s |\n|---|---|---|\n| tracing off | 114.9 µs | 10,373 |\n| tracing on, no subscribers | 115.1 µs | 10,309 |\n| tracing on, no-op subscriber | 112.7 µs | 10,521 |\n\n### Demo\n\nListening to the full Nuxt stack of events via the Sentry SDK including the new channel while on the new vite server yeilds this trace:",
+      "files": [
+        "packages/nuxt/src/app/internal/tracing.ts (+2 -0)",
+        "packages/nuxt/src/runtime/server/renderer/index.ts (+5 -1)",
+        "test/renderer/tracing-channel.test.ts (+63 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36489,
+      "title": "fix(vite-server): include the request in dev error reports",
+      "url": "https://github.com/nuxt/nuxt/pull/36489",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T21:45:50Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted an issue with vite-server error reports - this attributes them properly to the request that initiated them",
+      "files": [
+        "packages/vite-server/src/runtime/dev-error.ts (+3 -2)",
+        "test/vite-server-dev-error.test.ts (+6 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36493,
+      "title": "fix(nitro): register each dev server handler once",
+      "url": "https://github.com/nuxt/nuxt/pull/36493",
+      "author": "danielroe",
+      "mergedAt": "2026-10-06T22:06:09Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted that we were registering dev handlers twice 🤦",
+      "files": [
+        "packages/nitro-server/src/index.ts (+2 -2)",
+        "packages/nitro-server/src/registrations.ts (+10 -0)",
+        "packages/nitro-server/test/registrations.test.ts (+13 -1)"
+      ],
+      "filesTotal": 3
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 2
+    }
+  }
+}

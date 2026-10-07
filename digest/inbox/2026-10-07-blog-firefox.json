@@ -1,0 +1,19 @@
+{
+  "kind": "blog",
+  "id": "firefox",
+  "title": "Firefox リリースノート",
+  "relatedRepo": null,
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "posts": [
+    {
+      "title": "Firefox 157.0.1",
+      "url": "https://www.firefox.com/firefox/157.0.1/releasenotes/",
+      "publishedAt": "2026-10-06T00:00:00.000Z",
+      "versions": [
+        "157.0.1"
+      ],
+      "text": "## 157.0.1 Firefox Release\n\nOctober 6, 2026\n\nVersion 157.0.1, first offered to Release channel users on October 6, 2026\n\n### Fixed\n\n-\n\nFixed downloads failing on macOS when Firefox is set to ask where to save files but doesn't have permission to access the Downloads folder. (Bug 2077390)\n\n-\n\nFixed the sidebar getting stuck on the Bookmarks or AI Chatbot panel for some users. (Bug 2076296)\n\n-\n\nFixed the Restore from Backup option not appearing during onboarding on Windows. (Bug 2073401)\n\n-\n\nSecurity fix.\n\n-\n\nReference link to 157.0 release notes."
+    }
+  ],
+  "errors": []
+}

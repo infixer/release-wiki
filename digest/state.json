@@ -2,13 +2,13 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-10-02T17:37:08Z",
+      "lastMergedAt": "2026-10-06T17:23:47Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-04T23:02:34Z",
-      "lastReleaseAt": "2026-10-04T23:45:10Z"
+      "lastMergedAt": "2026-10-06T23:46:46Z",
+      "lastReleaseAt": "2026-10-06T23:52:54Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
@@ -17,37 +17,37 @@
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-10-04T21:33:45Z",
-      "lastReleaseAt": "2026-09-24T08:51:34Z"
+      "lastMergedAt": "2026-10-06T22:06:09Z",
+      "lastReleaseAt": "2026-10-05T22:11:57Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-10-03T00:45:44Z",
+      "lastMergedAt": "2026-10-07T00:07:12Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-03T17:49:31Z",
+      "lastMergedAt": "2026-10-06T23:22:13Z",
       "lastReleaseAt": "2026-09-30T19:10:03Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-10-04T20:16:41Z",
-      "lastReleaseAt": "2026-09-28T10:29:50Z"
+      "lastMergedAt": "2026-10-06T19:14:10Z",
+      "lastReleaseAt": "2026-10-05T11:04:25Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
-      "lastMergedAt": "2026-10-01T05:23:05Z",
-      "lastReleaseAt": "2026-10-03T23:07:17Z"
+      "lastMergedAt": "2026-10-07T00:13:58Z",
+      "lastReleaseAt": "2026-10-06T18:59:30Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-10-04T12:38:29Z",
+      "lastMergedAt": "2026-10-06T09:12:19Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
       "fullName": "w3c/aria",
-      "lastMergedAt": "2026-10-02T08:38:58Z",
+      "lastMergedAt": "2026-10-05T16:24:42Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/wcag": {
@@ -67,12 +67,12 @@
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-10-04T22:51:12Z",
-      "lastReleaseAt": "2026-10-03T20:48:54Z"
+      "lastMergedAt": "2026-10-07T00:21:50Z",
+      "lastReleaseAt": "2026-10-06T17:37:30Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-10-02T16:10:50Z",
+      "lastMergedAt": "2026-10-06T13:07:57Z",
       "lastReleaseAt": "2026-09-30T11:25:52Z"
     },
     "w3c/csswg-drafts": {
@@ -89,8 +89,8 @@
     },
     "openai/codex": {
       "fullName": "openai/codex",
-      "lastReleaseAt": "2026-10-04T15:42:32Z",
-      "lastMergedAt": "2026-10-04T23:07:26Z"
+      "lastReleaseAt": "2026-10-06T21:58:26Z",
+      "lastMergedAt": "2026-10-07T00:29:19Z"
     }
   },
   "blogs": {
@@ -108,6 +108,7 @@
     },
     "firefox": {
       "seen": [
+        "https://www.firefox.com/firefox/157.0.1/releasenotes/",
         "https://www.firefox.com/firefox/157.0/releasenotes/",
         "https://www.firefox.com/firefox/156.0.1/releasenotes/",
         "https://www.firefox.com/firefox/156.0/releasenotes/",
@@ -930,6 +931,7 @@
     },
     "anthropic": {
       "seen": [
+        "https://www.anthropic.com/news/cyber-verification-program",
         "https://www.anthropic.com/news/claude-frontier-academy",
         "https://www.anthropic.com/news/barclays-scales-claude",
         "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",

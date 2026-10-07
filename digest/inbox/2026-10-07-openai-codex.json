@@ -1,0 +1,718 @@
+{
+  "kind": "repo",
+  "repo": "openai/codex",
+  "branch": "main",
+  "collectedAt": "2026-10-07T00:47:26Z",
+  "range": {
+    "from": "2026-10-04T23:07:26Z",
+    "to": "2026-10-07T00:47:26Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "rust-v0.160.1",
+      "publishedAt": "2026-10-05T18:29:37Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.160.1"
+    },
+    "prerelease": {
+      "tag": "rust-v0.162.0-alpha.17",
+      "publishedAt": "2026-10-06T21:58:26Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.162.0-alpha.17"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "rust-v0.162.0-alpha.14",
+      "name": "0.162.0-alpha.14",
+      "publishedAt": "2026-10-05T02:05:59Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.162.0-alpha.14",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.162.0-alpha.15",
+      "name": "0.162.0-alpha.15",
+      "publishedAt": "2026-10-05T13:10:52Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.162.0-alpha.15",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.160.1",
+      "name": "0.160.1",
+      "publishedAt": "2026-10-05T18:29:37Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.160.1",
+      "prerelease": false,
+      "body": "## Bug Fixes\n\n- Preserve `SYSTEMROOT`, `TEMP`, and `TMP` when launching remote stdio MCP servers with explicitly configured remote environment variables, allowing Unix hosts to retain the Windows executor's startup environment.\n\n## Changelog\n\n- [#51121](https://github.com/openai/codex/pull/51121): Backport Windows remote MCP environment preservation to 0.160."
+    },
+    {
+      "tag": "rust-v0.162.0-alpha.16",
+      "name": "0.162.0-alpha.16",
+      "publishedAt": "2026-10-05T21:37:19Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.162.0-alpha.16",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.161.0-alpha.13.1",
+      "name": "0.161.0-alpha.13.1",
+      "publishedAt": "2026-10-06T05:27:02Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.161.0-alpha.13.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.162.0-alpha.17",
+      "name": "0.162.0-alpha.17",
+      "publishedAt": "2026-10-06T21:58:26Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.162.0-alpha.17",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {"number":51061,"title":"Gate Guardian continuation tests on classifier request capture","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {
+      "number": 51063,
+      "title": "Honor prior cancellation before starting Codex delegates",
+      "url": "https://github.com/openai/codex/pull/51063",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T09:51:07Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Honor prior cancellation before starting Codex delegates\n\n## Why\n\nAn already-cancelled delegate spawn can report a runtime admission or startup error instead of `TurnAborted`, including when runtime shutdown has been requested.\n\n## What changed\n\nCheck the cancellation token before runtime admission and session startup so prior cancellation returns `TurnAborted` immediately after approval-policy validation.\n\n## Testing\n\nExtend the pre-cancelled spawn test to cover both normal operation and requested runtime shutdown, asserting `TurnAborted` within a one-second timeout.",
+      "files": [
+        "codex-rs/core/src/codex_delegate.rs (+4 -0)",
+        "codex-rs/core/src/codex_delegate_tests.rs (+39 -30)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 51064,
+      "title": "Ignore stale refresh responses in agents overview tests",
+      "url": "https://github.com/openai/codex/pull/51064",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T09:51:30Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Ignore stale refresh responses in agents overview tests\n\n## Why\n\nAborting a refresh task cannot retract a response already queued for delivery. The test helper could consume that stale response and return before the replacement refresh completed.\n\n## What changed\n\nMake `finish_overview_refresh` skip responses whose request ID does not match the active refresh. Extend the lifecycle test to queue an invalidated response before removing a task, exercising the wait for the replacement refresh.",
+      "files": [
+        "codex-rs/tui/src/app/agents_overview_actions_tests.rs (+12 -0)",
+        "codex-rs/tui/src/app/agents_overview_tests.rs (+4 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 51065,
+      "title": "Scope Guardian V2 response timing to snapshot sampling",
+      "url": "https://github.com/openai/codex/pull/51065",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T09:52:40Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Scope Guardian V2 response timing to snapshot sampling\n\n## What changed\n\nMeasure `responses_duration` directly around `sampler.sample()` in the snapshot classification path. Leave it unset for conversation classification instead of timing submission and waiting for the score.",
+      "files": [
+        "codex-rs/ext/guardian-v2/src/async_scorer/classification.rs (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 51067,
+      "title": "Use issuing-step context for Guardian MCP elicitation reviews",
+      "url": "https://github.com/openai/codex/pull/51067",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T10:09:14Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Use issuing-step context for Guardian MCP elicitation reviews\n\n## Why\n\nMCP elicitation reviews used turn-start context, which could omit remote environments that became ready before the tool invocation and use stale environment permissions.\n\n## What changed\n\nCapture the issuing step's Guardian review context with each live MCP invocation and reuse it for elicitation reviews. Fall back to turn context when no matching live invocation is available, and preserve the captured context for in-flight actions.\n\n## Testing\n\nExtend the deferred-executor regression test to cover MCP elicitations, checking that Guardian receives the newly ready remote environment and its denied paths, excludes stale local denied paths, and returns the denial to the parent model.",
+      "files": [
+        "codex-rs/core/src/guardian/mod.rs (+1 -1)",
+        "codex-rs/core/src/mcp_tool_call.rs (+21 -8)",
+        "codex-rs/core/src/mcp_tool_call_tests.rs (+21 -8)",
+        "codex-rs/core/src/session/mcp.rs (+22 -15)",
+        "codex-rs/core/src/session/session.rs (+2 -3)",
+        "codex-rs/core/tests/suite/guardian_mcp_elicitation.rs (+1 -1)",
+        "codex-rs/core/tests/suite/remote_env.rs (+44 -17)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 51070,
+      "title": "Preserve trusted-tool context in Guardian Decisions requests",
+      "url": "https://github.com/openai/codex/pull/51070",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T10:16:19Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Preserve trusted-tool context in Guardian Decisions requests\n\n## Why\n\nThe Decisions adapter rejected developer messages, including host-annotated trusted-tool context. Requests containing that context could not be classified.\n\n## What changed\n\nAppend developer text annotated with `TrustedTool::KIND` to the classification rubric, preserving its authority while keeping user evidence in the input messages. Accept only a single text part with a single matching annotation; continue rejecting other developer messages and unsupported evidence.\n\n## Testing\n\nAdd a regression test covering trusted-tool context alongside untrusted user text, plus rejection of incorrect roles, missing or mismatched annotations, multiple annotations or content parts, and image content.",
+      "files": [
+        "codex-rs/ext/guardian-v2/src/async_scorer/decisions.rs (+28 -5)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/decisions_tests.rs (+69 -0)",
+        "codex-rs/guardian-context/src/trusted_tool.rs (+6 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 51117,
+      "title": "Install full context in compaction replacement history",
+      "url": "https://github.com/openai/codex/pull/51117",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T16:10:46Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Install full context in compaction replacement history\n\n## Why\n\nManual, pre-turn, and post-turn compaction previously deferred rebuilding initial context until the next turn. Their saved replacement history could omit refreshed instructions and skill catalogs.\n\n## What changed\n\n- Install initial context during local and remote compaction, before the last real user message or summary, keeping the compaction summary last.\n- Persist matching full world-state and turn-context baselines with every replacement instead of retaining only partial extension metadata.\n- Build replacement context and recompute token usage for the current model even when the previous model performs compaction. Reuse that captured context for eligible current-model retries.\n- Capture manual compaction context centrally and propagate preparation errors to the task runner.\n\n## Testing\n\nUpdate assertions and snapshots for context ordering, refreshed instructions, resume and fork history, current-model checkpoint baselines, and cloud skill catalog retention across compaction and resume.",
+      "files": [
+        "codex-rs/core/src/compact.rs (+51 -68)",
+        "codex-rs/core/src/compact_model_fallback.rs (+19 -3)",
+        "codex-rs/core/src/compact_remote_v2.rs (+24 -37)",
+        "codex-rs/core/src/compact_tests.rs (+6 -1)",
+        "codex-rs/core/src/compact_token_budget.rs (+3 -18)",
+        "codex-rs/core/src/guardian/review_session_tests.rs (+2 -2)",
+        "codex-rs/core/src/guardian/tests.rs (+2 -2)",
+        "codex-rs/core/src/session/mod.rs (+16 -35)",
+        "codex-rs/core/src/session/tests.rs (+52 -70)",
+        "codex-rs/core/src/session/turn.rs (+72 -117)"
+      ],
+      "filesTotal": 28
+    },
+    {
+      "number": 51119,
+      "title": "Clarify incremental tool namespace updates in Responses Lite",
+      "url": "https://github.com/openai/codex/pull/51119",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T16:19:09Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Clarify incremental tool namespace updates in Responses Lite\n\n## Why\n\nIncremental namespace declarations contain only changed or added tools. Their descriptions need to make clear that previously declared tools remain available unless explicitly marked unavailable, and that redefinitions replace earlier definitions.\n\n## What changed\n\nAppend this guidance to updates of existing namespaces, preserving any namespace description. Leave initial declarations and catalog hashes unchanged.\n\n## Testing\n\nExtend unit and request-history coverage for the namespace hint, unchanged turns that append no tool definitions, and MCP tool removals that append a standalone notice without rewriting history or repeating the notice on the next turn.",
+      "files": [
+        "codex-rs/core/src/context/world_state/snapshots/codex_core__context__world_state__top_level_tools__tests__snapshots_namespace_transitions.snap (+1 -1)",
+        "codex-rs/core/src/context/world_state/top_level_tools.rs (+11 -0)",
+        "codex-rs/core/src/context/world_state/top_level_tools_tests.rs (+10 -2)",
+        "codex-rs/core/tests/suite/scenarios_incremental_tools.rs (+152 -3)",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__incremental_tools__incremental_tool_removals.snap (+54 -0)",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__incremental_tools__incremental_tools.snap (+7 -4)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 51126,
+      "title": "Add promise settlement streaming helpers to code mode",
+      "url": "https://github.com/openai/codex/pull/51126",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T16:58:46Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Add promise settlement streaming helpers to code mode\n\n## What changed\n\nExpose two JavaScript globals for consuming results as inputs settle:\n\n- `as_settled(promises)` returns an async iterator of fulfilled and rejected records in settlement order, preserving queued results while the consumer is busy.\n- `stream_settled(promises, emit)` delivers those records to a callback, awaiting each invocation and propagating callback errors.\n\nRecords include an `index`, a `status`, and either a `value` or a `reason`. Iterable inputs use positional indices; `Map` inputs retain their keys. Both helpers accept promises, thenables, and plain values.\n\n## Testing\n\nAdd runtime coverage for ordering, input types, object identity, callback behavior, early iteration exit, and termination. Add stdio and gRPC host tests for partial results across waits, plus a scenario snapshot verifying fulfilled and rejected records reach the model.",
+      "files": [
+        "codex-rs/code-mode-runtime/BUILD.bazel (+1 -0)",
+        "codex-rs/code-mode-runtime/src/runtime/globals.rs (+6 -0)",
+        "codex-rs/code-mode-runtime/src/runtime/settled.js (+67 -0)",
+        "codex-rs/code-mode-runtime/src/service_tests.rs (+2 -0)",
+        "codex-rs/code-mode-host/tests/settled.rs (+181 -0)",
+        "codex-rs/code-mode-runtime/tests/settled.rs (+257 -0)",
+        "codex-rs/core/tests/suite/scenarios.rs (+3 -0)",
+        "codex-rs/core/tests/suite/scenarios_code_mode_settled_helpers_tests.rs (+64 -0)",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__code_mode_settled_helpers__code_mode_settled_helpers.snap (+43 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 51133,
+      "title": "Allow Guardian Decisions to fall back to `OPENAI_API_KEY`",
+      "url": "https://github.com/openai/codex/pull/51133",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T17:24:21Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Allow Guardian Decisions to fall back to `OPENAI_API_KEY`\n\n## What changed\n\nUse `OPENAI_API_KEY` for the Guardian Decisions sampler when `CODEX_GUARDIAN_DECISIONS_API_KEY` is absent, the provider is `openai`, and no custom base URL is configured. Preserve dedicated-key precedence, including empty values, and do not fall back for other providers or custom base URLs.\n\n## Testing\n\nAdd a credential-selection test covering fallback, dedicated-key precedence, empty dedicated keys, and provider and base URL restrictions.",
+      "files": [
+        "codex-rs/ext/guardian-v2/src/async_scorer/startup.rs (+31 -10)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/startup_tests.rs (+32 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 51137,
+      "title": "Recover Guardian reviews from parent checkpoints",
+      "url": "https://github.com/openai/codex/pull/51137",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T17:35:40Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Recover Guardian reviews from parent checkpoints\n\n## Why\n\nReviewer compaction can invalidate previously admitted transcript evidence. When a parent checkpoint is available, restarting from that checkpoint preserves the captured parent context instead of relying on a lossy reviewer summary.\n\n## What changed\n\n- Restart an invalidated reviewer once from the action-time parent checkpoint, within the original review deadline.\n- Preserve fresh checkpoints during startup and fit review input using the existing budget selection.\n- Select transcript evidence from the checkpoint actually loaded by the reviewer. Track the transcript source so cursors remain valid across legacy-history eviction and reset when the source changes.\n- Resume transcript deltas after successful recovery, including authorization added after the parent checkpoint.\n\n## Testing\n\nAdd regression coverage for checkpoint recovery, post-checkpoint authorization, resumed deltas, and stopping after one restart. Extend history tests to cover both legacy retention and parent-checkpoint reuse, and update the checkpoint-migration snapshot.",
+      "files": [
+        "codex-rs/core/src/guardian/input_budget.rs (+56 -1)",
+        "codex-rs/core/src/guardian/mod.rs (+1 -0)",
+        "codex-rs/core/src/guardian/prompt.rs (+33 -7)",
+        "codex-rs/core/src/guardian/review_session.rs (+117 -27)",
+        "codex-rs/core/src/guardian/review_session_setup.rs (+84 -9)",
+        "codex-rs/core/src/guardian/review_session_tests.rs (+50 -0)",
+        "codex-rs/core/src/guardian/tests.rs (+12 -7)",
+        "codex-rs/core/src/session/turn.rs (+6 -0)",
+        "codex-rs/core/tests/suite/guardian_history.rs (+37 -5)",
+        "codex-rs/core/tests/suite/guardian_review.rs (+158 -70)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 51139,
+      "title": "Force fresh Guardian sessions for parent-checkpoint recovery",
+      "url": "https://github.com/openai/codex/pull/51139",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T17:36:49Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Force fresh Guardian sessions for parent-checkpoint recovery\n\n## Why\n\nA Guardian review restarting from the parent checkpoint must bypass cached reviewer sessions and snapshots, even when another review is using the cached session.\n\n## What changed\n\n- Add `ReviewerRequest::requires_fresh_session` and enable it for parent-checkpoint recovery.\n- Replace an idle cached session with a fresh reusable session, or start a fresh ephemeral session when the cached session is busy. Neither recovery path inherits a cached snapshot.\n- Reserve the review permit before validating a cached session and before exposing a newly spawned session to concurrent requests.\n\n## Testing\n\nAdd tests covering recovery with idle and busy cached sessions, verifying that recovery receives no cached snapshot and that subsequent reviews reuse the appropriate session.",
+      "files": [
+        "codex-rs/core/src/guardian/review_session_setup.rs (+8 -5)",
+        "codex-rs/ext/guardian-reviewer/src/pool.rs (+39 -11)",
+        "codex-rs/ext/guardian-reviewer/src/pool_tests.rs (+115 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 51140,
+      "title": "Isolate Guardian checkpoint recovery flags per review attempt",
+      "url": "https://github.com/openai/codex/pull/51140",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T17:37:14Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Isolate Guardian checkpoint recovery flags per review attempt\n\n## What changed\n\nGive the initial Guardian review and its checkpoint recovery attempt separate recovery flags instead of resetting a shared flag. Keep the single restart under the original review deadline.\n\nRepresent reviewer selection explicitly with `ReuseIfAvailable` and `FreshParentCheckpoint`, so recovery requires a fresh session and ignores reusable fork snapshots.",
+      "files": [
+        "codex-rs/core/src/guardian/input_budget.rs (+3 -4)",
+        "codex-rs/core/src/guardian/review_session_setup.rs (+26 -15)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 51156,
+      "title": "Send base instructions as Responses input messages",
+      "url": "https://github.com/openai/codex/pull/51156",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T18:53:07Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Send base instructions as Responses input messages\n\n## What changed\n\nMove base instructions from the top-level `instructions` field into a prefixed `developer` message in `input` for standard Responses requests, matching Responses Lite. Remove the field from HTTP and WebSocket request types and assign instruction messages stable IDs derived from the thread and instruction text.\n\n## Testing\n\nExtend standard and Responses Lite tests to cover instruction message serialization, stable IDs, and resume consistency. Update WebSocket tests to verify that changed instructions trigger a full request without `previous_response_id`.",
+      "files": [
+        "codex-rs/codex-api/src/common.rs (+0 -5)",
+        "codex-rs/codex-api/src/endpoint/responses_websocket.rs (+1 -2)",
+        "codex-rs/core/src/client.rs (+21 -28)",
+        "codex-rs/core/src/client_common_tests.rs (+0 -4)",
+        "codex-rs/core/src/client_tests.rs (+34 -11)",
+        "codex-rs/core/src/client_tool_metadata_tests.rs (+18 -11)",
+        "codex-rs/core/src/guardian/request_budget.rs (+0 -2)",
+        "codex-rs/core/src/session/snapshots/codex_core__codex_tests__fork_startup_context_then_first_turn_diff.snap (+6 -4)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/sampler.rs (+0 -1)",
+        "codex-rs/tui/src/snapshots/codex_tui__managed_worktree_tools__tests__model_tests__managed_worktree_model_creation.snap (+31 -15)"
+      ],
+      "filesTotal": 81
+    },
+    {
+      "number": 51157,
+      "title": "Enforce required environment skills before model inference",
+      "url": "https://github.com/openai/codex/pull/51157",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T18:54:33Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Enforce required environment skills before model inference\n\n## What changed\n\n- Accept per-environment `skills.required` lists through `environment/add` and `environments.toml`.\n- Before inference, require each named skill to be enabled and supplied by the selected environment. Missing skills fail the turn before a model request, including when environment setup fails.\n- Stop applying an environment's requirements after it is deselected. Exempt isolated Guardian reviewers, which have no skill catalog.\n\n## Testing\n\nAdd tests for available, missing, disabled, and wrong-environment skills, failed environment setup, recovery after deselection, and propagation of TOML requirements to the correct environment.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/json/ClientRequest.json (+15 -0)",
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.schemas.json (+15 -0)",
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.v2.schemas.json (+15 -0)",
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-experimental.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-stable.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/schema/typescript/v2/EnvironmentSkillsParams.ts (+9 -0)",
+        "codex-rs/app-server-protocol/schema/typescript/v2/index.ts (+1 -0)",
+        "codex-rs/app-server-protocol/src/protocol/common.rs (+5 -1)",
+        "codex-rs/app-server-protocol/src/protocol/v2/environment.rs (+12 -0)",
+        "codex-rs/app-server/src/request_processors/environment_processor.rs (+8 -1)"
+      ],
+      "filesTotal": 33
+    },
+    {"number":51158,"title":"Sign the PowerShell installer in Windows releases","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51184,"title":"Remove obsolete Guardian thread-context enables from tests","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {
+      "number": 51185,
+      "title": "Retry transient gRPC code-mode session admission failures",
+      "url": "https://github.com/openai/codex/pull/51185",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T22:19:10Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Retry transient gRPC code-mode session admission failures\n\n## Why\n\nTransient admission errors or connection resets can prevent a code-mode session from opening before any execution starts.\n\n## What changed\n\n- Retry `OpenSession` and the initial lease message on `Unavailable` or `ResourceExhausted`, with at most three attempts and 100 ms and 200 ms delays within a single startup deadline.\n- Classify HTTP connection and request failures as `Unavailable` so admission can recover from connection resets, while preserving error sources.\n- Keep retries limited to initial admission so established executions are never replayed.\n\n## Testing\n\nAdd gRPC integration tests covering transient status recovery, the retry limit, immediate failure for non-retryable statuses, and successful session execution after a connection reset.",
+      "files": [
+        "codex-rs/code-mode/src/grpc_session/mod.rs (+32 -15)",
+        "codex-rs/code-mode/src/grpc_session/transport.rs (+23 -7)",
+        "codex-rs/code-mode-host/tests/grpc.rs (+2 -0)",
+        "codex-rs/code-mode-host/tests/grpc/admission_tests.rs (+108 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":51186,"title":"Prevent stable release pointers from moving backward","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {
+      "number": 51188,
+      "title": "Record base instructions in incremental tool history",
+      "url": "https://github.com/openai/codex/pull/51188",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T22:20:53Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Record base instructions in incremental tool history\n\n## What changed\n\n- Record nonempty base instructions as a developer message after tool declarations at the start of each incremental tool context window, and omit the request-level `instructions` field.\n- Preserve this prefix when rebuilding history after local or remote compaction, while keeping the compaction summary last.\n- Count recorded base instructions once when estimating context usage and trimming tool outputs.\n\n## Testing\n\nAdd regression coverage for instruction placement, omission of request-level instructions, compaction ordering, and token accounting. Exercise remote compaction trimming with both request-level and recorded base instructions.",
+      "files": [
+        "codex-rs/core/src/compact.rs (+46 -12)",
+        "codex-rs/core/src/compact_remote_v2.rs (+8 -7)",
+        "codex-rs/core/src/compact_remote_v2_attempt.rs (+9 -1)",
+        "codex-rs/core/src/compact_tests.rs (+12 -6)",
+        "codex-rs/core/src/context/base_instructions.rs (+20 -1)",
+        "codex-rs/core/src/context/world_state/base_instructions.rs (+28 -0)",
+        "codex-rs/core/src/context/world_state/mod.rs (+14 -0)",
+        "codex-rs/core/src/context_manager/history.rs (+9 -2)",
+        "codex-rs/core/src/context_manager/history_tests.rs (+18 -0)",
+        "codex-rs/core/src/session/mod.rs (+26 -14)"
+      ],
+      "filesTotal": 21
+    },
+    {
+      "number": 51191,
+      "title": "Clean up Unix app-server control-socket startup lock files",
+      "url": "https://github.com/openai/codex/pull/51191",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T22:38:47Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Clean up Unix app-server control-socket startup lock files\n\n## Why\n\nUnix control-socket shutdown removes the socket and rendezvous link but leaves the startup lock file behind.\n\n## What changed\n\nKeep a removable startup lock with the control-socket guard and release the lock after publishing the rendezvous link. On cleanup, reacquire the lock and verify that the path still identifies the same file before removing it.\n\nUse nonblocking acquisition with asynchronous retries, checking file identity after acquisition to handle lock-file replacement.\n\n## Testing\n\nAdd tests for nonblocking lock contention and dangling symlink rejection, and extend the control-socket lifecycle test to verify that the lock file is removed on shutdown.",
+      "files": [
+        "codex-rs/app-server-transport/src/transport/unix_socket.rs (+117 -5)",
+        "codex-rs/app-server-transport/src/transport/unix_socket_tests.rs (+44 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 51192,
+      "title": "Wait for SIGCONT when resuming the TUI",
+      "url": "https://github.com/openai/codex/pull/51192",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T22:42:09Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Wait for SIGCONT when resuming the TUI\n\n## What changed\n\nInstall a temporary `SIGCONT` handler and unblock the signal during `Ctrl+Z` suspension. After sending `SIGTSTP`, wait for the handler to confirm resumption, returning a timeout error if no confirmation arrives within the bounded wait.\n\nRestore the previous signal handler and thread signal mask, resume terminal stderr handling, and reapply terminal modes even when suspension fails. Propagate signal setup, delivery, and restoration errors to the caller.",
+      "files": [
+        "codex-rs/tui/src/tui/job_control.rs (+70 -5)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":51193,"title":"Test thread archiving before the first turn","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {
+      "number": 51194,
+      "title": "Add browser extension request headers to config requirements",
+      "url": "https://github.com/openai/codex/pull/51194",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T22:52:30Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Add browser extension request headers to config requirements\n\n## What changed\n\nSupport `browser_use.extension.request_headers` as a list of `name`/`value` pairs and expose it through `config/requirements/read` as `browserUse.extension.requestHeaders`. Update the generated JSON schemas, TypeScript types, and Python models.\n\nPreserve header values, including template strings, verbatim. Higher-priority requirement layers replace the entire header list, including with an explicit empty list. Redact header values in Rust debug output while retaining them in API serialization.\n\n## Testing\n\nAdd coverage for parsing and malformed entries, extension scoping, empty-list overrides, API mapping and read responses, and debug redaction without changing serialized values.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.schemas.json (+39 -0)",
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.v2.schemas.json (+39 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ConfigRequirementsReadResponse.json (+39 -0)",
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-experimental.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-stable.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/schema/typescript/v2/BrowserUseExtensionRequirements.ts (+6 -0)",
+        "codex-rs/app-server-protocol/schema/typescript/v2/BrowserUseRequirements.ts (+2 -1)",
+        "codex-rs/app-server-protocol/schema/typescript/v2/RequestHeader.ts (+5 -0)",
+        "codex-rs/app-server-protocol/schema/typescript/v2/index.ts (+2 -0)",
+        "codex-rs/app-server-protocol/src/protocol/v2/config.rs (+29 -0)"
+      ],
+      "filesTotal": 22
+    },
+    {"number":51198,"title":"Allow concurrent release builds while serializing publication","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {
+      "number": 51200,
+      "title": "Upgrade Bazel to 9.2.0 and refresh the module lockfile",
+      "url": "https://github.com/openai/codex/pull/51200",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T23:14:05Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Upgrade Bazel to 9.2.0 and refresh the module lockfile\n\n## What changed\n\nUpdate `.bazelversion` from 9.0.0 to 9.2.0 and refresh\n`MODULE.bazel.lock`, including lockfile format version 28, registry hashes,\nmodule extension digests, and cached crate metadata.",
+      "files": [
+        ".bazelversion (+1 -1)",
+        "MODULE.bazel.lock (+18 -16)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 51202,
+      "title": "Distinguish namespace removals in incremental tool updates",
+      "url": "https://github.com/openai/codex/pull/51202",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T23:49:36Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Distinguish namespace removals in incremental tool updates\n\n## Why\n\nRemoving a whole namespace previously listed both the namespace and every member as unavailable tools.\n\n## What changed\n\nEmit separate namespace and individual-tool sections in one removal notice for Responses Lite. A removed namespace subsumes its members, with instructions allowing tools declared in a later update to become available again. Keep individual removal notices for tools in surviving namespaces and for built-ins.\n\n## Testing\n\nExpand unit tests and snapshots to cover mixed removals, empty catalogs, restoration, and replacing a namespace with a built-in of the same name. Extend the MCP refresh scenario to verify namespace removal and restoration, successful calls after restoration, preserved request history, and no repeated updates on unchanged turns.",
+      "files": [
+        "codex-rs/core/src/context/world_state/snapshots/codex_core__context__world_state__top_level_tools__tests__snapshots_namespace_transitions.snap (+51 -5)",
+        "codex-rs/core/src/context/world_state/top_level_tools.rs (+53 -6)",
+        "codex-rs/core/src/context/world_state/top_level_tools_tests.rs (+73 -18)",
+        "codex-rs/core/tests/suite/scenarios_incremental_tools.rs (+131 -10)",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__incremental_tools__incremental_tool_removals.snap (+30 -2)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 51203,
+      "title": "Make apply_patch preserve line endings unconditionally",
+      "url": "https://github.com/openai/codex/pull/51203",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-05T23:52:20Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Make apply_patch preserve line endings unconditionally\n\n## Why\n\nUpdating a CRLF file with `apply_patch` previously normalized its line endings to LF unless preservation was explicitly enabled. Preserve the file's existing line endings without requiring an opt-in.\n\n## What changed\n\n- Use line-ending-preserving updates for both tool calls and standalone `apply_patch` invocations, removing the legacy normalization mode.\n- Mark `apply_patch_preserve_line_endings` as removed.\n- Always set `CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS=1` in child environments for compatibility with older patch executables, overriding stale values.\n\n## Testing\n\nUpdate CLI, tool-call, shell-heredoc, and app-server tests to check CRLF preservation by default. Keep coverage for overriding stale compatibility environment values.",
+      "files": [
+        "codex-rs/app-server/src/request_processors/command_exec_processor.rs (+1 -1)",
+        "codex-rs/apply-patch/src/file_update.rs (+36 -167)",
+        "codex-rs/apply-patch/src/invocation.rs (+4 -48)",
+        "codex-rs/apply-patch/src/lib.rs (+3 -39)",
+        "codex-rs/apply-patch/src/seek_sequence.rs (+5 -34)",
+        "codex-rs/apply-patch/src/standalone_executable.rs (+1 -6)",
+        "codex-rs/arg0/src/lib.rs (+1 -6)",
+        "codex-rs/core/src/exec_env.rs (+8 -15)",
+        "codex-rs/core/src/exec_env_tests.rs (+2 -8)",
+        "codex-rs/core/src/tasks/user_shell.rs (+1 -1)"
+      ],
+      "filesTotal": 21
+    },
+    {
+      "number": 51206,
+      "title": "Record initialization analytics for resumed subagents",
+      "url": "https://github.com/openai/codex/pull/51206",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T00:16:34Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Record initialization analytics for resumed subagents\n\n## Why\n\nReloaded subagent threads did not emit initialization analytics, and subagent initialization events always reported `new`.\n\n## What changed\n\nEmit initialization events for resumed spawned subagents before notifying thread listeners. Inherit parent client metadata before reserving a residency slot can evict the parent, preserve the thread's original `created_at`, and report `initialization_mode` as `resumed`. Refresh stored analytics metadata when a subagent resumes; newly created subagents continue to report `new`.\n\n## Testing\n\nExtend the cold-resume integration test to verify a single worker initialization event with the expected session, parent, source, resume mode, and original creation timestamp. Update serialization and session tests to check initialization modes.",
+      "files": [
+        "codex-rs/analytics/src/events.rs (+1 -1)",
+        "codex-rs/analytics/src/facts.rs (+1 -0)",
+        "codex-rs/analytics/src/reducer.rs (+6 -4)",
+        "codex-rs/core/src/agent/control/spawn.rs (+34 -2)",
+        "codex-rs/core/src/codex_delegate.rs (+1 -0)",
+        "codex-rs/core/src/guardian/review_session_setup.rs (+1 -0)",
+        "codex-rs/core/src/session/mod.rs (+15 -6)",
+        "codex-rs/core/src/session/tests.rs (+3 -0)",
+        "codex-rs/analytics/src/tests/suite/approvals_tests.rs (+2 -0)",
+        "codex-rs/analytics/src/tests/suite/threads_tests.rs (+9 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 51207,
+      "title": "Gate CLI Daybreak controls and selection behind an opt-in feature",
+      "url": "https://github.com/openai/codex/pull/51207",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T00:16:59Z",
+      "hint": "feature",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Gate CLI Daybreak controls and selection behind an opt-in feature\n\n## What changed\n\nAdd `features.cli_daybreak`, disabled by default, to gate Daybreak controls and automatic access-program selection in the TUI and `codex exec`. Apply the gate to resumed sessions and background task turns, and hide `/daybreak` when disabled. Explicit `--cyber-access-program` overrides remain available.\n\n## Testing\n\nExtend tests to cover disabled controls, history replay, foreground and background turn requests, exec resume/fork behavior, and explicit access-program overrides with the feature disabled.",
+      "files": [
+        "codex-rs/core/config.schema.json (+6 -0)",
+        "codex-rs/exec/src/lib.rs (+6 -2)",
+        "codex-rs/features/src/lib.rs (+8 -0)",
+        "codex-rs/tui/src/app/app_server_events.rs (+2 -0)",
+        "codex-rs/tui/src/app/daybreak.rs (+7 -1)",
+        "codex-rs/tui/src/app_server_session.rs (+1 -0)",
+        "codex-rs/tui/src/chatwidget/session_flow.rs (+2 -1)",
+        "codex-rs/tui/src/chatwidget/settings.rs (+7 -2)",
+        "codex-rs/tui/src/chatwidget/slash_dispatch.rs (+3 -0)",
+        "codex-rs/tui/src/dynamic_tools.rs (+14 -1)"
+      ],
+      "filesTotal": 21
+    },
+    {
+      "number": 51209,
+      "title": "Add ranked tool discovery to JavaScript code mode",
+      "url": "https://github.com/openai/codex/pull/51209",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T00:36:41Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Add ranked tool discovery to JavaScript code mode\n\n## What changed\n\n- Add the default-disabled `code_mode_tool_search` feature to expose `await tools.tool_search({query: \"...\", limit: 8})` in code mode when the model supports tool search.\n- Return BM25-ranked deferred tools as `{tools: [{name, description}]}`, including callable names and TypeScript declarations for use in later code cells.\n- Filter results through the current step's nested-tool policy before applying the limit, preserving namespace restrictions, normalized identities, description prefixes, and schema budgets.\n- Add ranked-search guidance while retaining `ALL_TOOLS` catalog discovery and description overrides.\n\n## Testing\n\nAdd coverage for feature and model-capability gating, namespace restrictions, argument validation, schema budgets, and discovery followed by deferred MCP and dynamic tool calls. Extend the scenario snapshot to cover search, invocation, yielding, and completion through `wait`.",
+      "files": [
+        "codex-rs/code-mode-protocol/src/description.rs (+84 -23)",
+        "codex-rs/code-mode-protocol/src/description_override_tests.rs (+54 -0)",
+        "codex-rs/code-mode-protocol/src/lib.rs (+2 -0)",
+        "codex-rs/core/config.schema.json (+6 -0)",
+        "codex-rs/core/src/tools/code_mode/execute_handler.rs (+9 -14)",
+        "codex-rs/core/src/tools/code_mode/execute_spec.rs (+4 -51)",
+        "codex-rs/core/src/tools/code_mode/mod.rs (+2 -0)",
+        "codex-rs/core/src/tools/code_mode/tool_definitions.rs (+30 -0)",
+        "codex-rs/core/src/tools/handlers/tool_search.rs (+120 -40)",
+        "codex-rs/core/src/tools/registry.rs (+2 -1)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 51211,
+      "title": "Reject sandbox-writable bubblewrap executables from PATH",
+      "url": "https://github.com/openai/codex/pull/51211",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T00:58:34Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Reject sandbox-writable bubblewrap executables from PATH\n\n## Why\n\nBubblewrap discovery probes executables before confinement. Excluding only the command's current directory leaves candidates in other writable roots eligible to run outside the sandbox.\n\n## What changed\n\n- Filter canonical `PATH` candidates using the filesystem policy and effective user permissions, including writable ancestors, symlinked roots, and full-disk write access. Preserve protected system installations while rejecting replaceable paths.\n- Select the launcher with the command's permissions before the proc-mount preflight, retaining the bundled bubblewrap fallback.\n- Use the effective permission profile and policy working directory for startup warning probes.\n\n## Testing\n\nAdd unit coverage for writable roots, symlinks, read-only carveouts, replaceable parents, and full-disk policies. Add Linux integration tests showing writable `bwrap` candidates are neither probed nor launched, including when the command runs in a workspace subdirectory or uses managed networking with full-disk write access.",
+      "files": [
+        "codex-rs/app-server/src/lib.rs (+4 -3)",
+        "codex-rs/exec/src/lib.rs (+4 -2)",
+        "codex-rs/linux-sandbox/src/launcher.rs (+24 -15)",
+        "codex-rs/linux-sandbox/src/linux_run_main.rs (+4 -0)",
+        "codex-rs/sandboxing/src/bwrap.rs (+125 -7)",
+        "codex-rs/sandboxing/src/bwrap_tests.rs (+184 -3)",
+        "codex-rs/sandboxing/src/lib.rs (+3 -0)",
+        "codex-rs/tui/src/app/startup_prompts.rs (+4 -3)",
+        "codex-rs/cli/tests/exec_server/pid_namespace_tests.rs (+4 -1)",
+        "codex-rs/exec-server/tests/exec_process.rs (+24 -8)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 51215,
+      "title": "Measure raw MCP tool catalog sizes in telemetry",
+      "url": "https://github.com/openai/codex/pull/51215",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T01:17:18Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Measure raw MCP tool catalog sizes in telemetry\n\n## What changed\n\nRecord the total serialized JSON size of raw MCP tool definitions in the `codex.mcp.binding_catalog.raw_definition_json_bytes` histogram, before filtering or model preparation.\n\nEmit an `mcp.binding_catalog` trace event for each server with its tool count, definition size, server kind, plugin ID, and cached or live catalog source. Reuse bounded product SKU attribution for both metrics and events, and skip size measurement when neither telemetry output is enabled.",
+      "files": [
+        "codex-rs/codex-mcp/src/connection_manager.rs (+2 -0)",
+        "codex-rs/codex-mcp/src/connection_manager/catalog_telemetry.rs (+98 -0)",
+        "codex-rs/codex-mcp/src/connection_manager/tool_catalog.rs (+60 -5)",
+        "codex-rs/codex-mcp/src/mcp/mod.rs (+1 -1)",
+        "codex-rs/otel/src/events/session_telemetry.rs (+17 -12)",
+        "codex-rs/otel/src/lib.rs (+1 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 51217,
+      "title": "Preserve review targets and scope misalignment continuation metadata",
+      "url": "https://github.com/openai/codex/pull/51217",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T01:26:26Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Preserve review targets and scope misalignment continuation metadata\n\n## What changed\n\n- Carry opaque `review_target` values through misalignment errors and expose optional `reviewTarget` in the app-server protocol and generated clients. Preserve the value verbatim and redact it from debug output.\n- Keep target-based `misalignment_override` metadata on turn requests, preserve it across steering updates, and exclude it from compaction and external MCP metadata. Reject overrides from global Responses metadata while retaining legacy timestamp behavior for per-turn overrides.\n\n## Testing\n\nExtend coverage for error propagation, debug and rollout redaction, steering preservation, and metadata filtering. Verify that automatic compaction omits the review target while turn requests before and after compaction retain it.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/json/ServerNotification.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.schemas.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.v2.schemas.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ErrorNotification.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ReviewStartResponse.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadForkResponse.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadListResponse.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadMetadataUpdateResponse.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadReadResponse.json (+7 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadResumeResponse.json (+7 -0)"
+      ],
+      "filesTotal": 34
+    },
+    {"number":51220,"title":"Honor the OTLP metrics temporality preference","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51221,"title":"Separate environment requests from runtime selections","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51223,"title":"Remove legacy personality template metadata","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51230,"title":"Make session lookup pagination stable and report listing failures","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51235,"title":"Remove default model labels from TUI model pickers","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51241,"title":"Add a partial answer message phase","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51249,"title":"Handle partial answers consistently across agent workflows","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51253,"title":"Enforce Fast and Ultra Fast policies independently","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51256,"title":"Start the Windows sandbox service during registered Core setup","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {
+      "number": 51257,
+      "title": "Fix installer checksum verification under Windows PowerShell",
+      "url": "https://github.com/openai/codex/pull/51257",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T03:44:00Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.162.0-alpha.17",
+      "body": "Fix installer checksum verification under Windows PowerShell\n\n## Why\n\nA native launcher can pass PowerShell 7 module paths to Windows PowerShell, preventing `Get-FileHash` from loading and blocking archive checksum verification.\n\n## What changed\n\nUpdate `scripts/install/install.ps1` to compute SHA-256 directly with .NET APIs after resolving the archive path. Dispose the file stream and hash provider, and retain the existing checksum mismatch error.",
+      "files": [
+        "scripts/install/install.ps1 (+15 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":51260,"title":"Handle partial answers in realtime routing and thread search","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51329,"title":"Remove partial-history subagent forks","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51330,"title":"Measure total Guardian approval decision duration","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51331,"title":"Track sub-agent result delivery outcomes","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51332,"title":"Record multi-agent wait duration by outcome","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51333,"title":"Record the multi-agent version in turn analytics","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51334,"title":"Count Guardian denial-limit interruptions in telemetry","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51335,"title":"Update collaboration snapshots for full-history fork instructions","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51347,"title":"Measure shell snapshot use and wait time per command","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51350,"title":"Allow larger shell snapshots when replaying from a file","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51355,"title":"Add bounded diagnostics for agent spawn failures","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51378,"title":"Keep Guardian v2 WebSocket pools warm with concurrent replenishment","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51391,"title":"Make URLs in asynchronous question titles clickable","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51396,"title":"Let late low-risk scores complete pending Guardian reviews","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51400,"title":"Prevent later Guardian scores from releasing earlier pending reviews","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51402,"title":"Preserve turn attribution across recovery and compaction","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51407,"title":"Protect ripgrep lookup during Linux sandbox construction","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51411,"title":"Suppress repeated image paste presses in legacy terminals","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51415,"title":"Expose and persist turn lineage across the app server","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51419,"title":"Preserve turn attribution when queued mail wakes durable sleep","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51420,"title":"Finish idle thread unloads after slow shutdown","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51421,"title":"Include root turn IDs in host-owned Apps tool calls","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51422,"title":"Accept environment requests at thread and turn settings boundaries","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51425,"title":"Skip stable installer alias publishing for prereleases","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51426,"title":"Remove the Bazel JVM override for Windows ARM64 voice builds","hint":"other","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51427,"title":"Prevent invalidated wakeups from starting a turn","hint":"unknown","release":"📦 rust-v0.162.0-alpha.17","brief":true},
+    {"number":51433,"title":"Show hook status messages as titles in the hooks browser","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51439,"title":"Preserve clickable URLs in TUI approval headers","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51440,"title":"Honor Retry-After in WebSocket error events","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51441,"title":"Fix core integration tests for updated turn APIs","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":51449,"title":"Make URLs clickable in TUI user input questions","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51450,"title":"Make URLs clickable in MCP elicitation prompts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51451,"title":"Make URLs in the TUI warnings viewer clickable","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51452,"title":"Make banner URLs clickable across wrapped lines","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51457,"title":"Preserve status usage hyperlinks when the URL wraps","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51458,"title":"Make URLs clickable in user verification prompts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51459,"title":"Preserve wrapped help links in Windows sandbox prompts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51460,"title":"Retry realtime sideband attachment while an existing call activates","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51463,"title":"Record resolved model and reasoning effort in sub-agent activity","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51465,"title":"Add an optional JSON transcript format for Guardian","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51466,"title":"Keep Guardian transcript records structured through budget recovery","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51467,"title":"Keep submission logs useful without exposing payloads","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51470,"title":"Raise the managed app-server file descriptor limit on Unix","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51471,"title":"Preserve clickable URLs in pending input previews","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51472,"title":"Preserve clickable URLs in TUI selection rows","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51473,"title":"Preserve URL destinations in wrapped hook details","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51480,"title":"Preserve tool declaration mode across resumed context windows","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51482,"title":"Use PathUri for skill identity and path matching","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51483,"title":"Add correlated, credential-free rendezvous connection diagnostics","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51491,"title":"Classify executor capability root ownership independently of parsing","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51492,"title":"Remove obsolete fields from persisted turn context","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51493,"title":"Bind capability roots to environment selections","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51499,"title":"Load rollout history on a single blocking worker","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51500,"title":"Add shared task pinning to the agent command center","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51502,"title":"Bound relay connection attempts and handle pongs during blocked writes","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51503,"title":"Expose selected environments to MCP contributors","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51510,"title":"Preserve live TUI settings when configuration reloads fail","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 51511,
+      "title": "Fix Windows 10 drive-letter opens for no-follow filesystem operations",
+      "url": "https://github.com/openai/codex/pull/51511",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-06T23:20:56Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix Windows 10 drive-letter opens for no-follow filesystem operations\n\n## Why\n\nOn Windows 10, strict native opens can reject the DOS drive alias itself as a reparse point, preventing no-follow filesystem operations on ordinary drive-letter paths.\n\n## What changed\n\nRetry rejected drive-letter opens relative to a verified local volume root. Require the root to resolve to a physical disk volume directory without reparse attributes, and retain `OBJ_DONT_REPARSE` for paths beneath it so junctions remain blocked.\n\n## Testing\n\nAdd Windows tests for file creation and reading through the volume fallback, opening the drive root, and rejecting junction traversal and creation. Validate accepted volume-root names and verify that named pipes are rejected without establishing a client connection.",
+      "files": [
+        "codex-rs/exec-server/src/no_follow/windows.rs (+52 -14)",
+        "codex-rs/exec-server/src/no_follow/windows_tests.rs (+99 -2)",
+        "codex-rs/exec-server/src/no_follow/windows_volume_fallback.rs (+74 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":51512,"title":"Align Windows sandbox temp permissions with the child environment","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51515,"title":"Expose detailed agent tree shutdown failure reports","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51517,"title":"Pass thread persistence intent to attachment uploads","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":51525,"title":"Preserve the CLI MXC preference in executor config reads","hint":"unknown","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}
