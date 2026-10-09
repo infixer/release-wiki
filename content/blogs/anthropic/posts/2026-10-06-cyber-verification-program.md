@@ -61,6 +61,7 @@ Anthropic は、資格のあるセキュリティ専門家に高度なサイバ�
 
 ## 関連
 
+- [[blogs/anthropic/posts/2026-10-08-anthropic-cyber-mission|Anthropic Cyber Mission を開始、重要インフラと OSS の防御を支援]]
 - [[blogs/anthropic/posts/2026-09-01-enterprise-frontier-safeguards|顧客と共に開発する Enterprise Frontier Safeguards]]
 - [[blogs/anthropic/posts/2026-09-17-life-sciences-verification-program|Life Sciences Verification Program（LSVP）提供開始]]
 - [[blogs/anthropic/posts/2026-08-31-improving-alignment-security-efforts|アライメントとセキュリティ対策の強化]]

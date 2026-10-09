@@ -1,6 +1,6 @@
 ---
 title: TUI
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/openai-codex
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。2026-09-30 の回では、フルスクリーンのステータス行に Plan mode の切り替えヒント（`shift+tab`）が出るようになり、応答中のフォローアップ指示（`:codex-followup[...]`）はラベルとして表示されるようになった。インラインコード内の選択はプレーンテキストでコピーされ、Pro プランの表示名は `Pro 100`・`Pro 200`・`Pro 500` に、起動時のプロモーションはプラットフォーム別のデスクトップアプリの tip に整理された。2026-10-02 の回では、コマンドセンターに会話のフォーク（`f`、`agents.fork`）が追加され、既定の検索ショートカットは `F3` と `/` に移った。権限の設定は接続先サーバーの定義に従うようになり、描画されたファイルパスの選択はプレーンテキストでコピーされる。2026-10-05 の回では、TUI に管理された Git worktree のツール（`create_worktree` など）が追加され、トランスクリプトのマウススクロール速度は `tui.mouse_scroll_speed` で設定できるようになった（既定は 1 イベント 1 行に変更）。`Ctrl+Insert` でのコピー、権限ショートカットのサーバーのカタログへの準拠、ストリーミング中の確定した表のスクロールバックへの出力、設定したキー割り当てとページャーの割り当ての優先、GNU Screen での ASCII タイトル、tmux の確認の 1 秒での打ち切りなども入った。2026-10-07 の回では、CLI の Daybreak の操作とアクセスプログラムの自動選択が既定で無効の `features.cli_daybreak` の後ろに置かれ（無効時は `/daybreak` を表示しない）、`Ctrl+Z` からの再開では `SIGCONT` を確認するまで待つようになった。
+ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。2026-09-30 の回では、フルスクリーンのステータス行に Plan mode の切り替えヒント（`shift+tab`）が出るようになり、応答中のフォローアップ指示（`:codex-followup[...]`）はラベルとして表示されるようになった。インラインコード内の選択はプレーンテキストでコピーされ、Pro プランの表示名は `Pro 100`・`Pro 200`・`Pro 500` に、起動時のプロモーションはプラットフォーム別のデスクトップアプリの tip に整理された。2026-10-02 の回では、コマンドセンターに会話のフォーク（`f`、`agents.fork`）が追加され、既定の検索ショートカットは `F3` と `/` に移った。権限の設定は接続先サーバーの定義に従うようになり、描画されたファイルパスの選択はプレーンテキストでコピーされる。2026-10-05 の回では、TUI に管理された Git worktree のツール（`create_worktree` など）が追加され、トランスクリプトのマウススクロール速度は `tui.mouse_scroll_speed` で設定できるようになった（既定は 1 イベント 1 行に変更）。`Ctrl+Insert` でのコピー、権限ショートカットのサーバーのカタログへの準拠、ストリーミング中の確定した表のスクロールバックへの出力、設定したキー割り当てとページャーの割り当ての優先、GNU Screen での ASCII タイトル、tmux の確認の 1 秒での打ち切りなども入った。2026-10-07 の回では、CLI の Daybreak の操作とアクセスプログラムの自動選択が既定で無効の `features.cli_daybreak` の後ろに置かれ（無効時は `/daybreak` を表示しない）、`Ctrl+Z` からの再開では `SIGCONT` を確認するまで待つようになった。2026-10-09 の回では、API キーのアカウントの Daybreak の選択で `CliDaybreak` と `ApiKeyCyberAccessPrograms` の両方を必須にし、Daybreak がオフでも対象のアカウントはカタログの `standard` のアクセスプログラムを選べるようになった。安定版 rust-v0.162.0 で `/copy`・`Ctrl+Insert`・`tui.mouse_scroll_speed`・コマンドセンターのピン留めなどが正式に公開された。
 
 ## 主な API・オプション
 
@@ -25,6 +25,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-09 — Daybreak の選択で API キーの機能ゲートに従う（[#52228](https://github.com/openai/codex/pull/52228)）📦 rust-v0.163.0-alpha.1 · [[repos/openai-codex/changes/2026-10-09|変更]]
 - 2026-10-07 — `Ctrl+Z` からの再開で `SIGCONT` を待つ（[#51192](https://github.com/openai/codex/pull/51192)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
 - 2026-10-07 — CLI の Daybreak の操作をオプトインの `features.cli_daybreak` に（[#51207](https://github.com/openai/codex/pull/51207)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
 - 2026-10-05 — `/new`・`/fork` の Git worktree の選択肢の表記を明確に（[#50416](https://github.com/openai/codex/pull/50416)）📦 rust-v0.162.0-alpha.13 · [[repos/openai-codex/changes/2026-10-05|変更]]
@@ -76,3 +77,6 @@ tags:
 - [[repos/openai-codex/releases/rust-v0.160.0|rust-v0.160.0]]
 - [[repos/openai-codex/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/openai-codex/changes/2026-10-07|2026-10-07 の変更]]
+- [[repos/openai-codex/releases/rust-v0.161.0|rust-v0.161.0]]
+- [[repos/openai-codex/releases/rust-v0.162.0|rust-v0.162.0]]
+- [[repos/openai-codex/changes/2026-10-09|2026-10-09 の変更]]

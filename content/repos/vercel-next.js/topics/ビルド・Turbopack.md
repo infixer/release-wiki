@@ -1,6 +1,6 @@
 ---
 title: ビルド・Turbopack
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになり、macOS で監視がハングする問題も修正された。遅延 dynamic import は SSR でも使えるようになった。16.4 に向けて、`experimental.turbopackSharedRuntime` が既定で有効になり、`experimental.turbopackMangleExportNames` も本番ビルドで既定有効になった。turbo-persistence はコンパクションを刷新して永続キャッシュの肥大化を抑えている。`generateBuildId` を明示した場合はスキュー保護が有効でも常に使われる。アナライザーはトップがルートのサマリー画面になり、比較ツリーマップではモジュールの増減を表示する。マングリングは facade を使う方式を `experimental.turbopackMangleViaMaterializedNamespaceObject` でオプトインできる。turbo-tasks では不要な再実行や永続化データの破損を防ぐ修正が続き、trace-server の MCP はメモリ調査に使えるようになった。React Compiler の `enablePreserveExistingMemoizationGuarantees` も next.config から指定できる。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。アナライザーは `next analyze --export-graph` で保存済みスナップショットのグラフを JSON Lines（スキーマは `next/analyze/graph-v1.schema.json`）として出力できるようになり、ルートごとのエントリも含む。ESM エクスポートのプロトコル変更（#98932）は remote-components との互換性のため revert された。静的エクスポートでは設定した `distDir` が保持されるようになり、turbo-tasks ではスナップショットの一貫性やタスクの片付けの順序に関する修正が続いている。
+Turbopack・webpack を使ったビルド/開発サーバーの実装と、それに関わる CLI・設定オプション・コードモッド。ビルド出力の無駄の削減（本番でレイアウトセグメントを 1 回だけチャンク化など）、モジュール解決・トレース・エクスポート判定まわりのリグレッション修正、turbo-tasks の GC の安定化が続いている。`next analyze` は正式機能になり、比較画面の URL 共有や `--snapshot-name` への改名などアナライザー UI の改善も進んでいる。`additionalRoots` はデプロイアダプターでも使えるようになり、macOS で監視がハングする問題も修正された。遅延 dynamic import は SSR でも使えるようになった。16.4 に向けて、`experimental.turbopackSharedRuntime` が既定で有効になり、`experimental.turbopackMangleExportNames` も本番ビルドで既定有効になった。turbo-persistence はコンパクションを刷新して永続キャッシュの肥大化を抑えている。`generateBuildId` を明示した場合はスキュー保護が有効でも常に使われる。アナライザーはトップがルートのサマリー画面になり、比較ツリーマップではモジュールの増減を表示する。マングリングは facade を使う方式を `experimental.turbopackMangleViaMaterializedNamespaceObject` でオプトインできる。turbo-tasks では不要な再実行や永続化データの破損を防ぐ修正が続き、trace-server の MCP はメモリ調査に使えるようになった。React Compiler の `enablePreserveExistingMemoizationGuarantees` も next.config から指定できる。一方、実験的な `customWebpack` はモノレポでの依存重複の問題から revert された。アナライザーは `next analyze --export-graph` で保存済みスナップショットのグラフを JSON Lines（スキーマは `next/analyze/graph-v1.schema.json`）として出力できるようになり、ルートごとのエントリも含む。ESM エクスポートのプロトコル変更（#98932）は remote-components との互換性のため revert された。静的エクスポートでは設定した `distDir` が保持されるようになり、turbo-tasks ではスナップショットの一貫性やタスクの片付けの順序に関する修正が続いている。16.4 は安定版 v16.4.0 として公開された。トレースまわりでは、トレースファイルのサイズの内訳を調べる `turbo-trace-size` CLI が加わり、メモリサンプルに稼働中の Tokio ワーカースレッド数が記録されるようになり、turbo-trace-server は圧縮トレースを大幅に速く読めるようになった。ファイルシステムキャッシュの保存失敗は分かりやすい警告で表示され、ファイル監視の `NotFound` エラーは表示されなくなった。
 
 ## 主な API・オプション
 
@@ -22,9 +22,17 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 - `generateBuildId` — 明示すれば `deploymentId` 設定時も常に使われる
 - `experimental.turbopack.resolveAlias` — `false` を指定してモジュールを空スタブに解決可能に
 - `next analyze --export-graph` — 保存済みスナップショットのグラフを JSON Lines で標準出力へ（`--snapshot-name` / `--snapshot <id>` / `--route` / `--dist-dir`）。`next analyze --output --snapshot-name <name>` はサーバーを起動せずに保存だけ行う
+- `turbo-trace-size`（`turbopack/crates/turbopack-trace-size`）— Turbopack のトレースファイルのサイズの内訳を表示する CLI（raw・gzip・zstd に対応、`--top` で件数指定）
 
 ## 変更履歴
 
+- 2026-10-09 — トレースのサイズを調べる `turbo-trace-size` CLI を追加（[#99765](https://github.com/vercel/next.js/pull/99765)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
+- 2026-10-09 — トレースのメモリサンプルに稼働中の Tokio ワーカースレッド数を記録（[#99233](https://github.com/vercel/next.js/pull/99233)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
+- 2026-10-09 — turbo-trace-server で圧縮されたトレースの読み込みを高速化（[#99775](https://github.com/vercel/next.js/pull/99775)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
+- 2026-10-09 — ファイルシステムキャッシュの保存失敗を分かりやすい警告で表示し、失敗後はコンパクションをスキップ（[#99823](https://github.com/vercel/next.js/pull/99823)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
+- 2026-10-09 — ファイル監視で `NotFound` のエラーを表示せず、ほかの監視エラーは標準エラー出力へ（[#99794](https://github.com/vercel/next.js/pull/99794)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
+- 2026-10-09 — `cache-components-instant-false` コードモッドがテスト・spec・story ファイルを対象にしないよう修正（[#99795](https://github.com/vercel/next.js/pull/99795)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
+- 2026-10-09 — 安定版 v16.4.0 を公開（`resolveAlias` の `false` 対応、アナライザーのスナップショット履歴など）· [[repos/vercel-next.js/releases/v16.4.0|v16.4.0]]
 - 2026-10-07 — `next analyze --export-graph` でアナライザーのグラフを JSON Lines で出力（[#99387](https://github.com/vercel/next.js/pull/99387)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
 - 2026-10-07 — アナライザーの JSON Lines にルートの詳細（`route.entries`）を追加（[#99172](https://github.com/vercel/next.js/pull/99172)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
 - 2026-10-07 — ESM エクスポートのプロトコル変更（#98932）を revert（[#99704](https://github.com/vercel/next.js/pull/99704)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
@@ -94,6 +102,8 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 関連
 
+- [[repos/vercel-next.js/changes/2026-10-09|2026-10-09 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.0|v16.4.0]]
 - [[repos/vercel-next.js/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-02|2026-10-02 の変更]]

@@ -1,6 +1,6 @@
 ---
 title: UI
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/vitest-dev-vitest
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込みは単純なパイプラインに作り直され、検索が suite に一致したときはその下のツリー全体を表示する。HTML レポートのモジュールグラフはプロジェクト・環境ごとに 1 回だけ保存される。ブラウザモードのテストを表示する iframe と分割ペインのハンドルが重ならないよう、レイアウトが修正された。v5.0.2 では認証 cookie をブラウザのセッション終了後も保持するようになっている。`vitest --ui` でブラウザのタブが 2 つ開く不具合も修正された（Vite の `server.open` だけで開く）。設定の `test.ui.theme` で UI のテーマを指定できる（experimental）。トレースビューアーにはズームのポップオーバー（拡大・縮小・ペインに合わせる・リセット。デフォルト 100%、倍率はリロード後も保持）があり、複数の要素に一致したロケーターはすべてハイライトされる。
+Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込みは単純なパイプラインに作り直され、検索が suite に一致したときはその下のツリー全体を表示する。HTML レポートのモジュールグラフはプロジェクト・環境ごとに 1 回だけ保存される。ブラウザモードのテストを表示する iframe と分割ペインのハンドルが重ならないよう、レイアウトが修正された。v5.0.2 では認証 cookie をブラウザのセッション終了後も保持するようになっている。`vitest --ui` でブラウザのタブが 2 つ開く不具合も修正された（Vite の `server.open` だけで開く）。設定の `test.ui.theme` で UI のテーマを指定できる（experimental）。トレースビューアーにはズームのポップオーバー（拡大・縮小・ペインに合わせる・リセット。デフォルト 100%、倍率はリロード後も保持）があり、複数の要素に一致したロケーターはすべてハイライトされる。UI のサーバーでは、認証と `index.html` のハンドラーをどちらも UI のベースパスにマウントするよう揃え、`..` を含むパスで HTML が返らないようにした。分割ペインのリサイズハンドルは境界線を中心に両側 2px になり、ドラッグ中もハイライトが残る（いずれも未リリース）。
 
 ## 主な API・オプション
 
@@ -16,6 +16,8 @@ Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込�
 
 ## 変更履歴
 
+- 2026-10-09 — `index.html` のハンドラーを UI のベースパスにマウント（[#11517](https://github.com/vitest-dev/vitest/pull/11517)） ⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-09|変更]]
+- 2026-10-09 — 分割ペインのリサイズハンドルを境界線の中央に（[#11506](https://github.com/vitest-dev/vitest/pull/11506)） ⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-09|変更]]
 - 2026-10-06 — `test.ui.theme` オプションを追加（直後の [#11509](https://github.com/vitest-dev/vitest/pull/11509) で experimental に）（[#11499](https://github.com/vitest-dev/vitest/pull/11499)）⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-07|変更]]
 - 2026-10-06 — トレースビューアーにフィット・ズームの操作を追加（[#11490](https://github.com/vitest-dev/vitest/pull/11490)）⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-07|変更]]
 - 2026-10-05 — トレースビューで、複数の要素に一致したセレクターをすべてハイライト（[#11489](https://github.com/vitest-dev/vitest/pull/11489)）⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-07|変更]]

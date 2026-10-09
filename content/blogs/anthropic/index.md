@@ -1,6 +1,6 @@
 ---
 title: Anthropic News
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - blog/anthropic
 ---
@@ -9,6 +9,9 @@ tags:
 
 ## 記事
 
+- 2026-10-08 — [[blogs/anthropic/posts/2026-10-08-2026-usage-policy-update|2026 年版 Usage Policy の更新]] — 欺瞞的キャンペーンの新セクション、選挙・兵器・監視規定の明確化、物理動作やモデルへの虐待への対応（11 月 12 日発効）
+- 2026-10-08 — [[blogs/anthropic/posts/2026-10-08-genesis-mission-commitment|Genesis Mission に 3 年で 1.5 億ドルを拠出]] — NASA・NIH・NSF など 15 以上の連邦機関で Claude を使えるよう支援
+- 2026-10-08 — [[blogs/anthropic/posts/2026-10-08-anthropic-cyber-mission|Anthropic Cyber Mission を開始、重要インフラと OSS の防御を支援]] — 重要インフラ向けの CIDP と、OSS を無料でスキャンする OSS Scanner を開始
 - 2026-10-06 — [[blogs/anthropic/posts/2026-10-06-cyber-verification-program|Cyber Verification Program を拡大、3 段階のアクセス階層を導入]] — Project Glasswing と CVP を統合し、Defense・Red Team・Specialized の 3 階層で高度なサイバー能力を提供
 - 2026-10-02 — [[blogs/anthropic/posts/2026-10-02-claude-frontier-academy|Claude Frontier Academy を開始、1 億ドルで 1 万人のエンジニアを育成]] — 2027 年末までに Frontier Deployed Engineer 1 万人を育成する推薦制のレジデンシー
 - 2026-10-01 — [[blogs/anthropic/posts/2026-10-01-barclays-scales-claude|Barclays が Claude の活用を全社に拡大]] — Claude Code を 2027 年までにエンジニアの過半数へ展開、知識アシスタントやメール処理でも活用
@@ -20,6 +23,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-10-09 — 記事 3 件。エラー: なし
 - 2026-10-07 — 記事 1 件。エラー: なし
 - 2026-10-05 — 記事 1 件。エラー: なし
 - 2026-10-02 — 記事 1 件。エラー: なし

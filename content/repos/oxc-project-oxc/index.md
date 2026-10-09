@@ -1,6 +1,6 @@
 ---
 title: oxc-project/oxc
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/oxc-project-oxc
 ---
@@ -16,23 +16,25 @@ tags:
 
 ## 直近の注目変更
 
+- Oxfmt が `prettier-plugin-astro@1.x` 経由で Astro に対応（`--migrate prettier`・LSP も対応）（[#27386](https://github.com/oxc-project/oxc/pull/27386)、[#27387](https://github.com/oxc-project/oxc/pull/27387)、[#27388](https://github.com/oxc-project/oxc/pull/27388)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/LSP|LSP]]
+- 型認識の診断でソースをファイルごとに共有し、oxlint のピーク RSS を大幅削減（[#27462](https://github.com/oxc-project/oxc/pull/27462)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]
+- oxlint・oxfmt の LSP が設定のエラーをクライアントに表示（[#25486](https://github.com/oxc-project/oxc/pull/25486)、[#26014](https://github.com/oxc-project/oxc/pull/26014)、[#26003](https://github.com/oxc-project/oxc/pull/26003)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/LSP|LSP]]
+- クラスの静的ブロックの変換で合成のプライベートフィールドを使わないように（[#27300](https://github.com/oxc-project/oxc/pull/27300)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/ES2022クラス変換|ES2022クラス変換]]
+- Minifier: 定数の引数で呼ばれる未使用の IIFE を除去（[#27434](https://github.com/oxc-project/oxc/pull/27434)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
+- oxfmt の設定探索がシンボリックリンクの設定をたどるように（[#27389](https://github.com/oxc-project/oxc/pull/27389)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
+- `typescript/no-import-type-side-effects` と `import/no-duplicates` の自動修正の衝突を防止（[#27409](https://github.com/oxc-project/oxc/pull/27409)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
 - `oxc_formatter_toml` クレートを追加（埋め込み TOML の整形、TOML 1.1 対応。破壊的変更）（[#27365](https://github.com/oxc-project/oxc/pull/27365)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
 - oxlint・oxfmt: stderr をブロッキングモードにし、64KB で出力が途切れる問題を修正（[#27363](https://github.com/oxc-project/oxc/pull/27363)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
-- codegen: `-` の後の負の `BigIntLiteral` が `--1n` と出力される問題を修正（[#27378](https://github.com/oxc-project/oxc/pull/27378)、[#27377](https://github.com/oxc-project/oxc/pull/27377)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- semantic: `TSMethodSignature` の計算されたキーを外側のスコープで解決（[#27357](https://github.com/oxc-project/oxc/pull/27357)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
-- レキサー: 文脈解析の改行と型の終わりの規則を tsc に揃える（[#27353](https://github.com/oxc-project/oxc/pull/27353)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]
-- `unicorn/prefer-query-selector` に `allowWithVariables` オプションを追加（[#27346](https://github.com/oxc-project/oxc/pull/27346)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
 - Oxfmt が Markdown ファイルを `oxc_formatter_markdown` で整形（破壊的変更）（[#27256](https://github.com/oxc-project/oxc/pull/27256)）📦 oxlint_v1.87.0 · トピック: [[repos/oxc-project-oxc/topics/Markdownフォーマッタ|Markdownフォーマッタ]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
-- Markdown フォーマッタ: すべての `proseWrap` で中国語・日本語の文字まわりの改行を保持（[#27331](https://github.com/oxc-project/oxc/pull/27331)）📦 oxlint_v1.87.0 · トピック: [[repos/oxc-project-oxc/topics/Markdownフォーマッタ|Markdownフォーマッタ]]
-- Minifier: 委譲しない `yield` の `undefined` 引数を畳み込む（[#27324](https://github.com/oxc-project/oxc/pull/27324)）📦 oxlint_v1.87.0 · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- JavaScript で TypeScript 専用のクラス修飾子を TS8009 として拒否（[#27312](https://github.com/oxc-project/oxc/pull/27312)）📦 crates_v0.153.0 · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
 
 ## トピック
 
+- [[repos/oxc-project-oxc/topics/ES2022クラス変換|ES2022クラス変換]] — `oxc_transformer` の ES2022 クラス機能（静的ブロックなど）の下位変換
 - [[repos/oxc-project-oxc/topics/Explicit-Resource-Management|Explicit-Resource-Management]] — `using` / `await using` 宣言の下位変換（`oxc_transformer`）
 - [[repos/oxc-project-oxc/topics/Isolated-Declarations|Isolated-Declarations]] — `oxc_isolated_declarations` による `.d.ts` 生成
 - [[repos/oxc-project-oxc/topics/JSプラグイン|JSプラグイン]] — oxlint の JS プラグインの実行基盤（CFG ウォーカー・ルール計測）
 - [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]] — vitest/unicorn/import/react 等、個別 lint ルールの不具合修正・オプション追加
+- [[repos/oxc-project-oxc/topics/LSP|LSP]] — oxlint・oxfmt の言語サーバー（`oxc_language_server`）と設定エラーの通知
 - [[repos/oxc-project-oxc/topics/Markdownフォーマッタ|Markdownフォーマッタ]] — `oxc_formatter_markdown` クレート（oxfmt_v0.72.0 から Oxfmt の Markdown 整形に使用）
 - [[repos/oxc-project-oxc/topics/Minifier|Minifier]] — `oxc_minifier` / codegen の正しさ修正と圧縮の最適化（import / export の統合など）
 - [[repos/oxc-project-oxc/topics/NAPI・WASIビルド|NAPI・WASIビルド]] — NAPI パッケージの WASI（wasm32-wasip1）ビルド
@@ -51,4 +53,4 @@ tags:
 ## 取り込み
 
 - [[repos/oxc-project-oxc/log|取り込み履歴]]
-- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-07|2026-10-07]]、[[repos/oxc-project-oxc/changes/2026-10-05|2026-10-05]]、[[repos/oxc-project-oxc/changes/2026-10-02|2026-10-02]]、[[repos/oxc-project-oxc/changes/2026-09-30|2026-09-30]]、[[repos/oxc-project-oxc/changes/2026-09-28|2026-09-28]]
+- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-09|2026-10-09]]、[[repos/oxc-project-oxc/changes/2026-10-07|2026-10-07]]、[[repos/oxc-project-oxc/changes/2026-10-05|2026-10-05]]、[[repos/oxc-project-oxc/changes/2026-10-02|2026-10-02]]、[[repos/oxc-project-oxc/changes/2026-09-30|2026-09-30]]

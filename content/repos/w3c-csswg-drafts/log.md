@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-10-05
+updated: 2026-10-09
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-10-09
+
+- 期間: 2026-09-30T18:29:55Z 〜 2026-10-09T01:15:46Z（直接のコミット: 2026-10-02T23:09:07Z 〜 2026-10-09T01:15:46Z）
+- PR 3 件（詳しく 3 件 / 1 行 0 件）、直接のコミット 29 件（詳しく 10 件 / 1 行 19 件）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-10-09|changes]]、[[repos/w3c-csswg-drafts/topics/css-overflow-4|css-overflow-4]]（新規）、[[repos/w3c-csswg-drafts/topics/cssom-view-1|cssom-view-1]]（新規）、[[repos/w3c-csswg-drafts/topics/css-sizing-4|css-sizing-4]]（新規）、[[repos/w3c-csswg-drafts/topics/css-grid-3|css-grid-3]]（新規）、[[repos/w3c-csswg-drafts/topics/css-content-3|css-content-3]]（新規）、[[repos/w3c-csswg-drafts/topics/css-forms-1|css-forms-1]]、[[repos/w3c-csswg-drafts/topics/css-color-4|css-color-4]]
+- エラー: なし
 
 ## 2026-10-05
 

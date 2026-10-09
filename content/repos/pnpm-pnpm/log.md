@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-10-09
+
+- 期間: 2026-10-07T00:21:50Z 〜 2026-10-09T01:15:46Z
+- PR 69 件（詳しく 30 件 / 1 行 39 件）、Release 0 件
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-10-09|changes]]、[[repos/pnpm-pnpm/topics/Rust-ツールチェーン|Rust ツールチェーン（新規）]]、[[repos/pnpm-pnpm/topics/エージェントスキル|エージェントスキル（新規）]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/マルチエコシステム設定|マルチエコシステム設定]]（関連リンク）、[[repos/pnpm-pnpm/index|index]]
+- 備考: 期間内の Release は無く、PR はすべて ⏳ 未リリース。更新したトピックでは、以前の回で重複して書かれていた概要の文・変更履歴の行・関連のリンクを整理した
+- エラー: なし
 
 ## 2026-10-07
 

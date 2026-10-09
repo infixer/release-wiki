@@ -1,6 +1,6 @@
 ---
 title: Menu
-updated: 2026-09-30
+updated: 2026-10-09
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -12,6 +12,7 @@ S2（`@react-spectrum/s2`）の Menu は、セクション区切りやローデ�
 
 ## 変更履歴
 
+- 2026-10-08 — `useMenu` でユーザーのキーボードハンドラーを `useKeyboard` 経由に（[#10651](https://github.com/adobe/react-spectrum/pull/10651)）。同日に revert（[#10744](https://github.com/adobe/react-spectrum/pull/10744)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-09|変更]]
 - 2026-09-30 — 仮想化 Menu の区切り線の高さとサブメニュートリガーのインデントを修正、推定高さをサイズ別に（[#10673](https://github.com/adobe/react-spectrum/pull/10673)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-09-30|変更]]
 - 2026-09-30 — S2 の Menu が仮想化に対応（[#10614](https://github.com/adobe/react-spectrum/pull/10614)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-09-30|変更]]
 - 2026-09-24 — 次のノードがローダー/null のときにセパレーターを隠すよう修正。非同期ローディングの Menu の docs サンプルにも幅を固定（[#10609](https://github.com/adobe/react-spectrum/pull/10609)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-09-24|変更]]
@@ -21,3 +22,5 @@ S2（`@react-spectrum/s2`）の Menu は、セクション区切りやローデ�
 - [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
 - [[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-09-24|2026-09-24 の変更]]
+- [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
+- [[repos/adobe-react-spectrum/changes/2026-10-09|2026-10-09 の変更]]

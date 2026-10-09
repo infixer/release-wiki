@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,16 +15,16 @@ tags:
 
 ## 直近の注目変更
 
+- API: ベータ版リリースに向けた整理（`/unstable` の削除、`api.internal` → `api.debug`、`@deprecated` の削除など）（[#64681](https://github.com/microsoft/TypeScript/pull/64681)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- シンボルのデータ部分を共有し、インスタンス化したシンボルを 96 → 24 バイトに（[#64691](https://github.com/microsoft/TypeScript/pull/64691)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- VS Code 拡張が API クライアントのモジュールを公開（[#64647](https://github.com/microsoft/TypeScript/pull/64647)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]、[[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
+- 宣言出力で再 export するモジュールを索引化し、最初のインクリメンタル再ビルドを 45.7 秒 → 3.5 秒に（[#64469](https://github.com/microsoft/TypeScript/pull/64469)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
+- 計算されたプロパティ名を常にチェックし、不安定な診断を解消（[#64674](https://github.com/microsoft/TypeScript/pull/64674)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- デコレータ付きクラス・不正な分割代入での emit のクラッシュを修正（[#64670](https://github.com/microsoft/TypeScript/pull/64670)、[#64651](https://github.com/microsoft/TypeScript/pull/64651)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - 設定ファイルの無いプログラムでプロジェクト参照の診断を出すと API サーバーがクラッシュする問題を修正（[#64637](https://github.com/microsoft/TypeScript/pull/64637)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - カスタマイズしたモジュール解決で誤った TS2876 などを出さないように（[#64638](https://github.com/microsoft/TypeScript/pull/64638)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - decorator metadata の出力でデコレータ付きのオブジェクトリテラルのメンバーがクラッシュする問題を修正（[#64633](https://github.com/microsoft/TypeScript/pull/64633)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - `typeof import()` の型修飾子について emit が付け加える不安定な診断を修正（[#64636](https://github.com/microsoft/TypeScript/pull/64636)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- DOM の型定義を更新（Web Serial・Document Picture-in-Picture・`CloseWatcher`・`Element.setHTML()` など）（[#64604](https://github.com/microsoft/TypeScript/pull/64604)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- 非同期 API で dispose の Promise を捨てないように（`[Symbol.asyncDispose]()`）（[#64584](https://github.com/microsoft/TypeScript/pull/64584)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- JS のコンストラクタで定義したプロパティの診断が不安定だった問題を修正（[#64646](https://github.com/microsoft/TypeScript/pull/64646)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- 後から低い `node_modules` の深さで到達したファイルの import を処理し直す（外部ライブラリ判定を決定的に）（[#64632](https://github.com/microsoft/TypeScript/pull/64632)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- アイドル時のキャッシュ掃除タイマーを Session に保存し、`Close` が 30 秒待たされないように（[#64624](https://github.com/microsoft/TypeScript/pull/64624)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
-- `getInferTypeParameters` の結果の順序を安定化（[#64621](https://github.com/microsoft/TypeScript/pull/64621)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 
 ## トピック
 
@@ -37,4 +37,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-07|2026-10-07]]、[[repos/microsoft-TypeScript/changes/2026-10-05|2026-10-05]]、[[repos/microsoft-TypeScript/changes/2026-10-02|2026-10-02]]、[[repos/microsoft-TypeScript/changes/2026-09-30|2026-09-30]]、[[repos/microsoft-TypeScript/changes/2026-09-28|2026-09-28]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-09|2026-10-09]]、[[repos/microsoft-TypeScript/changes/2026-10-07|2026-10-07]]、[[repos/microsoft-TypeScript/changes/2026-10-05|2026-10-05]]、[[repos/microsoft-TypeScript/changes/2026-10-02|2026-10-02]]、[[repos/microsoft-TypeScript/changes/2026-09-30|2026-09-30]]

@@ -1,6 +1,6 @@
 ---
 title: Linterルール個別修正
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,10 +8,11 @@ tags:
 
 ## 概要
 
-`no-unused-vars` 以外の個別 lint ルールについての細かい不具合修正をまとめたトピック。vitest/unicorn 系ルールの自動修正の適用範囲、`prefer-const`・`preserve-caught-error`・`import/no-duplicates`・`node/no-exports-assign` などのルールについて、判定基準や自動修正の適用条件を上流（ESLint・Unicorn・import-js・typescript-eslint）や実際の意味論に揃える変更が中心。自動修正が不正なコードや意味の変わるコードを生む問題（`require-await` と `await using`、`one-var` の `declare` 落ち、`prefer-exponentiation-operator` の優先順位、`unicorn/no-zero-fractions` の区切り文字付き整数）の修正も続いている。オプション追加としては `react/only-export-components` の `allowCompoundComponents`（oxlint_v1.86.0）、`react/jsx-no-target-blank`・`unicorn/no-useless-switch-case`・`react/no-unescaped-entities` のサジェスチョン実装がある。jsx-a11y 系（`lang`・`mouse-events-have-key-events`・`label-has-associated-control`）では、式の文字列・nullish な値・空の属性値の判定を直す修正が入った。`unicorn/prefer-query-selector` には `allowWithVariables` オプションが追加された（未リリース）。
+`no-unused-vars` 以外の個別 lint ルールについての細かい不具合修正をまとめたトピック。vitest/unicorn 系ルールの自動修正の適用範囲、`prefer-const`・`preserve-caught-error`・`import/no-duplicates`・`node/no-exports-assign` などのルールについて、判定基準や自動修正の適用条件を上流（ESLint・Unicorn・import-js・typescript-eslint）や実際の意味論に揃える変更が中心。自動修正が不正なコードや意味の変わるコードを生む問題（`require-await` と `await using`、`one-var` の `declare` 落ち、`prefer-exponentiation-operator` の優先順位、`unicorn/no-zero-fractions` の区切り文字付き整数）の修正も続いている。オプション追加としては `react/only-export-components` の `allowCompoundComponents`（oxlint_v1.86.0）、`react/jsx-no-target-blank`・`unicorn/no-useless-switch-case`・`react/no-unescaped-entities` のサジェスチョン実装がある。jsx-a11y 系（`lang`・`mouse-events-have-key-events`・`label-has-associated-control`）では、式の文字列・nullish な値・空の属性値の判定を直す修正が入った。`unicorn/prefer-query-selector` には `allowWithVariables` オプションが追加された（未リリース）。`typescript/no-import-type-side-effects` と `import/no-duplicates` の自動修正が同じパスで衝突して不正な構文を生む問題も修正された（未リリース）。
 
 ## 変更履歴
 
+- 2026-10-09 — `typescript/no-import-type-side-effects` と `import/no-duplicates` の自動修正の衝突を防止（[#27409](https://github.com/oxc-project/oxc/pull/27409)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
 - 2026-10-07 — `unicorn/prefer-query-selector` に `allowWithVariables` オプションを追加（[#27346](https://github.com/oxc-project/oxc/pull/27346)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]
 - 2026-10-05 — `react/no-unescaped-entities` にサジェスチョンを実装（[#27292](https://github.com/oxc-project/oxc/pull/27292)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-05|変更]]
 - 2026-10-05 — `jsx-a11y/label-has-associated-control` がラベル・関連付け属性の値（空文字など）を検証（[#27302](https://github.com/oxc-project/oxc/pull/27302)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-05|変更]]

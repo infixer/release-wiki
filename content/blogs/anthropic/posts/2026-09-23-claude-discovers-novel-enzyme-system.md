@@ -35,6 +35,7 @@ Anthropic は新しい生命科学研究グループとラボの立ち上げを�
 
 ## 関連
 
+- [[blogs/anthropic/posts/2026-10-08-genesis-mission-commitment|Genesis Mission に 3 年で 1.5 億ドルを拠出]]
 - [[blogs/anthropic/posts/2026-09-18-accenture-embedded-evaluation|アクセンチュアとの組み込み型評価パートナーシップ]]
 - [[blogs/anthropic/posts/2026-09-17-life-sciences-verification-program|Life Sciences Verification Program（LSVP）提供開始]]
 - [[blogs/anthropic/posts/2026-09-01-enterprise-frontier-safeguards|顧客と共に開発する Enterprise Frontier Safeguards]]

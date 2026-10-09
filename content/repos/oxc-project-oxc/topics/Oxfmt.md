@@ -1,6 +1,6 @@
 ---
 title: Oxfmt
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,10 +8,13 @@ tags:
 
 ## 概要
 
-Oxfmt（フォーマッタ本体 `oxc_formatter`）の Prettier 互換性の向上が続いている。同梱の Prettier は 3.9.9 まで更新済み（oxfmt_v0.71.0 で公開）。コメントの扱いを重点的に直しており、JSDoc（`/***` も JSDoc として扱う）の行末ダブルスペース（ハードブレーク）の保持、通常のブロックコメントの行末スペースの保持、隣接ブロックコメントの揃え、代入演算子 `=` まわりのコメントを元の側・行に保つ方針、引数にコメントがあるテスト呼び出しのレイアウトなどを修正している。意図的な Prettier との差異は `DIVERGENCES.md` に記録される。呼び出し先と開きかっこの間のコメントも呼び出し先側に留めるようになった。埋め込みテンプレート（`` css`...` `` など）のレイアウトはソースの形ではなく AST から決めるようになり、`quoteProps: consistent` は分割代入パターンにも適用される。ignore は、親ディレクトリが除外されていれば否定パターンで再び含めない（Git・Prettier と同じ）挙動に明示パス・stdin・LSP でも揃った。CLI の Stdin モードではグローバルな ignore の先行確認とソース付き診断の表示、LSP では `.prettierignore` の変更の再読み込みに対応した。CSS フォーマッタ（`oxc_formatter_css`）・JSON フォーマッタ（`oxc_formatter_json`）でも Prettier・JS フォーマッタとの互換の修正が続き、埋め込み CSS をセレクターの無いブロックの中身として解析できるようになった（css-in-md 向け）。また、同じ Node.js プロセスで `runCli()` を繰り返し呼べるようになった（Vite+ からの直接呼び出し向け）。oxfmt_v0.72.0 で、Markdown ファイルの整形が Prettier から `oxc_formatter_markdown` に置き換わった（破壊的変更）。TOML の整形も他のフォーマッタと同じ形の `oxc_formatter_toml`（`oxc-toml` のラッパー）経由になり、frontmatter や Markdown 内の TOML も整形され、TOML 1.1 に対応した（未リリース）。`embeddedLanguageFormatting: off` では frontmatter をそのまま残す。CLI では stderr もブロッキングモードにし、出力が 64KB で途切れる問題を直した（oxlint も同様）。
+Oxfmt（フォーマッタ本体 `oxc_formatter`）の Prettier 互換性の向上が続いている。同梱の Prettier は 3.9.9 まで更新済み（oxfmt_v0.71.0 で公開）。コメントの扱いを重点的に直しており、JSDoc（`/***` も JSDoc として扱う）の行末ダブルスペース（ハードブレーク）の保持、通常のブロックコメントの行末スペースの保持、隣接ブロックコメントの揃え、代入演算子 `=` まわりのコメントを元の側・行に保つ方針、引数にコメントがあるテスト呼び出しのレイアウトなどを修正している。意図的な Prettier との差異は `DIVERGENCES.md` に記録される。呼び出し先と開きかっこの間のコメントも呼び出し先側に留めるようになった。埋め込みテンプレート（`` css`...` `` など）のレイアウトはソースの形ではなく AST から決めるようになり、`quoteProps: consistent` は分割代入パターンにも適用される。ignore は、親ディレクトリが除外されていれば否定パターンで再び含めない（Git・Prettier と同じ）挙動に明示パス・stdin・LSP でも揃った。CLI の Stdin モードではグローバルな ignore の先行確認とソース付き診断の表示、LSP では `.prettierignore` の変更の再読み込みに対応した。CSS フォーマッタ（`oxc_formatter_css`）・JSON フォーマッタ（`oxc_formatter_json`）でも Prettier・JS フォーマッタとの互換の修正が続き、埋め込み CSS をセレクターの無いブロックの中身として解析できるようになった（css-in-md 向け）。また、同じ Node.js プロセスで `runCli()` を繰り返し呼べるようになった（Vite+ からの直接呼び出し向け）。oxfmt_v0.72.0 で、Markdown ファイルの整形が Prettier から `oxc_formatter_markdown` に置き換わった（破壊的変更）。TOML の整形も他のフォーマッタと同じ形の `oxc_formatter_toml`（`oxc-toml` のラッパー）経由になり、frontmatter や Markdown 内の TOML も整形され、TOML 1.1 に対応した（未リリース）。`embeddedLanguageFormatting: off` では frontmatter をそのまま残す。CLI では stderr もブロッキングモードにし、出力が 64KB で途切れる問題を直した（oxlint も同様）。`prettier-plugin-astro@1.x` 経由で `.astro` ファイルと埋め込みの `astro` を整形できるようになった（`astro: true` でオプトイン、`@astrojs/compiler-rs` が必要。frontmatter と `<script>` は `oxc_formatter` が整形）。`--migrate prettier` と LSP も Astro に対応した。設定探索はシンボリックリンクの設定ファイルをたどるようになり、oxlint と挙動が揃った。JSDoc の複数段落の `@description` タグの段落も保つようになった（いずれも未リリース）。
 
 ## 変更履歴
 
+- 2026-10-09 — Astro に対応（`prettier-plugin-astro@1.x`、`--migrate prettier`、LSP）（[#27386](https://github.com/oxc-project/oxc/pull/27386)、[#27387](https://github.com/oxc-project/oxc/pull/27387)、[#27388](https://github.com/oxc-project/oxc/pull/27388)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
+- 2026-10-09 — 設定探索でシンボリックリンクの設定ファイルをたどるように（oxlint と同じ挙動）（[#27389](https://github.com/oxc-project/oxc/pull/27389)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
+- 2026-10-09 — JSDoc の `@description` タグで複数段落を保持（[#27439](https://github.com/oxc-project/oxc/pull/27439)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
 - 2026-10-07 — `oxc_formatter_toml` クレートを追加（埋め込み TOML の整形、TOML 1.1 対応。破壊的変更）（[#27365](https://github.com/oxc-project/oxc/pull/27365)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]
 - 2026-10-07 — Markdown 内の MDX 内の Svelte で svelte プラグインを読み込む（[#27369](https://github.com/oxc-project/oxc/pull/27369)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]
 - 2026-10-07 — stderr をブロッキングモードにし、64KB で出力が途切れる問題を修正（oxlint も）（[#27363](https://github.com/oxc-project/oxc/pull/27363)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]

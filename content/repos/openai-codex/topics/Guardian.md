@@ -1,6 +1,6 @@
 ---
 title: Guardian
-updated: 2026-10-07
+updated: 2026-10-09
 tags:
   - repo/openai-codex
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Guardian は Codex のエージェント行動を自動でレビュー・承認する仕組み（同期/非同期レビュー、リスクスコアのキャッシュなど）。直近では、レビューが参照する認可の証跡を正確に保つ変更が続いている。ユーザーによる目標（goal）の更新や人間による上書き指示が証跡として保持され、変わらない heartbeat 指示はまとめられるようになった。レビュー中に新しいユーザー入力が来た場合は中止せず最新の証跡で再レビューし、非同期スコアは対象環境の権限（読み取り拒否など）に紐づけてキャッシュされる。端末入力の承認（`write_stdin_approval`）は既定で有効になり、判定結果を OTLP ログへ出力するオプション `otel.log_guardian_assessments` も追加された。2026-09-30 の回では、オプトインの機能として、レビュアーが会話履歴を検索・参照できる `guardian_conversation_history_tools` と、ハンドオフを手がかりにワーカーごとの root 証跡を選ぶ `guardian_root_handoff_context` が追加された。暗号化されたエージェントメッセージもレビューに保持されるようになり、diff 表示の準備でリモートの Git 探索を待たなくなった。2026-10-02 の回では、Guardian のセッション初期化でホストのスキル発見を省き、主要な executor がオフラインでもレビューが止まらないようになった。rust-v0.160.0 で会話履歴の参照とハンドオフを考慮した root コンテキスト（いずれもオプトイン）が安定版に入った。2026-10-07 の回では、MCP の elicitation のレビューが発行したステップのコンテキスト（その時点で準備のできたリモート環境と権限）を使うようになり、Decisions のリクエストでは信頼済みツールのコンテキストを保持し、専用キーが無ければ `OPENAI_API_KEY` にフォールバックする。レビュアーのコンパクションで証跡が無効になった場合は、親のチェックポイントから新しいセッションで 1 回だけ再開して復旧する。
+Guardian は Codex のエージェント行動を自動でレビュー・承認する仕組み（同期/非同期レビュー、リスクスコアのキャッシュなど）。直近では、レビューが参照する認可の証跡を正確に保つ変更が続いている。ユーザーによる目標（goal）の更新や人間による上書き指示が証跡として保持され、変わらない heartbeat 指示はまとめられるようになった。レビュー中に新しいユーザー入力が来た場合は中止せず最新の証跡で再レビューし、非同期スコアは対象環境の権限（読み取り拒否など）に紐づけてキャッシュされる。端末入力の承認（`write_stdin_approval`）は既定で有効になり、判定結果を OTLP ログへ出力するオプション `otel.log_guardian_assessments` も追加された。2026-09-30 の回では、オプトインの機能として、レビュアーが会話履歴を検索・参照できる `guardian_conversation_history_tools` と、ハンドオフを手がかりにワーカーごとの root 証跡を選ぶ `guardian_root_handoff_context` が追加された。暗号化されたエージェントメッセージもレビューに保持されるようになり、diff 表示の準備でリモートの Git 探索を待たなくなった。2026-10-02 の回では、Guardian のセッション初期化でホストのスキル発見を省き、主要な executor がオフラインでもレビューが止まらないようになった。rust-v0.160.0 で会話履歴の参照とハンドオフを考慮した root コンテキスト（いずれもオプトイン）が安定版に入った。2026-10-07 の回では、MCP の elicitation のレビューが発行したステップのコンテキスト（その時点で準備のできたリモート環境と権限）を使うようになり、Decisions のリクエストでは信頼済みツールのコンテキストを保持し、専用キーが無ければ `OPENAI_API_KEY` にフォールバックする。レビュアーのコンパクションで証跡が無効になった場合は、親のチェックポイントから新しいセッションで 1 回だけ再開して復旧する。2026-10-09 の回では、保持したアシスタントのコンテキストを別セクション `RETAINED ASSISTANT CONTEXT` に分けてスナップショットのプレフィックスを安定させ、承認の保留中に認可が変わったときは古いレビューを巻き戻して新しいレビューを求めるようになった。送信元のスレッドが別ホストにあっても永続化した履歴から送信元のコンテキストを読み込み、失敗したレビューの記録は SQLite に保存されて再起動後のレポートにも使える。
 
 ## 主な API・オプション
 
@@ -24,6 +24,10 @@ Guardian は Codex のエージェント行動を自動でレビュー・承認�
 
 ## 変更履歴
 
+- 2026-10-09 — 失敗したレビューの記録を SQLite に保存し再起動後のレポートでも使う（[#51651](https://github.com/openai/codex/pull/51651)）📦 rust-v0.163.0-alpha.1 · [[repos/openai-codex/changes/2026-10-09|変更]]
+- 2026-10-09 — 永続化した送信元のコンテキストを読み込む（[#51734](https://github.com/openai/codex/pull/51734)）📦 rust-v0.163.0-alpha.1 · [[repos/openai-codex/changes/2026-10-09|変更]]
+- 2026-10-09 — 古いレビューを巻き戻してからレビュアーの履歴を再利用（[#51683](https://github.com/openai/codex/pull/51683)）📦 rust-v0.163.0-alpha.1 · [[repos/openai-codex/changes/2026-10-09|変更]]
+- 2026-10-09 — `RETAINED ASSISTANT CONTEXT` を分けてスナップショットのプレフィックスを安定化（[#51627](https://github.com/openai/codex/pull/51627)、[#51642](https://github.com/openai/codex/pull/51642)）📦 rust-v0.163.0-alpha.1 · [[repos/openai-codex/changes/2026-10-09|変更]]
 - 2026-10-07 — 親のチェックポイントからの復旧で新しいセッションを使い、試行ごとに復旧のフラグを分離（[#51139](https://github.com/openai/codex/pull/51139)、[#51140](https://github.com/openai/codex/pull/51140)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
 - 2026-10-07 — レビューを親のチェックポイントから復旧（期限内で 1 回）（[#51137](https://github.com/openai/codex/pull/51137)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
 - 2026-10-07 — Guardian Decisions で `OPENAI_API_KEY` へのフォールバック（[#51133](https://github.com/openai/codex/pull/51133)）📦 rust-v0.162.0-alpha.17 · [[repos/openai-codex/changes/2026-10-07|変更]]
@@ -56,3 +60,4 @@ Guardian は Codex のエージェント行動を自動でレビュー・承認�
 - [[repos/openai-codex/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/openai-codex/releases/rust-v0.160.0|rust-v0.160.0]]
 - [[repos/openai-codex/changes/2026-10-07|2026-10-07 の変更]]
+- [[repos/openai-codex/changes/2026-10-09|2026-10-09 の変更]]
