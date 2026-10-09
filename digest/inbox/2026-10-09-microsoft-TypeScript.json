@@ -1,0 +1,289 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-10-09T01:15:46Z",
+  "range": {
+    "from": "2026-10-06T23:22:13Z",
+    "to": "2026-10-09T01:15:46Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64651,
+      "title": "Fix crashes on malformed destructuring assignments during emit",
+      "url": "https://github.com/microsoft/TypeScript/pull/64651",
+      "author": "Andarist",
+      "mergedAt": "2026-10-07T17:36:55Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "supersedes https://github.com/microsoft/TypeScript/pull/63972 https://github.com/microsoft/TypeScript/pull/63973 and https://github.com/microsoft/TypeScript/pull/64472\nfixes a crash reported here: https://github.com/microsoft/TypeScript/issues/64458#issuecomment-5841266398\n\nThose removed asserts assume a non-malformed source code. But those transformer paths still run over malformed nodes and it's the easiest to accept such subtrees given those malformed trees legitimately reach those visitors.\n\nAlternatively, the fix could check if the target is valid or not and skip those \"strict\" (with asserts) visitors. But honestly, that seems like a more work/specialcasing and from what I've seen in the past the similar codepaths are just usually tolerant when it comes to malformed inputs like this so I think removing those asserts would match the preexisting style~",
+      "files": [
+        "tsc/internal/transformers/estransforms/classfields.go (+1 -1)",
+        "tsc/internal/transformers/estransforms/esdecorator.go (+2 -2)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=false,target=es2015).errors.txt (+57 -0)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=false,target=es2015).js (+115 -0)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=false,target=es2022).errors.txt (+57 -0)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=false,target=es2022).js (+118 -0)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=true,target=es2015).errors.txt (+60 -0)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=true,target=es2015).js (+68 -0)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=true,target=es2022).errors.txt (+60 -0)",
+        "tsc/testdata/baselines/reference/compiler/malformedDestructuringAssignmentTransformVariants(experimentaldecorators=true,target=es2022).js (+61 -0)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 64675,
+      "title": "Try to filter go compiler test files before reading them and building compiler tests",
+      "url": "https://github.com/microsoft/TypeScript/pull/64675",
+      "author": "weswigham",
+      "mergedAt": "2026-10-07T18:52:43Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "At least if the pattern/string passed as a filter is simple enough. This works because compiler test names are derived from the file names - so we can use the targeted test names filter to filter the files we load, reducing IO and setup work we're just going to discard anyway. On windows (where file IO can be... elongated), this improves the performance of starting a limited subset of tests from ~14s to ~1s on my lower performance machine.\n\n...there is some regex pattern reparsing going on to achieve that, though, so you can still get that benefit when you filter for, eg, `TestLocal/declarationEmit(With|Empty)StatementNoCrash`, rather than just a single test.",
+      "files": [
+        "tsc/internal/testrunner/compiler_runner.go (+5 -0)",
+        "tsc/internal/testrunner/compiler_test_filter.go (+92 -0)",
+        "tsc/internal/testrunner/compiler_test_filter_test.go (+52 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64647,
+      "title": "[api] Expose API client modules from VS Code extension",
+      "url": "https://github.com/microsoft/TypeScript/pull/64647",
+      "author": "andrewbranch",
+      "mergedAt": "2026-10-07T19:39:50Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Our VS Code extension already exposes a way for third-party extensions to connect a TypeScript API client to the user's currently running TypeScript LSP server. But since the API client and server need to be version-matched, and users can choose between a workspace version of TypeScript or one of potentially multiple built-in versions for their LSP server, the VS Code extension really needs to give those third-party extensions a way to resolve the correct version of the API client to use.\n\nPreviously, third-party extensions would do something like this:\n\n```ts\nimport { API } from \"typescript/async\"; // <-- extension dependency version!\n\nexport function activate(context: vscode.ExtensionContext) {\n  const extension = vscode.extensions.getExtension<ExtensionAPI>(\"TypeScriptTeam.native-preview\")!;\n  const extensionAPI = await extension.activate();\n  const listener = extensionAPI.onLanguageServerInitialized(async () => {\n    // ⚠️ *should* only do this inside onLanguageServerInitialized!\n    const pipe = await extensionAPI.initializeAPIConnection();\n    // 🚨 Establish potentially version-mismatched client/server connection!\n    const api = await API.fromLSPConnection({ pipe });\n  });\n  context.subscriptions.push(listener);\n}\n```\n\nWith this PR, that will change to:\n\n```ts\nimport type { ExtensionAPI } from \"typescript/vscode\"; // <-- devDependency for types\n\nexport function activate(context: vscode.ExtensionContext) {\n  const extension = vscode.extensions.getExtension<ExtensionAPI\n…(truncated)",
+      "files": [
+        "Herebyfile.mjs (+111 -35)",
+        "packages/typescript/package.json (+2 -1)",
+        "packages/typescript/src/vscode/extensionApi.ts (+48 -2)",
+        "packages/typescript/src/vscode/moduleLoader.ts (+41 -0)",
+        "packages/vscode-typescript-nightly/package.json (+2 -1)",
+        "packages/vscode-typescript/l10n/bundle.l10n.json (+2 -0)",
+        "packages/vscode-typescript/package.json (+2 -1)",
+        "packages/vscode-typescript/src/client.ts (+13 -10)",
+        "packages/vscode-typescript/src/extension.ts (+2 -15)",
+        "packages/vscode-typescript/src/projectStatus.ts (+6 -9)"
+      ],
+      "filesTotal": 14
+    },
+    {
+      "number": 64640,
+      "title": "fix(64627): reject deferred imports without namespace bindings",
+      "url": "https://github.com/microsoft/TypeScript/pull/64640",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-10-07T20:21:26Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64627",
+      "files": [
+        "tsc/internal/checker/grammarchecks.go (+4 -1)",
+        "tsc/internal/compiler/program.go (+1 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.generated.json (+1 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.json (+4 -0)",
+        "tsc/internal/diagnostics/diagnostics_generated.go (+3 -0)",
+        "tsc/internal/parser/parser.go (+1 -1)",
+        "tsc/internal/transformers/moduletransforms/externalmoduleinfo.go (+0 -1)",
+        "tsc/testdata/baselines/reference/conformance/importDeferInvalidDefault(module=commonjs).errors.txt (+47 -0)",
+        "tsc/testdata/baselines/reference/conformance/importDeferInvalidDefault(module=commonjs).js (+49 -0)",
+        "tsc/testdata/baselines/reference/conformance/importDeferInvalidDefault(module=commonjs).symbols (+13 -0)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 64670,
+      "title": "fix(64665): fix emit crash for duplicate private names in decorated classes",
+      "url": "https://github.com/microsoft/TypeScript/pull/64670",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-10-07T21:01:12Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64665",
+      "files": [
+        "tsc/internal/transformers/estransforms/classfields.go (+4 -4)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-methods-staticPrivate(target=es2015).errors.txt (+66 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-methods-staticPrivate(target=es2015).js (+58 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-methods-staticPrivate(target=es2022).errors.txt (+66 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-methods-staticPrivate(target=es2022).js (+49 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-methods-staticPrivate(target=esnext).errors.txt (+66 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-methods-staticPrivate(target=esnext).js (+31 -0)",
+        "tsc/testdata/tests/cases/conformance/esDecorators/classDeclaration/methods/esDecorators-classDeclaration-methods-staticPrivate.ts (+16 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 64642,
+      "title": "Fix `workspace/symbol` crash on an inferred project without a program",
+      "url": "https://github.com/microsoft/TypeScript/pull/64642",
+      "author": "Andarist",
+      "mergedAt": "2026-10-07T22:13:24Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes the issue reported here: https://github.com/microsoft/TypeScript/issues/64623#issuecomment-5973552095",
+      "files": [
+        "tsc/internal/project/projectcollectionbuilder.go (+7 -0)",
+        "tsc/internal/fourslash/tests/workspaceSymbolNewInferredProject_test.go (+57 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64469,
+      "title": "Index re-exporting modules for declaration emit",
+      "url": "https://github.com/microsoft/TypeScript/pull/64469",
+      "author": "resure",
+      "mergedAt": "2026-10-07T22:45:52Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64464\n\nMost of this change was generated with AI tooling; I have hit this problem myself and have reviewed the result.\n\nAny edit to a widely imported module, even a comment-only one, makes the first incremental rebuild far slower than a full check, `noEmit` included, because the builder emits declarations of the dependent files to compute their signatures. The time goes into `getAlternativeContainingModules`: when none of the modules imported by the file being emitted exports a symbol, it scanned the exports of every external module in the program, once per symbol. The checker now builds one index on first use, from a resolved export target to the external modules exporting it, and answers that fallback from it. The result is the same modules in the same program-file order as the old scan, including the two matches that need no named export: a module whose `export =` is the symbol, and the symbol's own parent module. Plain declaration emit went through the same scan and gets faster too.\n\nAs @weswigham asked, this now carries only the checker change; computing the signatures of dependent files in parallel moved to #64659. The two touch no common files and are independent.\n\nThe issue's 6,000-leaf reproducer (9,066 files) on 32-core Linux, median of 3 runs, base `de61e69621`:\n\n| | main | this PR |\n| --- | --- | --- |\n| first rebuild after a comment-only edit to `hub.ts` (`noEmit`, `incremental`) | 45.7 s | 3.5 s |\n| peak RSS of that rebuild | 354 MiB | 372 MiB |\n| `--decl\n…(truncated)",
+      "files": [
+        "tsc/internal/checker/checker.go (+6 -1)",
+        "tsc/internal/checker/symbolaccessibility.go (+71 -9)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitAlternativeContainingModules.js (+104 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitAlternativeContainingModules.symbols (+134 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitAlternativeContainingModules.types (+141 -0)",
+        "tsc/testdata/tests/cases/compiler/declarationEmitAlternativeContainingModules.ts (+54 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64674,
+      "title": "Make computed property names always checked, regardless of parent grammar errors",
+      "url": "https://github.com/microsoft/TypeScript/pull/64674",
+      "author": "weswigham",
+      "mergedAt": "2026-10-07T23:22:09Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes a source of flaky diags that can be hidden from `.d.ts` authors with overliberal use of `skipLibCheck`.",
+      "files": [
+        "tsc/internal/checker/checker.go (+3 -6)",
+        "tsc/testdata/baselines/reference/compiler/deprecatedReferenceInEnumComputedNameNoFlake.errors.txt (+15 -0)",
+        "tsc/testdata/baselines/reference/compiler/deprecatedReferenceInEnumComputedNameNoFlake.js (+21 -0)",
+        "tsc/testdata/baselines/reference/compiler/deprecatedReferenceInEnumComputedNameNoFlake.symbols (+18 -0)",
+        "tsc/testdata/baselines/reference/compiler/deprecatedReferenceInEnumComputedNameNoFlake.types (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/importedValueInEnumComputedNameNoFlake.errors.txt (+14 -0)",
+        "tsc/testdata/baselines/reference/compiler/importedValueInEnumComputedNameNoFlake.js (+20 -0)",
+        "tsc/testdata/baselines/reference/compiler/importedValueInEnumComputedNameNoFlake.symbols (+17 -0)",
+        "tsc/testdata/baselines/reference/compiler/importedValueInEnumComputedNameNoFlake.types (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/incompatibleAssignmentInEnumComputedNameNoFlake.errors.txt (+20 -0)"
+      ],
+      "filesTotal": 56
+    },
+    {
+      "number": 64686,
+      "title": "Move the getDocumentationForSymbol docstring onto the function",
+      "url": "https://github.com/microsoft/TypeScript/pull/64686",
+      "author": "patrickkettner",
+      "mergedAt": "2026-10-08T05:51:41Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64685\n\n## Analysis\n\nThe comment describing `getDocumentationForSymbol` sits above `type documentationLocationMapper`, so `go doc` and editor hover present it as that type's documentation and the function has none.\n\n## Fix\n\nMoved the comment onto the function. No text changes.\n\n## Copilot Checklist\n\nI successfully ran the applicable command at the end of my session, and it completed without error:\n * [x] npx hereby validate\n * [ ] npx hereby validate --api (for TypeScript API changes)\n\nI used Claude Code for this change, and I have read and reviewed it.",
+      "files": [
+        "tsc/internal/ls/hover.go (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64681,
+      "title": "[api] Prepare for beta release",
+      "url": "https://github.com/microsoft/TypeScript/pull/64681",
+      "author": "andrewbranch",
+      "mergedAt": "2026-10-08T15:32:38Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- Removes `/unstable` prefix from module exports\n- Renames the `api.internal` namespace to `api.debug` (containing the profiling helpers)\n- Moves `snapshot.internal.formatNodeForInsertion` to `languageService.formatNodeForInsertion`\n- Marks `api.createBuildOrchestrator` `@internal` for now\n- Compiles with `--stripInternal`\n- Exports `factory` from `\"typescript/ast\"`\n- Removes `@deprecated` functions/methods",
+      "files": [
+        "Herebyfile.mjs (+15 -1)",
+        "packages/typescript/package.json (+13 -13)",
+        "packages/typescript/src/api/async/api.ts (+37 -89)",
+        "packages/typescript/src/api/node/node.ts (+0 -1)",
+        "packages/typescript/src/api/proto.generated.ts (+13 -17)",
+        "packages/typescript/src/api/proto.ts (+1 -26)",
+        "packages/typescript/src/api/sync/api.ts (+60 -185)",
+        "packages/typescript/src/ast/ast.ts (+1 -0)",
+        "packages/typescript/src/ast/factory.generated.ts (+1 -0)",
+        "packages/typescript/src/vscode/extensionApi.ts (+12 -12)"
+      ],
+      "filesTotal": 46
+    },
+    {
+      "number": 64691,
+      "title": "Shared data symbols",
+      "url": "https://github.com/microsoft/TypeScript/pull/64691",
+      "author": "ahejlsberg",
+      "mergedAt": "2026-10-08T20:02:20Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "With this PR we split `Symbol` into a header part and a data part. The two parts are typically allocated together, but in the checker, instantiated symbols now share the data part with the original symbol. This shrinks instantiated symbols from 96 bytes to 24 bytes.",
+      "files": [
+        "tsc/internal/api/session.go (+28 -28)",
+        "tsc/internal/api/session_symbolresponse_test.go (+6 -7)",
+        "tsc/internal/ast/symbol.go (+78 -29)",
+        "tsc/internal/ast/symbol_test.go (+113 -0)",
+        "tsc/internal/ast/utilities.go (+8 -8)",
+        "tsc/internal/binder/binder.go (+61 -61)",
+        "tsc/internal/binder/nameresolver.go (+24 -22)",
+        "tsc/internal/binder/referenceresolver.go (+12 -12)",
+        "tsc/internal/checker/checker.go (+744 -739)",
+        "tsc/internal/checker/emitresolver.go (+17 -17)"
+      ],
+      "filesTotal": 65
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "Copilot": 1
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-10-09T01:15:46Z",
+  "range": {
+    "from": "2026-10-06T09:12:19Z",
+    "to": "2026-10-09T01:15:46Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 12583,
+      "title": "Integrate fragment parser options with trusted types",
+      "url": "https://github.com/whatwg/html/pull/12583",
+      "author": "noamr",
+      "mergedAt": "2026-10-07T10:52:25Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "In the places where Trusted Types' createHTML is called, we now also check for createParserOptions and call that if it's available, by calling \"get trusted type compliant input\" instead of \"get trusted type compliant string\".\n\nThis now allows a default policy to supply a sanitizer or change script-running behavior for the legacy markup insertion methods (innerHTML, outerHTML, insertAdjacentHTML(), createContextualFragment()), and to alter the sanitizer/script behavior of modern calls like setHTMLUnsafe() and parseHTMLUnsafe().\n\nThe exceptions to this are srcdoc, document.write(), DOMParser.parseFromString(), and the [insertHTML execCommand](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#inserthtml). We can resolve separately whether these should also be sanitized with createParserOptions.\n\n## Structural changes\n\n* The safe boolean and scriptingMode parameters of \"set and filter HTML\" / \"fragment parsing algorithm steps\" are replaced by a single fragment parser mode enum: Safe (setHTML(), parseHTML()), Unsafe (setHTMLUnsafe(), parseHTMLUnsafe()), and Legacy (innerHTML, outerHTML, insertAdjacentHTML(), createContextualFragment()). Safe and Unsafe always use the HTML parser and allow declarative shadow roots; Legacy keeps today's behavior (XML parser in XML documents, no declarative shadow roots).\n\n* Since all markup insertion methods can now include a sanitizer, most of the steps from \"set and filter HTML\" are folded into the \"fragment parsing algorithm s\n…(truncated)",
+      "files": [
+        "source (+410 -250)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13006,
+      "title": "Expose cross-origin isolated capability and time origin to worklets",
+      "url": "https://github.com/whatwg/html/pull/13006",
+      "author": "mjwilson-google",
+      "mergedAt": "2026-10-07T11:20:48Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "In \"set up a worklet environment settings object\", define both \"The cross-origin isolated capability\" and \"The time origin\" to return the corresponding values from `outsideSettings`.\n\nThis is to support https://github.com/w3c/hr-time/pull/169 which seeks to expose `performance.now()` on `AudioWorkletGlobalScope` in the Web Audio API, which in turn seeks to support https://github.com/WebAudio/web-audio-api/issues/2413.  Please see discussion there for further context.\n\nThe state of the specification at time of writing this patch is as follows:\n- \"The cross-origin isolated capability\" was left as `TODO` when worklets were migrated into HTML (#6056).\n- \"The time origin\" asserted that it is never called (#7339).\n\nDelegating to `outsideSettings`'s cross-origin isolated capability and time origin allows `AudioWorkletGlobalScope` `performance.now()` to have the same coarsening behavior as in other contexts.\n\n- [x] At least two implementers are interested (and none opposed):\n   * [Chromium](https://github.com/w3c/hr-time/pull/169#issue-2836347817)\n   * [Gecko](https://github.com/w3c/hr-time/pull/169#issuecomment-3835262120)\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * The [WebAudio IDLHarness test](https://github.com/web-platform-tests/wpt/blob/master/webaudio/idlharness.https.window.js) will test for exposure of the API.  Additional Web Platform Tests to be added as part of the linked hr-time and web-audio-api s\n…(truncated)",
+      "files": [
+        "source (+6 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 12195,
+      "title": "Add HTMLScriptElement IDL changes for Trusted Types",
+      "url": "https://github.com/whatwg/html/pull/12195",
+      "author": "lukewarlow",
+      "mergedAt": "2026-10-07T13:05:36Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This upstreams the changes to `HTMLScriptElement`'s IDL attributes that were previously monkey patched by the Trusted Types specification, along with their getter and setter steps.\n\n`HTMLScriptElement` now shadows `innerText` and `textContent` so they can take a `TrustedScript`. Its `src` and `text` IDL attributes now take `TrustedScriptURL` and `TrustedScript` respectively.\n\nThere are no behaviour changes. Spec-only mistakes in the Trusted Types text were fixed along the way:\n  - The `text` setter said \"the given value\" where it meant the compliant string.\n  - The `src` getter relied on reflection internals that no longer apply once `[ReflectURL]` is removed.\n\nThis depends on w3c/trusted-types#607, which adds the \"update script trustedness\" algorithm this calls and removes the corresponding monkey patches.\n\n- [x] At least two implementers are interested (and none opposed):\n   * Chromium (already implements)\n   * WebKit (already implements)\n   * Firefox (already implements)\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * trusted-types/block-string-assignment-to-HTMLElement-generic.html (covers innerText/textContent on script),\n  block-string-assignment-to-text-and-url-sinks.html and HTMLScriptElement-internal-slot.html.\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: N/A\n   * Gecko: N/A\n   * WebKit: N/A\n- [x] Corresponding \n…(truncated)",
+      "files": [
+        "source (+136 -5)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13001,
+      "title": "Fix hiding popovers that are removed or moved between documents",
+      "url": "https://github.com/whatwg/html/pull/13001",
+      "author": "jakearchibald",
+      "mergedAt": "2026-10-07T16:46:35Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "This catches a couple of bugs relating to calling popover methods on elements that are moved between documents during operations.\n\n- Fixes #9161.\n- Supersedes #9457.\n- Supersedes https://github.com/whatwg/dom/pull/1185.\n\nThe removing steps run the hide popover algorithm, but it started by checking popover validity, which throws if the element is not connected. The removing steps run after the element has been removed from its parent, so this always failed, leaving the popover showing and in the top layer. The same applied if the element's node document was not fully active. Check popover validity now only requires the element to be connected and its node document to be fully active when the popover is expected to be hidden, that is, when showing it.\n\nIn addition:\n* The hide popover algorithm now passes the document to check popover validity after firing beforetoggle and after hiding the popover stack, as the show popover algorithm does. Previously, if a beforetoggle event listener moved the popover to another document and showed it there, the original hide would go on to hide it in the new document.\n* The popover close watcher is now only destroyed when the hide popover algorithm completes, rather than whenever it returns early. Previously, bailing out could destroy the close watcher of a popover that was still showing, including one shown again in another document.\n* Calling hidePopover() on a showing popover whose node document is not fully active now hides it, rather than \n…(truncated)",
+      "files": [
+        "source (+28 -18)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

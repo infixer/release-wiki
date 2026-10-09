@@ -2,13 +2,13 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-10-06T17:23:47Z",
+      "lastMergedAt": "2026-10-07T20:08:09Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-06T23:46:46Z",
-      "lastReleaseAt": "2026-10-06T23:52:54Z"
+      "lastMergedAt": "2026-10-08T22:32:43Z",
+      "lastReleaseAt": "2026-10-08T23:55:20Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
@@ -17,37 +17,37 @@
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-10-06T22:06:09Z",
+      "lastMergedAt": "2026-10-08T22:36:15Z",
       "lastReleaseAt": "2026-10-05T22:11:57Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-10-07T00:07:12Z",
+      "lastMergedAt": "2026-10-08T20:36:55Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-06T23:22:13Z",
+      "lastMergedAt": "2026-10-08T20:02:20Z",
       "lastReleaseAt": "2026-09-30T19:10:03Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-10-06T19:14:10Z",
+      "lastMergedAt": "2026-10-08T18:35:35Z",
       "lastReleaseAt": "2026-10-05T11:04:25Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
       "lastMergedAt": "2026-10-07T00:13:58Z",
-      "lastReleaseAt": "2026-10-06T18:59:30Z"
+      "lastReleaseAt": "2026-10-08T19:48:38Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-10-06T09:12:19Z",
+      "lastMergedAt": "2026-10-07T16:46:35Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
       "fullName": "w3c/aria",
-      "lastMergedAt": "2026-10-05T16:24:42Z",
+      "lastMergedAt": "2026-10-08T17:26:50Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/wcag": {
@@ -57,7 +57,7 @@
     },
     "openui/open-ui": {
       "fullName": "openui/open-ui",
-      "lastMergedAt": "2026-10-01T19:06:56Z",
+      "lastMergedAt": "2026-10-07T21:25:50Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/ecma262": {
@@ -67,18 +67,18 @@
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-10-07T00:21:50Z",
+      "lastMergedAt": "2026-10-08T23:04:47Z",
       "lastReleaseAt": "2026-10-06T17:37:30Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-10-06T13:07:57Z",
+      "lastMergedAt": "2026-10-08T11:08:33Z",
       "lastReleaseAt": "2026-09-30T11:25:52Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-09-30T18:29:55Z",
-      "lastCommitAt": "2026-10-02T23:09:07Z",
+      "lastMergedAt": "2026-10-08T20:36:44Z",
+      "lastCommitAt": "2026-10-09T01:00:17Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
@@ -89,8 +89,8 @@
     },
     "openai/codex": {
       "fullName": "openai/codex",
-      "lastReleaseAt": "2026-10-06T21:58:26Z",
-      "lastMergedAt": "2026-10-07T00:29:19Z"
+      "lastReleaseAt": "2026-10-08T21:07:13Z",
+      "lastMergedAt": "2026-10-09T00:41:43Z"
     }
   },
   "blogs": {
@@ -931,6 +931,9 @@
     },
     "anthropic": {
       "seen": [
+        "https://www.anthropic.com/news/2026-usage-policy-update",
+        "https://www.anthropic.com/news/genesis-mission-commitment",
+        "https://www.anthropic.com/news/anthropic-cyber-mission",
         "https://www.anthropic.com/news/cyber-verification-program",
         "https://www.anthropic.com/news/claude-frontier-academy",
         "https://www.anthropic.com/news/barclays-scales-claude",

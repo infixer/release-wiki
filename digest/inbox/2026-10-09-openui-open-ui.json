@@ -1,0 +1,29 @@
+{
+  "kind": "repo",
+  "repo": "openui/open-ui",
+  "branch": "main",
+  "collectedAt": "2026-10-09T01:15:46Z",
+  "range": {
+    "from": "2026-10-01T19:06:56Z",
+    "to": "2026-10-09T01:15:46Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 1531,
+      "title": "Update CODEOWNERS to cover parts as well",
+      "url": "https://github.com/openui/open-ui/pull/1531",
+      "author": "gregwhitworth",
+      "mergedAt": "2026-10-07T21:25:50Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

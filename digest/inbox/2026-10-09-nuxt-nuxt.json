@@ -1,0 +1,175 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-09T01:15:46Z",
+  "range": {
+    "from": "2026-10-06T22:06:09Z",
+    "to": "2026-10-09T01:15:46Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.0",
+      "publishedAt": "2026-10-05T22:11:57Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36430,
+      "title": "fix(nuxt): preserve onServerPrefetch for useId hydration",
+      "url": "https://github.com/nuxt/nuxt/pull/36430",
+      "author": "QvarcY",
+      "mergedAt": "2026-10-07T17:30:57Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #36428\n\n`onServerPrefetch` was completely removed from the production client build via tree-shaking which could alter the Vue asynchronous boundary between server and client; this caused `useId()` to generate different identifiers on the server and client, resulting in a hydration mismatch. Now, the `onServerPrefetch` registration is preserved in the client build as an empty `() => {}`. The original server-only handler code can still be excluded from the client bundle. `useAsyncData` no longer relies on a direct workaround involving Vue's internal `instance.sp`.\nAdditional tree-shaking regression tests have been added to correctly verify this behavior.\n\n<details>\n<summary>Original text in Latvian</summary>\n\nNovērš problēmu #36428\n`onServerPrefetch` tika pilnībā izņemts no klienta ražošanas versijas (build), izmantojot *tree-shaking* procesu, kas varēja izmainīt Vue asinhrono robežu starp serveri un klientu; tas lika `useId()` ģenerēt atšķirīgus identifikatorus serverī un klientā, izraisot neatbilstību hidratācijas (hydration) procesā. Tagad `onServerPrefetch` reģistrācija klienta versijā tiek saglabāta kā tukša funkcija `() => {}`. Sākotnējo, tikai serverim paredzēto apstrādātāja kodu joprojām var izslēgt no klienta pakotnes (*bundle*). `useAsyncData` vairs nepaļaujas uz tiešu risinājumu, kas izmanto Vue iekšējo `instance.sp`.\nIr pievienoti papildu *tree-shaking* regresijas testi, lai pareizi pārbaudītu šo darbību.\n\n</details>",
+      "files": [
+        "packages/nuxt/src/app/composables/asyncData.ts (+3 -4)",
+        "packages/nuxt/src/app/composables/payload.ts (+3 -0)",
+        "packages/nuxt/src/app/composables/server-prefetch.ts (+10 -0)",
+        "packages/nuxt/src/core/nuxt.ts (+1 -0)",
+        "packages/nuxt/src/core/plugins/tree-shake.ts (+21 -0)",
+        "packages/nuxt/test/tree-shake.test.ts (+19 -0)",
+        "test/basic.test.ts (+5 -0)",
+        "test/bundle.test.ts (+1 -1)",
+        "test/fixtures/basic/app/pages/use-id-preload-payload.vue (+14 -0)",
+        "test/fixtures/basic/app/pages/use-id-server-prefetch.vue (+14 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 36515,
+      "title": "fix(kit,nitro): match dev handler paths on both nitro majors",
+      "url": "https://github.com/nuxt/nuxt/pull/36515",
+      "author": "danielroe",
+      "mergedAt": "2026-10-08T15:32:58Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nmodules currently have to register dev handlers twice to serve the same paths on both nitro majors. `@nuxt/fonts`, for example, registers `/_fonts` _and_ `/_fonts/**` for this reason.\n\nwith this PR, a single registration matches the same paths on either:\n\n| v2 handler at | nitropack v2 before | nitropack v2 after | nitro v3 before | nitro v3 after |\n| --- | --- | --- | --- | --- |\n| `/foo` | `/foo` and below | `/foo` and below | `/foo` only | `/foo` and below |\n| `/foo/**` | nothing | `/foo` and below | `/foo` and below | `/foo` and below |\n\n**on nitropack v2**, `addDevServerHandler` now also registers the base path of a `/foo/**` route, as `addServerHandler` has done since #36325.\n\n**on nitro v3**, the compat layer mounts v2 dev handlers as middleware below their route and strips the base from `event.path`, as nitropack v2 does. `NUXT_B9004` is now only reported for dev handlers registered as middleware.\n\n> [!IMPORTANT]\n> this only affects `nuxt2` handlers; the `nuxt` and `nitro3` variants keep matching their route exactly in line with how nitro v3/h3 v2 work",
+      "files": [
+        "packages/kit/src/nitro.ts (+24 -2)",
+        "packages/nitro-server/src/compat.ts (+6 -1)",
+        "docs/3.guide/4.modules/9.server-compatibility.md (+18 -0)",
+        "docs/4.api/5.kit/12.nitro.md (+9 -9)",
+        "packages/kit/test/nitro.test.ts (+30 -0)",
+        "packages/nitro-server/test/compat.test.ts (+40 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 36501,
+      "title": "fix(vite-server): use the configured outDir as the public directory for non-ssr environment",
+      "url": "https://github.com/nuxt/nuxt/pull/36501",
+      "author": "Barbapapazes",
+      "mergedAt": "2026-10-08T15:54:39Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nHello 👋,\n\nThe Cloudflare Vite plugin change the output directory. The current configuration does not use it so the written files aren't placed in the expected location. Apply only when the SSR is disabled as the client output can be dissociated from the server output.\n\nrelated to https://github.com/Barbapapazes/code.soubiran.dev/blob/main/patches/%40nuxt__vite-server%404.6.0.patch",
+      "files": [
+        "packages/vite-server/src/index.ts (+15 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36507,
+      "title": "fix(kit): install the package a missing subpath belongs to",
+      "url": "https://github.com/nuxt/nuxt/pull/36507",
+      "author": "kazbekaskarov",
+      "mergedAt": "2026-10-08T17:10:18Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves nuxt/cli#1603\n\n### 📚 Description\n\n`ensureDependencyInstalled` paspackage manager unchanged.PostCSS plugins are resolved through it using their config key. So with `postcss.plugins: {   'tailwindcss/nesting': {} }` ane that subpath no longer exists,Nuxt suggests and runs `pnpm add -D tailwindcss/nesting`. pnpm reads `owner/repo` as a GitHub shorthand, so the install failsAILED`. Installing anything byhand doesn't help, and the prompt comes back on every start.\n\nThis PR:\n\n- reduces specifiers to their package name (`tailwindcss/nesting` → `tailwindcss`, `@scope/pkg/sub` → `@scope/pkg`) before they reach the install command. This covers both the prompt and every hint built wit\n- skips the prompt when the package the subpath belongs to is already installed. In that case the package just doesn't provide that subpath, and reinstalling it won't change that. The caller still reports the failure (e.g. `NUXT_B7007` for PostCSS plugins).\n- adds `packages/kit/test/depenithout this change.",
+      "files": [
+        "packages/kit/src/dependency.ts (+71 -9)",
+        "packages/kit/src/diagnostics/bundler.ts (+5 -0)",
+        "packages/kit/src/internal/index.ts (+2 -0)",
+        "packages/vite/src/css.ts (+7 -1)",
+        "packages/webpack/src/utils/postcss.ts (+7 -1)",
+        "packages/kit/test/dependency.test.ts (+132 -0)",
+        "packages/vite/test/postcss-plugins.test.ts (+57 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36477,
+      "title": "fix(vite): don't abort dep scan on virtual imports in installed packages",
+      "url": "https://github.com/nuxt/nuxt/pull/36477",
+      "author": "kaangokdemir",
+      "mergedAt": "2026-10-08T21:51:07Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36473\nresolves https://github.com/nuxt-modules/i18n/issues/4162\n\n### 📚 Description\n\nWith Nuxt 4.6, apps using i18n have an issue with the dependency scan in dev. The scan stops and pre-bundling is skipped.\n\nThe new scan entries from https://github.com/nuxt/nuxt/pull/36208 include files from i18n, and `NuxtLinkLocale.js` imports `#components`. i18n has its own `imports` field in package.json, so Vite tries to resolve `#components` from there and throws an error. Normally Nuxt transforms rewrite this import, but the scan doesn't run them.\n\nSolution: during the scan, if a `#` import can't be resolved, leave it out of the scan.\n\nNote: `scan` is not in the public type of the `resolveId` options, Vite passes it at runtime.\n\nI added tests, they fail without this change. I also tried the same idea in my app and pre-bundling works again.\n\nThe screenshots are from the playground on main, I just added `@nuxtjs/i18n` 10.6.0 and ran `nuxt dev playground --no-tui` (with the new TUI the error is hidden behind `e`). You can ignore the `NUXT_B9003` warning, it's there in both because i18n imports `h3`, nothing to do with this PR.\n\nBefore:\n\nAfter:",
+      "files": [
+        "packages/kit/src/internal/index.ts (+2 -0)",
+        "packages/kit/src/internal/subpath-imports.ts (+16 -0)",
+        "packages/nuxt/src/components/plugins/transform.ts (+4 -12)",
+        "packages/vite/src/plugins/optimize-deps.ts (+22 -0)",
+        "packages/vite/test/optimize-deps.test.ts (+61 -4)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36503,
+      "title": "fix(nuxt): align `Serialize` object types with JSON",
+      "url": "https://github.com/nuxt/nuxt/pull/36503",
+      "author": "okueng",
+      "mergedAt": "2026-10-08T22:21:24Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36500\n\n### 📚 Description\n\n`SerializeObject` mapped over `keyof Omit<T, FilterKeys<T, NonJsonPrimitive>>`. On a type with an index signature, `keyof T` is `string | number`, so the `Pick` inside `Omit` keeps only the signature and every named key disappears. Zod's `.catchall()`, `z.looseObject()` and `.passthrough()` all infer such types, so with `routeTypedFetch` a route returning one was typed without its named fields.\n\nKey remapping applies the same keep/drop rule without going through `Omit`, so it keeps the named keys, the signature and the optional modifiers. `FilterKeys` had no other user and is removed.\n\nTests: two cases in `serialize-types.spec.ts`, one for an index-signature type and one guarding optional modifiers under the new mapping. The first fails before this change; the existing cases are unchanged. `pnpm typecheck`, `pnpm test:types` and the unit tests for `serialize-types` and `server-routes` pass locally.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+      "files": [
+        "packages/nuxt/src/app/types/serialize.ts (+4 -9)",
+        "packages/nuxt/test/serialize-types.spec.ts (+20 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36506,
+      "title": "fix(nuxt): allow `false` in `setPageLayout` types",
+      "url": "https://github.com/nuxt/nuxt/pull/36506",
+      "author": "atinux",
+      "mergedAt": "2026-10-08T22:36:15Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Regression from #33805 that changed the parameter type. Before, it was `PageMeta['layout']`, which includes `false`. After, it was only `keyof NuxtLayouts`. The runtime code did not change, so `false` still works.",
+      "files": [
+        "packages/nuxt/src/app/composables/router.ts (+1 -1)",
+        "test/fixtures/basic-types/app/app-types.ts (+3 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}

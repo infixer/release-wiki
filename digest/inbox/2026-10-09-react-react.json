@@ -1,0 +1,98 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-10-09T01:15:46Z",
+  "range": {
+    "from": "2026-10-06T17:23:47Z",
+    "to": "2026-10-09T01:15:46Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.0",
+      "publishedAt": "2026-09-09T18:01:33Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 37780,
+      "title": "[DevTools] Don't remount the extension on same-document navigations",
+      "url": "https://github.com/react/react/pull/37780",
+      "author": "hoxyq",
+      "mergedAt": "2026-10-07T17:38:05Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #37681.\n\nSince Chrome 153, `chrome.devtools.network.onNavigated` also fires for same-document navigations. [devtools-frontend CL 8155971](https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/8155971) made `Page.navigatedWithinDocument` call `setInspectedURL()`, and the DevTools extension server forwards every inspected URL change to extensions as `onNavigated`. The callback only gets the URL. In Chrome 154 it fires for `pushState`, `replaceState` (including same-URL and state-only calls), hash changes, intercepted Navigation API navigations and `history.back()` within the document.\n\nThe extension treated every event as a new page. It unmounted the panels, sent `shutdown` to the backend that was still running in the page, and remounted. So every client-side route change lost the selection and any in-progress Profiler recording. The remount itself was also unreliable. The content script only says hello to the backend manager once per document, so the re-injected backend manager depended on timing. In some runs the page had no backend until the Components panel was opened. In others, the new backend sent its initial tree before the new frontend was listening.\n\nChanges:\n\n- **`main/index.js`, `evalScripts.js`:** only remount when the inspected document was replaced. Keep the current instance if both of these hold:\n  - it already received `extensionBackendInitialized`;\n  - the page still has `__REACT_DEVTOOLS_BACKEND_MANAGER_INJECTED__`. The bac\n…(truncated)",
+      "files": [
+        "packages/react-devtools-extensions/src/contentScripts/backendManager.js (+16 -1)",
+        "packages/react-devtools-extensions/src/contentScripts/proxy.js (+6 -0)",
+        "packages/react-devtools-extensions/src/evalScripts.js (+5 -0)",
+        "packages/react-devtools-extensions/src/main/elementSelection.js (+2 -10)",
+        "packages/react-devtools-extensions/src/main/index.js (+48 -4)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 37740,
+      "title": "Type host config capability flags as boolean",
+      "url": "https://github.com/react/react/pull/37740",
+      "author": "acdlite",
+      "mergedAt": "2026-10-07T19:18:36Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The reconciler is type checked once per renderer. In renderers that don't support a capability, its flag is exported as a literal (e.g. `supportsHydration = false` in ReactFiberConfigWithNoHydration), so Flow infers a literal type and reports every check of it as a constant condition. That's a property of one build, not of the shared code, which works with either value. We were suppressing it with `$FlowFixMe[constant-condition]` at each use.\n\nAnnotate the flag exports as `boolean` instead, so Flow treats them as unknown, and remove the 96 suppressions this makes unnecessary. Dead code elimination is unaffected, because the bundler still sees the literal value.",
+      "files": [
+        "packages/react-art/src/ReactFiberConfigART.js (+1 -1)",
+        "packages/react-dom-bindings/src/client/ReactFiberConfigDOM.js (+6 -6)",
+        "packages/react-native-renderer/src/ReactFiberConfigFabric.js (+1 -1)",
+        "packages/react-noop-renderer/src/ReactFiberConfigNoopHydration.js (+1 -1)",
+        "packages/react-noop-renderer/src/ReactFiberConfigNoopNoMutation.js (+1 -1)",
+        "packages/react-noop-renderer/src/ReactFiberConfigNoopNoPersistence.js (+1 -1)",
+        "packages/react-noop-renderer/src/ReactFiberConfigNoopResources.js (+1 -1)",
+        "packages/react-noop-renderer/src/ReactFiberConfigNoopSingletons.js (+1 -1)",
+        "packages/react-noop-renderer/src/ReactFiberConfigNoopTestSelectors.js (+1 -1)",
+        "packages/react-reconciler/src/ReactFiber.js (+0 -3)"
+      ],
+      "filesTotal": 29
+    },
+    {
+      "number": 37771,
+      "title": "[flags] clean up enableParallelTransitions",
+      "url": "https://github.com/react/react/pull/37771",
+      "author": "rickhanlonii",
+      "mergedAt": "2026-10-07T20:08:09Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "landed everywhere",
+      "files": [
+        "packages/react-reconciler/src/ReactFiberLane.js (+1 -5)",
+        "packages/react-reconciler/src/ReactFiberWorkLoop.js (+2 -5)",
+        "packages/shared/ReactFeatureFlags.js (+0 -3)",
+        "packages/shared/forks/ReactFeatureFlags.native-fb.js (+0 -1)",
+        "packages/shared/forks/ReactFeatureFlags.native-oss.js (+0 -1)",
+        "packages/shared/forks/ReactFeatureFlags.test-renderer.js (+0 -1)",
+        "packages/shared/forks/ReactFeatureFlags.test-renderer.native-fb.js (+0 -1)",
+        "packages/shared/forks/ReactFeatureFlags.test-renderer.www.js (+0 -1)",
+        "packages/shared/forks/ReactFeatureFlags.www-dynamic.js (+0 -1)",
+        "packages/shared/forks/ReactFeatureFlags.www.js (+0 -1)"
+      ],
+      "filesTotal": 12
+    }
+  ],
+  "errors": []
+}

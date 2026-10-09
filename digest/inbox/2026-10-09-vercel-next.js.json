@@ -1,0 +1,505 @@
+{
+  "kind": "repo",
+  "repo": "vercel/next.js",
+  "branch": "canary",
+  "collectedAt": "2026-10-09T01:15:46Z",
+  "range": {
+    "from": "2026-10-06T23:46:46Z",
+    "to": "2026-10-09T01:15:46Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v16.4.0",
+      "publishedAt": "2026-10-07T10:03:29Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.0"
+    },
+    "prerelease": {
+      "tag": "v16.5.0-canary.5",
+      "publishedAt": "2026-10-08T23:55:20Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.5"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v16.5.0-canary.2",
+      "name": "v16.5.0-canary.2",
+      "publishedAt": "2026-10-07T07:40:30Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.2",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.4.0",
+      "name": "v16.4.0",
+      "publishedAt": "2026-10-07T10:03:29Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.0",
+      "prerelease": false,
+      "body": "Check out the [16.4 announcement post](https://nextjs.org/blog/next-16-4) to get an overview of the changes.\n\n### Core Changes\n\n- Show compiler plugin warning in more situations: #75682\n- fix(scripts): correct typo in rm.mjs error message: #87015\n- docs: improve clarity and punctuation in README: #86096\n- Fix debug build paths Pages Router support entries: #93529\n- bundle-analyzer: record historical snapshots on each analyze run: #93520\n- fix: detect proxy.ts correctly with compound pageExtensions: #93246\n- feat(turbopack): support `false` values for `resolveAlias` config: #93331\n\n### Misc Changes\n\n- docs: correction to dynamicParams migration: #96624\n- docs: proxy event argument: #96435\n- docs: remove experimental note from runtime prefetching: #96615\n- Preserve per-segment prefetching after dynamic navigation: #96583\n- Rename static generation stream option to waitForAllReady: #96564\n- Remove obsolete static generation plumbing: #96563\n- [turbopack] Drop dead writes to `exports`: #96381\n- [turbopack] Ignore writes to `exports` after a `module.exports = {}` writes: #96380\n- [turbopack] Add test for sideEffects with optimizePackageImports: #96549\n- [turbopack] Strip leading BOM before parsing CSS: #96678\n- Upgrade React from `cbb046ab-20260731` to `7dfc7ccd-20260803`: #96550\n- docs: use relative doc links in instant-navigation error pages: #96672\n- Turbopack: terminate failed plugin worker threads: #96592\n- Fix HTML-limited bot matching in prerender bypass rules: #96584\n- [ci] Fix create_release_branch for new repo permissions: #96641\n- test: skip action module instance deploy test: #96629\n- docs: quote the dynamicParams build error in a blockquote: #96633\n- [react-sync] Open pull requests as the bot that authors the commits: #96682\n- [Bench] Fixes for pure Fizz bench: #96771\n- Derive foreground cache revalidation from the consumer: #96731\n- Fix race when navigating Back before hydration: #96252\n- docs: present each Skill as steps in the AI agents guide: #96751\n- Reuse completed cache entries for the rest of a request: #96727\n- Upgrade React from `7dfc7ccd-20260803` to `11eddecd-20260805`: #96735\n- Remove WorkStore execution mode: #96674\n- Remove cache revalidation execution mode reads: #96670\n- Separate App Route render and prerender pipelines: #96662\n- Remove App Page execution mode reads: #96660\n- test: fix missing await in css-chunking test: #96725\n- docs (Skills): stop assuming app/ at the root and port 3000: #96696\n- Implement next/font BeforeResolvePlugins as ImportMappingReplacement: #95808\n- Use Tailwind Turbopack loader in create-next-app: #96606\n- docs: instant navigation quick start with an adoption prompt: #96663\n- Separate App Page render and prerender pipelines: #96659\n- Move App Router execution intent to entrypoints: #96640\n- Pass explicit render capabilities through App Render: #96576\n- Pass explicit prefetch hint policy through App Render: #96572\n- Replace WorkStore isStaticGeneration with executionMode: #96570\n- docs: document\n…(truncated)"
+    },
+    {
+      "tag": "v16.5.0-canary.3",
+      "name": "v16.5.0-canary.3",
+      "publishedAt": "2026-10-07T23:50:30Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.3",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.4",
+      "name": "v16.5.0-canary.4",
+      "publishedAt": "2026-10-08T16:11:37Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.4",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.5",
+      "name": "v16.5.0-canary.5",
+      "publishedAt": "2026-10-08T23:55:20Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.5",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 99233,
+      "title": "Trace active Tokio worker threads with memory samples",
+      "url": "https://github.com/vercel/next.js/pull/99233",
+      "author": "sokra",
+      "mergedAt": "2026-10-07T06:41:34Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "## What?\n\nRecord the number of non-idle Tokio scheduler worker threads alongside Turbopack's existing process-memory samples. The span-query API and MCP output expose it as the fourth value in each memory sample. The WebSocket query result adds a parallel worker series for visualization in [vercel/turbo-trace-viewer#33](https://github.com/vercel/turbo-trace-viewer/pull/33), retaining the original memory-only series.\n\n## Why?\n\nMemory samples alone do not show whether Tokio's workers were busy or parked at a given point in a trace. The aligned worker count makes it easier to correlate memory changes and traced work with scheduler activity.\n\n## How?\n\nEach traced runtime builder initializes one global atomic counter with its worker capacity, then Tokio's worker-only park/unpark callbacks adjust it. This avoids counting blocking-pool threads and assumes one traced Tokio runtime per process; shutdown bookkeeping is unnecessary for this metric. The counter is read at the existing memory-sampling cadence rather than emitting trace rows on each worker transition. Trace ingestion, span-query downsampling, and the WebSocket worker series preserve the count from the same sample as the selected memory value.\n\n## Verification\n\n- `cargo test --locked -p turbopack-trace-utils -p turbopack-trace-server`\n- `cargo check --locked -p turbopack-cli -p turbopack-nft -p next-build-test -p next-napi-bindings`\n- `cargo fmt --all -- --check`; `git diff --check`\n- Not run: Next.js TypeScript/prettier/fu\n…(truncated)",
+      "files": [
+        "crates/next-build-test/src/main.rs (+5 -1)",
+        "crates/next-napi-bindings/src/lib.rs (+4 -0)",
+        "crates/next-napi-bindings/src/turbo_trace_server.rs (+10 -7)",
+        "packages/next/src/build/swc/generated-native.d.ts (+7 -6)",
+        "packages/next/src/cli/internal/turbo-trace-server.ts (+5 -3)",
+        "turbopack/crates/turbopack-cli/src/main.rs (+18 -15)",
+        "turbopack/crates/turbopack-nft/src/main.rs (+6 -1)",
+        "turbopack/crates/turbopack-trace-server/src/lib.rs (+18 -16)",
+        "turbopack/crates/turbopack-trace-server/src/query_tests.rs (+78 -0)",
+        "turbopack/crates/turbopack-trace-server/src/reader/mod.rs (+2 -2)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 99748,
+      "title": "Turbopack: Minor cleanup from review of #99711",
+      "url": "https://github.com/vercel/next.js/pull/99748",
+      "author": "bgw",
+      "mergedAt": "2026-10-07T06:44:25Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "Minor cleanup opportunities I noticed after reviewing https://fleet-review.vercel.tools/vercel/next.js/pull/99711/changes/ba6208431008d331bb3c738cd32643c61c04f411..18e7c6dee5d4f85aa1c9a9a68a50830fc73b52f8",
+      "files": [
+        "turbopack/crates/turbo-tasks-fs/src/path_map.rs (+0 -3)",
+        "turbopack/crates/turbo-tasks-fs/src/watcher/mod.rs (+9 -10)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 99485,
+      "title": "fix: Bump vendored @mswjs/interceptors from 0.42.5 to 0.42.6",
+      "url": "https://github.com/vercel/next.js/pull/99485",
+      "author": "blz-ea",
+      "mergedAt": "2026-10-07T06:59:06Z",
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "This PR bumps `@mswjs/interceptors` from 0.42.5 to 0.42.6 which includes https://github.com/mswjs/interceptors/pull/852\n\nFixes issue with `testProxy` described in https://github.com/mswjs/interceptors/issues/850",
+      "files": [
+        "packages/next/package.json (+1 -1)",
+        "packages/next/src/compiled/@mswjs/interceptors/ClientRequest/index.js (+1 -1)",
+        "pnpm-lock.yaml (+8 -8)",
+        "pnpm-workspace.yaml (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 99041,
+      "title": "[cd] Use pnpm to manage the version",
+      "url": "https://github.com/vercel/next.js/pull/99041",
+      "author": "eps1lon",
+      "mergedAt": "2026-10-07T07:17:10Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "lerna's last job was bumping the version, and it needed a dependency graph of exact pins to do it. Internal dependencies now use the `workspace:*` protocol instead, which pnpm substitutes for the concrete version when packing, so published manifests are unchanged.\n\n`workspace:*` resolves to the same bare exact version that was pinned before.\n\nThat leaves the bump itself, which `scripts/version-bump.js` now does: write one version field per package, commit, tag. It stays small because every package is versioned in lockstep and releases always bumped all of them (`--force-publish`), so there is no changed-detection to reimplement.\n\n`packages/next/package.json` replaces `lerna.json` as the version source of truth.\nThe release branch gate moves to `scripts/release-branches.json`.\n\nThree things fall out:\n\n- `normalize-version-bump.js` no longer has to normalize internal dependency specs, since `workspace:*` carries no version. Those specs also stop contributing to turbo input hashes.\n- `set-preview-version.js` no longer needs to check out a branch first. That only existed because `lerna version` refused to run on a detached HEAD.\n- no more lockfile regeneration after a release which means we can reuse n_m caches\n\n`create-preview-tarballs.js` keeps `npm pack`: it rewrites internal dependencies\n to tarball URLs rather than versions, because that is what preview installs need, so pnpm's substitution would be the wrong transform. It now throws if any `workspace:` specifier survives th\n…(truncated)",
+      "files": [
+        ".prettierignore (+0 -1)",
+        "lerna.json (+0 -15)",
+        "package.json (+0 -2)",
+        "packages/eslint-config-next/package.json (+1 -1)",
+        "packages/next/package.json (+6 -6)",
+        "packages/third-parties/package.json (+1 -1)",
+        "pnpm-lock.yaml (+11 -2692)",
+        "scripts/check-backport-canary-release.js (+2 -4)",
+        "scripts/create-preview-tarballs.js (+23 -0)",
+        "scripts/create-release-branch.js (+10 -7)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 99720,
+      "title": "Bump to swc v81",
+      "url": "https://github.com/vercel/next.js/pull/99720",
+      "author": "mischnic",
+      "mergedAt": "2026-10-07T07:46:40Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "This removes the last cases of box_patterns from our build",
+      "files": [
+        "Cargo.lock (+64 -67)",
+        "Cargo.toml (+10 -10)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 99775,
+      "title": "turbo-trace-server: speed up loading compressed traces",
+      "url": "https://github.com/vercel/next.js/pull/99775",
+      "author": "sokra",
+      "mergedAt": "2026-10-07T10:02:58Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "### What?\n\nMakes loading compressed (`.zst` / `.gz`) traces in `turbo-trace-server` much faster. On a large trace, compressed loads now beat raw loads from before this change. Raw loads get faster too.\n\n| 12M-span synthetic trace (warm cache, median) | before | after |\n|---|---|---|\n| raw | ~17s | ~13.5s |\n| `.zst` | ~26s | ~14s |\n| `.gz` | ~26s | ~12s |\n\nSmaller synthetic traces (2–3M spans) improve as well:\n- raw goes from 3.5–4.9s to 2.2–3.3s;\n- compressed goes from 2.2–3.7s to 2.1–2.9s.\n\n### Why?\n\nOpening compressed traces was very slow. There were two causes.\n\n1. **Per-batch work was quadratic.**\n   - After every batch of rows, `Store::invalidate_outdated_spans` cleared the cached corrected self time of **every** self-time event of each touched span, plus its ancestors and the root.\n   - For a span with millions of events, that is a full scan per batch.\n2. **Compressed input arrived in tiny batches.**\n   - zstd/gzip decoders return about one input buffer of output per `read`, roughly 450 KB.\n   - Raw files arrived in 64 MB reads.\n   - So compressed traces ran that full scan about 100× more often. On the trace above, invalidation alone took ~12.7s for `.zst` versus ~1.5s for raw.\n\n### How?\n\n**Constant-time cache invalidation.**\n- Each span now has a generation counter for the cached corrected self times of its self-time events.\n- Invalidating a span just bumps the counter. A cached per-event value only counts if it was computed for the span's current generation.\n- The val\n…(truncated)",
+      "files": [
+        "turbopack/crates/turbopack-trace-server/src/lazy_sorted_vec.rs (+0 -4)",
+        "turbopack/crates/turbopack-trace-server/src/reader/mod.rs (+223 -29)",
+        "turbopack/crates/turbopack-trace-server/src/reader/threaded.rs (+470 -0)",
+        "turbopack/crates/turbopack-trace-server/src/span.rs (+34 -5)",
+        "turbopack/crates/turbopack-trace-server/src/span_ref.rs (+24 -11)",
+        "turbopack/crates/turbopack-trace-server/src/store.rs (+177 -5)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 99795,
+      "title": "Fix instant codemod matching colocated test files",
+      "url": "https://github.com/vercel/next.js/pull/99795",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-07T13:00:19Z",
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "## Summary\n\n- prevent `cache-components-instant-false` from adding route config to colocated test, spec, and story files\n- keep compound page extensions eligible while filtering common non-route suffixes\n- cover POSIX and Windows paths in the regression tests\n\n## Verification\n\n- `pnpm --filter @next/codemod build`\n- `pnpm --filter @next/codemod test --runInBand cache-components-instant-false.test.js`",
+      "files": [
+        "packages/next-codemod/transforms/cache-components-instant-false.ts (+9 -3)",
+        "packages/next-codemod/transforms/__tests__/cache-components-instant-false.test.js (+8 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 99814,
+      "title": "Use ESLint 10 in new create-next-app projects",
+      "url": "https://github.com/vercel/next.js/pull/99814",
+      "author": "devjiwonchoi",
+      "mergedAt": "2026-10-07T15:39:40Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "## Summary\n\nUse ESLint `^10` in create-next-app projects so fresh apps no longer install deprecated ESLint 9. Update the existing TypeScript and JavaScript configuration tests to assert the exact dependency range.\n\nSome ESLint plugins still declare peer support only through ESLint 9, so installs can report peer dependency warnings.\n\n## Verification\n\nGenerated TypeScript and JavaScript apps installed ESLint 10.12.0 and passed their lint scripts using locally built `eslint-config-next` and `@next/eslint-plugin-next` packages.",
+      "files": [
+        "packages/create-next-app/templates/index.ts (+1 -1)",
+        "test/production/create-next-app/eslint-config.test.ts (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 99765,
+      "title": "Turbopack: add turbo-trace-size CLI to inspect trace file size",
+      "url": "https://github.com/vercel/next.js/pull/99765",
+      "author": "sokra",
+      "mergedAt": "2026-10-07T16:15:02Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "### What?\n\nAdds `turbopack/crates/turbopack-trace-size`, a CLI (`turbo-trace-size`) that shows where the bytes in a Turbopack trace file (`.next-profiles/trace-turbopack.bin`) go. It decodes the postcard `TraceRow` stream (raw, gzip or zstd) and reports:\n\n- size per row type (`Start`, `Enter`, `Exit`, `AllocationCounters`, ...)\n- the components of `Start`/`Event`/`Record` rows (name, target, values, fixed fields)\n- bytes per span name, including its Enter/Exit/End/Record rows and Events\n- bytes per attribute key\n- the bytes spent re-writing the same span names, targets, keys and string values\n\n```sh\ncargo run --bin turbo-trace-size --release -- .next-profiles/trace-turbopack.bin --top 30\n```\n\n### Why?\n\n`NEXT_TURBOPACK_TRACING` traces get large quickly. This tool shows which events cause that, so we can decide what to slim down.\n\n### Findings: `bench/heavy-npm-deps`, `NEXT_TURBOPACK_TRACING=1 next build`\n\n68.42 MiB raw, 4.66 M rows (gzip -1: 21.3 MiB, zstd -3: 21.2 MiB):\n\n| row type           |     count |     bytes |    avg |     % |\n| ------------------ | --------: | --------: | -----: | ----: |\n| AllocationCounters | 2,280,168 | 45.00 MiB | 20.7 B | 65.8% |\n| Exit               | 1,140,084 |  8.40 MiB |  7.7 B | 12.3% |\n| Enter              | 1,140,084 |  8.40 MiB |  7.7 B | 12.3% |\n| Start              |    39,481 |  5.57 MiB |  148 B |  8.1% |\n| Record             |    21,913 |   804 KiB |   38 B |  1.1% |\n| End                |    39,480 |   265 KiB |    7 B |  0.4% |\n| \n…(truncated)",
+      "files": [
+        "Cargo.lock (+13 -0)",
+        "turbopack/crates/turbopack-trace-size/Cargo.toml (+27 -0)",
+        "turbopack/crates/turbopack-trace-size/src/lib.rs (+1245 -0)",
+        "turbopack/crates/turbopack-trace-size/src/main.rs (+28 -0)",
+        "contributing/turbopack/tracing.md (+11 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 99722,
+      "title": "Turbopack: batch EsmBinding codegen",
+      "url": "https://github.com/vercel/next.js/pull/99722",
+      "author": "mischnic",
+      "mergedAt": "2026-10-07T16:15:46Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "**View diff without whitespace**\n\nCall these just once (per module), not once per referenced import\n- `unused_references()`\n- `reference.get_referenced_asset()`\n- `imported_module.get_ident(export)`",
+      "files": [
+        "turbopack/crates/turbopack-ecmascript/src/code_gen.rs (+3 -3)",
+        "turbopack/crates/turbopack-ecmascript/src/lib.rs (+1 -1)",
+        "turbopack/crates/turbopack-ecmascript/src/references/esm/base.rs (+2 -2)",
+        "turbopack/crates/turbopack-ecmascript/src/references/esm/binding.rs (+216 -173)",
+        "turbopack/crates/turbopack-ecmascript/src/references/esm/mod.rs (+1 -1)",
+        "turbopack/crates/turbopack-ecmascript/src/references/mod.rs (+19 -14)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 99824,
+      "title": "Turbopack: fix turbo-trace-size test after MemorySample gained active_worker_threads",
+      "url": "https://github.com/vercel/next.js/pull/99824",
+      "author": "sokra",
+      "mergedAt": "2026-10-07T17:47:41Z",
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "### What?\n\nFixes the `rust check` (clippy) and `test cargo unit` jobs on canary, which fail with:\n\n```\nerror[E0063]: missing field `active_worker_threads` in initializer of `TraceRow<'_>`\n   --> turbopack/crates/turbopack-trace-size/src/lib.rs:936:13\n```\n\nThe fix adds the missing field to the `TraceRow::MemorySample` row in the `turbo-trace-size` unit test.\n\n### Why?\n\nThis was a semantic merge conflict between two PRs that each passed CI on their own:\n\n- #99233 added `active_worker_threads` to `TraceRow::MemorySample`.\n- #99765 added the `turbo-trace-size` crate, whose test builds a `MemorySample` row without that field.\n\nOnly test code is affected. Every other `MemorySample` constructor already sets the field.\n\n### How?\n\nThe test row now sets `active_worker_threads: 3`. The size assertions are computed from the serialized rows, so they don't change.\n\nVerified locally on top of `db03f83f`: before the change, `cargo test -p turbopack-trace-size` fails with the error above. After it, the following pass:\n\n- `cargo test -p turbopack-trace-size`\n- `cargo clippy --all-targets -- -D warnings` for `turbopack-trace-size`, `turbopack-trace-utils` and `turbopack-trace-server`\n- tests of `turbopack-trace-utils` and `turbopack-trace-server`",
+      "files": [
+        "turbopack/crates/turbopack-trace-size/src/lib.rs (+1 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 99770,
+      "title": "[ci] Increase deploy test concurrency to 8",
+      "url": "https://github.com/vercel/next.js/pull/99770",
+      "author": "eps1lon",
+      "mergedAt": "2026-10-07T18:45:12Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "Increases test concurrency for the deploy test jobs to 8 (prev: 2 in the full suite, 1 in new build-and-test jobs).\n\nFor deploy tests, the CPU-intensive work that should be as stable as possible (the Next.js build and server) does not happen on the runner. It happens remotely when the deployment is built at Vercel. The runner mostly handles I/O and setup: pushing the deployment, waiting for it to become ready, polling logs, and making requests against it. So the usual reason to cap concurrency (runner CPU contention) barely applies.\n\nAdjusted rate-limits:\n- 10x `api-projects-get` (prev failure: https://github.com/vercel/next.js/actions/runs/37617890690/job/112780953612#step:35:1159)\n\nTrade-offs to watch:\n\n- Peak concurrent Vercel deployments per run rises 4× (shards × 2 → shards × 8; 64 → 256 concurrent test files at today's shard counts). If we hit Vercel account deployment-concurrency limits, increase the limits\n- maybe we still need a bit beefier runners if the concurrent setup/tests starve runner CPU\n\n## test plan\n\n- [x] [deploy tests with debug logging on this branch takes 30 minutes wall time without hitting Vercel rate limits](https://github.com/vercel/next.js/actions/runs/37627918534); usual flake on the 1st try (down from [97 minutes on canary](https://github.com/vercel/next.js/actions/runs/37588790388/attempts/1))",
+      "files": [
+        "scripts/test-new-tests.mjs (+10 -1)",
+        ".github/workflows/test_e2e_deploy_release.yml (+3 -3)",
+        "test/lib/next-modes/next-deploy.ts (+4 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 99818,
+      "title": "Fix next-bundle-optimizer skill handoffs",
+      "url": "https://github.com/vercel/next.js/pull/99818",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-07T18:57:20Z",
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.5",
+      "filesTotal": 1
+    },
+    {
+      "number": 99825,
+      "title": "[turbopack] fix some unused dependencies",
+      "url": "https://github.com/vercel/next.js/pull/99825",
+      "author": "kassens",
+      "mergedAt": "2026-10-07T19:35:01Z",
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "These were breaking some GitHub builds for me for some reason.\n\n## Test Plan\nGitHub CI + local cargo check validation",
+      "files": [
+        "Cargo.lock (+0 -13)",
+        "crates/next-core/Cargo.toml (+0 -1)",
+        "turbopack/crates/turbo-tasks-backend/Cargo.toml (+1 -2)",
+        "turbopack/crates/turbo-tasks-fs/Cargo.toml (+0 -1)",
+        "turbopack/crates/turbo-tasks/Cargo.toml (+1 -5)",
+        "turbopack/crates/turbopack-cli/Cargo.toml (+0 -3)",
+        "turbopack/crates/turbopack-ecmascript/Cargo.toml (+0 -1)",
+        "turbopack/crates/turbopack-mdx/Cargo.toml (+0 -1)",
+        "turbopack/crates/turbopack-node/Cargo.toml (+0 -2)",
+        "turbopack/crates/turbopack-tracing/Cargo.toml (+1 -3)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 99813,
+      "title": "create-next-app: write agent feedback block to AGENTS.md when enabled",
+      "url": "https://github.com/vercel/next.js/pull/99813",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-07T19:42:51Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "### What\n\nWhen `experimental.agentFeedback` is enabled, create-next-app now writes the `nextjs-agent-feedback` block into `AGENTS.md` along with the `nextjs-agent-rules` block.\n\n### Why\n\nBefore this change, create-next-app enabled the flag in `next.config.ts` but only wrote the rules block. The feedback block was added later by `next dev`, and only when `@vercel/detect-agent` found a coding agent (`syncAgentFeedbackForDev` in `app-info-log.ts`). As a result:\n\n- An agent that read `AGENTS.md` before running `next dev` never saw the feedback instructions.\n- The block then appeared as an uncommitted `AGENTS.md` change on top of the \"Initial commit from Create Next App\".\n\n### How\n\n- `generateAgentFiles(root, { agentFeedback })` adds the feedback block after the rules block. The text is copied from `packages/next/src/server/lib/generate-agent-files.ts`, with a comment saying to keep them in sync. `next dev` compares the block byte-for-byte.\n- `create-app.ts` passes `agentFeedback: !example && agentFeedback`, because examples don't get `experimental.agentFeedback` written to their config.\n- `--no-agents-md` still writes no `AGENTS.md`.\n\n### Verification\n\nI ran the new helper next to `next dev`'s `writeAgentFiles` + `writeAgentFeedbackFiles`, with the flag on and off:\n- The output is byte-identical in both cases.\n- `hasCurrentAgentRules` / `hasCurrentAgentFeedback` return true on create-next-app's output.\n- Running `next dev`'s writers again on that output returns `unchanged`.\n\nTest\n…(truncated)",
+      "files": [
+        "packages/create-next-app/create-app.ts (+2 -1)",
+        "packages/create-next-app/helpers/generate-agent-files.ts (+41 -8)",
+        "test/production/create-next-app/index.test.ts (+58 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 99738,
+      "title": "Document `next analyze export` and skill are added in 16.4",
+      "url": "https://github.com/vercel/next.js/pull/99738",
+      "author": "wbinnssmith",
+      "mergedAt": "2026-10-07T22:32:14Z",
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.5",
+      "filesTotal": 3
+    },
+    {
+      "number": 99823,
+      "title": "turbopack: don't report unactionable 'stopping failed' warnings",
+      "url": "https://github.com/vercel/next.js/pull/99823",
+      "author": "lukesandberg",
+      "mergedAt": "2026-10-08T00:22:58Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "## What\n\nBuilds with the Turbopack filesystem cache didn't give useful output when the cache couldn't be written during shutdown, for example because of a read-only directory or a full disk. The build succeeded, but it printed a bare `Shutting down failed: <message>` which was not useful\n\nBefore:\n```\nPersisting failed during shutdown: Unable to write SST file 00000020.sst\n\nCaused by:\n: Permission denied (os error 13)te/var/folders/p6/ytr7tcts5ndf72xw136ky30m0000gn/T/next-install-6cb7b5bc6e3b95a18ae07aa856827db93efc662fe73934ecebae8de778735e0c/.next/cache/turbopack/v16.5.0-canary.2-2c48f075ef/00000020.sst`\nShutting down failed: A previous write operation failed with an unrecoverable error; no further writes are possible\n```\n\nNow:\n\n```\nWARNING: Saving the filesystem cache failed:\n    Unable to write SST file 00000020.sst: failed to create file `/Users/lukesandberg/projects/next_2/next.js/test/tmp/next-test-1791392696220-115/.next/cache/turbopack/unversioned/00000020.sst`: Permission denied (os error 13)\n```\n\nThe \"Shutting down failed\" error is gone and the filesystem cache error is slightly improved.\n\nAlso:\n- **Compaction is skipped once a write has already failed.**  That avoids a second, redundant failure.\n- **Database shutdown can't fail anymore.** Compaction errors during shutdown are logged as warnings.",
+      "files": [
+        "turbopack/crates/turbo-persistence/benches/mod.rs (+4 -4)",
+        "turbopack/crates/turbo-persistence/src/db.rs (+5 -2)",
+        "turbopack/crates/turbo-persistence/src/tests.rs (+61 -61)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/mod.rs (+4 -4)",
+        "turbopack/crates/turbo-tasks-backend/src/database/turbo/mod.rs (+8 -4)",
+        "turbopack/crates/turbo-tasks-backend/src/kv_backing_storage.rs (+5 -5)",
+        "turbopack/crates/turbo-tasks-backend/src/lib.rs (+2 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 99838,
+      "title": "Bump next in upgrade eval fixtures for CVE-2026-94483",
+      "url": "https://github.com/vercel/next.js/pull/99838",
+      "author": "lukesandberg",
+      "mergedAt": "2026-10-08T02:16:17Z",
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "## Summary\n\nBumps `next` in three upgrade eval fixtures that were pinned to versions affected by CVE-2026-94483 (Image Optimization SSRF via allow-listed remote patterns; fixed in 16.3.8):\n\n- `future-cache-components-nudge`: 16.3.5 → 16.4.0\n- `future-cache-components-same-version`: 16.3.5 → 16.4.0\n- `latest-same-major`: 16.2.12 → 16.3.8\n\nA few things needed to be updated to match\n\n- `latest/setup.ts` and `future/setup.ts` mock `registry.npmjs.org/next/latest` with a hardcoded `target`. That target is now 16.4.0 (the current `latest`), so the same-version scenarios still sit on \"latest\" and the same-major scenario still has a newer target in the same major.\n- `latest-same-major` uses 16.3.8 rather than 16.4.0 because it has to start below the target in the same major. 16.3.8 is the oldest patched release; there is no patched 16.2.x.\n- The `EVAL.ts` exact-version assertions are updated to match.\n\nThe `latest-cross-major`, `latest-nudge` and `future-cache-components` scenarios now also upgrade to 16.4.0. Their starting versions are unchanged.\n\nFixes VULN-16485\nFixes VULN-16486\nFixes VULN-16487",
+      "files": [
+        "evals/next-upgrade/evals/future-cache-components-nudge/EVAL.ts (+1 -1)",
+        "evals/next-upgrade/evals/future-cache-components-nudge/package.json (+1 -1)",
+        "evals/next-upgrade/evals/future-cache-components-same-version/package.json (+1 -1)",
+        "evals/next-upgrade/evals/latest-same-major/EVAL.ts (+1 -1)",
+        "evals/next-upgrade/evals/latest-same-major/package.json (+1 -1)",
+        "evals/next-upgrade/future/setup.ts (+5 -5)",
+        "evals/next-upgrade/latest/setup.ts (+1 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 99840,
+      "title": "Revert \"[ci] Increase deploy test concurrency to 8\"",
+      "url": "https://github.com/vercel/next.js/pull/99840",
+      "author": "bgw",
+      "mergedAt": "2026-10-08T03:22:12Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "Reverts vercel/next.js#99770\n\nWe're seeing a lot of deployment test failures due to rate limits. We can try bumping the rate limits and trying again, but reverting for right now to unblock deployment tests.",
+      "files": [
+        "scripts/test-new-tests.mjs (+1 -10)",
+        ".github/workflows/test_e2e_deploy_release.yml (+3 -3)",
+        "test/lib/next-modes/next-deploy.ts (+0 -4)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 99794,
+      "title": "turbo-tasks-fs: Don't print NotFound watcher errors",
+      "url": "https://github.com/vercel/next.js/pull/99794",
+      "author": "sokra",
+      "mergedAt": "2026-10-08T07:00:39Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "### What?\n\nStop the Turbopack disk watcher from printing `watch error … NotFound` for paths that vanish while notify is scanning them, and send the remaining watcher errors to stderr instead of stdout.\n\n### Why?\n\nIn polling mode, notify's `PollWatcher` walks the tree with walkdir. When a directory is deleted between being listed and being opened or stat'ed, notify reports an `Io` error with `NotFound`. Deleting a large tree (`rm -rf`, a package install) produces a burst of these. A filesystem fuzzer saw about 4000 in two minutes. Each one was printed with `println!`, so a library was spamming the user's stdout.\n\nThese errors don't signal a correctness problem. The watcher already invalidates the reported path recursively, and the next scan reports the removal anyway. The fuzzer runs had no missed invalidations.\n\n### How?\n\n- A small private classifier recognizes notify errors of kind `Io` wrapping `std::io::ErrorKind::NotFound`. It matches on the structured error kinds, not on message text.\n- The watcher thread skips the print for those errors. Batch invalidation and batch-delay scheduling still run for every error, so invalidation behavior doesn't change.\n- Other notify error kinds, including `PathNotFound`, are still reported, now on stderr.\n\n### Verification\n\n- `cargo test -p turbo-tasks-fs --lib watcher::tests`: 19 passed, covering native and polling watchers in both recursive and non-recursive modes\n- `cargo clippy -p turbo-tasks-fs --tests -- -D warnings`\n- Not run: a de\n…(truncated)",
+      "files": [
+        "turbopack/crates/turbo-tasks-fs/src/watcher/mod.rs (+12 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 99821,
+      "title": "Replace deprecated React.FormEvent with SubmitEvent",
+      "url": "https://github.com/vercel/next.js/pull/99821",
+      "author": "kassens",
+      "mergedAt": "2026-10-08T07:10:28Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "## Summary\n\n`@types/react` 19.2.10 deprecates `FormEvent`/`FormEventHandler` (they don't correspond to a real DOM event). This switches `onSubmit` handlers to `SubmitEvent<HTMLFormElement>` in test fixtures, the docs (`authentication.mdx`, `preserving-ui-state.mdx`), and `examples/with-supabase`. It also removes an unused `FormEvent` import from a JSX docs sample.\n\nExamples still pinned to `@types/react` 18 are unchanged, since `SubmitEvent` only exists in `@types/react` >= 19.2.10.\n\n## Verification\n\n- Type-checked the updated fixtures and the docs snippet patterns with `tsc` (strict) against `@types/react` 19.2.18, plus a negative check confirming the event type is enforced against `onSubmit`. The fixture files aren't in the root `tsconfig.json` include list, so `pnpm typescript` doesn't cover them.",
+      "files": [
+        "examples/with-supabase/components/forgot-password-form.tsx (+3 -1)",
+        "examples/with-supabase/components/login-form.tsx (+1 -1)",
+        "examples/with-supabase/components/sign-up-form.tsx (+1 -1)",
+        "examples/with-supabase/components/update-password-form.tsx (+3 -1)",
+        "docs/01-app/02-guides/authentication.mdx (+2 -3)",
+        "docs/01-app/02-guides/preserving-ui-state.mdx (+2 -2)",
+        "test/development/app-dir/segment-explorer/app/search/search.tsx (+1 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 99846,
+      "title": "[test] Authenticate deploy tests via VERCEL_TOKEN instead of shared auth.json",
+      "url": "https://github.com/vercel/next.js/pull/99846",
+      "author": "eps1lon",
+      "mergedAt": "2026-10-08T08:18:48Z",
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.5",
+      "filesTotal": 2
+    },
+    {
+      "number": 99842,
+      "title": "Fix telemetry delivery on Node.js 24",
+      "url": "https://github.com/vercel/next.js/pull/99842",
+      "author": "devjiwonchoi",
+      "mergedAt": "2026-10-08T08:29:17Z",
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.5",
+      "body": "### Why?\n\nTelemetry fails on Node.js 24 with this error before any HTTP request is sent:\n\n```text\nTypeError: RequestInit: Expected signal (\"AbortSignal {}\") to be an instance of AbortSignal.\n```\n\nNative `fetch` checks that `RequestInit.signal` is an instance of Node's native `AbortSignal`. The Edge Runtime ponyfill creates its own `AbortSignal` class: the name is the same, but the constructor is different, so the signal fails the instance check.\n\nThe telemetry transport retries once and suppresses the final error, so the CLI can exit successfully without delivering events.\n\nThe controller was introduced when Next.js supported Node.js 14.6. Next.js now requires Node.js 20.9 or later, where native `AbortController` is available on all supported versions.\n\n### How?\n\nUse Node's native `AbortController` so its signal matches `fetch`, preserving the existing timeout.\n\nVerified real SDK HTTP delivery on Node.js 20.9, 22.6, and 24.1, and the five-second cancellation deadline. The patched CLI received HTTP 204 for all three upgrade lifecycle events; Snowflake persistence is not yet verified. The full repository build and test suite were not run.",
+      "files": [
+        "packages/next/src/telemetry/storage.ts (+0 -1)",
+        "packages/next/src/telemetry/post-telemetry-payload.test.ts (+100 -0)",
+        "test/production/next-server-nft/next-server-nft.test.ts (+0 -9)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 99858,
+      "title": "docs: align function sidebar titles",
+      "url": "https://github.com/vercel/next.js/pull/99858",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-08T12:05:52Z",
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.5",
+      "filesTotal": 2
+    },
+    {
+      "number": 99896,
+      "title": "Fix google tag manager e2e test, assume GTM 200s instead of 404ing",
+      "url": "https://github.com/vercel/next.js/pull/99896",
+      "author": "bgw",
+      "mergedAt": "2026-10-08T21:32:31Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.5",
+      "filesTotal": 2
+    },
+    {
+      "number": 99891,
+      "title": "Increase timeout on module-scope deployment test",
+      "url": "https://github.com/vercel/next.js/pull/99891",
+      "author": "bgw",
+      "mergedAt": "2026-10-08T22:12:30Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.5",
+      "filesTotal": 1
+    },
+    {
+      "number": 99886,
+      "title": "Update error strings for a few deployment tests",
+      "url": "https://github.com/vercel/next.js/pull/99886",
+      "author": "bgw",
+      "mergedAt": "2026-10-08T22:32:43Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.5",
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "next-js-bot[bot]": 1
+    }
+  }
+}
