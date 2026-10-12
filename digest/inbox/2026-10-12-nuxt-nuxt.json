@@ -1,0 +1,395 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-12T00:37:16Z",
+  "range": {
+    "from": "2026-10-08T22:36:15Z",
+    "to": "2026-10-12T00:37:16Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.1",
+      "publishedAt": "2026-10-09T22:47:35Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v4.6.1",
+      "name": "v4.6.1",
+      "publishedAt": "2026-10-09T22:47:35Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.1",
+      "prerelease": false,
+      "body": "> v4.6.1 is the next patch release.\n\n## 👉 Changelog\n\n[compare changes](https://github.com/nuxt/nuxt/compare/v4.6.0...v4.6.1)\n\n### 🔥 Performance\n\n- **nitro:** build the portable event's web view on first access ([`cffb182d6`](https://github.com/nuxt/nuxt/commit/cffb182d6))\n\n### 🩹 Fixes\n\n- **vite:** match vite 8.1+ optimizer messages for deps hint (#36525)\n- **nuxt:** accept any `baseURL` when fetch response type is named (#36523)\n- **nitro:** resolve `nitropack/types` declarations under nodenext ([`242e1971e`](https://github.com/nuxt/nuxt/commit/242e1971e))\n- **nuxt:** allow `false` in `setPageLayout` types (#36506)\n- **nuxt:** align `Serialize` object types with JSON (#36503)\n- **vite:** don't abort dep scan on virtual imports in installed packages (#36477)\n- **nuxt:** update `publishConfig` config export extension ([`64fa191cb`](https://github.com/nuxt/nuxt/commit/64fa191cb))\n- **kit:** install the package a missing subpath belongs to (#36507)\n- **vite-server:** use the configured outDir as the public directory for non-ssr environment (#36501)\n- **kit,nitro:** match dev handler paths on both nitro majors (#36515)\n- **nuxt:** preserve onServerPrefetch for useId hydration (#36430)\n- **vite-server:** include the request in dev error reports (#36489)\n- **nitro:** register each dev server handler once (#36493)\n- **nitro:** pass `RequestEvent` to `nuxt` dev server handlers ([`e6beceea2`](https://github.com/nuxt/nuxt/commit/e6beceea2))\n- **nuxt:** type the global `$fetch` with nuxt's `TypedFetch` (#36492)\n- **vite-server:** work with deploy target plugins in dev (#36491)\n- **schema:** ignore `.wrangler` directory (#36487)\n- **vite-server:** pass the path to the error page render (#36488)\n- **nuxt,vite:** disable dev error broadcast if `BroadcastChannel` throws (#36480)\n- **kit:** align semantic version regexp with nightly version format (#36479)\n- **nuxt:** export types reachable from async data composables (#36478)\n- **vite:** detect enclosing string delimiter in inline style urls (#36476)\n- **schema:** type the `nuxt` dev server handler variant ([`452052793`](https://github.com/nuxt/nuxt/commit/452052793))\n- **nitro:** inline nuxt runtime when resolved to windows paths ([`21657c6fc`](https://github.com/nuxt/nuxt/commit/21657c6fc))\n- **nitro:** resolve `unhead` from nuxt in server bundle ([`dc1e2d6e6`](https://github.com/nuxt/nuxt/commit/dc1e2d6e6))\n\n### 💅 Refactors\n\n- **kit:** use `package-manager-detector` workspace + deno handling ([`1563a6d25`](https://github.com/nuxt/nuxt/commit/1563a6d25))\n\n### 📖 Documentation\n\n- document dev server handlers and `nuxt/server` scope ([`7c36a1352`](https://github.com/nuxt/nuxt/commit/7c36a1352))\n- fix nightly examples (#36486)\n\n### 🏡 Chore\n\n- remove `CLAUDE.md` (#36462)\n- relax minimum release age exclude ([`bdf98e936`](https://github.com/nuxt/nuxt/commit/bdf98e936))\n- update welcome template ([`787d0d980`](https://github.com/nuxt/nuxt/commit/787d0d980))\n\n### ✅ Tests\n\n- resolve temporary fixture paths on mac\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 36523,
+      "title": "fix(nuxt): accept any `baseURL` when fetch response type is named",
+      "url": "https://github.com/nuxt/nuxt/pull/36523",
+      "author": "danielroe",
+      "mergedAt": "2026-10-09T11:41:34Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves https://github.com/nuxt/nuxt/issues/36521\n\n### 📚 Description\n\nsince 4.6.0, naming the response type of a call meant it no longer accepted a `baseURL`, even though it worked in 4.5.x:\n\n```ts\nuseFetch<{ items: number[] }>('/x', { baseURL: useRuntimeConfig().public.apiBase })\n// TS2769: No overload matches this call.\n//   Type 'string' is not assignable to type '\"\" | Ref<\"\" | undefined, \"\" | undefined> | ...'\n```\n\nthis was becase a call that named one type argument couldn't infer the others, so the base falls back to its `''` default.\n\nso this PR makes the default `string` when the request type has fallen back to its own default...",
+      "files": [
+        "packages/nuxt/src/app/composables/fetch.ts (+13 -13)",
+        "packages/nuxt/src/app/types/fetch.ts (+12 -5)",
+        "test/fixtures/basic-types/app/fetch-types.ts (+19 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36525,
+      "title": "fix(vite): match vite 8.1+ optimizer messages for deps hint",
+      "url": "https://github.com/nuxt/nuxt/pull/36525",
+      "author": "danielroe",
+      "mergedAt": "2026-10-09T16:13:42Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36497\n\n### 📚 Description\n\nsince Vite 8.1.1, the runtime dependency hint from #34320 never shows, because vitejs/vite#22549 reworded the optimizer messages\n\nthis PR matches both wordings",
+      "files": [
+        "packages/vite/src/utils/logger.ts (+5 -4)",
+        "packages/vite/test/logger.test.ts (+40 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36537,
+      "title": "docs: add spa-loading-template documentation",
+      "url": "https://github.com/nuxt/nuxt/pull/36537",
+      "author": "Mini-ghost",
+      "mergedAt": "2026-10-10T09:47:01Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 36536,
+      "title": "fix(vite-server): respect spa loading template location",
+      "url": "https://github.com/nuxt/nuxt/pull/36536",
+      "author": "Mini-ghost",
+      "mergedAt": "2026-10-10T10:07:38Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nN/A\n\n### 📚 Description\n\nWhen using the experimental Vite server builder with:\n\n```ts\nexport default defineNuxtConfig({\n  ssr: false,\n  experimental: {\n    spaLoadingTemplateLocation: 'within',\n  },\n  server: {\n    builder: 'vite',\n  },\n})\n```\n\n`@nuxt/vite-server` currently renders the SPA loading template outside of `#__nuxt`.\n\n### Before\n\n```html\n<div id=\"__nuxt\"></div>\n<div id=\"__nuxt-loader\">\n\n</div>\n```\n\nFor `spaLoadingTemplateLocation: 'within'`, the client expects the loading template to be rendered inside `#__nuxt` and relies on Vue replacing it when the app mounts.\n\nBecause the Vite server renders it outside of the app root, `#__nuxt-loader` is not removed and remains visible after the application has mounted.\n\nThis PR aligns the Vite server behavior with the existing Nitro renderer.\n\n### After\n\n```html\n<div id=\"__nuxt\">\n\n</div>\n```\n\nWhen `spaLoadingTemplateLocation` is set to `within`, the loading template is now rendered directly inside `#__nuxt`, so Vue replaces it naturally during mount.\n\nThe existing `body` behavior remains unchanged, and tests have been added to cover both cases.\n\nThank you very much for your time and review! If there’s anything I might have overlooked, please feel free to let me know.",
+      "files": [
+        "packages/vite-server/src/html.ts (+6 -2)",
+        "packages/vite-server/test/html.test.ts (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36533,
+      "title": "feat(nuxt): add `finishColor` prop to `<NuxtLoadingIndicator>`",
+      "url": "https://github.com/nuxt/nuxt/pull/36533",
+      "author": "0xgdr",
+      "mergedAt": "2026-10-10T10:16:44Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #31632\n\n### 📚 Description\n\nAdds a `finishColor` prop to `<NuxtLoadingIndicator>`, so the bar can use a different color once loading has finished (e.g. a more saturated green):\n\n```vue\n<NuxtLoadingIndicator color=\"#a7f3d0\" finish-color=\"#16a34a\" />\n```\n\n- It applies once progress reaches 100%.\n- `errorColor` still takes precedence when there is an error.\n- When it's unset, the bar keeps using `color`, so existing behaviour is unchanged.\n\nThe prop is documented on the component page, and runtime tests in `test/nuxt/loading-indicator.test.ts` cover the finish color, the error color taking precedence, and the fallback to `color`.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+      "files": [
+        "packages/nuxt/src/app/components/nuxt-loading-indicator.ts (+8 -1)",
+        "docs/4.api/1.components/5.nuxt-loading-indicator.md (+1 -0)",
+        "test/nuxt/loading-indicator.test.ts (+42 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36540,
+      "title": "fix(nitro): don't inline deps under absolute transpile dirs",
+      "url": "https://github.com/nuxt/nuxt/pull/36540",
+      "author": "danielroe",
+      "mergedAt": "2026-10-10T12:27:12Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\na nuxt v5 issue spotted in https://github.com/nuxt/image/pull/2281",
+      "files": [
+        "packages/nitro-server/src/index.ts (+2 -2)",
+        "packages/nitro-server/src/utils.ts (+13 -1)",
+        "packages/nitro-server/test/nitro-config.test.ts (+11 -0)",
+        "packages/nitro-server/test/utils.test.ts (+26 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 36541,
+      "title": "fix(nitro,vite): don't access unspecified dependencies",
+      "url": "https://github.com/nuxt/nuxt/pull/36541",
+      "author": "danielroe",
+      "mergedAt": "2026-10-10T13:22:33Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\ntwo fixes to improve support for pnpm's global virtual store",
+      "files": [
+        "packages/nitro-server/src/index.ts (+1 -1)",
+        "packages/nuxt/src/core/plugins/virtual.ts (+2 -8)",
+        "packages/nuxt/src/core/utils/virtual.ts (+10 -0)",
+        "packages/nuxt/src/pages/module.ts (+1 -1)",
+        "packages/vite/package.json (+1 -0)",
+        "packages/vite/src/utils/index.ts (+1 -1)",
+        "packages/nitro-server/test/nitro-config.test.ts (+11 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36543,
+      "title": "feat(nuxt): type `serverFetch` against server routes",
+      "url": "https://github.com/nuxt/nuxt/pull/36543",
+      "author": "danielroe",
+      "mergedAt": "2026-10-10T17:38:43Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted that `serverFetch` just returns a Response - this applies our strong types to it",
+      "files": [
+        "packages/nitro-server/src/index.ts (+3 -3)",
+        "packages/nitro-server/src/internal.d.ts (+1 -0)",
+        "packages/nuxt/src/app/types.ts (+2 -0)",
+        "packages/nuxt/src/app/types/fetch.ts (+3 -1)",
+        "packages/nuxt/src/core/nuxt.ts (+2 -0)",
+        "packages/nuxt/src/core/utils/server-routes.ts (+3 -3)",
+        "packages/nuxt/src/server/fetch.ts (+56 -0)",
+        "packages/nuxt/src/server/index.ts (+1 -1)",
+        "docs/3.guide/6.going-further/5.server-imports.md (+1 -1)",
+        "packages/nuxt/test/__snapshots__/server-routes.test.ts.snap (+2 -2)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 36542,
+      "title": "fix(kit): resolve module dependencies from the declaring module",
+      "url": "https://github.com/nuxt/nuxt/pull/36542",
+      "author": "harlan-zw",
+      "mergedAt": "2026-10-10T23:14:02Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nhttps://github.com/harlan-zw/nuxt-site-config/pull/136\n\n### 📚 Description\n\nA module can depend on other modules. Modules could either ask the end user to install the module or they could require an explicit version themselves.\n\nWhile the issue that originally brought this up (https://github.com/harlan-zw/nuxt-site-config/pull/136) could be mitigated by having end user install the module version themselves, for other modules like Nuxt SEO where we want to provide some sort of assurance with module versions working correctly togethor, they must resolve from the module resolve path.",
+      "files": [
+        "packages/kit/src/module/install.ts (+20 -5)",
+        "packages/kit/test/module-install.test.ts (+116 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36549,
+      "title": "fix(vite,nitro): link null-byte virtual css through `/@id/` in dev",
+      "url": "https://github.com/nuxt/nuxt/pull/36549",
+      "author": "danielroe",
+      "mergedAt": "2026-10-11T08:06:31Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nwith `@unocss/nuxt` in dev, the SSR HTML contains a stylesheet link with a literal NUL byte in it:\n\n```html\n<link rel=\"stylesheet\" href=\"/_nuxt/\\0/__uno.css\" crossorigin>\n```\n\nthe HTML tokenizer replaces the NUL with U+FFFD, so the browser requests `/_nuxt/%EF%BF%BD/__uno.css` - and uno happens to resolve that by suffix, but it means there are two copies of its stylesheet injected.\n\nthis PR maps non-path ids to `/@id/` (with `\\0` as `__x00__`) before they become links, the same way Vite itself does. this also applies to bare virtual ids like `virtual:foo.css`, which only happened to work before....",
+      "files": [
+        "packages/nitro-server/src/vite.ts (+7 -1)",
+        "packages/vite/src/utils/css.ts (+7 -1)",
+        "packages/vite/test/css.test.ts (+27 -1)",
+        "test/basic.test.ts (+8 -0)",
+        "test/fixtures/basic/nuxt.config.ts (+13 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36550,
+      "title": "docs: fix outdated internal links",
+      "url": "https://github.com/nuxt/nuxt/pull/36550",
+      "author": "Mini-ghost",
+      "mergedAt": "2026-10-11T08:06:31Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 18
+    },
+    {
+      "number": 36539,
+      "title": "docs: explain how to disable iOS Safari phone number detection",
+      "url": "https://github.com/nuxt/nuxt/pull/36539",
+      "author": "Flo0806",
+      "mergedAt": "2026-10-11T08:12:37Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 36546,
+      "title": "fix(nuxt): preserve error state on aborted or cancelled navigation",
+      "url": "https://github.com/nuxt/nuxt/pull/36546",
+      "author": "Flo0806",
+      "mergedAt": "2026-10-11T08:51:45Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nResolves: #36529\n\n### 📚 Description\n\nAborted routes with wrong paths (not found) doesn't abort. `router.afterEach` returns 404. Now we skip aborted page correctly.\n\n### Test\n- added fixture and tests",
+      "files": [
+        "packages/nuxt/src/pages/runtime/plugins/router.ts (+4 -4)",
+        "test/nuxt/composables.test.ts (+44 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36535,
+      "title": "fix(nuxt): don't start a page transition with no page to leave",
+      "url": "https://github.com/nuxt/nuxt/pull/36535",
+      "author": "0xgdr",
+      "mergedAt": "2026-10-11T09:22:13Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36484\n\n### 📚 Description\n\nWith a page transition but no layout transition, navigating to a page that has a different layout and an async setup leaves `nuxtApp['~transitionPromise']` pending forever. `scrollBehavior` and head disposal both wait on that promise, so the page never scrolls, the previous page's title stays, and later navigations don't scroll either.\n\n**Cause:** the layout change mounts a new `<NuxtPage>` inside the new layout. When its Suspense goes pending, `onPending` calls `_startTransition()`. That `<NuxtPage>`'s `<Transition>` has only just mounted and has no previous page to animate out, so `onAfterLeave`, the only place `_finishTransition()` is called, never runs. With the same layout, the existing `<Transition>` does run a leave, which is why only layout switches are affected.\n\n**Fix:** `onPending` only starts the transition once that `<NuxtPage>` has resolved a page before (`hasResolvedOnce`), i.e. when there is a page to leave. When a layout transition is configured, `<NuxtLayout>` still starts and settles the promise from its own `onBeforeLeave`/`onAfterLeave`, so head disposal in that case (#36395) is unchanged and its test still passes.\n\n**Tests:**\n\n- I added a test to `test/nuxt/nuxt-layout.test.ts` that mirrors the reproduction. It switches layouts to a page with a `pageTransition` and an async setup, with no layout transition, and asserts the transition promise settles. It fails on `main` and passes with the fix.\n- T\n…(truncated)",
+      "files": [
+        "packages/nuxt/src/pages/runtime/page.ts (+2 -1)",
+        "test/nuxt/nuxt-layout.test.ts (+65 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36552,
+      "title": "docs: align spa loading template references",
+      "url": "https://github.com/nuxt/nuxt/pull/36552",
+      "author": "Mini-ghost",
+      "mergedAt": "2026-10-11T09:55:11Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 36534,
+      "title": "feat(nuxt,vite,webpack): add `'nosource'` sourcemap option",
+      "url": "https://github.com/nuxt/nuxt/pull/36534",
+      "author": "0xgdr",
+      "mergedAt": "2026-10-11T11:13:34Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #23547\n\n### 📚 Description\n\nAdds `'nosource'` as a value for `sourcemap.client` and `sourcemap.server`. It generates sourcemaps that keep file names and line mappings but leave out the original source code (`sourcesContent`), so maps can be published without exposing the source.\n\n```ts\nexport default defineNuxtConfig({\n  sourcemap: { client: 'nosource' },\n})\n```\n\nAs suggested in the issue, this is implemented with the bundler option:\n\n- **Vite (client + SSR):** `build.sourcemap: true` plus `rolldownOptions.output.sourcemapExcludeSources: true`. An explicit `vite.build.sourcemap` still takes precedence, as before.\n- **Nitro:** `rollupConfig.output.sourcemapExcludeSources` when `sourcemap.server` is `'nosource'`.\n- **webpack / rspack:** the `nosources-` devtool variants (`nosources-source-map` in production, `eval-nosources-cheap-module-source-map` for the client in dev, `nosources-cheap-module-source-map` for the server in dev).\n\nEverything else reads the option as a boolean, so `'nosource'` behaves like `true` there.\n\n**Verification:** I built the playground with `sourcemap: { client: 'nosource', server: 'nosource' }` and inspected `.output/public`:\n\n| | `.map` files | maps with `sourcesContent` | JS referencing a map |\n|---|---|---|---|\n| `client: true` | 3 | 3 | 3 |\n| `client: 'nosource'` | 3 | 0 | 3 |\n\nNitro already strips `sourcesContent` from server maps by default, so there's no visible server difference in the playground. The server option\n…(truncated)",
+      "files": [
+        "packages/nitro-server/src/index.ts (+4 -0)",
+        "packages/schema/src/types/schema.ts (+3 -3)",
+        "packages/vite/src/shared/client.ts (+2 -1)",
+        "packages/vite/src/shared/server.ts (+2 -1)",
+        "packages/webpack/src/configs/client.ts (+4 -3)",
+        "packages/webpack/src/configs/server.ts (+3 -2)",
+        "docs/4.api/6.nuxt-config.md (+7 -2)",
+        "packages/nitro-server/test/nitro-config.test.ts (+12 -0)",
+        "packages/vite/test/sourcemap-options.test.ts (+56 -0)",
+        "packages/webpack/test/devtool.test.ts (+51 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 36555,
+      "title": "fix(webpack): use valid devtool for hidden client sourcemaps in dev",
+      "url": "https://github.com/nuxt/nuxt/pull/36555",
+      "author": "danielroe",
+      "mergedAt": "2026-10-11T16:14:53Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted this in reviewing https://github.com/nuxt/nuxt/pull/36534",
+      "files": [
+        "packages/webpack/src/configs/client.ts (+1 -1)",
+        "packages/webpack/test/devtool.test.ts (+10 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36558,
+      "title": "fix(nuxt): include builder-env types in nitro context when `nitroViteEnvironment` is enabled",
+      "url": "https://github.com/nuxt/nuxt/pull/36558",
+      "author": "KazariEX",
+      "mergedAt": "2026-10-11T17:47:56Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n*none*\n\n### 📚 Description\n\n*none*",
+      "files": [
+        "packages/nuxt/src/core/nuxt.ts (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 32963,
+      "title": "docs: clarify testing environments, runners, and config",
+      "url": "https://github.com/nuxt/nuxt/pull/32963",
+      "author": "JessicaSachs",
+      "mergedAt": "2026-10-11T21:55:36Z",
+      "labels": [
+        "📚 documentation",
+        "4.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

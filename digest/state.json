@@ -7,47 +7,47 @@
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-08T22:32:43Z",
-      "lastReleaseAt": "2026-10-08T23:55:20Z"
+      "lastMergedAt": "2026-10-10T01:41:24Z",
+      "lastReleaseAt": "2026-10-10T23:47:51Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
       "lastMergedAt": "2026-09-18T00:54:21Z",
-      "lastReleaseAt": "2026-09-30T09:01:06Z"
+      "lastReleaseAt": "2026-10-10T07:49:44Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-10-08T22:36:15Z",
-      "lastReleaseAt": "2026-10-05T22:11:57Z"
+      "lastMergedAt": "2026-10-11T21:55:36Z",
+      "lastReleaseAt": "2026-10-09T22:47:35Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
       "lastMergedAt": "2026-10-08T20:36:55Z",
-      "lastReleaseAt": "2026-09-24T08:51:34Z"
+      "lastReleaseAt": "2026-10-09T03:06:51Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-08T20:02:20Z",
+      "lastMergedAt": "2026-10-09T23:51:51Z",
       "lastReleaseAt": "2026-09-30T19:10:03Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-10-08T18:35:35Z",
+      "lastMergedAt": "2026-10-11T17:57:22Z",
       "lastReleaseAt": "2026-10-05T11:04:25Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
-      "lastMergedAt": "2026-10-07T00:13:58Z",
-      "lastReleaseAt": "2026-10-08T19:48:38Z"
+      "lastMergedAt": "2026-10-09T16:16:37Z",
+      "lastReleaseAt": "2026-10-09T19:28:59Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-10-07T16:46:35Z",
+      "lastMergedAt": "2026-10-09T08:27:43Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
       "fullName": "w3c/aria",
-      "lastMergedAt": "2026-10-08T17:26:50Z",
+      "lastMergedAt": "2026-10-09T23:06:22Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/wcag": {
@@ -62,23 +62,23 @@
     },
     "tc39/ecma262": {
       "fullName": "tc39/ecma262",
-      "lastMergedAt": "2026-10-03T08:27:36Z",
+      "lastMergedAt": "2026-10-09T20:31:46Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-10-08T23:04:47Z",
-      "lastReleaseAt": "2026-10-06T17:37:30Z"
+      "lastMergedAt": "2026-10-11T21:55:39Z",
+      "lastReleaseAt": "2026-10-11T11:30:09Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-10-08T11:08:33Z",
+      "lastMergedAt": "2026-10-10T08:16:16Z",
       "lastReleaseAt": "2026-09-30T11:25:52Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-10-08T20:36:44Z",
-      "lastCommitAt": "2026-10-09T01:00:17Z",
+      "lastMergedAt": "2026-10-10T22:53:53Z",
+      "lastCommitAt": "2026-10-10T22:53:52Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
@@ -89,8 +89,8 @@
     },
     "openai/codex": {
       "fullName": "openai/codex",
-      "lastReleaseAt": "2026-10-08T21:07:13Z",
-      "lastMergedAt": "2026-10-09T00:41:43Z"
+      "lastReleaseAt": "2026-10-10T00:26:59Z",
+      "lastMergedAt": "2026-10-11T23:44:57Z"
     }
   },
   "blogs": {

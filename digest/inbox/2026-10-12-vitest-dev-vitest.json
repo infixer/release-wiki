@@ -1,0 +1,149 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-10-12T00:37:16Z",
+  "range": {
+    "from": "2026-10-08T11:08:33Z",
+    "to": "2026-10-12T00:37:16Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.0.3",
+      "publishedAt": "2026-09-30T11:25:52Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.3"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 11525,
+      "title": "fix(browser): run browser instances as workers",
+      "url": "https://github.com/vitest-dev/vitest/pull/11525",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-09T12:05:10Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Every browser instance is a worker: at most `maxWorkers` instances are open at the same time, the pool closes the least recently used idle instance when another project needs the slot, and providers without parallel support run alone. `maxWorkers` is also the budget of pages shared by the open instances, so the page count stays close to the core count instead of `projects * maxWorkers`.\n\nPrewarm is capped at `maxWorkers` launches, a project adopts any warm browser with the same launch options, and the Playwright provider returns the browser of a closed instance to the warm pool, so the next project reuses the process instead of launching one.\n\nBenchmark: 16 browser projects with 6 files of 4 DOM tests each, headless Chromium, Apple M4 with 10 cores, median of 5 interleaved runs. Memory is the summed RSS of the Vitest process and every browser process.\n\n| Scenario | Wall time (main / PR) | Peak memory (main / PR) | Browser processes (main / PR) | Renderer processes (main / PR) |\n|---|---|---|---|---|\n| 16 projects, default `maxWorkers` | 16.0 s / 11.7 s | 17.4 GB / 5.6 GB | 16 / 9 | 96 / 17 |\n| 16 projects, `--maxWorkers=2` | 11.5 s / 18.7 s | 9.8 GB / 1.6 GB | 16 / 2 | 32 / 3 |\n| 1 project, default `maxWorkers` | 6.8 s / 6.8 s | 2.7 GB / 2.7 GB | 1 / 1 | 9 / 9 |\n\nWith `--maxWorkers=2` the run is slower because 2 pages run instead of 4: `maxWorkers` now means the number of files that run at the same time, like in the node pools.\n\nFixes #9696\nCloses #10991\nPotentially fixes #78\n…(truncated)",
+      "files": [
+        "packages/browser-playwright/src/playwright.ts (+96 -22)",
+        "packages/browser/src/client/orchestrator.ts (+39 -10)",
+        "packages/browser/src/node/middlewares/testerMiddleware.ts (+1 -1)",
+        "packages/browser/src/node/project.ts (+15 -2)",
+        "packages/browser/src/node/rpc.ts (+12 -5)",
+        "packages/browser/src/node/serverTester.ts (+1 -1)",
+        "packages/vitest/src/node/config/pluginHarness.ts (+4 -0)",
+        "packages/vitest/src/node/core.ts (+1 -0)",
+        "packages/vitest/src/node/plugins/browserLoader.ts (+9 -1)",
+        "packages/vitest/src/node/pool.ts (+4 -7)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 11531,
+      "title": "fix(coverage): filenames containing brackets incorrectly showing as uncovered",
+      "url": "https://github.com/vitest-dev/vitest/pull/11531",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-09T12:05:31Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes https://github.com/vitest-dev/vitest/issues/11433 (part 1 only)",
+      "files": [
+        "packages/vitest/src/node/coverage.ts (+6 -3)",
+        "test/coverage-test/test/include-exclude.unit.test.ts (+32 -5)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11529,
+      "title": "fix(coverage): istanbul coverage wrong when module transform warmups",
+      "url": "https://github.com/vitest-dev/vitest/pull/11529",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-09T12:05:55Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes https://github.com/vitest-dev/vitest/issues/11433 (part 2 only)",
+      "files": [
+        "packages/coverage-istanbul/src/provider.ts (+28 -8)",
+        "test/coverage-test/test/uncovered-concurrent-transform.istanbul.test.ts (+66 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11539,
+      "title": "fix: resolve mocks in directories with spaces",
+      "url": "https://github.com/vitest-dev/vitest/pull/11539",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-09T15:57:18Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Stack trace paths from browsers (`http://`) and native imports (`file://`) are URL-encoded, so `vi.mock` resolved relative paths against `space%20dir`. The stack parser now decodes these URLs; raw file paths are left as is.\n\nAlso decodes the request URL in the WebKit mock path and the `__mocks__` redirect path for the preview provider.\n\nFixes #7788",
+      "files": [
+        "packages/browser-playwright/src/playwright.ts (+3 -1)",
+        "packages/browser/src/node/rpc.ts (+1 -1)",
+        "packages/utils/src/source-map.ts (+11 -2)",
+        "test/browser/specs/mocking.test.ts (+55 -0)",
+        "test/e2e/test/no-module-runner.test.ts (+23 -0)",
+        "test/unit/test/utils.spec.ts (+23 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 11540,
+      "title": "fix(mocker): fix native loader mocking edge cases",
+      "url": "https://github.com/vitest-dev/vitest/pull/11540",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-09T16:07:58Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11297\nFixes #11533\n\n- `hoistMocks` doesn't rewrite imports when the file has no hoisted calls (the native loader used the edited code)\n- `export *` targets are passed to `findPackageJSON` as `file:` URLs, circular re-exports stop at the cache",
+      "files": [
+        "packages/mocker/src/node/hoistMocks.ts (+2 -1)",
+        "packages/mocker/src/node/parsers.ts (+16 -16)",
+        "test/e2e/test/no-module-runner.test.ts (+82 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11542,
+      "title": "fix(browser): open one cdp session per tester",
+      "url": "https://github.com/vitest-dev/vitest/pull/11542",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-09T16:47:02Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "packages/browser/src/node/projectParent.ts (+22 -21)",
+        "test/browser/test/cdp.test.ts (+3 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11537,
+      "title": "fix(browser): clean up unmocked and pending mocks",
+      "url": "https://github.com/vitest-dev/vitest/pull/11537",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-10T08:16:16Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- `vi.unmock` and `vi.doUnmock` never removed the Playwright route: `register` keys it by the full URL, `delete` looked it up by the path. Unmocking a factory mock from a setup file hung the run.\n- A file that mocks a module but never loads it can finish before the mock is registered. The cleanup then runs first and the route leaks into the next file (\"rpc is closed, cannot call resolveManualMock\" when isolated, \"Mock ... wasn't registered\" when not).\n\nFixes #8745",
+      "files": [
+        "packages/browser-playwright/src/playwright.ts (+2 -1)",
+        "packages/mocker/src/browser/mocker.ts (+2 -0)",
+        "test/browser/fixtures/mocking-unloaded/1-mock-not-loaded.test.ts (+7 -0)",
+        "test/browser/fixtures/mocking-unloaded/2-original.test.ts (+6 -0)",
+        "test/browser/fixtures/mocking-unloaded/src/unloaded.ts (+3 -0)",
+        "test/browser/fixtures/mocking-unloaded/vitest.config.ts (+27 -0)",
+        "test/browser/fixtures/mocking-unmock/do-unmock.test.ts (+11 -0)",
+        "test/browser/fixtures/mocking-unmock/setup.ts (+4 -0)",
+        "test/browser/fixtures/mocking-unmock/src/setup-automock.ts (+3 -0)",
+        "test/browser/fixtures/mocking-unmock/src/setup-factory.ts (+3 -0)"
+      ],
+      "filesTotal": 13
+    }
+  ],
+  "errors": []
+}

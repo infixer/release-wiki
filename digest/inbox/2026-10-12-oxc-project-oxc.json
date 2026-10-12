@@ -1,0 +1,676 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-10-12T00:37:16Z",
+  "range": {
+    "from": "2026-10-08T18:35:35Z",
+    "to": "2026-10-12T00:37:16Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.87.0",
+      "publishedAt": "2026-10-05T11:04:25Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.87.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {"number":27465,"title":"test(oxfmt/lsp): normalize error path for windows","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27444,
+      "title": "feat(oxfmt)!: improve `--migrate prettier`",
+      "url": "https://github.com/oxc-project/oxc/pull/27444",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-09T01:42:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #18215\n\n- Search Prettier config only in the CWD, in the same order as Prettier\n  - Exit with an error if not found, instead of creating a blank `.oxfmtrc.json`\n  - Nested configs should be migrated by running in each directory\n- Load the config without `prettier.resolveConfig()`\n  - JS/TS configs: `import()`\n  - `.json` and `package.json`: `import()` with `{ type: \"json\" }`\n  - `.prettierrc`: `JSON.parse()`\n  - Shareable config (e.g. `\"prettier\": \"@company/prettier-config\"`): `createRequire()`\n  - ⚠️ YAML, JSON5 and TOML: not supported, exit with an error\n- Migrate `overrides`\n  - Unsupported options like `parser` and `plugins` are skipped with a warning\n- Migrate only Prettier-compatible options, and warn about the others\n  - Previously, unknown keys like `importOrder` were copied as-is\n- Warn that the logic in JS/TS configs is not preserved\n- Also check `oxfmt.config.ts` and `oxfmt.config.mts` as existing config\n- Suggest running `oxfmt` after migration, since the generated file may not be formatted",
+      "files": [
+        "apps/oxfmt/src-js/cli/migration/migrate-prettier.ts (+235 -139)",
+        "apps/oxfmt/src-js/cli/migration/shared.ts (+11 -2)",
+        "apps/oxfmt/test/cli/migrate_prettier/0.snap.md (+23 -16)",
+        "apps/oxfmt/test/cli/migrate_prettier/1.snap.md (+20 -5)",
+        "apps/oxfmt/test/cli/migrate_prettier/10.snap.md (+23 -6)",
+        "apps/oxfmt/test/cli/migrate_prettier/11.snap.md (+24 -5)",
+        "apps/oxfmt/test/cli/migrate_prettier/12.snap.md (+33 -6)",
+        "apps/oxfmt/test/cli/migrate_prettier/13.snap.md (+23 -20)",
+        "apps/oxfmt/test/cli/migrate_prettier/14.snap.md (+23 -20)",
+        "apps/oxfmt/test/cli/migrate_prettier/15.snap.md (+23 -6)"
+      ],
+      "filesTotal": 34
+    },
+    {
+      "number": 27474,
+      "title": "refactor(oxfmt): align `--init` and `--migrate biome` messages with `--migrate prettier`",
+      "url": "https://github.com/oxc-project/oxc/pull/27474",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-09T01:49:35Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Follow up on #27444.",
+      "files": [
+        "apps/oxfmt/src-js/cli/migration/init.ts (+1 -1)",
+        "apps/oxfmt/src-js/cli/migration/migrate-biome.ts (+10 -9)",
+        "apps/oxfmt/test/cli/init_already_exists/0.snap.md (+2 -1)",
+        "apps/oxfmt/test/cli/migrate_biome/0.snap.md (+1 -1)",
+        "apps/oxfmt/test/cli/migrate_biome/1.snap.md (+2 -1)",
+        "apps/oxfmt/test/cli/migrate_biome/10.snap.md (+3 -2)",
+        "apps/oxfmt/test/cli/migrate_biome/11.snap.md (+4 -1)",
+        "apps/oxfmt/test/cli/migrate_biome/2.snap.md (+2 -1)",
+        "apps/oxfmt/test/cli/migrate_biome/3.snap.md (+2 -1)",
+        "apps/oxfmt/test/cli/migrate_biome/4.snap.md (+2 -1)"
+      ],
+      "filesTotal": 15
+    },
+    {"number":27476,"title":"perf(ci): parallelize independent workflow steps","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27482,"title":"perf(ci): overlap dependent workflow steps","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27483,"title":"perf(ci): speed up Windows builds","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27485,"title":"perf(ci): overlap more workflow steps","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27466,
+      "title": "fix(minifier): preserve delete semantic when folding non-finite numbers",
+      "url": "https://github.com/oxc-project/oxc/pull/27466",
+      "author": "armano2",
+      "mergedAt": "2026-10-09T09:09:47Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "after folding constants to numbers we have to preserve behavior of `delete`.\n`delete (0/0)`, `delete (1/0)`, `delete +\"a\"` should evaluate to `true`, but if we convert them to `NaN` or `Infinity` this expression was evaluated to `false`\n\nwith this change we are going to convert them to `delete 0` to preserve result\n\nref https://github.com/oxc-project/oxc/issues/24331#delete-of-a-constant-folded-nan-changes-true-to-false",
+      "files": [
+        "crates/oxc_minifier/src/peephole/fold_constants.rs (+16 -3)",
+        "crates/oxc_minifier/tests/peephole/fold_constants.rs (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27487,
+      "title": "refactor(parser): build TypeScript recovery nodes with AST constructors",
+      "url": "https://github.com/oxc-project/oxc/pull/27487",
+      "author": "camc314",
+      "mergedAt": "2026-10-09T09:29:35Z",
+      "labels": [
+        "A-parser"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Construct the TypeScript recovery placeholders for invalid interface heritage and missing index signature parameters through the parser's AST builder instead of `Dummy`. The placeholder node types, spans, and names stay the same.",
+      "files": [
+        "crates/oxc_parser/src/ts/statement.rs (+3 -3)",
+        "crates/oxc_parser/src/ts/types.rs (+6 -3)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27411,
+      "title": "feat(parser)!: assign node IDs during parsing",
+      "url": "https://github.com/oxc-project/oxc/pull/27411",
+      "author": "camc314",
+      "mergedAt": "2026-10-09T09:43:34Z",
+      "labels": [
+        "A-parser",
+        "A-ast"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Assign unique node IDs while the parser constructs AST nodes, reserving zero for Program. IDs follow construction order and may have gaps from discarded nodes or reparsing; semantic analysis still replaces them with dense IDs for its node store.\n\nThis is a breaking change because consumers can no longer assume node IDs are unset after parsing.",
+      "files": [
+        "crates/oxc_ast/src/builder/mod.rs (+1 -1)",
+        "crates/oxc_parser/src/ast_builder.rs (+48 -0)",
+        "crates/oxc_parser/src/lib.rs (+16 -5)",
+        "crates/oxc_syntax/src/node.rs (+3 -1)",
+        "tasks/coverage/src/driver.rs (+24 -5)",
+        "crates/oxc_parser/tests/node_ids.rs (+151 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 25690,
+      "title": "fix(linter/unicorn/prefer-bigint-literals): unwrap redundant constructor call; don't auto-fix for lost precision",
+      "url": "https://github.com/oxc-project/oxc/pull/25690",
+      "author": "jtbandes",
+      "mergedAt": "2026-10-09T09:44:44Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`prefer-bigint-literals` now simplifies global `BigInt(123n)` calls to `123n` and withholds numeric autofixes that would change the runtime bigint value. Rounded number literals still receive a diagnostic with an “Integer literal loses precision” note.\n\n- Decimal integer checks compare the full stored integer, including trailing zeros. For example, `BigInt(1000000000000000100)` evaluates to `1000000000000000128n`, so replacing it with `1000000000000000100n` is unsafe.\n- Binary, octal, and hexadecimal checks use significant binary digits without narrowing the value to `u64`. This blocks unsafe fixes such as `BigInt(0xffffffffffffffff)` while preserving valid fixes above `u64::MAX`, such as `BigInt(0x10000000000000000)`.\n- Calls to locally bound `BigInt` functions, parameters, and imports are left intact.\n- Replacements preserve token boundaries: `BigInt(1n)in {'1':0}` becomes `1n in {'1':0}`. The same padding applies to number and string arguments and adjacent `instanceof`, `as`, and `satisfies` keywords.\n\nThe precision helpers are shared through `utils/number.rs`. Bigint fixes use exact decimal integer equality, while `no-loss-of-precision` retains its existing decimal significant-digit behavior. The non-decimal correction also applies to `no-loss-of-precision`. Regression tests cover rounded and exact large integers, shadowed calls, and token boundaries.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_loss_of_precision.rs (+11 -509)",
+        "crates/oxc_linter/src/rules/unicorn/prefer_bigint_literals.rs (+82 -11)",
+        "crates/oxc_linter/src/snapshots/eslint_no_loss_of_precision.snap (+32 -0)",
+        "crates/oxc_linter/src/snapshots/unicorn_prefer_bigint_literals.snap (+76 -0)",
+        "crates/oxc_linter/src/utils/mod.rs (+3 -2)",
+        "crates/oxc_linter/src/utils/number.rs (+514 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 27431,
+      "title": "refactor(ast)!: remove `Copy` from `Comment`",
+      "url": "https://github.com/oxc-project/oxc/pull/27431",
+      "author": "camc314",
+      "mergedAt": "2026-10-09T09:56:34Z",
+      "labels": [
+        "A-linter",
+        "A-parser",
+        "A-ast",
+        "A-codegen",
+        "A-isolated-declarations",
+        "A-formatter",
+        "A-lexer",
+        "A-react-compiler"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "`Comment` no longer implements `Copy`, and its query methods now borrow `&self`. Consumers borrow or move comments where possible and explicitly clone comments when they need owned snapshots. This prepares the AST API for interior-mutable comment metadata.",
+      "files": [
+        "crates/oxc_ast/src/ast/comment.rs (+23 -21)",
+        "crates/oxc_codegen/src/comment.rs (+15 -13)",
+        "crates/oxc_formatter/src/formatter/comments.rs (+4 -4)",
+        "crates/oxc_formatter/src/formatter/trivia.rs (+3 -5)",
+        "crates/oxc_formatter/src/print/array_expression.rs (+1 -1)",
+        "crates/oxc_formatter/src/print/as_or_satisfies_expression.rs (+2 -2)",
+        "crates/oxc_formatter/src/print/binary_like_expression.rs (+1 -1)",
+        "crates/oxc_formatter/src/print/call_like_expression/arguments.rs (+1 -1)",
+        "crates/oxc_formatter/src/print/class.rs (+2 -3)",
+        "crates/oxc_formatter/src/print/export_declarations.rs (+1 -1)"
+      ],
+      "filesTotal": 30
+    },
+    {
+      "number": 27393,
+      "title": "feat(ast)!: add comment attachment storage",
+      "url": "https://github.com/oxc-project/oxc/pull/27393",
+      "author": "camc314",
+      "mergedAt": "2026-10-09T10:06:34Z",
+      "labels": [
+        "A-linter",
+        "A-parser",
+        "A-cli",
+        "A-ast",
+        "A-isolated-declarations",
+        "A-ast-tools",
+        "A-linter-plugins"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Add optional `Comment::attachment` storage for an owning node and `Leading`, `Trailing`, or `Dangling` placement. Store the owner as `Cell<NodeId>` so semantic analysis can remap it through shared comment references; placement remains a plain value.\n\n`CommentAttachment` is non-Copy. AST cloning preserves an independent attachment cell when retaining semantic IDs and clears the attachment otherwise. Ownership metadata is excluded from ESTree serialization and content equality.\n\nThe comment layout grows from 16 to 24 bytes. Update parser deserializers, oxlint plugin buffer access, and allocation snapshots to match. Keep attachments optional for standalone lexer comments, manually constructed comments, and clones without node IDs.",
+      "files": [
+        "apps/oxlint/src-js/generated/constants.ts (+5 -5)",
+        "apps/oxlint/src-js/plugins/comments.ts (+8 -8)",
+        "apps/oxlint/src-js/plugins/comments_methods.ts (+28 -4)",
+        "apps/oxlint/src-js/plugins/tokens.ts (+7 -9)",
+        "apps/oxlint/src-js/plugins/tokens_and_comments.ts (+12 -13)",
+        "apps/oxlint/src-js/plugins/tokens_methods.ts (+1 -1)",
+        "apps/oxlint/src/js_plugins/parse.rs (+1 -1)",
+        "crates/oxc_ast/src/ast/comment.rs (+95 -1)",
+        "crates/oxc_ast/src/generated/assert_layouts.rs (+30 -10)",
+        "crates/oxc_ast/src/generated/derive_clone_in.rs (+0 -19)"
+      ],
+      "filesTotal": 33
+    },
+    {
+      "number": 27495,
+      "title": "perf(react-compiler): borrow filtered suppression ranges",
+      "url": "https://github.com/oxc-project/oxc/pull/27495",
+      "author": "camc314",
+      "mergedAt": "2026-10-09T10:18:48Z",
+      "labels": [
+        "A-codegen",
+        "A-lexer",
+        "A-react-compiler"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Return references to matching suppression ranges during per-function filtering, and pass those references to diagnostic generation. This avoids cloning suppression comments for every affected function while retaining the owned program-level snapshots.",
+      "files": [
+        "crates/oxc_react_compiler/src/react_compiler/entrypoint/suppression.rs (+5 -5)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27498,
+      "title": "fix(oxfmt): normalize symlink targets in CLI snapshots",
+      "url": "https://github.com/oxc-project/oxc/pull/27498",
+      "author": "camc314",
+      "mergedAt": "2026-10-09T10:44:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Normalize symlink targets to forward slashes in CLI fixture snapshots, matching the existing file-path normalization. This fixes the Windows `config_symlink` snapshot mismatch in [the failed CI job](https://github.com/oxc-project/oxc/actions/runs/37914491278/job/113767252572).",
+      "files": [
+        "apps/oxfmt/test/cli/utils.ts (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27504,
+      "title": "fix(parser): apply no-side-effects annotations after export",
+      "url": "https://github.com/oxc-project/oxc/pull/27504",
+      "author": "camc314",
+      "mergedAt": "2026-10-09T16:24:34Z",
+      "labels": [
+        "A-parser",
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`export /*@__NO_SIDE_EFFECTS__*/ function f() {}` left the function’s `pure` flag unset because statement parsing only captured annotations before `export`. Capture annotations immediately after `export` and apply the existing function purity handling.",
+      "files": [
+        "crates/oxc_parser/src/js/module.rs (+10 -1)",
+        "crates/oxc_parser/src/js/statement.rs (+1 -1)",
+        "crates/oxc_parser/src/lexer/trivia_builder.rs (+11 -0)",
+        "crates/oxc_minifier/tests/peephole/remove_unused_expression.rs (+4 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27502,
+      "title": "refactor(formatter): rename lifetime",
+      "url": "https://github.com/oxc-project/oxc/pull/27502",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-09T16:30:35Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pure renaming. Minor follow-on after #27431.\n\nThat PR introduced lifetimes for `Comment` references. Use the name `'c` for `&'c Comment` instead of `&'a Comment`. `'a` generally means \"lifetime of the arena\" in Oxc, and other code in this same file uses it in this way, so having `'a` mean something else a few lines earlier is confusing.",
+      "files": [
+        "crates/oxc_formatter_json/src/comments.rs (+7 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27503,
+      "title": "perf(lexer): copy all `Comment`s as single memcpy",
+      "url": "https://github.com/oxc-project/oxc/pull/27503",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-09T16:47:34Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fix a perf-negative effect in #27431 for `oxc_lexer`.\n\nA loop cloning `Comment`s with repeated `.clone()` calls is much slower than the single memcpy which was there previously. `Comment` now contains an `Option`, so the clone loop compiles down to checking and branching on this `Option` on every turn of the loop.\n\n`Comment` is not `Copy` and more, but it's still a POD type (not `Drop`), so it's valid to just copy the whole slice with a single memcpy (`copy_nonoverlapping`). Go back to doing that.\n\nThe guarantee that this is safe is a bit weak (non-local), but that's a problem with `oxc_lexer` overall at present. Hardening the safety of the crate is a separate, larger task. In the meantime, this removes the perf regression.",
+      "files": [
+        "crates/oxc_lexer/src/lib.rs (+10 -36)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27505,
+      "title": "fix(coverage): better error when `git` command fails in conformance tests",
+      "url": "https://github.com/oxc-project/oxc/pull/27505",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-09T16:55:35Z",
+      "labels": [
+        "C-test"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix a problem I ran into after upgrading to latest MacOS Developer Tools.\n\nConformance runs `git rev-parse` to get the current SHA of the submodules. Problem I hit was that when running conformance for `oxc_lexer` SIMD implementation, cross-compiled for x86 on Mac, this `git` call gets routed to the wrong `git` binary.\n\nThis PR doesn't fix that, but it ensures that cases like this produce a panic with helpful diagnostic, rather than swallowing the error and returning `\"\"` as the git SHA, which was a headache to debug.",
+      "files": [
+        "tasks/common/src/snapshot.rs (+9 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27518,
+      "title": "style(ast_tools): reformat comments",
+      "url": "https://github.com/oxc-project/oxc/pull/27518",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-09T19:55:36Z",
+      "labels": [
+        "A-ast-tools"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The style Nazi strikes again!",
+      "files": [
+        "tasks/ast_tools/src/generators/ast_kind.rs (+1 -1)",
+        "tasks/ast_tools/src/generators/get_id.rs (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27519,"title":"docs(linter): update stale comment","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27522,
+      "title": "feat(minifier): add folding of delete expression",
+      "url": "https://github.com/oxc-project/oxc/pull/27522",
+      "author": "armano2",
+      "mergedAt": "2026-10-10T02:43:26Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Fold delete expression to true/false if possible\n\nin minifier there are 2 types of NaN, identifier and Number, `delete Number` even if its a nan or infinity should produce true, and delete on global unmutable variable should return false\n\ncontext:\nwhile checking additional cases i noticed that `delete Math.sqrt(-1)`, `delete Number('a')` where still folded to incorrect syntax, and there is so many of them that folding them at source seem like a better idea, we should also update codegen when printing NaN and Infinity Number if parent is delete, and in that case print it as `(1/0, 0/0)`\n\nfollow up on #27466",
+      "files": [
+        "crates/oxc_minifier/src/peephole/fold_constants.rs (+42 -16)",
+        "crates/oxc_minifier/tests/peephole/esbuild.rs (+19 -19)",
+        "crates/oxc_minifier/tests/peephole/fold_constants.rs (+48 -12)",
+        "crates/oxc_minifier/tests/peephole/remove_dead_code.rs (+6 -6)",
+        "crates/oxc_minifier/tests/peephole/remove_unused_expression.rs (+1 -1)",
+        "crates/oxc_minifier/tests/peephole/substitute_alternate_syntax.rs (+1 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 27447,
+      "title": "fix(crates/oxc_semantic): decline to evaluate unary ops on strings in enum initializers",
+      "url": "https://github.com/oxc-project/oxc/pull/27447",
+      "author": "Brooooooklyn",
+      "mergedAt": "2026-10-10T03:20:34Z",
+      "labels": [
+        "A-semantic",
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`eval_unary_expression` folded unary `+`/`-`/`~` on `ConstantValue::String` using Babel's semantics (`+\"s\"` → `\"s\"`, `-\"s\"` → `NaN`, `~\"s\"` → `-1`), citing \"JS coercion\" — but none of those match JavaScript, where `+\"2\"` is `2`, `-\"3\"` is `-3`, and `~\"4\"` is `-5`. TypeScript leaves such initializers unevaluated (computed members), which the code comment itself acknowledges.\n\nDownstream in `oxc_transformer`, a wrongly-folded enum member value does real damage:\n\n- `enum E { A = +\"2\" }` folded to the *string* `\"2\"`, so the member was emitted as a plain `E[\"A\"] = \"2\"` — wrong type and missing the reverse mapping\n- `enum E { B = -\"3\" }` folded to `NaN`, emitting `E[E[\"B\"] = NaN] = \"B\"` — a bogus `NaN` key and `B === NaN` instead of `-3`\n- `~\"4\"` folded to `-1` — `C === -1` instead of `-5`\n- member references with string values hit the same arm (`enum E { A = \"4\", B = -A }` → `NaN` instead of `-4`), and the bad value then propagated into following members (`enum E { A = +\"2\", B }` → `B = 12` via `1 + \"2\"` instead of `undefined`)\n\nThis was found while fixing oxc-project/oxc-node#795: `with_enum_eval(true)` is required for correct alias emission, which made this evaluator bug reachable in a release build.\n\n## Fix\n\nReturn `None` for unary `+`/`-`/`~`/`void`/`!` on `ConstantValue::String` — the initializer stays a computed member and is emitted verbatim, matching `tsc` emit byte-for-semantics. Declining (rather than coercing with `ToNumber`) is the safer choice: verbatim em\n…(truncated)",
+      "files": [
+        "crates/oxc_semantic/src/ts_enum/eval.rs (+5 -10)",
+        "tasks/coverage/snapshots/semantic_typescript.snap (+2 -2)",
+        "crates/oxc_semantic/tests/integration/enum_values.rs (+18 -10)",
+        "tasks/transform_conformance/snapshots/oxc.snap.md (+1 -6)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27489,
+      "title": "perf(transformer): skip ES2022 exits for non-class expressions",
+      "url": "https://github.com/oxc-project/oxc/pull/27489",
+      "author": "camc314",
+      "mergedAt": "2026-10-10T03:43:34Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Both ES2022 expression-exit transforms only affect class expressions. Return before reading class-transform state for every other expression kind.\n\nStep 1 of 3 replacing #27446. Parent: main. Next: #27491. [Graphite stack](https://app.graphite.com/github/pr/oxc-project/oxc/27489).\n\nAI assistance was used for this change.",
+      "files": [
+        "crates/oxc_transformer/src/es2022/mod.rs (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27491,
+      "title": "perf(transformer): skip static block dispatch for ordinary statements",
+      "url": "https://github.com/oxc-project/oxc/pull/27491",
+      "author": "camc314",
+      "mergedAt": "2026-10-10T03:44:08Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Ordinary statements cannot contain the class declaration handled by ES2022 statement-entry dispatch. Check the statement kind before loading class-transform state, admitting only class declarations, export declarations, and default export declarations.\n\nStep 2 of 3 replacing #27446. Parent: #27489. Next: #27492. [Graphite stack](https://app.graphite.com/github/pr/oxc-project/oxc/27489).\n\nAI assistance was used for this change.",
+      "files": [
+        "crates/oxc_transformer/src/es2022/mod.rs (+8 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27492,
+      "title": "perf(transformer): skip expression exit pipeline for unaffected nodes",
+      "url": "https://github.com/oxc-project/oxc/pull/27492",
+      "author": "camc314",
+      "mergedAt": "2026-10-10T03:44:42Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The shared expression-exit hook enters the common, JSX, class, async-generator, and async plugins for every expression. Most identifiers, literals, and member expressions cannot be changed by any of those exit hooks.\n\nInline an expression-kind guard and outline the unchanged ordered pipeline. Only arrow functions, await/yield expressions, calls, classes, functions, and JSX elements/fragments enter it. Callback ordering stays the same. In transformed benchmark ASTs, 87–93% of expressions bypass the pipeline; generated x86 code confirms a direct return for those nodes.\n\nStep 3 of 3 replacing #27446. This is the largest measured optimization in the stack. The [historical direct comparison with its parent source state, 24f05550ad → 3d14714939](https://app.codspeed.io/oxc-project/oxc/runs/compare/6ac775c75d230c8573718652..6ac77b325d230c857371872b?q=transformer) showed rounded additional gains:\n\n| Transformer benchmark | Improvement over parent |\n| --- | ---: |\n| react.development.js | 10% |\n| binder.ts | 10% |\n| App.tsx | 8% |\n| kitchen-sink.tsx | 7% |\n| RadixUIAdoptionSection.jsx | 1% |\n\nIsolated declarations was unchanged. cal.com.tsx was skipped, so reused values do not establish a gain there. Runtime environments differed; these are CodSpeed simulation measurements, not precise native wall-clock speedups.\n\nThe combined stack previously reported 10.32% aggregate improvement against actual main baseline f14ead5. The [comparison with pre-regression 676cc60](https://app.codspeed.i\n…(truncated)",
+      "files": [
+        "crates/oxc_transformer/src/lib.rs (+26 -5)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27526,
+      "title": "fix(transformer_plugins): preserve optional chains through non-null assertions",
+      "url": "https://github.com/oxc-project/oxc/pull/27526",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-10T03:49:33Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`ReplaceGlobalDefines` prematurely unwraps optional chains when a TypeScript non-null assertion hides an optional member. In Rolldown's define-before-transform pipeline, `c?.a!.b` then remains `c?.a.b` even with an ES2017 target. Walk through non-null assertions when checking for optional markers so the chain remains available for lowering.\n\nRegression coverage includes member accesses, computed properties, calls, repeated assertions, and `delete`, across ES2015/ES2017/ES2019 and both `preserve_parens` settings.\n\nAddresses the upstream cause of [rolldown/rolldown#11172](https://github.com/rolldown/rolldown/issues/11172).\n\nValidation:\n\n- `just test -p oxc_transformer_plugins` — 124 tests passed.\n- `just lint -p oxc_transformer_plugins` — passed.\n- `just fmt` — passed, including dependency audit.\n- `pnpm run build-test` and `pnpm test` in `napi/transform` — build passed; 53 tests passed.\n- Confirmed the regression fails before the fix with the output reported in the issue.\n\nAI disclosure: Authored and tested with OpenAI Codex.",
+      "files": [
+        "crates/oxc_transformer_plugins/src/replace_global_defines.rs (+3 -0)",
+        "crates/oxc_transformer_plugins/tests/integrations/replace_global_defines.rs (+54 -6)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27520,
+      "title": "refactor(linter/plugins): add debug assert",
+      "url": "https://github.com/oxc-project/oxc/pull/27520",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-10T09:58:33Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-linter-plugins"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Follow-on after #27393.\n\nRestore debug assertion which was lost in that PR. Sizes of `Token` and the merged entries stored in `tokensAndCommentsInt32` (representing a comment or a token) must be the same - this is relied upon by code later in this file. Better to state the invariant explicitly.",
+      "files": [
+        "apps/oxlint/src-js/plugins/tokens.ts (+3 -0)",
+        "apps/oxlint/src-js/plugins/tokens_and_comments.ts (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27536,
+      "title": "perf(linter/plugins): use shift over multiply for powers of 2",
+      "url": "https://github.com/oxc-project/oxc/pull/27536",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-10T11:23:32Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-linter-plugins"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Follow on after #27393.\n\nAfter that PR, `Comment` is now 24 bytes, whereas `Token` is 16 bytes. In Oxlint plugins code, this change required using multiplication to convert from comment index to position in buffer. But `Token`'s size is still a power of 2, so can still use shift for that (faster).\n\nAlso, the shift required for these conversions for the tokens/comments/tokens-and-comments buffers were hardcoded in various places. Replace them all with constants - `<< 2` -> `<< TOKEN_SIZE32_SHIFT` - to make is clearer what's going on.",
+      "files": [
+        "apps/oxlint/src-js/plugins/comments_methods.ts (+2 -0)",
+        "apps/oxlint/src-js/plugins/tokens.ts (+4 -2)",
+        "apps/oxlint/src-js/plugins/tokens_and_comments.ts (+3 -2)",
+        "apps/oxlint/src-js/plugins/tokens_methods.ts (+17 -7)",
+        "apps/oxlint/tsdown_plugins/inline_search.ts (+3 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27537,
+      "title": "build(linter/plugins): prevent build slowdown under PNPM 12",
+      "url": "https://github.com/oxc-project/oxc/pull/27537",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-10T11:38:33Z",
+      "labels": [
+        "A-linter",
+        "A-cli"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fix `pnpm run build-js` in `apps/oxlint` becoming very slow when the conformance submodules are present. When they've been cloned to `apps/oxlint/conformance/submodules`, the ATTW step took ~53s. After this PR it takes ~0.3s.\n\n### The problem\n\nTSDown's ATTW check runs `pnpm pack` on `apps/oxlint`, and checks the resulting tarball.\n\n`apps/oxlint/package.json` has no `files` field, so the tarball contains everything in the directory that isn't excluded by an ignore file. The conformance repos in `apps/oxlint/conformance/submodules` are excluded only by the nested `apps/oxlint/conformance/.gitignore`.\n\npnpm 11 respected that nested `.gitignore`. pnpm 12 (adopted in #26381) does not. So after `pnpm run init-conformance` (which clones ~5.4 GB of repos), every `build-js` packs all of them:\n\n|  | Conformance repos not cloned | Conformance repos cloned |\n| --- | --- | --- |\n| `pnpm pack` time | 1\\.7s | 116s |\n| Tarball size | 24 MB | 1\\.1 GB |\n\n### The fix\n\nAdd `\"files\": [\"dist\"]` to `apps/oxlint/package.json`.\n\nThis package is private and is never published. The published package is `npm/oxlint`. So the tarball exists only for ATTW, which only needs `package.json` and `dist`. An allow-list is immune to ignore-file quirks like this one. It also shrinks the tarball from 24 MB to 8.6 MB even without the conformance repos, because the tests, fixtures, sources, and the second copy of the `.node` binary in `src-js` are no longer packed.\n\nNothing else packs `oxlint-app` or depends on it, s\n…(truncated)",
+      "files": [
+        "apps/oxlint/.npmignore (+0 -6)",
+        "apps/oxlint/package.json (+3 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27538,"title":"docs(linter/plugins): improve documentation for `firstCommentAtOrAfter`","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27539,
+      "title": "perf(linter/plugins): inline `firstCommentAtOrAfter` into call sites",
+      "url": "https://github.com/oxc-project/oxc/pull/27539",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-10T12:23:14Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-linter-plugins"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Perf optimization. Follow-on after #27393.\n\nThat PR introduced a function `firstCommentAtOrAfter`, replacing some places which previously used `firstTokenAtOrAfter`.\n\nA TSDown plugin inlines `firstTokenAtOrAfter` into all call sites. Extend the plugin so it also inlines `firstCommentAtOrAfter`, restoring the same code shape as before #27393.",
+      "files": [
+        "apps/oxlint/src-js/plugins/comments_methods.ts (+3 -0)",
+        "apps/oxlint/src-js/plugins/tokens_methods.ts (+3 -0)",
+        "apps/oxlint/tsdown_plugins/inline_search.ts (+39 -32)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27512,
+      "title": "feat(ast)!: refactor comment attachment storage",
+      "url": "https://github.com/oxc-project/oxc/pull/27512",
+      "author": "camc314",
+      "mergedAt": "2026-10-10T13:08:33Z",
+      "labels": [
+        "A-linter",
+        "A-parser",
+        "A-cli",
+        "A-ast",
+        "A-isolated-declarations",
+        "A-linter-plugins"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "apps/oxlint/src-js/generated/constants.ts (+2 -2)",
+        "crates/oxc_ast/src/ast/comment.rs (+15 -48)",
+        "crates/oxc_ast/src/generated/assert_layouts.rs (+14 -24)",
+        "crates/oxc_ast/src/generated/derive_content_eq.rs (+7 -0)",
+        "crates/oxc_ast/src/lib.rs (+1 -3)",
+        "crates/oxc_ast_macros/src/generated/structs.rs (+583 -588)",
+        "crates/oxc_isolated_declarations/src/lib.rs (+3 -2)",
+        "crates/oxc_parser/src/lexer/trivia_builder.rs (+37 -16)",
+        "napi/parser/src-js/generated/constants.js (+2 -2)",
+        "napi/parser/src-js/generated/deserialize/js.js (+2 -2)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 27545,
+      "title": "perf(minifier): optimize unused expression removal in minimize_if",
+      "url": "https://github.com/oxc-project/oxc/pull/27545",
+      "author": "armano2",
+      "mergedAt": "2026-10-10T17:30:05Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "If minimized expression can be removed fold it to `;` without waiting for next pass or other minifications to clean this code path\n\neg. folds `if (0) {}` to `;` instead of first folding it to `0;`",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_if_statement.rs (+7 -2)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27542,
+      "title": "perf(ast): generate derive for `CloneIn` on `Comment`",
+      "url": "https://github.com/oxc-project/oxc/pull/27542",
+      "author": "overlookmotel",
+      "mergedAt": "2026-10-10T18:12:33Z",
+      "labels": [
+        "A-ast"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Follow-on after #27512.\n\nGenerate the derive of `CloneIn`, rather than writing it out manually. The auto-generated version is more performant as it uses a branchless method to clone the `node_id` field.",
+      "files": [
+        "crates/oxc_ast/src/ast/comment.rs (+2 -14)",
+        "crates/oxc_ast/src/generated/derive_clone_in.rs (+34 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27543,"title":"refactor(isolated_declarations): use `CloneIn` to clone `Comment`s","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27540,"title":"chore(agents): update agents.md with note for minifier","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27437,
+      "title": "feat(oxfmt): support `associations` config to specify language over filepath",
+      "url": "https://github.com/oxc-project/oxc/pull/27437",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-11T12:22:33Z",
+      "labels": [
+        "A-cli",
+        "A-editor",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Closes #17852 (finally!), closes #26257.\n\n---\n\nIntroduce `associations` config field (inspired by dprint).\n\n```json\n{\n  \"associations\": [\n    { \"files\": [\"**/*.html\"], \"excludeFiles\": [\"index.html\"], \"language\": \"angular-html\" },\n    { \"files\": [\"**/*.wxml\"], \"language\": \"html\" },\n    { \"files\": [\"**/*.conf\"], \"language\": \"json\" }\n  ]\n}\n```\n\nPrecedence is solved by an array instead of an object, later wins like `overrides`.\nFor `language`, use Shiki ids. It's intuitive and already used in our codebase.\n\nIn the CLI, this bypasses selecting a formatter based on the filename and behaves as if one had been determined.",
+      "files": [
+        "apps/oxfmt/src-js/config.generated.ts (+50 -5)",
+        "apps/oxfmt/src/cli/stdin_runner.rs (+2 -3)",
+        "apps/oxfmt/src/cli/walk.rs (+2 -2)",
+        "apps/oxfmt/src/core/config/associations.rs (+29 -0)",
+        "apps/oxfmt/src/core/config/mod.rs (+36 -6)",
+        "apps/oxfmt/src/core/config/overrides.rs (+3 -8)",
+        "apps/oxfmt/src/core/language.rs (+19 -2)",
+        "apps/oxfmt/src/core/mod.rs (+1 -1)",
+        "apps/oxfmt/src/core/oxfmtrc.rs (+22 -1)",
+        "apps/oxfmt/src/core/support.rs (+20 -1)"
+      ],
+      "filesTotal": 32
+    },
+    {
+      "number": 27475,
+      "title": "feat(oxfmt): support `overrides[].parser` -> `associations[].language` migration",
+      "url": "https://github.com/oxc-project/oxc/pull/27475",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-11T12:24:32Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "`oxfmt --migrate prettier` can handle `parser` migration.",
+      "files": [
+        "apps/oxfmt/src-js/cli/migration/migrate-prettier.ts (+54 -8)",
+        "apps/oxfmt/test/cli/migrate_prettier/16.snap.md (+30 -1)",
+        "apps/oxfmt/test/cli/migrate_prettier/fixtures/js_config/prettier.config.mjs (+2 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":27552,"title":"chore(oxfmt): bump prettier-plugin-astro","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27553,"title":"chore(oxfmt): bump bundled prettier","hint":"other","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 4
+    }
+  }
+}

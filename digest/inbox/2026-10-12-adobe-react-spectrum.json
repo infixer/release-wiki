@@ -1,0 +1,39 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-10-12T00:37:16Z",
+  "range": {
+    "from": "2026-10-08T20:36:55Z",
+    "to": "2026-10-12T00:37:16Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "@react-spectrum/s2@1.8.0",
+      "name": "React Spectrum S2 1.8.0",
+      "publishedAt": "2026-10-09T03:05:59Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/%40react-spectrum/s2%401.8.0",
+      "prerelease": false,
+      "body": "This release introduces the new SideNavPanel component, adds async and virtualized support for Menu, and brings several exciting updates to React Spectrum's AI components!\n\n[Full Release Notes](https://react-spectrum.adobe.com/releases/v1-8-0)"
+    },
+    {
+      "tag": "react-aria-components@1.22.0",
+      "name": "React Aria Components v1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0",
+      "prerelease": false,
+      "body": "This release introduces [Sheet](https://react-aria.adobe.com/Sheet), a swipeable overlay that slides in from the edge of the viewport, built on native browser scroll gestures. This component is perfect for implementing touch-friendly trays such as mobile sheets, navigation drawers, and notification banners. Check out our [blog post](https://react-aria.adobe.com/blog/sheet) about how it works!\n\nIt also adds Turbopack support to @react-aria/optimize-locales-plugin, overlay placement that accounts for the virtual keyboard, and much more!\n\nAs always, many thanks to all of our contributors!\n\n[Full Release Notes](https://react-aria.adobe.com/releases/v1-22-0)"
+    }
+  ],
+  "prs": [],
+  "errors": []
+}

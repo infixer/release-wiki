@@ -1,0 +1,850 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-10-12T00:37:16Z",
+  "range": {
+    "from": "2026-10-08T23:04:47Z",
+    "to": "2026-10-12T00:37:16Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.11.2",
+      "publishedAt": "2026-10-09T17:38:44Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.11.2"
+    },
+    "prerelease": {
+      "tag": "pnpr@0.1.0-alpha.15",
+      "publishedAt": "2026-10-10T12:35:55Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.15"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v12.11.0",
+      "name": "pnpm 12.11.0",
+      "publishedAt": "2026-10-09T06:43:40Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.11.0",
+      "prerelease": false,
+      "body": "This release adds Rust toolchain management, links the agent skills that dependencies ship, adds the `permissions` setting, and keeps the colors of streamed script output.\n\n### Minor Changes\n\n- `pnpm install` now links the agent skills that direct dependencies ship under `skills/<name>/SKILL.md` into the project's agent skill directories, such as `.claude/skills`. A package's skills are linked only after you approve them with `pnpm approve`. The `skills.dirs` setting chooses the directories [pnpm/rfcs#35](https://github.com/pnpm/rfcs/pull/35).\n\n  Added the `permissions` setting, which records what each dependency may do. Its `build` capability works like `allowBuilds` and takes precedence over it. `pnpm approve-builds` writes to `permissions` when `pnpm-workspace.yaml` already has it, and to `allowBuilds` otherwise.\n\n  Added `pnpm permissions`, which lists the granted and denied permissions and the packages awaiting approval. `pnpm approve` reviews build scripts and agent skills in one prompt [pnpm/rfcs#36](https://github.com/pnpm/rfcs/pull/36).\n\n- pnpm now installs and runs Rust toolchains.\n\n  - With `cargo.enabled`, `pnpm install` installs the toolchain named in `rust-toolchain.toml`. pnpm verifies the release signature, stores the toolchain once per machine, and links it into `.pnpm/rust`. `pnpm run` and `pnpm exec` put its `cargo` and `rustc` on the `PATH`.\n  - `pnpm add -g rust@<channel>` installs a toolchain globally. The `cargo` and `rustc` commands run it outside projects that pin their own. `pnpm update -g`, `pnpm ls -g`, and `pnpm remove -g` manage it like any global package.\n  - In a project, `pnpm add rust@<channel>` pins the toolchain in `rust-toolchain.toml`.\n  - `pnpm shim add rust` adds project-aware shims for `cargo`, `rustc`, and the other Rust tools. In a project with a `rust-toolchain.toml`, they run the toolchain the file names and install it on first use. Elsewhere, the next command of the same name on `PATH` runs, such as rustup's.\n\n- `pnpm run` and `pnpm exec` now keep the colors of script output that they print under the project's name, such as with `--stream`. pnpm sets `FORCE_COLOR=1` for these scripts when its own output is in color, unless `FORCE_COLOR` is already set.\n\n  Script output is also rendered more cleanly:\n\n  - A line that a progress bar redraws with `\\r` shows only its last state.\n  - Escape codes that move the cursor or clear the screen are dropped.\n  - Long colored lines are cut at the terminal width.\n  - `pnpm -r run` no longer garbles its live output when a script fails while other scripts are still running.\n\n### Patch Changes\n\n#### Installing packages\n\n- pnpm no longer panics with \"unexpected error when polling the I/O driver\" when it runs under QEMU user-mode emulation, such as a `linux/amd64` container on an Apple Silicon Mac [#16696](https://github.com/pnpm/pnpm/issues/16696).\n\n- `pnpm view`, `pnpm update`, and other commands that read registry metadata now work behind proxies that end a response by\n…(truncated)"
+    },
+    {
+      "tag": "v12.11.1",
+      "name": "pnpm 12.11.1",
+      "publishedAt": "2026-10-09T12:28:20Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.11.1",
+      "prerelease": false,
+      "body": "This release fixes two ways `pnpm install` could fail, runs tools of any Rust release through `pnx`, and treats `registry.npmjs.com` as an alias of the npm registry.\n\n### Patch Changes\n\n- `pnpm install` no longer fails when `packageManager` pins the pnpm version that is already running and the registry does not publish that version. pnpm warns and continues. A registry mirror that has not synced a release no longer blocks the commands of a project pinned to it.\n\n- `pnpm install` no longer fails with `ERR_PNPM_CMD_SHIM_CHMOD` when `node_modules/.bin` holds a shim that another user created, if everyone can already execute it and it is not world-writable. This happens when several users share one checkout.\n\n- `enable-modules-dir=false` (`enableModulesDir: false` through the Node.js addon) fetches the registry packages the host can install into the store again, as pnpm v10 did, while still writing nothing under `node_modules`. The setting exists for a `node_modules` that something else mounts from the store, such as a FUSE daemon, and that consumer no longer has to download each package on first access. A plain `--lockfile-only` run still fetches nothing.\n\n- `pnpm pack` and `pnpm publish` no longer put `.npmignore` and `.gitignore` files in the tarball. A `files` entry that names one still ships it.\n\n- pnpm now treats `https://registry.npmjs.com/` as an alias of `https://registry.npmjs.org/`. Registry requests, credentials, and trusted publishing use the canonical hostname.\n\n- `pnx --package=rust@<channel> <tool>` runs a tool of that Rust release, for example `pnx --package=rust@nightly-2026-01-01 cargo build`. pnpm installs the release with the components and targets from `rust-toolchain.toml` and the target of each `--target` argument.\n\n- `pnpm install` now links agent skills for more coding agents. It detects the agent from `ANTIGRAVITY_AGENT`, `COPILOT_AGENT`, `COPILOT_CLI`, `CODEX_THREAD_ID`, `CODEX_SANDBOX`, `AI_AGENT`, and `CLAUDE_CODE` [pnpm/tasks#116](https://github.com/pnpm/tasks/issues/116).\n\n- When the registry rejects `pnpm stage publish`, the error message now starts with \"Failed to stage package\".\n\n## Platinum Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://bit.cloud/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/bit.svg\" width=\"80\" alt=\"Bit\"></a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://openai.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/openai_dark.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/openai_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/openai_dark.svg\" width=\"160\" alt=\"OpenAI\" />\n          </picture>\n        </a>\n      </td>\n      <td al\n…(truncated)"
+    },
+    {
+      "tag": "v12.11.2",
+      "name": "pnpm 12.11.2",
+      "publishedAt": "2026-10-09T17:38:44Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.11.2",
+      "prerelease": false,
+      "body": "This release fixes `--workspace-concurrency=Infinity`, filters set by an `updateConfig` hook, and store fetches with `enable-modules-dir=false`.\n\n### Patch Changes\n\n- `--workspace-concurrency=Infinity` now runs workspace projects with no concurrency limit. It used to fail with `invalid digit found in string` [#16793](https://github.com/pnpm/pnpm/issues/16793).\n\n- `pnpm install` and other recursive commands now apply the `filter` and `filterProd` that an `updateConfig` hook sets. They used to run on every workspace project [#16792](https://github.com/pnpm/pnpm/issues/16792).\n\n- `enable-modules-dir=false` now also fetches the packages an install reuses from an existing lockfile, so the store holds every package the lockfile lists.\n\n## Platinum Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://bit.cloud/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/bit.svg\" width=\"80\" alt=\"Bit\"></a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://openai.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/openai_dark.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/openai_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/openai_dark.svg\" width=\"160\" alt=\"OpenAI\" />\n          </picture>\n        </a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://notion.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/notion.svg\" width=\"80\" alt=\"Notion\"></a>\n      </td>\n    </tr>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://coderabbit.ai/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/coderabbit.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/coderabbit_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/coderabbit.svg\" width=\"220\" alt=\"CodeRabbit\" />\n          </picture>\n        </a>\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n## Gold Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://sanity.io/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/sanity.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/sanity_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/sanity.svg\" width=\"120\" alt=\"Sanity\" />\n          </picture>\n     \n…(truncated)"
+    },
+    {
+      "tag": "pnpr@0.1.0-alpha.15",
+      "name": "pnpr 0.1.0-alpha.15",
+      "publishedAt": "2026-10-10T12:35:55Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.15",
+      "prerelease": true
+    },
+    {
+      "tag": "v12.12.0",
+      "name": "pnpm 12.12.0",
+      "publishedAt": "2026-10-10T19:52:45Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.12.0",
+      "prerelease": false,
+      "body": "This release shares task results and dependency builds through a remote cache, adds the `addMissingPeerTypes` setting, and lets `pnpm add --config` and `pnpm update` manage configuration dependencies. It also fixes `dangerouslyAllowAllBuilds` running the build scripts of packages that `allowBuilds` denies.\n\n### Minor Changes\n\n- `pnpm pipeline` can share task results between machines. A result is a signed artifact stored on a pnpr server or on a server that speaks the Turborepo Remote Cache API, such as Vercel Remote Cache.\n\n  The remote side-effects cache can also store dependency builds on a Turborepo Remote Cache server. Both caches read the new `remoteCache` setting, which names the server and holds the signing keys. `pnpm pipeline --report` records the run under the organization `remoteCache.org` names.\n\n- Added the `addMissingPeerTypes` setting, which links the `@types` package of a peer dependency next to every package that peer-depends on it. For example, a package that peer-depends on `react` gets the project's `@types/react` linked next to it. This lets TypeScript find the types of a peer dependency when the global virtual store is on [#15689](https://github.com/pnpm/pnpm/discussions/15689).\n\n- `pnpm add --config` and `pnpm update` now handle configuration dependencies the way they handle other dependencies [#16814](https://github.com/pnpm/pnpm/issues/16814).\n\n  `pnpm add --config` saves a version range in `pnpm-workspace.yaml` by the same rules as `pnpm add`, so `pnpm add --config my-config@latest` saves a range such as `^1.2.0`. It also resolves the package again when `pnpm-lock.yaml` already locks an older version.\n\n  `pnpm update` updates configuration dependencies within their ranges, and `pnpm update --latest` moves them to their latest version. A selector such as `pnpm update my-config` updates only the configuration dependencies it names.\n\n### Patch Changes\n\n- A package set to `false` in `allowBuilds` no longer runs its build scripts when `dangerouslyAllowAllBuilds` is `true`. The two settings together now allow every build except the denied ones. Previously, `dangerouslyAllowAllBuilds` ignored the denials.\n\n- pnpm now switches to the pnpm version a project pins even when it cannot read its configuration. Previously, a setting it rejected in the global config file, an `.npmrc` file, or `_auth`, or a `pnpm-workspace.yaml` it could not parse, stopped every command, `pnpm --version` included.\n\n- `pnpm update` and `pnpm why` accept `--depth Infinity` again. They failed with `invalid value 'Infinity' for '--depth <DEPTH>'` [#16817](https://github.com/pnpm/pnpm/issues/16817).\n\n- `pnpm deploy` without `injectWorkspacePackages` now binds a peer dependency of a linked workspace package to the version its parent provides, as an injected install does. Previously the deploy failed with `ERR_PNPM_DEPLOY_AMBIGUOUS_PEER` whenever other packages in the deployed graph depended on different versions of that peer [#16807](https://github.com/pnpm/pn\n…(truncated)"
+    },
+    {
+      "tag": "v12.12.1",
+      "name": "pnpm 12.12.1",
+      "publishedAt": "2026-10-11T11:30:09Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.12.1",
+      "prerelease": false,
+      "body": "This release adds OIDC authentication to `pnpm dist-tag` and the `tool:` protocol. `pnpm publish` now checks which registry an `NPM_ID_TOKEN` was issued for before using it.\n\n### Patch Changes\n\n- `pnpm publish` now uses an `NPM_ID_TOKEN` only if its `aud` claim matches the selected registry, such as `npm:registry.npmjs.org`. A token for another registry is skipped with a warning, and pnpm falls back to the configured credentials.\n\n- `pnpm dist-tag add`, `rm`, and `ls` now support OIDC authentication in CI. Enable \"Allow npm dist-tag\" in the package's trusted publishing settings to manage tags without a stored npm token.\n\n- Added the `tool:` protocol for the tools pnpm downloads itself: Node.js, Bun, Deno, and Yarn. `pnpm add bun@tool:1.3.0`, `pnx node@tool:22`, and `pnx yarn@tool:4` work like the `runtime:` spelling, which stays supported as an alias. A lockfile written for `runtime:` stays up to date when `package.json` switches to `tool:`, and the other way around.\n\n  A named registry can no longer be called `tool`.\n\n## Platinum Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://bit.cloud/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/bit.svg\" width=\"80\" alt=\"Bit\"></a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://openai.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/openai_dark.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/openai_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/openai_dark.svg\" width=\"160\" alt=\"OpenAI\" />\n          </picture>\n        </a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://notion.com/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"https://pnpm.io/img/users/notion.svg\" width=\"80\" alt=\"Notion\"></a>\n      </td>\n    </tr>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://coderabbit.ai/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-color-scheme: light)\" srcset=\"https://pnpm.io/img/users/coderabbit.svg\" />\n            <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pnpm.io/img/users/coderabbit_light.svg\" />\n            <img src=\"https://pnpm.io/img/users/coderabbit.svg\" width=\"220\" alt=\"CodeRabbit\" />\n          </picture>\n        </a>\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n## Gold Sponsors\n\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://sanity.io/?utm_source=pnpm&utm_medium=release_notes\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <picture>\n            <source media=\"(prefers-co\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {"number":16776,"title":"chore(ci): expose staged publication diagnostics","hint":"other","release":"📦 v12.11.2","brief":true},
+    {"number":16779,"title":"chore: fix oidc","hint":"other","release":"📦 v12.11.2","brief":true},
+    {
+      "number": 16777,
+      "title": "fix(publish): name the stage in a rejected stage publish error",
+      "url": "https://github.com/pnpm/pnpm/pull/16777",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T07:57:36Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\n`pnpm stage publish` runs the regular publish pipeline against the registry's staging endpoint. When the registry rejected the request, the error read \"Failed to publish package ...\", which reads as a regular publish. The 12.11.0 release workflow hit this: `pnpm stage publish` got a 401 from npm, and the log said \"Failed to publish\".\n\nThe error now says \"Failed to stage package ...\" for a stage publish, in both CLIs. The error code stays `ERR_PNPM_FAILED_TO_PUBLISH`. Regular and batch publish messages are unchanged.\n\n## Squash Commit Body\n\n```text\n`pnpm stage publish` reuses the publish pipeline, so a registry rejection\nof the staging POST surfaced as \"Failed to publish package ...\". That\nreads as a regular publish and misled the diagnosis of a 401 from npm's\nstaging endpoint in the release workflow.\n\nThe error now says \"Failed to stage package ...\" when the request was a\nstage publish, in both CLIs. The error code stays\nERR_PNPM_FAILED_TO_PUBLISH, and batch publish messages are unchanged.\n```\n\n## Checklist\n\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n\n---\nWritten by an agent (Claude Code, claude-opus-5-5).\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n---\n<a href=\"https://app.blacksmi\n…(truncated)",
+      "files": [
+        "pnpm/crates/publish/src/failed_to_publish_error.rs (+19 -6)",
+        "pnpm/crates/publish/src/failed_to_publish_error/tests.rs (+37 -6)",
+        "pnpm/crates/publish/src/publish_packed_pkg.rs (+1 -0)",
+        "pnpm11/releasing/commands/src/publish/FailedToPublishError.ts (+8 -4)",
+        "pnpm11/releasing/commands/src/publish/publishPackedPkg.ts (+1 -1)",
+        ".changeset/stage-publish-failure-message.md (+7 -0)",
+        "pnpm11/releasing/commands/test/publish/FailedToPublishError.test.ts (+13 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16775,
+      "title": "fix(pnpr): serve web UI assets completely when they are gzipped",
+      "url": "https://github.com/pnpm/pnpm/pull/16775",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T07:58:04Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\npnpm/pnpm#16769 made pnpr stream web UI files. In a real browser the UI rendered blank: the scripts and styles failed with `ERR_INCOMPLETE_CHUNKED_ENCODING`. `curl --compressed` shows the response ending after the headers.\n\n**Cause:** `streaming::stream_file` builds its body with `stream::unfold`, which panics when polled again after it ends. The gzip encoder in the compression layer does poll once more. Cached tarballs never hit this, because `application/octet-stream` is excluded from compression. UI assets are text, and big enough to be compressed. The existing UI tests used tiny files, which stay under the compression threshold.\n\n**Fix:** both file streams in `streaming.rs` are fused. A new test fetches a 90 KB asset with `accept-encoding: gzip` and decodes it. It panics without the fix and passes with it.\n\nThe web UI has not been released yet, so there is no changeset.\n\n## Squash Commit Body\n\n```text\n`streaming::stream_file` builds its body with `stream::unfold`, which\npanics when polled again after it has ended. The compression layer's\ngzip encoder polls its inner body once more after the end, so every\ncompressed streamed body broke after the headers: browsers reported\nERR_INCOMPLETE_CHUNKED_ENCODING and the web UI rendered blank.\n\nCached tarballs never hit this, because `application/octet-stream` is\nexcluded from compression. The web UI's scripts and styles are text, and\nlarge enough to be compressed.\n\nBoth file streams are now fused. A new test fetches a l\n…(truncated)",
+      "files": [
+        "pnpr/crates/storage/src/streaming.rs (+5 -2)",
+        "pnpr/crates/pnpr/tests/server/web_ui.rs (+27 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 16746,
+      "title": "fix(pack): leave .npmignore and .gitignore out of the tarball",
+      "url": "https://github.com/pnpm/pnpm/pull/16746",
+      "author": "incognitojam",
+      "mergedAt": "2026-10-09T08:31:14Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\n`pnpm pack` and `pnpm publish` in pnpm 12 put a package's `.npmignore` and `.gitignore` files into the tarball, at the root and in every subdirectory. pnpm 11 leaves them out, as npm does. No issue was filed for this.\n\nPacking this package:\n\n```\npackage.json   {\"name\":\"fixture\",\"version\":\"1.0.0\"}\n.npmignore     secret.txt\n.gitignore     dist\nindex.js\nlib/a.js\nsecret.txt\nsub/.gitignore\nsub/.npmignore\nsub/b.js\n```\n\n11.28.5 packs `index.js`, `lib/a.js`, `package.json` and `sub/b.js`. 12.10.1 also packs `.gitignore`, `.npmignore`, `sub/.gitignore` and `sub/.npmignore`. The bug is pnpm 12 only, so the change is Rust only.\n\n### Root cause\n\npnpm 11 uses npm-packlist, whose default rules start with `.npmignore` and `.gitignore`. Those unanchored patterns exclude both files at any depth. The Rust port in `pnpm-fs-packlist` keeps the rest of npm-packlist's defaults in `ALWAYS_EXCLUDED_BASENAMES`, `ALWAYS_EXCLUDED_DIR_SEGMENTS` and `ALWAYS_EXCLUDED_SUFFIXES`, but has no rule for the two ignore files. The walk reads them as ignore rules, and nothing then removes the files themselves.\n\nnpm-packlist's default rules are not absolute. A `files` entry is applied after them in the directory it matches, so an entry that matches an ignore file directly ships it. I checked this against 11.28.5:\n\n| `files` | 11.28.5 packs |\n| --- | --- |\n| `[\".npmignore\", \".gitignore\", \"sub\"]` | `.npmignore`, `.gitignore`, but not `sub/.npmignore` or `sub/.gitignore` |\n| `[\".*\"]` or `[\"*\"]` | `.npmigno\n…(truncated)",
+      "files": [
+        "pnpm/crates/fs-packlist/src/lib.rs (+22 -2)",
+        ".changeset/pack-excludes-ignore-files.md (+5 -0)",
+        "pnpm/crates/fs-packlist/src/tests/files.rs (+118 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16711,
+      "title": "fix(cmd-shim): skip chmod on a shim that is already executable",
+      "url": "https://github.com/pnpm/pnpm/pull/16711",
+      "author": "adamwett",
+      "mergedAt": "2026-10-09T08:31:55Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\nWhen several users share one checkout (a shared test server, a group-writable deploy directory), every `pnpm install`, `pnpm add`, and every script run that triggers the pre-run install fails for everyone except the user who last wrote `node_modules/.bin`:\n\n```\nError: ERR_PNPM_CMD_SHIM_CHMOD\n  × installing dependencies\n  ╰─▶ Failed to chmod \"<project>/node_modules/.bin/biome\": Operation not permitted (os error 1)\n```\n\n`write_shim` calls `set_executable` on the shim after deciding whether to rewrite it, including when the existing shim is already current. `Host::set_executable` replaced the mode with `0o755` unconditionally. On Unix only a file's owner may `chmod` it, even to its current mode, so a current, executable shim another user wrote fails the install. Group write access and setgid directories do not help.\n\npnpm v11 is not affected: `linkBin` returns early for a correctly linked bin and never chmods its shim. This is a v12-only fix.\n\nThe fix gives an existing shim the rule bin targets already follow in `ensure_executable_bits`: skip the chmod when every execute bit is already set. A world-writable shim is still reset to `0755`. A shim that lacks an execute bit is still chmodded, and that chmod still fails when the user does not own the shim. A shim the run has just created skips the probe and is chmodded directly, so a cold install does no extra `stat`.\n\n## Squash Commit Body\n\n```text\n`write_shim` chmods the shim after every link, including when the shim on\n…(truncated)",
+      "files": [
+        "pnpm/crates/cmd-shim/src/capabilities.rs (+17 -10)",
+        "pnpm/crates/cmd-shim/src/capabilities/executable.rs (+31 -5)",
+        "pnpm/crates/cmd-shim/src/capabilities/executable/tests.rs (+59 -7)",
+        "pnpm/crates/cmd-shim/src/link_bins/shim_writer.rs (+3 -3)",
+        ".changeset/shared-node-modules-bin-chmod.md (+5 -0)",
+        "pnpm/crates/cmd-shim/src/link_bins/tests/permissions.rs (+65 -2)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 16784,
+      "title": "feat(pnx): run a tool of the Rust release --package=rust@<channel> names",
+      "url": "https://github.com/pnpm/pnpm/pull/16784",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T09:02:11Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\nWith `cargo.enabled`, pnpm 12.11 puts the linked Rust toolchain on `PATH` in `pnpm run`. A script that needs another release, such as `cargo +nightly-2026-08-27 build`, then reaches the real cargo, which does not understand rustup's `+toolchain`. That broke the WebAssembly build in pnpm/pnpm#16781 (the pnpm 12.11 upgrade).\n\nThis PR adds a pnpm way to pick a release for one command, without taking over the `cargo` name:\n\n```sh\npnx --package=rust@nightly-2026-08-27 cargo build --target wasm32-wasip1-threads\n```\n\n- `rust@<channel>` in `--package`, with one of the toolchain's tools as the command, is provisioned like `pnx node@22`. pnpm installs the release into the store and runs the tool from it, with its `bin` first on `PATH`. `RUSTUP_TOOLCHAIN` is set to the toolchain directory so rustup's subcommand proxies run the same release.\n- The release gets the profile, components, and targets of the toolchain file that governs the working directory, plus the target of each `--target` argument.\n- A bare `rust` means `stable`. Anything that is not a channel, or a command that is not a toolchain tool, stays on the ordinary registry path.\n\nFollow-up in pnpm/pnpm#16781 once this ships: the wasm and runtime-probe build scripts switch to `pnx --package=rust@nightly-… cargo`. The Dylint job is a separate script fix, because cargo-dylint calls the `rustup` binary itself.\n\nKnown trade-off: the store keys an install by its exact components and targets, so nightly with the wasm targe\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/dlx.rs (+7 -1)",
+        "pnpm/crates/cli/src/cli_args/dlx/provision.rs (+8 -1)",
+        "pnpm/crates/cli/src/cli_args/dlx/rust.rs (+100 -0)",
+        "pnpm/crates/cli/src/cli_args/dlx/rust/tests.rs (+68 -0)",
+        "pnpm/crates/rust-toolchain/src/lib.rs (+13 -0)",
+        "pnpm/crates/rust-toolchain/src/tests.rs (+16 -1)",
+        "pnpm/crates/rust-toolchain/src/toolchain_file.rs (+29 -0)",
+        "pnpm/crates/rust-toolchain/src/toolchain_file/tests.rs (+19 -0)",
+        ".changeset/dlx-rust-release.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/rust_toolchain.rs (+46 -1)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 16785,
+      "title": "fix: keep installing when the packageManager pin names an unpublished running version",
+      "url": "https://github.com/pnpm/pnpm/pull/16785",
+      "author": "KSXGitHub",
+      "mergedAt": "2026-10-09T09:31:13Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\n`pnpm install` fails outright when `packageManager` pins the pnpm version that is already running and the registry does not publish that version:\n\n```\nError: ERR_PNPM_BAD_CONFIG_DEP\n  x resolve package manager dependencies\n  `-> Failed to resolve config dependency pnpm@12.11.0: No matching version\n      found for pnpm@12.11.0 while fetching it from https://registry.npmjs.org/\n```\n\nA `packageManager` pin on pnpm 12 or newer persists, so the recording pass puts it under the env lockfile's `packageManagerDependencies` and resolves the pinned version from the registry to pin its bytes by integrity. A pin naming the running pnpm asks for no download, so when the registry does not serve that version there is nothing to record, and today that fails the whole command. Anyone on a registry mirror that has not synced a release yet, or on a build that is never published, has every command in a pinned project blocked by a pin on the pnpm they are already running.\n\nIt also makes `Build and run pnpm in WebContainers` red by construction after every release. That check pins the version the CLI it just built reports, so it cannot pass between the version bump landing on main and the packages being published. For 12.11.0 that window was 7h38m:\n\n| Event | Time (UTC) |\n| --- | --- |\n| pnpm/pnpm#16772 bumps `PNPM_VERSION` to 12.11.0 | 2026-10-08 23:04:47 |\n| last passing run of the check | 23:01 |\n| failing runs, across 5 unrelated PRs | 23:06 to 06:28 |\n| `pnpm@12.11.0` published to\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/pre_command/execute.rs (+2 -2)",
+        "pnpm/crates/cli/src/config_deps.rs (+44 -1)",
+        "pnpm/crates/env-installer/src/lib.rs (+1 -0)",
+        "pnpm/crates/env-installer/src/resolve_package_manager_integrities.rs (+16 -1)",
+        "pnpm/crates/env-installer/src/tests.rs (+21 -2)",
+        ".changeset/package-manager-pin-unpublished-running-version.md (+5 -0)",
+        "pnpm/crates/env-installer/src/tests/lockfile.rs (+85 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16780,
+      "title": "feat(config): normalize the npm registry HTTPS alias",
+      "url": "https://github.com/pnpm/pnpm/pull/16780",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T09:31:54Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\nTreat the exact HTTPS root `https://registry.npmjs.com/` as an alias of `https://registry.npmjs.org/`. A scoped route using `.com` currently requests an OIDC token with audience `npm:registry.npmjs.com`, which npm rejects with 401. The shared URL normalization now selects the canonical registry before requests and token exchange.\n\nKeep authentication for raw download URLs scoped to the actual destination. Normalize embedded registry routes and credential keys together.\n\nAdd canonical aliases for root credential and TLS keys, so settings under either hostname reach the canonical registry. Explicit `.com` keys retain their original scope for custom endpoints. For URL-scoped environment credentials, explicit `.org` keys take precedence over the alias fallback. HTTP endpoints, custom ports, subpaths, query strings, fragments, and lookalike hosts retain their existing behavior.\n\nThe WebContainers fixture serves metadata for its matching package-manager pin, so CI can record integrity for a build that has not been published yet.\n\nRelated to the [failed release job](https://github.com/pnpm/pnpm/actions/runs/37888245377/job/113687624654). This is new alias support in pnpm v12.\n\n## Squash Commit Body\n\n```text\nCanonicalize the npm registry HTTPS alias in the shared registry URL\nnormalizer. Apply normalization to credential and TLS keys so configured\nauthentication follows the canonical registry.\n\nCover workspace and npmrc routes, JSON and npmrc credentials, TLS keys,\nOIDC a\n…(truncated)",
+      "files": [
+        "pnpm/crates/config/src/npmrc_auth.rs (+4 -4)",
+        "pnpm/crates/config/src/npmrc_auth/credential_keys.rs (+1 -4)",
+        "pnpm/crates/config/src/npmrc_auth/credentials.rs (+13 -7)",
+        "pnpm/crates/config/src/npmrc_auth/ini.rs (+8 -5)",
+        "pnpm/crates/config/src/npmrc_auth/json.rs (+11 -8)",
+        "pnpm/crates/config/src/npmrc_auth/tests.rs (+1 -0)",
+        "pnpm/crates/napi/src/config/overlay.rs (+11 -5)",
+        "pnpm/crates/napi/src/config/tests.rs (+33 -0)",
+        "pnpm/crates/network/src/auth.rs (+1 -1)",
+        "pnpm/crates/network/src/auth/lookup.rs (+1 -1)"
+      ],
+      "filesTotal": 22
+    },
+    {
+      "number": 16773,
+      "title": "feat(pacquet): expand agent detection for skills directory linking",
+      "url": "https://github.com/pnpm/pnpm/pull/16773",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T09:47:56Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\nExpands the agent environment variable detection in pacquet for agent skills directory linking:\n- Adds `CLAUDE_CODE` alongside `CLAUDECODE` (`.claude/skills`)\n- Adds `ANTIGRAVITY_AGENT` (`.agents/skills`)\n- Adds `COPILOT_AGENT` and `COPILOT_CLI` (`.github/skills`)\n- Adds `CODEX_THREAD_ID` and `CODEX_SANDBOX` (`.agents/skills`)\n- Adds `AI_AGENT` (`.agents/skills`) as a generic fallback\n\nSpecific agent indicators take precedence over `AI_AGENT`. Also updates the integration test harness to strip all supported agent environment variables to ensure hermetic test execution.\n\nCloses https://github.com/pnpm/tasks/issues/116\n\n## Squash Commit Body\n\n```text\nAdd environment variable detection for additional AI coding\nagents that configure or read agent skills directories:\n- CLAUDE_CODE alongside CLAUDECODE (.claude/skills)\n- ANTIGRAVITY_AGENT (.agents/skills)\n- COPILOT_AGENT and COPILOT_CLI (.github/skills)\n- CODEX_THREAD_ID and CODEX_SANDBOX (.agents/skills)\n- AI_AGENT (.agents/skills) as a generic fallback\n\nSpecific agent variables take precedence over the generic\nAI_AGENT fallback. Also strip all supported agent variables\nin the integration test harness for hermetic tests.\n\nRefs: https://github.com/pnpm/tasks/issues/116\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Adde\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/agent_skills.rs (+11 -0)",
+        "pnpm/crates/package-manager/src/agent_skills/targets.rs (+126 -11)",
+        "pnpm/crates/package-manager/src/agent_skills/targets/tests.rs (+181 -0)",
+        "pnpm/crates/package-manager/src/agent_skills/tests.rs (+17 -0)",
+        ".changeset/agent-skills-environment-variables.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/agent_skills.rs (+36 -17)",
+        "pnpm/docs/agent-skills.md (+5 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16774,
+      "title": "feat(pnpr): let the web UI sign in with OIDC",
+      "url": "https://github.com/pnpm/pnpm/pull/16774",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T09:48:10Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\nServer side of signing in from pnpr's web UI (pnpm/tasks#113). The UI side shipped in `@pnpm/pnpr.apps.pnpr-web` 0.2.5, which `pnpr/ui` now builds. It adds a sign-in screen with a password form and one button per OIDC provider, sign-out, and keeps the token in the tab's `sessionStorage`.\n\n- **Password sign-in** needs no server change. The UI uses npm's login endpoint, `PUT /-/user/org.couchdb.user:<name>`.\n- **`GET /-/pnpr/v0/sign-in`** lists the OIDC providers that offer browser sign-in, as `{\"oidc\": [{\"name\": ...}]}`.\n- **`/-/oidc/{provider}/login?return=ui`**: the return target is stored in the sealed login cookie. After the provider, the callback sets a one-time code in the HttpOnly `__Host-pnpr-oidc-handoff` cookie and redirects to `../../ui/sign-in/oidc` instead of showing the token.\n  - The redirect is relative, so it works behind a path prefix.\n  - Neither the token nor the code appears in a URL. Only the browser that signed in holds the code, so a forwarded link cannot sign another browser in.\n  - The code is one-time and expires after a minute.\n  - `return=ui` is a 400 when pnpr serves no web UI. Any other `return` value is a 400.\n- **`POST /-/oidc/handoff`** takes no body. It redeems the code in that cookie for `{\"token\", \"expires\"}`, once, and clears the cookie. Codes live in memory next to the sessions they carry, so the existing affinity note for multi-replica OIDC sign-in covers them.\n- `OidcState` keeps browser sessions and handoff codes together i\n…(truncated)",
+      "files": [
+        "pnpr/crates/auth/src/oidc.rs (+12 -14)",
+        "pnpr/crates/auth/src/oidc/handoffs.rs (+45 -0)",
+        "pnpr/crates/auth/src/oidc/sessions.rs (+46 -7)",
+        "pnpr/crates/auth/src/oidc/tests.rs (+43 -19)",
+        "pnpr/crates/pnpr/src/server/oidc.rs (+153 -38)",
+        "pnpr/crates/pnpr/src/server/oidc/tests.rs (+61 -2)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+8 -6)",
+        "pnpr/ui/package.json (+1 -1)",
+        "pnpr/ui/pnpm-lock.yaml (+148 -121)",
+        ".changeset/pnpr-ui-sign-in.md (+5 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 16783,
+      "title": "fix(package-manager): fetch into the store when the modules dir is disabled",
+      "url": "https://github.com/pnpm/pnpm/pull/16783",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T09:53:10Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\n`enableModulesDir: false` (`enable-modules-dir=false`) exists for a `node_modules` that something else mounts from the store, such as a FUSE daemon. pnpm's TypeScript engine fetched every package into the store before it skipped the linking steps; the Rust engine treats the setting as `--lockfile-only` and fetches nothing, so the consumer of the mount downloads each package on first access, one at a time.\n\nThis restores the fetch. The run keeps the lockfile-only plumbing (no `node_modules`, no modules manifest, no workspace state) and fetches the lockfile's registry packages into the store: the frozen path from the wanted lockfile, through the tarball prefetcher, awaited; the fresh path through the resolver's tarball prefetch, which the run now turns on for this mode; it keeps the download tasks the prefetch spawns and waits on them, so a late or failed download is not missed. Index hits are checked by their files, since no materialization follows to repair a row whose files are gone, and an entry the install could not fetch fails the run. Packages the host cannot install (another platform's binaries) are left out, as the materialization leaves them out, and so are git and tarball-URL dependencies on the frozen path: they stay on the consumer's on-demand path, as every package was before. A plain `--lockfile-only` or `--dry-run` run still fetches nothing.\n\nThe Node.js addon stops turning `enableModulesDir: false` into a lockfile-only execution; the engine reads th\n…(truncated)",
+      "files": [
+        "pnpm/crates/napi/src/install.rs (+8 -11)",
+        "pnpm/crates/napi/src/install/options.rs (+4 -0)",
+        "pnpm/crates/napi/src/install/overlay.rs (+3 -1)",
+        "pnpm/crates/napi/src/install/tests.rs (+4 -3)",
+        "pnpm/crates/package-manager/src/install/errors.rs (+14 -0)",
+        "pnpm/crates/package-manager/src/install/materialize.rs (+5 -2)",
+        "pnpm/crates/package-manager/src/install/run.rs (+11 -15)",
+        "pnpm/crates/package-manager/src/install/run/auto_dedupe.rs (+1 -1)",
+        "pnpm/crates/package-manager/src/install/run/dispatch.rs (+4 -25)",
+        "pnpm/crates/package-manager/src/install/run/execution.rs (+29 -23)"
+      ],
+      "filesTotal": 41
+    },
+    {"number":16788,"title":"docs: fix concurrencyGroups anchor on tasks command page","hint":"other","release":"📦 v12.11.2","brief":true},
+    {"number":16791,"title":"chore(release): pacquet 12.11.1","hint":"other","release":"📦 v12.11.2","brief":true},
+    {"number":16781,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"📦 v12.11.2","brief":true},
+    {
+      "number": 16794,
+      "title": "fix(pnpr): build the web UI from pnpr-web 0.2.7",
+      "url": "https://github.com/pnpm/pnpm/pull/16794",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T13:26:43Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\npnpm/pnpm#16774 merged with the server change that keeps parallel web UI sign-ins apart. The callback now leaves the one-time handoff code in a per-flow `__Host-pnpr-oidc-handoff-<flow>` cookie and sends the browser to `sign-in/oidc?flow=<flow>`. But `pnpr/ui` still built pnpr-web 0.2.5, which reads the code from the URL. So OIDC sign-in from the web UI is broken on main. Password sign-in is not affected.\n\npnpr-web 0.2.7 sends `POST /-/oidc/handoff?flow=<flow>` with the browser's cookies, and shows the expired-sign-in message when `flow` is missing or the server returns 401. This PR moves `pnpr/ui` to 0.2.7. No changeset, because the feature has not been released.\n\nVerified in headless Chromium against pnpr built from this branch, serving the UI built from it:\n- Without a cookie, the UI sends one POST to `/-/oidc/handoff?flow=f1` with no cookie and shows the expired message.\n- With a made-up `__Host-pnpr-oidc-handoff-f1` cookie, the POST carries it, the server refuses it and clears the cookie, and the page links back to `/-/ui/sign-in`.\n- `POST /-/oidc/handoff` with no `flow` returns 400.\n\nNot verified: a full round trip through a real OIDC provider.\n\n## Squash Commit Body\n\n```text\npnpr-web 0.2.5 read the OIDC handoff code from the URL. The server now\nleaves it in a per-flow cookie and sends the browser to\n`sign-in/oidc?flow=<flow>`, so OIDC sign-in from the web UI failed.\n0.2.7 redeems the cookie for the flow named in the URL.\n```\n\n---\nWritten by an agent (Claude\n…(truncated)",
+      "files": [
+        "pnpr/ui/package.json (+1 -1)",
+        "pnpr/ui/pnpm-lock.yaml (+118 -118)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":16796,"title":"chore: set lockfile.includeResolutionSettings to true","hint":"other","release":"📦 v12.11.2","brief":true},
+    {
+      "number": 16797,
+      "title": "fix(package-manager): fetch the packages reused from the lockfile when the modules dir is disabled",
+      "url": "https://github.com/pnpm/pnpm/pull/16797",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T14:56:12Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\nFollow-up to pnpm/pnpm#16783. On the fresh path, an `enableModulesDir: false` install fetched only through the resolver's prefetch, and the prefetch runs only for packages the install actually resolves. Packages reused from an existing lockfile were left to the linking step, which this mode skips, so they never reached the store. pnpm v10 called `storeController.requestPackage` for every package on this path, including reused ones (`currentPkg`), and fetched unless the run was lockfile-only (`skipFetch: ctx.dryRun`, with `dryRun` set from `lockfileOnly`).\n\nAfter waiting for the prefetch, the run now fetches the resolved lockfile's registry packages that neither the run's tarball cache nor the store holds. Prefetched packages are skipped through the shared tarball cache, and stored ones through the same verified lookup the frozen half uses. Only those downloads report progress; the rest was reported during resolution, so no package gets a second status.\n\nFound in a FUSE-mounted `node_modules` of about 5,500 packages, once the restored lockfile was reused instead of resolved again: only 2,402 of 3,453 cold packages reached the store during the install, and the build that followed downloaded the rest on first access.\n\nThe materialization input builders move from `install/run/execution.rs` into `install/run/materialization_inputs.rs` to keep the file within the size lint.\n\n## Squash Commit Body\n\n```text\nThe fresh path of an `enableModulesDir: false` install fetched on\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/run.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install/run/execution.rs (+17 -118)",
+        "pnpm/crates/package-manager/src/install/run/materialization_inputs.rs (+119 -0)",
+        "pnpm/crates/package-manager/src/install/run/store_fetch.rs (+29 -5)",
+        "pnpm/crates/package-manager/src/store_fetch.rs (+30 -6)",
+        "pnpm/crates/package-manager/src/tarball_prefetch.rs (+29 -1)",
+        "pnpm/crates/package-manager/src/tarball_prefetch/lockfile_entries.rs (+20 -0)",
+        ".changeset/enable-modules-dir-fetches-reused-packages.md (+6 -0)",
+        "pnpm/crates/package-manager/src/install/tests/modules_dir_disabled.rs (+41 -2)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 16799,
+      "title": "fix(config-deps): apply the filter an updateConfig hook sets",
+      "url": "https://github.com/pnpm/pnpm/pull/16799",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T15:27:34Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\npnpm 12 ignored the `filter` / `filterProd` that a pnpmfile `updateConfig` hook returns. The hook output is written back through the `pnpm-workspace.yaml` settings only, and the selectors are not settings, so a recursive command such as `pnpm install` ran on every workspace project. pnpm 11 reads `config.filter` after the hooks run, so the same hook narrowed the install there.\n\nCloses pnpm/pnpm#16792\n\npnpm 11 already behaves this way, so the fix is v12-only.\n\n## Squash Commit Body\n\n```text\nThe updateConfig hook output was written back through the\npnpm-workspace.yaml settings only. `filter` / `filterProd` are not\nsettings, so pnpm 12 dropped them and a recursive command ran on every\nproject.\n\n- The hook's selectors now replace the config's, including the `{.}...`\n  default of a recursive-by-default command, as pnpm 11 adds that\n  default only when no filter was set.\n- `--filter` / `--filter-prod` are recorded in `cli_settings`, so the\n  command line outranks the hook, as with other CLI settings.\n- The hook input carries only command-line selectors, so a hook can tell\n  whether the user gave a filter (`config.filter ??= [...]`), matching\n  pnpm 11, which adds the default after the hooks run.\n- A hook-set filter does not turn on recursive mode, as on pnpm 11.\n\nCloses pnpm/pnpm#16792\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CL\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/dispatch/configuration.rs (+6 -0)",
+        "pnpm/crates/cli/src/config_deps/hooks.rs (+7 -0)",
+        "pnpm/crates/cli/src/config_deps/hooks/apply.rs (+33 -0)",
+        "pnpm/crates/cli/src/config_deps/tests.rs (+39 -0)",
+        "pnpm/crates/config/src/settings.rs (+4 -4)",
+        ".changeset/update-config-hook-filter.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/install_filters.rs (+34 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16795,
+      "title": "fix(cli): accept Infinity for --workspace-concurrency",
+      "url": "https://github.com/pnpm/pnpm/pull/16795",
+      "author": "lazerg",
+      "mergedAt": "2026-10-09T15:32:59Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\n`pnpm -r --workspace-concurrency=Infinity test` failed with `invalid value 'Infinity' for '--workspace-concurrency <workspace_concurrency>': invalid digit found in string`. The docs say `Infinity` means unlimited concurrency, and pnpm v11 accepts it. In v12 the flag was a plain `i32` with clap's default parser, so only integers got through.\n\nThe flag now has a value parser that maps `Infinity` to `i32::MAX`. That resolves to the largest workspace concurrency, and every consumer already clamps it with `usize::try_from(..).unwrap_or(usize::MAX)`. Other values parse as before. v11 is not affected, so the fix is v12 only.\n\nFixes https://github.com/pnpm/pnpm/issues/16793\n\n## Squash Commit Body\n\n```text\nThe --workspace-concurrency flag was an Option<i32> parsed by clap's\ndefault integer parser, so the documented Infinity value was rejected\nwith \"invalid digit found in string\". pnpm v11 reads it as an\nunbounded number.\n\nA parse_workspace_concurrency value parser now maps Infinity to\ni32::MAX, which resolve_child_concurrency passes through as the\nlargest concurrency. Every other value still goes through i32 parsing,\nincluding the 0 and negative forms.\n\nFixes https://github.com/pnpm/pnpm/issues/16793\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Added a changeset (`pnpm c\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/cli_command.rs (+14 -2)",
+        ".changeset/workspace-concurrency-infinity.md (+5 -0)",
+        "pnpm/crates/cli/src/cli_args/tests/global_options.rs (+8 -0)",
+        "pnpm/crates/cli/tests/suite/exec_recursive.rs (+20 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":16798,"title":"ci: run dylint as a pnpm pipeline again","hint":"other","release":"📦 v12.11.2","brief":true},
+    {"number":16802,"title":"chore(release): pacquet 12.11.2","hint":"other","release":"📦 v12.11.2","brief":true},
+    {"number":16801,"title":"refactor(resolver): move the update scope beside the vocabulary it reads","hint":"unknown","release":"📦 v12.11.2","brief":true},
+    {"number":16804,"title":"chore(release): pnpr 0.1.0-alpha.15","hint":"other","release":"📦 v12.11.2","brief":true},
+    {"number":16800,"title":"refactor(resolver): let the children recording answer for itself","hint":"unknown","release":"📦 v12.11.2","brief":true},
+    {
+      "number": 16805,
+      "title": "fix(wasm): leave ignore files out of the staged runtime dependencies",
+      "url": "https://github.com/pnpm/pnpm/pull/16805",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T16:29:57Z",
+      "labels": [
+        "product: pacquet"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.11.2",
+      "body": "## Summary\n\nThe v12.11.2 release failed in \"Verify generated npm packages\" ([run](https://github.com/pnpm/pnpm/actions/runs/37954114645/job/113909525781)):\n\n```\ncmp: .../pnpm_npm_wasm/contents/package/dist/node_modules/isexe/.npmignore: No such file or directory\n```\n\nThe repo moved to pnpm 12.11.1 in pnpm/pnpm#16781, and that version includes pnpm/pnpm#16746, which leaves `.npmignore` and `.gitignore` out of the tarball at any depth. `pnpm/wasm/stage.mjs` copies the deployed runtime dependencies into `dist/node_modules` as they are, and isexe 2.0.0 ships a `.npmignore`. The verify step expects every staged file under `dist/` to be in the tarball, so it failed.\n\nStaging now drops `.npmignore` and `.gitignore` from the bundled dependencies, as it already drops source maps. The published tarball is unchanged; only the staged directory now matches it.\n\nVerified locally with pnpm 12.11.1: ran the same `deploy` the stage script runs, applied the cleanup, packed with `files: [\"dist/\"]`, and the staged file list equals the tarball's. `isexe/.npmignore` was the only ignore file in the tree.\n\nNo changeset: the published `@pnpm/wasm` contents do not change.\n\n## Squash Commit Body\n\n```text\npnpm 12.11 packs without .npmignore and .gitignore at any depth\n(pnpm/pnpm#16746). The release job verifies that every staged file under\n`dist/` is in the tarball, so the bundled isexe's .npmignore failed the\nv12.11.2 release. Staging now drops those files, as it already drops\nsource maps, so the stage\n…(truncated)",
+      "files": [
+        "pnpm/wasm/stage.mjs (+4 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 16813,
+      "title": "fix(building): let allowBuilds denials outrank dangerouslyAllowAllBuilds",
+      "url": "https://github.com/pnpm/pnpm/pull/16813",
+      "author": "zkochan",
+      "mergedAt": "2026-10-09T23:13:58Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith `dangerouslyAllowAllBuilds: true`, a package set to `false` in `allowBuilds` still ran its build scripts: `AllowBuildPolicy::check` returned `true` under the flag before looking at the denials. That left no way to say \"build everything except these packages\":\n\n- with the flag, the denials were ignored;\n- without it, every package not listed in `allowBuilds` was skipped as unapproved.\n\nNow the denials are checked first, and the flag only applies to packages that are not denied. When the flag is set and nothing is denied, `check` still returns before parsing the dep path.\n\nThis came up in Bit, which offers that setting (`dangerouslyAllowAllScripts` plus `neverBuiltDependencies`). Its workaround was to drop the flag and strip the denied packages' `scripts` in a readPackage hook. That builds nothing else either, and it sends every package manifest through JavaScript. With this change, Bit can pass the flag and the denials directly and remove that part of the hook.\n\n**Behavior change versus pnpm v11:** v11's `createAllowBuildFunction` returns `() => true` under the flag. The `dangerously_allow_all_overrides_deny` test pinned that precedence; it is replaced by one asserting the new one. pnpm v11 is unchanged here.\n\n## Squash Commit Body\n\n```text\n`AllowBuildPolicy::check` returned `true` for every package as soon as\n`dangerouslyAllowAllBuilds` was set, before it looked at the deny rules.\n\"Build everything except these packages\" therefore had no expression:\nthe denia\n…(truncated)",
+      "files": [
+        "pnpm/crates/config/src/settings.rs (+2 -2)",
+        "pnpm/crates/deps-restorer/src/build_modules/allow_build_policy.rs (+14 -3)",
+        "pnpm/crates/napi/src/config.rs (+2 -1)",
+        "pnpm/crates/napi/src/install/options.rs (+2 -1)",
+        ".changeset/deny-builds-over-allow-all.md (+6 -0)",
+        "pnpm/crates/deps-restorer/src/build_modules/tests/build_policy.rs (+9 -0)",
+        "pnpm/crates/deps-restorer/src/build_modules/tests/resolution.rs (+0 -6)",
+        "pnpm/docs/settings/build.md (+1 -1)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 16815,
+      "title": "fix(package-manager): reuse the lockfile when injected projects come from memory",
+      "url": "https://github.com/pnpm/pnpm/pull/16815",
+      "author": "zkochan",
+      "mergedAt": "2026-10-10T09:52:19Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThrough the Node-API binding, a host can pass workspace projects in memory, with a `dependencyManifest` for the view an injected instance of a project gets (#13492). Resolution uses it. The checks that decide whether the lockfile can be reused did not, so every repeat install of such a workspace resolved again. On Bit's own workspace (342 projects, 259 of them with a `dependencyManifest`), a repeat install now reports \"Already up to date\" in under a second. Before, it resolved again on every run.\n\nThree gaps, each confirmed on that workspace by logging which check rejected the lockfile:\n\n1. **The injected project's manifest.** The repeat-install content check and the lockfile freshness check read an injected project's importer manifest instead of its `dependencyManifest`.\n2. **`workspace:` dependencies of an injected project.** The check read the target's `package.json` from disk. Projects passed in memory may have none, so it now looks the target up among the loaded project manifests first.\n3. **A dependency also declared as a peer.** The resolver lets the peer win when `autoInstallPeers` is on and the peer is not optional, or when the parent provides it (`peer_shadowed_dependencies`). The snapshot then records the peer, but the check compared it with the dependency's range. The check now mirrors the resolver. This one is not specific to the binding: any injected package that declares a name both ways was never judged fresh.\n\n## Squash Commit Body\n\n```text\nThroug\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install.rs (+3 -3)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness.rs (+13 -3)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_deps.rs (+53 -113)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_deps/peers.rs (+157 -0)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_deps/spec.rs (+56 -54)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_deps/spec/tests.rs (+116 -22)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_deps/tests.rs (+158 -4)",
+        "pnpm/crates/package-manager/src/install/run.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install/run/dispatch.rs (+6 -15)",
+        "pnpm/crates/package-manager/src/install/run/importer_selection.rs (+46 -0)"
+      ],
+      "filesTotal": 27
+    },
+    {
+      "number": 16810,
+      "title": "feat: add the addMissingPeerTypes setting",
+      "url": "https://github.com/pnpm/pnpm/pull/16810",
+      "author": "zkochan",
+      "mergedAt": "2026-10-10T10:56:28Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds the `addMissingPeerTypes` setting to pnpm v12. When it is on, every peer `X` of a dependency also makes `@types/X` an optional peer, unless the package already declares it. This is the rule Yarn applies in `normalizePackage`.\n\nThis fixes TypeScript failing to find the types of a peer dependency under the global virtual store. With `enableGlobalVirtualStore`, `next` lives outside the project. TypeScript resolves `react` from Next's real path and never reaches the project's `node_modules/@types`. Related to https://github.com/pnpm/pnpm/discussions/15689, where `packageExtensions` adding `@types/react` as an optional peer of `next` was the workaround.\n\nWhy not `@pnpm/plugin-types-fixer`: it only copies `@types/X` from a package's own published `devDependencies`. Next publishes none, and the abbreviated registry metadata omits `devDependencies` entirely. A `readPackage` hook would also make pacquet fall back from pnpr server-side resolution to local resolution.\n\nDesign points for review:\n- **Off by default, independent of the virtual store type.** The setting changes snapshot keys. `enableGlobalVirtualStore` can differ per machine, so tying the default to it would make teammates rewrite each other's lockfiles.\n- **Recorded in the lockfile as `settings.addMissingPeerTypes`,** written only while on, like `dedupePeers`. It is also recorded in the workspace state and sent to pnpr. Turning it on re-resolves the lockfile, and a frozen install rejects a lockfile written\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/deploy/workspace_manifest.rs (+3 -0)",
+        "pnpm/crates/cli/src/cli_args/install.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_request.rs (+26 -3)",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_resolution.rs (+5 -4)",
+        "pnpm/crates/cli/src/cli_args/install/tests.rs (+19 -1)",
+        "pnpm/crates/config/src/env_overlay.rs (+4 -43)",
+        "pnpm/crates/config/src/env_overlay/resolution.rs (+53 -0)",
+        "pnpm/crates/config/src/settings.rs (+5 -0)",
+        "pnpm/crates/config/src/workspace_yaml.rs (+1 -1)",
+        "pnpm/crates/config/src/workspace_yaml/settings.rs (+1 -0)"
+      ],
+      "filesTotal": 53
+    },
+    {"number":16819,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16812,
+      "title": "feat: share build output between machines through pnpr or a Turborepo remote cache",
+      "url": "https://github.com/pnpm/pnpm/pull/16812",
+      "author": "zkochan",
+      "mergedAt": "2026-10-10T11:51:39Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nBuild output can now be shared between machines through one `remoteCache` setting. It covers both dependency side effects and `pnpm pipeline` task results, on either of two transports: a pnpr server, or a server that speaks the Turborepo Remote Cache API (Vercel Remote Cache or a self-hosted one).\n\nThe two caches now share one artifact format, one trust model, and one transport layer:\n\n- **Format.** Pipeline task results are `workspace-task` artifacts of the shared artifact protocol. The protocol reserved that subject, but nothing used it until now. A task result is a signed P-256 envelope whose manifest mirrors a local cache entry (`meta.json` plus `outputs/`). It is verified with the same `trustedKeys` as dependency builds, so only machines holding the private key can publish results others use.\n- **Transport.** `ArtifactStore` in `pnpm-pnpr-client` is either pnpr or `TurborepoArtifactStore`.\n  - Both run the server's answer through the same client-side verification (`select_verified_artifacts`).\n  - On the Turborepo API, the store mirrors pnpr's routes. The signed envelope is stored per scope under `sha256(owner, input key, compatibility scope)`, with scopes from the existing `compatibility_scopes`, so a scope holds one artifact, as on pnpr. Each blob is stored once per owner under a hash of its integrity, and a publication stores its blobs before its envelopes.\n  - The API cannot create conditionally, so a later publication replaces an earlier one. Only a mach\n…(truncated)",
+      "files": [
+        "Cargo.lock (+3 -0)",
+        "pnpm/crates/cli/src/cli_args/dispatch_install/pipeline.rs (+24 -8)",
+        "pnpm/crates/cli/src/cli_args/pipeline.rs (+24 -5)",
+        "pnpm/crates/cli/src/cli_args/pipeline/cache.rs (+15 -0)",
+        "pnpm/crates/cli/src/cli_args/pipeline/cache/inputs.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/pipeline/cache_tiers.rs (+72 -0)",
+        "pnpm/crates/cli/src/cli_args/pipeline/execution.rs (+43 -23)",
+        "pnpm/crates/cli/src/cli_args/pipeline/remote_cache.rs (+370 -0)",
+        "pnpm/crates/cli/src/cli_args/pipeline/remote_cache/tests.rs (+20 -0)",
+        "pnpm/crates/config/src/lib.rs (+4 -4)"
+      ],
+      "filesTotal": 101
+    },
+    {
+      "number": 16825,
+      "title": "fix(ci): build the rustfmt fork with the pinned nightly's rustc",
+      "url": "https://github.com/pnpm/pnpm/pull/16825",
+      "author": "zkochan",
+      "mergedAt": "2026-10-10T12:04:25Z",
+      "labels": [
+        "product: pacquet"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nEvery Rust CI run has failed the Format job since about 10:50 UTC today, `main` included, with `can't find crate for rustc_ast`.\n\n- The Format job formats with a rustfmt fork built against the pinned nightly (`pnpm/scripts/rustfmt.json`). CI restores the built fork from the cache key `rustfmt-Linux-X64-<hash>`.\n- That cache entry was evicted. A run at 10:35 UTC hit it, and every run since misses it, so the job builds the fork from source.\n- The build runs `rustup run <nightly> cargo install …`, and that cargo takes `rustc` from `PATH`. The job runs under `pnpm pipeline rust-format`, which puts pnpm's managed stable Rust 1.97.0 first on `PATH`. Stable Rust has no `rustc-dev` crates, so the build fails.\n- Fix: `RUSTC` is set to the compiler `rustup which rustc --toolchain <nightly>` reports. The script already cleared `RUSTC` for this build, so it now sets it instead.\n\nVerified locally:\n- A from-scratch build with pnpm's Rust 1.97.0 `bin` first on `PATH` fails with the CI error before the change and installs both binaries after it.\n- `node --test pnpm/scripts/rustfmt.test.mjs` passes. The new test checks that the build gets the toolchain's `rustc` even when `RUSTC` already names another one.\n\n## Squash Commit Body\n\n```text\nThe formatter fork is built with `rustup run <nightly> cargo install`,\nand that cargo took `rustc` from PATH. Under `pnpm pipeline` the first\nrustc on PATH is pnpm's managed stable Rust, which has no rustc-dev\ncrates, so the build failed with \"can\n…(truncated)",
+      "files": [
+        "pnpm/scripts/rustfmt.mjs (+16 -4)",
+        "pnpm/scripts/rustfmt.test.mjs (+38 -7)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 16820,
+      "title": "fix(cli): accept Infinity for --depth in update and why",
+      "url": "https://github.com/pnpm/pnpm/pull/16820",
+      "author": "aklkv",
+      "mergedAt": "2026-10-10T12:37:22Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm update --depth Infinity` and `pnpm why --depth Infinity` failed with `invalid value 'Infinity' for '--depth <DEPTH>': invalid digit found in string`. pnpm v11 accepts `Infinity` for both. In v12 both flags were a plain `Option<usize>` with clap's default parser. `pnpm list --depth Infinity` kept working because `list` has its own `parse_depth`.\n\nA shared `parse_depth_limit` value parser now maps `Infinity` to `usize::MAX`. It matches case-insensitively, like `list`'s parser. `update` already uses `usize::MAX` when `--depth` is omitted (`update/execution.rs`), and `why`'s renderer draws the whole tree for it. A renderer test pins that: `Some(usize::MAX)` renders the same tree, JSON, and parseable output as `None`. One branch needed care: `update --patches` delegates the patch refresh only when no depth is given, so `--depth Infinity` now counts as no depth there and keeps that path. v11 is not affected, so the fix is v12 only.\n\nFixes https://github.com/pnpm/pnpm/issues/16817\n\n## Squash Commit Body\n\n```text\npnpm update and pnpm why declared --depth as Option<usize> with clap's\ndefault integer parser, so the Infinity value pnpm v11 accepts was\nrejected with \"invalid digit found in string\". pnpm list was not\naffected because it has its own parse_depth.\n\nA shared parse_depth_limit value parser maps Infinity to usize::MAX,\nmatching case-insensitively like list's parser. update already uses\nusize::MAX when --depth is omitted, and why's renderer draws the whole\ntree\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args.rs (+10 -0)",
+        "pnpm/crates/cli/src/cli_args/tests.rs (+32 -0)",
+        "pnpm/crates/cli/src/cli_args/update.rs (+5 -3)",
+        "pnpm/crates/cli/src/cli_args/update/tests.rs (+4 -0)",
+        "pnpm/crates/cli/src/cli_args/why.rs (+4 -2)",
+        "pnpm/crates/deps-inspection/src/dependents_render/tests.rs (+19 -0)",
+        ".changeset/depth-infinity-in-update-and-why.md (+5 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16822,
+      "title": "feat(napi): accept addMissingPeerTypes as an install option",
+      "url": "https://github.com/pnpm/pnpm/pull/16822",
+      "author": "zkochan",
+      "mergedAt": "2026-10-10T13:10:55Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds `addMissingPeerTypes` to the `@pnpm/napi` install options. The setting landed in https://github.com/pnpm/pnpm/pull/16810, which left it out of the N-API bindings, so an embedder could only enable it through `pnpm-workspace.yaml`.\n\nThe option goes through the config overlay the same way `dedupePeers` does. `index.d.ts` documents it, and notes that the value must match the one the existing lockfile was generated with.\n\n## Squash Commit Body\n\n```text\nThe addMissingPeerTypes setting landed in pnpm/pnpm#16810 without an\ninstall option in the N-API bindings, so an embedder could only turn it\non through pnpm-workspace.yaml.\n\nThe option is forwarded through the config overlay like dedupePeers,\nwhich also changes the lockfile's peer suffixes. A config test checks\nthat true, false, and an omitted option reach the resolved config.\n```\n\n## Checklist\n\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n- [x] Updated the documentation if needed.\n\n---\nWritten by an agent (Claude Code, claude-opus-5-5).\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16822?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dar\n…(truncated)",
+      "files": [
+        "pnpm/crates/napi/src/config.rs (+1 -0)",
+        "pnpm/crates/napi/src/config/overlay.rs (+3 -0)",
+        "pnpm/crates/napi/src/install/options.rs (+1 -0)",
+        "pnpm/crates/napi/src/install/overlay.rs (+1 -0)",
+        "pnpm/crates/napi/src/install/tests.rs (+1 -0)",
+        "pnpm/npm/napi/index.d.ts (+7 -0)",
+        ".changeset/napi-add-missing-peer-types.md (+5 -0)",
+        "pnpm/crates/napi/src/install/tests/configuration.rs (+17 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 16816,
+      "title": "feat(config-deps): save and update config dependencies like project dependencies",
+      "url": "https://github.com/pnpm/pnpm/pull/16816",
+      "author": "lazerg",
+      "mergedAt": "2026-10-10T13:28:42Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nConfig dependencies now follow the save and update rules of project dependencies.\n\n- `pnpm add --config <pkg>@latest` kept the version already in `pnpm-lock.yaml` after a newer one was published. The planner treated a lockfile entry whose specifier matched the declaration as resolved, so it never asked the registry. `add --config` now resolves the packages it names again.\n- `add --config` saves the specifier the npm resolver computes under `savePrefix`/`saveExact`, as `pnpm add` does. `add --config foo@latest` and `add --config foo` save a range such as `^1.2.0` instead of the tag.\n- `pnpm update` updates config dependencies: every one with no selectors, the ones a name or pattern matches otherwise. A range keeps its operator, an exact pin stays exact, and `--latest` reaches past the range. A declaration that tracks a dist-tag keeps the tag and only the lockfile moves, as in `package.json`.\n- `--interactive`, `--patches`, `--no-save`, `--filter`, the dependency-group flags, and versioned selectors leave config dependencies alone.\n\nThe `add --config` re-resolution bug is v12-only: v11 resolves every package passed to `add --config`. The save-rule and `pnpm update` changes are v12 features and are not ported to v11.\n\nFixes https://github.com/pnpm/pnpm/issues/16814\n\n## Squash Commit Body\n\n```text\nConfig dependencies now follow the save and update rules of project\ndependencies.\n\nThe env lockfile stores a config dependency's specifier next to the\nversion it resolved to\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/add/execution.rs (+12 -3)",
+        "pnpm/crates/cli/src/cli_args/pipelines/mutation.rs (+3 -8)",
+        "pnpm/crates/cli/src/cli_args/update.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/update/config_dependencies.rs (+79 -0)",
+        "pnpm/crates/cli/src/cli_args/update_changeset.rs (+15 -1)",
+        "pnpm/crates/cli/src/config_deps.rs (+20 -34)",
+        "pnpm/crates/cli/src/config_deps/declarations.rs (+111 -0)",
+        "pnpm/crates/env-installer/Cargo.toml (+2 -1)",
+        "pnpm/crates/env-installer/src/lib.rs (+3 -1)"
+      ],
+      "filesTotal": 20
+    },
+    {
+      "number": 16808,
+      "title": "fix(resolver): install `workspace:` peers from the workspace on legacy deploy",
+      "url": "https://github.com/pnpm/pnpm/pull/16808",
+      "author": "comp615",
+      "mergedAt": "2026-10-10T14:40:09Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16806\n\n`pnpm deploy --legacy` failed with `ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER` when a workspace dependency of the deployed project declared a `workspace:^` peer that the project did not depend on itself.\n\nThe peer walker stripped `workspace:` from the range it records for a missing peer, and the importer hoist auto-installed the peer with what was left. On 12.11.2:\n\n| Peer range | Legacy deploy result |\n| --- | --- |\n| `workspace:^` | fails with `\"c@^\" isn't supported by any available resolver` |\n| `workspace:*` | installs the unrelated npm package `c@1.1.1` |\n| `workspace:^1.0.0` | installs the unrelated npm package `c@1.1.1` |\n\n`autoInstallPeers` is on by default, so this PR installs the peer from the workspace. A `workspace:` peer has one meaning: only the workspace project satisfies it.\n\n- **Walker:** records the declared range, as pnpm 11's `getMissingPeers` does. The comparable range used by the satisfaction check and the peer issue report is unchanged.\n- **Hoist merge:** when any consumer declares the peer with `workspace:`, optional declarations included, the versions every consumer names are intersected and the result keeps the protocol.\n  - Identical ranges pass through unchanged, so an aliased `workspace:<name>@<range>` reaches the workspace resolver.\n  - A union such as `workspace:^1 || workspace:^2` is joined into `workspace:^1 || ^2`. A union with an aliased member leaves the peer missing.\n  - `workspace:^1.0.0` + `>=1.1.0` \n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/deploy/install.rs (+9 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/hoist_peers.rs (+7 -1)",
+        "pnpm/crates/resolving-deps-resolver/src/hoist_peers/tests.rs (+9 -2)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_importer/missing_peers.rs (+97 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers/walker/peer_issues.rs (+2 -8)",
+        ".changeset/legacy-deploy-workspace-peer.md (+7 -0)",
+        "pnpm/crates/cli/tests/suite/deploy/legacy.rs (+88 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_importer/tests/behavior.rs (+399 -2)",
+        "pnpm/crates/resolving-deps-resolver/src/tests/peers/auto_install.rs (+42 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 16826,
+      "title": "fix: no setting stops the switch to the pinned pnpm, and the remote cache token lives in auth settings",
+      "url": "https://github.com/pnpm/pnpm/pull/16826",
+      "author": "zkochan",
+      "mergedAt": "2026-10-10T16:28:05Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThree related changes about where pnpm reads settings and credentials, and what it does with ones it cannot read.\n\n**1. No setting stops the switch to the pinned pnpm (v11 and v12).** Both CLIs load the full configuration before they decide whether to switch to the pnpm a project pins. Any setting the running pnpm rejected stopped every command, `pnpm --version` included. The sources involved: the global `config.yaml`, an `.npmrc` file, `_auth`, and, in v11, `pnpm-workspace.yaml`. A newer pnpm that understands the setting never got to run. When the load fails, both now retry and leave out only what they cannot read:\n- v12: `Config::skip_unreadable_settings`, formerly limited to `pnpm-workspace.yaml`, now covers every source. The global `config.yaml` and `pnpm-workspace.yaml` keep each setting that parses on its own. A source that still fails is left out by itself: the global file, the workspace file's settings, `_auth`, or a project `.npmrc` `tokenHelper`.\n- v11: `getConfig` takes `skipUnreadableSettings`, which does the same per source and also leaves out the project `.npmrc`. `main.ts` uses it only when the normal load throws, and reports the original error when there is nothing to switch to.\n- Every source that can be read still applies, so a repository that breaks its own files cannot drop the machine's `pmOnFail` opt-out, registry, credentials, or proxy.\n\n**2. `_auth` tolerates fields a later pnpm adds (v11 and v12).** The global `config.yaml` is shared by ev\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/pre_command.rs (+9 -23)",
+        "pnpm/crates/cli/src/cli_args/pre_command/load_config.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/pre_command/unreadable_settings.rs (+25 -0)",
+        "pnpm/crates/config/src/auth_sources.rs (+10 -3)",
+        "pnpm/crates/config/src/loading.rs (+94 -2)",
+        "pnpm/crates/config/src/npmrc_auth/json.rs (+49 -3)",
+        "pnpm/crates/config/src/settings.rs (+9 -5)",
+        "pnpm/crates/config/src/settings/cache.rs (+1 -2)",
+        "pnpm/crates/config/src/workspace_settings.rs (+16 -3)",
+        "pnpm/crates/config/src/workspace_yaml.rs (+2 -0)"
+      ],
+      "filesTotal": 38
+    },
+    {"number":16830,"title":"docs: fix stale paths and package name in AGENTS.md","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16821,
+      "title": "fix(reporter): restore colored script output performance",
+      "url": "https://github.com/pnpm/pnpm/pull/16821",
+      "author": "altaywtf",
+      "mergedAt": "2026-10-10T16:38:53Z",
+      "labels": [
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRestore colored-script output speed in v11. Closes pnpm/tasks#119.\n\n| Dense colored output | Reverted fix | Fixed |\n|---|---:|---:|\n| Colors disabled | 417.27 ms | 374.34 ms |\n| Colors enabled | 465.20 ms | 398.69 ms |\n\nMedians (n=5), macOS arm64/Node 26.11.1; reproduction linked.\n\n- Fragment-processing regression: v11-only. Native slowdown includes required filtering.\n- npm preserves controls; pnpm filters them.\n- No changeset: unreleased v11 sanitizer.\n\n## Squash Commit Body\n\n```text\nAvoid per-fragment sanitization when a line contains only printable text,\ntabs and SGR sequences. Keep the existing sanitizer for other controls.\n\nCloses pnpm/tasks#119.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Added or updated tests.\n\n---\nWritten by an agent (Codex, gpt-6-astra).",
+      "files": [
+        "pnpm11/cli/default-reporter/src/reporterForClient/reportLifecycleScripts.ts (+4 -0)",
+        "pnpm11/cli/default-reporter/test/reportingLifecycleScripts.ts (+34 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":16824,"title":"perf(install): speed up frozen injected workspace installs","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":16823,"title":"perf(workspace): speed up discovery with excluded subtrees","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":16803,"title":"test(cli): wait for every run in the exec all-at-once tests","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":7551,"title":"test(hoisted): ensure repeat install does not download skipped optional dependencies","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16809,
+      "title": "fix(deploy): bind a linked workspace package's peer to what its parent provides",
+      "url": "https://github.com/pnpm/pnpm/pull/16809",
+      "author": "comp615",
+      "mergedAt": "2026-10-10T19:05:47Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16807\n\nWithout `injectWorkspacePackages`, deploy has to bind the peers of a linked workspace package itself, because the shared lockfile has no snapshot for it. It bound each peer to the deployed graph's resolution and refused when the graph held more than one version. In the issue, `a` depends on the workspace `is-number` directly, but `is-odd` brings a registry `is-number@6`, so the deploy failed with `ERR_PNPM_DEPLOY_AMBIGUOUS_PEER`. pnpm 12.11.2 and pnpm 11.28.5 both fail. Both deploy fine with `injectWorkspacePackages: true`.\n\nA dependency's peer resolves from its parents, so this PR binds the peer the way an injected install would:\n\n- For each unbound peer of a linked workspace package, deploy walks up the deployed graph. On each path it takes the nearest ancestor that depends on the peer itself. The deployed project counts as an ancestor. A package that consumes the linked package as a peer is not its parent, though the lockfile records that peer as an ordinary dependency entry. A package that lists it as both a dependency and a peer is its parent, since the dependency wins.\n- One provider binds the peer. A peer the deployed project depends on directly therefore gets that version, whichever other versions the graph holds.\n- Several distinct providers still refuse with `ERR_PNPM_DEPLOY_AMBIGUOUS_PEER`. Deploy keeps one copy of each linked package, while injection would create one per parent.\n- With no provider, the existing rule applies unch\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/deploy/peers.rs (+128 -90)",
+        "pnpm/crates/cli/src/cli_args/deploy/peers/deployed_graph.rs (+228 -0)",
+        "pnpm/crates/cli/src/cli_args/deploy/peers/deployed_graph/tests.rs (+137 -0)",
+        "pnpm11/releasing/commands/src/deploy/createDeployFiles.ts (+10 -1)",
+        "pnpm11/releasing/commands/src/deploy/deployPackageGraph.ts (+168 -17)",
+        ".changeset/deploy-prototype-named-peer.md (+6 -0)",
+        ".changeset/deploy-workspace-protocol-peer.md (+7 -0)",
+        "pnpm/crates/cli/tests/suite/deploy/peers.rs (+28 -0)",
+        "pnpm/crates/cli/tests/suite/deploy/peers/ancestors.rs (+566 -0)",
+        "pnpm/docs/cli/deploy.md (+2 -2)"
+      ],
+      "filesTotal": 14
+    },
+    {"number":16836,"title":"chore(release): pacquet 12.12.0","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16835,"title":"fix(pnpr): connect the libsql backend over TLS","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16832,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16837,"title":"ci: share Rust Clippy and Doc results through Vercel Remote Cache","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16841,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16838,
+      "title": "feat: accept the `tool:` protocol for provisioned tools",
+      "url": "https://github.com/pnpm/pnpm/pull/16838",
+      "author": "zkochan",
+      "mergedAt": "2026-10-11T09:27:56Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThis PR implements the first, non-breaking step of the [`tool:` protocol RFC](https://github.com/pnpm/rfcs/pull/37). pnpm v12 now accepts `tool:` anywhere it accepts `runtime:` today, and `runtime:` keeps working as an alias:\n\n- the Node.js, Bun, Deno, and Yarn 6 resolvers;\n- `pnpm add` and `pnpm update`;\n- `pnx node@tool:22`, `pnx bun@tool:1.3`, and `pnx yarn@tool:4`, plus `pnpm add -g yarn@tool:4`. `yarn@tool:<range>` maps to its Yarn line (npm `yarn`, `@yarnpkg/cli-dist`, or the native releases) the same way `yarn@<range>` does;\n- folding into `devEngines.runtime` / `engines.runtime` when the manifest is written, and the `onFail` override;\n- global shims, deploy, and the catalog-mode exemption;\n- lockfile freshness. `tool:<spec>` and `runtime:<spec>` count as equal in both directions, so a frozen install accepts either spelling against a lockfile written with the other;\n- the check that decides whether a locked version can be reused.\n\npnpm writes `runtime:` wherever it writes a specifier. `pnpm add node@tool:24` folds the entry into `devEngines.runtime` / `engines.runtime`, which store no protocol and read back as `runtime:<version>`, so the lockfile's importer specifier is `runtime:` too. A project that moves to `tool:` through pnpm commands therefore keeps a lockfile earlier pnpm versions accept with `--frozen-lockfile`.\n\n**Not in this PR.** Each item is a later step of the RFC:\n\n- **Lockfile keys** (`node@runtime:24.6.0` → `node@tool:24.6.0`), resolved `vers\n…(truncated)",
+      "files": [
+        "Cargo.lock (+17 -0)",
+        "Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/deploy/lockfile.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/dlx/provision.rs (+11 -3)",
+        "pnpm/crates/cli/src/cli_args/dlx/tests.rs (+6 -0)",
+        "pnpm/crates/cli/src/cli_args/global/shims.rs (+4 -3)",
+        "pnpm/crates/cli/src/engine_pm/selector.rs (+12 -0)",
+        "pnpm/crates/cli/src/engine_pm/selector/tests.rs (+18 -0)",
+        "pnpm/crates/deps-path/Cargo.toml (+1 -0)"
+      ],
+      "filesTotal": 48
+    },
+    {
+      "number": 16840,
+      "title": "feat(dist-tag): support oidc authentication",
+      "url": "https://github.com/pnpm/pnpm/pull/16840",
+      "author": "jdalton",
+      "mergedAt": "2026-10-11T10:21:49Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nLet trusted CI jobs manage npm tags such as `latest` and `next` without storing an npm token.\n\n- Add OIDC login to `pnpm dist-tag add`, `rm`, and `ls` in pnpm v12.\n- Reuse the publish command's login code. It exchanges the CI job's identity for a temporary token for that package.\n- Fall back to configured credentials when OIDC is unavailable or the token request is rejected.\n- Keep tokens in memory. Do not save them to `.npmrc` or request provenance for tag changes.\n- In both pnpm v11 and v12, use an injected `NPM_ID_TOKEN` only when its `aud` claim matches the selected registry. Otherwise warn and fall back to configured credentials. Both CLIs report `ERR_PNPM_ID_TOKEN_REGISTRY_AUDIENCE_MISMATCH`.\n\nThis adds the same capability as [npm/cli#10038](https://github.com/npm/cli/pull/10038).\n\n<details>\n<summary><strong>Validation</strong> - local tests and checks passed</summary>\n\n- All dist-tag and id-token tests passed (62 after the rebase onto main), including registry selection, OIDC login, and fallback to configured credentials.\n- Rust checks, formatting, linting, and the pre-push hooks passed. CI is still running.\n\n</details>\n\n## Squash Commit Body\n\n```text\nLet trusted CI jobs manage npm tags without a stored npm token.\n\nReuse the publish command's OIDC login for dist-tag add, rm, and ls.\nGet a temporary token for the selected package and registry. Keep configured\ncredentials as the fallback when OIDC is unavailable or rejected.\n\nKeep tokens in memory and skip pr\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/dispatch_query/registry.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/dist_tag.rs (+30 -12)",
+        "pnpm/crates/cli/src/cli_args/dist_tag/registry.rs (+23 -3)",
+        "pnpm/crates/publish/src/oidc/id_token.rs (+26 -3)",
+        "pnpm/crates/publish/src/oidc/id_token/tests.rs (+63 -2)",
+        "pnpm/crates/publish/src/oidc/provenance.rs (+1 -1)",
+        "pnpm/crates/publish/src/publish_options/tests.rs (+4 -1)",
+        "pnpm/crates/publish/src/publish_packed_pkg/tests.rs (+11 -1)",
+        "pnpm11/releasing/commands/src/publish/oidc/idToken.ts (+31 -5)",
+        ".changeset/dist-tag-oidc.md (+5 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {"number":16843,"title":"fix(building): let a rebuild skip a cached build that changed nothing","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16844,"title":"chore(release): pacquet 12.12.1","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16848,"title":"docs: remove users list page","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16858,"title":"fix: fall back to fsync when F_FULLFSYNC is unsupported","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16857,"title":"fix(setup): resolve the pnpm executable through symlinks","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16845,
+      "title": "feat: record the tools that build git-hosted dependencies (lockBuildTools)",
+      "url": "https://github.com/pnpm/pnpm/pull/16845",
+      "author": "zkochan",
+      "mergedAt": "2026-10-11T21:33:08Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nStage 1 of [RFC 21, locked build environments](https://github.com/pnpm/rfcs/pull/21), in pnpm v12: the experimental `lockBuildTools: true` setting.\n\nWith the setting on, the lockfile records the package manager and the Node.js that prepare each git-hosted dependency. Every later install prepares the dependency with exactly those tools, downloaded and checked against the recorded integrity. Neither a copy on the host nor a live resolution is used.\n\n```yaml\npackages:\n  pins-yarn@git+file:///…#5c8f9a…:\n    resolution: {commit: 5c8f9a…, repo: …, type: git}\n  node@tool:24.6.0:\n    resolution: {type: variations, variants: […]}\n  yarn@tool:1.22.22:\n    resolution: {integrity: sha512-…, tarball: https://registry.npmjs.org/yarn/-/yarn-1.22.22.tgz}\n\nsnapshots:\n  pins-yarn@git+file:///…#5c8f9a…:\n    buildDependencies:\n      node: tool:24.6.0\n      yarn: tool:1.22.22\n```\n\nHow it works:\n\n- **Lockfile.** There is a new `tool:` key prefix (`Prefix::Tool`) and a `buildDependencies` field on snapshots. No install walk follows that field. The walks that prune or filter the lockfile keep the tools' `packages:` entries (`fast_update_lockfile`, `materialization_closure`, deploy, `filter_by_importers`). `settings.lockBuildTools` is recorded, so turning the setting on or off makes the lockfile stale: a frozen install fails with `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH`, and a regular install records the tools.\n- **Recording** (`package-manager/src/build_tools_record*`) runs after the fresh lo\n…(truncated)",
+      "files": [
+        "Cargo.lock (+2 -0)",
+        "pnpm/crates/cli/src/cli_args/cat_index.rs (+4 -1)",
+        "pnpm/crates/cli/src/cli_args/deploy/peers.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_pnpmfile.rs (+10 -2)",
+        "pnpm/crates/cli/src/cli_args/store/status.rs (+10 -3)",
+        "pnpm/crates/cli/src/engine_pm/channel.rs (+6 -33)",
+        "pnpm/crates/config/src/settings.rs (+6 -0)",
+        "pnpm/crates/config/src/workspace_yaml.rs (+1 -0)",
+        "pnpm/crates/config/src/workspace_yaml/settings.rs (+1 -0)",
+        "pnpm/crates/config/src/workspace_yaml/workspace_scope.rs (+1 -0)"
+      ],
+      "filesTotal": 108
+    },
+    {"number":16859,"title":"revert: record the tools that build git-hosted dependencies (lockBuildTools)","hint":"unknown","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}

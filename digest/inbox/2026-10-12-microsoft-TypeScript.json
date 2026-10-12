@@ -1,0 +1,93 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-10-12T00:37:16Z",
+  "range": {
+    "from": "2026-10-08T20:02:20Z",
+    "to": "2026-10-12T00:37:16Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64639,
+      "title": "[api] Answer nested requests on the sync connection in stack order",
+      "url": "https://github.com/microsoft/TypeScript/pull/64639",
+      "author": "cplieger",
+      "mergedAt": "2026-10-09T17:23:14Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "While `SyncConn.Call` handles a nested request from a client callback, it releases its lock, so another goroutine's call can start inside the client's pending nested request. Responses are matched by method name, so the nested answer and both callback answers then reach the wrong requests.\n\n**Impact:** a resolver callback that delegates to another resolver, the pattern the API's own test shows, binds most imports to the wrong module once the loader uses more than one thread. Every type and diagnostic the tool reads from that program is then wrong, and no error says so. In the reproduction, 873 of 900 nested answers went to another request.\n\nThe sync connection now answers exchanges in the order a synchronous client can handle them. It counts the calls in flight and records whether the innermost one is reading its response. A new call waits while one is reading. A message the client sends from inside a callback clears that flag, so the handler's own calls go through, and the call that received it reads again only once every call made above it has returned. A request is answered at the same point, which is what keeps nested answers from crossing.\n\n`TestSyncConnAnswersNestedRequestsInStackOrder` drives two overlapping callbacks against a fake synchronous client under `testing/synctest`. It fails on each of 20 runs without the change. `TestSyncConnNotificationHandlerCanCall` keeps a call made from a notification handler working, as it does on `main`. With a `tsc` built from this \n…(truncated)",
+      "files": [
+        "tsc/internal/ipc/conn_sync.go (+38 -9)",
+        "tsc/internal/ipc/conn_sync_test.go (+89 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64095,
+      "title": "feat: add iterator methods to esnext",
+      "url": "https://github.com/microsoft/TypeScript/pull/64095",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-10-09T21:17:02Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #63700",
+      "files": [
+        "packages/typescript/schemas/jsconfig.schema.json (+2 -2)",
+        "packages/typescript/schemas/tsconfig.schema.json (+2 -2)",
+        "tools/scripts/tsc/options.ts (+1 -1)",
+        "tsc/internal/bundled/embed_generated.go (+3 -0)",
+        "tsc/internal/bundled/libs/lib.esnext.d.ts (+1 -0)",
+        "tsc/internal/bundled/libs/lib.esnext.iterator.d.ts (+149 -0)",
+        "tsc/internal/bundled/libs_generated.go (+1 -0)",
+        "tsc/internal/compiler/program_test.go (+1 -0)",
+        "tsc/internal/tsoptions/declarations_generated.go (+1 -1)",
+        "tsc/testdata/baselines/reference/compiler/builtinIterator.symbols (+1 -1)"
+      ],
+      "filesTotal": 52
+    },
+    {
+      "number": 64711,
+      "title": "Dense link stores",
+      "url": "https://github.com/microsoft/TypeScript/pull/64711",
+      "author": "ahejlsberg",
+      "mergedAt": "2026-10-09T23:51:51Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Analysis has revealed that our paged link stores (see https://github.com/microsoft/typescript-go/pull/4329) are inefficient when compilation uses multiple checkers. For example, with 8 checkers as much as 80% of paged link storage is wasted. With this PR we change the paged link store implementation to ensure dense allocation and more efficient utilization of storage. For example, the new implementation reduces the memory usage by 8-9% when compiling VS Code with 8 checkers.",
+      "files": [
+        "tsc/internal/ast/utilities.go (+51 -2)",
+        "tsc/internal/checker/checker.go (+1 -1)",
+        "tsc/internal/checker/links.go (+37 -21)",
+        "tsc/internal/core/linkstore.go (+31 -42)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "typescript-automation[bot]": 1
+    }
+  }
+}
