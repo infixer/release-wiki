@@ -1,6 +1,6 @@
 ---
 title: Menu
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -24,3 +24,4 @@ S2（`@react-spectrum/s2`）の Menu は、セクション区切りやローデ�
 - [[repos/adobe-react-spectrum/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - [[repos/adobe-react-spectrum/changes/2026-10-09|2026-10-09 の変更]]
+- [[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]（非同期読み込み・仮想化）

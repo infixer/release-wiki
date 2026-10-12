@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-10-12
+
+- 期間: 2026-10-08T23:04:47Z 〜 2026-10-12T00:37:16Z
+- PR 58 件（詳しく 30 件 / 1 行 28 件）、Release 6 件（安定版 5 件: v12.11.0, v12.11.1, v12.11.2, v12.12.0, v12.12.1。プレリリース 1 件: pnpr@0.1.0-alpha.15）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-10-12|changes]]、[[repos/pnpm-pnpm/topics/Rust-ツールチェーン|Rust ツールチェーン]]、[[repos/pnpm-pnpm/topics/エージェントスキル|エージェントスキル]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/releases/v12.11.0|v12.11.0]]、[[repos/pnpm-pnpm/releases/v12.11.1|v12.11.1]]、[[repos/pnpm-pnpm/releases/v12.11.2|v12.11.2]]、[[repos/pnpm-pnpm/releases/v12.12.0|v12.12.0]]、[[repos/pnpm-pnpm/releases/v12.12.1|v12.12.1]]、[[repos/pnpm-pnpm/releases/v12.10.1|v12.10.1]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/index|index]]
+- 備考: inbox の `latest.stable` は v12.11.2 だったが、期間内に公開された v12.12.1 を最新の安定版として扱った。リリースノートの本文はいずれも途中で切れている。v12.12.0・v12.12.1 に載っている内容の PR は inbox では ⏳ 未リリース、v12.11.1 の内容の PR は 📦 v12.11.2 と表記されており、そのまま書いた。`lockBuildTools`（#16845）は同じ期間に #16859 で取り消された。セキュリティ・設定のトピックで重複していた概要の文・API の行・変更履歴の行・関連のリンクを整理した
+- エラー: なし
 
 ## 2026-10-09
 

@@ -1,6 +1,6 @@
 ---
 title: pnpr
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-pnpm リポジトリで開発されているレジストリサーバー pnpr（`pnpr/` 配下、プレリリース `pnpr@0.1.0-alpha.*` として公開）。upstream のレジストリから packument を取得してキャッシュし、pnpm クライアントにメタデータと tarball を配る。upstream の packument に `dist.integrity` が無いバージョンについては、tarball をダウンロードして SHA-512 の integrity を計算し、正規化した packument を保存するようになった（未リリース）。pnpm v12 は pnpr へレジストリの宣言を送るが、クライアント側だけの設定（`registries` の `networkConcurrency`）は送らない。OCI のコンテナイメージの upstream では、`https://quay.io` の CDN へのリダイレクトも許可するようになった（それまではレイヤー取得が 502）。2026-10-09 の回では、実行時の管理（pnpm/tasks#111）が一通り入った（いずれも未リリース）。管理者ロール `auth.admins` を設け、`teamsManagedBy: api` のレジストリでは npm の team API（`pnpm team create/destroy/add/rm`）でチームを、`/-/pnpr/v0/admin/users` でアカウントを管理できる。`rulesManagedBy: api` のレジストリでは `/-/pnpr/v0/admin/rules/{ecosystem}/{name}` でパッケージルールを設定のデプロイなしに変えられ（`If-Match` による条件付き更新に対応）、`npm access grant`/`revoke` もルールに対応付けられる。OIDC のグループからセッションの間だけチームに参加させる設定、SCIM 2.0 によるアカウントの無効化、`/-/ui/` での Web UI（`@pnpm/pnpr-ui`）の配信も加わった。
+pnpm リポジトリで開発されているレジストリサーバー pnpr（`pnpr/` 配下、プレリリース `pnpr@0.1.0-alpha.*` として公開）。upstream のレジストリから packument を取得してキャッシュし、pnpm クライアントにメタデータと tarball を配る。upstream の packument に `dist.integrity` が無いバージョンについては、tarball をダウンロードして SHA-512 の integrity を計算し、正規化した packument を保存するようになった（未リリース）。pnpm v12 は pnpr へレジストリの宣言を送るが、クライアント側だけの設定（`registries` の `networkConcurrency`）は送らない。OCI のコンテナイメージの upstream では、`https://quay.io` の CDN へのリダイレクトも許可するようになった（それまではレイヤー取得が 502）。2026-10-09 の回では、実行時の管理（pnpm/tasks#111）が一通り入った（いずれも未リリース）。管理者ロール `auth.admins` を設け、`teamsManagedBy: api` のレジストリでは npm の team API（`pnpm team create/destroy/add/rm`）でチームを、`/-/pnpr/v0/admin/users` でアカウントを管理できる。`rulesManagedBy: api` のレジストリでは `/-/pnpr/v0/admin/rules/{ecosystem}/{name}` でパッケージルールを設定のデプロイなしに変えられ（`If-Match` による条件付き更新に対応）、`npm access grant`/`revoke` もルールに対応付けられる。OIDC のグループからセッションの間だけチームに参加させる設定、SCIM 2.0 によるアカウントの無効化、`/-/ui/` での Web UI（`@pnpm/pnpr-ui`）の配信も加わった。2026-10-12 の回では、Web UI のサインイン（pnpm/tasks#113）が入った。パスワードは npm のログインのエンドポイント、OIDC はコールバックが 1 回限りのコードを HttpOnly の Cookie に置き、UI が `POST /-/oidc/handoff` でトークンに引き換える（トークンもコードも URL に出ない）。UI は pnpr-web 0.2.7 から作る。gzip で圧縮した Web UI のファイルが途中で切れて画面が空白になる問題も直った。プレリリース pnpr@0.1.0-alpha.15 が出た。
 
 ## 主な API・オプション
 
@@ -22,9 +22,14 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 - `auth.oidc[].login.groups.teams` — OIDC のグループをセッションの間だけレジストリのチームに対応付け（未リリース）
 - `auth.scim.token` — `/-/pnpr/v0/scim/v2` で SCIM 2.0 のプロビジョニング・無効化（未リリース）
 - `ui.enabled`・`ui.dir` — `/-/ui/` で Web UI（`@pnpm/pnpr-ui`）を配信（未リリース）
+- `GET /-/pnpr/v0/sign-in` — ブラウザのサインインに使える OIDC プロバイダーの一覧
+- `/-/oidc/{provider}/login?return=ui` と `POST /-/oidc/handoff?flow=<flow>` — フローごとの `__Host-pnpr-oidc-handoff-<flow>` Cookie の 1 回限り・1 分で失効するコードを `{"token", "expires"}` に引き換え
 
 ## 変更履歴
 
+- 2026-10-12 — Web UI を pnpr-web 0.2.7 から作る（OIDC のサインインの修正）（[#16794](https://github.com/pnpm/pnpm/pull/16794)）📦 v12.11.2 · [[repos/pnpm-pnpm/changes/2026-10-12|変更]]
+- 2026-10-12 — Web UI から OIDC でサインイン（[#16774](https://github.com/pnpm/pnpm/pull/16774)）📦 v12.11.2 · [[repos/pnpm-pnpm/changes/2026-10-12|変更]]
+- 2026-10-12 — gzip で圧縮した Web UI のファイルを最後まで配信（[#16775](https://github.com/pnpm/pnpm/pull/16775)）📦 v12.11.2 · [[repos/pnpm-pnpm/changes/2026-10-12|変更]]
 - 2026-10-09 — Web UI を `/-/ui/` で配信（[#16769](https://github.com/pnpm/pnpm/pull/16769)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-09|変更]]
 - 2026-10-09 — SCIM でアカウントを無効化（[#16742](https://github.com/pnpm/pnpm/pull/16742)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-09|変更]]
 - 2026-10-09 — `npm access grant`/`revoke` をルールに対応付け（[#16740](https://github.com/pnpm/pnpm/pull/16740)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-09|変更]]
@@ -38,6 +43,7 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-10-12|2026-10-12 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.9.1|v12.9.1]]

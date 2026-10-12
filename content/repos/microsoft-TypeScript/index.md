@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,6 +15,9 @@ tags:
 
 ## 直近の注目変更
 
+- link store を密に割り当て、8 チェッカーでの VS Code のコンパイルのメモリを 8〜9% 削減（[#64711](https://github.com/microsoft/TypeScript/pull/64711)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- `esnext` の lib に iterator のメソッドの型定義（`lib.esnext.iterator.d.ts`）を追加（[#64095](https://github.com/microsoft/TypeScript/pull/64095)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- API: 同期接続で入れ子のリクエストにスタックの順で応答し、複数スレッドのローダーで import が誤ったモジュールに結び付く問題を修正（[#64639](https://github.com/microsoft/TypeScript/pull/64639)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - API: ベータ版リリースに向けた整理（`/unstable` の削除、`api.internal` → `api.debug`、`@deprecated` の削除など）（[#64681](https://github.com/microsoft/TypeScript/pull/64681)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - シンボルのデータ部分を共有し、インスタンス化したシンボルを 96 → 24 バイトに（[#64691](https://github.com/microsoft/TypeScript/pull/64691)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - VS Code 拡張が API クライアントのモジュールを公開（[#64647](https://github.com/microsoft/TypeScript/pull/64647)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]、[[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
@@ -22,9 +25,6 @@ tags:
 - 計算されたプロパティ名を常にチェックし、不安定な診断を解消（[#64674](https://github.com/microsoft/TypeScript/pull/64674)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - デコレータ付きクラス・不正な分割代入での emit のクラッシュを修正（[#64670](https://github.com/microsoft/TypeScript/pull/64670)、[#64651](https://github.com/microsoft/TypeScript/pull/64651)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - 設定ファイルの無いプログラムでプロジェクト参照の診断を出すと API サーバーがクラッシュする問題を修正（[#64637](https://github.com/microsoft/TypeScript/pull/64637)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- カスタマイズしたモジュール解決で誤った TS2876 などを出さないように（[#64638](https://github.com/microsoft/TypeScript/pull/64638)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- decorator metadata の出力でデコレータ付きのオブジェクトリテラルのメンバーがクラッシュする問題を修正（[#64633](https://github.com/microsoft/TypeScript/pull/64633)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- `typeof import()` の型修飾子について emit が付け加える不安定な診断を修正（[#64636](https://github.com/microsoft/TypeScript/pull/64636)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 
 ## トピック
 
@@ -37,4 +37,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-09|2026-10-09]]、[[repos/microsoft-TypeScript/changes/2026-10-07|2026-10-07]]、[[repos/microsoft-TypeScript/changes/2026-10-05|2026-10-05]]、[[repos/microsoft-TypeScript/changes/2026-10-02|2026-10-02]]、[[repos/microsoft-TypeScript/changes/2026-09-30|2026-09-30]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-12|2026-10-12]]、[[repos/microsoft-TypeScript/changes/2026-10-09|2026-10-09]]、[[repos/microsoft-TypeScript/changes/2026-10-07|2026-10-07]]、[[repos/microsoft-TypeScript/changes/2026-10-05|2026-10-05]]、[[repos/microsoft-TypeScript/changes/2026-10-02|2026-10-02]]

@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-12
+
+- 期間: 2026-10-08T18:35:35Z 〜 2026-10-12T00:37:16Z
+- PR 41 件（詳しく 16 件 / 1 行 25 件、うち brief 11 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-12|changes]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/TypeScriptトランスフォーマー|TypeScriptトランスフォーマー]]、[[repos/oxc-project-oxc/topics/ES2022クラス変換|ES2022クラス変換]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 4 件）
 
 ## 2026-10-09
 

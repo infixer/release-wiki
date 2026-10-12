@@ -1,6 +1,6 @@
 ---
 title: AI-コンポーネント
-updated: 2026-10-07
+updated: 2026-10-12
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -40,3 +40,4 @@ tags:
 - [[repos/adobe-react-spectrum/topics/Menu|Menu]]（仮想化 Menu）
 - [[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-09-28|2026-09-28 の変更]]
+- [[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]（AI コンポーネントの更新）

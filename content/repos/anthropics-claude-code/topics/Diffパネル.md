@@ -1,6 +1,6 @@
 ---
 title: Diff パネル
-updated: 2026-10-07
+updated: 2026-10-12
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -20,6 +20,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-09 — `/diff` のパネル・ダイアログを開いている間、トースト・通知が表示されずに待たされる問題を修正 📦 v2.1.296 · [[repos/anthropics-claude-code/releases/v2.1.296|リリース]]
 - 2026-10-07 — ドッキングしたパネルの上の自前の空行（`PANE_TOP_PAD_ROWS`）を削除し、エンジンが確保する先頭行の下にヘッダーから描くように（[#99206](https://github.com/anthropics/claude-code/pull/99206)）⏳ 未リリース · [[repos/anthropics-claude-code/changes/2026-10-07|変更]]
 - 2026-10-01 — `/diff` のダイアログで一覧のどのファイルも開けるように（表示中の行の hunk を読む）、閉じても「Diff dialog dismissed」を出さないように（[#98555](https://github.com/anthropics/claude-code/pull/98555)）📦 v2.1.287 · [[repos/anthropics-claude-code/changes/2026-10-02|変更]]
 - 2026-09-30 — パネルを開いた時点から HEAD を監視し、別ターミナルで終えたマージを自動で検知。珍しい名前のブランチで 2 秒ごとに git を起動しないように（[#98357](https://github.com/anthropics/claude-code/pull/98357)）📦 v2.1.287 · [[repos/anthropics-claude-code/changes/2026-10-02|変更]]
@@ -40,3 +41,4 @@ tags:
 - [[repos/anthropics-claude-code/releases/v2.1.285|v2.1.285]]
 - [[repos/anthropics-claude-code/releases/v2.1.283|v2.1.283]]
 - [[repos/anthropics-claude-code/releases/v2.1.281|v2.1.281]]
+- [[repos/anthropics-claude-code/releases/v2.1.296|v2.1.296]]

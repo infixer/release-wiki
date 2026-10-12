@@ -1,9 +1,16 @@
 ---
 title: whatwg/html 取り込み履歴
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/whatwg-html
 ---
+
+## 2026-10-12
+
+- 期間: 2026-10-07T16:46:35Z 〜 2026-10-12T00:37:16Z
+- PR 1 件（詳しく 1 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/whatwg-html/changes/2026-10-12|changes]]（新規）、[[repos/whatwg-html/topics/style要素|style要素]]（新規）
+- エラー: なし
 
 ## 2026-10-09
 

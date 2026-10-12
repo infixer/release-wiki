@@ -1,6 +1,6 @@
 ---
 title: whatwg/html
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/whatwg-html
 ---
@@ -9,10 +9,11 @@ tags:
 
 ## 最新リリース
 
-今回の取り込み期間（2026-10-06〜2026-10-09）に Release の記録なし。
+今回の取り込み期間（2026-10-07〜2026-10-12）に Release の記録なし。
 
 ## 直近の注目変更
 
+- `body` の中で `style` 要素を使えるように（`<scope-start>` なしの `@scope` 内のルールに限る）（[#13007](https://github.com/whatwg/html/pull/13007)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/style要素|style要素]]
 - フラグメントパーサーのオプションを Trusted Types と統合（default policy の `createParserOptions` で従来の挿入にもサニタイザーを）（[#12583](https://github.com/whatwg/html/pull/12583)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
 - worklet に cross-origin isolated capability と time origin を公開（AudioWorklet の `performance.now()` 向け）（[#13006](https://github.com/whatwg/html/pull/13006)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/ワークレット|ワークレット]]
 - 削除された・別の文書に移された popover が隠れない問題を修正（[#13001](https://github.com/whatwg/html/pull/13001)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/popover|popover]]
@@ -22,7 +23,6 @@ tags:
 - classic 以外の script の `type` から空白を取り除かない（`type=" module "` はモジュールにならない）（[#13031](https://github.com/whatwg/html/pull/13031)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/script要素|script要素]]
 - サニタイズのアルゴリズムで MathML の `<a>` を扱うように（[#12592](https://github.com/whatwg/html/pull/12592)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
 - XML パーサーで DOM のノード作成アルゴリズムを使うように（[#13037](https://github.com/whatwg/html/pull/13037)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/XMLパーサー|XMLパーサー]]
-- COEP/COOP の `report-to` は URL ではなくエンドポイント名を取ると修正（[#11366](https://github.com/whatwg/html/pull/11366)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/COOP-COEP|COOP-COEP]]
 
 ## トピック
 
@@ -33,6 +33,7 @@ tags:
 - [[repos/whatwg-html/topics/popover|popover]] — popover の表示・非表示（取り除かれた・別文書に移された popover の扱い）
 - [[repos/whatwg-html/topics/script要素|script要素]] — `script` 要素の `type` 属性の判定と Trusted Types 向け IDL
 - [[repos/whatwg-html/topics/select要素|select要素]] — `select`・`option` と `selectedcontent` の更新・選択状態
+- [[repos/whatwg-html/topics/style要素|style要素]] — `style` 要素を置ける場所（`body` 内での `@scope` 付き `style`）
 - [[repos/whatwg-html/topics/XMLパーサー|XMLパーサー]] — XML パーサーのノード作成アルゴリズム
 - [[repos/whatwg-html/topics/イベントハンドラ|イベントハンドラ]] — イベントハンドラのコンパイルと呼び出し（scripting is disabled の扱い）
 - [[repos/whatwg-html/topics/エンコーディング判定|エンコーディング判定]] — text/html 文書の文字エンコーディング推測（XML 宣言のスニッフィング含む）
@@ -47,4 +48,4 @@ tags:
 ## 取り込み
 
 - [[repos/whatwg-html/log|取り込み履歴]]
-- 最近の変更: [[repos/whatwg-html/changes/2026-10-09|2026-10-09]]、[[repos/whatwg-html/changes/2026-10-07|2026-10-07]]、[[repos/whatwg-html/changes/2026-10-05|2026-10-05]]、[[repos/whatwg-html/changes/2026-10-02|2026-10-02]]、[[repos/whatwg-html/changes/2026-09-30|2026-09-30]]
+- 最近の変更: [[repos/whatwg-html/changes/2026-10-12|2026-10-12]]、[[repos/whatwg-html/changes/2026-10-09|2026-10-09]]、[[repos/whatwg-html/changes/2026-10-07|2026-10-07]]、[[repos/whatwg-html/changes/2026-10-05|2026-10-05]]、[[repos/whatwg-html/changes/2026-10-02|2026-10-02]]

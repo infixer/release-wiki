@@ -1,6 +1,6 @@
 ---
 title: SideNav
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -27,3 +27,4 @@ SidePanel は `SideNavPanel` に改名された（[#10734](https://github.com/ad
 - [[repos/adobe-react-spectrum/changes/2026-10-02|2026-10-02 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-10-09|2026-10-09 の変更]]
+- [[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]（`SideNavPanel` の追加）

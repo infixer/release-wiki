@@ -1,6 +1,6 @@
 ---
 title: mod API
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -23,6 +23,7 @@ UI の `Button` は子要素（文字列と `Text`）を持てるようになり
 
 ## 変更履歴
 
+- 2026-10-09 — mod の `prompt.submit` フックの実行中の Esc・中断で、ヘッドレスセッションが終わる・入力が消える・チェック前のプロンプトが通る問題を修正 📦 v2.1.296 · [[repos/anthropics-claude-code/releases/v2.1.296|リリース]]
 - 2026-10-08 — `$.ui.notify` を追加、`Button` が子要素（文字列と `Text`）を取れるように 📦 v2.1.295 · [[repos/anthropics-claude-code/releases/v2.1.295|リリース]]
 - 2026-10-07 — `$.tool.register` に `isDeferred` を追加、`claude plugin test` が mod で失敗する問題を修正 📦 v2.1.293 · [[repos/anthropics-claude-code/releases/v2.1.293|リリース]]
 
@@ -31,3 +32,4 @@ UI の `Button` は子要素（文字列と `Text`）を持てるようになり
 - [[repos/anthropics-claude-code/topics/フック|フック]]
 - [[repos/anthropics-claude-code/topics/sec-default|sec-default]]
 - [[repos/anthropics-claude-code/releases/v2.1.292|v2.1.292]]（`prompt.autocomplete`・`$.model.complete` のプロンプトキャッシュなど、mod 向けの追加を含む）
+- [[repos/anthropics-claude-code/releases/v2.1.296|v2.1.296]]

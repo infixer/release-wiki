@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -9,7 +9,8 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [react-aria-components@1.21.0](https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.21.0)（2026-09-04）
+- 安定版: [react-aria-components@1.22.0](https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0)（2026-10-09）→ [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|まとめ]]（`Sheet` の追加など）
+- 安定版（S2）: [@react-spectrum/s2@1.8.0](https://github.com/adobe/react-spectrum/releases/tag/%40react-spectrum/s2%401.8.0)（2026-10-09）→ [[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|まとめ]]（`SideNavPanel`、Menu の非同期・仮想化など）
 - プレリリース: なし
 
 ## 直近の注目変更
@@ -42,4 +43,5 @@ tags:
 ## 取り込み
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-09|2026-10-09]]、[[repos/adobe-react-spectrum/changes/2026-10-07|2026-10-07]]、[[repos/adobe-react-spectrum/changes/2026-10-05|2026-10-05]]、[[repos/adobe-react-spectrum/changes/2026-10-02|2026-10-02]]、[[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30]]
+- リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-12|2026-10-12]]、[[repos/adobe-react-spectrum/changes/2026-10-09|2026-10-09]]、[[repos/adobe-react-spectrum/changes/2026-10-07|2026-10-07]]、[[repos/adobe-react-spectrum/changes/2026-10-05|2026-10-05]]、[[repos/adobe-react-spectrum/changes/2026-10-02|2026-10-02]]

@@ -1,9 +1,17 @@
 ---
 title: adobe/react-spectrum 取り込み履歴
-updated: 2026-10-09
+updated: 2026-10-12
 tags:
   - repo/adobe-react-spectrum
 ---
+
+## 2026-10-12
+
+- 期間: 2026-10-08T20:36:55Z 〜 2026-10-12T00:37:16Z
+- PR 0 件（詳しく 0 件 / 1 行 0 件）、Release 2 件（安定版 2 件: @react-spectrum/s2@1.8.0, react-aria-components@1.22.0）
+- 更新したページ: [[repos/adobe-react-spectrum/changes/2026-10-12|changes]]（新規）、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]（新規）、[[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]（新規）、[[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]、[[repos/adobe-react-spectrum/topics/ロケール最適化|ロケール最適化]]、[[repos/adobe-react-spectrum/topics/SideNav|SideNav]]、[[repos/adobe-react-spectrum/topics/Menu|Menu]]、[[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]（いずれも `## 関連` にリリースへのリンクを追加）
+- リリースページのファイル名: タグの `/` を `-` に置き換え（`@react-spectrum/s2@1.8.0` → `@react-spectrum-s2@1.8.0`）
+- エラー: なし
 
 ## 2026-10-09
 
