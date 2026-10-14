@@ -1,0 +1,78 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-10-14T00:21:33Z",
+  "range": {
+    "from": "2026-10-09T08:27:43Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 12753,
+      "title": "Add positional HTML insertion methods",
+      "url": "https://github.com/whatwg/html/pull/12753",
+      "author": "noamr",
+      "mergedAt": "2026-10-12T09:49:14Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Add `appendHTML()`, `prependHTML()`, `beforeHTML()`, `afterHTML()`, and `replaceWithHTML()`, alongside their `*Unsafe()` variants.\n\n`NonDocumentTypeChildNode` methods fail silently when the child has no parent, like their equivalent DOM methods, and fail with a `\"HierarchyRequestError\"` `DOMException` for an invalid parent (`Document`, hostless `DocumentFragment`, `template` element, or `html` element). `appendHTML()` and `prependHTML()` (and their `*Unsafe()` variants) also throw a `\"HierarchyRequestError\"` `DOMException` when called on an `html` element, as parsing a fragment with an `html` context element always produces both a `head` and a `body` element.\n\nNote that the new `NonDocumentTypeChildNode` methods are also exposed on `CharacterData`.\n\nRenamed \"set and filter HTML\" to \"filter and set HTML\" to be more consistent with the order of operations and with the newly added helper methods.\n\nCloses #10122\n\n- [x] At least two implementers are interested (and none opposed):\n   * Chrome\n   * Gecko (https://github.com/mozilla/standards-positions/issues/1370)\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/60555\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: Implemented\n   * WebKit: https://bugs.webkit.org/show_bug.cgi?id=315741\n   * Gecko: https://bugzilla.mozilla.org/show_bug.\n…(truncated)",
+      "files": [
+        "source (+625 -50)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13023,
+      "title": "Check CSP synchronously for string timer handlers",
+      "url": "https://github.com/whatwg/html/pull/13023",
+      "author": "zcorpan",
+      "mergedAt": "2026-10-12T11:52:36Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Check CSP synchronously for string timer handlers\n\nAs in implementations, a blocked call now returns 0 without reporting an exception, and the check is done only once per call.\n\nFixes #13018.\n\n- [x] At least two implementers are interested (and none opposed):\n   * Chromium, Gecko, and WebKit already behave this way\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/63204\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: N/A (passes)\n   * Gecko: N/A (passes)\n   * WebKit: N/A (passes)\n   * Deno: N/A (no CSP)\n   * Node.js: N/A (no CSP)\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs: N/A\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A\n- [x] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13023/timers-and-user-prompts.html\" title=\"Last updated on Oct 2, 2026, 2:55 AM UTC (3b19088)\">/timers-and-user-prompts.html</a>  ( <a href=\"https://whatpr.org/html/13023/6992cb5...3b19088/timers-and-user-prompts.html\" title=\"Last updated on Oct 2, 2026, 2\n…(truncated)",
+      "files": [
+        "source (+7 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13043,
+      "title": "Don't fire `error` at a removed media `source` candidate",
+      "url": "https://github.com/whatwg/html/pull/13043",
+      "author": "zcorpan",
+      "mergedAt": "2026-10-13T11:05:57Z",
+      "labels": [
+        "topic: media"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #12986.\n\n- [x] At least two implementers are interested (and none opposed):\n   * Chromium (already implemented)\n   * WebKit (already implemented)\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/63347\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: N/A\n   * Gecko: https://bugzilla.mozilla.org/show_bug.cgi?id=2079157\n   * WebKit: N/A\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A\n- [x] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13043/media.html\" title=\"Last updated on Oct 7, 2026, 8:37 AM UTC (b465f0d)\">/media.html</a>  ( <a href=\"https://whatpr.org/html/13043/ba3400b...b465f0d/media.html\" title=\"Last updated on Oct 7, 2026, 8:37 AM UTC (b465f0d)\">diff</a> )",
+      "files": [
+        "source (+8 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 12756,
+      "title": "Sanitize while parsing",
+      "url": "https://github.com/whatwg/html/pull/12756",
+      "author": "noamr",
+      "mergedAt": "2026-10-13T22:19:52Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Sanitize while parsing, instead of parsing into a fragment and then walking it.\n\nThe sanitizer configuration is passed into the HTML parser, which consults it wherever it would create or insert a node: disallowed elements are never created or inserted (or are replaced by their children, by redirecting insertions to where the element would have gone), disallowed attributes are dropped before the element is created, and disallowed comments and processing instructions are discarded. The separate post-parse \"sanitize\" algorithm is gone; the safe variants are expressed by applying their restrictions to the configuration up front.\n\nConsequences of doing this in the parser:\n\n- No custom element constructors run for elements the sanitizer discards (they get no definition and a null registry), and no speculative fetches are started while sanitizing.\n- When sanitizing, fragment parsing builds its result in the inert document and adopts it into the target afterwards, so discarded elements never exist in the target document (#12560).\n- Declarative shadow roots are only attached when `<template>` and `shadowrootmode` survive the configuration; `<template for>` patching as well.\n- Insertion locations are computed after element creation, since creating a customized built-in can run script. The adoption agency algorithm and the Noah's Ark clause are adjusted so that removed/replaced elements and stripped attributes don't affect them (the latter now compares token attributes, matching all eng\n…(truncated)",
+      "files": [
+        "source (+915 -577)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

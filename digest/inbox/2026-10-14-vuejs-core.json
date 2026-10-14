@@ -1,0 +1,541 @@
+{
+  "kind": "repo",
+  "repo": "vuejs/core",
+  "branch": "main",
+  "collectedAt": "2026-10-14T00:21:33Z",
+  "range": {
+    "from": "2026-09-18T00:54:21Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v3.5.44",
+      "publishedAt": "2026-10-13T07:43:25Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.5.44"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v3.5.44",
+      "name": "v3.5.44",
+      "publishedAt": "2026-10-13T07:43:25Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.5.44",
+      "prerelease": false,
+      "body": "For stable releases, please refer to [CHANGELOG.md](https://github.com/vuejs/core/blob/main/CHANGELOG.md) for details.\nFor pre-releases, please refer to [CHANGELOG.md](https://github.com/vuejs/core/blob/minor/CHANGELOG.md) of the `minor` branch."
+    }
+  ],
+  "prs": [
+    {
+      "number": 15781,
+      "title": "dx(compiler-core): hint at defineModel() ref when v-model is used on a prop (fix #13280)",
+      "url": "https://github.com/vuejs/core/pull/15781",
+      "author": "parsajiravand",
+      "mergedAt": "2026-10-12T01:39:55Z",
+      "labels": [
+        ":cake: p2-nice-to-have"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #13280\n\nWhen `v-model` is used on the prop name declared by `defineModel()`, the template compiler reports `X_V_MODEL_ON_PROPS`. That message only suggests the v-bind + v-on pattern, which doesn't help here: the fix is to use the ref returned by `defineModel()`.\n\n```vue\n<script setup lang=\"ts\">\ndefineModel<boolean>('submitting') // not assigned\n</script>\n\n<template>\n  <Comp v-model=\"submitting\" />\n</template>\n```\n\nThis PR appends one line to the existing message:\n\n> For props declared with defineModel(), assign the returned ref to a variable and use v-model on that variable.\n\nNotes:\n\n- Only the message text changes. The error code, location, the conditions that raise it and codegen are unchanged.\n- The template compiler can't tell `defineModel()` props apart from `defineProps()` props. Both are `BindingTypes.PROPS`, and in dev `compileTemplate()` runs separately from `compileScript()`. So the hint goes in the shared message, phrased conditionally.\n- Making an unassigned `defineModel()` an error was tried in #13352 and reverted in #13390, so this PR only improves the message.\n- Production browser builds only reference the error URL, so bundle size is unchanged.\n\nTests: added a `message` assertion to compiler-core's `used on props` test, plus an SFC-level test with the issue's reproduction.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Improved the compiler error shown when `v-model` is used with a prop. The message now explains that, for props declared with `defineModel\n…(truncated)",
+      "files": [
+        "packages/compiler-core/src/errors.ts (+1 -1)",
+        "packages/compiler-core/__tests__/transforms/vModel.spec.ts (+1 -0)",
+        "packages/compiler-sfc/__tests__/compileScript/defineModel.spec.ts (+16 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15848,
+      "title": "fix(transition-group): measure nested groups against their moving outer item",
+      "url": "https://github.com/vuejs/core/pull/15848",
+      "author": "edison1105",
+      "mergedAt": "2026-10-12T08:03:27Z",
+      "labels": [
+        "ready to merge",
+        "scope: transition",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "fix https://github.com/vuejs/core/issues/5385\nfix https://github.com/vuejs/core/issues/1531\n\nclose #15660\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Improved movement animations in nested transition groups. Items now calculate their movement relative to enclosing groups, helping prevent incorrect position shifts when parent and child groups update independently.\n  * Improved position comparisons when nested group items move between a Teleport target and their outer group. These changes support more consistent animations across two- and three-level nesting, including groups with or without move transitions.",
+      "files": [
+        "packages/runtime-dom/src/components/TransitionGroup.ts (+93 -19)",
+        "packages/vue/__tests__/e2e/TransitionGroup.spec.ts (+471 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15604,
+      "title": "fix(compiler-sfc): error when defineModel prop options reference a destructured prop",
+      "url": "https://github.com/vuejs/core/pull/15604",
+      "author": "lazerg",
+      "mergedAt": "2026-10-12T08:18:52Z",
+      "labels": [
+        "ready to merge",
+        "scope: sfc",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "`defineModel()` moves its prop options (`default`, `type`, …) out of `setup()` and into the component's `props`, but the props destructure transform still rewrites identifiers inside them. A `default` that reads a destructured prop ends up as `_useModel(__props, \"modelValue\"__props.defaultValue)` — the rewritten identifier is left where the options object used to be, and the file no longer parses.\n\nThere is no correct rewrite here: the options are hoisted to module scope, where neither the destructured binding nor `__props` exists. So this now fails at compile time with the same kind of message `defineModel()` already gives for setup-scope variables, pointing at the props argument the option receives (`default: props => props.defaultValue`). `get` and `set` stay in `setup()` and keep working as before.\n\nclose #15602\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * The compiler now reports an error when a `defineModel()` runtime option references a destructured prop, which is unavailable in that option’s scope.\n  * For `default` options, the error suggests accessing the prop through the default factory’s `props` argument.\n  * References within factory-local variables, including shadowed names, continue to compile correctly.",
+      "files": [
+        "packages/compiler-sfc/src/script/definePropsDestructure.ts (+37 -0)",
+        "packages/compiler-sfc/__tests__/compileScript/__snapshots__/defineModel.spec.ts.snap (+80 -0)",
+        "packages/compiler-sfc/__tests__/compileScript/defineModel.spec.ts (+70 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15627,
+      "title": "fix(runtime-dom): treat playsinline as a boolean attribute",
+      "url": "https://github.com/vuejs/core/pull/15627",
+      "author": "gjija",
+      "mergedAt": "2026-10-12T08:28:05Z",
+      "labels": [
+        "ready to merge"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "`<video :playsinline=\"false\">` renders `playsinline=\"false\"`, both on the client and in SSR output. `playsinline` is a boolean attribute in the HTML spec, so its presence means true whatever the value, and the video still plays inline on iOS.\n\nIts DOM property is `playsInline`, so the lowercase key fails the `key in el` check and goes through `patchAttr`, but unlike `readonly` it isn't in `specialBooleanAttrs`, so `false` gets written as a string. Adding it to that list fixes both paths (the SSR `isBooleanAttr` list is built from it), and it now behaves like `readonly`. Added a test in `patchAttrs.spec.ts` and one in `ssrRenderAttrs.spec.ts`.\n\nPlayground: https://play.vuejs.org/#eNptUk1PhDAQ/SuTxsiaIBzUC1YSDyaa6M1jE0UYXGJ32kDB3RD+u9N2vw7eeI83b2bedBaP1mbTiKIQcqj7zjoY0I22VNRtrOkdzNBjm8Jv5ep1CobezEgOG1ig7c0GEi5OFCmqDQ0OOtIdITz4olVb6QGvDr+mPXskzOj2VJIwqagdqXadIeaqZnUFsyLwqmyq9OhNPxlg//z+9lrAxTxFPjuSi1I0dQ2azOpqN7yEWc6VZ/TyqWhRdNxn5XvyFGHPVVwjDYOkHEGrx2FdQGLN4BJYWCfzGBcHxcDhhr0dMgKQuvpCXcqOLG/odhYflKjXWP98ma0SMF1vTIOaydiGqbw8JTfPh+9lkXn0CrZhNSjCElFxbsE5MpyUKGUelLHI9liyo8/a23kY+fJpa7H2l/zt3PrUPhytAFnzjOWldvfB7PLb3XsQrT2SeVBARc1e/E/0wWyv5ObcWuZnWYlUfEzYD3xzfoA32V12eyOWP4I05oU=\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * The `playsinline` attribute on video elements is now handled consistently: enabled values render as an empty attribute, while disabled values omit it.",
+      "files": [
+        "packages/shared/src/domAttrConfig.ts (+2 -1)",
+        "packages/runtime-dom/__tests__/patchAttrs.spec.ts (+10 -0)",
+        "packages/server-renderer/__tests__/ssrRenderAttrs.spec.ts (+5 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15554,
+      "title": "fix(runtime-core): keep async placeholder for block patching and pending component updates",
+      "url": "https://github.com/vuejs/core/pull/15554",
+      "author": "ondrhn",
+      "mergedAt": "2026-10-12T08:28:46Z",
+      "labels": [
+        "ready to merge",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "`patchBlockChildren` picks the patch container from `oldVNode.el`. A component whose async `setup()` has not resolved yet has no `el`, only the placeholder comment, so the lookup falls back to the block root. When that component sits in a nested element and its vnode is then replaced (for example `<Dummy v-if>` switching to the `v-if` comment), the new node is inserted into the block root with an anchor that belongs to the nested element and the DOM throws (`NotFoundError` in jsdom, `el is null` in the browser).\n\nThe placeholder was also getting lost before that point: both early-return paths in `updateComponent` (pending async, and no update needed) copy `n2.el = n1.el` but not `placeholder`, so any unrelated update of the parent, such as a slot toggle, drops it from the current vnode.\n\nTwo changes in `renderer.ts`:\n\n- `patchBlockChildren`: use `oldVNode.el || oldVNode.placeholder` to resolve the parent container.\n- `updateComponent`: carry `placeholder` over together with `el` on both early-return paths.\n\n#13560 added the placeholder and uses it as the anchor in keyed children patching; the block fast path and the pending component update paths were not covered. The failure reproduces inside a `<Suspense>` boundary as well, so it is not limited to unsupported usage of async `setup()`.\n\nTest in `packages/vue/__tests__/index.spec.ts` (compiled template, jsdom); it throws on `main` and passes with this change. The stray `` in the last assertion is the placeholder of the pendin\n…(truncated)",
+      "files": [
+        "packages/runtime-core/src/renderer.ts (+6 -2)",
+        "packages/vue/__tests__/index.spec.ts (+97 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15618,
+      "title": "fix(compat): expose _setupProxy for Vue 2.7 compiled script setup (fix #11164)",
+      "url": "https://github.com/vuejs/core/pull/15618",
+      "author": "kwy404",
+      "mergedAt": "2026-10-12T08:29:30Z",
+      "labels": [
+        "ready to merge",
+        "scope: v2 compat"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #11164\n\nComponents compiled by Vue 2.7 from `<script setup>` read their bindings through `_vm._self._setupProxy`, which the compat build does not provide, so mounting them crashes. This adds `_setupProxy` to the compat private APIs, pointing at the instance proxy, which already exposes the setup state.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Fixed compatibility-mode rendering so render functions can access values returned from `setup()` and reflect updates to reactive values. Components using setup-provided content now render and update correctly.",
+      "files": [
+        "packages/runtime-core/src/compat/instance.ts (+1 -0)",
+        "packages/vue-compat/__tests__/instance.spec.ts (+20 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15640,
+      "title": "fix(suspense): mount resolved async component with its own namespace",
+      "url": "https://github.com/vuejs/core/pull/15640",
+      "author": "ondrhn",
+      "mergedAt": "2026-10-12T08:33:23Z",
+      "labels": [
+        "ready to merge",
+        "scope: suspense",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "A suspensible async component rendered inside an `<svg>` (or `<math>`) under a `<Suspense>` has its subtree mounted in the HTML namespace once its setup promise resolves. The elements end up in the DOM with the right attributes but the wrong `namespaceURI`, so `<path>` and friends are never drawn. The same component renders correctly when it is sync, when there is no `<Suspense>` around it, or with `suspensible: false` — all of which skip the async dep registration path.\n\nWhen `mountComponent` sees `instance.asyncDep`, it hands the component to `parentSuspense.registerDep()` but drops the `namespace` argument it was itself called with. `registerDep` in `Suspense.ts` then calls `setupRenderEffect` with the `namespace` closed over from `createSuspenseBoundary`, i.e. the namespace at the `<Suspense>` vnode's own position, not the one where the component actually sits. `registerDep` now takes the namespace as a fourth parameter and `mountComponent` forwards it, mirroring what the sync branch already does. Hydration needs no change: `hydration.ts` already calls `mountComponent` with `getContainerType(container)`, so the correct namespace flows through.\n\nMathML support (#7836) added the `namespace` parameter to `createSuspenseBoundary`, but `registerDep` kept using the boundary's namespace, carried over from the earlier `isSVG` flag.\n\nfix #15639\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Fixed SVG rendering for asynchronous components inside Suspense boundaries. Resolved elemen\n…(truncated)",
+      "files": [
+        "packages/runtime-core/src/components/Suspense.ts (+5 -1)",
+        "packages/runtime-core/src/renderer.ts (+6 -1)",
+        "packages/vue/__tests__/svgNamespace.spec.ts (+53 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15711,
+      "title": "fix(KeepAlive): unmount pruned current component when its vnode was cloned on mount",
+      "url": "https://github.com/vuejs/core/pull/15711",
+      "author": "lazerg",
+      "mergedAt": "2026-10-12T08:46:18Z",
+      "labels": [
+        "ready to merge",
+        "scope: keep-alive"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #15710\n\nWhen KeepAlive re-renders and the child is found in the cache, the returned vnode gets `el` from the cached one, so `normalizeVNode` (`cloneIfMounted`) in `renderComponentRoot` clones it. That clone is what gets mounted and cached, so `current` and the cached vnode end up being different objects. When `max` then prunes the entry of the component on screen, `pruneCacheEntry` only resets the flag on `current`. The mounted vnode keeps `COMPONENT_SHOULD_KEEP_ALIVE`, so it gets deactivated instead of unmounted.\n\nThe fix resets the flag on the cached vnode as well. Returning the already-mounted parent vnode, as in the issue, is one way to hit this; changing a prop on the child before switching views does it too.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Fixed a `KeepAlive` caching issue where a previously mounted component could be unmounted incorrectly when switching components with a cache limit of one.",
+      "files": [
+        "packages/runtime-core/src/components/KeepAlive.ts (+1 -0)",
+        "packages/runtime-core/__tests__/components/KeepAlive.spec.ts (+28 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15742,
+      "title": "fix(runtime-core): render nothing for an invalid v-for range in production",
+      "url": "https://github.com/vuejs/core/pull/15742",
+      "author": "ValentinYoushkevich",
+      "mergedAt": "2026-10-12T08:48:10Z",
+      "labels": [
+        ":cake: p2-nice-to-have"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "#12308 made dev render nothing (with a warning) for a negative or non-integer `v-for` range, but the check stayed behind `__DEV__`. So in production the same template still throws `RangeError: Invalid array length` and the whole app goes blank, while SSR renders `Math.ceil(n)` items for `3.1` ([playground](https://play.vuejs.org/#eNpVUtFu1DAQ/JWRK3E5QRPRa0ENuQhE+8ATqCBeMEJO4kusy60t28lRne7f2VyuqH2zPTuzs7M+iE/OpeOgRS6KUHvjIoKOgyslmZ2zPuIArzc4YuPtDgsuXUjKMtTK2yHoHoYaU6tofcjhVKsD1jBR7wIuMZpgql7jNd4ioeFvzAaD8Qqfn8iV3livcYYurlbXN0tJtaUQzyLrqX3ya6EWv/8jT7JrrCQV2eybHfOFOa5XUfMNKFz5w7YtVxZV+e3h612RVSUbRuw0Oq0a7VPc3f/MobBXngy1UNSALBobQ4qJk5+q951lGeUcWssjVr2iLfYmdpDiQVGr7723PscXGlVvGijv1SN6TW3spEiLbEqUHVVDjJbwse5NvV1LcRoydUPoku/Rs4FkfpmZy6UUpWqaUxZIDoc5lDOK43HJE50UZ/XGjKh7FQIrTxMwe3pnJDhFGC85bYamNU0xvBB7sS0pkG/147mWZV5d3L57f/uBw2ahuVnG3fhUZM8yF2/En1H7YCzxj1qlN+n1Shz/AZ4HzlA=), switch to PROD). This brings back the dev/prod mismatch that 67099fe fixed for #5867.\n\nA real case is a carousel whose page count goes negative when there are fewer items than visible slots ([nuxt/ui#2045](https://github.com/nuxt/ui/issues/2045)).\n\nThis moves the check out of `__DEV__` in `renderList` and `ssrRenderList`; only the warning stays dev-only (+21 B gzip in prod). Vapor's `createFor` has the same pattern in `minor`; I'll follow up there.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Invalid numeric list ranges—including negative, fractional, and `NaN` values—now render as empty lists in both client-sid\n…(truncated)",
+      "files": [
+        "packages/runtime-core/src/helpers/renderList.ts (+6 -4)",
+        "packages/server-renderer/src/helpers/ssrRenderList.ts (+6 -4)",
+        "packages/runtime-core/__tests__/helpers/renderList.spec.ts (+11 -0)",
+        "packages/server-renderer/__tests__/ssrRenderList.spec.ts (+12 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 15757,
+      "title": "fix(runtime-core): only flush jobs queued by the root render itself",
+      "url": "https://github.com/vuejs/core/pull/15757",
+      "author": "edison1105",
+      "mergedAt": "2026-10-12T08:50:04Z",
+      "labels": [
+        "ready to merge",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #6728\n\nA root `render()` ends with `flushPreFlushCbs()` and `flushPostFlushCbs()` so that pre watchers triggered in a new tree's setup run before its `mounted` (#5721). Both drain the whole queue, so `createApp().mount()` inside a pre watcher runs every other pending pre job nested in that callback (#6728), and a plain `mount()` after a state change runs other apps' pending watchers synchronously (mount side of #14215).\n\nA root render now only flushes what it is responsible for:\n\n- **Mount / unmount**: pre jobs of the components it created (`id >= minUid`, a compat root uses its own uid) and the post cbs it queued. Post watcher jobs are judged by owner (`job.i`: instance / `null` for component-less / `undefined` for internal cbs), other cbs by whether they were already pending. Jobs of other components and component-less watchers stay in the queue and run in order after the current job.\n- **Root update**: unchanged, still flushes all pending pre jobs and post cbs.\n- `flushPreFlushCbs` rescans after running a job when not filtering by instance, since a job can queue a smaller-id job ahead of the scan index (pre-existing hole).\n- `apiWatch` marks post watcher jobs with their owner when queued, covering the bound first run of `watchPostEffect`.\n\nTests cover mount inside pre/post watchers, sync mount/unmount with pending watchers of other apps, component-less watchers, root update ordering (`beforeUpdate` pre, own post watcher, `updated` dedup), compat pre/post watchers fro\n…(truncated)",
+      "files": [
+        "packages/runtime-core/src/apiWatch.ts (+5 -2)",
+        "packages/runtime-core/src/component.ts (+4 -0)",
+        "packages/runtime-core/src/renderer.ts (+28 -25)",
+        "packages/runtime-core/src/scheduler.ts (+60 -8)",
+        "packages/runtime-core/__tests__/apiCreateApp.spec.ts (+429 -2)",
+        "packages/runtime-core/__tests__/scheduler.spec.ts (+22 -0)",
+        "packages/vue-compat/__tests__/instance.spec.ts (+86 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 15755,
+      "title": "fix(reactivity): once watcher should stop when its callback throws",
+      "url": "https://github.com/vuejs/core/pull/15755",
+      "author": "patienry",
+      "mergedAt": "2026-10-12T08:50:50Z",
+      "labels": [
+        "ready to merge",
+        "scope: reactivity"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "[Reproduction link](https://play.vuejs.org/#eNq1VMFu2zAM/RVCl6RoYBfrsEPgBtuKHtZDO6zDTgYG12ZitbJkSFSSwTCwj9gX7ktGy05iDGnQS0+mSJF8j3p0Iz7VdbT2KOYicbmVNYFD8vUi1bKqjSVowOJyBpuM8hJaWFpTwYQzJqlOdW60I9C+gqvu2vTibOfLjdd03HutZP48CoXS01RDV2jWfadncLWApjOhz4nWmfJ4ft674hiotGYDmQa01tjefftwfxfVmXU4nTSpCCmpmIPXBS6lxqKdcDuANjRpwOgc50DWI7Sp3oMsM10o3KEcYTmgH8M5CuZ1ULhrEvdj54HzgbCqVUbIJ4CkkOtgsFm+GywYXmIjqQwE4O/vP5AHsFQiPHoio6HyimStEEhW6GaMrQjhPFPqMeO70u3qkZWrFVos/kuKhtbxvncAFIYwh6YZnrhtk3gEdOj/MSC6SgU/KY9JLMI5iftwT2+f9gLRntRbEDVa/Qo1X8exl8IpolFXjNmOpHOScxKPXlrMBDmW3lKuoidnNO9ikFsqclPVUqG9r0myNDsBDUuRCuZnNrfB1yk4SDrklJg/H/E/uW3nS8VXiw7tmuW4j1FmV0h9+ObhDrds74OVKbwK4n0x+A2dUb7D2F/7zDJn2KN7Ae2X8EeRevXd3WwJtduR6oAeFpPXxeP1CeoHuJfR+5DHq8RT/EnuB9quKo/wQ3QRXYr2H2yXnOs=)\n\nA `watch` callback may throw an error, e.g. when processing JSON. In this case, the `once` watcher will no longer work, which is inconsistent with the behavior of the `.once` event modifier.\n\nAlthough developers can catch errors themselves in the `watch` callback, would it be more appropriate to keep the semantics of `once` consistent? 🤔\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Watchers configured to run once now stop even if their callback throws an error.",
+      "files": [
+        "packages/reactivity/src/watch.ts (+5 -3)",
+        "packages/reactivity/__tests__/watch.spec.ts (+12 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15777,
+      "title": "fix(custom-element): skip mounting an async custom element removed while its component loads",
+      "url": "https://github.com/vuejs/core/pull/15777",
+      "author": "maciejbak89",
+      "mergedAt": "2026-10-12T08:54:39Z",
+      "labels": [
+        "ready to merge",
+        ":hammer: p3-minor-bug",
+        "scope: custom elements"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "fix #15775\n\nAn async custom element removed from the document while its component is loading is still mounted when the component resolves. If its Vue custom element parent was removed with it, the mount throws on the parent's unmounted instance (`reading 'provides'`), and a custom element nested inside it stays blank after the tree is added back. Reproduction in #15775.\n\nThis checks `this.isConnected` before the initial mount in `_resolveDef`, as #15154 does for a child waiting on its parent. The definition still resolves and is cached, and `connectedCallback` mounts it when the element is connected again.\n\nTests: a parent / async child / grandchild case (fails on main: unhandled error and blank grandchild) and an async element with no Vue parent that must not run `mounted` while detached. `minor` has the same unguarded mount (`this._mountComponent(def)` in `_resolveDef`).\n\nRan the `unit` and `unit-jsdom` projects (3,747 passed, 6 skipped), plus prettier, eslint and the pre-commit `tsc --noEmit`; not the e2e or dts tests.\n\n## Summary by CodeRabbit\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Resolved an issue where asynchronously defined custom elements could mount while detached. They now mount when connected, with nested content and parent-provided values available.",
+      "files": [
+        "packages/runtime-dom/src/apiCustomElement.ts (+5 -1)",
+        "packages/runtime-dom/__tests__/customElement.spec.ts (+93 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15818,
+      "title": "fix(teleport): move targetStart and keep children before targetAnchor",
+      "url": "https://github.com/vuejs/core/pull/15818",
+      "author": "ondrhn",
+      "mergedAt": "2026-10-12T08:57:34Z",
+      "labels": [
+        "scope: teleport",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "Changing a Teleport's `to` after mount leaves its `targetStart` text node behind in the old target and moves the content past `targetAnchor` in the new one. Because later patches mount new children before `targetAnchor`, a Teleport whose children grow from `[A]` to `[A, B]` renders as `B, A`. It gets worse when the Teleport initially targeted its own component's container: the stranded `targetStart` still carries `TeleportEndKey`, so `getNextHostNode` follows it into the new target and hands `insertBefore` an anchor from a different parent, which throws `NotFoundError` when the component's root fragment is replaced by an element.\n\n`moveTeleport` in `packages/runtime-core/src/components/Teleport.ts` only inserted `targetAnchor` for `TeleportMoveTypes.TARGET_CHANGE` and then moved the children with the incoming `parentAnchor`, which is `null` at that call site — so they were appended to the new container, i.e. after the anchor that was just inserted. `targetStart` was never moved at all. It now inserts `targetStart` as well and sets `parentAnchor` to `targetAnchor` before the children move, so the content ends up between the two anchors again. As a side effect `updateCssVars`, which walks from `targetStart` to `targetAnchor`, now marks the right range after a target change.\n\n`targetStart` was introduced later than `moveTeleport` (#9071, to let the renderer's `nextSibling` search skip teleported content) and this branch was never updated for it.\n\nfix #15817\n\n## Summary by CodeRa\n…(truncated)",
+      "files": [
+        "packages/runtime-core/src/components/Teleport.ts (+9 -1)",
+        "packages/runtime-core/__tests__/components/Teleport.spec.ts (+77 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15783,
+      "title": "fix(compiler-dom): inject Transition persisted for v-show in production",
+      "url": "https://github.com/vuejs/core/pull/15783",
+      "author": "parsajiravand",
+      "mergedAt": "2026-10-12T08:58:12Z",
+      "labels": [
+        "ready to merge",
+        "scope: compiler",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "`transformTransition` is only registered in dev builds of `@vue/compiler-dom`:\n\n```ts\nexport const DOMNodeTransforms: NodeTransform[] = [\n  transformStyle,\n  ...(__DEV__ ? [transformTransition, validateHtmlNesting] : []),\n]\n```\n\nIt started as a dev-only warning (`warnTransitionChildren`). Since 425310e8b (fix #4845) it also injects `persisted` when the child uses `v-show`, and it filters out comment and whitespace children. Both change the generated code, but production compiler builds skip the transform, so #4845 is back in production.\n\n### Reproduction\n\nThis uses the template from the #4845 e2e test, compiled at runtime by the CDN build. The e2e suite only runs the dev build, which is why it didn't catch the regression.\n\n```html\n<script src=\"https://unpkg.com/vue@3.5.43/dist/vue.global.prod.js\"></script>\n<div id=\"app\">\n  <transition appear @before-enter=\"log('before-enter')\" @enter=\"log('enter')\">\n    <div v-show=\"show\">content</div>\n  </transition>\n</div>\n<script>\n  Vue.createApp({\n    data: () => ({ show: false }),\n    methods: { log: console.log },\n  }).mount('#app')\n</script>\n```\n\n| Build | `persisted` in the render function | `before-enter` / `enter` on mount |\n| --- | --- | --- |\n| `vue.global.js` (dev) | yes | 0 / 0 |\n| `vue.global.prod.js` (main) | no | 1 / 1 |\n| `vue.global.prod.js` (this PR) | yes | 0 / 0 |\n\nSFCs are affected too. `@vue/compiler-sfc` requires `@vue/compiler-dom`, whose `index.js` loads the prod bundle when `NODE_ENV=production`. On main, `compileT\n…(truncated)",
+      "files": [
+        "packages/compiler-dom/src/index.ts (+2 -1)",
+        "packages/compiler-dom/src/transforms/Transition.ts (+3 -1)",
+        "packages/compiler-dom/__tests__/transforms/Transition.spec.ts (+32 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15769,
+      "title": "fix(ssr): honor falsy vnode content overrides",
+      "url": "https://github.com/vuejs/core/pull/15769",
+      "author": "kazuki-netizen",
+      "mergedAt": "2026-10-12T09:01:15Z",
+      "labels": [
+        "ready to merge",
+        "scope: ssr",
+        ":cake: p2-nice-to-have"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "Rendering `h('div', { innerHTML: '' }, 'fallback')` currently emits the fallback instead of empty content. `textContent: 0` and `h('textarea', { value: 0 })` are also ignored because the VNode SSR renderer checks these properties by truthiness.\n\nUse nullish checks so empty strings, zero, and false override children, matching DOM property assignment. Convert `innerHTML` to a string before pushing it into the SSR buffer. Null and undefined retain their existing fallback behavior.\n\nRegression tests cover text and array children through `renderToString`, `renderToNodeStream`, and `pipeToNodeWritable`. Before the fix, the new focused tests produced 9 failures and 6 passes; after the fix, the complete render suite passes (186 tests).\n\nValidation on Node 24.16.0:\n- `pnpm exec vitest run --project 'unit*'`: 3,774 passed, 6 skipped.\n- `pnpm check`: passed.\n- ESLint and Prettier on both changed files: passed.\n- `pnpm build server-renderer -f cjs`: development and production bundles built.\n\nAI assistance: Codex authored the patch and tests and ran the validation commands above. No human review is claimed.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Server-rendered elements now respect empty strings, `0`, and `false` as values for `innerHTML`, `textContent`, and `<textarea>`, rather than falling back to children.\n  * `null` and `undefined` continue to render fallback children.",
+      "files": [
+        "packages/server-renderer/src/render.ts (+4 -4)",
+        "packages/server-renderer/__tests__/render.spec.ts (+37 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15634,
+      "title": "fix(runtime-core): detect new prop keys when comparing full props",
+      "url": "https://github.com/vuejs/core/pull/15634",
+      "author": "lazerg",
+      "mergedAt": "2026-10-12T09:06:44Z",
+      "labels": [
+        "ready to merge",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #15632\n\n`hasPropsChanged` only compared values for each key in the next props. When an object `v-bind` swaps one key for another of the same count and the new one is `undefined` (`{ errorMessage: 'x' }` to `{ counter: undefined }`), `nextProps.counter === prevProps.counter` is `undefined === undefined`, so the child update was skipped and the removed prop stayed on the instance for good. A key that is missing from the previous props now counts as a change.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Fixed child components retaining stale prop values when the props object is replaced and a previously provided prop is no longer present. The child now updates to reflect the replacement props, including when the replacement provides an event listener instead of the earlier prop. This keeps rendered content in sync with the current props.",
+      "files": [
+        "packages/runtime-core/src/componentRenderUtils.ts (+4 -2)",
+        "packages/runtime-core/__tests__/rendererComponent.spec.ts (+55 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15703,
+      "title": "fix(reactivity): avoid mutating native array iterators",
+      "url": "https://github.com/vuejs/core/pull/15703",
+      "author": "edison1105",
+      "mergedAt": "2026-10-12T09:09:41Z",
+      "labels": [
+        "ready to merge",
+        "scope: reactivity"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "fix https://github.com/vuejs/core/issues/15643\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Improved iteration over reactive and readonly arrays while preserving native iterator behavior and correctly wrapping yielded values.\n  * Improved cleanup when iteration ends early, including forwarding iterator cleanup methods when available.\n  * Improved compatibility with custom array iterators and iterator helpers, including when working with values from mutable and readonly arrays.",
+      "files": [
+        "packages/reactivity/src/arrayInstrumentations.ts (+37 -7)",
+        "packages/reactivity/__tests__/arrayIterator.spec.ts (+189 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15793,
+      "title": "fix(reactivity): preserve shallow collection semantics",
+      "url": "https://github.com/vuejs/core/pull/15793",
+      "author": "zhoubiao188",
+      "mergedAt": "2026-10-12T09:17:08Z",
+      "labels": [
+        "ready to merge",
+        "scope: reactivity"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close https://github.com/vuejs/core/issues/15792\n\n`isShallow()` currently returns `false` for proxies created by `shallowReactive()` / `shallowReadonly()` around a `Map` or `Set`, because the collection `get` trap (`createInstrumentationGetter` in `packages/reactivity/src/collectionHandlers.ts`) handles the `__v_isReactive`, `__v_isReadonly` and `__v_raw` flags but not `__v_isShallow`. The lookup falls through to `Reflect.get(rawTarget, '__v_isShallow')`, which is always `undefined`. The plain-object handler (`BaseReactiveHandler` in `baseHandlers.ts`) already handles this flag, so behavior is inconsistent between the two handler families.\n\nThis is not just the predicate: `isShallow()` gates several internal paths, and each of them misbehaves for shallow collections today:\n\n- `ref.value = shallowReactive(new Map())` stores `toRaw(value)` and re-wraps it with `toReactive()`, silently replacing the user's shallow proxy with a deep reactive proxy.\n- Assigning a shallow collection into a reactive object (`state.m = shallowMap`) or another reactive collection (`outerMap.set('m', shallowMap)`) likewise loses the shallow wrapper.\n- `watch()` on a shallow reactive collection traverses it deeply instead of one level (`reactiveGetter`).\n- The devtools custom formatter labels `shallowReactive(new Map())` as `Reactive` instead of `ShallowReactive`.\n\n**Fix** — 2 lines: handle `ReactiveFlags.IS_SHALLOW` in the collection `get` trap, returning the instrumentation's `shallow` flag, mirroring\n…(truncated)",
+      "files": [
+        "packages/reactivity/src/collectionHandlers.ts (+2 -0)",
+        "packages/reactivity/__tests__/reactive.spec.ts (+30 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15773,
+      "title": "fix(hydration): observe children of a display: contents root in hydrateOnVisible",
+      "url": "https://github.com/vuejs/core/pull/15773",
+      "author": "mansurkhoja",
+      "mergedAt": "2026-10-12T09:20:46Z",
+      "labels": [
+        "ready to merge",
+        ":hammer: p3-minor-bug",
+        "scope:hydration"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "A component with `hydrateOnVisible()` whose root element has `display: contents` is never hydrated. Such an element has no box, so `getBoundingClientRect()` returns zeros and `IntersectionObserver` never reports it as intersecting. The button inside stays dead, and nothing in the console says why. Nuxt's `hydrate-on-visible` uses this strategy too.\n\nNow, if a root element is not visible right away and has `display: contents`, its children are observed instead (and their children, if they have `display: contents` too). Other elements are handled like before, and `getComputedStyle` is only called for elements that are not visible on mount.\n\nThe new e2e case `visible (root with display: contents)` fails without the change. I also checked it by hand in Chrome 148 and in Safari 26.5 (iOS simulator): before the change the component is not hydrated even after scrolling, after the change it is hydrated when it scrolls into view. In Chrome I also checked two nested `display: contents` elements. I did not test Firefox.\n\nSize: `vue.global.prod.js` +139 B min, +51 B gzip.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Fixed visible-triggered hydration for elements using `display: contents`. Visibility is now detected on their descendants, so components hydrate when a descendant comes into view, including when the component’s own element has no visible box. This also supports nested `display: contents` elements and stops further visibility checks once hydration begins.",
+      "files": [
+        "packages/runtime-core/src/hydrationStrategies.ts (+12 -2)",
+        "packages/runtime-core/__tests__/hydration.spec.ts (+53 -0)",
+        "packages/vue/__tests__/e2e/hydration-strat-visible.html (+6 -0)",
+        "packages/vue/__tests__/e2e/hydrationStrategies.spec.ts (+46 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 15794,
+      "title": "fix(runtime-dom): preserve v-show display for unchanged style strings",
+      "url": "https://github.com/vuejs/core/pull/15794",
+      "author": "sergioperezcheco",
+      "mergedAt": "2026-10-13T00:21:15Z",
+      "labels": [
+        "ready to merge",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "An unchanged string `:style` binding can lose its saved display value when a component using `v-show` updates. For example, render `<div v-show=\"visible\" :style=\"style\">{{ count }}</div>` with `visible = false` and `style = 'display: inline-flex; color: red'`, increment `count`, then set `visible = true`: the element's inline display becomes empty instead of `inline-flex`.\n\n`patchStyle` skips assigning unchanged CSS strings, but still resets `vShowOriginalDisplay` because `hasControlledDisplay` remains false. Preserve the saved display in that no-op case while retaining updates for changed strings, object styles, and removed styles. Regression tests cover repeated visibility changes, unrelated component updates, both block and inline-flex displays, and an actual compiled template.\n\nValidated with the full unit suite, changed-file ESLint/Prettier, project type checking, all public package builds, declaration builds and type tests. The built development and production global bundles also pass the reproduction under jsdom; real-browser e2e and cross-platform CI were not run locally.\n\nPrepared and independently checked by Hermes Agent using gpt-6.1-sol in an automated contribution workflow.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Preserved elements’ original display styles when updates leave their CSS string unchanged, including while `v-show` toggles visibility.",
+      "files": [
+        "packages/runtime-dom/src/modules/style.ts (+3 -1)",
+        "packages/runtime-dom/__tests__/directives/vShow.spec.ts (+85 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 15571,
+      "title": "fix(compiler-dom): correctly stringify `0` and `false` in `v-html`",
+      "url": "https://github.com/vuejs/core/pull/15571",
+      "author": "patienry",
+      "mergedAt": "2026-10-13T00:22:21Z",
+      "labels": [
+        "ready to merge",
+        "scope: compiler",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "[Reproduction link](https://play.vuejs.org/#eNq9k1FPgzAUhf9Kc58nI27xYcElavagD2rU+NTEELjbupWWtAVZFv67txBQjNkLZm+n5xzK10s5wk2eB2WBsIDIYZbL2OGSK8aiVJSNGEhabC+XBlWKhoVMaZPFUh6iKbl9g+oskbG11xxiDstoOthgfFxebF0mKQ9/5QM9jppestaGtGBCsTkZiz0e/Po/mUImLPE41sJheuZJjh90p6Jpf31gAs4mWq3FJthZrehuHX2VQ6KzXEg0T7kTWlkOC9YkPqMvoj8fGs+ZAiedn2wx2f/h72zlPQ7PBi2aEjn0mYvNBl0br14fsSLdh5lOC0ntE+ELWi0Lz9jWbguVEvaPXkN7n+XaOKE2b3ZVOVS2O5QH9c266XOgH+zuxNG/cWfBvHmOq5qm+OHsOxq/K43wKgiDGdRfF4MehQ==)\n\nIn the third scenario in the reproduction link, `0` is not rendered correctly, which is inconsistent with the rendering behavior in the other scenarios.\n\n## Summary by CodeRabbit\n\n- **Bug Fixes**\n  - Fixed static template generation for `v-html` when values are empty strings or `null`.\n  - `v-html` content now consistently takes precedence over fallback element content.\n  - Preserved falsy literal values such as `0` and `false` as rendered element text.",
+      "files": [
+        "packages/compiler-dom/src/transforms/stringifyStatic.ts (+3 -3)",
+        "packages/compiler-dom/__tests__/transforms/__snapshots__/stringifyStatic.spec.ts.snap (+16 -0)",
+        "packages/compiler-dom/__tests__/transforms/stringifyStatic.spec.ts (+13 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15782,
+      "title": "fix(reactivity): do not track deps in watcher callbacks run inside another effect (fix #5009)",
+      "url": "https://github.com/vuejs/core/pull/15782",
+      "author": "parsajiravand",
+      "mergedAt": "2026-10-13T00:30:37Z",
+      "labels": [
+        "ready to merge",
+        "scope: reactivity",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #5009\n\nA `watch` callback, and the cleanup that runs just before it, can run synchronously inside another effect:\n\n- a `flush: 'sync'` watcher whose source is written during a render, computed or `watchEffect`\n- `watch()` from `@vue/reactivity` without a scheduler\n- an `immediate` watcher created while another effect is running\n\n`effect.run()` only makes the watcher the active subscriber while its getter runs. The cleanup and callback then run with the outer effect still active, so every reactive read inside them becomes a dependency of that outer effect. In the issue, this makes the `watchEffect` run again and restore the old value. With a sync watcher on a prop, the child re-renders whenever an unrelated ref read in the callback changes.\n\nThis PR pauses tracking around the cleanup and callback in `job`. That matches what the `watchEffect` branch of the same function already does for its cleanup, and what #2728 did for pre-flush watchers. The cleanup call moves inside the `try` so that tracking is restored even when it throws.\n\nThe originally reported pre-flush case was already fixed by 74d2a76af (#5721). This PR covers the remaining sync and immediate cases.\n\nTests:\n\n- runtime-core: the sync counterpart of the #2728 test\n- reactivity: reads in the cleanup and callback of a watcher triggered inside an effect are not tracked by that effect\n- reactivity: a throwing cleanup doesn't leave tracking paused\n\nCost: one `pauseTracking()`/`resetTracking()` pair per callback run,\n…(truncated)",
+      "files": [
+        "packages/reactivity/src/watch.ts (+7 -5)",
+        "packages/reactivity/__tests__/watch.spec.ts (+52 -0)",
+        "packages/runtime-core/__tests__/apiWatch.spec.ts (+41 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15724,
+      "title": "fix(compiler-core): parenthesise v-for key in v-memo cache guard",
+      "url": "https://github.com/vuejs/core/pull/15724",
+      "author": "luc122c",
+      "mergedAt": "2026-10-13T01:17:02Z",
+      "labels": [
+        "ready to merge",
+        "scope: compiler",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "Closes #15723.\n\nThe v-memo + v-for cache guard inlined the :key expression without parentheses, so a ternary key parsed as `cond ? a : b && _isMemoSame(...)` and `_isMemoSame(undefined, _memo)` was called on the first render. Wraps the key expression in parentheses and covers it with a test.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Fixed `v-memo` cache reuse for `v-for` items with conditional keys, ensuring the key comparison is evaluated correctly.",
+      "files": [
+        "packages/compiler-core/src/transforms/vFor.ts (+1 -1)",
+        "packages/compiler-core/__tests__/transforms/__snapshots__/vMemo.spec.ts.snap (+4 -4)",
+        "packages/compiler-core/__tests__/transforms/vMemo.spec.ts (+10 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 15853,
+      "title": "fix(transition): handle comment-wrapped component roots",
+      "url": "https://github.com/vuejs/core/pull/15853",
+      "author": "edison1105",
+      "mergedAt": "2026-10-13T02:51:02Z",
+      "labels": [
+        "scope: transition",
+        ":hammer: p3-minor-bug"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #6080, #5500\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Improved transitions when switching between components that render comments or single-root fragments, including in `out-in` and `in-out` modes and when using KeepAlive.\n  * Enter transitions now complete correctly when a component changes its own root while a leave transition is pending.\n  * Empty comment roots no longer trigger an `out-in` leave, and multi-root fragments remain unanimated.\n  * Fragment removal and leave callbacks now preserve the expected DOM state.",
+      "files": [
+        "packages/runtime-core/src/components/BaseTransition.ts (+34 -13)",
+        "packages/runtime-core/src/renderer.ts (+22 -23)",
+        "packages/runtime-core/__tests__/components/BaseTransition.spec.ts (+252 -0)",
+        "packages/vue/__tests__/e2e/Transition.spec.ts (+114 -0)",
+        "packages/vue/__tests__/index.spec.ts (+67 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 15857,
+      "title": "fix(server-renderer): propagate async setup errors",
+      "url": "https://github.com/vuejs/core/pull/15857",
+      "author": "edison1105",
+      "mergedAt": "2026-10-13T07:35:45Z",
+      "labels": [
+        "ready to merge",
+        "scope: ssr"
+      ],
+      "hint": "fix",
+      "release": "📦 v3.5.44",
+      "body": "close #15716\n\n## Summary by CodeRabbit\n\n## Summary\n\n* **Bug Fixes**\n  * Server rendering now reports asynchronous setup and rendering failures to the caller, even when another part of the page is still rendering.\n  * Synchronous server-prefetch errors no longer prevent rendering from continuing, and rejected prefetch promises do not disrupt rendering.\n  * Watchers are stopped after rendering completes or fails, including watchers registered during cleanup.\n  * If rendering and cleanup both fail, the original rendering error is preserved.",
+      "files": [
+        "packages/server-renderer/src/render.ts (+15 -8)",
+        "packages/server-renderer/src/renderToStream.ts (+17 -10)",
+        "packages/server-renderer/src/renderToString.ts (+51 -10)",
+        "packages/server-renderer/__tests__/render.spec.ts (+254 -3)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 6
+    }
+  }
+}

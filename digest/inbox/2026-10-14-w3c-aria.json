@@ -1,0 +1,42 @@
+{
+  "kind": "repo",
+  "repo": "w3c/aria",
+  "branch": "main",
+  "collectedAt": "2026-10-14T00:21:33Z",
+  "range": {
+    "from": "2026-10-09T23:06:22Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 2932,
+      "title": "Chore: Removes obsolete call in ariaChild.js",
+      "url": "https://github.com/w3c/aria/pull/2932",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-10-12T08:24:32Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 2934,
+      "title": "Editorial: Fix some minor typos in process document",
+      "url": "https://github.com/w3c/aria/pull/2934",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-10-13T15:52:28Z",
+      "labels": [
+        "editorial"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

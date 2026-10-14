@@ -1,0 +1,124 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-10-14T00:21:33Z",
+  "range": {
+    "from": "2026-10-07T20:08:09Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.0",
+      "publishedAt": "2026-09-09T18:01:33Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 37796,
+      "title": "[Fiber] Fix DEV crash when use() is passed a non-extensible thenable",
+      "url": "https://github.com/react/react/pull/37796",
+      "author": "zhoubiao188",
+      "mergedAt": "2026-10-12T10:25:18Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #37795\n\n## Summary\n\nIn DEV, `trackUsedThenable` infers async debug info for a used thenable by attaching a `_debugInfo` expando:\n\n```js\nif (__DEV__ && thenable._debugInfo === undefined) {\n  ...\n  thenable._debugInfo = [{awaited: ioInfo}]; // throws on non-extensible objects\n```\n\nIf the thenable was made non-extensible — e.g. a userspace-instrumented thenable (one that already carries a `status`) frozen by an immutable cache before being passed to `use()` — the assignment throws `TypeError: Cannot add property _debugInfo, object is not extensible` from inside React, crashing the render in development while the same code works in production.\n\nSince #37772 landed the `enableAsyncDebugInfo` flag for OSS, this path runs for every `use(thenable)` call in DEV, so such thenables now crash where they previously unwrapped fine.\n\nThis PR skips the debug-info inference when the thenable doesn't allow new properties, mirroring the existing guard for frozen values in Flight's `addAsyncInfo` (`ReactFlightClient.js`), which already skips `_debugInfo` for frozen values (\"Debug info is dropped for frozen elements\"). Debug info is simply dropped for such thenables; `use()` unwraps the value normally.\n\nNote: a *non-instrumented* frozen promise (`use(Object.freeze(promise))`) still hits the pre-existing `pendingThenable.status = 'pending'` assignment in the `default` branch, which requires a different fix (e.g. a WeakMap fallback) — I've flagged that separately in the issue.\n\n## How did you\n…(truncated)",
+      "files": [
+        "packages/react-reconciler/src/ReactFiberThenable.js (+8 -1)",
+        "packages/react-reconciler/src/__tests__/ReactUse-test.js (+30 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 37688,
+      "title": "[compiler] Don't treat comparing a ref-reading function as a ref access",
+      "url": "https://github.com/react/react/pull/37688",
+      "author": "Hmache",
+      "mergedAt": "2026-10-12T11:59:31Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes a false positive in the `react-hooks/refs` validation (`ValidateNoRefAccessInRender`). Fixes #37521.\n\nComparing a function with `===` / `!==` was reported as \"Cannot access refs during render\" whenever that function reads a ref when called, for example a `useCallback` that closes over `ref.current`:\n\n```js\nconst sampleFunc = useCallback(() => {\n  ref.current = /* ... */;\n}, []);\nreturn sampleFunc !== other ? 'different' : 'same';\n```\n\nA binary operator never invokes its operands, so comparing function identity cannot read `.current`. The `BinaryExpression` case validated its operands with `validateNoRefValueAccess`, which treats a `Structure` type carrying `fn.readRefEffect` the same as an actual ref value. This switches it to `validateNoDirectRefValueAccess`, which only flags a direct `RefValue` operand, so `ref.current === x` still errors while `fn !== otherFn` no longer does.\n\n## How did you test this change?\n\n- Added the regression fixture `allow-comparing-ref-accessing-function-identity` (input + `.expect.md`) reproducing the pattern from the issue; it now compiles without error and the eval result is `\"different\"`.\n- Direct `ref.current` comparisons continue to error (existing fixtures unchanged).\n- Ran the full compiler snapshot suite with `yarn snap`: 1828 tests, no regressions.\n- Ported the same change to the Rust compiler (`validate_no_ref_access_in_render.rs`): `yarn snap --rust` passes all 1828 fixtures against the Rust backend, and `scripts/test\n…(truncated)",
+      "files": [
+        "compiler/crates/react_compiler_validation/src/validate_no_ref_access_in_render.rs (+12 -4)",
+        "compiler/packages/babel-plugin-react-compiler/src/Validation/ValidateNoRefAccessInRender.ts (+11 -1)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-comparing-ref-accessing-function-identity.expect.md (+51 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-comparing-ref-accessing-function-identity.js (+19 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 37778,
+      "title": "Migrate all remaining `facebook/react` mentions",
+      "url": "https://github.com/react/react/pull/37778",
+      "author": "eps1lon",
+      "mergedAt": "2026-10-12T12:11:47Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Best reviewed by commit.\n\nMostly motivated to fix local GH artifact attestations. For everything else it just avoids a network hop.",
+      "files": [
+        "compiler/Cargo.toml (+1 -1)",
+        "compiler/apps/playground/components/Header.tsx (+1 -1)",
+        "compiler/crates/react_compiler/src/entrypoint/program.rs (+1 -1)",
+        "compiler/packages/babel-plugin-react-compiler/scripts/babel-plugin-annotate-react-code.ts (+1 -1)",
+        "compiler/packages/babel-plugin-react-compiler/scripts/eslint-plugin-react-hooks-test-cases.js (+1 -1)",
+        "compiler/packages/babel-plugin-react-compiler/src/Entrypoint/Options.ts (+1 -1)",
+        "compiler/packages/babel-plugin-react-compiler/src/Entrypoint/Program.ts (+1 -1)",
+        "compiler/packages/babel-plugin-react-compiler/src/HIR/Environment.ts (+1 -1)",
+        "compiler/packages/babel-plugin-react-compiler/src/TypeInference/InferTypes.ts (+2 -2)",
+        "package.json (+1 -1)"
+      ],
+      "filesTotal": 167
+    },
+    {
+      "number": 37814,
+      "title": "[DOM] Stop hiding siblings after a dehydrated Activity",
+      "url": "https://github.com/react/react/pull/37814",
+      "author": "skrabe",
+      "mergedAt": "2026-10-12T13:55:55Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #37813.\n\n## Summary\n\n`hideOrUnhideDehydratedBoundary` accepts an Activity instance but only recognizes Suspense markers. Hiding a dehydrated Activity walked past its `` and set `display: none` on every following sibling in the parent, outside the hidden tree. Those siblings stayed hidden after the Activity was shown again.\n\nThe walk now ends at `` and counts `` for depth, matching `clearHydrationBoundary`.\n\n## How did you test this change?\n\nThe first commit adds a test to `ReactDOMServerPartialHydrationActivity-test` that pins down the current behavior: an Activity containing a dehydrated Activity (with a nested Activity inside it) is hidden, and the sibling after it ends up hidden too, and stays hidden after the Activity is shown again. It passes on `main`.\n\nThe second commit is the fix, and flips the sibling assertions. With only the end-marker half of the fix, the test fails on the content after the nested Activity, so the depth counting is covered too.\n\nRan:\n\n- `yarn test` and `yarn test --prod` for `ReactDOMServerPartialHydration*`, `ReactDOMActivity*` and `ReactDOMFizzSuspenseList`: all pass, at both commits for the new test.\n- `yarn test -r=stable` (dev and prod) for the new test, and `-r=stable` for `ReactDOMServerPartialHydration*`: all pass.\n- `yarn flow dom-node`, `yarn flow dom-browser`, `yarn linc`, `yarn prettier`: clean.",
+      "files": [
+        "packages/react-dom-bindings/src/client/ReactFiberConfigDOM.js (+3 -2)",
+        "packages/react-dom/src/__tests__/ReactDOMServerPartialHydrationActivity-test.internal.js (+78 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 37710,
+      "title": "[Fizz] Postpone a task aborted while rendering from where it started",
+      "url": "https://github.com/react/react/pull/37710",
+      "author": "AdzerKI",
+      "mergedAt": "2026-10-13T06:51:19Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #37709\n\nWhen a prerender is aborted while a retried render task is on the stack, `retryRenderTask` resets the segment to where the attempt started, but `task.keyPath` and `task.childIndex` are left at the innermost child that was rendering. `abortUnwoundTask` then postpones the task at that child's slot under its parent element, and the resume renders only that child into the boundary's segment.\n\nThis restores the key path and child index the attempt started from before finishing the abort, so the postponed hole covers the whole discarded attempt. `task.node` stays as is, since DEV async debug info reads it for the owner stack.\n\n## How did you test this change?\n\nThe first commit adds a test to `ReactDOMFizzStaticBrowser-test` that aborts the prerender from a component rendered by a retried task and resumes it, asserting the current output (`<div>World</div>`). The second commit is the fix and updates the assertion to the whole `<section>`.\n\n`yarn test packages/react-dom/src/__tests__/ReactDOMFizz packages/react-server` passes with and without `-r=experimental`. With `--prod`, `ReactServer › has Owner Stacks in DEV when aborted` fails the same way on main. Prettier, ESLint and `yarn flow dom-node` are clean.",
+      "files": [
+        "packages/react-server/src/ReactFizzServer.js (+4 -0)",
+        "packages/react-dom/src/__tests__/ReactDOMFizzStaticBrowser-test.js (+68 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}

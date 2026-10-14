@@ -1,0 +1,281 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-10-14T00:21:33Z",
+  "range": {
+    "from": "2026-10-08T20:36:55Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10695,
+      "title": "Fix: form reset in select",
+      "url": "https://github.com/adobe/react-spectrum/pull/10695",
+      "author": "Bhavani2016",
+      "mergedAt": "2026-10-12T17:31:21Z",
+      "labels": [
+        "small review",
+        "ready for review",
+        "RAC",
+        "Select"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10642\n\n### Summary\nA Select with more than 300 items should restore its default selection when the form resets, even without a name.\n\nPreviously, no hidden input was rendered in this case, so the reset listener could not attach to the form. This change renders the input regardless of name, allowing the existing reset logic to work.\n\nAdded tests for 300 and 301 items, with and without a name, including form submission checks and React Aria Components interaction tests.\n\nAI assistance: Used ChatGPT to help investigate the issue\n## ✅ Pull Request Checklist:\n\n- [X] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [X] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [X] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [X] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n1. Render a Select with 301 items, a default selection, and no name.\n2. Select another item.\n3. Click the form's reset butto\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/select/HiddenSelect.tsx (+1 -3)",
+        "packages/react-aria-components/test/Select.test.js (+38 -0)",
+        "packages/react-aria/test/select/HiddenSelect.test.tsx (+29 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10686,
+      "title": "fix: form reset with there are multiple selections in CheckboxGroup",
+      "url": "https://github.com/adobe/react-spectrum/pull/10686",
+      "author": "Bhavani2016",
+      "mergedAt": "2026-10-12T17:32:23Z",
+      "labels": [
+        "small review",
+        "ready for review"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10643\n\nWhen a form resets a CheckboxGroup with multiple selected values, one checkbox can remain selected. The goal is for every checkbox to return to the group's default selection.\n\nremoveValue previously calculated each removal from the values captured by the render. When multiple removals happen in the same update, a later removal can restore a value removed earlier. This change uses a functional state update so each removal sees the latest values.\n\nThe change adds a React Aria Components regression test for both CheckboxField and Checkbox, plus a React Stately test for multiple removals in one update.\n\nAI assistance disclosure: I used ChatGPT to help investigate the issue\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [x] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.m\n…(truncated)",
+      "files": [
+        "packages/react-stately/src/checkbox/useCheckboxGroupState.ts (+6 -3)",
+        "packages/react-aria-components/test/CheckboxGroup.test.js (+21 -0)",
+        "packages/react-stately/test/checkbox/useCheckboxGroupState.test.tsx (+21 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10621,
+      "title": "fix: keep S2 toast controls spaced from the expanded list while scrol…",
+      "url": "https://github.com/adobe/react-spectrum/pull/10621",
+      "author": "Zakkaus",
+      "mergedAt": "2026-10-12T17:32:40Z",
+      "labels": [
+        "Toast",
+        "small review",
+        "ready for review",
+        "S2"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "When the expanded toast list overflows, its padding toward the Clear all / Collapse buttons scrolls away with the content and toasts sit flush against the buttons. This moves that spacing to the region so it stays constant while scrolling.\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [x] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [CLAUDE.md](https://github.com/adobe/react-spectrum/blob/main/CLAUDE.md).\n\n## 📝 Test Instructions:\n\nIn the S2 Storybook Toast Example story, show about 12 toasts, click the stack to expand, and scroll. The gap between the buttons and the list no longer disappears.\n\n## 🧢 Your Project:",
+      "files": [
+        "packages/@react-spectrum/s2/src/Toast.tsx (+8 -17)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 10503,
+      "title": "fix(react-aria): only announce combobox section changes to VoiceOver",
+      "url": "https://github.com/adobe/react-spectrum/pull/10503",
+      "author": "gonzoblasco",
+      "mergedAt": "2026-10-12T17:33:18Z",
+      "labels": [
+        "small review",
+        "needs testing",
+        "ready for review"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #10220: ComboBox only announced the item name with VoiceOver, losing the richer native announcement (selected state, menu item role, item count).\n\n## Root cause\n\nOn Apple devices, `useComboBox` announces every focused-item change through a live region. Current VoiceOver versions announce per-item details (selected state, role, item count) natively while arrowing within a section, so that live-region announcement interrupts and replaces the richer native speech with just the item name.\n\n## Change\n\nGate the manual announcement so it only fires when navigating into a new section, where VoiceOver is silent and the section title + option count are not announced natively. Arrowing within the same section no longer triggers a manual announcement, letting VoiceOver handle it.\n\nThis keeps the inter-section navigation announcements (section title + option count) that were the reason the effect existed, while no longer stomping on VoiceOver's native per-item announcements.\n\n## Tests\n\n- Updated the combobox announcement tests to assert that per-item navigation no longer triggers a manual announcement, while section-entry announcements are preserved.\n- 218 tests pass in `packages/@adobe/react-spectrum/test/combobox/ComboBox.test.js`.\n- 41 tests pass in `packages/react-aria-components/test/ComboBox.test.js`.\n\nTested scenario matrix under mocked Apple platform:\n\n- Arrowing through items (no sections): no manual announcement.\n- Arrowing to the selected item: no manual annou\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/combobox/useComboBox.ts (+21 -18)",
+        "packages/@adobe/react-spectrum/test/autocomplete/SearchAutocomplete.test.js (+10 -24)",
+        "packages/@adobe/react-spectrum/test/combobox/ComboBox.test.js (+10 -38)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10712,
+      "title": "fix(Toolbar): scroll keyboard-focused items fully into view",
+      "url": "https://github.com/adobe/react-spectrum/pull/10712",
+      "author": "devteamaegis",
+      "mergedAt": "2026-10-12T17:34:05Z",
+      "labels": [
+        "small review",
+        "ready for review"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #5885\n\n**Intent:** when you arrow-key through a toolbar that is clipped by an overflow container, the newly focused item should end up fully visible, not left partly cut off.\n\n**Root cause:** `useToolbar` moves focus with `focusManager.focusNext()` / `focusPrevious()`, which just call `element.focus()`. Browsers don't scroll on `focus()` when the element is already partly visible, so an item that is clipped by a few pixels stays clipped after it gets focus.\n\n**Fix:** after an arrow key moves focus, call `scrollIntoViewport(nextFocused, {containingElement: ref.current})` on the element the focus manager returned. That's the same helper `useSelectableCollection` uses for keyboard navigation (it also passes the collection ref as `containingElement`). It only runs for arrow-key navigation, not Tab/Shift+Tab or pointer focus, so clicking an item doesn't scroll anything.\n\nA previous attempt (#7538) did the scrolling in `onFocus`, gated on `getInteractionModality()`. That needed a new `@react-aria/interactions` dependency, and the author closed it without review. Doing it in the keydown handler avoids the modality check, because it only runs when the toolbar itself moved focus.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updat\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/toolbar/useToolbar.ts (+13 -5)",
+        "packages/react-aria-components/test/Toolbar.test.tsx (+32 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10699,
+      "title": "fix: horizontal virtual dnd",
+      "url": "https://github.com/adobe/react-spectrum/pull/10699",
+      "author": "nwidynski",
+      "mergedAt": "2026-10-12T17:43:18Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/adobe/react-spectrum/pull/8533#issuecomment-3239539985\n\nI noticed horizontal dnd being weirdly inaccurate while testing for something else and remembered I still had an open TODO. I had Claude finish it up and it LGTM.\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\n## 🧢 Your Project:",
+      "files": [
+        "packages/react-stately/src/layout/ListLayout.ts (+18 -10)",
+        "packages/react-stately/test/virtualizer/ListLayout.test.ts (+164 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10746,
+      "title": "fix: don't inherit parent Form props in a nested Form",
+      "url": "https://github.com/adobe/react-spectrum/pull/10746",
+      "author": "UditDewan",
+      "mergedAt": "2026-10-12T17:43:34Z",
+      "labels": [
+        "Form",
+        "small review",
+        "ready for review",
+        "RAC"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10740\n\nA RAC `Form` both provides and consumes `FormContext` via `useContextProps`, so a `Form` rendered inside another `Form` in the React tree (e.g. an independent form in a `Modal`) merged in the outer form's props: chained `onSubmit`, duplicated `id`/`className`, and inherited `validationErrors`.\n\n**Intent:** a nested `Form` should be independent, while a `FormContext` provided by the user (not by a `Form`) should keep working as it does today.\n\n**Implementation:** following the suggestion in the issue, `Form` now adds a private symbol to the `FormContext` value it provides. When a `Form` sees that marker on the incoming context, it skips merging it (passing `slot: null` to `useContextProps`, the existing \"don't use context\" escape hatch). Fields are unaffected: they only read `validationBehavior` from `FormContext`, and still get it from their nearest `Form`.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [x] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance]\n…(truncated)",
+      "files": [
+        "packages/react-aria-components/src/Form.tsx (+16 -3)",
+        "packages/react-aria-components/test/Form.test.js (+51 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10730,
+      "title": "fix: runAfterTransition retains elements when multiple transitions are cancelled",
+      "url": "https://github.com/adobe/react-spectrum/pull/10730",
+      "author": "ali-idrizi",
+      "mergedAt": "2026-10-12T17:43:51Z",
+      "labels": [
+        "small review",
+        "ready for review"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #7326\n\nWe noticed a memory leak issue in an app, and tracked it down to the same issue as explained in #7326.\n\n`runAfterTransition` registers its `transitioncancel` listener with `{once: true}`. Browsers dispatch one `transitioncancel` per property (verified in Chrome 148 and Firefox 150). So when an element with two or more running transitions has them cancelled, only the first property is removed, and the listener detached. The element then stays in `transitionsByElement` indefinitely.\n\nThis has two effects:\n\n- **Removed from the DOM mid-transition**: the element and its detached subtree are retained until something calls `runAfterTransition` again and `cleanupDetachedElements()`\n- **Still connected** (e.g. `display: none`): `cleanupDetachedElements()` never removes it, so the map never empties. Every later `runAfterTransition` callback on the page never fires\n\nThe fix removes `once`. `onTransitionEnd` already removes the listener once the element has no transitioning properties left.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I unders\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/utils/runAfterTransition.ts (+1 -1)",
+        "packages/react-aria/test/utils/runAfterTransition.test.ts (+77 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10689,
+      "title": "fix: preserve tree focus when items arrive",
+      "url": "https://github.com/adobe/react-spectrum/pull/10689",
+      "author": "minwookshin",
+      "mergedAt": "2026-10-12T18:09:55Z",
+      "labels": [
+        "small review",
+        "ready for review"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10660\n\nA focused empty Tree should remain keyboard-navigable when its rows arrive. Keep the collection's focus handlers attached while empty, while allowing normal Tab navigation and text selection in empty-state content. This keeps focus tracking intact without moving focus back after the user has left the collection; ListBox behavior is unchanged.\n\nAdded Tree and GridList regressions and a `PopulateFocusedEmptyTree` story that adds rows without moving focus. AI-assisted; repository guidance was followed and the diff was reviewed.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues/10660).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [x] ~~Updated documentation (if it already exists for this component).~~ No public API or documented behavior changes; added a reproduction story.\n- [x] Looked at the Accessibility Practices for this feature - [Treegrid pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/).\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\nOpen the ne\n…(truncated)",
+      "files": [
+        "packages/react-aria-components/stories/Tree.stories.tsx (+29 -0)",
+        "packages/react-aria/src/gridlist/useGridList.ts (+6 -2)",
+        "packages/react-aria-components/test/GridList.test.js (+84 -0)",
+        "packages/react-aria-components/test/Tree.test.tsx (+57 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 10758,
+      "title": "docs(s2): fix CustomDialog usage",
+      "url": "https://github.com/adobe/react-spectrum/pull/10758",
+      "author": "chirokas",
+      "mergedAt": "2026-10-12T19:42:40Z",
+      "labels": [
+        "documentation",
+        "small review",
+        "ready for review",
+        "S2"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 10745,
+      "title": "fix: route user keyboard handlers through useKeyboard in useMenu, useDateField, useDatePicker, useDateRangePicker",
+      "url": "https://github.com/adobe/react-spectrum/pull/10745",
+      "author": "snowystinger",
+      "mergedAt": "2026-10-13T21:16:48Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Reverts adobe/react-spectrum#10744\n\nAdds @reidbarber 's PR back for after patch",
+      "files": [
+        "packages/react-aria/src/datepicker/useDateField.ts (+7 -3)",
+        "packages/react-aria/src/datepicker/useDatePicker.ts (+8 -6)",
+        "packages/react-aria/src/datepicker/useDateRangePicker.ts (+8 -6)",
+        "packages/react-aria/src/menu/useMenu.ts (+10 -12)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 10728,
+      "title": "fix: add missing keyboard handlers to collections for select+home/end and fix datepicker missing prevent default",
+      "url": "https://github.com/adobe/react-spectrum/pull/10728",
+      "author": "snowystinger",
+      "mergedAt": "2026-10-13T21:23:02Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/adobe/react-spectrum/issues/10720\nFixes some keyboard handlers in collections and in datepickers\n\nThese changes were introduced in the PR to move us to useKeyboard's new `shortcuts`. You can test out the prior behaviour in this PR https://github.com/adobe/react-spectrum/pull/10197/changes#diff-14963dc5bbe1c25b056b66863ec6092a44d91c98d32474dc121c4beaebc41177 which had reverted it.\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\n1. Open RAC docs TagGroup (the same applies to GridList and ListBox).\n2. Focus first example.\n3. Press Home, End, PageUp or PageDown.\n4. Focus moves to the expected item, and the page no longer scrolls.\n\nAlso\n1. Open S2 docs ListView\n2. Select middle it\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/datepicker/useDatePickerGroup.ts (+2 -6)",
+        "packages/react-aria/src/selection/useSelectableCollection.ts (+10 -0)",
+        "packages/react-aria-components/test/ListBox.test.js (+33 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10754,
+      "title": "fix: avoid an extra render on mount in useDescription",
+      "url": "https://github.com/adobe/react-spectrum/pull/10754",
+      "author": "tabedzki",
+      "mergedAt": "2026-10-13T21:23:02Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": ":robot: _AI text below_ :robot:\n\nRelated: #2504, #9738\n\n## Summary\n\n**Intent:** components that use `useDescription` (every draggable via `useDrag`, plus tags, table column resizing and others) shouldn't need a second render on mount just to pick up the id of a description node that already exists.\n\n**What was happening:** `useDescription` stores the id in state that always starts as `undefined`, then sets it in a layout effect, including when the shared node for that description is already there. Every component therefore rendered twice on mount, and the second render was a synchronous update from the layout phase. In a virtualized list with draggable rows, each row scrolled into view scheduled one of these. In Actual Budget this kept React from ever finishing a commit with no pending work while the user scrolled quickly, and React 19 threw \"Maximum update depth exceeded\" (actualbudget/actual#9170).\n\n**Change:** initialize the state lazily from the existing node. When the node exists, the layout effect sets the same id the state already holds, so React skips the update. Only the component that creates the node still re-renders once. Ref counting, node cleanup and description changes behave as before. This is smaller in scope than the `aria-description` direction discussed in #9738, and doesn't get in its way.\n\n**Tests:** added a test in `dnd.test.js` showing that draggables mounting after the description exists commit once, with no extra update, and point at the shared node,\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/utils/useDescription.ts (+3 -1)",
+        "packages/react-aria/test/dnd/dnd.test.js (+53 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 10716,
+      "title": "fix: preserve custom fixed-target rectangles",
+      "url": "https://github.com/adobe/react-spectrum/pull/10716",
+      "author": "minwookshin",
+      "mergedAt": "2026-10-13T21:27:32Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10640.\n\nIntent: allow `getTargetRect` to return DOMRect, DOMRectReadOnly, or a frozen rectangle for a fixed target in a transformed containing block without throwing or mutating the caller's rectangle.\n\nApproach: copy the four positioning fields before subtracting margins in the fixed-position branch. Add a browser regression covering fixed and absolute targets, transformed portals, custom rectangle types, and the default measurement path. This was implemented and validated with Codex, following AGENTS.md.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues/10640).\n- [x] Added/updated unit tests and storybook for this change (browser regression added; no new visual API or story).\n- [x] Filled out test instructions.\n- [x] Updated documentation (existing `getTargetRect` contract is unchanged).\n- [x] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/).\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/react-spectrum/blob/main/AGENTS.md).\n\n## 📝 Test Instructions:\n\nRun `yarn test --runInBand`, `yarn test:ssr`, and `yarn test:browser --maxWorkers=1 --fileParallelism=false`.\n\nFull resu\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/overlays/calculatePosition.ts (+5 -4)",
+        "packages/react-aria/src/overlays/useOverlayPosition.ts (+1 -1)",
+        "packages/react-aria/test/overlays/useOverlayPosition.browser.test.tsx (+93 -0)"
+      ],
+      "filesTotal": 3
+    }
+  ],
+  "errors": []
+}

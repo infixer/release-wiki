@@ -1,0 +1,263 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-14T00:21:33Z",
+  "range": {
+    "from": "2026-10-10T22:53:53Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14532,
+      "title": "[css-overscroll-2] Explain overscrollcontainer and overscrollareas",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14532",
+      "author": "flackr",
+      "mergedAt": "2026-10-12T18:17:18Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Creates the first draft of the css-overscroll-2 specification with an explanation of overscrollcontainer and overscrollareas as discussed in #13999.",
+      "files": [
+        "css-overscroll-2/Overview.bs (+740 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14595,
+      "title": "[cssom-1][editorial] Switch back to \"parse a list of declarations\"",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14595",
+      "author": "cdoublev",
+      "mergedAt": "2026-10-13T09:59:04Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Oversight in fbd84ec.",
+      "files": [
+        "cssom-1/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-10-10T22:53:52Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "commits": [
+    {
+      "sha": "51e650f",
+      "url": "https://github.com/w3c/csswg-drafts/commit/51e650f64ddb9308097cfcb86e223c52e512cc55",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Clarify that container's content is shifted - not requiring that content to be scrolling content.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "cd75df4",
+      "url": "https://github.com/w3c/csswg-drafts/commit/cd75df4a51e42754e1f2e100548d9b3dacdbbd19",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Add note explaining reverse stacking order.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "aff7693",
+      "url": "https://github.com/w3c/csswg-drafts/commit/aff76932b68463473d8ddb9a9e0a61aa381c38f8",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Ensure show invokers can be activated on currently closed areas.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "fe1aae1",
+      "url": "https://github.com/w3c/csswg-drafts/commit/fe1aae16d737618a4c798dcbc30805287c3da0d1",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Simplify UA stylesheet.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+6 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "66443f6",
+      "url": "https://github.com/w3c/csswg-drafts/commit/66443f649d88fcfa3a81bc1c72cd5edccd0e8877",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Remove unnecessary reveal definition.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "f3eec25",
+      "url": "https://github.com/w3c/csswg-drafts/commit/f3eec256d45c3ff57fcab9ad68242d61fa54e8ab",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Fix references.",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+5 -5)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "d9d916e",
+      "url": "https://github.com/w3c/csswg-drafts/commit/d9d916eb32f35bb01f3dc6d1f727aa1cb78bb90c",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Apply consistent indentation and spacing.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+58 -58)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "a916008",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a916008f4009fe8f8bc3480ffdb17717af4e67df",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "Apply suggestions from tabatkins code review",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Co-authored-by: Tab Atkins Jr. <jackalmage@gmail.com>",
+      "files": [
+        "css-overscroll-2/Overview.bs (+15 -8)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "2c470ff",
+      "url": "https://github.com/w3c/csswg-drafts/commit/2c470fff111959e8882aae59416e726e11a1521f",
+      "author": "flackr",
+      "committedAt": "2026-10-12T18:17:18Z",
+      "title": "[css-overscroll-2] First draft of css-overscroll-2",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Creates the first draft of the css-overscroll-2 specification with an\nexplanation of overscrollcontainer and overscrollareas as discussed in",
+      "files": [
+        "css-overscroll-2/Overview.bs (+730 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "c746558",
+      "url": "https://github.com/w3c/csswg-drafts/commit/c746558a0d80d3578437baa425d806fe21a23c73",
+      "author": "tabatkins",
+      "committedAt": "2026-10-12T18:24:33Z",
+      "title": "[css-overscroll-2][editorial] Fix dfn markup",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overscroll-2/Overview.bs (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "ad17812",
+      "url": "https://github.com/w3c/csswg-drafts/commit/ad17812780d34e07b2dd8f166753d2583c75c568",
+      "author": "tabatkins",
+      "committedAt": "2026-10-12T21:33:42Z",
+      "title": "[cssom-1][editorial] Fixed indent to be consistent across the spec. (1-space, ugh)",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "cssom-1/Overview.bs (+175 -174)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "a8a0b41",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a8a0b410feda59f8bb9ed2df246de385ee9161fb",
+      "author": "tabatkins",
+      "committedAt": "2026-10-12T21:33:42Z",
+      "title": "[cssom-1] Update 'serialize an identifier' to match the altered parsing rules for idents. #7129.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "cssom-1/Overview.bs (+3 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "87c9dba",
+      "url": "https://github.com/w3c/csswg-drafts/commit/87c9dbaae36228c75dc88bf2be7c45e25d051921",
+      "author": "tabatkins",
+      "committedAt": "2026-10-12T22:02:00Z",
+      "title": "[css-syntax-3] Consistently notate whether a parse algo consumes the whole input, or else checks that its input is empty when it's done. #11730",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+62 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "fbd84ec",
+      "url": "https://github.com/w3c/csswg-drafts/commit/fbd84ec61ae093787ced21cd48d3a7536e04b50a",
+      "author": "tabatkins",
+      "committedAt": "2026-10-12T22:16:28Z",
+      "title": "[css-syntax-3] Remove 'parse a block's contents' entirely, as there's no valid callers. Switch back to 'parse a list of declarations', and handle it explicitly, like 'parse a comma-separated list'. #11113",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+18 -90)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "8b486f8",
+      "url": "https://github.com/w3c/csswg-drafts/commit/8b486f8948290b99afe5139660166bf77556dfba",
+      "author": "tabatkins",
+      "committedAt": "2026-10-13T21:48:53Z",
+      "title": "[css-pseudo-4][editorial] Add big text",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-pseudo-4/Overview.bs (+85 -59)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "9f78c40",
+      "url": "https://github.com/w3c/csswg-drafts/commit/9f78c40e1fa3afb1990224f1c7ab3946965a285b",
+      "author": "tabatkins",
+      "committedAt": "2026-10-13T23:00:23Z",
+      "title": "[css-pseudo-4] Add initial draft of ::interest-invoker, to support the HTML PR. #12437",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-pseudo-4/Overview.bs (+117 -0)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

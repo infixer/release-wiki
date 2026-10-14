@@ -1,0 +1,393 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-10-14T00:21:33Z",
+  "range": {
+    "from": "2026-10-09T23:51:51Z",
+    "to": "2026-10-14T00:21:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64505,
+      "title": "fix(64494): fix decorated class names with private member self-references",
+      "url": "https://github.com/microsoft/TypeScript/pull/64505",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-10-12T17:30:26Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64494",
+      "files": [
+        "tsc/internal/transformers/estransforms/classfields.go (+10 -9)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-setFunctionName(target=es2015).js (+107 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-setFunctionName(target=es2022).js (+92 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-setFunctionName(target=esnext).js (+32 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-setFunctionNameComputedField(usedefineforclassfields=false).js (+46 -0)",
+        "tsc/testdata/baselines/reference/conformance/esDecorators-classDeclaration-setFunctionNameComputedField(usedefineforclassfields=true).js (+42 -0)",
+        "tsc/testdata/tests/cases/conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-setFunctionName.ts (+16 -0)",
+        "tsc/testdata/tests/cases/conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-setFunctionNameComputedField.ts (+17 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 64696,
+      "title": "Use ensureModifierFlags to calculate jsdoc constructor property modifiers",
+      "url": "https://github.com/microsoft/TypeScript/pull/64696",
+      "author": "weswigham",
+      "mergedAt": "2026-10-12T17:30:43Z",
+      "labels": [
+        "Author: Team",
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64628",
+      "files": [
+        "tsc/internal/transformers/declarations/transform.go (+6 -2)",
+        "tsc/testdata/baselines/reference/compiler/jsDeclarationEmitThisPropertyJSDocModifiers.js (+39 -0)",
+        "tsc/testdata/baselines/reference/conformance/jsdocAccessibilityTagsDeclarations.js (+2 -2)",
+        "tsc/testdata/baselines/reference/conformance/jsdocReadonlyDeclarations.js (+1 -1)",
+        "tsc/testdata/tests/cases/compiler/jsDeclarationEmitThisPropertyJSDocModifiers.ts (+25 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64599,
+      "title": "Check package reachability before using exports in declarations",
+      "url": "https://github.com/microsoft/TypeScript/pull/64599",
+      "author": "Andarist",
+      "mergedAt": "2026-10-12T17:56:30Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "fixes https://github.com/microsoft/TypeScript/issues/64590\n\nThe issue was causedd by an early return~, the code sequence was roughly was:\n\n1. Inspect package.json.\n2. If exports supplies a specifier, return it immediately.\n3. Check whether the importing file can reach that node_modules directory.\n\nSo the step 2 bypassed the step 3's validation~ entirely. The fix simply relies on reordering the steps listed above. It now validates the reachability before checking if the exports have the specifier.",
+      "files": [
+        "tsc/internal/modulespecifiers/specifiers.go (+11 -9)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitUnreachablePackageExports(module=nodenext).errors.txt (+50 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitUnreachablePackageExports(module=nodenext).js (+50 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitUnreachablePackageExports(module=preserve).errors.txt (+50 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitUnreachablePackageExports(module=preserve).js (+50 -0)",
+        "tsc/testdata/tests/cases/compiler/declarationEmitUnreachablePackageExports.ts (+48 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64738,
+      "title": "Keep `this` inside functions nested in downleveled static blocks",
+      "url": "https://github.com/microsoft/TypeScript/pull/64738",
+      "author": "trevorade",
+      "mergedAt": "2026-10-12T18:57:38Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64733.\n\nWhen a class with a downleveled `static {}` block refers to its own name, the block's `this` is rewritten to the class alias (`_a`). Subtrees that contain no class fields and no lexical `this` are visited with `substitutionVisitor`, which only replaces references to the class name. But `visitPropertyAccessExpressionForSubstitution` visited the expression with `tx.Visitor()` instead of the active visitor, so `this.bar()` inside a regular function in the block reached `visitThisExpression` while the static block was still the current class element, and became `_a.bar()`:\n\n```ts\nclass Foo {\n    declare toObject: () => number;\n    bar() { return 1; }\n    static {\n        Foo.prototype.toObject = function (this: Foo) {\n            return this.bar(); // emitted as `_a.bar()` for target < es2022\n        };\n    }\n}\n```\n\nThis passes the active visitor into `visitPropertyAccessExpressionForSubstitution`: `substitutionVisitor` from `visitForSubstitution`, and `tx.Visitor()` from `visitPropertyAccessExpression`. The behavior came in with the original port of `visitPropertyAccessExpressionForSubstitution` (microsoft/typescript-go#3147).\n\nThe new test `classStaticBlock29` covers a function and an arrow inside a function nested in the block, alongside `this` directly in the block (still rewritten to `_a`) and an element access (not affected). Its ES2021 output matches TypeScript 6.0.3.\n\nVerification: without the fix, the new ES2021 baseline shows `_a.bar()` in both nested cas\n…(truncated)",
+      "files": [
+        "tsc/internal/transformers/estransforms/classfields.go (+4 -4)",
+        "tsc/testdata/baselines/reference/conformance/classStaticBlock29(target=es2021).js (+65 -0)",
+        "tsc/testdata/baselines/reference/conformance/classStaticBlock29(target=es2021).symbols (+93 -0)",
+        "tsc/testdata/baselines/reference/conformance/classStaticBlock29(target=es2021).types (+107 -0)",
+        "tsc/testdata/baselines/reference/conformance/classStaticBlock29(target=es2022).js (+63 -0)",
+        "tsc/testdata/baselines/reference/conformance/classStaticBlock29(target=es2022).symbols (+93 -0)",
+        "tsc/testdata/baselines/reference/conformance/classStaticBlock29(target=es2022).types (+107 -0)",
+        "tsc/testdata/tests/cases/conformance/classes/classStaticBlock/classStaticBlock29.ts (+33 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 64739,
+      "title": "Shrink `ValueSymbolLinks` by 16 bytes",
+      "url": "https://github.com/microsoft/TypeScript/pull/64739",
+      "author": "ahejlsberg",
+      "mergedAt": "2026-10-12T19:12:15Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Moving a single boolean field into a separate `collections.Set[*ast.Symbol]` saves 16 bytes from `ValueSymbolLinks`. That amounts to 1% savings when compiling VS Code with the default 4 checkers. Every little bit counts.",
+      "files": [
+        "tsc/internal/checker/checker.go (+2 -2)",
+        "tsc/internal/checker/types.go (+6 -7)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64353,
+      "title": "Fix invalid decorator examples in lib.decorators.d.ts",
+      "url": "https://github.com/microsoft/TypeScript/pull/64353",
+      "author": "wfatih",
+      "mergedAt": "2026-10-12T21:57:54Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #54338\nFixes #54099\n\n### Problem\n\nBoth `@example` blocks in `lib.decorators.d.ts` reference types that do not exist in any lib file:\n\n* `ClassDecoratorContext.addInitializer` annotates the returned decorator as `ClassDecoratorFunction`\n* `ClassMethodDecoratorContext.addInitializer` annotates `bound` as `ClassMethodDecoratorFunction`\n\nNeither name is declared anywhere in the repository (`git grep` finds only these two comments), so both snippets fail with `Cannot find name '...'`. The second snippet is additionally not parseable — `const bound: ClassMethodDecoratorFunction = (value, context) { ... }` is missing the `=>` — so it cannot be pasted into an editor as-is.\n\n### Change\n\nBoth snippets are rewritten in terms of the context types this file actually declares:\n\n* the class-decorator example is now a decorator factory generic over `Class extends CustomElementConstructor`, with the element class extending `HTMLElement` so `customElements.define(name, this)` is valid;\n* the `bound` example is now a generic function declaration taking `value: Value` and `context: ClassMethodDecoratorContext<This, Value>`, with the dynamic member access done through an explicit `Record<PropertyKey, any>` view of `this`.\n\nBehaviour of the examples is unchanged; only the annotations and the syntax error are fixed.\n\n### Verification\n\n* Both snippets compile with no errors under `tsc --strict --target es2022 --lib es2022,dom --noEmit`.\n* `ClassDecoratorFunction` / `ClassMethodDecoratorFunctio\n…(truncated)",
+      "files": [
+        "tsc/internal/bundled/libs/lib.decorators.d.ts (+14 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 63424,
+      "title": "Add `Intl.PluralRules.selectRange` typing to es2023.intl",
+      "url": "https://github.com/microsoft/TypeScript/pull/63424",
+      "author": "3ru",
+      "mergedAt": "2026-10-12T22:21:18Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Split from #58084\n\nThis adds the missing [`Intl.PluralRules.prototype.selectRange`](https://tc39.es/ecma402/#sec-intl.pluralrules.prototype.selectrange) typing to `src/lib/es2023.intl.d.ts`",
+      "files": [
+        "tsc/internal/bundled/libs/lib.es2023.intl.d.ts (+4 -0)",
+        "tsc/testdata/baselines/reference/conformance/intlPluralRulesSelectRangeES2023.js (+14 -0)",
+        "tsc/testdata/baselines/reference/conformance/intlPluralRulesSelectRangeES2023.symbols (+21 -0)",
+        "tsc/testdata/baselines/reference/conformance/intlPluralRulesSelectRangeES2023.types (+25 -0)",
+        "tsc/testdata/tests/cases/conformance/es2023/intlPluralRulesSelectRangeES2023.ts (+8 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64588,
+      "title": "Restore symbol names in JSX import action titles",
+      "url": "https://github.com/microsoft/TypeScript/pull/64588",
+      "author": "Andarist",
+      "mergedAt": "2026-10-12T23:18:07Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "A pretty close port of the Strada's logic that fixes 2 skipped tests",
+      "files": [
+        "tsc/internal/ls/autoimport/fix.go (+7 -0)",
+        "tsc/internal/ls/codeactions_importfixes.go (+5 -3)",
+        "tsc/internal/ls/completions.go (+2 -1)",
+        "tsc/internal/fourslash/tests/importNameCodeFix_jsx4_test.go (+0 -1)",
+        "tsc/internal/fourslash/tests/importNameCodeFix_jsx6_test.go (+0 -1)",
+        "tsc/internal/fourslash/tests/importNameCodeFix_jsx8_test.go (+35 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64772,
+      "title": "Port missing keyof simplification for generic mapped types with name types",
+      "url": "https://github.com/microsoft/TypeScript/pull/64772",
+      "author": "Andarist",
+      "mergedAt": "2026-10-13T17:24:21Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "fixes https://github.com/microsoft/TypeScript/issues/64768\nthis PR corrects the misported https://github.com/microsoft/typescript-go/pull/2750",
+      "files": [
+        "tsc/internal/checker/checker.go (+11 -8)",
+        "tsc/testdata/baselines/reference/compiler/mappedTypeAsClauseIntersectionConstraintIndexedAccess.symbols (+71 -0)",
+        "tsc/testdata/baselines/reference/compiler/mappedTypeAsClauseIntersectionConstraintIndexedAccess.types (+35 -0)",
+        "tsc/testdata/baselines/reference/conformance/mappedTypeConstraints2.errors.txt (+8 -2)",
+        "tsc/testdata/baselines/reference/conformance/mappedTypeConstraints2.js (+11 -0)",
+        "tsc/testdata/baselines/reference/conformance/mappedTypeConstraints2.symbols (+23 -0)",
+        "tsc/testdata/baselines/reference/conformance/mappedTypeConstraints2.types (+13 -0)",
+        "tsc/testdata/tests/cases/compiler/mappedTypeAsClauseIntersectionConstraintIndexedAccess.ts (+17 -0)",
+        "tsc/testdata/tests/cases/conformance/types/mapped/mappedTypeConstraints2.ts (+4 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 64770,
+      "title": "Fix nil panic when stripInternal elides type alias RHS",
+      "url": "https://github.com/microsoft/TypeScript/pull/64770",
+      "author": "andre-fajar-n",
+      "mergedAt": "2026-10-13T19:42:44Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64667\n  ## Analysis\n  With `--declaration --stripInternal`, `@internal` on a type-alias RHS can be stripped by `visitDeclarationSubtree`, leaving a nil\n  `Type` on the alias:\n  ```ts\n  interface Foo {}\n  export type T =\n      /** @internal */\n      Foo;\n  ```\n  Declaration emit then called `ast.GetTypeNodePrecedence` with nil from `emitTypeAliasDeclaration` → `emitTypeNode`, causing:\n  `panic: runtime error: invalid memory address or nil pointer dereference`\n  Index signatures already fall back to `any` when the visited type is nil; type aliases did not.\n  ## Fix\n  In `transformTypeAliasDeclaration`, if `Visit(input.Type)` returns nil, substitute `any` (same pattern as\n  `transformIndexSignatureDeclaration`). Added `declarationEmitStripInternalTypeAliasRHS.ts` and baselines.\n  Alternate considered: nil-guard only in `emitTypeNode` / `GetTypeNodePrecedence`. That would avoid the crash but could emit an\n  incomplete alias; transforming to `any` matches existing stripInternal declaration behavior.\n  ## AI Assistance\n  This PR was authored with AI assistance (Cursor); I have reviewed and understand the changes.",
+      "files": [
+        "tsc/internal/transformers/declarations/transform.go (+6 -1)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitStripInternalTypeAliasRHS.js (+15 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitStripInternalTypeAliasRHS.symbols (+13 -0)",
+        "tsc/testdata/baselines/reference/compiler/declarationEmitStripInternalTypeAliasRHS.types (+10 -0)",
+        "tsc/testdata/tests/cases/compiler/declarationEmitStripInternalTypeAliasRHS.ts (+7 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64563,
+      "title": "Build all platforms in parallel in release pipeline",
+      "url": "https://github.com/microsoft/TypeScript/pull/64563",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-13T20:15:42Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This should speed things up, especially full release builds with lots of platforms.",
+      "files": [
+        "Herebyfile.mjs (+153 -86)",
+        "tools/pipelines/typescript-build.yml (+86 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64615,
+      "title": "Restore dependency-depth build scheduling",
+      "url": "https://github.com/microsoft/TypeScript/pull/64615",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-13T20:15:42Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "#64158 regressed #64220",
+      "files": [
+        "tsc/internal/execute/build/graph_test.go (+121 -0)",
+        "tsc/internal/execute/build/orchestrator.go (+11 -7)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64762,
+      "title": "Fix symbol table kind mask",
+      "url": "https://github.com/microsoft/TypeScript/pull/64762",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-13T20:22:44Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "The previous mask retained only one of the three kind bits, disabling alias caching for globals and raw exports and the members fast path. Oops.",
+      "files": [
+        "tsc/internal/checker/symbolaccessibility.go (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64581,
+      "title": "Add content mapper output extensions",
+      "url": "https://github.com/microsoft/TypeScript/pull/64581",
+      "author": "andrewbranch",
+      "mergedAt": "2026-10-13T23:38:21Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64053\n\nThis makes TypeScript content mapping a better citizen in a system where another tool is going to emit content mapped files to disk. The current system basically assumes a bundler or running the source in place.\n\nA content mapper's package.json can now specify `typescript.contentMapper.outputExtensions`, a mapping from a content mapped file's original extension to the output extension that another tool will emit:\n\n```json\n{\n  \"name\": \"ember-content-mapper\",\n  \"typescript\": {\n    \"contentMapper\": {\n      \"exec\": [\"node\", \"server.js\"],\n      \"outputExtensions\": {\n        \".gts\": \".js\"\n      }\n    }\n  }\n}\n```\n\nThe same configuration is supported in `tsconfig.json` as an override (the entire mapping is overridden; keys are not merged):\n\n```json\n{\n  \"contentMappers\": [\n    {\n      \"package\": \"ember-content-mapper\",\n      \"extensions\": [\".gts\"],\n      \"outputExtensions\": {\n        \".gts\": \".js\"\n      }\n    }\n  ]\n}\n```\n\nThis causes:\n\n- The declaration file output for `Component.gts` to be `Component.d.ts` instead of `Component.d.gts.ts`, because there is expected to be a `Component.js` (that someone else will create).\n\n- ⚠️ The program that uses this content mapper **must set `rewriteRelativeImportExtensions: true`**. Why? If configuration indicates that `Page.gts` is going to be emitted as `Page.js`, then a plain TypeScript file in the same program that imports it:\n\n  ```ts\n  // routes.ts\n  import Page from \"./Page.gts\";\n  ```\n\n  must be emitted as\n\n  ```js\n  // route\n…(truncated)",
+      "files": [
+        "packages/typescript/src/vscode/extensionApi.ts (+1 -0)",
+        "packages/vscode-typescript/src/contentMapperContributions.ts (+16 -2)",
+        "tools/scripts/lsp/generate.mts (+1 -0)",
+        "tsc/internal/checker/checker.go (+37 -8)",
+        "tsc/internal/checker/nodebuilderimpl.go (+13 -0)",
+        "tsc/internal/checker/nodecopy.go (+5 -1)",
+        "tsc/internal/compiler/emitHost.go (+4 -0)",
+        "tsc/internal/compiler/emitter.go (+7 -5)",
+        "tsc/internal/compiler/program.go (+12 -2)",
+        "tsc/internal/contentmapper/contentmapper.go (+44 -15)"
+      ],
+      "filesTotal": 126
+    },
+    {
+      "number": 64491,
+      "title": "Match Strada and don't resolve imports of ambient modules declared in the same file",
+      "url": "https://github.com/microsoft/TypeScript/pull/64491",
+      "author": "Andarist",
+      "mergedAt": "2026-10-13T23:38:38Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "fixes https://github.com/microsoft/TypeScript/issues/64486\n\nIt might be surprising that this issue resolves the referenced issue... so the story goes like this:\n1. `IntersectionObserver` gets passed to `DeepPartial`\n2. `IntersectionObserver` references `Element`, `Document`, `Window`, `typeof globalThis`\n3. `@types/lodash` \"installs\" itself a a global UMD variable through `export as namespace _`\n4. So `DeepPartial` walks through the whole Lodash API and that fans out to a lot of instantiations\n\nThis PR avoids this because the repro's `lodash-isempty.d.ts` contains `declare module 'lodash/isEmpty' { import _isEmpty from 'lodash/isEmpty'; ... }`. Strada treats that inner import as referring to the locally declared ambient module and doesn't resolve it. But Corsa resolved it to `@types/lodash/isEmpty.d.ts`, pulling all of `@types/lodash` into the program.",
+      "files": [
+        "tsc/internal/compiler/fileloader.go (+12 -0)",
+        "tsc/testdata/baselines/reference/compiler/ambientModuleImportingItselfNotResolved.errors.txt (+25 -0)",
+        "tsc/testdata/baselines/reference/compiler/ambientModuleImportingItselfNotResolved.js (+27 -0)",
+        "tsc/testdata/baselines/reference/compiler/ambientModuleImportingItselfNotResolved.symbols (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/ambientModuleImportingItselfNotResolved.trace.json (+1 -0)",
+        "tsc/testdata/baselines/reference/compiler/ambientModuleImportingItselfNotResolved.types (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/nodeColonModuleResolution.trace.json (+2 -28)",
+        "tsc/testdata/tests/cases/compiler/ambientModuleImportingItselfNotResolved.ts (+28 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 63971,
+      "title": "Fix crash on decorated anonymous class declaration",
+      "url": "https://github.com/microsoft/TypeScript/pull/63971",
+      "author": "Andarist",
+      "mergedAt": "2026-10-13T23:39:30Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "fixes https://github.com/microsoft/TypeScript/issues/63962",
+      "files": [
+        "tsc/internal/transformers/tstransforms/runtimesyntax.go (+4 -1)",
+        "tsc/testdata/baselines/reference/compiler/anonymousClassDeclarationWithClassDecorator.errors.txt (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/anonymousClassDeclarationWithClassDecorator.js (+84 -0)",
+        "tsc/testdata/baselines/reference/compiler/anonymousClassDeclarationWithClassDecorator.symbols (+18 -0)",
+        "tsc/testdata/baselines/reference/compiler/anonymousClassDeclarationWithClassDecorator.types (+18 -0)",
+        "tsc/testdata/tests/cases/compiler/anonymousClassDeclarationWithClassDecorator.ts (+11 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64755,
+      "title": "[api] Leave a config out of its own extended source files",
+      "url": "https://github.com/microsoft/TypeScript/pull/64755",
+      "author": "cplieger",
+      "mergedAt": "2026-10-13T23:46:07Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "When an opened config's `extends` chain cycles back to it, `parseConfig` lists the config in its own `ExtendedSourceFiles`. It gets there through the edge that closes the cycle, or through a cached extended config whose list was built while another project was opened. The project registry walks that list in `updateExtendingConfigs` while it holds the config's own entry lock, so `LoadOrStore` waits on that lock and `createSnapshot` never returns.\n\n**Impact:** one circular `extends` in a repository makes `createSnapshot` hang with no error, where `tsc -p` reports TS18000 and exits 2 at once, so an analyzer on the API stalls on that repository instead of reporting what is wrong with it.\n\n`parseConfig` now skips the config's own path when it assembles `ExtendedSourceFiles`, compared by `PathKey` as the circularity check does. Every other config in the chain stays in the list, so watching and cache invalidation see the same dependencies, and TS18000 is reported as before. Strada also lists the config in this case, but nothing there walks the list under that config's lock.\n\n`TestOpenProjectsWithCircularExtendsReportCircularity` opens `p1` and then `p2` in one session. Both extend `shared/base.json`, which extends `p2`, so `p2` reaches itself through the edge that closes the cycle and through the `base.json` entry cached while `p1` was opened. It expects TS18000 as the only config file parsing diagnostic of `p2`, and on `main` it hangs until the test timeout. With a `tsc` built from\n…(truncated)",
+      "files": [
+        "tsc/internal/api/session_apistate_test.go (+39 -0)",
+        "tsc/internal/tsoptions/tsconfigparsing.go (+3 -1)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "Copilot": 1,
+      "dependabot[bot]": 1
+    }
+  }
+}
