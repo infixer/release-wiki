@@ -1,6 +1,6 @@
 ---
 title: AIアップグレード
-updated: 2026-10-12
+updated: 2026-10-14
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-AI コーディングエージェント（Codex・Claude など）を使って、Next.js アプリのアップグレードや改善を支援するための仕組み。`next upgrade --agent`（旧 `--ai` / `--experimental-ai`。用語は「Agent」に統一された）は、セキュリティ勧告がある場合に安全なバージョンへの移行をエージェントに任せられるコマンドで、移行に必要なコンテキストと引き継ぎプロンプトを用意する。渡すコンテキストは「異なるメジャー」「同じメジャー」「将来のデフォルト」に分かれ、該当するものだけが渡される。Git が無いアプリではその場で、Git があれば worktree・コミット・プルリクエストを使ってアップグレードし、worktree を使うかどうかはユーザーに確認する（未リリース）。アドバイザリは npm に対象バージョンだけを照会し、準備のできたアップグレード先があるときだけ通知する。実験的な `agentFeedback` は、`next dev` を使うエージェントセッション中に遭遇した Next.js の使いにくさを、作業を妨げずに収集する仕組みで（問題を解決した後も候補を報告まで保持し、レビュー URL は常に最終応答に含める）、`create-next-app` の推奨デフォルトにも含まれるようになった。エージェント向けのアップグレード通知は `experimental.agentUpgrade`（旧 `experimental.agenticAutoUpgrade`）として既定で有効（`'security'` ポリシー）になり、通知・引き継ぎ・完了は既存のテレメトリで計測される。コードモッドの実行時は `package.json#packageManager` で宣言されたパッケージマネージャーが優先される。エージェントで使うモデルと推論の強さは、ハードコードせずにエージェントの CLI から取得するようになり、プロンプトには選択肢が表示される。アップグレードを促すメニューの表示中も `next dev` / `next build` は子プロセスで動き続ける。create-next-app は `experimental.agentFeedback` を有効にしたとき、`AGENTS.md` に `nextjs-agent-feedback` ブロックも最初から書くようになった。アップグレードのテレメトリには、開始時の Next.js・Node・パッケージマネージャーのバージョンや移行先のバージョンなどのメタデータが付くようになった（v16.5.0-canary.8）。
+AI コーディングエージェント（Codex・Claude など）を使って、Next.js アプリのアップグレードや改善を支援するための仕組み。`next upgrade --agent`（旧 `--ai` / `--experimental-ai`。用語は「Agent」に統一された）は、セキュリティ勧告がある場合に安全なバージョンへの移行をエージェントに任せられるコマンドで、移行に必要なコンテキストと引き継ぎプロンプトを用意する。渡すコンテキストは「異なるメジャー」「同じメジャー」「将来のデフォルト」に分かれ、該当するものだけが渡される。Git が無いアプリではその場で、Git があれば worktree・コミット・プルリクエストを使ってアップグレードし、worktree を使うかどうかはユーザーに確認する（未リリース）。アドバイザリは npm に対象バージョンだけを照会し、準備のできたアップグレード先があるときだけ通知する。実験的な `agentFeedback` は、`next dev` を使うエージェントセッション中に遭遇した Next.js の使いにくさを、作業を妨げずに収集する仕組みで（問題を解決した後も候補を報告まで保持し、レビュー URL は常に最終応答に含める）、`create-next-app` の推奨デフォルトにも含まれるようになった。エージェント向けのアップグレード通知は `experimental.agentUpgrade`（旧 `experimental.agenticAutoUpgrade`）として既定で有効（`'security'` ポリシー）になり、通知・引き継ぎ・完了は既存のテレメトリで計測される。コードモッドの実行時は `package.json#packageManager` で宣言されたパッケージマネージャーが優先される。エージェントで使うモデルと推論の強さは、ハードコードせずにエージェントの CLI から取得するようになり、プロンプトには選択肢が表示される。アップグレードを促すメニューの表示中も `next dev` / `next build` は子プロセスで動き続ける。create-next-app は `experimental.agentFeedback` を有効にしたとき、`AGENTS.md` に `nextjs-agent-feedback` ブロックも最初から書くようになった。アップグレードのテレメトリには、開始時の Next.js・Node・パッケージマネージャーのバージョンや移行先のバージョンなどのメタデータが付くようになった（v16.5.0-canary.8）。アップグレードのリマインダーは `AGENTS.md` の専用の管理ブロック `nextjs-agent-upgrade` に分かれ、`experimental.agentUpgrade` のポリシーだけに従う（`false` なら `next dev` がブロックを削除）。`agentFeedback` の管理ブロックの「Ignore routine debugging and unverified changes.」は、検証を省いてよいと読めないよう、フィードバックの範囲を限定する文に置き換えられた。新しく起動する Codex のアップグレードセッションではネットワークアクセスが有効になり、`@next/codemod agents-md` はドキュメントの `root` を出力ファイル基準の相対パスで書くようになった（いずれも v16.5.0-canary.10）。
 
 ## 主な API・オプション
 
@@ -17,9 +17,15 @@ AI コーディングエージェント（Codex・Claude など）を使って�
 - `next internal report-ai-upgrade <run-id> success|failure` — エージェントが AI アップグレードの完了を報告するコマンド（テレメトリ用）。[#99545](https://github.com/vercel/next.js/pull/99545) で完了レポーターは「Agent」の用語に合わせて改名された
 - `experimental.agentFeedback` / `experimental.agentRules` — `next dev` 実行中の困りごとを匿名化して収集する実験的ワークフロー
 - `create-next-app --agent-feedback` / `--no-agent-feedback` — 新規アプリで `experimental.agentFeedback` を有効/無効にする（対話式の推奨デフォルトでは有効）
+- `nextjs-agent-upgrade`（`AGENTS.md` の管理ブロック）— アップグレードのリマインダー用ルール。`experimental.agentUpgrade` が有効なら生成、`false` なら `next dev` が削除する
+- `npx @next/codemod agents-md --output <file>` — `AGENTS.md` にドキュメント索引を書く。パスは出力ファイルのディレクトリ基準
 
 ## 変更履歴
 
+- 2026-10-12 — アップグレードのリマインダーを `agentUpgrade` で制御する専用ブロック `nextjs-agent-upgrade` に（[#99990](https://github.com/vercel/next.js/pull/99990)）📦 v16.5.0-canary.10 · [[repos/vercel-next.js/changes/2026-10-14|変更]]
+- 2026-10-12 — Codex によるアップグレードでネットワークアクセスを有効に（[#100074](https://github.com/vercel/next.js/pull/100074)）📦 v16.5.0-canary.10 · [[repos/vercel-next.js/changes/2026-10-14|変更]]
+- 2026-10-12 — codemod `agents-md` のドキュメントの `root` を出力ファイル基準の相対パスに（[#100016](https://github.com/vercel/next.js/pull/100016)）📦 v16.5.0-canary.10 · [[repos/vercel-next.js/changes/2026-10-14|変更]]
+- 2026-10-12 — `agentFeedback` の管理ブロックの文言を、検証の省略と読めないよう修正（[#100020](https://github.com/vercel/next.js/pull/100020)）📦 v16.5.0-canary.10 · [[repos/vercel-next.js/changes/2026-10-14|変更]]
 - 2026-10-09 — アップグレードのテレメトリにバージョン・実行環境のメタデータを追加（[#99925](https://github.com/vercel/next.js/pull/99925)）📦 v16.5.0-canary.8 · [[repos/vercel-next.js/changes/2026-10-12|変更]]
 - 2026-10-09 — create-next-app が `AGENTS.md` にエージェントのフィードバック用ブロックも書くように（[#99813](https://github.com/vercel/next.js/pull/99813)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
 - 2026-10-07 — アップグレードのモデルと推論の強さをエージェントの CLI から取得（[#99736](https://github.com/vercel/next.js/pull/99736)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
@@ -49,3 +55,4 @@ AI コーディングエージェント（Codex・Claude など）を使って�
 - [[repos/vercel-next.js/changes/2026-09-28|2026-09-28 の変更]]
 - [[repos/vercel-next.js/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-12|2026-10-12 の変更]]
+- [[repos/vercel-next.js/changes/2026-10-14|2026-10-14 の変更]]

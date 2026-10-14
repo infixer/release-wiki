@@ -1,6 +1,6 @@
 ---
 title: UI
-updated: 2026-10-09
+updated: 2026-10-14
 tags:
   - repo/vitest-dev-vitest
   - topic
@@ -34,3 +34,4 @@ Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込�
 - [[repos/vitest-dev-vitest/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/vitest-dev-vitest/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]（トレース）
+- [[repos/vitest-dev-vitest/releases/v5.0.4|v5.0.4]]

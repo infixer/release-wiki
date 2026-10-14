@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-10-12
+updated: 2026-10-14
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -9,7 +9,7 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v5.0.3](https://github.com/vitest-dev/vitest/releases/tag/v5.0.3)（2026-09-30）→ [[repos/vitest-dev-vitest/releases/v5.0.3|まとめ]]
+- 安定版: [v5.0.4](https://github.com/vitest-dev/vitest/releases/tag/v5.0.4)（2026-10-12）→ [[repos/vitest-dev-vitest/releases/v5.0.4|まとめ]]
 - プレリリース: なし
 
 ## 直近の注目変更
@@ -18,7 +18,7 @@ tags:
 - ブラウザモードで `vi.unmock` がルートを消さない・登録待ちのモックが次のファイルに漏れる問題を修正（[#11537](https://github.com/vitest-dev/vitest/pull/11537)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/モック|モック]]
 - 空白を含むディレクトリでモックを解決できるように（[#11539](https://github.com/vitest-dev/vitest/pull/11539)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
 - coverage: 角かっこを含むファイル名・istanbul のウォームアップ時のカバレッジの誤りを修正（[#11531](https://github.com/vitest-dev/vitest/pull/11531)、[#11529](https://github.com/vitest-dev/vitest/pull/11529)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
-- `experimental.recordDependencies` を追加（`--changed` / `related` の依存関係をキャッシュから求める）（[#11515](https://github.com/vitest-dev/vitest/pull/11515)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]、[[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
+- `experimental.recordDependencies` を追加（`--changed` / `related` の依存関係をキャッシュから求める）（[#11515](https://github.com/vitest-dev/vitest/pull/11515)）📦 v5.0.4 · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]、[[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - ブラウザモードでセットアップファイルの `vi.mock` が効かない Vitest 5 の退行を修正（[#11520](https://github.com/vitest-dev/vitest/pull/11520)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/モック|モック]]
 - coverage: `allowExternal` でカバーされていないファイルが含まれない問題とルート外のグロブを修正（[#11513](https://github.com/vitest-dev/vitest/pull/11513)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
 - プロジェクトで `root` を尊重するように（[#11521](https://github.com/vitest-dev/vitest/pull/11521)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プロジェクト|プロジェクト]]
@@ -43,4 +43,4 @@ tags:
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-12|2026-10-12]]、[[repos/vitest-dev-vitest/changes/2026-10-09|2026-10-09]]、[[repos/vitest-dev-vitest/changes/2026-10-07|2026-10-07]]、[[repos/vitest-dev-vitest/changes/2026-10-05|2026-10-05]]、[[repos/vitest-dev-vitest/changes/2026-10-02|2026-10-02]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-14|2026-10-14]]、[[repos/vitest-dev-vitest/changes/2026-10-12|2026-10-12]]、[[repos/vitest-dev-vitest/changes/2026-10-09|2026-10-09]]、[[repos/vitest-dev-vitest/changes/2026-10-07|2026-10-07]]、[[repos/vitest-dev-vitest/changes/2026-10-05|2026-10-05]]

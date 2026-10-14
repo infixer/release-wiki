@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-10-12
+updated: 2026-10-14
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-10-14
+
+- 期間: 2026-10-10T22:53:53Z 〜 2026-10-14T00:21:33Z（直接のコミット: 2026-10-10T22:53:52Z 〜 2026-10-14T00:21:33Z）
+- PR 2 件（詳しく 1 件 / 1 行 1 件）、直接のコミット 16 件（詳しく 7 件 / 1 行 9 件）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-10-14|changes]]（新規）、[[repos/w3c-csswg-drafts/topics/css-overscroll-2|css-overscroll-2]]（新規）、[[repos/w3c-csswg-drafts/topics/css-pseudo-4|css-pseudo-4]]（新規）、[[repos/w3c-csswg-drafts/topics/cssom-1|cssom-1]]（新規）、[[repos/w3c-csswg-drafts/topics/css-syntax-3|css-syntax-3]]
+- エラー: なし
 
 ## 2026-10-12
 

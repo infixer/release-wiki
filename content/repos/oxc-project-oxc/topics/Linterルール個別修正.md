@@ -1,6 +1,6 @@
 ---
 title: Linterルール個別修正
-updated: 2026-10-12
+updated: 2026-10-14
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,10 +8,12 @@ tags:
 
 ## 概要
 
-`no-unused-vars` 以外の個別 lint ルールについての細かい不具合修正をまとめたトピック。vitest/unicorn 系ルールの自動修正の適用範囲、`prefer-const`・`preserve-caught-error`・`import/no-duplicates`・`node/no-exports-assign` などのルールについて、判定基準や自動修正の適用条件を上流（ESLint・Unicorn・import-js・typescript-eslint）や実際の意味論に揃える変更が中心。自動修正が不正なコードや意味の変わるコードを生む問題（`require-await` と `await using`、`one-var` の `declare` 落ち、`prefer-exponentiation-operator` の優先順位、`unicorn/no-zero-fractions` の区切り文字付き整数）の修正も続いている。オプション追加としては `react/only-export-components` の `allowCompoundComponents`（oxlint_v1.86.0）、`react/jsx-no-target-blank`・`unicorn/no-useless-switch-case`・`react/no-unescaped-entities` のサジェスチョン実装がある。jsx-a11y 系（`lang`・`mouse-events-have-key-events`・`label-has-associated-control`）では、式の文字列・nullish な値・空の属性値の判定を直す修正が入った。`unicorn/prefer-query-selector` には `allowWithVariables` オプションが追加された（未リリース）。`typescript/no-import-type-side-effects` と `import/no-duplicates` の自動修正が同じパスで衝突して不正な構文を生む問題も修正された（未リリース）。`unicorn/prefer-bigint-literals` は `BigInt(123n)` を `123n` に簡約し、実行時の値が変わる（精度が落ちる）自動修正は行わないようになった。精度の判定は `utils/number.rs` に共通化され、`no-loss-of-precision` の 2・8・16 進数の判定も直った（未リリース）。
+`no-unused-vars` 以外の個別 lint ルールについての細かい不具合修正をまとめたトピック。vitest/unicorn 系ルールの自動修正の適用範囲、`prefer-const`・`preserve-caught-error`・`import/no-duplicates`・`node/no-exports-assign` などのルールについて、判定基準や自動修正の適用条件を上流（ESLint・Unicorn・import-js・typescript-eslint）や実際の意味論に揃える変更が中心。自動修正が不正なコードや意味の変わるコードを生む問題（`require-await` と `await using`、`one-var` の `declare` 落ち、`prefer-exponentiation-operator` の優先順位、`unicorn/no-zero-fractions` の区切り文字付き整数）の修正も続いている。オプション追加としては `react/only-export-components` の `allowCompoundComponents`（oxlint_v1.86.0）、`react/jsx-no-target-blank`・`unicorn/no-useless-switch-case`・`react/no-unescaped-entities` のサジェスチョン実装がある。jsx-a11y 系（`lang`・`mouse-events-have-key-events`・`label-has-associated-control`）では、式の文字列・nullish な値・空の属性値の判定を直す修正が入った。`unicorn/prefer-query-selector` には `allowWithVariables` オプションが追加された（oxlint_v1.88.0 で公開）。`typescript/no-import-type-side-effects` と `import/no-duplicates` の自動修正が同じパスで衝突して不正な構文を生む問題も修正された（oxlint_v1.88.0 で公開）。`unicorn/prefer-bigint-literals` は `BigInt(123n)` を `123n` に簡約し、実行時の値が変わる（精度が落ちる）自動修正は行わないようになった。精度の判定は `utils/number.rs` に共通化され、`no-loss-of-precision` の 2・8・16 進数の判定も直った（oxlint_v1.88.0 で公開）。`sort-keys` の `natural: true` の比較は ESLint の `natural-compare` の移植になり、全順序でない比較による自動修正の panic も解消した。`oxc/bad-array-method-on-arguments` は `arguments` の参照をファイルごとに 1 回だけ調べるようになり、`var arguments;` に束縛された参照もチェックする（いずれも oxlint_v1.88.0）。
 
 ## 変更履歴
 
+- 2026-10-14 — `sort-keys`: `natural: true` の比較を ESLint の `natural-compare` に揃え、自動修正の panic・重複キーの入れ替えを解消（[#27579](https://github.com/oxc-project/oxc/pull/27579)） 📦 oxlint_v1.88.0 · [[repos/oxc-project-oxc/changes/2026-10-14|変更]]
+- 2026-10-14 — `oxc/bad-array-method-on-arguments`: `arguments` の参照をファイルごとに 1 回だけ調べ、`var arguments;` に束縛された参照もチェック（[#26930](https://github.com/oxc-project/oxc/pull/26930)） 📦 oxlint_v1.88.0 · [[repos/oxc-project-oxc/changes/2026-10-14|変更]]
 - 2026-10-12 — `unicorn/prefer-bigint-literals`: 冗長な `BigInt()` を外し、精度が落ちる自動修正をしない（[#25690](https://github.com/oxc-project/oxc/pull/25690)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-12|変更]]
 - 2026-10-09 — `typescript/no-import-type-side-effects` と `import/no-duplicates` の自動修正の衝突を防止（[#27409](https://github.com/oxc-project/oxc/pull/27409)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
 - 2026-10-07 — `unicorn/prefer-query-selector` に `allowWithVariables` オプションを追加（[#27346](https://github.com/oxc-project/oxc/pull/27346)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-07|変更]]
@@ -47,3 +49,7 @@ tags:
 - [[repos/oxc-project-oxc/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.87.0|oxlint_v1.87.0]]
 - [[repos/oxc-project-oxc/changes/2026-10-07|2026-10-07 の変更]]
+- [[repos/oxc-project-oxc/changes/2026-10-09|2026-10-09 の変更]]
+- [[repos/oxc-project-oxc/changes/2026-10-12|2026-10-12 の変更]]
+- [[repos/oxc-project-oxc/releases/oxlint_v1.88.0|oxlint_v1.88.0]]
+- [[repos/oxc-project-oxc/changes/2026-10-14|2026-10-14 の変更]]

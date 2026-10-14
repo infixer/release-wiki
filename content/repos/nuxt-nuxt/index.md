@@ -1,6 +1,6 @@
 ---
 title: nuxt/nuxt
-updated: 2026-10-12
+updated: 2026-10-14
 tags:
   - repo/nuxt-nuxt
 ---
@@ -14,16 +14,16 @@ tags:
 
 ## 直近の注目変更
 
+- nuxt・nitro: 失敗したレンダリングのヘッダーを投げられたエラーに書き込まない（共有エラーでのヘッダー漏れの修正、`event.context.nuxt['~response-headers']` に記録）（[#36586](https://github.com/nuxt/nuxt/pull/36586)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/サーバーレンダリング|サーバーレンダリング]]
+- nitro: miniflare の dev ランナーで `workerd` の SSR の conditions を保つ（`cloudflare_module` の dev で 500 になる問題）（[#36556](https://github.com/nuxt/nuxt/pull/36556)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
+- vite: dev でインライン化した `vue` をバンドラー向けのビルドに解決（[#36569](https://github.com/nuxt/nuxt/pull/36569)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
+- kit: nitro v2 ではファイル名から決めるハンドラーのメソッドを小文字に（[#36567](https://github.com/nuxt/nuxt/pull/36567)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/サーバー互換性|サーバー互換性]]
+- 文字列・配列の `appMiddleware` のルートルールをオブジェクト形式に正規化（[#36565](https://github.com/nuxt/nuxt/pull/36565)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/ルーティング・レイアウト|ルーティング・レイアウト]]
 - sourcemap に `'nosource'` オプション（`sourcesContent` を含めないソースマップ）を追加（[#36534](https://github.com/nuxt/nuxt/pull/36534)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/設定・スキーマ|設定・スキーマ]]
 - 離れるページが無いときはページ遷移を始めず、スクロール・head の破棄が止まる問題を修正（[#36535](https://github.com/nuxt/nuxt/pull/36535)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/ルーティング・レイアウト|ルーティング・レイアウト]]
 - 中断・キャンセルされたナビゲーションでエラー状態を保つ（[#36546](https://github.com/nuxt/nuxt/pull/36546)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/ルーティング・レイアウト|ルーティング・レイアウト]]
 - vite・nitro: dev で NUL バイトを含む仮想 CSS を `/@id/` 経由でリンク（`@unocss/nuxt` のスタイル重複）（[#36549](https://github.com/nuxt/nuxt/pull/36549)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 - kit: モジュールの依存モジュールを宣言したモジュールの場所から解決（[#36542](https://github.com/nuxt/nuxt/pull/36542)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
-- `serverFetch` をサーバールートに対して型付け（[#36543](https://github.com/nuxt/nuxt/pull/36543)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/データ取得|データ取得]]
-- nitro・vite: 宣言していない依存関係にアクセスせず、pnpm のグローバル仮想ストアに対応（[#36541](https://github.com/nuxt/nuxt/pull/36541)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
-- `<NuxtLoadingIndicator>` に `finishColor` プロップを追加（[#36533](https://github.com/nuxt/nuxt/pull/36533)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/UIテンプレート・ローディング画面|UIテンプレート・ローディング画面]]
-- vite-server: `spaLoadingTemplateLocation: 'within'` で SPA ローディングテンプレートを `#__nuxt` の中に描画（[#36536](https://github.com/nuxt/nuxt/pull/36536)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/UIテンプレート・ローディング画面|UIテンプレート・ローディング画面]]
-- 応答の型を指定した fetch でも任意の `baseURL` を受け付ける（4.6.0 からの退行の修正。v4.6.1 の本文にも掲載）（[#36523](https://github.com/nuxt/nuxt/pull/36523)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/データ取得|データ取得]]
 
 ## トピック
 
@@ -33,7 +33,7 @@ tags:
 - [[repos/nuxt-nuxt/topics/開発時エラー表示|開発時エラー表示]] — 開発サーバーでの SSR エラー・スタックトレース表示、エラーオーバーレイ、vite-server のエラーレポート
 - [[repos/nuxt-nuxt/topics/サーバー互換性|サーバー互換性]] — Nitro v2 形式のサーバーコード・dev ハンドラーとの互換対応と `nuxt/server` への移行支援（サーバー非依存の Nuxt へ）
 - [[repos/nuxt-nuxt/topics/サーバーセッション|サーバーセッション]] — `nuxt/server` のセッションユーティリティ
-- [[repos/nuxt-nuxt/topics/サーバーレンダリング|サーバーレンダリング]] — サーバー側レンダラー、エラーページのインライン描画とエラーレスポンスの形式、ペイロード URL
+- [[repos/nuxt-nuxt/topics/サーバーレンダリング|サーバーレンダリング]] — サーバー側レンダラー、エラーページのインライン描画とエラーレスポンスの形式・ヘッダー、ペイロード URL
 - [[repos/nuxt-nuxt/topics/設定・スキーマ|設定・スキーマ]] — `nuxt.config` のオプション（`prerender`・`nitro.*` の非推奨・無視するディレクトリ・`sourcemap` の `'nosource'`）と kit の設定・互換性 API
 - [[repos/nuxt-nuxt/topics/データ取得|データ取得]] — `useFetch`・`useAsyncData` とアドオン機能
 - [[repos/nuxt-nuxt/topics/トレーシング|トレーシング]] — フック・バンドラー・ミドルウェア・リクエスト（`nuxt.request`）の tracing channel
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/nuxt-nuxt/log|取り込み履歴]]
-- 最近の変更: [[repos/nuxt-nuxt/changes/2026-10-12|2026-10-12]]、[[repos/nuxt-nuxt/changes/2026-10-09|2026-10-09]]、[[repos/nuxt-nuxt/changes/2026-10-07|2026-10-07]]、[[repos/nuxt-nuxt/changes/2026-10-05|2026-10-05]]、[[repos/nuxt-nuxt/changes/2026-10-02|2026-10-02]]
+- 最近の変更: [[repos/nuxt-nuxt/changes/2026-10-14|2026-10-14]]、[[repos/nuxt-nuxt/changes/2026-10-12|2026-10-12]]、[[repos/nuxt-nuxt/changes/2026-10-09|2026-10-09]]、[[repos/nuxt-nuxt/changes/2026-10-07|2026-10-07]]、[[repos/nuxt-nuxt/changes/2026-10-05|2026-10-05]]

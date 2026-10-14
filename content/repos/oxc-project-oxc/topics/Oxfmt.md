@@ -1,6 +1,6 @@
 ---
 title: Oxfmt
-updated: 2026-10-12
+updated: 2026-10-14
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,10 +8,12 @@ tags:
 
 ## 概要
 
-Oxfmt（フォーマッタ本体 `oxc_formatter`）の Prettier 互換性の向上が続いている。同梱の Prettier は 3.9.9 まで更新済み（oxfmt_v0.71.0 で公開）。コメントの扱いを重点的に直しており、JSDoc（`/***` も JSDoc として扱う）の行末ダブルスペース（ハードブレーク）の保持、通常のブロックコメントの行末スペースの保持、隣接ブロックコメントの揃え、代入演算子 `=` まわりのコメントを元の側・行に保つ方針、引数にコメントがあるテスト呼び出しのレイアウトなどを修正している。意図的な Prettier との差異は `DIVERGENCES.md` に記録される。呼び出し先と開きかっこの間のコメントも呼び出し先側に留めるようになった。埋め込みテンプレート（`` css`...` `` など）のレイアウトはソースの形ではなく AST から決めるようになり、`quoteProps: consistent` は分割代入パターンにも適用される。ignore は、親ディレクトリが除外されていれば否定パターンで再び含めない（Git・Prettier と同じ）挙動に明示パス・stdin・LSP でも揃った。CLI の Stdin モードではグローバルな ignore の先行確認とソース付き診断の表示、LSP では `.prettierignore` の変更の再読み込みに対応した。CSS フォーマッタ（`oxc_formatter_css`）・JSON フォーマッタ（`oxc_formatter_json`）でも Prettier・JS フォーマッタとの互換の修正が続き、埋め込み CSS をセレクターの無いブロックの中身として解析できるようになった（css-in-md 向け）。また、同じ Node.js プロセスで `runCli()` を繰り返し呼べるようになった（Vite+ からの直接呼び出し向け）。oxfmt_v0.72.0 で、Markdown ファイルの整形が Prettier から `oxc_formatter_markdown` に置き換わった（破壊的変更）。TOML の整形も他のフォーマッタと同じ形の `oxc_formatter_toml`（`oxc-toml` のラッパー）経由になり、frontmatter や Markdown 内の TOML も整形され、TOML 1.1 に対応した（未リリース）。`embeddedLanguageFormatting: off` では frontmatter をそのまま残す。CLI では stderr もブロッキングモードにし、出力が 64KB で途切れる問題を直した（oxlint も同様）。`prettier-plugin-astro@1.x` 経由で `.astro` ファイルと埋め込みの `astro` を整形できるようになった（`astro: true` でオプトイン、`@astrojs/compiler-rs` が必要。frontmatter と `<script>` は `oxc_formatter` が整形）。`--migrate prettier` と LSP も Astro に対応した。設定探索はシンボリックリンクの設定ファイルをたどるようになり、oxlint と挙動が揃った。JSDoc の複数段落の `@description` タグの段落も保つようになった（いずれも未リリース）。設定に `associations`（dprint 由来）が加わり、ファイルパスごとに言語（Shiki の ID）を指定してフォーマッタを選べるようになった（配列で後勝ち）。`--migrate prettier` は、カレントディレクトリだけを Prettier と同じ順序で探し（見つからなければエラー）、`resolveConfig()` を使わずに読み込み、`overrides` も移行し（`parser` は `associations[].language` に変換）、Prettier 互換でないオプションは警告するようになった（破壊的変更。YAML・JSON5・TOML の設定は未対応。いずれも未リリース）。
+Oxfmt（フォーマッタ本体 `oxc_formatter`）の Prettier 互換性の向上が続いている。同梱の Prettier は 3.9.9 まで更新済み（oxfmt_v0.71.0 で公開）。コメントの扱いを重点的に直しており、JSDoc（`/***` も JSDoc として扱う）の行末ダブルスペース（ハードブレーク）の保持、通常のブロックコメントの行末スペースの保持、隣接ブロックコメントの揃え、代入演算子 `=` まわりのコメントを元の側・行に保つ方針、引数にコメントがあるテスト呼び出しのレイアウトなどを修正している。意図的な Prettier との差異は `DIVERGENCES.md` に記録される。呼び出し先と開きかっこの間のコメントも呼び出し先側に留めるようになった。埋め込みテンプレート（`` css`...` `` など）のレイアウトはソースの形ではなく AST から決めるようになり、`quoteProps: consistent` は分割代入パターンにも適用される。ignore は、親ディレクトリが除外されていれば否定パターンで再び含めない（Git・Prettier と同じ）挙動に明示パス・stdin・LSP でも揃った。CLI の Stdin モードではグローバルな ignore の先行確認とソース付き診断の表示、LSP では `.prettierignore` の変更の再読み込みに対応した。CSS フォーマッタ（`oxc_formatter_css`）・JSON フォーマッタ（`oxc_formatter_json`）でも Prettier・JS フォーマッタとの互換の修正が続き、埋め込み CSS をセレクターの無いブロックの中身として解析できるようになった（css-in-md 向け）。また、同じ Node.js プロセスで `runCli()` を繰り返し呼べるようになった（Vite+ からの直接呼び出し向け）。oxfmt_v0.72.0 で、Markdown ファイルの整形が Prettier から `oxc_formatter_markdown` に置き換わった（破壊的変更）。TOML の整形も他のフォーマッタと同じ形の `oxc_formatter_toml`（`oxc-toml` のラッパー）経由になり、frontmatter や Markdown 内の TOML も整形され、TOML 1.1 に対応した（oxfmt_v0.73.0 で公開）。`embeddedLanguageFormatting: off` では frontmatter をそのまま残す。CLI では stderr もブロッキングモードにし、出力が 64KB で途切れる問題を直した（oxlint も同様）。`prettier-plugin-astro@1.x` 経由で `.astro` ファイルと埋め込みの `astro` を整形できるようになった（`astro: true` でオプトイン、`@astrojs/compiler-rs` が必要。frontmatter と `<script>` は `oxc_formatter` が整形）。`--migrate prettier` と LSP も Astro に対応した。設定探索はシンボリックリンクの設定ファイルをたどるようになり、oxlint と挙動が揃った。JSDoc の複数段落の `@description` タグの段落も保つようになった（いずれも oxfmt_v0.73.0 で公開）。設定に `associations`（dprint 由来）が加わり、ファイルパスごとに言語（Shiki の ID）を指定してフォーマッタを選べるようになった（配列で後勝ち）。`--migrate prettier` は、カレントディレクトリだけを Prettier と同じ順序で探し（見つからなければエラー）、`resolveConfig()` を使わずに読み込み、`overrides` も移行し（`parser` は `associations[].language` に変換）、Prettier 互換でないオプションは警告するようになった（破壊的変更。YAML・JSON5・TOML の設定は未対応。いずれも oxfmt_v0.73.0 で公開）。css-in-js では、補間を含むコメントでのクラッシュを直し、プレースホルダーを `@media`・`@import`・プロパティ名・条件の中でも扱えるようになった。`(make<T>)!()` のかっこを保ち、`export default` の後の `class` / `function` のかっこは文の先頭と同じ扱いになった（いずれも oxfmt_v0.73.0）。
 
 ## 変更履歴
 
+- 2026-10-14 — css-in-js: 補間を含むコメントでのクラッシュを修正し、プレースホルダーを `@media`・`@import`・プロパティ名・条件で扱う（[#27638](https://github.com/oxc-project/oxc/pull/27638)、[#27639](https://github.com/oxc-project/oxc/pull/27639)、[#27640](https://github.com/oxc-project/oxc/pull/27640)） 📦 oxlint_v1.88.0 · [[repos/oxc-project-oxc/changes/2026-10-14|変更]]
+- 2026-10-14 — `export default class|function` のかっこを文の先頭と同じ扱いに、`TSInstantiationExpression` の前の `!`・`export` でかっこを保つ（[#27628](https://github.com/oxc-project/oxc/pull/27628)、[#27626](https://github.com/oxc-project/oxc/pull/27626)） 📦 oxlint_v1.88.0 · [[repos/oxc-project-oxc/changes/2026-10-14|変更]]
 - 2026-10-12 — `--migrate prettier` を改善（探索・読み込み・`overrides` の移行・非互換オプションの警告。破壊的変更）（[#27444](https://github.com/oxc-project/oxc/pull/27444)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-12|変更]]
 - 2026-10-12 — `associations` 設定を追加（ファイルパスごとに言語を指定）、`--migrate prettier` が `overrides[].parser` を `associations[].language` に移行（[#27437](https://github.com/oxc-project/oxc/pull/27437)、[#27475](https://github.com/oxc-project/oxc/pull/27475)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-12|変更]]
 - 2026-10-09 — Astro に対応（`prettier-plugin-astro@1.x`、`--migrate prettier`、LSP）（[#27386](https://github.com/oxc-project/oxc/pull/27386)、[#27387](https://github.com/oxc-project/oxc/pull/27387)、[#27388](https://github.com/oxc-project/oxc/pull/27388)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
@@ -61,3 +63,7 @@ Oxfmt（フォーマッタ本体 `oxc_formatter`）の Prettier 互換性の向�
 - [[repos/oxc-project-oxc/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/oxc-project-oxc/releases/oxfmt_v0.72.0|oxfmt_v0.72.0]]
 - [[repos/oxc-project-oxc/changes/2026-10-07|2026-10-07 の変更]]
+- [[repos/oxc-project-oxc/changes/2026-10-09|2026-10-09 の変更]]
+- [[repos/oxc-project-oxc/changes/2026-10-12|2026-10-12 の変更]]
+- [[repos/oxc-project-oxc/releases/oxfmt_v0.73.0|oxfmt_v0.73.0]]
+- [[repos/oxc-project-oxc/changes/2026-10-14|2026-10-14 の変更]]
