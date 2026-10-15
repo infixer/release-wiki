@@ -1,0 +1,126 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T22:05:52Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.1",
+      "publishedAt": "2026-10-09T22:47:35Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36592,
+      "title": "fix(nitro,vite): always link `dist` to static output",
+      "url": "https://github.com/nuxt/nuxt/pull/36592",
+      "author": "danielroe",
+      "mergedAt": "2026-10-14T09:51:29Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nwith `nitro: { static: true }`, `nuxt build` on `main` produces a real `dist` directory containing nothing but SSR sourcemaps, rather than the `dist` -> `.output/public` symlink we create on v4:\n\n```\ndist/index.mjs.map.json\ndist/server.mjs.map.json\ndist/_nuxt/pages-DEvIEIO8.js.map.json\n...\n```\n\nbasically, when nitro runs as a vite environment, the `dist` symlink is only created in the legacy build path, so it's never created at all.\n\n1. the sourcemap preserver wrote its `.map.json` files against `dist`, but nothing read them in vite environment api anyway, so this PR skips the export half as well, and links `dist` from the `compiled` hook in the vite environment path\n\n2. the existing check used `existsSync`, which follows symlinks, so a dangling `dist` link would never be replaced",
+      "files": [
+        "packages/nitro-server/src/legacy.ts (+4 -6)",
+        "packages/nitro-server/src/utils.ts (+16 -1)",
+        "packages/nitro-server/src/vite.ts (+7 -2)",
+        "packages/vite/src/plugins/sourcemap-preserver.ts (+7 -9)",
+        "packages/nitro-server/test/utils.test.ts (+40 -2)",
+        "packages/vite/test/sourcemap-preserver.test.ts (+15 -0)",
+        "test/static-dist.test.ts (+32 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36593,
+      "title": "chore: animate readme banner",
+      "url": "https://github.com/nuxt/nuxt/pull/36593",
+      "author": "HugoRCD",
+      "mergedAt": "2026-10-14T13:29:32Z",
+      "labels": [
+        "🧹 p1-chore",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 36594,
+      "title": "ci: comment nuxt.com preview links on docs pull requests",
+      "url": "https://github.com/nuxt/nuxt/pull/36594",
+      "author": "larbish",
+      "mergedAt": "2026-10-14T14:30:46Z",
+      "labels": [
+        "🧹 p1-chore",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 36591,
+      "title": "fix(vite-server): scope asset url helpers to the build",
+      "url": "https://github.com/nuxt/nuxt/pull/36591",
+      "author": "tada5hi",
+      "mergedAt": "2026-10-15T08:37:07Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36589\n\n### 📚 Description\n\nServer chunks read asset URLs through the process-wide `__buildAssetsURL` / `__publicAssetsURL` globals. When several vite-server handlers are imported into one process, the last one imported answers for all of them, so an app renders another app's asset URLs.\n\n`renderBuiltUrl` emits these expressions when a chunk is rendered, which is too late for them to import anything. So this PR keeps the global but scopes it to the build:\n\n- vite-server wraps the configured `renderBuiltUrl` for server builds and rewrites the expression to `globalThis[\"__nuxt_assets:<hash>\"].buildAssetsURL(...)`.\n- The generated handler passes the same key to `createRendererOptions`, which installs the helpers under it.\n\nThe key hashes the build directory together with the build id, because a build id may be pinned to the same value for several apps (for example, a commit hash). The unscoped globals are still set, for code that reads them directly.\n\nThe fixture test installs a foreign `__buildAssetsURL` before the page chunk loads. Without the fix, the page renders `/other-build/logo.svg`.",
+      "files": [
+        "packages/vite-server/src/runtime/renderer.ts (+0 -4)",
+        "packages/vite-server/src/ssr.ts (+34 -0)",
+        "test/fixtures/vite-server-ssr/app/assets/logo.svg (+1 -0)",
+        "test/fixtures/vite-server-ssr/app/pages/asset.vue (+10 -0)",
+        "test/vite-server-ssr.test.ts (+8 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36596,
+      "title": "fix(nitro): pass the sent response to v2 `render:response` listeners",
+      "url": "https://github.com/nuxt/nuxt/pull/36596",
+      "author": "danielroe",
+      "mergedAt": "2026-10-15T09:31:41Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\npreviously we used to send a stale copy of `event.res` to this (legacy) hook in compat mode. they now get the status and headers of the response that is actually sent.",
+      "files": [
+        "packages/nitro-server/src/runtime/compat/render-response.ts (+93 -40)",
+        "packages/nitro-server/src/runtime/handlers/renderer.ts (+2 -2)",
+        "packages/nitro-server/src/runtime/utils/renderer/options.ts (+1 -1)",
+        "packages/nitro-server/test/render-response.test.ts (+141 -1)",
+        "test/fixtures/nitro-legacy/app.vue (+6 -0)",
+        "test/fixtures/nitro-legacy/server/plugins/render-response.ts (+14 -0)",
+        "test/nitro-legacy.test.ts (+13 -1)"
+      ],
+      "filesTotal": 7
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 2
+    }
+  }
+}

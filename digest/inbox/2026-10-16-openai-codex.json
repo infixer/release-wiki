@@ -1,0 +1,667 @@
+{
+  "kind": "repo",
+  "repo": "openai/codex",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-14T00:00:12Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "rust-v0.163.0",
+      "publishedAt": "2026-10-15T21:30:38Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "rust-v0.163.0-alpha.11",
+      "name": "0.163.0-alpha.11",
+      "publishedAt": "2026-10-14T03:27:29Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0-alpha.11",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.163.0-alpha.10.1",
+      "name": "0.163.0-alpha.10.1",
+      "publishedAt": "2026-10-14T20:45:55Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0-alpha.10.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.163.0-alpha.10.2",
+      "name": "0.163.0-alpha.10.2",
+      "publishedAt": "2026-10-15T18:26:31Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0-alpha.10.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.163.0",
+      "name": "0.163.0",
+      "publishedAt": "2026-10-15T21:30:38Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0",
+      "prerelease": false,
+      "body": "## New Features\n\n- Open `/config` to search preferences across categories, change supported settings immediately, and see which changes require a restart. (#52990, #53429)\n- Send a follow-up while Codex is responding to steer it immediately. Interrupting a turn also stops active Code Mode cells and their nested tool calls. (#51812, #51835)\n- Configure a leader key in `/keymap`. The default is `Ctrl+X`, shortcut hints stay open until you choose or cancel, and voice mute moves to `F9`. (#52273)\n- Restart a managed background server from `/daemon`. Codex warns about work the restart could interrupt, then reconnects automatically. (#53173)\n- Codex can run independent read-only tools in parallel, including skill, memory, and conversation-history lookups. (#52245)\n- Daybreak is enabled by default for eligible accounts. `codex exec` can also select it with an OpenAI API key when the server offers access. (#53701, #53717)\n\n## Bug Fixes\n\n- Resuming a saved thread restores its permissions and network approvals, while respecting explicit overrides and current managed policy. (#53150, #53419, #53424)\n- The network proxy now checks permission before a DNS lookup, rejects duplicate `Host` headers, and prevents credential aliases from bypassing inspection hooks. (#51650, #52661, #53506)\n- Return to an existing side conversation with `/side` after switching threads. Answers to pending prompts also go back to the thread that asked. (#52184, #53436)\n- On Windows, `Ctrl+V` and `Shift+Insert` paste text as well as images. On WSL, repeated pastes reuse the clipboard reader, and copy attempts time out instead of hanging. (#53224, #52967, #53453)\n- Local commands finish promptly when a child keeps an output pipe open. Remote commands preserve late-arriving output so the final poll can still collect it. (#52652, #53331, #53622)\n- `codex exec` no longer prints the same file diff again after an unrelated command. (#53444)\n\n## Documentation\n\n- Updated the bundled OpenAI Docs guidance for migrations to the GPT-6 family, including model-specific reasoning, tool use, and data residency considerations. (#51768)\n- Clarified how the Linux sandbox uses bubblewrap for filesystem isolation and seccomp for syscall filtering. (#52610)\n\n## Chores\n\n- Codex now uses its standard shell executor and no longer bundles a patched `zsh`. Configurations using the retired shell flags receive a migration notice. (#52160, #52213)\n- Reduced Linux and macOS release package size by stripping symbols from packaged binaries while preserving them in the original build outputs. (#52178)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.162.0...rust-v0.163.0\n\n- #51539 Add completion-aware realtime attachment and session-scoped detach @zahan-oai\n- #51547 Add a Windows MXC sandbox opt-out @iceweasel-oai\n- #51556 Complete dynamic tool lifecycles on cancellation @mikelam-oai\n- #51575 Expose package assembly helpers and support gzip DotSlash artifacts @bolinfest\n- #51595 Add threa\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 53811,
+      "title": "Support daemon installation from Windows WinGet packages",
+      "url": "https://github.com/openai/codex/pull/53811",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T00:49:42Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Support daemon installation from Windows WinGet packages\n\n## Why\n\nWinGet archives place the CLI and code mode host at the package root, while daemon installation expects them under `bin/`. This layout mismatch prevents installing the daemon from a WinGet CLI package.\n\n## What changed\n\nValidate WinGet packages in their original layout before converting the staged copy to the daemon layout. Move the executables under `bin/`, update the package entrypoint and optional voice manifest checksum key, and hash the final tree for release reuse. Leave the source package unchanged.\n\n## Testing\n\nAdd a Windows integration test covering daemon startup, repeated `update --from-cli --yes` calls, rewritten manifests, and rejection of an incomplete package without changing the selected release or source manifests.",
+      "files": [
+        "codex-rs/app-server-daemon/src/prepare_install.rs (+54 -16)",
+        "codex-rs/app-server-daemon/src/prepare_install_tests.rs (+1 -1)",
+        "codex-rs/cli/tests/app_server_daemon_windows.rs (+126 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 53816,
+      "title": "Reject Guardian review threads during interactive CLI resume",
+      "url": "https://github.com/openai/codex/pull/53816",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T01:08:12Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Reject Guardian review threads during interactive CLI resume\n\n## What changed\n\nCheck the selected thread's app-server metadata before resuming it in the TUI. Reject Guardian review threads with a clear error and suggest `codex resume <parent_thread_id>` when a parent session is available. Preserve existing resume behavior if the metadata read fails.\n\n## Testing\n\nAdd a regression test for Guardian thread rejection and the parent-session hint. Update daemon startup coverage to select a saved session when testing `resume`.",
+      "files": [
+        "codex-rs/tui/src/lib.rs (+62 -0)",
+        "codex-rs/tui/src/session_resume.rs (+24 -1)",
+        "codex-rs/cli/tests/daemon_startup.rs (+27 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 53827,
+      "title": "Prune unused app-server daemon releases safely",
+      "url": "https://github.com/openai/codex/pull/53827",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T01:50:10Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Prune unused app-server daemon releases safely\n\n## What changed\n\n- Record the current and previous dedicated daemon selections in `selection-history`, bound to the selection link's identity. Preserve that history when an install leaves the selection unchanged.\n- Prune unused releases after package preparation and scheduled update processing, including updates that require no restart. Retain the current and previous selections, packages used by the daemon or updater, and the calling executable's package.\n- Require lifecycle and installer locks, valid selection history, and verified package boundaries before cleanup. Skip unsafe or unrecognized packages and retire releases before best-effort deletion so partial failures are not retried.\n- Resolve the updater's actual executable identity after an executable handoff that preserves its PID.\n\n## Testing\n\nExtend coverage for stale selection history, retention of the last two selections, packages containing external symlinks, partial deletion and reinstall, cleanup without restarting the daemon, and repeated installs preserving selection history.",
+      "files": [
+        "codex-rs/app-server-daemon/src/backend/pid.rs (+9 -0)",
+        "codex-rs/app-server-daemon/src/lib.rs (+16 -0)",
+        "codex-rs/app-server-daemon/src/managed_install.rs (+2 -2)",
+        "codex-rs/app-server-daemon/src/prepare_install.rs (+19 -8)",
+        "codex-rs/app-server-daemon/src/prepare_install_tests.rs (+78 -0)",
+        "codex-rs/app-server-daemon/src/release_pruning.rs (+251 -0)",
+        "codex-rs/app-server-daemon/src/update_loop.rs (+1 -1)",
+        "codex-rs/app-server-daemon/src/update_loop_tests.rs (+23 -2)",
+        "scripts/install/install.ps1 (+55 -7)",
+        "scripts/install/install.sh (+19 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 53831,
+      "title": "Track content provenance through prompt assembly and compaction",
+      "url": "https://github.com/openai/codex/pull/53831",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T02:02:06Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Track content provenance through prompt assembly and compaction\n\n## Why\n\nMessage roles and content classifications do not identify who supplied each context part. Source attribution needs to survive prompt assembly and history truncation, including messages that combine text from different producers.\n\n## What changed\n\n- Add per-part `ContentItemMetadata` for user input, developer instructions, `AGENTS.md`, skills, harness context, command hooks, and tool context with optional callable namespaces.\n- Carry attribution alongside content and classifications through contextual fragments, extension prompts, hook output, and agent messages. Keep tool-provided context-window hints separate from harness text.\n- Preserve the source of retained text slices during compaction and attribute generated truncation notices to the harness. Default missing historical attribution to unknown.\n- Attribute host MCP calls using cached tool namespaces only when catalog revisions remain stable, without starting servers or refreshing catalogs for attribution.\n- Send the new metadata to Responses Lite and strip it from requests to endpoints that do not support it.\n\n## Testing\n\nExtend compaction tests to cover mixed sources, missing or extra metadata entries, and discarded media. Update Responses Lite request assertions to verify endpoint-specific attribution handling.",
+      "files": [
+        "codex-rs/codex-mcp/src/connection_manager/tool_catalog.rs (+1 -1)",
+        "codex-rs/codex-mcp/src/lib.rs (+1 -0)",
+        "codex-rs/codex-mcp/src/runtime.rs (+57 -13)",
+        "codex-rs/context-fragments/src/annotated_content.rs (+150 -19)",
+        "codex-rs/context-fragments/src/fragment.rs (+50 -18)",
+        "codex-rs/context-fragments/src/lib.rs (+3 -0)",
+        "codex-rs/core/src/agent/control.rs (+23 -4)",
+        "codex-rs/core/src/client.rs (+6 -0)",
+        "codex-rs/core/src/codex_thread.rs (+1 -0)",
+        "codex-rs/core/src/compact.rs (+54 -29)"
+      ],
+      "filesTotal": 86
+    },
+    {
+      "number": 53845,
+      "title": "Fix daemon updater socket binding and bootstrap readiness on Unix",
+      "url": "https://github.com/openai/codex/pull/53845",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T02:52:06Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix daemon updater socket binding and bootstrap readiness on Unix\n\n## Why\n\nThe updater bound its socket directly beneath `CODEX_HOME`, which can exceed Unix socket path limits. Bootstrap could also report success before the updater's manual-update socket was ready.\n\n## What changed\n\n- Reuse the control socket's protected binding and cleanup guard for the updater, with a symlink at the advertised socket path.\n- Remove stale updater socket entries before startup while preserving regular files.\n- Wait up to 30 seconds for supported automatic updaters to publish their socket, without connecting as a readiness probe. Report updater exit or timeout with stderr log context.\n- Preserve compatibility with older updaters that lack the manual-update command.\n\n## Testing\n\nAdd Unix integration tests for updater readiness with a long `CODEX_HOME` path and bootstrap failure when a regular file blocks the updater socket, verifying that the file is preserved and the daemon remains running.",
+      "files": [
+        "codex-rs/app-server-daemon/src/lib.rs (+53 -0)",
+        "codex-rs/app-server-daemon/src/update_loop.rs (+11 -4)",
+        "codex-rs/app-server-transport/src/lib.rs (+2 -0)",
+        "codex-rs/app-server-transport/src/transport/mod.rs (+2 -0)",
+        "codex-rs/app-server-transport/src/transport/unix_socket.rs (+27 -16)",
+        "codex-rs/cli/tests/app_server_daemon.rs (+46 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 53853,
+      "title": "Reuse staged file digests when preparing daemon installs",
+      "url": "https://github.com/openai/codex/pull/53853",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T03:27:01Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Reuse staged file digests when preparing daemon installs\n\n## Why\n\nDaemon installation rereads staged files to verify the executable and hash the normalized WinGet package, even though staging already computed their digests.\n\n## What changed\n\nCache file digests while copying the package and reuse them for the staged executable comparison and final WinGet tree hash. Update cached paths when moving WinGet executables and refresh digests when rewriting manifests.\n\nContinue hashing source packages and existing releases from disk so digest reuse does not bypass content validation.\n\n## Testing\n\nExtend the installation test to corrupt an existing release's `codex-package.json` and verify that reinstalling rejects it while preserving the current selection.",
+      "files": [
+        "codex-rs/app-server-daemon/src/managed_install.rs (+1 -1)",
+        "codex-rs/app-server-daemon/src/prepare_install.rs (+53 -29)",
+        "codex-rs/app-server-daemon/src/prepare_install_tests.rs (+23 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 53859,
+      "title": "Record bucketed terminal sizes in TUI telemetry",
+      "url": "https://github.com/openai/codex/pull/53859",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T03:52:44Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Record bucketed terminal sizes in TUI telemetry\n\n## What changed\n\n- Add `terminal_columns` and `terminal_rows` buckets to `codex.tui.start`.\n- Record `codex.tui.terminal_size` for new turns in the active thread and for resize bucket changes after the terminal size settles for 15 seconds. Reuse launch context and suppress duplicate turn notifications.\n- Respect analytics consent for the built-in metrics exporter while allowing explicitly configured OTLP collectors. Apply consent checks to the active exporter across provider replacements.\n\n## Testing\n\nAdd coverage for exporter replacement and consent after config reloads. Extend the PTY integration test to verify startup size buckets, turn-start observations, and delayed resize observations with analytics disabled and an explicit OTLP collector.",
+      "files": [
+        "codex-rs/otel/src/metrics/client.rs (+24 -0)",
+        "codex-rs/otel/src/metrics/client_tests.rs (+57 -0)",
+        "codex-rs/tui/src/app.rs (+1 -0)",
+        "codex-rs/tui/src/app/startup.rs (+39 -0)",
+        "codex-rs/tui/src/app/test_support.rs (+1 -0)",
+        "codex-rs/tui/src/app/tests.rs (+5 -0)",
+        "codex-rs/tui/src/app/thread_routing.rs (+17 -0)",
+        "codex-rs/tui/src/chatwidget.rs (+4 -0)",
+        "codex-rs/tui/src/daemon_startup_tests.rs (+1 -0)",
+        "codex-rs/tui/src/daemon_telemetry.rs (+9 -7)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 53872,
+      "title": "Refresh model instructions in incremental-tool context windows",
+      "url": "https://github.com/openai/codex/pull/53872",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T05:37:00Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Refresh model instructions in incremental-tool context windows\n\n## Why\n\nIncremental-tool windows recorded base instructions only at setup, so a catalog refresh for the same model could leave active instructions stale. Instruction changes need to reach the model without rewriting the existing history prefix.\n\n## What changed\n\n- Track model identity and instruction content independently, appending a `model_instructions` developer message when either changes. Explicitly mark replacement or removal of base instructions, and avoid repeating unchanged updates.\n- Start new windows after compaction with the latest model instructions while preserving custom base instructions.\n- Preserve the recorded window base during local compaction retries, including empty instructions, and rebuild current model instructions when reconstructing child context.\n\n## Testing\n\nAdd integration tests and request snapshots for catalog refreshes, instruction removal, model switches, compaction, restart, and forks. Extend regression coverage for legacy snapshots and local compaction retries.",
+      "files": [
+        "codex-rs/core/src/agent/control/spawn.rs (+6 -0)",
+        "codex-rs/core/src/agent/control_tests.rs (+70 -4)",
+        "codex-rs/core/src/compact.rs (+12 -2)",
+        "codex-rs/core/src/compact_tests.rs (+44 -18)",
+        "codex-rs/core/src/context/base_instructions.rs (+20 -6)",
+        "codex-rs/core/src/context/mod.rs (+2 -0)",
+        "codex-rs/core/src/context/model_instructions.rs (+52 -0)",
+        "codex-rs/core/src/context/world_state/base_instructions.rs (+0 -28)",
+        "codex-rs/core/src/context/world_state/mod.rs (+6 -15)",
+        "codex-rs/core/src/context/world_state/model.rs (+88 -17)"
+      ],
+      "filesTotal": 21
+    },
+    {
+      "number": 53879,
+      "title": "Preserve running turn recovery across thread settings updates",
+      "url": "https://github.com/openai/codex/pull/53879",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T06:03:17Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Preserve running turn recovery across thread settings updates\n\n## Why\n\nStandalone thread settings updates cleared the running turn's continuation lineage, preventing recovery after a daemon restart.\n\n## What changed\n\nPreserve continuation lineage while a task is registered. Continue invalidating pending continuations for idle, reserved, and finishing turns, and record started-turn lineage atomically with task registration.\n\n## Testing\n\nExtend settings invalidation coverage to idle, reserved, and finishing turns. Exercise an in-flight reasoning effort update before compaction, then verify cold resume preserves the turn's frozen settings and allows continuation. Wait for thread idle before testing idle continuation.",
+      "files": [
+        "codex-rs/core/src/session/tests.rs (+11 -2)",
+        "codex-rs/core/src/session/thread_settings.rs (+13 -2)",
+        "codex-rs/core/src/session/turn_input.rs (+1 -1)",
+        "codex-rs/core/src/tasks/mod.rs (+7 -6)",
+        "codex-rs/core/tests/suite/compact.rs (+45 -2)",
+        "codex-rs/core/tests/suite/snapshots/all__suite__compact__compaction_cold_resume_after_completion.snap (+2 -2)",
+        "codex-rs/core/tests/suite/turn_input_submission.rs (+5 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 53895,
+      "title": "Resume unloaded subagent threads when selected in the TUI",
+      "url": "https://github.com/openai/codex/pull/53895",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T07:07:45Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Resume unloaded subagent threads when selected in the TUI\n\n## Why\n\nPersisted subagent threads could be reported as unavailable when selected after unloading, even though their saved history could be restored.\n\n## What changed\n\nAttempt to resume selected threads marked closed, including those with a cached live channel, and restore their transcript through the existing attachment flow.\n\n## Testing\n\nExtend coverage for V1 and V2 subagents to verify saved transcript restoration, the appropriate direct-input behavior, and reattachment when a close notification from the previous runtime is still queued.",
+      "files": [
+        "codex-rs/tui/src/app/session_lifecycle.rs (+6 -15)",
+        "codex-rs/tui/src/app/tests.rs (+87 -33)",
+        "codex-rs/tui/src/snapshots/codex_tui__app__tests__selected_unloaded_subagent_V1.snap (+8 -0)",
+        "codex-rs/tui/src/snapshots/codex_tui__app__tests__selected_unloaded_subagent_V2.snap (+8 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 53897,
+      "title": "Isolate daemon package tests to reduce disk contention",
+      "url": "https://github.com/openai/codex/pull/53897",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T07:13:37Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Isolate daemon package tests to reduce disk contention\n\n## Why\n\nDaemon package tests copy full debug CLI packages. Running these I/O-heavy cases alongside other tests can increase shared-disk writeback pressure.\n\n## What changed\n\n- Move package installation and replacement coverage into the `app_server_daemon_package` test binary, sharing daemon fixtures with the lifecycle tests.\n- Reserve all nextest test threads for each package test and add an exclusive Bazel target that runs the cases serially on Linux and macOS.\n- Hard-link the prepared fixture executable during package setup, while retaining real independent package copies in the installer.",
+      "files": [
+        "codex-rs/.config/nextest.toml (+5 -3)",
+        "codex-rs/cli/BUILD.bazel (+32 -0)",
+        "codex-rs/cli/Cargo.toml (+4 -0)",
+        "codex-rs/cli/tests/app_server_daemon.rs (+8 -329)",
+        "codex-rs/cli/tests/app_server_daemon/package.rs (+219 -0)",
+        "codex-rs/cli/tests/app_server_daemon/support.rs (+140 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 53908,
+      "title": "Keep the agent dashboard browsable during task removal",
+      "url": "https://github.com/openai/codex/pull/53908",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T08:05:34Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Keep the agent dashboard browsable during task removal\n\n## Why\n\nArchiving or deleting a task blocked dashboard navigation until the server request finished.\n\n## What changed\n\nKeep the dashboard interactive for browsing while archive and delete requests are pending. Hide the affected task immediately and show an inline progress message. Allow selection movement and search while preventing task switching, new tasks, and leaving the dashboard until the request completes.\n\nPreserve the dashboard selection when removing the current task detaches the session.\n\n## Testing\n\nUpdate archive and delete progress tests and snapshots to cover navigation, resize handling, immediate task hiding, and suppression of task switching and creation while requests are pending.",
+      "files": [
+        "codex-rs/tui/src/app/agent_center/render.rs (+10 -0)",
+        "codex-rs/tui/src/app/agents_overview_action_progress_tests.rs (+100 -72)",
+        "codex-rs/tui/src/app/agents_overview_actions.rs (+59 -67)",
+        "codex-rs/tui/src/app/agents_overview_view.rs (+14 -1)",
+        "codex-rs/tui/src/app/snapshots/codex_tui__app__agents_overview_actions__progress_tests__archive_progress.snap (+25 -26)",
+        "codex-rs/tui/src/app/snapshots/codex_tui__app__agents_overview_actions__progress_tests__delete_progress.snap (+25 -26)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 53932,
+      "title": "Preserve conversation history when compaction fails",
+      "url": "https://github.com/openai/codex/pull/53932",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T09:44:38Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Preserve conversation history when compaction fails\n\n## Why\n\nCompaction could record partial output before the response completed, leaving failed summaries in conversation history and persisted rollouts.\n\n## What changed\n\nBuffer compaction output until `response.completed` so failed or incomplete attempts leave no partial output in history. Record successful output before the response completion notification, preserving its compaction metadata.\n\n## Testing\n\nAdd regression coverage for preserving messages, tool results, and token usage after a disconnected compaction stream, including after restart. Verify incomplete compaction output is excluded from subsequent requests and successful output remains observable and persisted.",
+      "files": [
+        "codex-rs/core/src/compact.rs (+18 -20)",
+        "codex-rs/core/tests/suite/compact.rs (+221 -22)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 53940,
+      "title": "Bound rollout input for memory extraction",
+      "url": "https://github.com/openai/codex/pull/53940",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T10:19:30Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Bound rollout input for memory extraction\n\n## What changed\n\nRead rollout evidence from newest to oldest for both memory versions, retaining up to 8 MiB of sanitized response items and inter-agent communications, then restore chronological order. Skip malformed records and records larger than 1 MiB, and require valid session metadata in the first record within that limit.\n\n## Testing\n\nAdd coverage for the retained byte budget, newest-record ordering, malformed and oversized records, and unsupported session metadata. Extend extraction request tests for both memory versions to verify that evidence after an oversized record reaches the model.",
+      "files": [
+        "codex-rs/memories/write/src/phase1.rs (+1 -2)",
+        "codex-rs/memories/write/src/rollout_input.rs (+68 -1)",
+        "codex-rs/memories/write/src/rollout_input_tests.rs (+60 -0)",
+        "codex-rs/memories/write/src/startup_tests.rs (+27 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 53947,
+      "title": "Stop rollout reads when the calling task is cancelled",
+      "url": "https://github.com/openai/codex/pull/53947",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T10:46:30Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Stop rollout reads when the calling task is cancelled\n\n## Why\n\nBlocking rollout reads can continue decompressing and scanning history after the calling async task is dropped.\n\n## What changed\n\nPropagate caller cancellation through rollout readers, prefix validation, model-context scans, history materialization, and working-directory lookup. Check cancellation during compressed input and output, bounded reads, seeks, and between history records. Return an error on cancellation so partial history cannot be mistaken for a complete read.\n\n## Testing\n\nAdd regression coverage for dropping a caller during decompression, cancelling compressed input and output (including skippable frames), cancelling reads and seeks on plain and decoded snapshots, and cancelling history materialization between records.",
+      "files": [
+        "codex-rs/exec/src/lib.rs (+7 -3)",
+        "codex-rs/memories/write/src/rollout_input.rs (+1 -1)",
+        "codex-rs/rollout/src/compression_tests.rs (+1 -1)",
+        "codex-rs/rollout/src/seekable_reader.rs (+78 -8)",
+        "codex-rs/rollout/src/seekable_reader_tests.rs (+92 -8)",
+        "codex-rs/thread-store/src/local/model_context.rs (+14 -4)",
+        "codex-rs/thread-store/src/local/rollout_lineage.rs (+3 -1)",
+        "codex-rs/thread-store/src/local/thread_history_materialization.rs (+18 -9)",
+        "codex-rs/thread-store/src/local/thread_history_materialization_tests.rs (+15 -0)",
+        "codex-rs/tui/src/worktree_startup.rs (+7 -3)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 53963,
+      "title": "Test memory extraction budgets with excluded items and ciphertext",
+      "url": "https://github.com/openai/codex/pull/53963",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T12:07:36Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Test memory extraction budgets with excluded items and ciphertext\n\nExtend phase-one request tests for both memory versions with reasoning,\ndeveloper messages, and assistant ciphertext whose combined size exceeds\nthe reader budget while individual records remain below the record limit.\nVerify that earlier extraction evidence and assistant text alongside large\nciphertext remain in the request, with `encrypted_content` excluded.",
+      "files": [
+        "codex-rs/memories/write/src/startup_tests.rs (+25 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":53969,"title":"Avoid reconnect races in the daemon restart test","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 53987,
+      "title": "Skip service backoff for stale Guardian authorization retries",
+      "url": "https://github.com/openai/codex/pull/53987",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T13:56:02Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Skip service backoff for stale Guardian authorization retries\n\n## Why\n\nStale authorization requires refreshing local evidence, so service retry backoff unnecessarily delays the next review attempt.\n\n## What changed\n\nYield cooperatively before retrying `StaleAuthorization`, then check cancellation and the shared deadline. Keep retries within the existing attempt budget.\n\n## Testing\n\nExtend paused-time tests to cover recovery with fresh evidence and exhaustion of the shared attempt budget, asserting that retries incur no backoff and return the final attempt's evidence.",
+      "files": [
+        "codex-rs/ext/guardian-reviewer/src/retry.rs (+16 -0)",
+        "codex-rs/ext/guardian-reviewer/src/retry_tests.rs (+40 -13)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 53990,
+      "title": "Keep host MCP and plugin configuration local with remote environments",
+      "url": "https://github.com/openai/codex/pull/53990",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T14:08:44Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Keep host MCP and plugin configuration local with remote environments\n\n## Why\n\nA remote primary environment could supply its working directory and workspace roots to host plugins and MCP processes, breaking relative MCP executable resolution and applying the wrong workspace permissions.\n\n## What changed\n\n- Build host configuration from the local environment, falling back to the session's host working directory and runtime workspace roots when no local environment is selected. Preserve explicitly empty local roots.\n- Use the same host configuration for MCP startup and refresh, and refresh MCP state when runtime workspace roots change.\n- Keep repository skill discovery paired with the primary executor's working directory and filesystem.\n- Box skill warmup and turn context construction futures to reduce enclosing future sizes.\n\n## Testing\n\nExtend the MCP integration test to cover a remote primary with populated, empty, or absent local roots; relative executable resolution before and after refresh; workspace-root revocation; and remote repository skill discovery.",
+      "files": [
+        "codex-rs/core/src/environment_selection.rs (+8 -16)",
+        "codex-rs/core/src/lib.rs (+1 -0)",
+        "codex-rs/core/src/session/mcp_runtime.rs (+6 -22)",
+        "codex-rs/core/src/session/mod.rs (+0 -1)",
+        "codex-rs/core/src/session/session.rs (+9 -12)",
+        "codex-rs/core/src/session/tests.rs (+2 -8)",
+        "codex-rs/core/src/session/turn_context.rs (+40 -33)",
+        "codex-rs/core/src/skills.rs (+36 -0)",
+        "codex-rs/core/tests/suite/rmcp_client.rs (+157 -2)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 53991,
+      "title": "Report the reason for ChatGPT token refresh requests",
+      "url": "https://github.com/openai/codex/pull/53991",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T14:14:27Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Report the reason for ChatGPT token refresh requests\n\n## What changed\n\nInclude a `refresh_reason` diagnostic in ChatGPT OAuth token refresh requests to distinguish `proactive_expiry`, `scheduled`, `unauthorized_recovery`, and `forced` refreshes. Omit the field for gateway refresh requests.\n\n## Testing\n\nExtend refresh tests to check the reported reasons, including scheduled refreshes when access token expiry is unavailable.",
+      "files": [
+        "codex-rs/login/src/auth/manager.rs (+50 -23)",
+        "codex-rs/login/src/gateway_auth.rs (+1 -0)",
+        "codex-rs/login/src/oauth/client.rs (+24 -0)",
+        "codex-rs/login/src/oauth/client_tests.rs (+4 -1)",
+        "codex-rs/login/src/oauth/mod.rs (+1 -0)",
+        "codex-rs/login/tests/suite/auth_refresh.rs (+57 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 53996,
+      "title": "Bump `rustls` to `0.23.46`",
+      "url": "https://github.com/openai/codex/pull/53996",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T14:26:43Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Bump `rustls` to `0.23.46`",
+      "files": [
+        "MODULE.bazel.lock (+1 -1)",
+        "codex-rs/Cargo.lock (+2 -2)",
+        "codex-rs/Cargo.toml (+1 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 53997,
+      "title": "Filter rollout filenames before checking compressed siblings",
+      "url": "https://github.com/openai/codex/pull/53997",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T14:36:15Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Filter rollout filenames before checking compressed siblings\n\n## Why\n\nFilesystem lookups by thread or rollout ID check whether unrelated compressed rollouts have an uncompressed sibling. These checks are unnecessary when the filename does not match the requested ID.\n\n## What changed\n\nApply the thread or rollout ID filter before resolving plain/compressed file precedence. Preserve preference for uncompressed files and selection of the newest rollout for a thread.\n\n## Testing\n\nExtend lookup tests to cover unrelated compressed files, uncompressed-file precedence, missing rollout IDs, and rollout ID tie-breaking for files with the same timestamp.",
+      "files": [
+        "codex-rs/rollout/src/compression_tests.rs (+32 -0)",
+        "codex-rs/rollout/src/list.rs (+37 -28)",
+        "codex-rs/rollout/src/tests.rs (+6 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 54003,
+      "title": "Include compressed rollouts in doctor storage statistics",
+      "url": "https://github.com/openai/codex/pull/54003",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T14:57:10Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Include compressed rollouts in doctor storage statistics\n\n## Why\n\nDoctor's rollout statistics only counted `.jsonl` files, omitting storage used by compressed `.jsonl.zst` rollouts.\n\n## What changed\n\nRecognize compressed rollouts when collecting active and archived file counts, total bytes, and average bytes. Count both physical files when plain and compressed representations coexist, while continuing to ignore unrelated files and compression temporary files.\n\n## Testing\n\nExtend the rollout statistics test to cover nested plain and compressed files, coexisting representations, archived compressed rollouts, and ignored files, with a snapshot of the reported counts and sizes.",
+      "files": [
+        "codex-rs/cli/src/doctor.rs (+33 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 54008,
+      "title": "Fix session lookup and resume after rollout compression",
+      "url": "https://github.com/openai/codex/pull/54008",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T15:22:17Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix session lookup and resume after rollout compression\n\n## Why\n\nCompression replaces `.jsonl` rollout files with `.jsonl.zst` files, so checking only the original path can skip existing sessions. Compression can also replace a file between path lookup and canonicalization.\n\n## What changed\n\n- Resolve compressed rollout alternatives when selecting the latest local session.\n- Retry rollout path resolution when files disappear during lookup or canonicalization.\n\n## Testing\n\nExtend coverage to verify latest-session filtering after startup compression and resuming a compressed rollout through its original relative `.jsonl` path with preserved turns.",
+      "files": [
+        "codex-rs/thread-store/src/local/read_thread.rs (+33 -11)",
+        "codex-rs/tui/src/lib.rs (+29 -4)",
+        "codex-rs/app-server/tests/suite/v2/rollout_compress_tests.rs (+33 -2)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 54027,
+      "title": "Preserve Windows startup variables and MXC child environment defaults",
+      "url": "https://github.com/openai/codex/pull/54027",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T16:31:23Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Preserve Windows startup variables and MXC child environment defaults\n\n## Why\n\nWindows MXC needs valid host startup variables, while an empty child environment must remain empty for the SDK to select Windows user-profile defaults.\n\n## What changed\n\n- Replace caller overrides of `SystemDrive` and `LOCALAPPDATA` case-insensitively with nonempty Unicode host values, failing before launch if either is unavailable.\n- Track whether the original child environment was empty, ignoring launcher transport keys. Supply host `SystemRoot` for launcher bootstrap in that case, then clear the bootstrap environment before the SDK selects defaults.\n\n## Testing\n\nExtend transport tests to cover host-value replacement and preservation of empty child environments. Strengthen the PowerShell fallback RPC test to require `SystemDrive`, `LOCALAPPDATA`, `USERPROFILE`, and `PATH` in the child.",
+      "files": [
+        "codex-rs/mxc-sandbox/src/lib.rs (+6 -0)",
+        "codex-rs/mxc-sandbox/src/policy_tests.rs (+4 -0)",
+        "codex-rs/mxc-sandbox/src/transport.rs (+21 -3)",
+        "codex-rs/mxc-sandbox/src/transport_tests.rs (+9 -0)",
+        "codex-rs/exec-server/tests/exec_process/windows_sandbox.rs (+1 -1)",
+        "codex-rs/mxc-sandbox/README.md (+11 -2)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 54032,
+      "title": "Bound concurrent Git diffs for untracked files",
+      "url": "https://github.com/openai/codex/pull/54032",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T16:48:16Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Bound concurrent Git diffs for untracked files\n\n## Why\n\nCollecting a diff previously launched a Git process for every untracked file at once, allowing process counts to grow with the number of files.\n\n## What changed\n\nLimit untracked-file diffs to eight concurrent operations per collection while preserving patch order and skipping failed file diffs. Concurrent collections each retain their own limit.\n\n## Testing\n\nAdd tests for independent concurrency limits, failed-file handling, and patch order and application with tracked changes, binary files, and filenames containing spaces or a leading dash.",
+      "files": [
+        "codex-rs/git-utils/src/diff_tests.rs (+259 -0)",
+        "codex-rs/git-utils/src/info.rs (+15 -7)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 54033,
+      "title": "Extend memory extension resource retention to 14 days",
+      "url": "https://github.com/openai/codex/pull/54033",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T16:53:41Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Extend memory extension resource retention to 14 days\n\n## What changed\n\nIncrease memory extension resource retention from 7 to 14 days before pruning.\n\n## Testing\n\nUpdate pruning and startup test fixtures for the 14-day retention window, including resources at the exact cutoff.",
+      "files": [
+        "codex-rs/memories/write/src/extensions/prune_tests.rs (+4 -4)",
+        "codex-rs/memories/write/src/lib.rs (+1 -1)",
+        "codex-rs/memories/write/src/startup_tests.rs (+3 -3)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 54039,
+      "title": "Return async Guardian approvals before review cleanup finishes",
+      "url": "https://github.com/openai/codex/pull/54039",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T17:10:45Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Return async Guardian approvals before review cleanup finishes\n\n## Why\n\nAn asynchronous approval currently waits for the redundant synchronous review to finish cancellation cleanup before returning a decision.\n\n## What changed\n\nCancel the redundant review and let it drain under the parent's `ReviewerTasks` tracker so a current approval can return immediately. Revalidate the approval and check cancellation before approving the action. Hosts without a task tracker continue to wait for cleanup.\n\nKeep the reviewer reservation held until cleanup completes, and let shutdown join the tracked attempt. Discard late results and evidence from the cancelled review.\n\n## Testing\n\nAdd tests covering current, invalidated, and cancelled approvals while cleanup is blocked, suppression of late evidence, reviewer reservations during cleanup, and shutdown waiting for abandoned attempts.",
+      "files": [
+        "codex-rs/ext/guardian-reviewer/src/outcome.rs (+1 -1)",
+        "codex-rs/ext/guardian-reviewer/src/pool_tests.rs (+75 -0)",
+        "codex-rs/ext/guardian-reviewer/src/review.rs (+48 -14)",
+        "codex-rs/ext/guardian-reviewer/src/review_tests.rs (+216 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 54044,
+      "title": "Keep fork lineage ahead of paginated transcript history",
+      "url": "https://github.com/openai/codex/pull/54044",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T17:25:41Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Keep fork lineage ahead of paginated transcript history\n\n## Why\n\nLoading older history could place transcript entries before the `Thread forked from` notice, separating fork lineage from the session header.\n\n## What changed\n\nTreat fork lineage as a session prefix in both the TUI transcript and transcript overlay so older pages are inserted after it.\n\n## Testing\n\nAdd regression tests for repeated history prepends in both paths, verifying that fork lineage stays first.",
+      "files": [
+        "codex-rs/tui/src/app/history_pagination.rs (+2 -6)",
+        "codex-rs/tui/src/app/history_pagination_tests.rs (+40 -0)",
+        "codex-rs/tui/src/chatwidget/session_flow.rs (+2 -1)",
+        "codex-rs/tui/src/history_cell/session.rs (+21 -0)",
+        "codex-rs/tui/src/pager_overlay/transcript.rs (+2 -6)",
+        "codex-rs/tui/src/pager_overlay/transcript_tests.rs (+23 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {"number":54046,"title":"Track approval cancellation sources and Guardian context changes","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54047,"title":"Restore elapsed time for replayed in-progress turns","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54048,"title":"Defer folder trust checks until starting a task from agents overview","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54050,"title":"Scope TUI skill refreshes and workspace commands to explicit directories","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54053,"title":"Add Responses API client metadata patches for turn start and steer","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54056,"title":"Coalesce overlapping native TLS root certificate loads","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54057,"title":"Distinguish unsupported evidence in Decisions comparison metrics","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54058,"title":"Forward turn metadata to image generation and edit requests","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54059,"title":"Support store-owned preparation when resuming threads","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54060,"title":"Limit unarchive scans to the requested thread's archived rollouts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 54069,
+      "title": "Fix Windows environment handling for remote MCP servers",
+      "url": "https://github.com/openai/codex/pull/54069",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-14T18:57:01Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix Windows environment handling for remote MCP servers\n\n## Why\n\nRemote MCP environment filtering could drop `SystemDrive` and `LocalAppData`. Explicit overrides also need Windows-aware merging to replace inherited variables with differently cased names.\n\n## What changed\n\n- Preserve `SYSTEMDRIVE` and `LOCALAPPDATA` when remote environment variables activate the allowlist.\n- Apply explicit environment overrides through the executor environment policy, while retaining the final overlay for variables excluded by the allowlist.\n\n## Testing\n\nExtend environment-policy tests to cover the additional Windows variables, overrides with differently cased names, and the final overlay used by older executors.",
+      "files": [
+        "codex-rs/rmcp-client/src/stdio_server_launcher.rs (+56 -9)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":54070,"title":"Expose gateway authentication as a reusable OAuth session API","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54076,"title":"Avoid false URL-launch detections in literal PowerShell commands","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54078,"title":"Update `gix` to 0.89.0 and `gix-url` to 0.40.0","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54079,"title":"Retire rejected MCP OAuth refresh tokens","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54080,"title":"Extract TUI user-turn submission into a dedicated module","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54081,"title":"Centralize vertical navigation in TUI list views","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54082,"title":"Stabilize the Guardian network review timeout test","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":54087,"title":"Upgrade Bazel's `rules_python` to 2.4.2","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54094,"title":"Preserve specific MCP failure codes in metrics and spans","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54096,"title":"Add Bazel targets for on-demand schemas and Python SDK generation","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54097,"title":"Show Daybreak notices after the session header","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54098,"title":"Keep environment tools stable across readiness changes","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54099,"title":"Wait for readiness in the SIGTERM cancellation test","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54113,"title":"Embed generated app-server schema bundles in Bazel builds","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54114,"title":"Report terminal completion states and blocking reasons","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54119,"title":"Allow stdin review under active grants with sandbox prompts disabled","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54133,"title":"Record per-tool incremental update and description size metrics","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54135,"title":"Allow large file writes over direct exec-server WebSockets","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54151,"title":"Generate keymap descriptors and binding accessors from one catalog","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54169,"title":"Reload the model catalog after account changes","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54170,"title":"Preserve ChatGPT authentication for Gov MCP servers","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 54175,
+      "title": "Retire worktree and voice feature flags",
+      "url": "https://github.com/openai/codex/pull/54175",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-15T03:48:49Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Retire worktree and voice feature flags\n\n## What changed\n\n- Remove feature-flag checks from managed worktree creation and repository-aware session discovery, while retaining local workspace and trust checks.\n- Make TUI voice availability follow platform support instead of `features.realtime_conversation`.\n- Ignore `features.worktrees` and `features.realtime_conversation` configuration overrides, warn when managed requirements reference them, and hide both flags from `/experimental`, including catalogs from older servers.\n\n## Testing\n\nAdd coverage for ignored configuration overrides and managed requirements, and update session filtering, worktree grouping, and experimental feature discovery tests for the retired flags.",
+      "files": [
+        "codex-rs/core/src/config/config_tests.rs (+9 -0)",
+        "codex-rs/core/src/config/managed_features.rs (+9 -0)",
+        "codex-rs/exec/src/lib.rs (+0 -5)",
+        "codex-rs/features/src/lib.rs (+5 -5)",
+        "codex-rs/features/src/tests.rs (+19 -0)",
+        "codex-rs/tui/src/app/agent_center_tests.rs (+1 -3)",
+        "codex-rs/tui/src/app/agents_overview.rs (+4 -5)",
+        "codex-rs/tui/src/app/agents_overview_new.rs (+4 -6)",
+        "codex-rs/tui/src/app/agents_overview_tests.rs (+19 -32)",
+        "codex-rs/tui/src/app/managed_worktree_creation.rs (+1 -6)"
+      ],
+      "filesTotal": 38
+    },
+    {"number":54216,"title":"Show image previews in the fullscreen transcript","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54217,"title":"Apply syntax theme colors to Markdown prose in the TUI","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54250,"title":"Add regression tests for case-variant metadata protection","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54257,"title":"Preserve recent speech when trimming realtime transcripts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54263,"title":"Require fresh Guardian approval for escalated tool retries","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54264,"title":"Track Guardian transcript admission across failed reviews","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54265,"title":"Add regression coverage for Guardian sandbox retry approvals","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":54273,"title":"Protect metadata writes through macOS case aliases","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54278,"title":"Share Guardian image deduplication and checkpoint restoration","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54281,"title":"Attribute compaction summaries to the assistant in Guardian transcripts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54309,"title":"Enable credential masking for remote exec-server commands","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54315,"title":"Keep TUI Markdown colors readable against their backgrounds","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54316,"title":"Centralize context fragment kind constants","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54346,"title":"Add scoped executor credential auth for remote exec-server","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54351,"title":"Use the turn index for turn-scoped item pagination","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54363,"title":"Filter uninspectable network roots from implicit MXC read grants","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54365,"title":"Prevent duplicate assistant messages around interleaved commands","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54369,"title":"Retry SQLite operations on transient writer contention","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54378,"title":"Support inline model, reasoning, and speed selection in `/model`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54379,"title":"Add configuration support for TUI input presets","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54380,"title":"Add `/presets` for reusable prompts and slash commands","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54381,"title":"Add a keyboard shortcut menu for presets","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54383,"title":"Support inline permission profile selection with `/permissions`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54385,"title":"Allow saving current permission settings as presets","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54387,"title":"Add session-only arguments to `/title` and `/statusline`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54388,"title":"Add quick dial presets for terminal title and status line layouts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54389,"title":"Preserve existing SQLite journal modes on startup","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54398,"title":"Store generated image items as attachment references","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54401,"title":"Run managed daemon processes at background priority on macOS","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54414,"title":"Allow root turn suspension with live descendants","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54417,"title":"Skip SQLite page reclamation on Linux NFS mounts","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54419,"title":"Support line breaks in Mermaid flowchart node labels","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54420,"title":"Record local image inputs on completed image-generation items","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54421,"title":"Treat explicit connections to the verified default daemon as local","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54424,"title":"Add remote plugin metadata to plugin configuration","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54432,"title":"Support remote credential masking with Zsh shell snapshots","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54433,"title":"Use neutral labels for nonzero exits in compact TUI output","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":54434,"title":"Add rotating stdin credentials for remote exec-server","hint":"unknown","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}

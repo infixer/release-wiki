@@ -1,0 +1,164 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T06:51:19Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.1",
+      "publishedAt": "2026-10-14T17:06:15Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v19.0.9",
+      "name": "19.0.9 (October 14th, 2026)",
+      "publishedAt": "2026-10-14T17:05:59Z",
+      "url": "https://github.com/react/react/releases/tag/v19.0.9",
+      "prerelease": false,
+      "body": "## React Server Components\n\n- Improve transport protocol ([#37842](https://github.com/facebook/react/pull/37842) by @unstubbable and @eps1lon)"
+    },
+    {
+      "tag": "v19.1.10",
+      "name": "19.1.10 (October 14th, 2026)",
+      "publishedAt": "2026-10-14T17:06:06Z",
+      "url": "https://github.com/react/react/releases/tag/v19.1.10",
+      "prerelease": false,
+      "body": "## React Server Components\n\n- Improve transport protocol ([#37843](https://github.com/facebook/react/pull/37843) by @unstubbable and @eps1lon)"
+    },
+    {
+      "tag": "v19.2.9",
+      "name": "19.2.9 (October 14th, 2026)",
+      "publishedAt": "2026-10-14T17:06:10Z",
+      "url": "https://github.com/react/react/releases/tag/v19.2.9",
+      "prerelease": false,
+      "body": "## React Server Components\n\n- Improve transport protocol ([#37844](https://github.com/facebook/react/pull/37844) by @unstubbable and @eps1lon)"
+    },
+    {
+      "tag": "v19.3.1",
+      "name": "19.3.1 (October 14th, 2026)",
+      "publishedAt": "2026-10-14T17:06:15Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.1",
+      "prerelease": false,
+      "body": "## React Server Components\n\n- Improve transport protocol ([#37845](https://github.com/facebook/react/pull/37845) by @unstubbable and @eps1lon)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 37764,
+      "title": "[compiler] Fix refs false positive for IntersectionObserver callbacks",
+      "url": "https://github.com/react/react/pull/37764",
+      "author": "akasakariko",
+      "mergedAt": "2026-10-14T10:53:37Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #35982\n\nThis pull request resolves a false positive ref access error during render when passing callbacks to the global `IntersectionObserver` constructor\n\nCumulative implementation:\n- Both TypeScript and Rust compiler backends model the global `IntersectionObserver` constructor with a deferred frozen callback (`Effect.Freeze`), read-only options (`Effect.Read`), and a mutable non-aliasing return value\n- `NewExpression` instructions reuse standard call-effect ref validation rather than branching to a separate path, ensuring unknown constructors receiving refs directly or via callbacks are rejected during render\n\nReview follow-up updates:\n- Switched generic return type from `BuiltInObject` shape to `Poly` (`Type::Poly` in Rust and `{kind: 'Poly'}` in TypeScript)\n- Updated Rust constructor section heading comment in `compiler/crates/react_compiler_hir/src/globals.rs`\n- Simplified positive compiler fixture `allow-ref-access-in-intersection-observer.ts` to two minimal hooks covering construction with and without options\n- Retained original `useCallback`, `useMemo`, and options reproduction as an ESLint integration test in `packages/eslint-plugin-react-hooks/__tests__/ReactCompilerRuleTypescript-test.ts`\n- Added compiler negative fixture `error.invalid-ref-in-unknown-constructor.js` for passing a direct ref argument to an unknown constructor\n- Added compiler negative fixture `error.invalid-mutate-hook-value-in-intersection-observer.js` for mutating a `useMemo`-re\n…(truncated)",
+      "files": [
+        "compiler/crates/react_compiler_hir/src/globals.rs (+23 -1)",
+        "compiler/crates/react_compiler_validation/src/validate_no_ref_access_in_render.rs (+3 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/HIR/Globals.ts (+17 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/Validation/ValidateNoRefAccessInRender.ts (+4 -3)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-ref-access-in-intersection-observer.expect.md (+63 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-ref-access-in-intersection-observer.ts (+12 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-mutate-hook-value-in-intersection-observer.expect.md (+36 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-mutate-hook-value-in-intersection-observer.js (+8 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-ref-in-intersection-observer-shadowed.expect.md (+34 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-ref-in-intersection-observer-shadowed.js (+7 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 37846,
+      "title": "[Flight] Improve transport protocol",
+      "url": "https://github.com/react/react/pull/37846",
+      "author": "eps1lon",
+      "mergedAt": "2026-10-14T16:31:26Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "eps1lon/react-secured-mirror#78\neps1lon/react-secured-mirror#80\neps1lon/react-secured-mirror#89",
+      "files": [
+        ".eslintrc.js (+2 -0)",
+        "packages/react-client/src/ReactFlightClient.js (+49 -22)",
+        "packages/react-client/src/ReactFlightReplyClient.js (+18 -10)",
+        "packages/react-server/src/ReactFlightReplyBackingFormData.js (+131 -71)",
+        "packages/react-server/src/ReactFlightReplyServer.js (+60 -66)",
+        "packages/react-server/src/ReactServerStreamConfigBrowser.js (+73 -4)",
+        "packages/react-server/src/ReactServerStreamConfigEdge.js (+80 -5)",
+        "packages/react-server/src/ReactServerStreamConfigNode.js (+87 -5)",
+        "scripts/error-codes/codes.json (+2 -1)",
+        "packages/react-dom/src/__tests__/ReactDOMFizzForm-test.js (+7 -0)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 37850,
+      "title": "Fix overlapping replay slots after a prerender abort",
+      "url": "https://github.com/react/react/pull/37850",
+      "author": "gnoff",
+      "mergedAt": "2026-10-14T21:06:55Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nA prerender can abort during a retry after the retried task has spawned a suspended child. Abort cleanup records a replay slot for the whole task, then tries to record a child slot at the same key path. Resuming the parent already renders that child, so the existing assertion turns a resumable abort into a prerender error. This surfaced after the abort unwind change in #37710.\n\nKeep the parent slot and ignore the redundant child slot. The regression test verifies that both children render after resuming.\n\n## How did you test this change?\n\n- `yarn test ReactDOMFizzStaticBrowser --runInBand` (36 passed)\n- `yarn test ReactDOMFizzStaticBrowser --prod --runInBand` (36 passed)\n- `yarn linc`\n- `node scripts/prettier/index.js check-changed`",
+      "files": [
+        "packages/react-server/src/ReactFizzServer.js (+3 -4)",
+        "packages/react-dom/src/__tests__/ReactDOMFizzStaticBrowser-test.js (+56 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 37852,
+      "title": "Revert sync abort replay restoration pending a complete fix",
+      "url": "https://github.com/react/react/pull/37852",
+      "author": "gnoff",
+      "mergedAt": "2026-10-14T22:15:51Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Revert #37710 and #37850 while we revisit how synchronous prerender aborts preserve replay state.\n\nRestoring the aborted task root as a replay point can overlap postpones from child tasks. #37850 suppresses one form of the overlap, but an indexed parent slot can still coexist with a descendant replay node and fail during resumption. This removes the incomplete change so we can address the replay invariants together.\n\nThis deliberately restores the behavior reported in #37709: if a prerender abort interrupts a task after it has rendered part of its shell, the later resume can omit that markup. That regression needs a follow-up fix.\n\nThis supersedes #37851.\n\nTests: `yarn test ReactDOMFizzStaticBrowser --runInBand` and `yarn test ReactDOMFizzStaticBrowser --prod --runInBand` (34 passed in each mode).",
+      "files": [
+        "packages/react-server/src/ReactFizzServer.js (+4 -7)",
+        "packages/react-dom/src/__tests__/ReactDOMFizzStaticBrowser-test.js (+0 -124)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 37855,
+      "title": "[release] Await gh availability check before verifying artifacts",
+      "url": "https://github.com/react/react/pull/37855",
+      "author": "irontaek",
+      "mergedAt": "2026-10-15T08:14:36Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`executableIsAvailable` in `scripts/release/shared-commands/download-build-artifacts.js` is `async`, but `processArtifact` calls it without `await`:\n\n```js\nif (executableIsAvailable('gh')) {\n  await exec(`gh attestation verify artifacts_combined.zip --repo=${REPO}`, ...);\n}\n```\n\nThe condition is a `Promise`, so it is always truthy. On a machine without the `gh` CLI the script still runs `gh attestation verify` and fails, instead of skipping verification as the check intends. This adds the missing `await`.\n\n## How did you test this change?\n\nThe helper is not exported, so I reproduced it standalone with the same implementation and a command that isn't installed:\n\n```console\n$ node repro.js\nwithout await: branch taken\nwith await:    skipped\n```\n\nThe diff is the single `await`; `processArtifact` is already `async`.\n\nhttps://claude.ai/code/session_01W9Mk18mBNfkPfgg3hYweKq",
+      "files": [
+        "scripts/release/shared-commands/download-build-artifacts.js (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

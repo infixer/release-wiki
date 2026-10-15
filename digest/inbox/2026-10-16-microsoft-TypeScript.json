@@ -1,0 +1,304 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T23:46:07Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64648,
+      "title": "Add cache to `getSimplifiedConditionalType`",
+      "url": "https://github.com/microsoft/TypeScript/pull/64648",
+      "author": "ahejlsberg",
+      "mergedAt": "2026-10-14T00:34:03Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "With this PR we consistently cache results in `getSimplifiedType`. Previously, we cached results for indexed access types but not conditional types. Found in performance experiments by Bun team.",
+      "files": [
+        "tsc/internal/checker/checker.go (+12 -0)",
+        "tsc/testdata/baselines/reference/compiler/simplifiedConditionalTypeWritingCache.errors.txt (+21 -0)",
+        "tsc/testdata/baselines/reference/compiler/simplifiedConditionalTypeWritingCache.js (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/simplifiedConditionalTypeWritingCache.symbols (+39 -0)",
+        "tsc/testdata/baselines/reference/compiler/simplifiedConditionalTypeWritingCache.types (+27 -0)",
+        "tsc/testdata/tests/cases/compiler/simplifiedConditionalTypeWritingCache.ts (+8 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 64773,
+      "title": "Replace nodeData interface with generated AST accessors",
+      "url": "https://github.com/microsoft/TypeScript/pull/64773",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-14T01:07:43Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This ditches the dynamic dispatch with `nodeData` in favor of generated kind switches, like I did with `ForEachChild`.\n\n| Metric | Merge base | Branch | Change |\n|---|---:|---:|---:|\n| Binary file | 24,658,183 B | 23,810,311 B | **-847,872 B (-3.44%)** |\n| Executable `.text` | 9,491,153 B | 9,366,833 B | **-124,320 B (-1.31%)** |\n| Go PC/line metadata `.gopclntab` | 9,280,667 B | 8,583,938 B | **-696,729 B (-7.51%)** |\n| Go type metadata `.go.type` | 3,447,248 B | 3,404,384 B | **-42,864 B (-1.24%)** |\n| Symbols containing `tsc/internal/ast` | 6,331 | 2,682 | **-3,649 (-57.64%)** |\n| AST pointer-receiver methods | 5,477 | 1,819 | **-3,658 (-66.79%)** |\n\nIt also makes compiling the ast package 5% faster. Some dispatch goes through small generated tables, because the fully switch-based code is slower.\n\nSupersedes #64063. Part of the memory optimization stack summarized in #64734.",
+      "files": [
+        "tools/scripts/tsc/generate-go-ast.ts (+333 -11)",
+        "tsc/internal/ast/ast.go (+18 -97)",
+        "tsc/internal/ast/ast_generated.go (+3097 -194)",
+        "tsc/internal/ast/flow.go (+7 -2)",
+        "tsc/internal/ast/kind_stringer_generated.go (+4 -2)",
+        "tsc/internal/ast/nodeaccessors_bench_test.go (+120 -0)",
+        "tsc/internal/ast/nodeaccessors_test.go (+74 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 64795,
+      "title": "Avoid allocating normalized types on interning cache hits",
+      "url": "https://github.com/microsoft/TypeScript/pull/64795",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-14T14:13:57Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Union and intersection normalization builds temporary constituent lists even when an equivalent type already exists.\n\n- Uses reentrant, bounded scratch space for canonicalization, while published types keep independently owned constituents.\n- A fresh parse/bind/check of the compiler fixture used **8.51% fewer allocated bytes** and **18.26% fewer allocations**.\n- Retained heap was effectively unchanged.\n\nPart of the memory optimization stack summarized in #64734.\n\nReplaces #64778, which GitHub closed as merged when the stack was reordered.",
+      "files": [
+        "tsc/internal/checker/checker.go (+36 -17)",
+        "tsc/internal/checker/types_test.go (+131 -0)",
+        "tsc/internal/checker/utilities.go (+38 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64801,
+      "title": "Keep optional type-node and signature state out of hot records",
+      "url": "https://github.com/microsoft/TypeScript/pull/64801",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-14T16:02:32Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Most type nodes never need outer type parameters, and most signatures have no type parameters, `this` parameter, predicate, or composite state.\n\n- Moves optional outer type parameters out of type-node links (**32 → 16 bytes**).\n- Moves optional signature state out of signatures (**128 → 80 bytes**).\n- Historical VS Code retained-heap reductions were **0.43%** and **0.65%**, respectively.\n\nPart of the memory optimization stack summarized in #64734.\n\nReplaces #64785, which GitHub closed as merged when the stack was reordered.",
+      "files": [
+        "tsc/internal/checker/checker.go (+95 -93)",
+        "tsc/internal/checker/flow.go (+3 -3)",
+        "tsc/internal/checker/jsx.go (+2 -2)",
+        "tsc/internal/checker/nodebuilderimpl.go (+5 -5)",
+        "tsc/internal/checker/nodebuilderscopes.go (+1 -1)",
+        "tsc/internal/checker/nodecopy.go (+1 -1)",
+        "tsc/internal/checker/pseudotypenodebuilder.go (+7 -7)",
+        "tsc/internal/checker/relater.go (+24 -23)",
+        "tsc/internal/checker/services.go (+2 -2)",
+        "tsc/internal/checker/types.go (+99 -10)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 64072,
+      "title": "fix(64058): fix reparse jsdoc @extends type arguments for call expressions",
+      "url": "https://github.com/microsoft/TypeScript/pull/64072",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-10-14T16:24:53Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64058",
+      "files": [
+        "tsc/internal/checker/checker.go (+1 -27)",
+        "tsc/internal/checker/jsdoc.go (+32 -0)",
+        "tsc/internal/parser/parser_test.go (+63 -0)",
+        "tsc/internal/parser/reparser.go (+11 -9)",
+        "tsc/internal/transformers/declarations/transform.go (+1 -1)",
+        "tsc/internal/transformers/declarations/util.go (+0 -13)",
+        "tsc/testdata/baselines/reference/conformance/extendsTag10.errors.txt (+33 -0)",
+        "tsc/testdata/baselines/reference/conformance/extendsTag10.js (+76 -0)",
+        "tsc/testdata/baselines/reference/conformance/extendsTag10.symbols (+44 -0)",
+        "tsc/testdata/baselines/reference/conformance/extendsTag10.types (+54 -0)"
+      ],
+      "filesTotal": 38
+    },
+    {
+      "number": 64551,
+      "title": "perf(checker): fast-path compareNodes for identical AST parent containers and use cmp.Compare",
+      "url": "https://github.com/microsoft/TypeScript/pull/64551",
+      "author": "hazyhaar",
+      "mergedAt": "2026-10-14T16:57:55Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### Description\n\nThis PR introduces two focused optimizations in `tsc/internal/checker/utilities.go`:\n\n1. **Fast-path in `compareNodes` for identical parent containers**:\n   - When two AST nodes share the same syntactic parent container (`n1.Parent != nil && n1.Parent == n2.Parent`), they are guaranteed to reside in the exact same `SourceFile`.\n   - In this common case, the comparison immediately returns `n1.Pos() - n2.Pos()`, entirely eliding the full AST ancestry traversal to root `SourceFile` nodes (`ast.GetSourceFileOfNode`) and the subsequent file index map lookups.\n   - The ordering semantics are 100% identical to the existing implementation.\n\n2. **64-bit integer overflow protection in `compareSymbolsWorker`**:\n   - Replaces integer subtraction `int(ast.GetSymbolId(s1)) - int(ast.GetSymbolId(s2))` with `cmp.Compare(ast.GetSymbolId(s1), ast.GetSymbolId(s2))` for the unique `SymbolId` fallback comparison.\n   - Operates directly on the native 64-bit `uint64` identifier without narrowing, eliminating any potential overflow risks.\n\n### Validation & Test Results\n\n- All targeted checker unit tests pass cleanly:\n  `go test -race -count=1 ./tsc/internal/checker/...` -> **PASS**\n- Full official Microsoft test suite (`TestLocal`) verified bit-exact with 0 regressions and 0 data races.\n- Zero memory footprint impact (no allocations, pure in-place comparisons).",
+      "files": [
+        "tsc/internal/checker/utilities.go (+4 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64818,
+      "title": "[api] Fix named pipe / UDS creation",
+      "url": "https://github.com/microsoft/TypeScript/pull/64818",
+      "author": "andrewbranch",
+      "mergedAt": "2026-10-14T22:44:04Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "One semi-related fix per commit.\n\n- af47f842b1e134d244f477c73e69b7f0b946a1a4: when creating a UDS for an API client, create a tmp directory first and set permissions on the socket path to 0o600\n- 058a1edff004fae4d5e8b124a51af3c5890e6a8b: when an LSP client asks for an API socket to be created by a specific name, interpret that as the name of the tmp directory to be created and make the socket path `${tmpdir}/socket`, so the same strategy as above can be used\n- 416b01337e976b2346cb45c30fc1d9628d6731dd: use a random pipe name on Windows when spawning the sync API",
+      "files": [
+        "packages/typescript/src/api/syncChannel.ts (+6 -1)",
+        "tools/scripts/lsp/generate.mts (+1 -1)",
+        "tsc/cmd/tsc/api.go (+1 -1)",
+        "tsc/internal/api/server.go (+2 -2)",
+        "tsc/internal/ipc/transport.go (+27 -5)",
+        "tsc/internal/ipc/transport_unix.go (+46 -7)",
+        "tsc/internal/ipc/transport_unix_test.go (+103 -0)",
+        "tsc/internal/ipc/transport_windows.go (+15 -2)",
+        "tsc/internal/ipc/transport_windows_test.go (+76 -0)",
+        "tsc/internal/lsp/lsproto/lsp_generated.go (+1 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 64830,
+      "title": "Avoid weakset for executed generators",
+      "url": "https://github.com/microsoft/TypeScript/pull/64830",
+      "author": "dragomirtitian",
+      "mergedAt": "2026-10-15T16:54:55Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64829\n\nThis PR uses a symbol to keep track of executed generators.\n\nThere is a small change in behavior, since now the maker is global. However I don't think this is significant. The whole point of the check is to ensure generators are not reused since unlike promises which you can `await` multiple times, you can't `yield* ` a generator multiple times. So using a global marker is probably better preventing reuse even across batches.",
+      "files": [
+        "packages/typescript/src/api/sync/generatorSupport.ts (+22 -5)",
+        "packages/typescript/test/api-comparison.bench.ts (+57 -0)",
+        "packages/typescript/test/sync/api-generators.test.ts (+5 -14)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64831,
+      "title": "Fix release pipeline tests and workflow",
+      "url": "https://github.com/microsoft/TypeScript/pull/64831",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-15T18:35:42Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- The version swap breaks a help test; fix it\n- The token perms requested were not enough, and had odd errors on pipeline failure.",
+      "files": [
+        "tsc/internal/execute/tsctests/sys.go (+12 -2)",
+        "tsc/internal/execute/tsctests/tsc_test.go (+43 -0)",
+        "tsc/testdata/baselines/reference/tsc/commandLine/show-help-with-ExitStatus.DiagnosticsPresent_OutputsSkipped.js (+1 -1)",
+        ".github/workflows/create-cherry-pick-pr.yml (+2 -0)",
+        ".github/workflows/new-release-branch.yaml (+3 -0)",
+        ".github/workflows/set-version.yaml (+3 -0)",
+        ".github/workflows/sync-branch.yaml (+3 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 64832,
+      "title": "Ban network paths wholesale",
+      "url": "https://github.com/microsoft/TypeScript/pull/64832",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-15T21:09:37Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Simply trying to touch a network path may automatically send credentials over the network to a server. Just ban them entirely, across the board.\n\nThere are nice errors where possible, otherwise the funcs that hit the OS just reject them entirely.\n\nChecking is cheap; max looking at the first 4 bytes of a path.",
+      "files": [
+        "tsc/internal/compiler/fileloader.go (+5 -0)",
+        "tsc/internal/compiler/program.go (+3 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.generated.json (+1 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.json (+4 -0)",
+        "tsc/internal/diagnostics/diagnostics_generated.go (+3 -0)",
+        "tsc/internal/fswatch/watcher.go (+15 -1)",
+        "tsc/internal/fswatch/watcher_test.go (+29 -0)",
+        "tsc/internal/nativepath/network.go (+23 -0)",
+        "tsc/internal/nativepath/network_test.go (+56 -0)",
+        "tsc/internal/pprof/pprof.go (+21 -7)"
+      ],
+      "filesTotal": 27
+    },
+    {
+      "number": 64836,
+      "title": "Disable ATA when no user cache is available",
+      "url": "https://github.com/microsoft/TypeScript/pull/64836",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-15T21:59:15Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Instead of using tmp, which is world-writable on Linux etc.",
+      "files": [
+        "tsc/cmd/tsc/lsp.go (+1 -1)",
+        "tsc/internal/lsp/replay_test.go (+1 -1)",
+        "tsc/internal/project/ata/ata_test.go (+31 -0)",
+        "tsc/internal/vfs/osvfs/os.go (+7 -3)",
+        "tsc/internal/vfs/osvfs/os_test.go (+43 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 64839,
+      "title": "Escape quotes in synthesized module specifiers",
+      "url": "https://github.com/microsoft/TypeScript/pull/64839",
+      "author": "RyanCavanaugh",
+      "mergedAt": "2026-10-15T23:36:01Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes cases where package.json could have a module specifier that closed the import name, making the importing file syntactically invalid or unexpected:\n```ts\nimport * as foo from \"uneescaped\"string\";\n```\n\nI am not attached to this generated testcase, it's not great, but does do the job. Open to changing it to a matrix of single cases if anyone cares.",
+      "files": [
+        "tsc/internal/ls/autoimport/fix.go (+4 -3)",
+        "tsc/internal/ls/completions.go (+4 -1)",
+        "tsc/internal/fourslash/tests/autoImportQuotedModuleSpecifier_test.go (+171 -0)"
+      ],
+      "filesTotal": 3
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "typescript-automation[bot]": 1
+    }
+  }
+}

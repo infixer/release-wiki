@@ -1,0 +1,685 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T14:55:25Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.88.0",
+      "publishedAt": "2026-10-13T09:47:50Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.88.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {"number":26548,"title":"refactor(ast)!: migrate string literals and templates to JSStr","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 26677,
+      "title": "fix(ast)!: preserve lone surrogates in static member names",
+      "url": "https://github.com/oxc-project/oxc/pull/26677",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-14T01:16:34Z",
+      "labels": [
+        "A-linter",
+        "A-parser",
+        "A-semantic",
+        "A-cli",
+        "A-minifier",
+        "A-ast",
+        "A-transformer",
+        "A-codegen",
+        "A-isolated-declarations",
+        "A-ast-tools",
+        "A-formatter",
+        "A-linter-plugins",
+        "A-react-compiler",
+        "A-ecmascript"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`obj[\"\\uD800\"]` has a static property name, but after #26548 the member-name helpers return `None` for it because the name is not valid UTF-8. Consumers then treat the member as dynamic.\n\n`static_property_name()` and `static_property_info()` now return the name as a borrowed `JSStr`. This fixes lone-surrogate names in `no-self-assign`, `no-console`, React `displayName` inference, and enum member references in declaration output.\n\n## Breaking changes\n\n- `static_property_name()` and `static_property_info()` on the member expression types return `JSStr<'a>` instead of `&'a str` / `Str<'a>`. Use `as_str()` where UTF-8 is required.\n\n`PropertyKey` and class element names are handled in #27095.\n\nBased on #26548. Part of #26242.\n\nImplemented with AI assistance.",
+      "files": [
+        "crates/oxc_ast/src/ast_impl/js.rs (+32 -34)",
+        "crates/oxc_ast/src/ast_kind_impl.rs (+73 -6)",
+        "crates/oxc_ecmascript/src/side_effects/expressions.rs (+1 -1)",
+        "crates/oxc_isolated_declarations/src/enum.rs (+1 -1)",
+        "crates/oxc_linter/src/ast_util.rs (+7 -4)",
+        "crates/oxc_linter/src/rules/eslint/array_callback_return/mod.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/func_name_matching.rs (+8 -2)",
+        "crates/oxc_linter/src/rules/eslint/no_alert.rs (+2 -2)",
+        "crates/oxc_linter/src/rules/eslint/no_console.rs (+4 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_extend_native.rs (+2 -1)"
+      ],
+      "filesTotal": 114
+    },
+    {
+      "number": 27666,
+      "title": "fix(formatter): wrap comment-only JSX expression container in a group",
+      "url": "https://github.com/oxc-project/oxc/pull/27666",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-14T01:49:34Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #27496",
+      "files": [
+        "crates/oxc_formatter/src/print/jsx/mod.rs (+18 -25)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/issue-27496.jsx (+19 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/issue-27496.jsx.snap (+78 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27667,
+      "title": "fix(formatter): do not indent logical chains whose right sides all inline",
+      "url": "https://github.com/oxc-project/oxc/pull/27667",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-14T01:50:34Z",
+      "labels": [
+        "A-formatter",
+        "run-oxfmt-ecosystem-ci"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "```js\n// Before\nconst one = $abilities ?? [\n  \"foo\",\n  \"bar\",\n  \"veryVeryVeryVeryVeryVeryVeryVeryVeryLongKey\",\n];\nconst two = $abilities ?? [\"foo\"] ?? [\n    \"foo\",\n    \"bar\",\n    \"veryVeryVeryVeryVeryVeryVeryVeryVeryLongKey\",\n  ];\n\n// After\nconst one = $abilities ?? [\n  \"foo\",\n  \"bar\",\n  \"veryVeryVeryVeryVeryVeryVeryVeryVeryLongKey\",\n];\nconst two = $abilities ?? [\"foo\"] ?? [\n  \"foo\",\n  \"bar\",\n  \"veryVeryVeryVeryVeryVeryVeryVeryVeryLongKey\",\n];\n```",
+      "files": [
+        "crates/oxc_formatter/src/print/binary_like_expression.rs (+11 -6)",
+        "crates/oxc_formatter/DIVERGENCES.md (+31 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/logicals/inline-logical-chain-indent.js (+6 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/logicals/inline-logical-chain-indent.js.snap (+60 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27082,
+      "title": "fix(minifier): preserve indirect access when folding into call targets",
+      "url": "https://github.com/oxc-project/oxc/pull/27082",
+      "author": "waltuov",
+      "mergedAt": "2026-10-14T02:06:43Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Part of #24331.\n\nWhen the minifier folds something into a call target, it can drop the `(0, x)` form. That changes `this` for member calls and turns an indirect `eval` into a direct one. The tracker lists the optional chain case:\n\n```js\n(function(o) { console.log((0, o?.f)(42)); })({ a: \"PASS\", f(b) { return this.a || b; } });\n// minified: (e?.f)(42), prints PASS instead of 42\n```\n\nChecking the other places that move an expression into a call target or tag found three more paths with the same problem:\n\n```js\n// IIFE body substitution\n(() => o.f)()();       // -> o.f()\ndelete (() => o.f)();  // -> delete o.f\n\n// unused assignment removal (identifier and member targets)\nlet t; (t = o.f)();    // -> o.f()\nlet t; (t = eval)(x);  // -> eval(x), a direct eval\n\n// single use inlining into a tag\nlet c = a.b; c``;      // -> a.b``\n```\n\nIn a debug build, `(t = eval)(x)` and `(() => eval)()(x)` already trip the `stale direct-eval flags` assertion on main.\n\nChanges:\n- `should_keep_indirect_access` treats an optional chain that ends in a member access like a plain member access, as the `delete` arm already does.\n- A new `preserve_indirect_access_if_needed` helper is used by the IIFE body substitution and both unused assignment removals.\n- Single use inlining into a tag wraps a member or member chain replacement as `(0, a.b)`. This is what the two commented out tests in `esbuild.rs` expect, so they are enabled again.\n\nTests cover the comma, `&&`, `?:` and tagged template forms of the optio\n…(truncated)",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+14 -0)",
+        "crates/oxc_minifier/src/peephole/remove_dead_code.rs (+17 -0)",
+        "crates/oxc_minifier/src/peephole/remove_unused_expression.rs (+6 -0)",
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+4 -2)",
+        "crates/oxc_minifier/tests/peephole/esbuild.rs (+5 -5)",
+        "crates/oxc_minifier/tests/peephole/inline_single_use_variable.rs (+11 -0)",
+        "crates/oxc_minifier/tests/peephole/oxc.rs (+13 -0)",
+        "crates/oxc_minifier/tests/peephole/remove_unused_expression.rs (+44 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {"number":27663,"title":"refactor(minifier): flatten expression statements when possible","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27632,
+      "title": "feat(linter): mark eslint rules as recommended from upstream",
+      "url": "https://github.com/oxc-project/oxc/pull/27632",
+      "author": "camchenry",
+      "mergedAt": "2026-10-14T02:11:58Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Marking all rules from ESLint upstream as `recommended`: https://eslint.org/docs/latest/rules/.\n\nOne exception is `no-unused-expressions` which only `typescript-eslint` marks as recommended. Since we unify the two versions of the rule, we follow `typescript-eslint` and mark it as recommended.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/constructor_super.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/for_direction.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/getter_return.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_async_promise_executor.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_case_declarations.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_class_assign.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_compare_neg_zero.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_cond_assign.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_const_assign.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_constant_binary_expression.rs (+1 -0)"
+      ],
+      "filesTotal": 64
+    },
+    {"number":27668,"title":"docs(skills): update migrate-oxfmt SKILL.md","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27656,
+      "title": "fix(ecmascript): BigInt loose equality folding (unknown operands and `StringToBigInt`)",
+      "url": "https://github.com/oxc-project/oxc/pull/27656",
+      "author": "baltasarblanco",
+      "mergedAt": "2026-10-14T05:43:12Z",
+      "labels": [
+        "A-minifier",
+        "A-ecmascript"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### Bug\n\nTwo problems in folding `==` between a BigInt and a Number/String (oxc-minify 0.153.0 and 0.154.0, default options; same output on `main` at 022306f):\n\n```js\nconsole.log(2n ** 3n == 8, 2n ** 2n == \"4\", 18446744073709551616n == 2 ** 64, 1e21 == 1000000000000000000000n);\n// original: true true true true      folded: console.log(!1,!1,!1,!1)\nconsole.log(\"\\u000b1\" == 1n, \"012\" == 12n);\n// original: true true                folded: console.log(!1,!1)\nconsole.log(\"\\u00851\" == 1n, \"1_0\" == 10n, \"0x-1\" == -1n);\n// original: false false false        folded: console.log(!0,!0,!0)\n```\n\n1. In `abstract_equality_comparison` (`crates/oxc_ecmascript/src/constant_evaluation/equality_comparison.rs`), when one side is a BigInt both sides go through `evaluate_value_to_bigint`. If either returns `None` (here `2n ** 3n` is not evaluated, `2 ** 64` / `1e21` are ≥ 2^53, and `StringToBigInt` gives up on `\"\\u000b1\"` and `\"012\"`), the code falls through to the final `return Some(false)`. [`IsLooselyEqual`](https://tc39.es/ecma262/#sec-islooselyequal) compares a BigInt with a String through `StringToBigInt`, and with a finite Number by mathematical value; neither result is known when a side could not be converted.\n2. `StringToBigInt::string_to_big_int` (`crates/oxc_ecmascript/src/string_to_big_int.rs`) trims with Rust's `str::trim` (Unicode `White_Space`: includes U+0085, excludes U+FEFF; U+000B is rejected by a special case), passes the rest to `num_bigint`'s `from_str_radix`, which accepts `\n…(truncated)",
+      "files": [
+        "crates/oxc_ecmascript/src/constant_evaluation/equality_comparison.rs (+7 -0)",
+        "crates/oxc_ecmascript/src/string_to_big_int.rs (+51 -8)",
+        "crates/oxc_minifier/tests/peephole/fold_constants.rs (+13 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27622,
+      "title": "fix(ecmascript): do not fold Number.isInteger / isSafeInteger of tiny non-integers to true",
+      "url": "https://github.com/oxc-project/oxc/pull/27622",
+      "author": "baltasarblanco",
+      "mergedAt": "2026-10-14T06:58:11Z",
+      "labels": [
+        "A-minifier",
+        "A-ecmascript"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### Bug\n\n```js\nconsole.log(Number.isInteger(5e-324), Number.isSafeInteger(5e-324), Number.isInteger(1e-300), Number.isSafeInteger(-1e-20));\n// before: console.log(!0,!0,!0,!0)   -> true true true true\n// after:  console.log(!1,!1,!1,!1)   -> false false false false\n```\n\n(oxc-minify 0.153.0, default options; same output on `main` at 9a9eb83.) Also through a constant (`const x = 5e-324; Number.isInteger(x)` → `!0`).\n\nIt also changes control flow:\n\n```js\nvar i = setImmediate(function () { console.log(\"ran\"); });\nif (Number.isInteger(5e-324)) clearImmediate(i);\n```\n\nminifies to ``var e=setImmediate(function(){console.log(`ran`)});clearImmediate(e);``: the original prints `ran`, the minified prints nothing.\n\n`try_fold_number_methods` (`crates/oxc_ecmascript/src/constant_evaluation/call_expr.rs`) tests `extracted.fract().abs() < f64::EPSILON`. `f64::EPSILON` is about `2.2e-16`, so every number with a smaller fractional part counts as an integer. [`Number.isInteger`](https://tc39.es/ecma262/#sec-number.isinteger) and [`Number.isSafeInteger`](https://tc39.es/ecma262/#sec-number.issafeinteger) only accept an [integral Number](https://tc39.es/ecma262/#integral-number): \"a finite Number value whose mathematical value is in the set of integers\". That is an exact check.\n\n### Fix\n\n`is_integral = n.is_finite() && n.trunc() == n`, used by both methods.\n\n### Tests\n\nIn `crates/oxc_minifier/tests/peephole/replace_known_methods.rs`: `test_fold_number_functions_is_safe_integer` gets `5e-324` and \n…(truncated)",
+      "files": [
+        "crates/oxc_ecmascript/src/constant_evaluation/call_expr.rs (+5 -3)",
+        "crates/oxc_minifier/tests/peephole/replace_known_methods.rs (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27673,"title":"perf(formatter_core): keep the embedded IR when nothing in it is rewritten","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27561,"title":"perf(formatter_core): skip scanning texts with nothing to rewrite","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27555,"title":"refactor(formatter_css): build re-quoted strings in the arena","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27558,"title":"perf(formatter): write string literals with swapped quotes into the arena","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27095,
+      "title": "fix(ast)!: preserve lone surrogates in static property names",
+      "url": "https://github.com/oxc-project/oxc/pull/27095",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-14T08:33:34Z",
+      "labels": [
+        "A-linter",
+        "A-semantic",
+        "A-ast",
+        "A-transformer",
+        "A-isolated-declarations"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`PropertyKey::static_name()` and `ClassElement::static_name()` returned `None` for a key such as `{ \"\\uD800\": 1 }`, so rules treated it as dynamic and missed duplicate keys, duplicate class members, accessor pairs and overloads with these names.\n\nThey now return `StaticPropertyName`, which borrows the key's `JSStr` from the AST or owns the text of a numeric key. Regex keys use their canonical name, so `[/a/ig]` is `/a/gi`. `sort-keys` now sorts lone-surrogate keys too, with the comparator from #27579. async-to-generator no longer emits an invalid function name such as `1` for a key like `\"\\uD8001\"`. `JSStr::display()` is added for diagnostics; it writes a lone surrogate as `\\uXXXX`.\n\n## Breaking changes\n\n- `PropertyKey::static_name`, `PropertyKey::name` and `ClassElement::static_name` return `Option<StaticPropertyName<'a>>` instead of `Option<Cow<'a, str>>`.\n- `oxc_semantic::class::table::Element.name` is `StaticPropertyName<'a>`.\n\nBased on #26677. Part of #26242. Continues #26720.\n\nImplemented with AI assistance.",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "crates/oxc_ast/Cargo.toml (+3 -0)",
+        "crates/oxc_ast/src/ast_impl/js.rs (+17 -19)",
+        "crates/oxc_ast/src/ast_kind_impl.rs (+6 -4)",
+        "crates/oxc_ast/src/lib.rs (+2 -0)",
+        "crates/oxc_ast/src/static_property_name.rs (+183 -0)",
+        "crates/oxc_isolated_declarations/src/signatures.rs (+2 -2)",
+        "crates/oxc_linter/src/ast_util.rs (+10 -27)",
+        "crates/oxc_linter/src/rules/eslint/accessor_pairs.rs (+38 -17)",
+        "crates/oxc_linter/src/rules/eslint/class_methods_use_this.rs (+6 -3)"
+      ],
+      "filesTotal": 89
+    },
+    {"number":27557,"title":"perf(formatter): skip comment handling for nodes with no comment near them","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27682,
+      "title": "fix(transform_conformance): handle pnpm virtual store paths in snapshots",
+      "url": "https://github.com/oxc-project/oxc/pull/27682",
+      "author": "camc314",
+      "mergedAt": "2026-10-14T14:41:37Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "tasks/transform_conformance/reporter.mjs (+15 -4)",
+        "tasks/transform_conformance/snapshots/babel_exec.snap.md (+12 -12)",
+        "tasks/transform_conformance/snapshots/oxc_exec.snap.md (+1 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27676,
+      "title": "fix(minifier): preserve lexical initializers in dead for loops",
+      "url": "https://github.com/oxc-project/oxc/pull/27676",
+      "author": "camc314",
+      "mergedAt": "2026-10-14T14:52:34Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Removing a `for` loop whose condition is always false currently discards `let`/`const` initializers.\nFor example:\n```js\nfunction f() {\n  for(let x = console.log('effect'); false;) { }\n}\nf();\n```\nloses its observable log.\n\nPreserve the lexical declaration in a block that reuses the loop's scope, including initializer evaluation, destructuring effects, and TDZ behavior. Continue hoisting body `var` declarations and record discarded body/test/update references without dropping the moved initializer.\n\nRegression coverage exercises both declaration kinds, initializer order, shadowing, direct eval, TDZ, destructuring, conditional statement placement, and body var hoisting. The test helper also checks idempotency.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/remove_dead_code.rs (+31 -0)",
+        "crates/oxc_minifier/tests/peephole/remove_dead_code.rs (+39 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27683,"title":"style(lexer): group imports","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27684,"title":"refactor(lexer): remove `classify/avx2` directory","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27685,"title":"refactor(lexer): add `Lexer::pipeline` method","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27686,"title":"refactor(lexer): rename specialized functions","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27634,
+      "title": "feat(linter): mark typescript rules as recommended from upstream",
+      "url": "https://github.com/oxc-project/oxc/pull/27634",
+      "author": "camchenry",
+      "mergedAt": "2026-10-14T16:19:21Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Marks all `recommended` rules from `typescript-eslint` as recommended here too.",
+      "files": [
+        "crates/oxc_linter/src/rules/typescript/await_thenable.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/ban_ts_comment.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_array_delete.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_base_to_string.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_duplicate_enum_values.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_duplicate_type_constituents.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_empty_object_type.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_explicit_any.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_extra_non_null_assertion.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_floating_promises.rs (+1 -0)"
+      ],
+      "filesTotal": 41
+    },
+    {"number":27669,"title":"chore(linter): add recommended to rulegen template","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27670,
+      "title": "feat(linter): mark unicorn rules as recommended",
+      "url": "https://github.com/oxc-project/oxc/pull/27670",
+      "author": "camchenry",
+      "mergedAt": "2026-10-14T16:46:41Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Marks all unicorn rules as `recommended` from the upstream plugin. Only the ones in the `unopinionated` preset are included, since I don't think we should include many of the more opinionated ones in recommended.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/consistent_date_clone.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/consistent_existence_index_check.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/error_message.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/escape_case.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/explicit_timer_delay.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/import_style.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/new_for_builtins.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/no_abusive_eslint_disable.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/no_accessor_recursion.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/unicorn/no_anonymous_default_export.rs (+1 -0)"
+      ],
+      "filesTotal": 112
+    },
+    {
+      "number": 27695,
+      "title": "fix(ecmascript): correct parseFloat decimal prefix scanning",
+      "url": "https://github.com/oxc-project/oxc/pull/27695",
+      "author": "camc314",
+      "mergedAt": "2026-10-14T18:47:37Z",
+      "labels": [
+        "A-minifier",
+        "A-ecmascript"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Correct `parseFloat` constant folding to stop at numeric separators and accept an exponent after a decimal point without fractional digits. `parseFloat('1_2')` now folds to `1` instead of `12`, `parseFloat('1e2_3')` to `100` instead of `1e23`, and `parseFloat('1.e2')` to `100` instead of `1`.",
+      "files": [
+        "crates/oxc_ecmascript/src/constant_evaluation/call_expr.rs (+29 -34)",
+        "crates/oxc_minifier/tests/peephole/replace_known_methods.rs (+45 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27697,
+      "title": "fix(linter/eslint/no-var): avoid fixes for redeclared bindings",
+      "url": "https://github.com/oxc-project/oxc/pull/27697",
+      "author": "camc314",
+      "mergedAt": "2026-10-14T19:29:36Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Skip `no-var` fixes when any binding in the declaration has multiple declarations, matching ESLint's redeclaration guard. This keeps valid repeated `var` declarations from becoming duplicate `const` or `let` declarations while still reporting each violation.\n\nAdd regressions for repeated declarations, destructuring, and parameter/function collisions, plus a case confirming that separate scopes remain fixable.\n\nFixes #27694",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_var.rs (+23 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27699,
+      "title": "fix(oxlint,oxfmt): correct Node.js TypeScript support range",
+      "url": "https://github.com/oxc-project/oxc/pull/27699",
+      "author": "camc314",
+      "mergedAt": "2026-10-14T19:50:35Z",
+      "labels": [
+        "A-linter",
+        "A-cli"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "TypeScript config load errors currently advertise `^20.19.0 || >=22.18.0`, even though Node 20 cannot load TypeScript files natively. Remove the Node 20 range from the shared Oxlint/Oxfmt diagnostic and the matching TypeScript plugin documentation, including generated schema, declarations, and website snapshot. Package engine requirements stay the same.\n\nFixes #27678",
+      "files": [
+        "apps/oxlint/src-js/package/config.generated.ts (+1 -1)",
+        "apps/shared/src-js/js_config/node_version.ts (+1 -1)",
+        "crates/oxc_linter/src/config/oxlintrc.rs (+1 -1)",
+        "npm/oxlint/configuration_schema.json (+2 -2)",
+        "tasks/website_linter/src/snapshots/schema_markdown.snap (+1 -1)",
+        "apps/shared/test/js_config/node_version.test.ts (+14 -12)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 27702,
+      "title": "fix(linter/unicorn/catch-error-name): avoid fix symbol name collisions",
+      "url": "https://github.com/oxc-project/oxc/pull/27702",
+      "author": "camc314",
+      "mergedAt": "2026-10-14T20:48:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`unicorn/catch-error-name` could rename a parameter to an existing binding, producing invalid syntax or capturing another variable. The fixer now appends underscores until the configured name is available in the parameter's scope and every scope where it is referenced, and avoids capturing unresolved references in its body. Diagnostics show the selected name.\n\nAdds regressions for both reported examples, unused catch parameters, nested references, globals, promise callbacks, configured names, and repeated suffix collisions. Generated names are also accepted when the configured name already ends in an underscore.\n\nFixes #27700.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/catch_error_name.rs (+105 -7)",
+        "crates/oxc_linter/src/snapshots/unicorn_catch_error_name.snap (+6 -6)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27703,"title":"ci(lexer): report which SIMD/generic implementation used in conformance & benchmarks","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27705,"title":"test(lexer): update `just` recipes to cover Neon implementation","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":27706,"title":"ci(lexer): test and lint ARM Neon implementation in CI","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27375,
+      "title": "feat(minifier): add de morgan optimization for void expressions",
+      "url": "https://github.com/oxc-project/oxc/pull/27375",
+      "author": "armano2",
+      "mergedAt": "2026-10-15T01:38:26Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "add missing de morgan law optimizations in context of void expression\n\n`(!a || b === c) && b()` -> `a && b !== c || b()`\n\nlimitations: due to how nodes are processed, currently simple rewrites like `!a || b()` are not rewritten to `a && b()` and follow same limitations as optimizations of `not unary expression`",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_not_expression.rs (+71 -41)",
+        "crates/oxc_minifier/src/peephole/remove_unused_expression.rs (+3 -0)",
+        "tasks/minsize/minsize.snap (+9 -9)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+6 -6)",
+        "crates/oxc_minifier/tests/peephole/inline_single_use_variable.rs (+1 -1)",
+        "crates/oxc_minifier/tests/peephole/minimize_conditions.rs (+0 -2)",
+        "crates/oxc_minifier/tests/peephole/remove_unused_expression.rs (+68 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 27674,
+      "title": "fix(coverage): pin the V8 test262 status list to Node's V8 version",
+      "url": "https://github.com/oxc-project/oxc/pull/27674",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-15T01:43:24Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "monitor-oxc's Test262 job fails on every run because `cargo coverage runtime` no longer matches `runtime.snap`. The runtime suite skips the cases V8's `test262.status` lists as failing, and it fetches that file from V8's `main` branch at run time. On 2026-10-09 V8 landed `03af3c3548` (\"[scopes] Reject var arguments in parameter eval\") and removed the 88 `language/eval-code/direct/*declare-arguments*` entries. Node 26.5 bundles V8 14.6.202, which predates that fix, so those 88 cases now run and fail with `Expected a SyntaxError to be thrown`.\n\nThe skip list exists to hide bugs of the engine that executes the cases, and that engine is Node's V8, not V8 `main`. `main` is wrong in both directions: it un-skips cases V8 fixed after Node's branch cut, and it skips 236 entries for test262 files newer than the pinned checkout.\n\nThe list is now fetched at the V8 version reported by `node -p process.versions.v8` (`14.6.202.34`, which V8 tags on GitHub), falling back to `main` only when that tag does not exist. The gitignored cache file carries the version in its name so a Node bump cannot serve a stale list.\n\nWith the pinned list the snapshot only changes when the test262 pin or `.node-version` moves. Regenerated against Node 26.5.0 it adds nothing and drops: four `delete/super-property-uninitialized-this` cases that V8 fixed upstream after 14.6, the `typeof/symbol.js` timeout, and the two `bigint-and-number-extremes` minify cases that #27656 fixed (the regular CI does not run the runti\n…(truncated)",
+      "files": [
+        "tasks/coverage/snapshots/runtime.snap (+2 -14)",
+        "tasks/coverage/src/runtime/.gitignore (+1 -1)",
+        "tasks/coverage/src/runtime/test262_status.rs (+53 -25)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":27655,"title":"refactor(minifier): move import/export minification to standalone file","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27671,
+      "title": "feat(linter): mark import rules as recommended",
+      "url": "https://github.com/oxc-project/oxc/pull/27671",
+      "author": "camchenry",
+      "mergedAt": "2026-10-15T04:45:21Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Copying recommended state from the upstream plugin.",
+      "files": [
+        "crates/oxc_linter/src/rules/import/default.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/import/namespace.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/import/no_duplicates.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/import/no_named_as_default.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/import/no_named_as_default_member.rs (+1 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27691,
+      "title": "feat(linter): mark nextjs rules as recommended",
+      "url": "https://github.com/oxc-project/oxc/pull/27691",
+      "author": "camchenry",
+      "mergedAt": "2026-10-15T05:02:16Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Copying recommended rules from upstream.\n\n---\n\n<sub>Stack created with <a href=\"https://github.com/github/gh-stack\">GitHub Stacks CLI</a> • <a href=\"https://gh.io/stacks-feedback\">Give Feedback 💬</a></sub>",
+      "files": [
+        "crates/oxc_linter/src/rules/nextjs/google_font_display.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/google_font_preconnect.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/inline_script_id.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/next_script_for_ga.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/no_assign_module_variable.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/no_async_client_component.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/no_before_interactive_script_outside_document.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/no_css_tags.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/no_document_import_in_page.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/nextjs/no_duplicate_head.rs (+1 -0)"
+      ],
+      "filesTotal": 21
+    },
+    {"number":27559,"title":"perf(formatter_core): write into one element stack through a concrete `Formatter`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":27716,"title":"refactor(formatter_core): remove `Buffer` trait","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27726,
+      "title": "fix(linter/unicorn/consistent-function-scoping): count self-referencing variables as captures",
+      "url": "https://github.com/oxc-project/oxc/pull/27726",
+      "author": "camc314",
+      "mergedAt": "2026-10-15T12:57:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Treat a function's reference to its own variable binding as a parent-scope capture, matching eslint-plugin-unicorn. For example, a nested `const builder = (...args) => builder.apply(null, args)` was incorrectly reported as movable even though it captures `builder` from the enclosing scope.\n\nLimit the recursion exemption to function-name symbols. Add regression cases for arrow functions, anonymous and named function expressions, parameter defaults, and `var` bindings, while retaining warnings for internal function-name recursion and shadowed parameters.\n\nAddresses report 5 (`unicorn/consistent-function-scoping`) in #27710.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/consistent_function_scoping.rs (+23 -1)",
+        "crates/oxc_linter/src/snapshots/unicorn_consistent_function_scoping.snap (+18 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27722,
+      "title": "fix(linter/eslint/no-div-regex): report quantified leading equals",
+      "url": "https://github.com/oxc-project/oxc/pull/27722",
+      "author": "ozenyunus35",
+      "mergedAt": "2026-10-15T13:03:27Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "The first parsed term in `/=+$/`, `/=*x/`, and `/={2}/` is a quantifier, so these literals were missed. Inspect the quantifier's body to report them consistently with ESLint. The existing autofix still replaces only the leading `=`, turning `/=+$/` into `/[=]+$/`.\n\nAdds regression coverage for quantified leading equals, autofixes, character classes, and non-leading equals.\n\nPart of #27710 (item 2: `eslint/no-div-regex`).",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_div_regex.rs (+24 -6)",
+        "crates/oxc_linter/src/snapshots/eslint_no_div_regex.snap (+21 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27723,
+      "title": "fix(linter/eslint/no-magic-numbers): restrict unary exemptions to numeric signs",
+      "url": "https://github.com/oxc-project/oxc/pull/27723",
+      "author": "ozenyunus35",
+      "mergedAt": "2026-10-15T13:06:06Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Member assignments such as `exports.a = void 0` and `exports.b = ~5` now report the numeric literals, matching ESLint. Only unary `-` and `+` are treated as part of a number, so assignments such as `exports.c = -7` remain allowed.\n\nAdds regression coverage for `void`, `~`, `!`, and `typeof`, plus allowed signed literals.\n\nAddresses #27710, item 4 (`eslint/no-magic-numbers`).\n\nAI assistance was used in preparing this change.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_magic_numbers.rs (+11 -1)",
+        "crates/oxc_linter/src/snapshots/eslint_no_magic_numbers.snap (+28 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27724,
+      "title": "fix(linter/eslint/id-length): check destructuring assignment targets",
+      "url": "https://github.com/oxc-project/oxc/pull/27724",
+      "author": "ozenyunus35",
+      "mergedAt": "2026-10-15T13:11:22Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`id-length` missed identifiers used as destructuring assignment targets, including `[q] = values` and `for ([ix, s] of values) {}`. Check array and object targets, defaults, and rest elements, matching ESLint 10.12.0.\n\nPreserve `properties: \"never\"` exemptions and report the key when an explicit object property's key and target share a name, including parenthesized computed keys. Regression tests cover assignment targets, exempt reads, and diagnostic locations.\n\nPart of #27710 (report 3).",
+      "files": [
+        "crates/oxc_linter/src/generated/rule_runner_impls.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/id_length.rs (+88 -1)",
+        "crates/oxc_linter/src/snapshots/eslint_id_length.snap (+90 -0)",
+        "tasks/track_linter_timings/linter_timings.snap (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27731,
+      "title": "fix(linter/eslint/no-setter-return): check setters in property descriptors",
+      "url": "https://github.com/oxc-project/oxc/pull/27731",
+      "author": "camc314",
+      "mergedAt": "2026-10-15T13:19:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Oxlint currently allows descriptor setters such as `Object.defineProperty(o, \"x\", { set: value => value })`, while ESLint reports the returned value.\n\nRecognize setters passed to `Object.defineProperty`, `Reflect.defineProperty`, `Object.defineProperties`, and `Object.create`, including concise arrows. Check argument positions and global bindings, preserve nested-function boundaries, and enable the upstream descriptor tests with additional regression coverage.\n\nAddresses report 1 (`eslint/no-setter-return`) in #27710.",
+      "files": [
+        "crates/oxc_linter/src/generated/rule_runner_impls.rs (+4 -2)",
+        "crates/oxc_linter/src/rules/eslint/no_setter_return.rs (+157 -42)",
+        "crates/oxc_linter/src/snapshots/eslint_no_setter_return.snap (+273 -0)",
+        "tasks/track_linter_timings/linter_timings.snap (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27735,
+      "title": "fix(linter/eslint/no-useless-assignment): report dead stores to function parameters",
+      "url": "https://github.com/oxc-project/oxc/pull/27735",
+      "author": "camc314",
+      "mergedAt": "2026-10-15T13:38:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Track function parameter bindings so `function f(p) { p = 5; p = 6; return p; }` reports `p = 5`, matching ESLint. This also covers defaulted, destructured, and rest parameters.\n\nKeep writes during parameter initialization excluded: the CFG does not model skipped defaults or their destructuring evaluation order reliably. Reads in defaults still count as uses.\n\nFixes #27720",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_useless_assignment.rs (+72 -21)",
+        "crates/oxc_linter/src/snapshots/eslint_no_useless_assignment.snap (+128 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27738,"title":"refactor(linter): move inline AST paths into imports","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 27757,
+      "title": "fix(linter/eslint/max-params): count rest parameters",
+      "url": "https://github.com/oxc-project/oxc/pull/27757",
+      "author": "camc314",
+      "mergedAt": "2026-10-15T19:57:36Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Count rest parameters toward the limit for functions, arrows, and TypeScript function types, matching ESLint. For example, `function f(a, b, c, ...rest) {}` now reports four parameters with the default maximum of three.\n\nAddresses report 12 (`eslint/max-params`) in #27746.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/max_params.rs (+43 -12)",
+        "crates/oxc_linter/src/snapshots/eslint_max_params.snap (+98 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27763,
+      "title": "fix(linter/unicorn/no-array-callback-reference): ignore callback factory calls",
+      "url": "https://github.com/oxc-project/oxc/pull/27763",
+      "author": "camc314",
+      "mergedAt": "2026-10-15T20:05:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Match Unicorn by ignoring call expressions passed as callbacks, including `arr.forEach(make(x))` and `arr.map(make(x))`. Suggesting an arrow wrapper would run the factory once per element instead of once per array method call.\n\nAddresses report 4 (`unicorn/no-array-callback-reference`) in #27746.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_array_callback_reference.rs (+8 -11)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27751,
+      "title": "fix(linter/unicorn/catch-error-name): check unused underscore-prefixed names",
+      "url": "https://github.com/oxc-project/oxc/pull/27751",
+      "author": "camc314",
+      "mergedAt": "2026-10-15T20:12:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Match Unicorn by exempting only the exact unused name `_`. Unused `_err` and `__` are now reported and renamed in catch clauses and promise rejection handlers. Regression tests preserve the `_` exemption and configured names/ignore patterns.\n\nAddresses report 15 (`unicorn/catch-error-name`) in #27746.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/catch_error_name.rs (+26 -1)",
+        "crates/oxc_linter/src/snapshots/unicorn_catch_error_name.snap (+49 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27766,
+      "title": "fix(linter/unicorn/prefer-type-error): handle parenthesized type checks",
+      "url": "https://github.com/oxc-project/oxc/pull/27766",
+      "author": "camc314",
+      "mergedAt": "2026-10-15T20:19:44Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Unwrap parentheses when identifying type checks so `!(x instanceof Y)` and `!(typeof x === \"string\")` report `throw new Error(...)` and fix it to `TypeError`, matching Unicorn. Includes regressions for nested conditions and both autofixes.\n\nAddresses report 16 (`unicorn/prefer-type-error`) in #27746.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_type_error.rs (+43 -1)",
+        "crates/oxc_linter/src/snapshots/unicorn_prefer_type_error.snap (+53 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":27765,"title":"fix(linter/eslint/no-param-reassign): report rest parameter writes","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":27756,"title":"fix(linter/eslint/class-methods-use-this): count this in parameter defaults","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":27761,"title":"fix(linter/unicorn/prefer-regexp-test): check logical operands in boolean contexts","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":27755,"title":"fix(linter/eslint/no-unused-vars): count conditional calls in sequences as uses","hint":"fix","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 2
+    }
+  }
+}

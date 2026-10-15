@@ -1,0 +1,29 @@
+{
+  "kind": "repo",
+  "repo": "w3c/aria",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T15:52:28Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 2935,
+      "title": "Chore: Remove duplicate",
+      "url": "https://github.com/w3c/aria/pull/2935",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-10-15T16:49:24Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

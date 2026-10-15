@@ -1,0 +1,230 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T09:59:04Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14608,
+      "title": "Update the copyright license where that had yet to be done",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14608",
+      "author": "frivoal",
+      "mergedAt": "2026-10-15T03:30:03Z",
+      "labels": [
+        "meta"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "As per https://www.w3.org/2025/03/css-wg.html#licensing:\n> This Working Group will use the W3C Software and Document license for all its deliverables.\n\nThis is already handled in all documents produced with bikeshed, but a few legacy ones are not, and had the old license. This brings things into agreement with the current charter's expectations.",
+      "files": [
+        "css-2007/Overview.html (+2 -19)",
+        "css-2007/Overview.src.html (+1 -3)",
+        "css-2010/Overview.html (+2 -19)",
+        "css-2010/Overview.src.html (+1 -3)",
+        "css-backgrounds-3/box-shadow.src.html (+1 -1)",
+        "css-exclusions-1/Exclusions.src.html (+1 -1)",
+        "css-page-template-1/Overview.html (+2 -19)",
+        "css-page-template-1/Overview.src.html (+1 -1)",
+        "css-preslev-1/Overview.html (+2 -20)",
+        "css-preslev-1/Overview.src.html (+1 -3)"
+      ],
+      "filesTotal": 22
+    },
+    {
+      "number": 14607,
+      "title": "[css-borders-4] Fix corner-shape || border-radius order to match resolution in #11623",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14607",
+      "author": "kbabbitt",
+      "mergedAt": "2026-10-15T06:56:27Z",
+      "labels": [
+        "css-borders-4"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "css-borders-4/Overview.bs (+3 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14609,
+      "title": "[css-overflow] Clarify effect of visual supporession on baselines",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14609",
+      "author": "frivoal",
+      "mergedAt": "2026-10-15T07:40:41Z",
+      "labels": [
+        "css-overflow-4",
+        "Closed Accepted by Editor Discretion",
+        "topic: line-clamp"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is a follow up to https://github.com/w3c/csswg-drafts/issues/12859. The resolution taken there had no intent to change any effect on layouts, but without clarification in the spec text, it could be inferred that the clamped lines are still taken into account not only for accessibility / interactivity reasons, but also for layout reasons, and that was not indented. It would also break compat with the legacy -webkit-line-clamp verison.",
+      "files": [
+        "css-overflow-4/Overview.bs (+5 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14491,
+      "title": "[css-mixins-1] Make @layer invalid within a mixin body. #12417",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14491",
+      "author": "kbabbitt",
+      "mergedAt": "2026-10-15T20:23:45Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "css-mixins-1/Overview.bs (+8 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14600,
+      "title": "[animation-triggers-1] Set correct namespace for definitions",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14600",
+      "author": "cdoublev",
+      "mergedAt": "2026-10-15T20:26:52Z",
+      "labels": [
+        "editorial"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "[`keypress()`](https://drafts.csswg.org/animation-triggers-1/#funcdef-event-function-keypress) is defined `for=\"event-function\"` but it should be `for=\"<event-function>\"` as this creates a [dangling value](ed/css/animation-triggers.json#L476) in `w3c/webref`, because it cannot find the `event-function` property definition.\n\ncc @tidoust",
+      "files": [
+        "animation-triggers-1/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-10-13T23:00:23Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "commits": [
+    {
+      "sha": "9dcc91e",
+      "url": "https://github.com/w3c/csswg-drafts/commit/9dcc91e83842ca013d20c07a526bd1ddfb8ac618",
+      "author": "frivoal",
+      "committedAt": "2026-10-14T01:06:12Z",
+      "title": "[css-overflow] Update test coverage",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overflow-4/Overview.bs (+18 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "a26781e",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a26781e9787ac912d8e739978ff3740511d19de7",
+      "author": "frivoal",
+      "committedAt": "2026-10-14T02:13:39Z",
+      "title": "[css-overflow] Update test coverage",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overflow-4/Overview.bs (+5 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "1c249b3",
+      "url": "https://github.com/w3c/csswg-drafts/commit/1c249b342ee7a0dfe0fcf7f7dc75272b1e794d52",
+      "author": "frivoal",
+      "committedAt": "2026-10-14T02:56:22Z",
+      "title": "[css-overflow] Update test coverage",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overflow-4/Overview.bs (+8 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "47c467e",
+      "url": "https://github.com/w3c/csswg-drafts/commit/47c467ed44c18e53a94a1dc1d93ae9f84cb8775e",
+      "author": "JoshTumath",
+      "committedAt": "2026-10-14T16:36:13Z",
+      "title": "[css-images-5] Add 2D gradient explainer",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-images-5/explainers/freeform-gradient-editing.png (+0 -0)",
+        "css-images-5/explainers/freeform-gradient-example-simple.png (+0 -0)",
+        "css-images-5/explainers/freeform-gradient-example.png (+0 -0)",
+        "css-images-5/explainers/mesh-gradient-editing.png (+0 -0)",
+        "css-images-5/explainers/mesh-gradient-example-simple.png (+0 -0)",
+        "css-images-5/explainers/mesh-gradient-example.png (+0 -0)",
+        "css-images-5/explainers/2d-gradients.md (+292 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "sha": "f84599e",
+      "url": "https://github.com/w3c/csswg-drafts/commit/f84599e9b42cb5b159ba5ca08cc9fdcc5f829145",
+      "author": "frivoal",
+      "committedAt": "2026-10-15T08:07:47Z",
+      "title": "[css-overflow] Update test coverage",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overflow-4/Overview.bs (+4 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "247bc6b",
+      "url": "https://github.com/w3c/csswg-drafts/commit/247bc6b2f2fb8098aa27654316e2a2e968ee74bb",
+      "author": "tabatkins",
+      "committedAt": "2026-10-15T17:21:27Z",
+      "title": "[css-pseudo-4][css-ui-4][selectors-5] Tweaks around 'interest' to adopt a little more of the definitions into CSS. #12347",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-pseudo-4/Overview.bs (+39 -65)",
+        "css-ui-4/Overview.bs (+3 -3)",
+        "selectors-5/Overview.bs (+24 -16)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "sha": "6e477b9",
+      "url": "https://github.com/w3c/csswg-drafts/commit/6e477b9d3d4759f4c8853685fa1fe55c0f0f3a7e",
+      "author": "tabatkins",
+      "committedAt": "2026-10-15T20:07:39Z",
+      "title": "[css-pseudo-4] Whoops, add missing image",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-pseudo-4/images/interest-button.png (+0 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "a0d6092",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a0d60921d33164a0b749ff71f40e91935fa96725",
+      "author": "tabatkins",
+      "committedAt": "2026-10-15T20:26:12Z",
+      "title": "[css-pseudo-4][editorial] Restore accidentally-deleted chapter.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-pseudo-4/Overview.bs (+69 -0)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

@@ -1,0 +1,824 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T22:30:53Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.11.2",
+      "publishedAt": "2026-10-09T17:38:44Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.11.2"
+    },
+    "prerelease": {
+      "tag": "pnpr@0.1.0-alpha.15",
+      "publishedAt": "2026-10-10T12:35:55Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.15"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v12.14.0",
+      "name": "pnpm 12.14.0",
+      "publishedAt": "2026-10-15T13:42:33Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.14.0",
+      "prerelease": false,
+      "body": "This release adds the `sideEffectsCache.exclude` setting, stops `pnpm install` from waiting on the daily update check, and keeps pnpm from aborting with a core dump when the reader of its output exits.\n\n### Minor Changes\n\n- Added the `sideEffectsCache.exclude` setting for packages whose build depends on something pnpm cannot include in the cache key, such as the system libraries a native addon links against. pnpm builds the listed packages in every project and never restores or saves their builds through the side-effects cache, locally or on a `remoteCache` server. Under the global virtual store, each project gets its own copy of these packages and of the packages that depend on them. Entries use the same `name`, `@scope/*`, and `name@version` patterns as `minimumReleaseAgeExclude` [#5271](https://github.com/pnpm/pnpm/issues/5271).\n\n- `pnpm login` now prints the `npm-notice` response header during web-based login. Registries use it to show the verification code that completes the sign-in in the browser.\n\n### Patch Changes\n\n#### Installing packages\n\n- `pnpm install` and `pnpm add` no longer wait for the daily update check. If the command finishes first, pnpm skips the update notice and checks again next time. On a registry that accepted the connection but never answered, an install that had nothing to do used to take minutes [#16839](https://github.com/pnpm/pnpm/issues/16839).\n\n- `pnpm install`, `pnpm add` and `pnpm update` now reuse `pnpm-lock.yaml` when the workspace configures a catalog entry that no dependency references, such as an unused entry or one whose package an `overrides` entry replaces. Before, every resolution in such a workspace resolved all dependencies again from the registry [#16923](https://github.com/pnpm/pnpm/issues/16923).\n\n- `pnpm install` now looks up a git dependency's branch or tag once per install, even when many workspace projects depend on it. With `linkWorkspacePackages` enabled, it used to run `git ls-remote` once per project [#16899](https://github.com/pnpm/pnpm/issues/16899).\n\n- A filtered install, such as `pnpm install --filter <pkg>`, now keeps the `pnpm-lock.yaml` entries of workspace projects that are missing from disk, as in a sparse checkout. Their importers, packages, and catalog entries stay even when the filter matches every project on disk [#16931](https://github.com/pnpm/pnpm/issues/16931).\n\n- pnpm now decides whether a dependency that a package also declares as an optional peer is linked as a dependency or as a peer from the shallowest path that reaches the package. When an existing lockfile records such a dependency as a regular dependency and a newly added dependency now provides the peer, pnpm records it as a peer, as a fresh install does. The lockfile entry of such a package can change on the next install [#16901](https://github.com/pnpm/pnpm/issues/16901).\n\n- An install that adds nothing to the store no longer changes the modification time of the store directory. CI caches that check modification \n…(truncated)"
+    },
+    {
+      "tag": "v11.28.6",
+      "name": "pnpm 11.28.6",
+      "publishedAt": "2026-10-15T13:45:17Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v11.28.6",
+      "prerelease": false,
+      "body": "This release stops `pnpm publish` from sending a CI identity token to a registry it was not issued for. It also fixes installs that dropped a dependency also declared as an optional peer, and accepts empty `httpProxy` and `httpsProxy` settings again.\n\n### Patch Changes\n\n#### Security\n\n* `pnpm publish` now uses an `NPM_ID_TOKEN` only if its `aud` claim matches the selected registry, such as `npm:registry.npmjs.org`. A token for another registry is skipped with a warning, and pnpm falls back to the configured credentials.\n\n* The warning about renamed package files with invalid names no longer prints control characters from those file names.\n\n#### Configuration\n\n* pnpm again accepts `httpProxy` and `httpsProxy` set to `null` or written with no value in `pnpm-workspace.yaml` and the global config file, and treats them as unset. Since 11.28.5 these values failed with `ERR_PNPM_INVALID_SETTING`.\n\n* pnpm now switches to the pnpm version a project pins even when it cannot read its configuration. Previously, a setting it rejected in the global config file, an `.npmrc` file, `_auth`, or `pnpm-workspace.yaml` stopped every command, `pnpm --version` included.\n\n* A key under a registry URL in the `_auth` setting that does not start with `@` is now skipped with a warning, so a field a later pnpm version adds there no longer breaks this one. A key that holds an `authToken` object but lacks its `@`, such as `org` for `@org`, is still an error.\n\n#### Resolving dependencies\n\n* pnpm no longer drops a dependency that a package also declares as an optional peer dependency, for example `ajv` of `ajv-formats`. Since 11.28.0, in some dependency graphs the package got the dependency neither as a dependency nor as a peer, and failed to import it [#16901](https://github.com/pnpm/pnpm/issues/16901).\n\n* `pnpm install` no longer fails with `ERR_PNPM_NO_MATCHING_VERSION` after a change to `overrides` when the lockfile resolves an optional peer dependency to an npm alias of another package [#16654](https://github.com/pnpm/pnpm/issues/16654).\n\n* `pnpm install` and `pnpm dedupe` now link an optional peer to the workspace package that the workspace root depends on when the picked version matches it. Previously they installed the registry package with the same name and version [#16706](https://github.com/pnpm/pnpm/issues/16706).\n\n* Removal overrides such as `\"debug>supports-color\": \"-\"` now also apply to an optional peer that a package declares only in `peerDependenciesMeta` [#16681](https://github.com/pnpm/pnpm/issues/16681).\n\n* `pnpm dedupe` now preserves a hoisted workspace package when another package uses a separately installed peer with the same name [#16935](https://github.com/pnpm/pnpm/issues/16935).\n\n* `pnpm install` and `pnpm add --config` now apply `minimumReleaseAge` when they resolve a config dependency. A config dependency range resolves to the newest version that is old enough, so a later clean `pnpm install --frozen-lockfile` accepts the lockfile [#16660](https://gi\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 16920,
+      "title": "fix(fs-packlist): honor nested ignore files when `files` is set",
+      "url": "https://github.com/pnpm/pnpm/pull/16920",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T05:23:00Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith a `files` allowlist, `pnpm pack` / `pnpm publish` skipped every `.npmignore` / `.gitignore`, including ones inside listed directories. npm and pnpm 11 (npm-packlist) only skip the root ones and keep honoring nested ones within their subtree.\n\nThe packlist walk now reads subdirectories' ignore files in `files` mode. Only the root and workspace-inherited rules are replaced by the allowlist.\n\nA file named by a `files` entry still ships even if a nested ignore file excludes it. The walk enters an excluded directory only to reach named files and keeps nothing else there, so it still never follows symlinks or leaves the package. Divergence from npm: npm keeps such a named file only when it is a direct child of the ignore file's directory (`files: [\"src/util/x.test.js\"]` with `src/.npmignore` = `*.test.js` drops it in npm). pnpm keeps it at any depth, which is also what pnpm 12 did before.\n\npnpm 11 uses npm-packlist and is not affected, so this is a v12-only fix.\n\nCloses pnpm/pnpm#16909\n\n## Squash Commit Body\n\n```text\nWith a `files` allowlist, the packlist walk skipped every `.npmignore` and\n`.gitignore`, including the ones inside listed directories. npm-packlist\n(and so pnpm 11) only drops the root ones and keeps applying a\nsubdirectory's ignore file within its subtree.\n\nThe walk now reads subdirectories' ignore files in that mode and only\nreplaces the root and workspace-inherited rules with the allowlist. A file\nthat a `files` entry names still ships even when a n\n…(truncated)",
+      "files": [
+        "pnpm/crates/fs-packlist/src/ignore_walk.rs (+91 -17)",
+        "pnpm/crates/fs-packlist/src/lib.rs (+7 -9)",
+        ".changeset/nested-npmignore-with-files.md (+5 -0)",
+        "pnpm/crates/fs-packlist/src/tests/files.rs (+77 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":16922,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16919,
+      "title": "fix(cli): resolve the pinned pnpm through the registry and proxy flags",
+      "url": "https://github.com/pnpm/pnpm/pull/16919",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T07:41:59Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to https://github.com/pnpm/pnpm/discussions/16911.\n\nThe report: on a network that blocks `registry.npmjs.org`, `pnpm install --registry=<azure feed>` fails with `ERR_PNPM_BAD_CONFIG_DEP: Failed to fetch metadata from https://registry.npmjs.org/pnpm`, even when the running pnpm is the version `packageManager` pins.\n\nIn that case the pre-command pass still resolves the pin, to record its integrity in `pnpm-lock.yaml`. It uses the package-manager bootstrap registry. By design, that registry reads only trusted sources and ignores the project `.npmrc` and `pnpm-workspace.yaml`. But the pass loads its own config and applied only `--config.*` overrides. It skipped the global `CliNetworkArgs` flags (`--registry`, `--https-proxy`, `--http-proxy`, `--no-proxy`), which only the main dispatch applies.\n\nReproduced with a dead registry URL on 12.13.0 and a fresh `HOME`:\n\n| source | pin lookup goes to |\n| --- | --- |\n| `--config.registry=` | the given registry |\n| `PNPM_CONFIG_REGISTRY` | the given registry |\n| `registry=` in `~/.npmrc` | the given registry |\n| `--registry=` | **registry.npmjs.org** (bug) |\n| project `.npmrc` | registry.npmjs.org (by design, untrusted) |\n\nAfter the fix, `--registry=` reaches the given registry. pnpm v11 already sends `--registry` to `packageManagerRegistries` (`CLI --registry overrides pnpm-workspace.yaml registries.default` in `config/reader/test/index.ts`), so this is v12-only.\n\nUntil a release ships the fix, `registry=<mirror>` in `~/\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/cli_command.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/pre_command.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input.rs (+31 -3)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input/argv_scan.rs (+3 -2)",
+        "pnpm/crates/cli/src/cli_args/pre_command/load_config.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/pre_command/tests.rs (+37 -2)",
+        ".changeset/registry-flag-reaches-pnpm-pin.md (+5 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16918,
+      "title": "fix(fs-packlist): re-include the directories main, browser, and bin point into",
+      "url": "https://github.com/pnpm/pnpm/pull/16918",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T07:42:14Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#16908.\n\npnpm 12's `fs-packlist` left out a gitignored directory during the walk and then added back only the exact `main` / `bin` file. It did not handle `browser` at all. npm-packlist, and pnpm 11 through it, adds `!/<path>` strict rules for `main`, `browser`, and `bin` after the root's ignore files. Matched partially, such a rule re-includes the ignored directory, and ignore-walk then ships everything inside it.\n\nThe walk now appends the same rules to the root's rule set. `browser` also joins the force-include and `files`-override set.\n\nI checked the expected lists against `npm pack --dry-run` (npm 11):\n\n| fixture | npm | this PR |\n|---|---|---|\n| `.gitignore` `dist/` `out/`, `main` + `browser` | whole `dist/`, `out/` | same |\n| `.gitignore` `dist` `out`, `main` + `bin` object | whole `dist/`, `out/` | same |\n| `.npmignore` `dist/` `out/`, `main` + `bin` string | whole `dist/`, `out/` | same |\n| `files: [\"dist/top.js\"]`, `browser: \"out/browser.js\"` | `dist/top.js`, `out/browser.js` | same |\n| `browser` replacement map | ignored | ignored |\n\nTwo deliberate divergences, both in how the rule is built:\n\n- npm builds the rule from the raw value, so `main: \"./dist/lib/app.js\"` becomes `!/./dist/lib/app.js`. That rule matches nothing, and npm drops the main file entirely. pnpm already normalizes `./` for its force-include, so the rule is built from the normalized path. The `./` and bare forms now behave the same. Paths that escape the package are still\n…(truncated)",
+      "files": [
+        "pnpm/crates/fs-packlist/src/ignore_walk.rs (+8 -2)",
+        "pnpm/crates/fs-packlist/src/ignore_walk/rule.rs (+10 -0)",
+        "pnpm/crates/fs-packlist/src/ignore_walk/segment.rs (+13 -1)",
+        "pnpm/crates/fs-packlist/src/ignore_walk/tests.rs (+17 -0)",
+        "pnpm/crates/fs-packlist/src/lib.rs (+48 -48)",
+        ".changeset/pack-reinclude-main-browser-dirs.md (+5 -0)",
+        "pnpm/crates/fs-packlist/src/tests/runtime.rs (+103 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16912,
+      "title": "fix(resolver): re-split lockfile-pinned children when a dependency becomes a peer",
+      "url": "https://github.com/pnpm/pnpm/pull/16912",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T07:58:11Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFollow-up to pnpm/pnpm#16903. Installing in two steps could write a different lockfile than installing everything at once.\n\n```\nproject\n├── G > P > X      X lists B as a dependency and as an optional peer\n└── O              (optional peers: P, B)\n```\n\n- **One step:** `O`'s optional peers put `P` and `B` at the project root. `X` under that `P` has `B` above it, so it takes `B` as a peer: `X(B@1.0.0)`.\n- **Two steps (`G` first, then `O`):** the first lockfile records `X` with `B` as a dependency. In the second install, v12 read `P`'s children from that lockfile (pnpm/pnpm#13839 keeps them pinned to avoid churn), so `X` kept `B` as a dependency. v11 resolves the hoisted `P` fresh and writes the peer, as in one step.\n\n**Fix:** before a newly resolved package reads children pinned by the lockfile, v12 checks whether any pinned package would now split a dependency and peer differently. If one would, it resolves the children instead of reading the pins.\n\nThe lockfile entry for `X` doesn't say `B` is also a peer, so this needs `X`'s metadata. It is read only for pinned packages with a dependency or peer whose presence above them changed. A plain reinstall reads nothing. Adding a dependency to the issue's real-world repro read the metadata of one package.\n\nThe issue's repro now writes the same lockfile in one step and in two steps, matching v11.\n\n## Squash Commit Body\n\n```text\nA newly resolved package reads the children the prior lockfile pinned\nfor it (pnpm/pnpm#13839). W\n…(truncated)",
+      "files": [
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/reuse.rs (+2 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/reuse/snapshot_children.rs (+2 -1)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk.rs (+7 -3)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/level_walk.rs (+12 -6)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/locked_split.rs (+349 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/locked_split/tests.rs (+63 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/workspace_ctx.rs (+3 -2)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/workspace_ctx/children_ownership.rs (+41 -7)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/workspace_ctx/tests.rs (+5 -0)",
+        "pnpr/.fixtures/packages/@pnpm.e2e/peers-of-split-tie-parent/1.0.0/package.json (+16 -0)"
+      ],
+      "filesTotal": 19
+    },
+    {"number":16883,"title":"docs(resolving-deps-resolver): drop the importer-concurrency prose","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16924,
+      "title": "fix(lockfile): reuse the lockfile when no dependency references a catalog",
+      "url": "https://github.com/pnpm/pnpm/pull/16924",
+      "author": "Anoesj",
+      "mergedAt": "2026-10-14T08:38:38Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nA workspace that configures a catalog entry no dependency references made every resolution resolve all dependencies again from the registry instead of reusing `pnpm-lock.yaml`. The lockfile records only referenced catalog entries, so it has no `catalogs` section in that case. Besides an unused entry, an override on a cataloged package gets there too, because it replaces the dependency's `catalog:` specifier. typescript-native-bridge documents that setup.\n\nCloses pnpm/pnpm#16923.\n\n### Root cause\n\n`try_fast_update_catalogs` returned `FastCatalogUpdate::Unsupported` when the lockfile had no `catalogs` section while the workspace configured catalogs. `lockfile_reuse_seed` then withheld the reuse seed, so the walk resolved every dependency again.\n\n### Fix\n\nThe lockfile records only the catalog entries that a dependency references, and `catalog_references_have_snapshots`, which runs first, has already checked that each reference has one. A lockfile without a `catalogs` section is therefore one whose dependencies reference none, so `try_fast_update_catalogs` now treats it as an empty one. The lockfile freshness check (`all_catalogs_are_up_to_date`) already reads a missing section that way.\n\npnpm 11 is not affected: the TypeScript half of pnpm/pnpm#13477, which added this fast path, already reads a missing section as empty (`lockfile.catalogs ?? {}`). The Rust port diverged, so this is a Rust-only change.\n\n### Tests\n\n- Three CLI tests in `lockfile_resolution_reuse/overrid\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/fast_update_catalogs.rs (+5 -7)",
+        "pnpm/crates/package-manager/src/fast_update_catalogs/tests.rs (+23 -1)",
+        ".changeset/unreferenced-catalogs-keep-lockfile-reuse.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/lockfile_resolution_reuse/overrides.rs (+90 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16891,
+      "title": "fix(run): hide `[ELIFECYCLE]` under the silent reporter",
+      "url": "https://github.com/pnpm/pnpm/pull/16891",
+      "author": "everett1992",
+      "mergedAt": "2026-10-14T09:04:04Z",
+      "labels": [
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`pnpm run` wrote `[ELIFECYCLE] Command failed with exit code N.` to stderr with `eprintln!` whenever a script ran with inherited stdio, whatever the reporter. `--reporter=silent`, `--silent`, `--loglevel=silent` and `reporter: silent` all still printed it, while pnpm 11 prints nothing under the silent reporter. A tool that runs `pnpm --reporter=silent <script>` and checks stderr saw the line appear after upgrading.\n\nThe inherited path now skips the line when the selected reporter is the silent one. The streamed path already emits it through the reporter (pnpm/pnpm#16694), which the silent reporter drops, so both paths agree. Other reporters and `--loglevel=error` keep the line on stderr, as pnpm 11 keeps it at those levels.\n\n## Summary\n\n## Squash Commit Body\n\n```text\n`pnpm run` wrote `[ELIFECYCLE] Command failed with exit code N.` to stderr with `eprintln!` whenever a script ran with inherited stdio, whatever the reporter. `--reporter=silent`, `--silent`, `--loglevel=silent` and `reporter: silent` all still printed it, while pnpm 11 prints nothing under the silent reporter. A tool that runs `pnpm --reporter=silent <script>` and checks stderr saw the line appear after upgrading.\n\nThe inherited path now skips the line when the selected reporter is the silent one. The streamed path already emits it through the reporter (pnpm/pnpm#16694), which the silent reporter drops, so both paths agree. Other reporters and `--loglevel=error` keep the line on stderr, as pnpm 11 keeps it at th\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/run/execution.rs (+4 -2)",
+        ".changeset/run-silent-lifecycle-failure.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/reporter_setting.rs (+51 -0)",
+        "pnpm/crates/cli/tests/suite/run_recursive/output.rs (+39 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 15651,
+      "title": "feat: add `sideEffectsCache.exclude` setting",
+      "url": "https://github.com/pnpm/pnpm/pull/15651",
+      "author": "fumikun",
+      "mergedAt": "2026-10-14T09:06:41Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit",
+        "reviewed: zoltan's agent"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds a `sideEffectsCache.exclude` setting for packages whose build output depends on the environment it runs in, such as a native addon compiled against `JAVA_HOME`. Today the first successful build of such a package is stored in the side-effects cache and restored into every later project on the machine, so a project built in a different environment silently gets the first project's binary.\n\n```yaml\n# pnpm-workspace.yaml\nsideEffectsCache:\n  exclude:\n    - java\n    - '@native/*'\n    - 'sharp@1.0.0 || 2.0.0'\n```\n\nA listed package is built in every project. pnpm never restores its build from the side-effects cache and never saves it there, locally or remotely. Under the global virtual store it gets a project-scoped slot. Entries use the `minimumReleaseAgeExclude` / `trustPolicyExclude` pattern syntax. The list sits in the `sideEffectsCache` object next to `read`, `write`, and `remote`; declaring only `exclude` leaves the others at their defaults, and `pnpm config delete sideEffectsCache` clears it with them. Rules match the snapshot key's structured name and version, so a bare rule also covers a git or tarball resolution whose URL contains an `@`. A `name@version` rule names registry versions only.\n\nThis implements the per-package opt-out agreed on in the issue (named `buildPolicy: no-cache` there, when settings still lived in `package.json#pnpm`). It is a new feature, so it lands in pnpm v12 only.\n\nCloses pnpm/pnpm#5271\n\n### Where the rule is enforced\n\nThe patterns\n…(truncated)",
+      "files": [
+        "pnpm/crates/config/src/settings.rs (+7 -0)",
+        "pnpm/crates/config/src/workspace_yaml.rs (+7 -3)",
+        "pnpm/crates/config/src/workspace_yaml/apply.rs (+1 -0)",
+        "pnpm/crates/config/src/workspace_yaml/reset.rs (+1 -0)",
+        "pnpm/crates/config/src/workspace_yaml/sections.rs (+2 -0)",
+        "pnpm/crates/config/src/workspace_yaml/tests.rs (+2 -0)",
+        "pnpm/crates/deps-restorer/src/build_modules.rs (+4 -1)",
+        "pnpm/crates/deps-restorer/src/build_modules/allow_build_policy.rs (+47 -2)",
+        "pnpm/crates/deps-restorer/src/build_modules/build_one_snapshot/side_effects.rs (+6 -2)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/partition.rs (+25 -9)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 16917,
+      "title": "fix(install): install the Windows Rust toolchain for rustup's default host",
+      "url": "https://github.com/pnpm/pnpm/pull/16917",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T09:30:17Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to pnpm/pnpm#16854. Follow-up to pnpm/pnpm#16868.\n\n`pnpm install` installs the Rust toolchain that `rust-toolchain.toml` names. pnpm/pnpm#16868 made the Windows toolchain ABI follow the target pnpm was built for. That was the wrong signal in two ways:\n\n- Building pnpm for MSYS2 runs `pnpm install` on an official pnpm, which is an MSVC build, so 12.13.0 still installed `x86_64-pc-windows-msvc`.\n- rustup does not do this. Without a default host, `TargetTuple::from_host` in rustup's `src/dist/mod.rs` picks `{arch}-pc-windows-msvc` whatever rustup was built for. Its build target is used only when the architecture can't be detected.\n\nOn Windows the host triple now follows rustup:\n\n| source | example |\n| --- | --- |\n| rustup's `default_host_triple` (`$RUSTUP_HOME/settings.toml`), taken whole when it names a supported Windows host | `rustup set default-host x86_64-pc-windows-gnu` → `x86_64-pc-windows-gnu` |\n| otherwise, the MSVC toolchain for the machine's native architecture (`IsWow64Process2`, as rustup reads it) | x64 pnpm on ARM64 Windows → `aarch64-pc-windows-msvc` |\n\nThe build-target fallback from pnpm/pnpm#16868 is removed, so the toolchain no longer depends on how pnpm was built.\n\n`MSYSTEM` is deliberately not used. Git for Windows' Git Bash also sets `MSYSTEM=MINGW64`, so it would switch most Windows developers to the GNU toolchain.\n\n`rustup_settings_file()` moves from the CLI shim code into `pnpm-rust-toolchain` so both use one copy.\n\nThis is a partial \n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/cli/src/shim_dispatch.rs (+2 -2)",
+        "pnpm/crates/cli/src/shim_dispatch/rust_toolchain.rs (+0 -9)",
+        "pnpm/crates/rust-toolchain/Cargo.toml (+3 -0)",
+        "pnpm/crates/rust-toolchain/src/host.rs (+35 -18)",
+        "pnpm/crates/rust-toolchain/src/host/tests.rs (+12 -16)",
+        "pnpm/crates/rust-toolchain/src/host/windows_machine.rs (+53 -0)",
+        "pnpm/crates/rust-toolchain/src/lib.rs (+2 -0)",
+        "pnpm/crates/rust-toolchain/src/rustup_settings.rs (+34 -0)",
+        "pnpm/crates/rust-toolchain/src/rustup_settings/tests.rs (+28 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 16916,
+      "title": "fix(cli): stop aborting when stderr is a closed pipe",
+      "url": "https://github.com/pnpm/pnpm/pull/16916",
+      "author": "florentdestremau",
+      "mergedAt": "2026-10-14T10:47:46Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWhen the reader of pnpm's stderr exits early, the next write pnpm makes to stderr panics in `std::io::stdio::print_to` (`failed printing to stderr: Broken pipe (os error 32)`). The release profile uses `panic = \"abort\"`, so pnpm dies with SIGABRT, exit code 134 and a core dump. The usual trigger is a failing script whose `[ELIFECYCLE]` line goes to a closed pipe:\n\n```sh\n# package.json: { \"scripts\": { \"start\": \"sleep 1; exit 1\" } }\npnpm start 2>&1 | head -1          ; echo ${PIPESTATUS[0]}   # before: 134, after: 1\npnpm start >/dev/null 2> >(true)   ; echo $?                 # before: 134, after: 1\n```\n\nThis PR:\n\n- adds `pnpm_diagnostics::eprintln!` and `pnpm_diagnostics::eprint!`, which write to stderr and drop a failed write, like the reporter already does (`let _ = writeln!(...)`);\n- routes the 38 `eprintln!`/`eprint!` calls in `pnpm-cli`, `pnpm-store-dir` and `pnpm-diagnostics` through them;\n- enables clippy's `print_stderr` restriction lint so the std macros cannot come back. `clippy.toml` sets `allow-print-in-tests`. Code that never ships in the pnpm binary opts out with a crate-level `#![expect]`: the `pnpm/tasks` tools, the test-only binaries of `pnpm-fs`, and the CLI e2e suite (its helpers log to stderr outside `#[test]` functions, which `allow-print-in-tests` does not cover);\n- adds an e2e test that runs a failing script with a stderr pipe whose read end is already closed, and checks that the script's exit code comes back.\n\nFixes pnpm/pnpm#16904\n\nNotes fo\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "Cargo.toml (+1 -0)",
+        "clippy.toml (+2 -0)",
+        "pnpm/crates/cli/src/checkbox_terminal_wasm.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/audit.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/cache.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/docs.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/pipeline/agent.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/profile.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/run/execution.rs (+1 -1)"
+      ],
+      "filesTotal": 32
+    },
+    {"number":16926,"title":"docs(pnpr): remove stale duplicated docs and fix drifted claims","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16915,
+      "title": "fix(cli): avoid creating manifests for read-only and rejected commands",
+      "url": "https://github.com/pnpm/pnpm/pull/16915",
+      "author": "jatmn",
+      "mergedAt": "2026-10-14T12:02:43Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCommands that do not write the project manifest no longer create a missing `package.json`. This covers read-only queries such as `pnpm why` and `pnpm outdated`, lockfile-only `pnpm fetch` and `pnpm sbom`, `pnpm dedupe --check`, and every command that exits with an error during argument or prerequisite validation (`pnpm rt ls`, `pnpm audit` without a lockfile, `pnpm link ./missing`, and so on). A lockfile-only SBOM reports the root component with its missing-metadata defaults instead of the initialization template. Closes pnpm/pnpm#16907.\n\nCommand state initialization keeps a missing manifest in memory as the `pnpm init` scaffold. `pnpm install` saves it after the install succeeds, `pnpm link` after every target resolved, and `pnpm add` through its existing save. Inside a workspace a missing root manifest stays an empty in-memory manifest, as before.\n\nThe lifecycle executor reads a project's manifest from disk, so a standalone project with a `binding.gyp` and no manifest would have lost its implicit `node-gyp rebuild`. The package manager writes the scaffold right before that project's `install` stage runs, which covers `install`, `update`, `dedupe`, `prune`, pnpr materialization, a `binding.gyp` created by a resolution hook, and `rebuild --pending`. `rebuild --pending` also recognizes the active project as a pending project even when its manifest is not on disk yet; it used to classify a pending entry as a project only when `package.json` existed there.\n\nThis is a\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/install.rs (+11 -9)",
+        "pnpm/crates/cli/src/cli_args/link.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/rebuild.rs (+24 -21)",
+        "pnpm/crates/cli/src/cli_args/sbom/collection.rs (+1 -1)",
+        "pnpm/crates/cli/src/state.rs (+11 -8)",
+        "pnpm/crates/package-manager/src/install.rs (+2 -2)",
+        "pnpm/crates/package-manager/src/install/errors.rs (+3 -0)",
+        "pnpm/crates/package-manager/src/install/lifecycle/project_script_runner.rs (+30 -1)",
+        "pnpm/crates/package-manager/src/install/modules_state.rs (+14 -4)",
+        "pnpm/crates/package-manifest/src/serialization.rs (+11 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 16697,
+      "title": "feat(auth-commands): print npm-notice header in web login",
+      "url": "https://github.com/pnpm/pnpm/pull/16697",
+      "author": "akushsky",
+      "mergedAt": "2026-10-14T12:50:46Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm login` now prints the `npm-notice` response header of the web login probe (`POST <registry>/-/v1/login`), before the login URL and QR code. The npm CLI already does this. pnpm dropped the header, so a registry that delivers a verification code through it cannot show the code to a pnpm user.\n\nRegistries such as Artifactory can return the verification code that the user compares with the code shown in the browser (the notice looks like `Verification code: 123456. Enter this code in the browser to complete the login.`). Without this change the code never reaches the terminal and the user cannot finish the login.\n\nBehavior:\n\n- Every `npm-notice` value of the probe response is printed through the reporter, in the order received, before the auth URL and the \"Press ENTER\" line.\n- The text is registry-controlled, so control and formatting characters (such as bidi overrides) are removed before display. A notice that is empty afterwards is skipped. A notice never fails the login.\n- Nothing is printed when the response is not successful, the body is invalid, or a URL is rejected as unsafe. A response without the header produces the same output as before.\n- Only `pnpm login` is affected. The polling of `doneUrl` and the classic username and password flow are unchanged.\n\nThe TypeScript v11 `pnpm login` (`pnpm11/auth/commands`) has the same gap. I treated this as a new v12 feature per the version policy and did not touch `pnpm11/`. If the maintainers consider the gap a bu\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/auth-commands/Cargo.toml (+1 -0)",
+        "pnpm/crates/auth-commands/src/login/test_web_login.rs (+110 -0)",
+        "pnpm/crates/auth-commands/src/login/test_web_login_errors.rs (+91 -0)",
+        "pnpm/crates/auth-commands/src/login/web_login.rs (+31 -4)",
+        ".changeset/login-web-npm-notice.md (+5 -0)",
+        "pnpm/docs/cli/login.md (+2 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16927,
+      "title": "fix(pnpr): address audit security, immutability, and storage bugs",
+      "url": "https://github.com/pnpm/pnpm/pull/16927",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T13:20:28Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAddresses the Section D audit security, immutability, and storage bugs identified in https://github.com/pnpm/tasks/issues/131 (Related to pnpm/tasks#131):\n\n1. **Storage Cache Isolation**: Prevent unpublish operations from deleting pnpr internal cache subsystems by scoping `Storage::remove_blob` and `remove_package` to the hosted backend.\n2. **S3 Grouped Registry Prefix Normalization**: Percent-decode package names and normalize prefix comparisons via `object_store::path::Path` in S3 package listings.\n3. **Journal Replay Tarball Loss Prevention**: Check `open_hosted_blob()` before marking blobs lost during crash recovery journal replay.\n4. **Secrets in Debug Implementations**: Manual `Debug` implementations redacting database passwords, auth tokens, and resolution secrets in config.\n5. **Auth File Permissions**: Preserve permissions on atomic replacement and set Unix permissions to `0600` on newly created `htpasswd` and `tokens.db`.\n6. **Anti-User Enumeration**: Execute dummy bcrypt verification and return 401 instead of 403 on disabled registration when a user is not found.\n7. **Password Length & Bcrypt Truncation**: Enforce 71-byte maximum password length and non-truncating bcrypt verification to prevent 72-byte truncation bypasses.\n8. **Pipeline Runs Schema Flexibility**: Remove `deny_unknown_fields` from `PublishPipelineRun` deserialization.\n9. **Shared Artifact Entry Digest**: Domain-separate artifact fields with null bytes in `entry_digest`.\n10. **Write Reque\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpr/crates/auth/src/htpasswd.rs (+30 -4)",
+        "pnpr/crates/auth/src/lib.rs (+5 -1)",
+        "pnpr/crates/auth/src/libsql_backend.rs (+8 -3)",
+        "pnpr/crates/auth/src/libsql_backend/tests.rs (+4 -2)",
+        "pnpr/crates/auth/src/sqlx_backend.rs (+7 -2)",
+        "pnpr/crates/auth/src/tests.rs (+66 -2)",
+        "pnpr/crates/auth/src/token_store.rs (+11 -0)",
+        "pnpr/crates/auth/src/user_store.rs (+7 -2)",
+        "pnpr/crates/config/src/backend_config.rs (+54 -2)"
+      ],
+      "filesTotal": 34
+    },
+    {
+      "number": 16933,
+      "title": "fix(store): keep the store root mtime when an install adds nothing",
+      "url": "https://github.com/pnpm/pnpm/pull/16933",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T17:29:41Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/pnpm/pnpm/issues/16929\n\n## Problem\n\n`pnpm install --frozen-lockfile` against a complete store changed the mtime of `<store>/v11`, so GitLab CI re-archived and re-uploaded an unchanged store.\n\nThe cause is the SQLite store index. In WAL mode, SQLite creates `index.db-wal` and `index.db-shm` in the store root when a connection opens and deletes them when the last connection closes. Each step bumps the directory's mtime. Nothing else in the store changes. pnpm v9 had no SQLite index, so it didn't have this problem.\n\nReproduced on both the Rust CLI (12.13.0) and the TypeScript CLI (11.28.5). I snapshotted every mtime under the store before and after a frozen install, and only `v11` itself changed.\n\n## Fix\n\nBoth CLIs now count the open connections per store root in each process (thread, for v11):\n\n- The first connection to open records the root's mtime and its sorted entry names.\n- When the last connection closes, if the entry names are unchanged, the recorded mtime is restored.\n- If the root really changed (for example, `index.db` or `projects/` was created), the new mtime is kept.\n- Immutable (`frozenStore`) connections create no sidecars, so they are not tracked.\n\nRust: `pnpm/crates/store-dir/src/store_index/root_mtime.rs`. The guard is a field of `Backend::Sqlite` placed after `conn`, so it drops after SQLite closes.\nTypeScript: `pnpm11/store/index/src/rootMtime.ts`, called from the `StoreIndex` constructor and `close()`.\n\nNotes:\n- In v11, Node's `uti\n…(truncated)",
+      "files": [
+        "pnpm/crates/store-dir/src/store_index.rs (+12 -1)",
+        "pnpm/crates/store-dir/src/store_index/root_mtime.rs (+92 -0)",
+        "pnpm/crates/store-dir/src/store_index/root_mtime/tests.rs (+81 -0)",
+        "pnpm11/store/index/src/index.ts (+21 -2)",
+        "pnpm11/store/index/src/rootMtime.ts (+71 -0)",
+        ".changeset/store-root-mtime-unchanged.md (+7 -0)",
+        "pnpm11/store/index/test/index.ts (+77 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 16934,
+      "title": "feat(pnpr): support SIGTERM container shutdown and readiness probes",
+      "url": "https://github.com/pnpm/pnpm/pull/16934",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T17:35:47Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements Section C1 (Container shutdown & readiness) of https://github.com/pnpm/tasks/issues/131 (Related to pnpm/tasks#131):\n\n1. **Graceful Container Shutdown (Unix `SIGTERM`)**:\n   - `shutdown_signal` in `pnpr` listens for Unix `SIGTERM` signals in addition to `SIGINT` (Ctrl-C) using `tokio::select!`.\n   - On signal receipt, the server stops accepting new connections and finishes in-flight requests, enabling clean termination with `docker stop` and Kubernetes pod stops.\n\n2. **Storage and Auth Readiness Verification**:\n   - Added `check_readiness()` across hosted storage backends (filesystem directory access and S3 bucket readiness with a 5s timeout) and cache root directories.\n   - Added `check_readiness()` across authentication backends (`htpasswd` directory and file access, SQLite token store, Libsql backend, and SQLx PostgreSQL/MySQL backends).\n   - Added `RegistryError::StorageUnavailable` mapping to `503 Service Unavailable`.\n\n3. **Readiness and Liveness Endpoints**:\n   - Exposed `GET /-/ready` returning `200` with `{\"status\": \"ok\", \"storage\": \"ok\", \"auth\": \"ok\"}` on success, or `503` with backend error statuses on failure.\n   - Exposed `GET /-/live` returning `200` with `{\"status\": \"ok\"}` when the server process is alive.\n   - Wired readiness checking into `GET /-/ping`, returning `200` with `{}` on success (preserving npm CLI compatibility) or `503 Service Unavailable` when storage or auth backends are inaccessible.\n   - Mounted `/-/ping`, `/-/ready`, a\n…(truncated)",
+      "files": [
+        "pnpr/crates/auth/src/lib.rs (+17 -0)",
+        "pnpr/crates/auth/src/libsql_backend.rs (+16 -0)",
+        "pnpr/crates/auth/src/owned_tokens.rs (+4 -0)",
+        "pnpr/crates/auth/src/sqlx_backend.rs (+18 -0)",
+        "pnpr/crates/auth/src/sqlx_backend/mysql.rs (+5 -0)",
+        "pnpr/crates/auth/src/sqlx_backend/postgres.rs (+5 -0)",
+        "pnpr/crates/auth/src/tests.rs (+7 -1)",
+        "pnpr/crates/auth/src/token_store.rs (+14 -0)",
+        "pnpr/crates/auth/src/user_store.rs (+13 -0)",
+        "pnpr/crates/error/src/lib.rs (+7 -0)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 16925,
+      "title": "fix(run): report an inherited lifecycle failure through the ndjson reporter",
+      "url": "https://github.com/pnpm/pnpm/pull/16925",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T18:22:03Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm run` wrote the `[ELIFECYCLE] Command failed with exit code N.` line with `eprintln!` whenever the script's stdio was inherited, so under `--reporter=ndjson` a plain line landed among the JSON records on stderr. pnpm 11 emits a `level: \"error\"` record there, and the streamed path in pnpm 12 (`-r --stream`) already sends the line through the reporter.\n\nThe inherited path now goes through the reporter unless the default reporter is selected. The default reporter keeps the plain stderr line, the ndjson reporter writes the same `name: \"pnpm\"` error record the streamed path emits, and the silent reporter drops the event, which replaces the explicit silent check from pnpm/pnpm#16891.\n\nCloses pnpm/tasks#128\n\n## Squash Commit Body\n\n```text\n`pnpm run` wrote the `[ELIFECYCLE]` line with `eprintln!` whenever the\nscript's stdio was inherited, so under `--reporter=ndjson` a plain line\nlanded among the JSON records, while pnpm 11 emits an error record there.\nThe inherited path now goes through the reporter unless the default\nreporter is selected. That keeps the plain stderr line for the terminal\nand lets the ndjson reporter write the same `pnpm` error record the\nstreamed path already emits. The silent reporter drops the event, so the\nexplicit silent check is gone.\n\nCloses pnpm/tasks#128\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI.\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/reporter.rs (+7 -2)",
+        "pnpm/crates/cli/src/cli_args/run/execution.rs (+13 -10)",
+        ".changeset/run-ndjson-lifecycle-failure.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/_utils/mod.rs (+12 -0)",
+        "pnpm/crates/cli/tests/suite/reporter_setting.rs (+26 -0)",
+        "pnpm/crates/cli/tests/suite/run_recursive/output.rs (+43 -32)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 16763,
+      "title": "fix(config.reader): treat null httpProxy and httpsProxy as unset",
+      "url": "https://github.com/pnpm/pnpm/pull/16763",
+      "author": "grzdev",
+      "mergedAt": "2026-10-14T18:38:13Z",
+      "labels": [
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\npnpm/pnpm#16536 started validating `httpProxy` and `httpsProxy` with `Object.hasOwn(...)` followed by `assertString`. That check also rejects `null`, so `httpProxy:` with no value, or `httpProxy: null`, in `pnpm-workspace.yaml` or the global config file fails with `ERR_PNPM_INVALID_SETTING` since 11.28.5.\n\n`getOptionsFromPnpmSettings` now deletes a null proxy key and validates any other value as a string. A null therefore leaves the setting unset, and a proxy from `.npmrc` or the global config file still applies. If no layer sets one, the environment proxy variables apply as before. Numbers, booleans, arrays, and objects are still rejected.\n\nv12 is not affected and already behaves this way. Its proxy overlay only replaces a key when the workspace file gives it a value, and serde reads `null` as `None`.\n\n## Squash Commit Body\n\n```text\n`getOptionsFromPnpmSettings` validated `httpProxy` and `httpsProxy`\nwhenever the key was present, so a null value (a YAML key with no\nvalue, or `null`) failed with ERR_PNPM_INVALID_SETTING. That\nregressed in pnpm/pnpm#16536.\n\nA null proxy key is now deleted and any other value is validated as a\nstring. Deleting it, rather than passing null through, keeps a proxy\nset in a lower-priority layer (.npmrc, the global config file), which\nmatches v12: its proxy overlay only replaces a key when the workspace\nfile gives it a value.\n\nThe check lives in normalizeProxySettings so getOptionsFromPnpmSettings\nstays within the size and shape limits.\n`\n…(truncated)",
+      "files": [
+        "pnpm11/config/reader/src/getOptionsFromRootManifest.ts (+9 -6)",
+        ".changeset/accept-null-proxy-settings.md (+6 -0)",
+        "pnpm11/config/reader/test/getOptionsFromRootManifest.test.ts (+11 -2)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 16940,
+      "title": "fix(cli): keep pnpm's stdio handles out of detached grandchildren on Windows",
+      "url": "https://github.com/pnpm/pnpm/pull/16940",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T21:01:45Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes https://github.com/pnpm/pnpm/issues/16930.\n\n## Problem\n\nOn Windows, `pnpm nx ...` (and any `pnpm exec`/`pnpm run`) with redirected or piped output did not return while a detached grandchild, such as the Nx daemon, was still running.\n\n## Cause\n\npnpm's own standard handles are inherited from the shell, so they are marked inheritable. Rust's `Stdio::inherit` gives the child an inheritable *duplicate* as its standard handle. `CreateProcess(bInheritHandles = TRUE)` also passes the inheritable originals on as stray handles. Node.js marks only its own standard handles non-inheritable at startup, so the strays travel on to the detached daemon. The shell's pipe then stays open until the daemon exits. pnpm 10 was a Node process and did the same at its own startup, so it did not leak.\n\n## Fix\n\nAt startup pnpm marks its own standard handles non-inheritable, as Node.js does (`uv_disable_stdio_inheritance`). Children still get their stdio through the duplicates Rust creates. This is a no-op on Unix.\n\npnpm v11 runs on Node.js and is not affected, so this is a v12-only fix.\n\n## Verification\n\n- Reproduced with Nx 23.1.1 under PowerShell 7.6 and Node 24.21: `pnpm exec nx run a:hello --skip-nx-cache *> out.txt` hung until the timeout before the fix and returns after it. A minimal repro (a detached child sleeping 20s) went from about 21s to 1s.\n- New Windows test `exec::exec_output_ends_while_a_detached_grandchild_runs` fails without the fix (it waits about 21s) and passes with it in under\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/lib.rs (+2 -0)",
+        "pnpm/crates/cli/src/stdio_inheritance.rs (+38 -0)",
+        ".changeset/exec-detached-grandchild-redirect.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/exec.rs (+94 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 16941,
+      "title": "fix(deps): update rustls to 0.23.46",
+      "url": "https://github.com/pnpm/pnpm/pull/16941",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T21:18:01Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nUpdates `rustls` from 0.23.45 to 0.23.46 to resolve RUSTSEC-2026-0346, RUSTSEC-2026-0347, and RUSTSEC-2026-0348.\n\nMain stays green because Cargo Deny only runs on pull requests that change `Cargo.lock`. Those pull requests now fail it, for example pnpm/pnpm#16936. Lockfile-only change, from `cargo update -p rustls`. `cargo deny --all-features check advisories` passes locally.\n\nNo changeset. The advisories cover a `Debug` impl on client session values, ECH-rejection buffering, and the non-default `brotli` feature. None of them changes what pnpm users see.\n\n## Squash Commit Body\n\n```text\nResolves RUSTSEC-2026-0346, RUSTSEC-2026-0347, and RUSTSEC-2026-0348,\nwhich fail the Cargo Deny check on every pull request that touches\nCargo.lock.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n\n---\nWritten by an agent (Claude Code, claude-opus-5-5).\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16941?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v3.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v3.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1794604188&installation_model_id=426870&pr_number=16941&ref=codesmith_pr_footer&reposito\n…(truncated)",
+      "files": [
+        "Cargo.lock (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 16939,
+      "title": "feat(pnpr): support trusted proxies for client IP resolution",
+      "url": "https://github.com/pnpm/pnpm/pull/16939",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T22:46:11Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds trusted proxy support to pnpr for accurate and secure client IP resolution (Section C2 of https://github.com/pnpm/tasks/issues/131).\n\nRelated to https://github.com/pnpm/tasks/issues/131\n\n- Introduces `trusted_proxies` (`trustedProxies`) configuration to `HttpConfig` in `pnpr-config`, parsing IP addresses, CIDR ranges, and `\"loopback\"`.\n- Introduces `trusted_proxy_header` (`trustedProxyHeader`) configuration to `HttpConfig`, supporting `x-forwarded-for` (default), `forwarded`, and `x-real-ip`.\n- Implements secure client IP resolution in `pnpr::server::client_ip`:\n  - When the direct socket peer is trusted, parses only the explicitly configured forwarding header without fallback, preventing header injection and spoofing.\n  - Multi-hop chains (`X-Forwarded-For`, `Forwarded`) are traversed right-to-left, skipping intermediate trusted proxies until the first untrusted client IP is found.\n  - If the socket peer is untrusted, or if the configured header is absent or invalid, fails closed to the socket peer.\n- Attaches `ClientIp` to request extensions and sets the `client_ip` field on the access tracing span.\n- Deduplicates CIDR evaluation across token authentication and client IP resolution by reusing `pnpr_config::IpNetwork`.\n- Adds documentation in `pnpr/docs/configuration.md` and changeset.\n- Adds comprehensive unit and integration tests.\n\n## Squash Commit Body\n\n```text\nAdds trusted-proxy configuration and client IP resolution to pnpr.\n\nWhen behind a reverse prox\n…(truncated)",
+      "files": [
+        "pnpr/crates/config/config.yaml (+9 -0)",
+        "pnpr/crates/config/src/config_file.rs (+6 -0)",
+        "pnpr/crates/config/src/ip_network.rs (+21 -0)",
+        "pnpr/crates/config/src/ip_network/tests.rs (+24 -0)",
+        "pnpr/crates/config/src/lib.rs (+7 -1)",
+        "pnpr/crates/config/src/loading.rs (+27 -10)",
+        "pnpr/crates/config/src/presets.rs (+2 -0)",
+        "pnpr/crates/config/src/trusted_proxy_header.rs (+69 -0)",
+        "pnpr/crates/config/src/trusted_proxy_header/tests.rs (+23 -0)",
+        "pnpr/crates/pnpr/src/server.rs (+2 -0)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 16937,
+      "title": "fix(hoist): preserve workspace links beside auto-installed peers",
+      "url": "https://github.com/pnpm/pnpm/pull/16937",
+      "author": "dipunm",
+      "mergedAt": "2026-10-14T22:47:45Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Comments\n\nThe v11 bundle compiled locally. The focused hoist Jest suites passed (121 tests), and all three new CLI regression cases passed. The public reproduction passed after install and dedupe with the patched bundle. I also checked a direct dependency control and the hoisted node linker layout.\n\nThe full CLI test file has a separate runtime download test that failed locally with `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`. The v12 Rust regression test has not run locally. CI will run both suites.\n\n## Summary\n\nCloses pnpm/pnpm#16935.\n\nAn automatically installed peer can appear as a direct dependency in the resolved graph even though no importer declares it. The v11 workspace hoister treated that graph entry as a claim on the package name and removed a workspace hoist during `dedupe`.\n\nThis change selects workspace alias conflicts from non-link dependencies in all lockfile importers. For the hoisted node linker, it also reserves aliases already occupying the root directory in the resolved graph, including automatically installed peers. The graph still controls normal package hoisting. The new v11 test covers private and public hoisting and the hoisted node linker, including a workspace-only executable that must not be linked when a published copy occupies the root. A v12 test records the behavior that already works there.\n\nPublic reproduction: https://github.com/dipunm/pnpm-workspace-hoist-repro\n\n## Squash Commit Body\n\n```text\nCloses pnpm/pnpm#16935.\n\nWorkspace hoist selection p\n…(truncated)",
+      "files": [
+        "pnpm11/installing/deps-installer/src/install/link.ts (+2 -1)",
+        "pnpm11/installing/deps-restorer/src/directDependencyAliases.ts (+33 -0)",
+        "pnpm11/installing/deps-restorer/src/index.ts (+1 -0)",
+        "pnpm11/installing/deps-restorer/src/linkHoistedLayout.ts (+5 -0)",
+        "pnpm11/installing/deps-restorer/src/linkIsolatedLayout.ts (+2 -29)",
+        "pnpm11/installing/linking/hoist/src/hoistWorkspacePackages.ts (+3 -18)",
+        "pnpm11/installing/linking/hoist/src/index.ts (+1 -1)",
+        ".changeset/preserve-workspace-hoist-with-auto-peer.md (+8 -0)",
+        "pnpm/crates/cli/tests/suite/hoist.rs (+1 -0)",
+        "pnpm/crates/cli/tests/suite/hoist/peer_workspace_conflicts.rs (+49 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 16936,
+      "title": "fix: keep importers of projects missing from disk in filtered installs",
+      "url": "https://github.com/pnpm/pnpm/pull/16936",
+      "author": "zkochan",
+      "mergedAt": "2026-10-14T23:10:16Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nA filtered install drops lockfile entries of workspace projects that are listed in `pnpm-workspace.yaml` but missing from disk, as in a sparse checkout. Closes pnpm/pnpm#16931.\n\nMeasured on the reporter's repro (`packages/c` off disk, a dependency added to `packages/a`, then `pnpm install --lockfile-only --filter ...`):\n\n| | filter = every project on disk | narrower filter |\n|---|---|---|\n| pnpm 11.17.0 | drops `c` importer, `only-c` catalog, `left-pad` | keeps importer and `left-pad`, drops `only-c` catalog |\n| pnpm 12.12.1 | drops all | drops all |\n| this PR (both) | keeps all | keeps all |\n\nChanges:\n\n- **v12:** a `--filter` selection now always requests its importers. The stale-importer prune is skipped and the filtered lockfile merge runs, even when the filter matches every project on disk. The workspace state's `filteredInstall` stays count-based, as in v11, so `--filter \"*\"` still records an unfiltered install (`install_filters::filter_matching_every_real_project_is_not_partial` still passes).\n- **v12:** `merge_filtered_wanted_lockfile` keeps previous importers outside the workspace walk, plus their packages and catalog entries. It used to drop them for any filter. One unit test pinned the drop and was updated.\n- **v11:** `pruneLockfileImporters` defaults to `false` when `filter`/`filterProd` is set.\n- **v11:** `createNewLockfile` carries over the catalog entries used by importers the resolution left untouched.\n\nNot covered: an unfiltered `pnpm install` in a\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/deps-restorer/Cargo.toml (+1 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile.rs (+23 -10)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/missing_projects.rs (+72 -0)",
+        "pnpm/crates/package-manager/src/install/run/importer_selection.rs (+5 -1)",
+        "pnpm/crates/package-manager/src/install/run/workspace.rs (+3 -1)",
+        "pnpm11/installing/commands/src/install.ts (+1 -1)",
+        "pnpm11/installing/commands/src/recursive/context.ts (+9 -0)",
+        "pnpm11/installing/commands/src/recursive/options.ts (+1 -1)",
+        "pnpm11/installing/deps-resolver/src/getCatalogSnapshots.ts (+26 -1)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 16943,
+      "title": "feat(pnpr): rate limits, request timeouts, and coalescing",
+      "url": "https://github.com/pnpm/pnpm/pull/16943",
+      "author": "zkochan",
+      "mergedAt": "2026-10-15T00:29:21Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds pre-buffer authorization for package writes, upstream request coalescing (singleflight), login rate limiting, and request timeouts to pnpr.\n\nRelated to pnpm/tasks#131 (Section C3: DoS / Resource Exhaustion Protections).\n\n- **Pre-buffer authorization**: Package write and modification endpoints (`PUT /{pkg}`, `PUT /@{scope}/{pkg}`, `PUT /{pkg}/-rev/{rev}`) check caller authentication and write permissions before reading or buffering request payloads (up to 100 MiB).\n- **Upstream request coalescing (singleflight)**: Deduplicate concurrent in-flight upstream fetches (`load_upstream_packument`) for the same package and namespace so concurrent cache misses do not hammer upstream registries.\n- **Login rate limiting & concurrency limits**: Throttles failed login attempts by IP and username with `429 Too Many Requests` and a `Retry-After` header. Caps concurrent login operations and concurrent package publish buffering.\n- **Request timeouts**: Configurable `requestTimeout` (default 60s) layer returning `504 Gateway Timeout` when requests exceed the deadline.\n\n## Squash Commit Body\n\n```text\nfeat(pnpr): rate limits, request timeouts, and coalescing\n\nAdd pre-buffer authorization for package writes, upstream request coalescing,\nlogin rate limiting, and request timeouts to pnpr.\n\n- Pre-buffer authorization: package mutations (publish, update, dist-tags) check\n  caller authentication and write permissions before reading the request body.\n- Upstream coalescing (singleflight)\n…(truncated)",
+      "files": [
+        "pnpr/crates/config/src/config_file.rs (+3 -0)",
+        "pnpr/crates/config/src/lib.rs (+15 -0)",
+        "pnpr/crates/config/src/loading.rs (+15 -0)",
+        "pnpr/crates/config/src/presets.rs (+1 -0)",
+        "pnpr/crates/error/src/lib.rs (+20 -0)",
+        "pnpr/crates/error/src/response.rs (+13 -0)",
+        "pnpr/crates/package-name/src/lib.rs (+1 -1)",
+        "pnpr/crates/pnpr/src/server.rs (+6 -2)",
+        "pnpr/crates/pnpr/src/server/package_mutation.rs (+1 -1)",
+        "pnpr/crates/pnpr/src/server/rate_limit.rs (+157 -0)"
+      ],
+      "filesTotal": 25
+    },
+    {
+      "number": 16944,
+      "title": "feat(pnpr): metrics, request IDs, and enriched access logging",
+      "url": "https://github.com/pnpm/pnpm/pull/16944",
+      "author": "zkochan",
+      "mergedAt": "2026-10-15T02:17:35Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to pnpm/tasks#131 (Section C4: Metrics and request IDs).\n\nThis PR implements Prometheus metrics, request ID tracking, and enriched access logging in `pnpr`:\n- **Prometheus metrics**: `GET /-/metrics` (always metrics) and `GET /metrics` (metrics for scrapers; falls back to `metrics` packument when requested with npm accept headers). Emits standard Prometheus text format (`text/plain; version=0.0.4`) with in-flight gauges (RAII-tracked to prevent gauge leaks on drop/timeout), request counters by method and status, duration histogram, response bytes counter, proxy cache hits/misses, login rate limit hits, and build info.\n- **Request IDs**: Validates incoming `x-request-id` headers (printable ASCII, <=128 characters) or generates RFC 4122 UUID v4 IDs. Attaches the request ID to the tracing span, response header `x-request-id`, and access log record.\n- **Enriched access logging**: Unified middleware emitting records under target `pnpr::access` containing `request_id`, `method`, `uri`, `client_ip`, `user` (authenticated username or `\"-\"`), `user_agent`, `status`, `latency_ms`, and `bytes`.\n\n## Squash Commit Body\n\n```text\nExpose Prometheus metrics endpoint at `GET /-/metrics` and `GET /metrics`\nemitting standard text exposition with in-flight gauges, request counters,\nduration histograms, and cache statistics.\n\nForward and validate incoming `x-request-id` headers or generate fresh\nUUID v4s, recording them on response headers, tracing spans, and enriched\naccess lo\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server.rs (+4 -0)",
+        "pnpr/crates/pnpr/src/server/authentication.rs (+21 -9)",
+        "pnpr/crates/pnpr/src/server/metrics.rs (+257 -0)",
+        "pnpr/crates/pnpr/src/server/request_id.rs (+60 -0)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+10 -9)",
+        "pnpr/crates/pnpr/src/server/routing/observability.rs (+230 -58)",
+        "pnpr/crates/pnpr/src/server/state.rs (+11 -2)",
+        "pnpr/crates/pnpr/src/server/tests.rs (+3 -2)",
+        "pnpr/crates/pnpr/src/server/upstream_packuments.rs (+4 -0)",
+        "pnpr/crates/pnpr/src/server/user_accounts.rs (+4 -3)"
+      ],
+      "filesTotal": 15
+    },
+    {"number":16942,"title":"refactor(config): name the three states offline and preferOffline encode","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":16948,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16921,"title":"test(cli): port the local tarball bundledDependencies tests","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16946,
+      "title": "feat(pnpr): cache eviction, lru size cap, and orphan namespace pruning",
+      "url": "https://github.com/pnpm/pnpm/pull/16946",
+      "author": "zkochan",
+      "mergedAt": "2026-10-15T10:13:19Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "This PR implements Section C5 (Cache eviction) from [pnpm/tasks#131](https://github.com/pnpm/tasks/issues/131):\n\n- **Configurable cache budgets & TTL:** `cache:` in `pnpr_config` accepts either a path string or `{ path, maxSize, maxAge }`.\n- **Orphan namespace cleanup:** Discovers and prunes orphaned upstream namespaces under `~upstreams/` and `~public/` created by previous ephemeral per-process secrets or changed configurations.\n- **LRU & TTL eviction:** Deletes stale packuments, tarballs, and abandoned temporary files exceeding TTL or budget limits, cleaning up empty package and scope directories bottom-up.\n- **Background periodic maintenance & startup sweep:** Prunes orphaned namespaces on startup and optionally runs periodic cache sweeps in the background.\n- **`pnpr cache-gc` CLI command:** Parity with `oci-gc` supporting `--dry-run`, `--max-size`, `--max-age-secs`, and `--orphans-only`.\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16946?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v3.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v3.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1794624428&installation_model_id=426870&pr_number=16946&ref=codesmith_pr_footer&repository=pnpm%2Fpnpm&return_to=https\n…(truncated)",
+      "files": [
+        "pnpm/tasks/registry-mock/src/mock_instance.rs (+11 -1)",
+        "pnpm/tasks/registry-mock/src/mock_instance/tests.rs (+8 -21)",
+        "pnpr/crates/config/config.yaml (+4 -0)",
+        "pnpr/crates/config/src/byte_size.rs (+87 -0)",
+        "pnpr/crates/config/src/byte_size/tests.rs (+42 -0)",
+        "pnpr/crates/config/src/config_file.rs (+23 -5)",
+        "pnpr/crates/config/src/lib.rs (+43 -88)",
+        "pnpr/crates/config/src/loading.rs (+10 -5)",
+        "pnpr/crates/config/src/presets.rs (+2 -0)",
+        "pnpr/crates/config/src/storage_config.rs (+90 -0)"
+      ],
+      "filesTotal": 24
+    },
+    {
+      "number": 16872,
+      "title": "fix(pipeline): skip run report for empty dry-run selection",
+      "url": "https://github.com/pnpm/pnpm/pull/16872",
+      "author": "kairosci",
+      "mergedAt": "2026-10-15T10:14:27Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes https://github.com/pnpm/tasks/issues/126.\n\nAn empty selection used to conclude the run before checking `--dry-run`. It wrote a run report and printed log lines with `--json`. Now, when no projects are selected:\n\n- `pnpm pipeline --dry-run --json` prints `{\"tasks\": []}` and writes no report.\n- `pnpm pipeline --dry-run` prints the \"nothing to run\" message and writes no report.\n- A real run is unchanged. It prints the message and writes the report.\n\n## Squash Commit Body\n\n```text\nAn empty selection concluded the run before checking --dry-run. So a\ndry run wrote a run report under <cacheDir>/pipeline/<slug>/runs, and\nwith --json it printed log lines that a script could not parse.\n\nPipelineRun::conclude_empty_selection, in the reporting module, now\nhandles the empty selection. A JSON dry run prints the empty task-graph\ndocument. A human-readable dry run prints only the empty-selection\nmessage. Neither writes a report. A real run still writes the report.\n\nFixes https://github.com/pnpm/tasks/issues/126\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version. (`pnpm pipeline` exists only in v12.)\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n\n\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/pipeline.rs (+1 -11)",
+        "pnpm/crates/cli/src/cli_args/pipeline/reporting.rs (+33 -3)",
+        ".changeset/pipeline-dry-run-empty-selection.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/pipeline_cache.rs (+41 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":16932,"title":"fix(cli): stop aborting when stdout is a closed pipe","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16851,"title":"refactor(catalogs.config): omit the default key when no default catalog is defined","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16950,
+      "title": "feat(pnpr): support npm audit endpoints and osv bulk advisories",
+      "url": "https://github.com/pnpm/pnpm/pull/16950",
+      "author": "zkochan",
+      "mergedAt": "2026-10-15T11:59:21Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Support `POST /-/npm/v1/security/advisories/bulk`, `POST /-/npm/v1/security/audits`, and `POST /-/npm/v1/security/audits/quick`.\n\nWhen an OSV database is configured, bulk advisories evaluate against local records. Otherwise, requests forward to configured upstream registries.\n\nRef: https://github.com/pnpm/tasks/issues/131\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/16950?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v3.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v3.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1794653932&installation_model_id=426870&pr_number=16950&ref=codesmith_pr_footer&repository=pnpm%2Fpnpm&return_to=https%3A%2F%2Fgithub.com%2Fpnpm%2Fpnpm%2Fpull%2F16950&signature=8ae1fb425bfd9a3011b71fd386e3e77a8a5673b90f14e905d14d6e77ec5eb299\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/autofix-with-codesmith-dark.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/autofix-with-codesmith-light.svg\"></picture></a>\n<sup>Need help on this PR? Tag <code>@codesmith-bot</code> with what you need.</sup>\n\n## Summary by CodeRabbit\n\n- **New Features**\n  - Added npm security-au\n…(truncated)",
+      "files": [
+        "pnpr/crates/osv/src/lib.rs (+62 -196)",
+        "pnpr/crates/osv/src/loader.rs (+156 -0)",
+        "pnpr/crates/osv/src/records.rs (+241 -64)",
+        "pnpr/crates/pnpr/src/server.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/ecosystem.rs (+15 -0)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+3 -34)",
+        "pnpr/crates/pnpr/src/server/routing/team_handlers.rs (+47 -15)",
+        "pnpr/crates/pnpr/src/server/security_audit.rs (+197 -0)",
+        "pnpr/crates/upstream/src/audit.rs (+61 -0)",
+        "pnpr/crates/upstream/src/lib.rs (+14 -4)"
+      ],
+      "filesTotal": 16
+    },
+    {"number":16952,"title":"chore(release): 11.28.6, pacquet 12.14.0","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16882,"title":"test(cli): drop the clock from the bail-cancellation tests","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16951,"title":"fix(wasm): give the WebContainer build a dashmap whose locks can park","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16702,"title":"refactor: remove even more `map_or` and `map_or_else`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16954,
+      "title": "feat(pnpr): support token creation, expiry, and read-only audit access",
+      "url": "https://github.com/pnpm/pnpm/pull/16954",
+      "author": "zkochan",
+      "mergedAt": "2026-10-15T15:26:19Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to https://github.com/pnpm/tasks/issues/131 (Section C7: Token Creation, Expiry & Read-Only Audit Access).\n\nImplements `npm token create` support for `pnpr`:\n- Adds token creation endpoint `POST /-/npm/v1/tokens` (and prefixed `POST /~{registry}/-/npm/v1/tokens`).\n- Supports `--read-only`, CIDR whitelisting, expiry (`expires`, `expires_in`), and token name.\n- Verifies account password when user has a stored bcrypt hash; rate limits failed password attempts.\n- Enforces token expiry across all authenticated endpoints (expired tokens do not authenticate).\n- Touches `last_used_at` upon successful token authentication.\n- Forbids read-only tokens from mutating operations and creating new tokens (403 Forbidden).\n- Permits read-only tokens to access npm audit endpoints (`POST /-/npm/v1/security/advisories/bulk`, `POST /-/npm/v1/security/audits`, `POST /-/npm/v1/security/audits/quick`).\n\n## Squash Commit Body\n\n```text\nSupport creating tokens via POST /-/npm/v1/tokens and under registry prefixes\nwith read-only restrictions, CIDR whitelisting, expiry, and token names.\n\nEnforce token expiry across all authenticated requests, and update the\nlast_used_at timestamp on token authentication. Allow read-only tokens to\nquery npm audit endpoints while preventing token creation and mutating writes.\n\nRef: https://github.com/pnpm/tasks/issues/131\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] Added \n…(truncated)",
+      "files": [
+        "pnpr/crates/auth/src/htpasswd.rs (+2 -4)",
+        "pnpr/crates/auth/src/identify.rs (+34 -0)",
+        "pnpr/crates/auth/src/lib.rs (+41 -91)",
+        "pnpr/crates/auth/src/libsql_backend.rs (+5 -131)",
+        "pnpr/crates/auth/src/libsql_backend/schema.rs (+10 -0)",
+        "pnpr/crates/auth/src/libsql_backend/tests.rs (+2 -1)",
+        "pnpr/crates/auth/src/libsql_backend/tokens.rs (+198 -0)",
+        "pnpr/crates/auth/src/oidc/provider_config.rs (+1 -1)",
+        "pnpr/crates/auth/src/owned_tokens.rs (+13 -1)",
+        "pnpr/crates/auth/src/sqlx_backend.rs (+37 -11)"
+      ],
+      "filesTotal": 35
+    },
+    {
+      "number": 16956,
+      "title": "feat(pnpr): support npm publish --provenance and attestation endpoints",
+      "url": "https://github.com/pnpm/pnpm/pull/16956",
+      "author": "zkochan",
+      "mergedAt": "2026-10-15T18:00:20Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to https://github.com/pnpm/tasks/issues/131 (Section C8: `npm publish --provenance`).\n\nImplements `npm publish --provenance` and attestation endpoints for `pnpr`:\n\n- Accepts `.sigstore` and `.sigstore.json` attachments alongside `.tgz` during publish without requiring `dist.integrity`.\n- Stores sigstore bundles as content-addressed blobs and binds them to the published version.\n- Populates `dist.attestations` in packuments with `url` (`/-/npm/v1/attestations/{pkg}@{version}`) and `provenance.predicateType` (extracting predicate types from the Sigstore bundle when present).\n- Rewrites `dist.attestations.url` on packument reads for hosted and upstream packages to point at the local registry instance (supporting `~{registry}` prefixes).\n- Implements `GET /-/npm/v1/attestations/{*spec}` and prefixed `GET /~{registry}/-/npm/v1/attestations/{*spec}` to serve stored Sigstore bundles, supporting unscoped and scoped packages with percent-encoded or slash separators.\n- Implements `GET /-/npm/v1/keys` and prefixed `GET /~{registry}/-/npm/v1/keys`, proxying to upstream registries when configured or returning `{\"keys\":[]}`.\n- Cleans up corresponding `.sigstore` CAS blobs when a tarball is unpublished.\n\n## Squash Commit Body\n\n```text\nSupport publishing provenance attestations (.sigstore/.sigstore.json)\nalongside package tarballs and serving them via /-/npm/v1/attestations.\n\nRewrite dist.attestations.url in packuments to route through the pnpr\nregistry instance, and impl\n…(truncated)",
+      "files": [
+        "pnpr/crates/package-name/src/lib.rs (+30 -10)",
+        "pnpr/crates/package-name/src/tests.rs (+29 -0)",
+        "pnpr/crates/pnpr/src/server.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/attestations.rs (+193 -0)",
+        "pnpr/crates/pnpr/src/server/package_mutation.rs (+11 -13)",
+        "pnpr/crates/pnpr/src/server/publishing.rs (+2 -2)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments.rs (+118 -33)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+5 -0)",
+        "pnpr/crates/storage/src/publish.rs (+3 -0)",
+        "pnpr/crates/storage/src/publish/sigstore.rs (+84 -0)"
+      ],
+      "filesTotal": 21
+    },
+    {"number":16762,"title":"docs: clarify registry routing in updateConfig hooks","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":16958,"title":"fix(pnpr): reject duplicate publish attachments and optimize orphan check","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":16906,"title":"perf(deps-restorer): materialize package files on a 4-thread pool on macOS","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":16850,"title":"fix(config.reader): safely handle invalid url in environment variables","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 16585,
+      "title": "feat: accept zstd-compressed responses and serve them from pnpr",
+      "url": "https://github.com/pnpm/pnpm/pull/16585",
+      "author": "bmaurer",
+      "mergedAt": "2026-10-15T19:35:32Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\npnpm now advertises and decodes zstd-compressed HTTP responses. The install client sends `Accept-Encoding: zstd,gzip,deflate` (previously `gzip,deflate`). reqwest decodes a zstd body before pnpm sees it.\n\nWhy: full packuments compress much better under zstd than under gzip. pnpm fetches full packuments for `trustPolicy: no-downgrade`, for `resolutionMode: time-based` on registries without a `time` field, and for `minimumReleaseAge` when the abbreviated document carries no `time`. A long field repeated across versions spans far more than gzip's 32 KB window, so gzip cannot reuse the earlier copies.\n\nMeasured against registry.npmjs.org on 2026-10-04:\n\n| Document | identity | gzip -6 | zstd -3 | zstd -19 |\n|---|---|---|---|---|\n| `vite`, full | 38.96 MB | 4.65 MB | 603 KB | 455 KB |\n| `vite`, abbreviated | 2.31 MB | 403 KB | 382 KB | 368 KB |\n| 15 popular packages, full | 133.4 MB | 15.81 MB | 10.95 MB | 10.33 MB |\n| the 14 without `vite` | 94.5 MB | 11.16 MB | 10.35 MB | 9.88 MB |\n\nThe 15 packages: `@babel/core`, `@types/node`, `axios`, `esbuild`, `eslint`, `express`, `lodash`, `next`, `react`, `react-dom`, `rollup`, `typescript`, `vite`, `vue`, `webpack`. Most come out 0 to 14% smaller under zstd -3 than under gzip -6. vite's comes out 7.7x smaller: most of its full packument is `licenseText`, up to 259 KB per version and 34 MB in total.\n\nregistry.npmjs.org, registry.yarnpkg.com, and registry.npmmirror.com do not serve zstd today, even when offered it. This change \n…(truncated)",
+      "files": [
+        ".gitattributes (+1 -0)",
+        "Cargo.lock (+30 -0)",
+        "Cargo.toml (+9 -2)",
+        "cspell.json (+2 -1)",
+        "pnpm/crates/http/src/client.rs (+3 -0)",
+        "pnpm/crates/network/src/client_builder.rs (+7 -6)",
+        "pnpm/crates/resolving-npm-resolver/src/fetch_full_metadata/tests.rs (+44 -0)",
+        ".changeset/pnpr-zstd-upstream-responses.md (+5 -0)",
+        ".changeset/zstd-registry-responses.md (+5 -0)",
+        "pnpm/crates/resolving-npm-resolver/tests/fixtures/acme.json (+16 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 16960,
+      "title": "feat(pnpr): admin audit log for user, rule, team, scim, and unpublish operations",
+      "url": "https://github.com/pnpm/pnpm/pull/16960",
+      "author": "zkochan",
+      "mergedAt": "2026-10-15T22:03:59Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to [pnpm/tasks#131](https://github.com/pnpm/tasks/issues/131) (Section C9: Admin audit log).\n\nEmits structured audit records under the tracing target `pnpr::audit` at `info` level for administrative and destructive operations:\n- User management (create, password update, delete, token revoke, register)\n- Rule override updates and deletions\n- Team creation, destruction, member add/remove, and package access grant/revoke\n- SCIM user provisioning, replacement, patching, and deprovisioning\n- Package and tarball unpublishing, dist-tag mutations, and OCI blob/manifest deletions\n\nAll audit events inherit the active request span context (`request_id`, `client_ip`, `method`, `uri`) via tracing request spans.\n\n## Squash Commit Body\n\n```text\nEmit structured audit log events under target `pnpr::audit` at info level\nfor administrative and destructive actions:\n- User management (create, password update, delete, token revoke, register)\n- Rule override updates and deletions\n- Team creation, destruction, member add/remove, and package access grants\n- SCIM user provisioning, replacement, patching, and deprovisioning\n- Package and tarball unpublishing, dist-tag set/remove, and OCI deletions\n\nAll audit events inherit active request span context (request_id,\nclient_ip, method, uri) through tracing spans.\n\nRef: https://github.com/pnpm/tasks/issues/131\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] A\n…(truncated)",
+      "files": [
+        "pnpr/crates/config/src/logging.rs (+6 -5)",
+        "pnpr/crates/pnpr/src/server/oci/deletion.rs (+15 -0)",
+        "pnpr/crates/pnpr/src/server/oci/manifest_request.rs (+16 -1)",
+        "pnpr/crates/pnpr/src/server/package_mutation.rs (+70 -200)",
+        "pnpr/crates/pnpr/src/server/package_mutation/dist_tags.rs (+227 -0)",
+        "pnpr/crates/pnpr/src/server/rule_admin.rs (+19 -0)",
+        "pnpr/crates/pnpr/src/server/scim.rs (+37 -3)",
+        "pnpr/crates/pnpr/src/server/team_access.rs (+27 -0)",
+        "pnpr/crates/pnpr/src/server/team_mutations.rs (+42 -0)",
+        "pnpr/crates/pnpr/src/server/user_accounts.rs (+9 -0)"
+      ],
+      "filesTotal": 15
+    }
+  ],
+  "errors": []
+}

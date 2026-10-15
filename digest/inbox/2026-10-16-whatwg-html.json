@@ -1,0 +1,37 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T22:19:52Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 13055,
+      "title": "Allow restricting serialization and transfer to the same agent cluster",
+      "url": "https://github.com/whatwg/html/pull/13055",
+      "author": "annevk",
+      "mergedAt": "2026-10-14T06:15:03Z",
+      "labels": [
+        "topic: serialize and transfer",
+        "topic: agent"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Allow restricting serialization and transfer to the same agent cluster\n\nSome serializable and transferable objects, such as VideoFrame and MediaSourceHandle, cannot leave their agent cluster. Specifications have approximated this using [Exposed=(Window,DedicatedWorker)], but Window objects in different agent clusters can communicate with each other, and a dedicated worker created by a shared worker is in the agent cluster of that shared worker.\n\nSerialization and transfer steps can now restrict their result to the same agent cluster, and [SameAgentCluster] does so for every object implementing an interface. StructuredDeserialize and StructuredDeserializeWithTransfer then throw in a different agent cluster, as they already did for SharedArrayBuffer, which now uses the same mechanism. StructuredDeserializeWithTransfer now does this, and checks that all serialized and transferred interfaces are exposed, before running any transfer-receiving steps. Serializing such objects for storage throws. A result restricted this way may additionally refer to data that is only accessible within that agent cluster.\n\nThis will help https://github.com/w3c/webcodecs/issues/717\n\n- [x] At least two implementers are interested (and none opposed):\n   * N/A, this is needed by Web Codecs and possibly OffscreenCanvas. Adopting there requires interest and tests.\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * N/A, see above.\n- [x] [Impl\n…(truncated)",
+      "files": [
+        "source (+145 -55)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

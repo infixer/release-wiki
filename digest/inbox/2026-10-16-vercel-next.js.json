@@ -1,0 +1,902 @@
+{
+  "kind": "repo",
+  "repo": "vercel/next.js",
+  "branch": "canary",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T23:45:36Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v16.4.2",
+      "publishedAt": "2026-10-15T20:44:37Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v15.5.28",
+      "name": "v15.5.28",
+      "publishedAt": "2026-10-14T17:47:49Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v15.5.28",
+      "prerelease": false,
+      "body": "This release contains security fixes for the following advisories:\n\nCritical:\n- [Unauthenticated Remote Code Execution in Image Optimization API when SVG files are used](https://github.com/vercel/next.js/security/advisories/GHSA-2464-fhr4-w9xw)\n\nHigh:\n- [Denial of Service in App Router using Server Actions](https://github.com/vercel/next.js/security/advisories/GHSA-p3m5-59mp-jv5r)"
+    },
+    {
+      "tag": "v16.4.1",
+      "name": "v16.4.1",
+      "publishedAt": "2026-10-14T17:47:59Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.1",
+      "prerelease": false,
+      "body": "This release contains security fixes for the following advisories:\n\nCritical:\n- [Unauthenticated Remote Code Execution in `use cache` functions returning typed arrays](https://github.com/vercel/next.js/security/advisories/GHSA-673q-mjm6-r5xr)\n- [Unauthenticated Remote Code Execution in Image Optimization API when SVG files are used](https://github.com/vercel/next.js/security/advisories/GHSA-2464-fhr4-w9xw)\n\nHigh:\n- [Denial of Service in App Router using Server Actions](https://github.com/vercel/next.js/security/advisories/GHSA-p3m5-59mp-jv5r)"
+    },
+    {
+      "tag": "v16.5.0-canary.11",
+      "name": "v16.5.0-canary.11",
+      "publishedAt": "2026-10-14T18:52:59Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.11",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.12",
+      "name": "v16.5.0-canary.12",
+      "publishedAt": "2026-10-14T23:49:31Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.12",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.13",
+      "name": "v16.5.0-canary.13",
+      "publishedAt": "2026-10-15T10:00:06Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.13",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.14",
+      "name": "v16.5.0-canary.14",
+      "publishedAt": "2026-10-15T13:52:48Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.14",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.4.2",
+      "name": "v16.4.2",
+      "publishedAt": "2026-10-15T20:44:37Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.2",
+      "prerelease": false,
+      "body": "## What's Changed\n* [lts-active] turbo-tasks snapshot consistency fixes (#99644, #99732, #99649) by @lukesandberg in https://github.com/vercel/next.js/pull/100002\n* [lts-active] Turbopack: backport Pages Router dev module graph chaining (#98823, #99910, #100091) by @sokra in https://github.com/vercel/next.js/pull/100008\n* [lts-active] fix(next-code-frame): snap visible window to char boundaries by @lukesandberg in https://github.com/vercel/next.js/pull/100212\n* [lts-active] [turbopack] Fix two GC paths that leave half-torn-down dependency edges by @lukesandberg in https://github.com/vercel/next.js/pull/100209\n* [lts-active] Turbopack: Ignore realpath errors during module resolution, matching node's behavior by @lukesandberg in https://github.com/vercel/next.js/pull/100217\n* [lts-active] Backport docs fixes since v16.4.0 by @icyJoseph in https://github.com/vercel/next.js/pull/100246\n* [lts-active] Fix Turbopack lazy dynamic-import chunk-list collisions by @lukesandberg in https://github.com/vercel/next.js/pull/100211\n* [lts-active] Backport additional documentation fixes since v16.4.0 by @aurorascharff in https://github.com/vercel/next.js/pull/100262\n\n**Full Changelog**: https://github.com/vercel/next.js/compare/v16.4.1...v16.4.2"
+    }
+  ],
+  "prs": [
+    {
+      "number": 100052,
+      "title": "[ci] Fix Rspack test manifest update workflow",
+      "url": "https://github.com/vercel/next.js/pull/100052",
+      "author": "sokra",
+      "mergedAt": "2026-10-14T05:20:09Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 100146,
+      "title": "Simplify aggregation update queue control flow",
+      "url": "https://github.com/vercel/next.js/pull/100146",
+      "author": "lukesandberg",
+      "mergedAt": "2026-10-14T06:05:47Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Now that we are no longer suspending we can simplify control flow and implementation of the AggregationUpdateQueue\n\n* drop an unneeded `Clone` derive\n* process batch tasks via loops instead of `pop` + `push_front`\n* when we run out of optimization quota just immediately tag everything instead of popping each task and checking the quote again\n* simplify the public apis",
+      "files": [
+        "turbopack/crates/turbo-tasks-backend/src/backend/gc.rs (+1 -1)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/aggregation_update.rs (+78 -117)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/cleanup_old_edges.rs (+12 -17)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/leaf_distance_update.rs (+23 -44)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 100047,
+      "title": "Turbopack: avoid document-wide selector scans when probing for chunk tags",
+      "url": "https://github.com/vercel/next.js/pull/100047",
+      "author": "sokra",
+      "mergedAt": "2026-10-14T07:05:03Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #99993.\n\nOn the first non-runtime load of each chunk URL, Turbopack's browser DOM runtime checks whether a matching `<script>` or `<link rel=stylesheet>` already exists. That check was a document-wide `querySelectorAll` with four attribute and prefix selectors, so its cost grew with the size of the whole DOM. It runs on the main thread during hydration, roughly once per chunk. The selectors were also built by interpolating the URL without escaping: a decoded `\"` threw a `SyntaxError`, and a `\\` missed a tag that was already present.\n\nThe production loader (`doLoadChunk`) and the dev backend (`unloadChunk` / `reloadChunk`) now look tags up with `getElementsByTagName` and plain string comparison. The helpers are defined once in the DOM backend and reused by the dev backend, since the runtime files are concatenated rather than imported as modules.\n\nMatching behavior is otherwise unchanged:\n- A tag matches if its raw attribute equals the chunk URL, or starts with the URL plus `?`, for both the URL and its `decodeURI` form. A different query string still does not match.\n- The stylesheet lookup still requires `rel` to be exactly `stylesheet` (ASCII case-insensitive). Dev CSS unload still ignores `rel`.\n- All matching tags are returned in document order, from both head and body.\n- Results are snapshot arrays, so removing tags while looping over them is safe.\n\nThis lowers the cost per probe but is still proportional to the number of elements. A URL index that would \n…(truncated)",
+      "files": [
+        "turbopack/crates/turbopack-ecmascript-runtime/js/src/browser/runtime/dom/dev-backend-dom.ts (+4 -16)",
+        "turbopack/crates/turbopack-ecmascript-runtime/js/src/browser/runtime/dom/runtime-backend-dom.ts (+79 -10)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/layout.tsx (+9 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/page.tsx (+9 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/widgets/styled-client.module.css (+3 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/widgets/styled-client.tsx (+11 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/widgets/styled-server.module.css (+3 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/widgets/styled-server.tsx (+11 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/widgets/widget-a.tsx (+5 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/widgets/widget-b.tsx (+5 -0)"
+      ],
+      "filesTotal": 28
+    },
+    {
+      "number": 100138,
+      "title": "test: speed up use-cache-cross-deployment",
+      "url": "https://github.com/vercel/next.js/pull/100138",
+      "author": "mischnic",
+      "mergedAt": "2026-10-14T07:35:45Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100144,
+      "title": "docs: clarify Server Action dispatch across Mutating Data and the guide",
+      "url": "https://github.com/vercel/next.js/pull/100144",
+      "author": "icyJoseph",
+      "mergedAt": "2026-10-14T09:18:11Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 99786,
+      "title": "docs: explain router.prefetch stages",
+      "url": "https://github.com/vercel/next.js/pull/99786",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-14T09:58:42Z",
+      "labels": [
+        "type: next",
+        "Documentation",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 8
+    },
+    {
+      "number": 99877,
+      "title": "fix: mark HTTP fetch failures as span errors",
+      "url": "https://github.com/vercel/next.js/pull/99877",
+      "author": "kakadiadarpan",
+      "mergedAt": "2026-10-14T11:52:21Z",
+      "labels": [
+        "type: next"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Problem\n\nFetch spans report HTTP failures without an error status.\n\n## Solution\n\nMark recorded responses with status >= 400 as errors. Preserve response bodies and streaming.",
+      "files": [
+        "packages/next/src/server/lib/patch-fetch.ts (+6 -1)",
+        "packages/next/src/server/lib/patch-fetch.test.ts (+218 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 100175,
+      "title": "Turbopack: only search <head> for existing chunk tags",
+      "url": "https://github.com/vercel/next.js/pull/100175",
+      "author": "sokra",
+      "mergedAt": "2026-10-14T12:23:18Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nTurbopack's browser runtime now looks for existing chunk tags in `<head>` only, and `turbopack-dev-server` puts its chunk scripts into `<head>` as `<script async>` instead of at the end of `<body>`.\n\nFollow-up to #100047, answering [this review comment](https://github.com/vercel/next.js/pull/100047#discussion_r4267298397).\n\n### Why?\n\n#100047 removed the document-wide `querySelectorAll` from the chunk-tag lookup, but the lookup still iterated every `<script>`/`<link>` in the document, so its cost grew with the page content.\n\nI checked where chunk tags actually land in Next.js (Chromium; hard loads, App Router soft navigation, Pages Router, Suspense streaming, `loading.tsx`, PPR in prod):\n- The tags the runtime looks up are all in `<head>`.\n- The tags in `<body>` are the bootstrap `<script>` (a runtime chunk, never looked up), late `<link rel=preload>` tags for `next/dynamic` chunks in streamed boundaries, and, under PPR, a second copy of the `noModule` polyfills script.\n\n`turbopack-dev-server` was the one producer that put chunk scripts into `<body>`.\n\nSynthetic Chromium microbenchmark of the compiled lookup helper, 80 lookups, ms (before → after):\n\n| CPU | Body elements | Before | After |\n|---|---|---|---|\n| 1× | 800 | 3.5 | 2.6 |\n| 1× | 8,000 | 8.1 | 2.5 |\n| 1× | 32,000 | 23.3 | 2.5 |\n| 4× | 800 | 14.4 | 10.8 |\n| 4× | 8,000 | 33.9 | 10.5 |\n| 4× | 32,000 | 108.1 | 10.9 |\n\n### How?\n\n- **Runtime** (`runtime-backend-dom.ts`): `findChunkScripts` / `findChunkLinks` iter\n…(truncated)",
+      "files": [
+        "turbopack/crates/turbopack-dev-server/src/html.rs (+78 -27)",
+        "turbopack/crates/turbopack-ecmascript-runtime/js/src/browser/runtime/dom/dev-backend-dom.ts (+1 -1)",
+        "turbopack/crates/turbopack-ecmascript-runtime/js/src/browser/runtime/dom/runtime-backend-dom.ts (+15 -9)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/on-demand/on-demand-widget.module.css (+3 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/on-demand/on-demand-widget.tsx (+11 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/on-demand/on-demand.tsx (+23 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/on-demand/page.tsx (+9 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/streamed/page.tsx (+22 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/streamed/streamed-client.tsx (+9 -0)",
+        "test/e2e/app-dir/dynamic-chunk-dedupe/app/streamed/streamed-widget.module.css (+3 -0)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 100078,
+      "title": "Remove unused getParams matcher cache",
+      "url": "https://github.com/vercel/next.js/pull/100078",
+      "author": "mischnic",
+      "mergedAt": "2026-10-14T14:16:53Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "`last` was never getting assigned, so there was never a cache hit.\n\nEven if it was implemented correctly, the benefits are questionable as a LRU of size 1 isn't awfully effective anyway.",
+      "files": [
+        "packages/next/src/export/helpers/get-params.ts (+2 -21)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 100181,
+      "title": "test: speed up use-cache-cross-deployment even more",
+      "url": "https://github.com/vercel/next.js/pull/100181",
+      "author": "mischnic",
+      "mergedAt": "2026-10-14T14:51:41Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100126,
+      "title": "ci: run evals for releases and canaries",
+      "url": "https://github.com/vercel/next.js/pull/100126",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-14T15:21:02Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 99963,
+      "title": "Reload on missed Turbopack startup CSS updates",
+      "url": "https://github.com/vercel/next.js/pull/99963",
+      "author": "wbinnssmith",
+      "mergedAt": "2026-10-14T16:22:36Z",
+      "labels": [
+        "type: next",
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nRecover missed Turbopack startup CSS edits with a full page reload, while keeping ordinary CSS HMR state-preserving. Related: #99893; reuses the version-mismatch recovery introduced in #97966.\n\n### Why?\n\nCSS can finish loading before the browser starts HMR. An edit in that window leaves old CSS in the page, but initializing the browser from the current WebSocket version hides the mismatch. The initial HTML needs to carry the version it actually rendered, and the server must observe CSS before any browser subscribes.\n\n### How?\n\n- Capture the client HMR version before rendering and emit `__nextHmrInitialVersion` in an inline script **only in dev-server HTML with Turbopack HMR**, using safe serialization, the existing CSP nonce and Pages crossOrigin precedence.\n- Use the HTML version as the first-connection fallback. Previously observed WebSocket versions retain priority on reconnect. A stale subscription reuses the existing reload message/handler.\n- Await CSS-inclusive observation before serving HTML: App route client output, Pages route client output, and Pages' global `_app` client output. Pages chunks exclude dependencies already provided by `_app`, so the global observer is necessary for a truly fresh Pages-first load.\n- Reuse existing subscription ownership/deduplication and per-cycle client-version accounting. Successful observation sends no refresh/build-success message and does not invalidate the server-component cache. Subscriptions remain disabled for one-s\n…(truncated)",
+      "files": [
+        "packages/next/src/client/dev/hot-reloader/app/web-socket.ts (+1 -0)",
+        "packages/next/src/client/next-dev-turbopack.ts (+1 -0)",
+        "packages/next/src/client/page-bootstrap.ts (+3 -4)",
+        "packages/next/src/pages/_document.tsx (+13 -0)",
+        "packages/next/src/server/app-render/app-render.tsx (+10 -0)",
+        "packages/next/src/server/base-server.ts (+11 -0)",
+        "packages/next/src/server/dev/hot-reloader-turbopack.ts (+67 -8)",
+        "packages/next/src/server/dev/hot-reloader-types.ts (+2 -0)",
+        "packages/next/src/server/dev/next-dev-server.ts (+4 -0)",
+        "packages/next/src/server/dev/turbopack-utils.ts (+25 -0)"
+      ],
+      "filesTotal": 33
+    },
+    {
+      "number": 100081,
+      "title": "fix(analyze): use route summaries as the analyzer route index",
+      "url": "https://github.com/vercel/next.js/pull/100081",
+      "author": "wbinnssmith",
+      "mergedAt": "2026-10-14T16:33:21Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nThe bundle analyzer now uses the `route-summaries.json` that Turbopack writes as its **only** route index. This covers `next analyze`, `next build --analyze`, `next analyze export`, the analyzer UI's route picker, and comparison views. `routes.json` is no longer written or read, and `/_global-error` is listed like any other route.\n\n### Why?\n\n`next analyze export` failed with ENOENT on metadata routes that use `generateImageMetadata` or `generateSitemaps`, and the analyzer UI couldn't load their data either.\n\nThe cause was two route indexes that disagreed:\n\n- Turbopack writes each route's `analyze.data` under its structural entrypoint key, e.g. `/icon` or `/sitemap.xml`. It also lists those keys in `route-summaries.json`, along with each route's sizes.\n- `routes.json` was built separately from the routes manifest, which has the generator-adjusted pages `/icon/[__metadata_id__]` and `/sitemap/[__metadata_id__]`.\n\nReaders turn each listed route straight into `<route>/analyze.data`, so they asked for files that were never written.\n\nSince `route-summaries.json` already has every route plus its sizes, a second index is redundant. Dropping it makes the route list and the data on disk agree by construction.\n\n### How?\n\n- **Capture:** both capture commands read and validate the summaries, then use that list for the snapshot's `routeCount`. Nothing is filtered, so `/_global-error` (which can be large) is now visible.\n- **Export:** `next analyze export` uses the same validated\n…(truncated)",
+      "files": [
+        "apps/bundle-analyzer/components/analyzer.tsx (+10 -18)",
+        "apps/bundle-analyzer/components/compare-layout.tsx (+7 -4)",
+        "apps/bundle-analyzer/components/route-typeahead.tsx (+6 -3)",
+        "apps/bundle-analyzer/lib/analyzer-data.ts (+17 -0)",
+        "packages/next/src/build/analyze/graph-dump.ts (+2 -9)",
+        "packages/next/src/build/analyze/index.ts (+3 -87)",
+        "packages/next/src/build/analyze/snapshot.ts (+26 -0)",
+        "packages/next/src/build/index.ts (+3 -14)",
+        "test/e2e/next-analyze/app/meta/icon.tsx (+15 -0)",
+        "test/e2e/next-analyze/app/sitemap.ts (+15 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 100172,
+      "title": "Remove staticInfo.rsc",
+      "url": "https://github.com/vercel/next.js/pull/100172",
+      "author": "mischnic",
+      "mergedAt": "2026-10-14T16:50:19Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "It’s safe because .rsc wasn’t actually detecting client pages:\n- It searched for the compiler-generated marker `__next_internal_client_entry_do_not_use__`, not \"use client\". Static-info analysis reads raw source, so normal pages returned `'server'` or `undefined`.\n- Both values behaved identically: callers checked `rsc !== 'client'`, making the result effectively just “is this an App Router entry?”\n- Client-entry skipping was already redundant: it checked `isServerComponent || isInsideAppDir`.\n- The build’s remaining SSG branch was unreachable: it checked `isServerComponent` inside the Pages Router branch, where it was always false.\nThe cleanup replaces those ineffective checks with the router classification they already represented. Actual client/server boundaries are still determined by the bundler; its RSC metadata is untouched.\nBuild, type checks, unit tests, and focused Webpack dev/production tests passed.",
+      "files": [
+        "packages/next/src/build/analysis/get-page-static-info.ts (+0 -7)",
+        "packages/next/src/build/entries.ts (+5 -9)",
+        "packages/next/src/build/index.ts (+0 -12)",
+        "packages/next/src/server/dev/hot-reloader-webpack.ts (+3 -7)",
+        "packages/next/src/server/dev/on-demand-entry-handler.ts (+2 -6)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 100189,
+      "title": "ci: update release eval workflow pin",
+      "url": "https://github.com/vercel/next.js/pull/100189",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-14T16:57:31Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100197,
+      "title": "docs: update links for newly transferred demos",
+      "url": "https://github.com/vercel/next.js/pull/100197",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-14T17:54:24Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 5
+    },
+    {
+      "number": 100196,
+      "title": "docs: narrow catchError ErrorInfo.error, typed as unknown",
+      "url": "https://github.com/vercel/next.js/pull/100196",
+      "author": "icyJoseph",
+      "mergedAt": "2026-10-14T18:09:10Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 99542,
+      "title": "docs: fix \"a HTTP\"/\"a SSR\" grammar and Node.js casing",
+      "url": "https://github.com/vercel/next.js/pull/99542",
+      "author": "deveshasawa28",
+      "mergedAt": "2026-10-14T18:09:32Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 99960,
+      "title": "Copy pnpm store to tmpfs for test fixtures",
+      "url": "https://github.com/vercel/next.js/pull/99960",
+      "author": "bgw",
+      "mergedAt": "2026-10-14T18:40:06Z",
+      "labels": [
+        "created-by: Turbopack team"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100200,
+      "title": "ci: remove release eval dispatcher",
+      "url": "https://github.com/vercel/next.js/pull/100200",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-14T19:13:49Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 99827,
+      "title": "Upgrade from pnpm v10 to v12",
+      "url": "https://github.com/vercel/next.js/pull/99827",
+      "author": "bgw",
+      "mergedAt": "2026-10-14T19:43:56Z",
+      "labels": [
+        "type: next",
+        "Font (next/font)",
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Hopefully this should make test setup a little faster and it should make it easier for me to test compatibility with pnpm GVS (#99758).\n\nI previously tried to upgrade us to pnpm 11, but couldn't because it requires Node 22+, and we need to test against Node 20. However, pnpm 12 is written in Rust, and does not depend on particular versions of Node.\n\n## Other notable changes\n- Nx: Some of our tests needed an upgrade. It parses the pnpm lockfile, like Turborepo.\n- pnpm 12 fails to install from an uncompressed tarball (only supports gziped-tarballs?), so this builds the `tgz` from source (previously we had a binary tarball committed to the repo).\n\n## Testing\n\nI manually ran the e2e deployment tests: https://github.com/vercel/next.js/actions/runs/38491349790",
+      "files": [
+        ".agents/skills/sandbox-bench/scripts/sandbox-e2e.mjs (+1 -1)",
+        ".npmrc (+0 -7)",
+        "package.json (+1 -43)",
+        "packages/next/next-devtools.webpack-config.js (+22 -5)",
+        "pnpm-lock.yaml (+171 -37)",
+        "pnpm-workspace.yaml (+66 -18)",
+        "rspack/package.json (+1 -1)",
+        "rspack/pnpm-lock.yaml (+158 -0)",
+        "scripts/normalize-version-bump.js (+2 -1)",
+        "scripts/sync-react.js (+42 -1)"
+      ],
+      "filesTotal": 51
+    },
+    {
+      "number": 100198,
+      "title": "docs: clarify ESLint 10 support",
+      "url": "https://github.com/vercel/next.js/pull/100198",
+      "author": "aurorascharff",
+      "mergedAt": "2026-10-14T20:20:14Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 100202,
+      "title": "Fix CI for react 18.3",
+      "url": "https://github.com/vercel/next.js/pull/100202",
+      "author": "lukesandberg",
+      "mergedAt": "2026-10-14T20:20:36Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 99782,
+      "title": "Turbopack: don't treat events as relevant because their parent dir is in the watcher batch",
+      "url": "https://github.com/vercel/next.js/pull/99782",
+      "author": "sokra",
+      "mergedAt": "2026-10-14T20:48:05Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nOn macOS, frequent writes to an untracked file kept the watcher batch open and delayed the invalidation of tracked files until the writes stopped. This made the native cases of `irrelevant_events_do_not_delay_invalidation` fail consistently (took ~3.3s, i.e. the whole churn).\n\nWhy: FSEvents keeps the `ItemCreated` flag set on a recently created file, so each write to an existing file shows up as a `Create(File)` event. When a tracked file in the same directory changed, `mark_parent_dir` added that directory to the batch, even though nothing had listed it. The fast path in `is_relevant` then treated every later `Create` of a sibling as relevant because its parent was in the batch, and each of those events pushed the batch deadline back.\n\nThe fast path now only checks the path itself. The slow path still checks the parent against `dir_invalidator_map`, so events under a directory whose listing is tracked still count as relevant.\n\n## Verification\n\n- `cargo test -p turbo-tasks-fs --lib watcher::` on macOS: all 19 tests pass, including `repeated_writes_to_tracked_file_are_debounced`. Before this change, the two native `irrelevant_events_do_not_delay_invalidation` cases failed.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+      "files": [
+        "turbopack/crates/turbo-tasks-fs/src/watcher/mod.rs (+6 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 100186,
+      "title": "docs: replace unbounded cacheHandler snippets and fix tag handling in examples",
+      "url": "https://github.com/vercel/next.js/pull/100186",
+      "author": "icyJoseph",
+      "mergedAt": "2026-10-14T21:07:56Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 99924,
+      "title": "docs(examples): fix typo and update HTTP links to HTTPS in example READMEs",
+      "url": "https://github.com/vercel/next.js/pull/99924",
+      "author": "karan5028ji",
+      "mergedAt": "2026-10-14T21:39:25Z",
+      "labels": [
+        "examples"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 97713,
+      "title": "Turbopack: Avoid `serde_json::RawValue` conversions in a few places",
+      "url": "https://github.com/vercel/next.js/pull/97713",
+      "author": "bgw",
+      "mergedAt": "2026-10-14T22:18:45Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "[`RawValue::from_string`](https://docs.rs/serde_json/latest/serde_json/value/struct.RawValue.html#method.from_string) attempts to deserialize values to ensure they're valid JSON.\n\nThe original version of this PR used [`RawValue::from_string_unchecked`](https://docs.rs/serde_json/latest/serde_json/value/struct.RawValue.html#method.from_string_unchecked), which introduced some `unsafe` usage to avoid the parse.\n\nLuke's comments revealed some better approaches. For `pages_chunk_group_bootstrap_params`, we're also able to avoid a string copy by using `RcJsonRawValue` and serializing a `&RawValue` instead of a `Box<RawValue>`.",
+      "files": [
+        "Cargo.lock (+2 -2)",
+        "Cargo.toml (+1 -1)",
+        "crates/next-api/src/pages.rs (+2 -1)",
+        "crates/next-core/src/next_manifests/mod.rs (+6 -5)",
+        "turbopack/crates/turbopack-browser/src/ecmascript/evaluate/chunk.rs (+5 -4)",
+        "turbopack/crates/turbopack-core/src/chunk/chunking_context.rs (+2 -1)",
+        "turbopack/crates/turbopack-core/src/json.rs (+80 -0)",
+        "turbopack/crates/turbopack-core/src/lib.rs (+1 -0)",
+        "turbopack/crates/turbopack-core/src/source_map/utils.rs (+2 -5)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 100214,
+      "title": "docs: Add turborepo agents rules",
+      "url": "https://github.com/vercel/next.js/pull/100214",
+      "author": "bgw",
+      "mergedAt": "2026-10-14T23:55:02Z",
+      "labels": [
+        "created-by: Turbopack team"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100112,
+      "title": "Write webpack dev manifests atomically",
+      "url": "https://github.com/vercel/next.js/pull/100112",
+      "author": "sokra",
+      "mergedAt": "2026-10-15T05:17:25Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nIn webpack dev, manifest files (`*manifest.json` / `*manifest.js`, e.g. `next-font-manifest.json` and `page_client-reference-manifest.js`) are now written atomically: the content goes to a temp file next to the manifest, which is then renamed over it. Other emitted assets are written as before.\n\n### Why?\n\nThis fixes a canary hard flake in `test/e2e/app-dir/not-found/basic` › \"should render the 404 page when the file is removed, and restore the page when re-added\" ([example](https://github.com/vercel/next.js/actions/runs/38003705301/job/114068060547)). It is a real dev-server bug:\n\n- Renaming `app/page.js` away makes `/` render `/_not-found`. That entry is already built, so the render doesn't wait for the in-flight rebuild.\n- Webpack writes emitted assets in place (it truncates first). `RouteModule.loadManifests` can therefore read a 0-byte manifest. Instrumented local runs caught `.next/dev/server/app/_not-found/page_client-reference-manifest.js` (`Manifest file is empty`) and `.next/dev/server/next-font-manifest.json` (`Unexpected end of JSON input`). CI shows the same errors on every retry.\n- The request returns a 500, the browser lands on the pages error page, which never recovers through app-dir HMR, and the test times out after 120 s.\n\nTurbopack already writes its manifests with `writeFileAtomic` and isn't affected.\n\n### How?\n\n- `createAtomicManifestOutputFileSystem(fs)` returns an output FS that inherits from webpack's shared `graceful-fs` object without muta\n…(truncated)",
+      "files": [
+        "packages/next/src/lib/fs/write-atomic.ts (+4 -1)",
+        "packages/next/src/server/dev/atomic-manifest-output-fs.ts (+68 -0)",
+        "packages/next/src/server/dev/hot-reloader-webpack.ts (+10 -0)",
+        "packages/next/src/server/dev/atomic-manifest-output-fs.test.ts (+178 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 100136,
+      "title": "Keep requests through middleware in a single OpenTelemetry trace",
+      "url": "https://github.com/vercel/next.js/pull/100136",
+      "author": "sokra",
+      "mergedAt": "2026-10-15T06:56:36Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nRequests that pass through middleware / `proxy.ts` now produce **one OpenTelemetry trace**, instead of two or three.\n\nBefore, with OTEL configured in `instrumentation.ts`:\n\n| Request | No outer span | With an outer span (APM, custom server) |\n|---|---|---|\n| Middleware continues to render (`next()` / rewrite) | 3 traces (2 before 16.3) | 2 traces (1 before 16.3) |\n| Middleware redirect / direct response | 2 traces (1 before 16.3) | 2 traces (1 before 16.3) |\n\nAfter: 1 trace in every case.\n\n### Why?\n\nTwo independent causes:\n\n1. **Long-standing (13.5 → canary), #91282.** When middleware lets a request continue, the router server runs `BaseServer.handleRequest` twice: a middleware-invoke pass, then a render pass. Each pass extracts its context from the incoming request headers. Without an incoming `traceparent`, each pass started its own root trace.\n2. **16.3 regression from #95306.** In-process Node.js middleware ran under `ROOT_CONTEXT` to make `Middleware.execute` a sibling of `handleRequest`. That also detached it from any outer span, so the middleware span always started an extra trace.\n\nCustomers upgrading 16.2 → 16.3 see this as \"doubled traces\".\n\n### How?\n\nWhen middleware lets a request continue, the render is always **nested inside the middleware span**, in every host:\n\n```\nnext start / next dev:\n handleRequest GET (bubble, root)\n  └─ middleware GET\n      └─ GET /page\n\nseparately-invoked middleware (Vercel, adapters, direct entrypoints), no parent:\n middlewar\n…(truncated)",
+      "files": [
+        "packages/next/src/server/base-server.ts (+21 -2)",
+        "packages/next/src/server/lib/trace/tracer.ts (+32 -13)",
+        "packages/next/src/server/next-server.ts (+15 -18)",
+        "packages/next/src/server/web/adapter.ts (+29 -1)",
+        "packages/next/src/server/web/forward-trace-context.ts (+90 -0)",
+        "packages/next/src/server/web/forward-trace-context.test.ts (+163 -0)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/headers-echo/page.tsx (+22 -0)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/layout.tsx (+9 -0)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/page.tsx (+3 -0)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/page/page.tsx (+25 -0)"
+      ],
+      "filesTotal": 22
+    },
+    {
+      "number": 100102,
+      "title": "Emit the Turbopack shared-runtime bootstrap in the PPR resume so it gets the CSP nonce",
+      "url": "https://github.com/vercel/next.js/pull/100102",
+      "author": "sokra",
+      "mergedAt": "2026-10-15T08:03:38Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nWith `cacheComponents` and the default `experimental.turbopackSharedRuntime`, a Turbopack production build breaks hydration under a nonce-based CSP (`script-src 'self' 'nonce-…'`). The route's inlined chunk-group bootstrap ends up in the prerendered static shell without a nonce. The browser blocks it, the Turbopack runtime never starts the entry, and the page stays non-interactive.\n\nThis PR emits that bootstrap from the per-request part of the response instead, where the request's nonce is known. The shared runtime stays on by default.\n\n### Why?\n\nSince 16.4 the shared runtime replaces the per-route evaluate chunk with an inline `globalThis.TURBOPACK.push({ otherChunks, runtimeModuleIds })` script, passed to React as `bootstrapScriptContent`. A PPR static shell is rendered at build time: there is no request, so React has no nonce to put on it.\n\nThe shell can't be fixed when it's served either. On Vercel the proxy serves the cached shell before any Next.js code runs, and only the resumed dynamic stream is rendered per request. So the bootstrap has to come from that stream.\n\n### How?\n\n**Server.** Cache Components prerenders now keep the Turbopack bootstrap separate from the other bootstrap content, such as the Instant Navigation testing script, and leave it out of the shell.\n- For a postponed shell, the resume emits it as an inline script with the request nonce, right before the inlined Flight data. This reuses the existing data-injection pipeline, so the ordering is \n…(truncated)",
+      "files": [
+        "packages/next/src/build/templates/app-page-runtime.ts (+25 -4)",
+        "packages/next/src/client/app-bootstrap.ts (+13 -5)",
+        "packages/next/src/client/app-index.tsx (+2 -3)",
+        "packages/next/src/client/app-next-dev.ts (+2 -2)",
+        "packages/next/src/client/app-next-turbopack.ts (+2 -2)",
+        "packages/next/src/client/app-next.ts (+2 -2)",
+        "packages/next/src/client/dev/hot-reloader/app/asset-prefix.ts (+12 -0)",
+        "packages/next/src/client/dev/hot-reloader/app/web-socket.ts (+2 -4)",
+        "packages/next/src/server/app-render/app-render.tsx (+107 -34)",
+        "packages/next/src/server/app-render/get-script-nonce-from-header.tsx (+16 -0)"
+      ],
+      "filesTotal": 22
+    },
+    {
+      "number": 100158,
+      "title": "Fix extensionless Google font URLs in both bundlers",
+      "url": "https://github.com/vercel/next.js/pull/100158",
+      "author": "andrewimm",
+      "mergedAt": "2026-10-15T08:49:09Z",
+      "labels": [
+        "type: next",
+        "Font (next/font)",
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #99114 in both Turbopack and Webpack\n\nDue to Google Fonts dynamically returning the \"best\" font for the UA, it sometimes comes back as WOFF2 without an extension. We hardcode an extension expectation, so this fails:\n\nWebpack assumed every font URL ended in an extension, causing a null-regex crash.\nTurbopack split JSON options at embedded `&` characters. After that, its extension check would also fail\n\nThe solution:\nFor Webpack, remove the unsafe dereference, and resolve the extension from the CSS `format('XYZ')` hint when the URL lacks an extension\n\nFor Turbopack, carry the resolved font extension from CSS extraction into asset emission instead of requiring a URL suffix.\n\nAlso while investigating, Fleet found another bug: it parses the serialized options as a query string, so embedded `&` characters split the options before it ever reaches the extension check. To fix, we now percent-encode the entire JSON as one query entry, preserving the embedded params.",
+      "files": [
+        "crates/next-core/src/next_font/google/mod.rs (+145 -8)",
+        "packages/font/src/google/find-font-files-in-css.ts (+20 -1)",
+        "packages/font/src/google/loader.ts (+1 -2)",
+        "packages/font/src/google/find-font-files-in-css.test.ts (+61 -5)",
+        "test/e2e/app-dir/next-font-extensionless/app/layout.tsx (+12 -0)",
+        "test/e2e/app-dir/next-font-extensionless/app/page.tsx (+3 -0)",
+        "test/e2e/app-dir/next-font-extensionless/google-font-mocked-responses.js (+12 -0)",
+        "test/e2e/app-dir/next-font-extensionless/next-font-extensionless.test.ts (+112 -0)",
+        "test/e2e/app-dir/next-font-extensionless/next.config.ts (+5 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 100165,
+      "title": "turbo-tasks-backend: optimize aggregated updates outside of the lock",
+      "url": "https://github.com/vercel/next.js/pull/100165",
+      "author": "sokra",
+      "mergedAt": "2026-10-15T09:32:51Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nNet the collectible counts of an `AggregatedDataUpdate` in a new `AggregatedDataUpdate::optimize()`, called after the follower task's lock has been released.\n\n### Why?\n\nWhen an aggregating task gains (or loses) an upper, `AggregatedDataUpdate::from_task` builds an update from the task's own collectible counts plus `+1` for every positive aggregated collectible.\n\n- **Cancelling entries:** a task that takes or drops the collectibles of its subgraph holds an own `-1` for each of them, so most of those entries cancel out. An earlier large `next build` investigation found one such update with 106,268 entries, of which only 4 had a nonzero net count.\n- **Serialization:** in a large `next build`, ~6,000 uppers connect the same task. `from_task` runs while that follower's lock is held, so anything done per update while the lock is held serializes across all workers.\n- **Why the earlier version didn't help:** a previous version of this PR netted inside `from_task`, still under the lock. It didn't improve emit time.\n\n### How?\n\n- **`from_task`:** back to its original form (own entries, then `+1` per positive aggregated entry). It keeps a `Vec::with_capacity` upper bound so the vector isn't reallocated while the task is locked.\n- **`optimize()`:** sums the collectible entries per collectible, drops zero sums, and keeps the dirty container update unchanged. It reuses the vector's allocation.\n- **Call sites:** `optimize()` is called right after the follower lock is dropped, at t\n…(truncated)",
+      "files": [
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/aggregation_update.rs (+285 -7)",
+        "turbopack/crates/turbo-tasks-backend/tests/collectibles_take_many_uppers.rs (+120 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 100232,
+      "title": "docs: type error.js error prop as unknown",
+      "url": "https://github.com/vercel/next.js/pull/100232",
+      "author": "icyJoseph",
+      "mergedAt": "2026-10-15T12:06:27Z",
+      "labels": [
+        "examples",
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 5
+    },
+    {
+      "number": 100003,
+      "title": "docs: add instant navigation testing to Playwright guide",
+      "url": "https://github.com/vercel/next.js/pull/100003",
+      "author": "yousefdawood7",
+      "mergedAt": "2026-10-15T12:08:51Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100205,
+      "title": "Fix binary trace self-time on same-span re-entry",
+      "url": "https://github.com/vercel/next.js/pull/100205",
+      "author": "mischnic",
+      "mergedAt": "2026-10-15T12:15:55Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFix lost binary-trace self-time when a span re-enters itself on the same thread, as happens with instrumented futures. Previously, the inner Exit restarted the outer frame's clock under the same `(span_id, thread_id)` key and immediately removed it, dropping the outer frame's remaining work.\n\nStore the active slice start on each per-thread stack frame instead. Enter closes the current top's slice; Exit closes the matching frame and resumes the new top only when the exiting frame was on top. Non-LIFO exits remove suspended frames without restarting another clock; unmatched exits leave clocks unchanged. Allocation attribution, queued-parent processing, and `DROP_SPANS` remain intact.\n\n**Binary flame CPU/self-time, concurrency-corrected time, and concurrency metrics will change because the previously missing slices are now accounted for correctly.** This does not change the binary trace format.\n\nAdd encoded `TraceRow` parser regressions for single/multiple same-span nesting, child interleaving, cross-thread activity, non-LIFO/unmatched exits, live input with a partial final row, allocations, queued parents, and dropped spans. Five regression cases failed against the original reader before the fix.\n\n## Verification\n\n- `cargo test -p turbopack-trace-server` — 84 library and 58 binary tests passed.\n- `cargo clippy -p turbopack-trace-server --all-targets -- -D warnings` — passed.\n- `cargo fmt --all -- --check` — passed.\n- Generated a real binary trace from a small local \n…(truncated)",
+      "files": [
+        "turbopack/crates/turbopack-trace-server/src/reader/turbopack.rs (+363 -39)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 100241,
+      "title": "chore: fix turborepo cache for miri unit test job",
+      "url": "https://github.com/vercel/next.js/pull/100241",
+      "author": "mischnic",
+      "mergedAt": "2026-10-15T13:28:07Z",
+      "labels": [
+        "created-by: Turbopack team"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100185,
+      "title": "test: unskip tests for Turbopack",
+      "url": "https://github.com/vercel/next.js/pull/100185",
+      "author": "mischnic",
+      "mergedAt": "2026-10-15T13:32:17Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 8
+    },
+    {
+      "number": 100252,
+      "title": "docs: note that 'use cache: private' results persist across requests in dev",
+      "url": "https://github.com/vercel/next.js/pull/100252",
+      "author": "icyJoseph",
+      "mergedAt": "2026-10-15T14:10:36Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 100247,
+      "title": "docs: Add Pages Router upgrade guides for versions 15 and 16",
+      "url": "https://github.com/vercel/next.js/pull/100247",
+      "author": "icyJoseph",
+      "mergedAt": "2026-10-15T14:36:49Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 4
+    },
+    {
+      "number": 100234,
+      "title": "chore: Remove package.json#workspaces",
+      "url": "https://github.com/vercel/next.js/pull/100234",
+      "author": "mischnic",
+      "mergedAt": "2026-10-15T15:28:30Z",
+      "labels": [
+        "created-by: Turbopack team"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 100206,
+      "title": "Make error overlay editor actions easier to discover",
+      "url": "https://github.com/vercel/next.js/pull/100206",
+      "author": "samselikoff",
+      "mergedAt": "2026-10-15T15:35:00Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Make the \"Open in editor\" button easier to discover in the error overlay. Updates the icon to a Code Wrap icon from Geist.",
+      "files": [
+        "packages/next/src/next-devtools/dev-overlay/components/call-stack-frame/call-stack-frame.tsx (+6 -4)",
+        "packages/next/src/next-devtools/dev-overlay/components/code-frame/code-frame-shell.tsx (+4 -7)",
+        "packages/next/src/next-devtools/dev-overlay/components/code-frame/code-frame.tsx (+3 -26)",
+        "packages/next/src/next-devtools/dev-overlay/components/open-in-editor-button.tsx (+53 -0)",
+        "packages/next/src/next-devtools/dev-overlay/components/overview/segment-explorer.tsx (+1 -20)",
+        "packages/next/src/next-devtools/dev-overlay/components/terminal/editor-link.tsx (+16 -27)",
+        "packages/next/src/next-devtools/dev-overlay/components/terminal/terminal.tsx (+3 -8)",
+        "packages/next/src/next-devtools/dev-overlay/icons/code.tsx (+21 -0)",
+        "packages/next/src/next-devtools/dev-overlay/styles/component-styles.tsx (+2 -0)",
+        "test/development/acceptance-app/editor-links.test.ts (+5 -5)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 100133,
+      "title": "Add more test coverage for non-Partial Prefetching behavior",
+      "url": "https://github.com/vercel/next.js/pull/100133",
+      "author": "acdlite",
+      "mergedAt": "2026-10-15T18:38:13Z",
+      "labels": [
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 13
+    },
+    {
+      "number": 100242,
+      "title": "test: Add more segment config tests",
+      "url": "https://github.com/vercel/next.js/pull/100242",
+      "author": "mischnic",
+      "mergedAt": "2026-10-15T19:47:50Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 79
+    },
+    {
+      "number": 100266,
+      "title": "Hide overlay editor button labels on smaller screens",
+      "url": "https://github.com/vercel/next.js/pull/100266",
+      "author": "samselikoff",
+      "mergedAt": "2026-10-15T20:30:47Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Hide \"Open in editor\" button text on small screens.\n\nFollow-up to #100206.",
+      "files": [
+        "packages/next/src/next-devtools/dev-overlay/components/code-frame/code-frame.tsx (+1 -1)",
+        "packages/next/src/next-devtools/dev-overlay/components/open-in-editor-button.tsx (+19 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 99269,
+      "title": "Hoist app page request URL into render context",
+      "url": "https://github.com/vercel/next.js/pull/99269",
+      "author": "gnoff",
+      "mergedAt": "2026-10-15T21:52:28Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPass the final app-page request URL explicitly from the Node, Edge, and build export entry points into rendering. This keeps URL parsing and the deterministic prerender request ID tied to the exact URL observed on the request after existing normalization.\n\nDevelopment ISR status bookkeeping uses the forwarded URL with its existing URL parsing behavior.\n\nA path-scoped lint guard prevents new direct `req.url` reads in app-render.\n\n## Verification\n\n- `pnpm --filter=next types`\n- `pnpm --filter=next build`\n- Confirmed `rg -n '\\breq\\.url\\b' packages/next/src/server/app-render` has no matches.\n- ESLint stdin probes reject `req.url` under app-render with the `requestUrl` guidance and allow the same access outside app-render.\n- Not run: integration tests (the worktree lacks per-package dependencies, so the full bootstrap build could not complete).",
+      "files": [
+        "eslint.config.mjs (+13 -0)",
+        "packages/next/src/build/templates/app-page-runtime.ts (+1 -0)",
+        "packages/next/src/build/templates/edge-ssr-app.ts (+1 -0)",
+        "packages/next/src/export/routes/app-page.ts (+2 -0)",
+        "packages/next/src/export/worker.ts (+1 -0)",
+        "packages/next/src/server/app-render/app-render.tsx (+19 -6)",
+        "packages/next/src/server/next-server.ts (+1 -0)",
+        "packages/next/src/server/route-modules/app-page/module.ts (+5 -0)"
+      ],
+      "filesTotal": 8
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "next-js-bot[bot]": 2
+    }
+  }
+}

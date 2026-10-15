@@ -1,0 +1,324 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-10-15T23:42:24Z",
+  "range": {
+    "from": "2026-10-13T19:46:17Z",
+    "to": "2026-10-15T23:42:24Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.0.5",
+      "publishedAt": "2026-10-15T14:22:50Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.5"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v5.0.5",
+      "name": "v5.0.5",
+      "publishedAt": "2026-10-15T14:22:50Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.5",
+      "prerelease": false,
+      "body": "### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes\n\n- Keep vite default `fs.deny` with api token file &nbsp;-&nbsp; by @hi-ogawa, **Hiroshi Ogawa** and **Claude Opus 5.5** in https://github.com/vitest-dev/vitest/issues/11578 [<samp>(28dc1)</samp>](https://github.com/vitest-dev/vitest/commit/28dc1edfb)\n- Handle quoted file names in `--changed` &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11583 [<samp>(14921)</samp>](https://github.com/vitest-dev/vitest/commit/14921e962)\n- Add `data` to the `import.meta.hot` stub &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11590 [<samp>(3a828)</samp>](https://github.com/vitest-dev/vitest/commit/3a8289ac3)\n- Set `skip` in `skipIf`, ignore `undefined` options &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11591 [<samp>(d523a)</samp>](https://github.com/vitest-dev/vitest/commit/d523a15f2)\n- Skip builtin loading in async leak detector &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11598 [<samp>(fe86a)</samp>](https://github.com/vitest-dev/vitest/commit/fe86a64c6)\n- Keep the import frame in native loader errors &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11599 [<samp>(9697b)</samp>](https://github.com/vitest-dev/vitest/commit/9697b3894)\n- Run hook cleanups when a later hook fails &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11605 [<samp>(6c5a4)</samp>](https://github.com/vitest-dev/vitest/commit/6c5a44720)\n- Release mocks of finished test files &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11607 [<samp>(e9c3d)</samp>](https://github.com/vitest-dev/vitest/commit/e9c3d72f0)\n- Abort all running tests on cancel &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11606 [<samp>(6621a)</samp>](https://github.com/vitest-dev/vitest/commit/6621a72d6)\n- **browser**:\n  - Ignore synthetic pagehide events &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11582 [<samp>(ca081)</samp>](https://github.com/vitest-dev/vitest/commit/ca0813584)\n  - Run plugin buildStart on server creation &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11593 [<samp>(ea611)</samp>](https://github.com/vitest-dev/vitest/commit/ea611e44c)\n  - Drop late connections of closed sessions &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11600 [<samp>(f161e)</samp>](https://github.com/vitest-dev/vitest/commit/f161e6df2)\n  - Wait 30s for the browser to close &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11601 [<samp>(6498b)</samp>](https://github.com/vitest-dev/vitest/commit/6498b666a)\n  - Run global setup once with instances &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11596 [<samp>(8dd67)</samp>](https://github.com/vitest-dev/vitest/commit/8dd67c262)\n- **reporter**:\n  - End reason `&#39;failed&#39;\n…(truncated)"
+    },
+    {
+      "tag": "v4.1.12",
+      "name": "v4.1.12",
+      "publishedAt": "2026-10-15T14:36:29Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v4.1.12",
+      "prerelease": false,
+      "body": "### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes\n\n- **mocker**: Harden manual and redirect mocks [backport to v4] &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11580 [<samp>(b8253)</samp>](https://github.com/vitest-dev/vitest/commit/b82531324)\n\n##### &nbsp;&nbsp;&nbsp;&nbsp;[View changes on GitHub](https://github.com/vitest-dev/vitest/compare/v4.1.11...v4.1.12)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 11570,
+      "title": "chore: enable `trustPolicyExcludePrune`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11570",
+      "author": "btea",
+      "mergedAt": "2026-10-14T07:04:39Z",
+      "hint": "other",
+      "release": "📦 v5.0.5",
+      "filesTotal": 1
+    },
+    {
+      "number": 11578,
+      "title": "fix: keep vite default `fs.deny` with api token file",
+      "url": "https://github.com/vitest-dev/vitest/pull/11578",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-14T13:47:19Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "- follow-up to https://github.com/vitest-dev/vitest/pull/10583\n- follow-up to https://github.com/vitest-dev/vitest/pull/10554\n\n#10583 added the API token file to `server.fs.deny`, but neither root or project server ended up with the intended list. Vite applies its default deny list only when `deny` is unset after `config()` hooks, and it compiles the list into a matcher before `configResolved`, so mutating `fs.deny` after has no effect at that point. The behavior fix is following:\n\n| file                     | root before | root after | project before | project after |\n| ------------------------ | ----------- | ---------- | -------------- | ------------- |\n| `.env`, `*.pem`, `.git`  | denied      | denied     | ❌ served      | denied        |\n| `.vitest-secret-token`   | ❌ served   | denied     | denied         | denied        |\n\nCurrently Vite doesn't export its defaults, so Vitest keeps a copy of the newest Vite's list (stricter on older Vite). I'll ask for Vite side to check how framework is expected to extend fs.deny and ask for exporting the default list at least.",
+      "files": [
+        "packages/vitest/src/node/config/resolveConfig.ts (+1 -2)",
+        "packages/vitest/src/node/plugins/index.ts (+2 -1)",
+        "packages/vitest/src/node/plugins/utils.ts (+23 -0)",
+        "packages/vitest/src/node/plugins/workspace.ts (+2 -3)",
+        "test/e2e/test/fs-deny.test.ts (+93 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 11583,
+      "title": "fix: handle quoted file names in `--changed`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11583",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-14T20:48:00Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes #11564\n\nGit quotes paths with non-ASCII characters, `\"`, `\\` or tabs in its default output, so `--changed` resolved them to files that don't exist. `-z` prints paths as they are, separated by NUL.",
+      "files": [
+        "packages/vitest/src/node/vcs/git.ts (+4 -3)",
+        "test/e2e/test/git-changed.test.ts (+44 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11582,
+      "title": "fix(browser): ignore synthetic pagehide events",
+      "url": "https://github.com/vitest-dev/vitest/pull/11582",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T07:58:45Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes #11561\n\nThe iframe unload watcher now ignores untrusted `pagehide` events, so a test that dispatches its own event no longer fails the running file. The listener is no longer `once`, so an ignored event does not stop watching a real navigation.",
+      "files": [
+        "packages/browser/src/client/orchestrator.ts (+16 -16)",
+        "test/browser/specs/bail-out.test.ts (+49 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11590,
+      "title": "fix: add `data` to the `import.meta.hot` stub",
+      "url": "https://github.com/vitest-dev/vitest/pull/11590",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T08:32:57Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes #11528\n\nThe `/@vite/client` stub now returns a hot context with a fresh `data` object (plus the missing `acceptExports` and `off`). In vm pools it is created inside the context.\n\n`createHotContext` can't return `undefined`: Vite's CSS plugin emits unguarded `import.meta.hot.accept()` and `import.meta.hot.prune()` in dev, so CSS imports would throw in jsdom/happy-dom.",
+      "files": [
+        "packages/vitest/src/runtime/moduleRunner/moduleEvaluator.ts (+17 -12)",
+        "test/e2e/test/import-meta-hot.test.ts (+39 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11591,
+      "title": "fix: set `skip` in `skipIf`, ignore `undefined` options",
+      "url": "https://github.com/vitest-dev/vitest/pull/11591",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T09:16:37Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes #11588\n\n- `test.skipIf` and `test.runIf` always set `skip`, so `skipIf(false)` overrides `skip` from tags, the same as `test(name, { skip: false })`.\n- Options set to `undefined` no longer override values from tags, the parent suite or the chain (`test.skip(name, { skip: undefined })` stays skipped).",
+      "files": [
+        "packages/vitest/src/runtime/runner/suite.ts (+15 -14)",
+        "packages/vitest/src/runtime/runner/types.ts (+2 -0)",
+        "packages/vitest/src/runtime/runner/utils/chain.ts (+1 -0)",
+        "docs/api/test.md (+5 -1)",
+        "docs/guide/test-tags.md (+7 -0)",
+        "test/e2e/test/test-tags.test.ts (+110 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 11593,
+      "title": "fix(browser): run plugin buildStart on server creation",
+      "url": "https://github.com/vitest-dev/vitest/pull/11593",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T09:16:56Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Vite runs plugin `buildStart` hooks on `listen`, which the browser server defers until the first launch. Modules transformed before that (`--changed`, `related`, global setup) failed in `vite:css`; the graph walk swallowed the error and selected every test that imports a CSS module.\n\nFixes #11532",
+      "files": [
+        "packages/vitest/src/node/plugins/browserLoader.ts (+3 -0)",
+        "test/e2e/test/related-deps.test.ts (+40 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11568,
+      "title": "fix(reporter): end reason `'failed'` on worker crash",
+      "url": "https://github.com/vitest-dev/vitest/pull/11568",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-15T09:17:54Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes https://github.com/vitest-dev/vitest/issues/11464\n\nIf there are pending test modules when test run finishes, we can expect something went wrong when trying to run them. Report test run as failure. In the case of worker crash users will see the unhandled errors showing the reason.",
+      "files": [
+        "packages/vitest/src/node/test-run.ts (+1 -1)",
+        "test/e2e/test/pool-worker-exit.test.ts (+22 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11597,
+      "title": "ci: skip merge reports on closed pull requests",
+      "url": "https://github.com/vitest-dev/vitest/pull/11597",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T10:40:52Z",
+      "hint": "other",
+      "release": "📦 v5.0.5",
+      "filesTotal": 1
+    },
+    {
+      "number": 11598,
+      "title": "fix: skip builtin loading in async leak detector",
+      "url": "https://github.com/vitest-dev/vitest/pull/11598",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T10:41:31Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Node 26.12 loads some builtins on first use (`node:http` and the first `fetch` pull in webstreams) and creates a never-settling sentinel promise while the test file is on the stack. The detector reported it as a leak, and `detect-async-leaks` fails on the node-26 CI leg since the runners moved from 26.11.1 to 26.12.0.\n\nResources created while Node loads a builtin are now ignored.",
+      "files": [
+        "packages/vitest/src/runtime/detect-async-leaks.ts (+5 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 11600,
+      "title": "fix(browser): drop late connections of closed sessions",
+      "url": "https://github.com/vitest-dev/vitest/pull/11600",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T10:43:00Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Since #11525 the pool closes idle browsers mid-run. A page can still reconnect after its session was closed, and the connection was reported as an unhandled `Unknown session id` error (`runner.test.ts` on Windows). Closed sessions are remembered and their late connections are dropped; an unknown id still errors.",
+      "files": [
+        "packages/browser/src/node/rpc.ts (+5 -0)",
+        "packages/vitest/src/node/browser/sessions.ts (+9 -0)",
+        "packages/vitest/src/node/pools/browser.ts (+4 -3)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11601,
+      "title": "fix(browser): wait 30s for the browser to close",
+      "url": "https://github.com/vitest-dev/vitest/pull/11601",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T10:43:17Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Chromium regularly needs more than 10 s to close on Windows runners. The warning goes to stderr and fails specs that expect it empty.",
+      "files": [
+        "packages/vitest/src/node/pools/browser.ts (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 11603,
+      "title": "test: parallel screenshot instances, longer timeouts",
+      "url": "https://github.com/vitest-dev/vitest/pull/11603",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T10:48:06Z",
+      "hint": "other",
+      "release": "📦 v5.0.5",
+      "filesTotal": 4
+    },
+    {
+      "number": 11599,
+      "title": "fix: keep the import frame in native loader errors",
+      "url": "https://github.com/vitest-dev/vitest/pull/11599",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T10:51:14Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Node 26.12 evaluates most ES modules synchronously (nodejs/node#62530), so the hoisted `await import()` of a mocked module no longer gets an async frame from V8. Errors thrown while loading the module lost the import location and its code frame.\n\n`wrapDynamicImport` now captures the import location and appends it to the error and its causes when V8 did not. The async factory error gains the same frame.",
+      "files": [
+        "packages/vitest/src/runtime/moduleRunner/nativeModuleMocker.ts (+36 -8)",
+        "test/e2e/test/no-module-runner.test.ts (+9 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11605,
+      "title": "fix: run hook cleanups when a later hook fails",
+      "url": "https://github.com/vitest-dev/vitest/pull/11605",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T13:20:29Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes #11589\n\nCleanups returned by `beforeAll`/`beforeEach` hooks now run even if a later hook of the same kind throws. With `sequence.hooks: 'parallel'`, all hooks settle before the after hooks start, and every hook error is reported.",
+      "files": [
+        "packages/vitest/src/runtime/runner/run.ts (+34 -14)",
+        "test/e2e/test/concurrent.test.ts (+4 -0)",
+        "test/e2e/test/hook-cleanup.test.ts (+310 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11596,
+      "title": "fix(browser): run global setup once with instances",
+      "url": "https://github.com/vitest-dev/vitest/pull/11596",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T13:24:00Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes #11487\n\nThe `globalSetup` of the config that declares `browser.instances` now runs once for all instances instead of once per instance. Instances inherit its provided context.",
+      "files": [
+        "packages/vitest/src/node/core.ts (+11 -4)",
+        "packages/vitest/src/node/project.ts (+18 -4)",
+        "docs/config/browser/instances.md (+2 -0)",
+        "test/e2e/test/global-setup.test.ts (+150 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11607,
+      "title": "fix: release mocks of finished test files",
+      "url": "https://github.com/vitest-dev/vitest/pull/11607",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T13:45:57Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "Fixes #11495\n\nWith `isolate: false`, the mocker now resets at the end of each file, so mock factories of finished files are released.",
+      "files": [
+        "packages/vitest/src/runtime/moduleRunner/bareModuleMocker.ts (+6 -0)",
+        "packages/vitest/src/runtime/moduleRunner/moduleMocker.ts (+1 -5)",
+        "packages/vitest/src/runtime/moduleRunner/moduleRunner.ts (+2 -3)",
+        "packages/vitest/src/runtime/moduleRunner/startVitestModuleRunner.ts (+2 -1)",
+        "packages/vitest/src/runtime/runBaseTests.ts (+1 -0)",
+        "packages/vitest/src/runtime/runVmTests.ts (+1 -0)",
+        "test/e2e/test/mocking.test.ts (+266 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 11606,
+      "title": "fix: abort all running tests on cancel",
+      "url": "https://github.com/vitest-dev/vitest/pull/11606",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T13:46:12Z",
+      "hint": "fix",
+      "release": "📦 v5.0.5",
+      "body": "A finished test removed every test that started after it from the running tests list, so `--bail` and `cancelCurrentRun` did not abort or skip other concurrent tests.",
+      "files": [
+        "packages/vitest/src/runtime/runner/test-state.ts (+4 -4)",
+        "test/e2e/test/signal.test.ts (+78 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11608,
+      "title": "docs: explain outer-realm values in vm pools",
+      "url": "https://github.com/vitest-dev/vitest/pull/11608",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-15T14:04:50Z",
+      "hint": "other",
+      "release": "📦 v5.0.5",
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "vitest-release-bot[bot]": 1
+    }
+  }
+}
