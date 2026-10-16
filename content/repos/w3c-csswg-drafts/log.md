@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-10-16
+
+- 期間: 2026-10-13T09:59:04Z 〜 2026-10-15T23:42:24Z（直接のコミット: 2026-10-13T23:00:23Z 〜 2026-10-15T23:42:24Z）
+- PR 5 件（詳しく 3 件 / 1 行 2 件）、直接のコミット 8 件（詳しく 1 件 / 1 行 7 件）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-10-16|changes]]（新規）、[[repos/w3c-csswg-drafts/topics/css-borders-4|css-borders-4]]（新規）、[[repos/w3c-csswg-drafts/topics/css-mixins-1|css-mixins-1]]（新規）、[[repos/w3c-csswg-drafts/topics/css-overflow-4|css-overflow-4]]、[[repos/w3c-csswg-drafts/topics/css-pseudo-4|css-pseudo-4]]
+- エラー: なし
 
 ## 2026-10-14
 

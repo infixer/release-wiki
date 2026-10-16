@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,16 +15,16 @@ tags:
 
 ## 直近の注目変更
 
+- ネットワークパスを全面的に禁止し、資格情報の自動送信を防ぐ（[#64832](https://github.com/microsoft/TypeScript/pull/64832)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
+- ユーザーのキャッシュが無いときは tmp を使わず ATA を無効に（[#64836](https://github.com/microsoft/TypeScript/pull/64836)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
+- オートインポート・補完で生成するモジュール指定子のクォートをエスケープ（[#64839](https://github.com/microsoft/TypeScript/pull/64839)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
+- API: UDS を tmp ディレクトリ内に `0o600` で作成、Windows はランダムなパイプ名に（[#64818](https://github.com/microsoft/TypeScript/pull/64818)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- union・intersection の正規化でキャッシュヒット時の割り当てをなくし、割り当てバイト数を 8.51% 削減（[#64795](https://github.com/microsoft/TypeScript/pull/64795)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- AST の `nodeData` を生成したアクセサに置き換え、バイナリを 3.44% 縮小（[#64773](https://github.com/microsoft/TypeScript/pull/64773)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - コンテンツマッパーに出力拡張子の指定 `outputExtensions` を追加（`rewriteRelativeImportExtensions: true` が必要）（[#64581](https://github.com/microsoft/TypeScript/pull/64581)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/コンテンツマッパー|コンテンツマッパー]]
 - API: 循環する `extends` で `createSnapshot` が止まる問題を修正（[#64755](https://github.com/microsoft/TypeScript/pull/64755)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - 同じファイルで宣言した ambient module の中の import を解決しないように（`@types/lodash` 全体の取り込みを回避）（[#64491](https://github.com/microsoft/TypeScript/pull/64491)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - `tsc -b` の依存の深さ順のビルドスケジューリングを復活（[#64615](https://github.com/microsoft/TypeScript/pull/64615)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
-- シンボルテーブルの種別マスクを修正し、エイリアスのキャッシュとメンバーの高速パスを有効に（[#64762](https://github.com/microsoft/TypeScript/pull/64762)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- `--stripInternal` で型エイリアスの右辺が消えると宣言出力がパニックする問題を修正（[#64770](https://github.com/microsoft/TypeScript/pull/64770)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- `es2023.intl` に `Intl.PluralRules.prototype.selectRange` の型定義を追加（[#63424](https://github.com/microsoft/TypeScript/pull/63424)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- link store を密に割り当て、8 チェッカーでの VS Code のコンパイルのメモリを 8〜9% 削減（[#64711](https://github.com/microsoft/TypeScript/pull/64711)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- `esnext` の lib に iterator のメソッドの型定義（`lib.esnext.iterator.d.ts`）を追加（[#64095](https://github.com/microsoft/TypeScript/pull/64095)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- API: 同期接続で入れ子のリクエストにスタックの順で応答し、複数スレッドのローダーで import が誤ったモジュールに結び付く問題を修正（[#64639](https://github.com/microsoft/TypeScript/pull/64639)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 
 ## トピック
 
@@ -38,4 +38,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-14|2026-10-14]]、[[repos/microsoft-TypeScript/changes/2026-10-12|2026-10-12]]、[[repos/microsoft-TypeScript/changes/2026-10-09|2026-10-09]]、[[repos/microsoft-TypeScript/changes/2026-10-07|2026-10-07]]、[[repos/microsoft-TypeScript/changes/2026-10-05|2026-10-05]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]、[[repos/microsoft-TypeScript/changes/2026-10-14|2026-10-14]]、[[repos/microsoft-TypeScript/changes/2026-10-12|2026-10-12]]、[[repos/microsoft-TypeScript/changes/2026-10-09|2026-10-09]]、[[repos/microsoft-TypeScript/changes/2026-10-07|2026-10-07]]

@@ -1,6 +1,6 @@
 ---
 title: TUI
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/openai-codex
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。2026-09-30 の回では、フルスクリーンのステータス行に Plan mode の切り替えヒント（`shift+tab`）が出るようになり、応答中のフォローアップ指示（`:codex-followup[...]`）はラベルとして表示されるようになった。インラインコード内の選択はプレーンテキストでコピーされ、Pro プランの表示名は `Pro 100`・`Pro 200`・`Pro 500` に、起動時のプロモーションはプラットフォーム別のデスクトップアプリの tip に整理された。2026-10-02 の回では、コマンドセンターに会話のフォーク（`f`、`agents.fork`）が追加され、既定の検索ショートカットは `F3` と `/` に移った。権限の設定は接続先サーバーの定義に従うようになり、描画されたファイルパスの選択はプレーンテキストでコピーされる。2026-10-05 の回では、TUI に管理された Git worktree のツール（`create_worktree` など）が追加され、トランスクリプトのマウススクロール速度は `tui.mouse_scroll_speed` で設定できるようになった（既定は 1 イベント 1 行に変更）。`Ctrl+Insert` でのコピー、権限ショートカットのサーバーのカタログへの準拠、ストリーミング中の確定した表のスクロールバックへの出力、設定したキー割り当てとページャーの割り当ての優先、GNU Screen での ASCII タイトル、tmux の確認の 1 秒での打ち切りなども入った。2026-10-07 の回では、CLI の Daybreak の操作とアクセスプログラムの自動選択が既定で無効の `features.cli_daybreak` の後ろに置かれ（無効時は `/daybreak` を表示しない）、`Ctrl+Z` からの再開では `SIGCONT` を確認するまで待つようになった。2026-10-09 の回では、API キーのアカウントの Daybreak の選択で `CliDaybreak` と `ApiKeyCyberAccessPrograms` の両方を必須にし、Daybreak がオフでも対象のアカウントはカタログの `standard` のアクセスプログラムを選べるようになった。安定版 rust-v0.162.0 で `/copy`・`Ctrl+Insert`・`tui.mouse_scroll_speed`・コマンドセンターのピン留めなどが正式に公開された。2026-10-12 の回では、Herdr のセッション（`HERDR_ENV=1`）で `/copy`・`Ctrl+O` のコピーをターミナルにも OSC 52 で転送するようになり、末尾に改行のあるテキストを引用行に貼り付けたときの余分な空の引用行や、起動時の下書きの復元で Vim の Replace のキーを挿入として扱う問題が修正された。安定版 rust-v0.162.1 では、複数行の非同期の質問でのクラッシュが修正された。2026-10-14 の回では、アニメーション・composer stars・貼り付けの検出・自動の recap・tips の設定が再起動なしで反映されるようになり、設定パネルの検索が全グループを対象にし、アニメーションと composer stars は Effects のピッカーにまとまった。保留中のリクエストへの返信は元の接続とスレッドに送られるようになり、WSL のコピーは Windows のクリップボードを優先して時間制限付きで行う。16 色のターミナルでのステータスラインの色、`TERM_SESSION_ID` による Apple Terminal の誤判定、`codex exec` の人間向け出力での差分の重複表示も修正された。
+ターミナル上で動く Codex のフルスクリーン UI（会話トランスクリプト、各種選択メニュー、数式・Markdown・Mermaid のレンダリングなど）。直近では、Mermaid フローチャートの記法（辺の種類・ラベル・`&` グループ）が拡充され、非対応の記法はソースのまま残して通知するようになった。数式表示は `$0$`・`\bigwedge`・`\bigl`/`\bigr` に対応。クリップボードへのコピー中も UI が応答するようになり、Ghostty・Kitty ではリンク上にハンドポインタが表示される。Windows ターミナルでの SGR マウスレポートの修正や、中断通知の文言の簡素化も入った。2026-09-30 の回では、フルスクリーンのステータス行に Plan mode の切り替えヒント（`shift+tab`）が出るようになり、応答中のフォローアップ指示（`:codex-followup[...]`）はラベルとして表示されるようになった。インラインコード内の選択はプレーンテキストでコピーされ、Pro プランの表示名は `Pro 100`・`Pro 200`・`Pro 500` に、起動時のプロモーションはプラットフォーム別のデスクトップアプリの tip に整理された。2026-10-02 の回では、コマンドセンターに会話のフォーク（`f`、`agents.fork`）が追加され、既定の検索ショートカットは `F3` と `/` に移った。権限の設定は接続先サーバーの定義に従うようになり、描画されたファイルパスの選択はプレーンテキストでコピーされる。2026-10-05 の回では、TUI に管理された Git worktree のツール（`create_worktree` など）が追加され、トランスクリプトのマウススクロール速度は `tui.mouse_scroll_speed` で設定できるようになった（既定は 1 イベント 1 行に変更）。`Ctrl+Insert` でのコピー、権限ショートカットのサーバーのカタログへの準拠、ストリーミング中の確定した表のスクロールバックへの出力、設定したキー割り当てとページャーの割り当ての優先、GNU Screen での ASCII タイトル、tmux の確認の 1 秒での打ち切りなども入った。2026-10-07 の回では、CLI の Daybreak の操作とアクセスプログラムの自動選択が既定で無効の `features.cli_daybreak` の後ろに置かれ（無効時は `/daybreak` を表示しない）、`Ctrl+Z` からの再開では `SIGCONT` を確認するまで待つようになった。2026-10-09 の回では、API キーのアカウントの Daybreak の選択で `CliDaybreak` と `ApiKeyCyberAccessPrograms` の両方を必須にし、Daybreak がオフでも対象のアカウントはカタログの `standard` のアクセスプログラムを選べるようになった。安定版 rust-v0.162.0 で `/copy`・`Ctrl+Insert`・`tui.mouse_scroll_speed`・コマンドセンターのピン留めなどが正式に公開された。2026-10-12 の回では、Herdr のセッション（`HERDR_ENV=1`）で `/copy`・`Ctrl+O` のコピーをターミナルにも OSC 52 で転送するようになり、末尾に改行のあるテキストを引用行に貼り付けたときの余分な空の引用行や、起動時の下書きの復元で Vim の Replace のキーを挿入として扱う問題が修正された。安定版 rust-v0.162.1 では、複数行の非同期の質問でのクラッシュが修正された。2026-10-14 の回では、アニメーション・composer stars・貼り付けの検出・自動の recap・tips の設定が再起動なしで反映されるようになり、設定パネルの検索が全グループを対象にし、アニメーションと composer stars は Effects のピッカーにまとまった。保留中のリクエストへの返信は元の接続とスレッドに送られるようになり、WSL のコピーは Windows のクリップボードを優先して時間制限付きで行う。16 色のターミナルでのステータスラインの色、`TERM_SESSION_ID` による Apple Terminal の誤判定、`codex exec` の人間向け出力での差分の重複表示も修正された。2026-10-16 の回では、`features.worktrees` の廃止（worktree の作成が機能フラグなしで使える）、削除中のダッシュボードの操作、fork の系譜の表示順の修正が入った（未リリース）。rust-v0.163.0 では `/config` の検索、`/keymap` のリーダーキー（既定 `Ctrl+X`）、応答中の steer が入った。
 
 ## 主な API・オプション
 
@@ -27,6 +27,9 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-16 — `features.worktrees` を廃止し、管理された worktree の作成を機能フラグなしで利用可能に（[#54175](https://github.com/openai/codex/pull/54175)）⏳ 未リリース · [[repos/openai-codex/changes/2026-10-16|変更]]
+- 2026-10-16 — ページ分割した履歴より前に fork の系譜を表示（[#54044](https://github.com/openai/codex/pull/54044)）⏳ 未リリース · [[repos/openai-codex/changes/2026-10-16|変更]]
+- 2026-10-16 — タスクの削除中もエージェントのダッシュボードを操作できるように（[#53908](https://github.com/openai/codex/pull/53908)）⏳ 未リリース · [[repos/openai-codex/changes/2026-10-16|変更]]
 - 2026-10-14 — `codex exec` の人間向け出力で同じ差分を繰り返さない（[#53444](https://github.com/openai/codex/pull/53444)）📦 rust-v0.163.0-alpha.10 · [[repos/openai-codex/changes/2026-10-14|変更]]
 - 2026-10-14 — `TERM_SESSION_ID` で Apple Terminal と判定しない（[#53438](https://github.com/openai/codex/pull/53438)）📦 rust-v0.163.0-alpha.10 · [[repos/openai-codex/changes/2026-10-14|変更]]
 - 2026-10-14 — 16 色のターミナルでもステータスラインの色を保つ（[#53440](https://github.com/openai/codex/pull/53440)）📦 rust-v0.163.0-alpha.10 · [[repos/openai-codex/changes/2026-10-14|変更]]
@@ -93,3 +96,5 @@ tags:
 - [[repos/openai-codex/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/openai-codex/changes/2026-10-12|2026-10-12 の変更]]
 - [[repos/openai-codex/releases/rust-v0.162.1|rust-v0.162.1]]
+- [[repos/openai-codex/changes/2026-10-16|2026-10-16 の変更]]
+- [[repos/openai-codex/releases/rust-v0.163.0|rust-v0.163.0]]

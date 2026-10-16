@@ -1,6 +1,6 @@
 ---
 title: openai/codex
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/openai-codex
 ---
@@ -9,21 +9,21 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [rust-v0.162.1](https://github.com/openai/codex/releases/tag/rust-v0.162.1)（2026-10-09）→ [[repos/openai-codex/releases/rust-v0.162.1|まとめ]]（その前は [[repos/openai-codex/releases/rust-v0.162.0|rust-v0.162.0]]、2026-10-08）
-- プレリリース: [rust-v0.163.0-alpha.10](https://github.com/openai/codex/releases/tag/rust-v0.163.0-alpha.10)（2026-10-13）
+- 安定版: [rust-v0.163.0](https://github.com/openai/codex/releases/tag/rust-v0.163.0)（2026-10-15）→ [[repos/openai-codex/releases/rust-v0.163.0|まとめ]]（その前は [[repos/openai-codex/releases/rust-v0.162.1|rust-v0.162.1]]、2026-10-09）
+- プレリリース: なし（安定版より新しいものは無い。直近は rust-v0.163.0-alpha.10.2、2026-10-15）
 
 ## 直近の注目変更
 
-- macOS のユーザー確認のプロンプトの取り消しを修正（[#53790](https://github.com/openai/codex/pull/53790)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/認証|認証]]
-- `codex app-server daemon restart` で `--enable`・`--disable`・`-c features.*` の上書きを適用・保存（[#53751](https://github.com/openai/codex/pull/53751)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
-- 非同期（バックグラウンド）コンパクションの設定 `async_compaction`・`model_async_compact_threshold_percent` と、先行要求・結果の再利用の土台（[#53595](https://github.com/openai/codex/pull/53595)、[#53606](https://github.com/openai/codex/pull/53606)、[#53614](https://github.com/openai/codex/pull/53614)、[#53620](https://github.com/openai/codex/pull/53620)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]
-- ネイティブのツールを隠しつつ V2 のランタイムを保つ `features.multi_agent_v2.disable_native_tools`（[#53617](https://github.com/openai/codex/pull/53617)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]
-- ネットワークプロキシで重複した `Host` ヘッダーを `400` で拒否（[#53506](https://github.com/openai/codex/pull/53506)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/サンドボックス|サンドボックス]]
-- WSL で Windows のクリップボードを優先し、コピーの試行に時間制限（[#53453](https://github.com/openai/codex/pull/53453)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- 不完全な応答を再試行しない終端のエラー `ResponseIncomplete` に（[#53451](https://github.com/openai/codex/pull/53451)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]
-- 設定の切り替えを再起動なしで反映し、設定パネルの全グループ検索と Effects のピッカー（[#53429](https://github.com/openai/codex/pull/53429)、[#53496](https://github.com/openai/codex/pull/53496)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- 保存したスレッドの権限を設定の読み込み中に復元（[#53419](https://github.com/openai/codex/pull/53419)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]
-- 独立したランタイムでローカルのメッセージボードを共有する `LocalBoard`・`LocalBoardConnection`（[#53400](https://github.com/openai/codex/pull/53400)）📦 rust-v0.163.0-alpha.10 · トピック: [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]
+- `features.worktrees`・`features.realtime_conversation` を廃止し、worktree の作成と TUI の音声を機能フラグなしで利用可能に（[#54175](https://github.com/openai/codex/pull/54175)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]、[[repos/openai-codex/topics/リアルタイム音声|リアルタイム音声]]
+- リモートの MCP サーバーで `SYSTEMDRIVE`・`LOCALAPPDATA` を保つ（[#54069](https://github.com/openai/codex/pull/54069)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/MCP|MCP]]
+- 非同期の Guardian の承認をレビューの後始末を待たずに返す（[#54039](https://github.com/openai/codex/pull/54039)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/Guardian|Guardian]]
+- メモリの拡張のリソースの保持を 14 日に、抽出の入力を最大 8 MiB に（[#54033](https://github.com/openai/codex/pull/54033)、[#53940](https://github.com/openai/codex/pull/53940)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/メモリ|メモリ]]
+- ロールアウトの圧縮（`.jsonl.zst`）後のセッションの検索と再開を修正（[#54008](https://github.com/openai/codex/pull/54008)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]
+- リモート環境でもホストの MCP とプラグインの設定をローカル環境から作る（[#53990](https://github.com/openai/codex/pull/53990)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/MCP|MCP]]
+- コンパクションが失敗しても会話の履歴に途中の出力を残さない（[#53932](https://github.com/openai/codex/pull/53932)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]
+- Unix でデーモンの更新処理のソケットのパス長と起動の準備完了を修正（[#53845](https://github.com/openai/codex/pull/53845)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
+- 使わなくなったデーモンのリリースを安全に削除（[#53827](https://github.com/openai/codex/pull/53827)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
+- WinGet のパッケージからデーモンをインストールできるように（[#53811](https://github.com/openai/codex/pull/53811)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
 
 ## トピック
 
@@ -41,6 +41,7 @@ tags:
 - [[repos/openai-codex/topics/認証|認証]] — ChatGPT へのブラウザサインインとアカウント切り替え時の扱い
 - [[repos/openai-codex/topics/フィードバック・診断|フィードバック・診断]] — 利用状況・設定のレポート機構と `codex doctor`
 - [[repos/openai-codex/topics/プラグイン|プラグイン]] — プラグインのマーケットプレイスの追加と、ローカル・managed のソースのパスの照合
+- [[repos/openai-codex/topics/メモリ|メモリ]] — 過去のロールアウトからのメモリの抽出（入力の上限）と拡張のリソースの保持期間
 - [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]] — `spawn_agent` などによるサブエージェントへの委任、fork、メッセージボード（独立したランタイム間の共有を含む）、モデルカタログ
 - [[repos/openai-codex/topics/管理要件|管理要件]] — `requirements.toml` などの managed requirements による機能ゲートと設定
 - [[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]] — モデル・サービスティアの選択、Responses のリクエスト形式、接続ルーティングとリトライ
@@ -49,4 +50,4 @@ tags:
 ## 取り込み
 
 - [[repos/openai-codex/log|取り込み履歴]]
-- 最近の変更: [[repos/openai-codex/changes/2026-10-14|2026-10-14]]、[[repos/openai-codex/changes/2026-10-12|2026-10-12]]、[[repos/openai-codex/changes/2026-10-09|2026-10-09]]、[[repos/openai-codex/changes/2026-10-07|2026-10-07]]、[[repos/openai-codex/changes/2026-10-05|2026-10-05]]
+- 最近の変更: [[repos/openai-codex/changes/2026-10-16|2026-10-16]]、[[repos/openai-codex/changes/2026-10-14|2026-10-14]]、[[repos/openai-codex/changes/2026-10-12|2026-10-12]]、[[repos/openai-codex/changes/2026-10-09|2026-10-09]]、[[repos/openai-codex/changes/2026-10-07|2026-10-07]]

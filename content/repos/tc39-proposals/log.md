@@ -1,9 +1,16 @@
 ---
 title: tc39/proposals 取り込み履歴
-updated: 2026-10-02
+updated: 2026-10-16
 tags:
   - repo/tc39-proposals
 ---
+
+## 2026-10-16
+
+- 期間: 2026-10-01T02:28:38Z 〜 2026-10-15T23:42:24Z（直接のコミット: 2026-09-29T06:43:27Z 〜 2026-10-15T23:42:24Z）
+- PR 1 件（詳しく 1 件 / 1 行 0 件）、直接のコミット 0 件、Release 0 件
+- 更新したページ: [[repos/tc39-proposals/changes/2026-10-16|changes]]（新規）、[[repos/tc39-proposals/topics/ステージ進行|ステージ進行]]
+- エラー: なし
 
 ## 2026-10-02
 

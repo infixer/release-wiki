@@ -1,6 +1,6 @@
 ---
 title: Server Actions
-updated: 2026-09-28
+updated: 2026-10-16
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-App Router の Server Actions（サーバー上で実行される関数をクライアントから呼び出す仕組み）の実装。別のルートが持つアクションを呼んだときは、そのルートへリクエストを転送する処理がある。PPR ページへ遷移した後に遷移元ルートのアクションを呼ぶと、Vercel 上でこの転送がハングする不具合が修正された。
+App Router の Server Actions（サーバー上で実行される関数をクライアントから呼び出す仕組み）の実装。別のルートが持つアクションを呼んだときは、そのルートへリクエストを転送する処理がある。PPR ページへ遷移した後に遷移元ルートのアクションを呼ぶと、Vercel 上でこの転送がハングする不具合が修正された。安定版 v16.4.1 / v15.5.28 では、Server Actions を使う App Router でのサービス拒否（High）のセキュリティ修正が公開された。
 
 ## 変更履歴
 
@@ -18,3 +18,5 @@ App Router の Server Actions（サーバー上で実行される関数をクラ
 
 - [[repos/vercel-next.js/changes/2026-09-28|2026-09-28 の変更]]
 - [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
+- [[repos/vercel-next.js/releases/v16.4.1|v16.4.1]]
+- [[repos/vercel-next.js/releases/v15.5.28|v15.5.28]]

@@ -1,6 +1,6 @@
 ---
 title: pnpr
-updated: 2026-10-12
+updated: 2026-10-16
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-pnpm リポジトリで開発されているレジストリサーバー pnpr（`pnpr/` 配下、プレリリース `pnpr@0.1.0-alpha.*` として公開）。upstream のレジストリから packument を取得してキャッシュし、pnpm クライアントにメタデータと tarball を配る。upstream の packument に `dist.integrity` が無いバージョンについては、tarball をダウンロードして SHA-512 の integrity を計算し、正規化した packument を保存するようになった（未リリース）。pnpm v12 は pnpr へレジストリの宣言を送るが、クライアント側だけの設定（`registries` の `networkConcurrency`）は送らない。OCI のコンテナイメージの upstream では、`https://quay.io` の CDN へのリダイレクトも許可するようになった（それまではレイヤー取得が 502）。2026-10-09 の回では、実行時の管理（pnpm/tasks#111）が一通り入った（いずれも未リリース）。管理者ロール `auth.admins` を設け、`teamsManagedBy: api` のレジストリでは npm の team API（`pnpm team create/destroy/add/rm`）でチームを、`/-/pnpr/v0/admin/users` でアカウントを管理できる。`rulesManagedBy: api` のレジストリでは `/-/pnpr/v0/admin/rules/{ecosystem}/{name}` でパッケージルールを設定のデプロイなしに変えられ（`If-Match` による条件付き更新に対応）、`npm access grant`/`revoke` もルールに対応付けられる。OIDC のグループからセッションの間だけチームに参加させる設定、SCIM 2.0 によるアカウントの無効化、`/-/ui/` での Web UI（`@pnpm/pnpr-ui`）の配信も加わった。2026-10-12 の回では、Web UI のサインイン（pnpm/tasks#113）が入った。パスワードは npm のログインのエンドポイント、OIDC はコールバックが 1 回限りのコードを HttpOnly の Cookie に置き、UI が `POST /-/oidc/handoff` でトークンに引き換える（トークンもコードも URL に出ない）。UI は pnpr-web 0.2.7 から作る。gzip で圧縮した Web UI のファイルが途中で切れて画面が空白になる問題も直った。プレリリース pnpr@0.1.0-alpha.15 が出た。
+pnpm リポジトリで開発されているレジストリサーバー pnpr（`pnpr/` 配下、プレリリース `pnpr@0.1.0-alpha.*` として公開）。upstream のレジストリから packument を取得してキャッシュし、pnpm クライアントにメタデータと tarball を配る。upstream の packument に `dist.integrity` が無いバージョンについては、tarball をダウンロードして SHA-512 の integrity を計算し、正規化した packument を保存するようになった（未リリース）。pnpm v12 は pnpr へレジストリの宣言を送るが、クライアント側だけの設定（`registries` の `networkConcurrency`）は送らない。OCI のコンテナイメージの upstream では、`https://quay.io` の CDN へのリダイレクトも許可するようになった（それまではレイヤー取得が 502）。2026-10-09 の回では、実行時の管理（pnpm/tasks#111）が一通り入った（いずれも未リリース）。管理者ロール `auth.admins` を設け、`teamsManagedBy: api` のレジストリでは npm の team API（`pnpm team create/destroy/add/rm`）でチームを、`/-/pnpr/v0/admin/users` でアカウントを管理できる。`rulesManagedBy: api` のレジストリでは `/-/pnpr/v0/admin/rules/{ecosystem}/{name}` でパッケージルールを設定のデプロイなしに変えられ（`If-Match` による条件付き更新に対応）、`npm access grant`/`revoke` もルールに対応付けられる。OIDC のグループからセッションの間だけチームに参加させる設定、SCIM 2.0 によるアカウントの無効化、`/-/ui/` での Web UI（`@pnpm/pnpr-ui`）の配信も加わった。2026-10-12 の回では、Web UI のサインイン（pnpm/tasks#113）が入った。パスワードは npm のログインのエンドポイント、OIDC はコールバックが 1 回限りのコードを HttpOnly の Cookie に置き、UI が `POST /-/oidc/handoff` でトークンに引き換える（トークンもコードも URL に出ない）。UI は pnpr-web 0.2.7 から作る。gzip で圧縮した Web UI のファイルが途中で切れて画面が空白になる問題も直った。プレリリース pnpr@0.1.0-alpha.15 が出た。2026-10-16 の回では、運用向けの項目（pnpm/tasks#131 の C・D 節）がまとめて入った（いずれも未リリース）。`SIGTERM` での停止と `/-/ready`・`/-/live`、信頼するプロキシからのクライアント IP、ログインのレート制限・`requestTimeout`・upstream 取得のまとめ、Prometheus のメトリクスと要求 ID・アクセスログ、キャッシュの LRU・TTL 削除と `pnpr cache-gc`、npm の audit のエンドポイント（OSV）、`npm token create` と読み取り専用・期限付きトークン、`npm publish --provenance` と attestation、管理操作の監査ログ（`pnpr::audit`）。監査で見つかった権限・ユーザー列挙・bcrypt の切り詰めなどの問題も直り、upstream に zstd での応答を求めて zstd で配れるようになった。
 
 ## 主な API・オプション
 
@@ -24,9 +24,28 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 - `ui.enabled`・`ui.dir` — `/-/ui/` で Web UI（`@pnpm/pnpr-ui`）を配信（未リリース）
 - `GET /-/pnpr/v0/sign-in` — ブラウザのサインインに使える OIDC プロバイダーの一覧
 - `/-/oidc/{provider}/login?return=ui` と `POST /-/oidc/handoff?flow=<flow>` — フローごとの `__Host-pnpr-oidc-handoff-<flow>` Cookie の 1 回限り・1 分で失効するコードを `{"token", "expires"}` に引き換え
+- `GET /-/ready`・`GET /-/live`・`GET /-/ping` — ストレージと認証のレディネス（`503`）とライブネス。`SIGTERM` で処理中の要求を終えて停止（未リリース）
+- `trustedProxies`・`trustedProxyHeader`（`x-forwarded-for`・`forwarded`・`x-real-ip`）— 信頼するプロキシの後ろでクライアントの IP を求める（未リリース）
+- `requestTimeout`（既定 60 秒、超えると `504`）とログインのレート制限（`429`・`Retry-After`）（未リリース）
+- `GET /-/metrics`・`GET /metrics`（Prometheus）、`x-request-id`、アクセスログ `pnpr::access`、監査ログ `pnpr::audit`（未リリース）
+- `cache: { path, maxSize, maxAge }` と `pnpr cache-gc`（`--dry-run`・`--max-size`・`--max-age-secs`・`--orphans-only`）（未リリース）
+- `POST /-/npm/v1/security/advisories/bulk`・`/-/npm/v1/security/audits`・`/audits/quick` — OSV のデータベースか upstream で応答（未リリース）
+- `POST /-/npm/v1/tokens` — 読み取り専用・CIDR・有効期限・名前付きのトークン作成（未リリース）
+- `GET /-/npm/v1/attestations/{*spec}`・`GET /-/npm/v1/keys` — provenance の Sigstore バンドルの配信（未リリース）
 
 ## 変更履歴
 
+- 2026-10-16 — pnpr の管理操作の監査ログ（[#16960](https://github.com/pnpm/pnpm/pull/16960)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — zstd で圧縮した応答を配る（[#16585](https://github.com/pnpm/pnpm/pull/16585)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — `npm publish --provenance` と attestation のエンドポイント（[#16956](https://github.com/pnpm/pnpm/pull/16956)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — トークンの作成・有効期限・読み取り専用での audit（[#16954](https://github.com/pnpm/pnpm/pull/16954)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — npm の audit のエンドポイントと OSV（[#16950](https://github.com/pnpm/pnpm/pull/16950)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — キャッシュの LRU・TTL 削除と `pnpr cache-gc`（[#16946](https://github.com/pnpm/pnpm/pull/16946)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — Prometheus のメトリクス・要求 ID・アクセスログ（[#16944](https://github.com/pnpm/pnpm/pull/16944)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — レート制限・要求のタイムアウト・upstream 取得のまとめ（[#16943](https://github.com/pnpm/pnpm/pull/16943)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — 信頼するプロキシからクライアントの IP を求める（[#16939](https://github.com/pnpm/pnpm/pull/16939)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — `SIGTERM` での停止とレディネス・ライブネス（[#16934](https://github.com/pnpm/pnpm/pull/16934)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
+- 2026-10-16 — 監査で見つかったセキュリティ・ストレージの問題を修正（[#16927](https://github.com/pnpm/pnpm/pull/16927)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
 - 2026-10-12 — Web UI を pnpr-web 0.2.7 から作る（OIDC のサインインの修正）（[#16794](https://github.com/pnpm/pnpm/pull/16794)）📦 v12.11.2 · [[repos/pnpm-pnpm/changes/2026-10-12|変更]]
 - 2026-10-12 — Web UI から OIDC でサインイン（[#16774](https://github.com/pnpm/pnpm/pull/16774)）📦 v12.11.2 · [[repos/pnpm-pnpm/changes/2026-10-12|変更]]
 - 2026-10-12 — gzip で圧縮した Web UI のファイルを最後まで配信（[#16775](https://github.com/pnpm/pnpm/pull/16775)）📦 v12.11.2 · [[repos/pnpm-pnpm/changes/2026-10-12|変更]]
@@ -43,6 +62,7 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-10-16|2026-10-16 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-12|2026-10-12 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-05|2026-10-05 の変更]]

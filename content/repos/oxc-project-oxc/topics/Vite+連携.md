@@ -25,3 +25,4 @@ Vite+（voidzero-dev/vite-plus）向けに、oxlint・oxfmt の設定ファイ�
 
 - [[repos/oxc-project-oxc/releases/oxlint_v1.85.0|oxlint_v1.85.0]]
 - [[repos/oxc-project-oxc/changes/2026-09-24|2026-09-24 の変更]]
+- [[repos/oxc-project-oxc/topics/設定ファイル|設定ファイル]]

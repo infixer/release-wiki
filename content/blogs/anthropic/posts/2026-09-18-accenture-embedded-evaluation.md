@@ -30,6 +30,7 @@ Anthropic はアクセンチュア（の AI 専門部門 Faculty が主導）と
 
 ## 関連
 
+- [[blogs/anthropic/posts/2026-10-15-an-update-on-independent-evaluators|独立した評価者との取り組みの最新状況]]
 - [[blogs/anthropic/posts/2026-09-23-claude-discovers-novel-enzyme-system|Claude が CRISPR 様の新規酵素システムを発見]]
 - [[blogs/anthropic/posts/2026-09-17-life-sciences-verification-program|Life Sciences Verification Program（LSVP）提供開始]]
 - [[blogs/anthropic/posts/2026-09-01-enterprise-frontier-safeguards|顧客と共に開発する Enterprise Frontier Safeguards]]

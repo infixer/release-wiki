@@ -1,6 +1,6 @@
 ---
 title: pnpm/pnpm
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/pnpm-pnpm
 ---
@@ -9,28 +9,28 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v12.13.0](https://github.com/pnpm/pnpm/releases/tag/v12.13.0)（2026-10-13）→ [[repos/pnpm-pnpm/releases/v12.13.0|まとめ]]
-- 安定版（v11 系）: [v11.28.5](https://github.com/pnpm/pnpm/releases/tag/v11.28.5)（2026-10-06）→ [[repos/pnpm-pnpm/releases/v11.28.5|まとめ]]
+- 安定版: [v12.14.0](https://github.com/pnpm/pnpm/releases/tag/v12.14.0)（2026-10-15）→ [[repos/pnpm-pnpm/releases/v12.14.0|まとめ]]
+- 安定版（v11 系）: [v11.28.6](https://github.com/pnpm/pnpm/releases/tag/v11.28.6)（2026-10-15）→ [[repos/pnpm-pnpm/releases/v11.28.6|まとめ]]
 - 安定版（v10 系）: [v10.34.7](https://github.com/pnpm/pnpm/releases/tag/v10.34.7)（2026-10-12）→ [[repos/pnpm-pnpm/releases/v10.34.7|まとめ]]
 - プレリリース: [pnpr@0.1.0-alpha.15](https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.15)（2026-10-10）
 
 ## 直近の注目変更
 
+- `sideEffectsCache.exclude` で環境に左右されるパッケージのビルドを side-effects キャッシュから外す（[#15651](https://github.com/pnpm/pnpm/pull/15651)）⏳ 未リリース（v12.14.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]
+- pnpr の運用機能: `SIGTERM` 停止と `/-/ready`、信頼するプロキシ、レート制限、Prometheus のメトリクス、キャッシュ削除、audit、トークン作成、provenance、監査ログ（[#16934](https://github.com/pnpm/pnpm/pull/16934), [#16939](https://github.com/pnpm/pnpm/pull/16939), [#16943](https://github.com/pnpm/pnpm/pull/16943), [#16944](https://github.com/pnpm/pnpm/pull/16944), [#16946](https://github.com/pnpm/pnpm/pull/16946), [#16950](https://github.com/pnpm/pnpm/pull/16950), [#16954](https://github.com/pnpm/pnpm/pull/16954), [#16956](https://github.com/pnpm/pnpm/pull/16956), [#16960](https://github.com/pnpm/pnpm/pull/16960)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
+- zstd で圧縮された応答を受け付け、pnpr からも配る（[#16585](https://github.com/pnpm/pnpm/pull/16585)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]
+- `pnpm login` の Web ログインで `npm-notice`（確認コード）を表示（[#16697](https://github.com/pnpm/pnpm/pull/16697)）⏳ 未リリース（v12.14.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]
+- 依存が peer に変わる場合の lockfile の固定の解決し直しと、参照されないカタログでの lockfile の再利用（[#16912](https://github.com/pnpm/pnpm/pull/16912), [#16924](https://github.com/pnpm/pnpm/pull/16924)）⏳ 未リリース（v12.14.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]
+- `--filter` 付きのインストールでディスクに無いプロジェクトの lockfile の記録を残す（[#16936](https://github.com/pnpm/pnpm/pull/16936)）⏳ 未リリース（v12.14.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
+- `files` があるときのサブディレクトリの ignore と、`main`・`browser`・`bin` のディレクトリのパック（[#16920](https://github.com/pnpm/pnpm/pull/16920), [#16918](https://github.com/pnpm/pnpm/pull/16918)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
 - `pnpm token`（トークンの一覧・作成・取り消し）と `pnpm profile`（プロフィールと 2FA）を実装（[#16827](https://github.com/pnpm/pnpm/pull/16827), [#16828](https://github.com/pnpm/pnpm/pull/16828)）⏳ 未リリース（v12.13.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]
 - `storeIndexFormat: files` でネットワークファイルシステムの共有ストアの索引をパッケージごとのファイルに（[#16875](https://github.com/pnpm/pnpm/pull/16875), [#16879](https://github.com/pnpm/pnpm/pull/16879), [#16890](https://github.com/pnpm/pnpm/pull/16890)）⏳ 未リリース（v12.13.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/ストア|ストア]]
 - `nodePackageMap` 設定（`mode: write-only` で `.package-map.json` だけを書く）（[#15671](https://github.com/pnpm/pnpm/pull/15671)）⏳ 未リリース（v12.13.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/設定|設定]]
-- Python の依存解決を PEP 658 のメタデータファイルと先読みで高速化、`uv_build` に対応（[#16881](https://github.com/pnpm/pnpm/pull/16881), [#16865](https://github.com/pnpm/pnpm/pull/16865)）⏳ 未リリース（v12.13.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/Python-サポート|Python サポート]]
-- 依存かつ任意の peer でもある依存（`ajv-formats` の `ajv`）を浅い出現で決める（v11・v12）（[#16903](https://github.com/pnpm/pnpm/pull/16903)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]
-- 更新チェックが止まっても `pnpm install` を待たせない（[#16902](https://github.com/pnpm/pnpm/pull/16902)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]
-- `"files": []` なら常に含まれるファイルだけをパック（[#16892](https://github.com/pnpm/pnpm/pull/16892)）⏳ 未リリース（v12.13.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
-- `globalShims` のハードリンクのシムで全コマンドが失敗する問題を修正（[#16880](https://github.com/pnpm/pnpm/pull/16880)）⏳ 未リリース（v12.13.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]
-- `tool:` プロトコル（`pnpm add bun@tool:1.3.0`・`pnx node@tool:22`、`runtime:` は別名）（[#16838](https://github.com/pnpm/pnpm/pull/16838)）⏳ 未リリース（v12.12.1 に記載）· トピック: [[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]
-- `remoteCache` で `pnpm pipeline` のタスク結果と依存のビルドを pnpr・Turborepo Remote Cache で共有（[#16812](https://github.com/pnpm/pnpm/pull/16812)）⏳ 未リリース（v12.12.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]
 
 ## トピック
 
 - [[repos/pnpm-pnpm/topics/loaded-リンカー|loaded リンカー]] — 実験的な `nodeLinker: { type: loaded }`（ストアから直接読み込むインストール方式）
-- [[repos/pnpm-pnpm/topics/pnpr|pnpr]] — レジストリサーバー pnpr（upstream のキャッシュと integrity、管理 API・OIDC・SCIM・Web UI）
+- [[repos/pnpm-pnpm/topics/pnpr|pnpr]] — レジストリサーバー pnpr（upstream のキャッシュと integrity、管理 API・OIDC・SCIM・Web UI、ヘルスチェック・メトリクス・レート制限・audit・provenance）
 - [[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]] — 個別の CLI コマンド・オプションの追加や改善（`pnpm token`・`pnpm profile`、`--depth Infinity` など）
 - [[repos/pnpm-pnpm/topics/Python-サポート|Python サポート]] — Python（PyPI）を一級のエコシステムとして扱うための実装（ビルドバックエンド・依存解決の高速化を含む）
 - [[repos/pnpm-pnpm/topics/Rust-ツールチェーン|Rust ツールチェーン]] — `rust-toolchain.toml` のツールチェーンのインストール、`cargo`/`rustc` のシム、`pnpm add rust`、`pnx --package=rust@<channel>`
@@ -51,4 +51,4 @@ tags:
 ## 取り込み
 
 - [[repos/pnpm-pnpm/log|取り込み履歴]]
-- 最近の変更: [[repos/pnpm-pnpm/changes/2026-10-14|2026-10-14]]、[[repos/pnpm-pnpm/changes/2026-10-12|2026-10-12]]、[[repos/pnpm-pnpm/changes/2026-10-09|2026-10-09]]、[[repos/pnpm-pnpm/changes/2026-10-07|2026-10-07]]、[[repos/pnpm-pnpm/changes/2026-10-05|2026-10-05]]
+- 最近の変更: [[repos/pnpm-pnpm/changes/2026-10-16|2026-10-16]]、[[repos/pnpm-pnpm/changes/2026-10-14|2026-10-14]]、[[repos/pnpm-pnpm/changes/2026-10-12|2026-10-12]]、[[repos/pnpm-pnpm/changes/2026-10-09|2026-10-09]]、[[repos/pnpm-pnpm/changes/2026-10-07|2026-10-07]]

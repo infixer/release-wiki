@@ -1,6 +1,6 @@
 ---
 title: openui/open-ui
-updated: 2026-10-09
+updated: 2026-10-16
 tags:
   - repo/openui-open-ui
 ---
@@ -16,6 +16,7 @@ W3C Open UI Community Group のリポジトリ。フォーム部品やポップ�
 
 ## 直近の注目変更
 
+- rangegroup の explainer に非線形スケールと空の状態の説明を追加（[#1518](https://github.com/openui/open-ui/pull/1518)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/レンジ・スライダー|レンジ・スライダー]]
 - rangegroup の explainer を CSS Forms Level 1 に合わせて整理（[#1513](https://github.com/openui/open-ui/pull/1513)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/レンジ・スライダー|レンジ・スライダー]]
 - switch 要素の explainer を switch 属性の採用に合わせて更新（[#1376](https://github.com/openui/open-ui/pull/1376)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/スイッチ|スイッチ]]
 - レンジに関数型の疑似要素と重なったつまみの操作ルールを追加（[#1449](https://github.com/openui/open-ui/pull/1449)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/レンジ・スライダー|レンジ・スライダー]]
@@ -25,7 +26,6 @@ W3C Open UI Community Group のリポジトリ。フォーム部品やポップ�
 - Interest Invokers を「卒業した提案」に移動（[#1502](https://github.com/openui/open-ui/pull/1502)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/Interest-Invokers・ポップオーバー|Interest Invokers・ポップオーバー]]
 - filterable select と combobox の explainer を分割（[#1501](https://github.com/openui/open-ui/pull/1501)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/セレクト・コンボボックス|セレクト・コンボボックス]]
 - switch 属性の explainer からスタイル指定の API を外す（[#1498](https://github.com/openui/open-ui/pull/1498)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/スイッチ|スイッチ]]
-- Focusgroup V2 の explainer を整理（[#1494](https://github.com/openui/open-ui/pull/1494)）⏳ 未リリース · トピック: [[repos/openui-open-ui/topics/フォーカスグループ|フォーカスグループ]]
 
 ## トピック
 
@@ -40,4 +40,4 @@ W3C Open UI Community Group のリポジトリ。フォーム部品やポップ�
 ## 取り込み
 
 - [[repos/openui-open-ui/log|取り込み履歴]]
-- 最近の変更: [[repos/openui-open-ui/changes/2026-10-09|2026-10-09]]、[[repos/openui-open-ui/changes/2026-10-02|2026-10-02]]、[[repos/openui-open-ui/changes/2026-10-01|2026-10-01]]
+- 最近の変更: [[repos/openui-open-ui/changes/2026-10-16|2026-10-16]]、[[repos/openui-open-ui/changes/2026-10-09|2026-10-09]]、[[repos/openui-open-ui/changes/2026-10-02|2026-10-02]]、[[repos/openui-open-ui/changes/2026-10-01|2026-10-01]]

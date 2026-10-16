@@ -1,6 +1,6 @@
 ---
 title: tc39/ecma262
-updated: 2026-10-12
+updated: 2026-10-16
 tags:
   - repo/tc39-ecma262
 ---
@@ -25,4 +25,4 @@ tags:
 ## 取り込み
 
 - [[repos/tc39-ecma262/log|取り込み履歴]]
-- 最近の変更: [[repos/tc39-ecma262/changes/2026-10-12|2026-10-12]]、[[repos/tc39-ecma262/changes/2026-10-05|2026-10-05]]、[[repos/tc39-ecma262/changes/2026-10-02|2026-10-02]]、[[repos/tc39-ecma262/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/tc39-ecma262/changes/2026-10-16|2026-10-16]]、[[repos/tc39-ecma262/changes/2026-10-12|2026-10-12]]、[[repos/tc39-ecma262/changes/2026-10-05|2026-10-05]]、[[repos/tc39-ecma262/changes/2026-10-02|2026-10-02]]、[[repos/tc39-ecma262/changes/2026-09-24|2026-09-24]]

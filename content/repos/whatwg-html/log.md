@@ -1,9 +1,16 @@
 ---
 title: whatwg/html 取り込み履歴
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/whatwg-html
 ---
+
+## 2026-10-16
+
+- 期間: 2026-10-13T22:19:52Z 〜 2026-10-15T23:42:24Z
+- PR 1 件（詳しく 1 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/whatwg-html/changes/2026-10-16|changes]]（新規）、[[repos/whatwg-html/topics/シリアライズと転送|シリアライズと転送]]（新規）
+- エラー: なし
 
 ## 2026-10-14
 

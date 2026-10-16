@@ -1,9 +1,16 @@
 ---
 title: vercel/next.js 取り込み履歴
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/vercel-next.js
 ---
+
+## 2026-10-16
+
+- 期間: 2026-10-13T23:45:36Z 〜 2026-10-15T23:42:24Z
+- PR 46 件（詳しく 14 件 / 1 行 32 件）、Release 7 件（安定版 3 件: v15.5.28・v16.4.1・v16.4.2、ほか v16.5.0-canary.11〜.14）
+- 更新したページ: [[repos/vercel-next.js/changes/2026-10-16|changes]]（新規）、[[repos/vercel-next.js/releases/v16.4.1|v16.4.1]]（新規）、[[repos/vercel-next.js/releases/v15.5.28|v15.5.28]]（新規）、[[repos/vercel-next.js/releases/v16.4.2|v16.4.2]]（新規）、[[repos/vercel-next.js/releases/v16.4.0|v16.4.0]]、[[repos/vercel-next.js/releases/v15.5.27|v15.5.27]]、[[repos/vercel-next.js/topics/OpenTelemetry|OpenTelemetry]]（新規）、[[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]、[[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]、[[repos/vercel-next.js/topics/next-font|next/font]]、[[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]、[[repos/vercel-next.js/topics/画像最適化|画像最適化]]、[[repos/vercel-next.js/topics/Server-Actions|Server Actions]]、[[repos/vercel-next.js/index|index]]
+- エラー: なし（bot の PR 2 件を除外: `next-js-bot[bot]`）
 
 ## 2026-10-14
 

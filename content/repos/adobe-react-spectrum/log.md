@@ -1,9 +1,16 @@
 ---
 title: adobe/react-spectrum 取り込み履歴
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/adobe-react-spectrum
 ---
+
+## 2026-10-16
+
+- 期間: 2026-10-13T21:27:32Z 〜 2026-10-15T23:42:24Z
+- PR 3 件（詳しく 3 件 / 1 行 0 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/adobe-react-spectrum/changes/2026-10-16|changes]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]、[[repos/adobe-react-spectrum/topics/TokenField|TokenField]]、[[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]、[[repos/adobe-react-spectrum/index|index]]
+- エラー: なし
 
 ## 2026-10-14
 

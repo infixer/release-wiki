@@ -53,6 +53,7 @@ Anthropic は毎年恒例の Usage Policy（利用ポリシー）の改定版を
 
 ## 関連
 
+- [[blogs/anthropic/posts/2026-10-14-2026-us-midterms|2026 年米国中間選挙への備え]]
 - [[blogs/anthropic/posts/2026-10-08-anthropic-cyber-mission|Anthropic Cyber Mission を開始、重要インフラと OSS の防御を支援]]
 - [[blogs/anthropic/posts/2026-10-08-genesis-mission-commitment|Genesis Mission に 3 年で 1.5 億ドルを拠出]]
 - [[blogs/anthropic/posts/2026-10-06-cyber-verification-program|Cyber Verification Program を拡大、3 段階のアクセス階層を導入]]

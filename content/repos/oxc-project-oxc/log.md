@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-14
+updated: 2026-10-16
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-16
+
+- 期間: 2026-10-13T14:55:25Z 〜 2026-10-15T23:42:24Z
+- PR 54 件（詳しく 29 件 / 1 行 25 件、うち brief 24 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-16|changes]]、[[repos/oxc-project-oxc/topics/推奨ルール|推奨ルール]]（新規）、[[repos/oxc-project-oxc/topics/設定ファイル|設定ファイル]]（新規）、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/oxc_str|oxc_str]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/カバレッジ・テスト基盤|カバレッジ・テスト基盤]]、[[repos/oxc-project-oxc/topics/Vite+連携|Vite+連携]]（関連リンクのみ）、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 2 件）
 
 ## 2026-10-14
 

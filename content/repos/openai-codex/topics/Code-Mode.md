@@ -1,6 +1,6 @@
 ---
 title: Code Mode
-updated: 2026-10-12
+updated: 2026-10-16
 tags:
   - repo/openai-codex
   - topic
@@ -39,3 +39,4 @@ tags:
 - [[repos/openai-codex/releases/rust-v0.162.0|rust-v0.162.0]]
 - [[repos/openai-codex/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/openai-codex/changes/2026-10-12|2026-10-12 の変更]]
+- [[repos/openai-codex/releases/rust-v0.163.0|rust-v0.163.0]]

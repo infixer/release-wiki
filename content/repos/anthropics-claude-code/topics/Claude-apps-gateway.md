@@ -1,6 +1,6 @@
 ---
 title: Claude apps gateway
-updated: 2026-10-12
+updated: 2026-10-16
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -15,6 +15,7 @@ Claude apps gateway（Anthropic API・Amazon Bedrock・Vertex・Foundry など�
 managed settings の無いマシンでも、ユーザー設定の `forceLoginMethod: "gateway"` と `forceLoginGatewayUrl` で `/login` を gateway に向けられる。
 `managed.policies[]` には `code` キーがあり、`cli` と同じ設定を Claude Desktop の Code タブにも適用する（`desktop` と並べると Claude Desktop の gateway モードを有効にする）。
 `allowedProviders` に `"gateway"` を返す gateway が、ユーザー設定でその gateway を指定したノート PC を締め出す問題と、managed settings が `forceLoginMethod: "gateway"` で `forceLoginGatewayUrl` を指定しないマシンで保存済みのサインインが無視される問題（2.1.295 での退行）は v2.1.296 で修正された。
+v2.1.299 で、gateway の背後の Claude Code セッションの attribution ブロックにフィールドが加わり、`code` ポリシーの `env` に `CLAUDE_CODE_ATTRIBUTION_HEADER=0` を設定すると Claude Desktop の Code タブでも attribution ブロックを外せるようになった。
 
 ## 主な API・オプション
 
@@ -23,9 +24,11 @@ managed settings の無いマシンでも、ユーザー設定の `forceLoginMet
 - `upstream_request_id` — `inference` 監査イベントの upstream のリクエスト ID
 - `forceLoginMethod: "gateway"` / `forceLoginGatewayUrl` — `/login` で開く gateway
 - `managed.policies[]` の `code` — Claude Desktop の Code タブにも `cli` と同じ設定を適用
+- `code` ポリシーの `env` の `CLAUDE_CODE_ATTRIBUTION_HEADER=0` — attribution ブロックを外す
 
 ## 変更履歴
 
+- 2026-10-14 — gateway の背後のセッションの attribution ブロックにフィールドを追加、`CLAUDE_CODE_ATTRIBUTION_HEADER=0` で Claude Desktop の Code タブでも外せるように 📦 v2.1.299 · [[repos/anthropics-claude-code/releases/v2.1.299|リリース]]
 - 2026-10-09 — `managed.policies[]` に `code` キーを追加。`allowedProviders` の `"gateway"` によるロックアウトと、保存済みの gateway サインインが無視される退行を修正 📦 v2.1.296 · [[repos/anthropics-claude-code/releases/v2.1.296|リリース]]
 - 2026-10-08 — upstream ごとの `models` 一覧、クラウド upstream での `timeouts.upstream_ttfb_ms`、`upstream_request_id`、`request-id` ヘッダー、ユーザー設定での `forceLoginMethod: "gateway"` を追加。gateway などが context-1m beta を拒否したときに `[1m]` モデルのリクエストがすべて失敗する問題を修正 📦 v2.1.295 · [[repos/anthropics-claude-code/releases/v2.1.295|リリース]]
 
@@ -34,3 +37,4 @@ managed settings の無いマシンでも、ユーザー設定の `forceLoginMet
 - [[repos/anthropics-claude-code/topics/テレメトリ|テレメトリ]]
 - [[repos/anthropics-claude-code/releases/v2.1.295|v2.1.295]]
 - [[repos/anthropics-claude-code/releases/v2.1.296|v2.1.296]]
+- [[repos/anthropics-claude-code/releases/v2.1.299|v2.1.299]]

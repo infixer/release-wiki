@@ -1,9 +1,16 @@
 ---
 title: openui/open-ui 取り込み履歴
-updated: 2026-10-09
+updated: 2026-10-16
 tags:
   - repo/openui-open-ui
 ---
+
+## 2026-10-16
+
+- 期間: 2026-10-07T21:25:50Z 〜 2026-10-15T23:42:24Z
+- PR 1 件（詳しく 1 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/openui-open-ui/changes/2026-10-16|changes]]（新規）、[[repos/openui-open-ui/topics/レンジ・スライダー|レンジ・スライダー]]
+- エラー: なし
 
 ## 2026-10-09
 
