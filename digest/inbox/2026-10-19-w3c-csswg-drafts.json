@@ -1,0 +1,247 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-18T23:20:44Z",
+  "range": {
+    "from": "2026-10-15T20:26:52Z",
+    "to": "2026-10-18T23:20:44Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14587,
+      "title": "[mediaqueries-5] Add application display-mode and concurrent values #14125",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14587",
+      "author": "kyerebo",
+      "mergedAt": "2026-10-16T19:47:04Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Adds specification text for a `display-mode: application` value, along with removing the mutual exclusivity of `display-mode` values which caused issues with accurate `display-mode` detection.\n\nWhen a developer is querying for `display-mode: standalone`, and the user enters fullscreen, `display-mode: standalone` stops matching. The query now instead matches `display-mode: fullscreen`. This mutual exclusivity of `display-mode` values made for inconsistent signals and unpredictable behavior for developers to work with.\n\nThis change adds a new, stable signal for being in an application context `display-mode: application`.\nSupplementally fix matching behavior to be independent per value definition and allow more than one value to match at a time.\n\nReview discussion at https://github.com/w3c/csswg-drafts/issues/14125",
+      "files": [
+        "mediaqueries-5/Overview.bs (+24 -15)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14611,
+      "title": "[css-contain-2] Define skipped media playback behavior (#6468)",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14611",
+      "author": "hjanuschka",
+      "mergedAt": "2026-10-18T16:22:11Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Spec edits for the [2021 CSSWG resolution](https://github.com/w3c/csswg-drafts/issues/6468#issuecomment-887634200) on media playback in skipped subtrees.\n\n- Media elements skipped via `content-visibility: hidden` keep playing with audio suppressed (without changing `muted`/`volume`), queued events are deferred until unskipped, and state queries reflect the live playback state.\n- Applies through nested `iframe`s; picture-in-picture presentation outside the skipped contents is exempt.\n- Explicitly scoped to `content-visibility: hidden` only: contents skipped via `content-visibility: auto` are unaffected, so off-screen audio keeps playing.\n\nCloses #6468",
+      "files": [
+        "css-contain-2/Overview.bs (+28 -0)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-10-15T20:26:52Z",
+    "to": "2026-10-18T23:20:44Z"
+  },
+  "commits": [
+    {
+      "sha": "11d28b4",
+      "url": "https://github.com/w3c/csswg-drafts/commit/11d28b47ff480e10f6935b6d4dd3974e3297f1c5",
+      "author": "JoshTumath",
+      "committedAt": "2026-10-15T23:57:58Z",
+      "title": "[css-images-5] Add Josh Tumath as editor",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Following resolution in https://www.w3.org/2026/10/14-css-minutes.html",
+      "files": [
+        "css-images-5/Overview.bs (+1 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "4efceeb",
+      "url": "https://github.com/w3c/csswg-drafts/commit/4efceeb3cef5150cf3bf6909aa300b4194ac3872",
+      "author": "frivoal",
+      "committedAt": "2026-10-16T10:09:16Z",
+      "title": "[css-overflow] test coverage update",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-overflow-4/Overview.bs (+11 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "52e9ad7",
+      "url": "https://github.com/w3c/csswg-drafts/commit/52e9ad7ad07fe980851cd261d892c90b3171119a",
+      "author": "JoshTumath",
+      "committedAt": "2026-10-16T16:24:06Z",
+      "title": "[css-images-5][editorial] Fix typo in explainer",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "sha": "bb0aaed",
+      "url": "https://github.com/w3c/csswg-drafts/commit/bb0aaedc7bcf2ee59a732a2d9689ccbbccb566be",
+      "author": "svgeesus",
+      "committedAt": "2026-10-16T16:43:18Z",
+      "title": "[animation-triggers][editorial] Fixes for FPWD",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "animation-triggers-1/Overview.bs (+213 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "480dcbe",
+      "url": "https://github.com/w3c/csswg-drafts/commit/480dcbee85e1396d9995bfd9fb7f7c591e69484b",
+      "author": "svgeesus",
+      "committedAt": "2026-10-16T16:43:20Z",
+      "title": "[animation-triggers] Link fix",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "animation-triggers-1/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "4ec52df",
+      "url": "https://github.com/w3c/csswg-drafts/commit/4ec52dfa91903ffabe6972a10e723607d587dd85",
+      "author": "svgeesus",
+      "committedAt": "2026-10-16T16:43:22Z",
+      "title": "[animation-triggers][editorial] Back to ED",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "animation-triggers-1/Overview.bs (+2 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "b1af0bd",
+      "url": "https://github.com/w3c/csswg-drafts/commit/b1af0bd2f2d02dc19da3cbb584f3a7fa2dc0d83c",
+      "author": "svgeesus",
+      "committedAt": "2026-10-16T18:08:21Z",
+      "title": "[css-fonts-4] Clarified that kerning applies to proportionally-spaced glyphs only. Removed inaccurate claim that OpenType encourages that kerning be on by default. #6723",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-4/Overview.bs (+11 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "765841b",
+      "url": "https://github.com/w3c/csswg-drafts/commit/765841bcacb2e85a6692230f742ea55f00d4dd08",
+      "author": "svgeesus",
+      "committedAt": "2026-10-16T18:19:12Z",
+      "title": "[css-fonts-4][editorial] wpt",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-4/Overview.bs (+7 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "a17071d",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a17071ddd3a207698d6b5625234a71268a008c13",
+      "author": "svgeesus",
+      "committedAt": "2026-10-16T18:25:50Z",
+      "title": "[css-fonts-4] Further clarify that kerning is for proportional glyphs only #6723",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-4/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "c5a48cf",
+      "url": "https://github.com/w3c/csswg-drafts/commit/c5a48cf6164d007177d07e4afdcfa01ca8d16b9c",
+      "author": "tabatkins",
+      "committedAt": "2026-10-16T19:47:03Z",
+      "title": "Apply suggestion from @tabatkins",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "mediaqueries-5/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "6e2f4f7",
+      "url": "https://github.com/w3c/csswg-drafts/commit/6e2f4f772d91fcbb54a6e9c63a764f6304d572df",
+      "author": "tabatkins",
+      "committedAt": "2026-10-16T19:47:03Z",
+      "title": "Apply suggestion from @tabatkins",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "mediaqueries-5/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "ae27e63",
+      "url": "https://github.com/w3c/csswg-drafts/commit/ae27e63e5c9f03060bc7d6667b85348d0732fbd3",
+      "author": "tabatkins",
+      "committedAt": "2026-10-16T19:47:03Z",
+      "title": "Apply suggestion from @tabatkins",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "mediaqueries-5/Overview.bs (+4 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "070e021",
+      "url": "https://github.com/w3c/csswg-drafts/commit/070e0210db0076255d8ceb31a4ceda7ecb57dd2e",
+      "author": "akyereboah",
+      "committedAt": "2026-10-16T19:47:03Z",
+      "title": "[mediaqueries-5] Add application display-mode and allow concurrent matches",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Define application-context detection and independent display-mode value matching, preserving existing child-context inheritance.\n\nRelated CSSWG discussion: https://github.com/w3c/csswg-drafts/issues/14125",
+      "files": [
+        "mediaqueries-5/Overview.bs (+17 -8)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "7b4c69e",
+      "url": "https://github.com/w3c/csswg-drafts/commit/7b4c69ecaf9289d1bd5455d6bea10eec0b4a4399",
+      "author": "tabatkins",
+      "committedAt": "2026-10-16T19:51:29Z",
+      "title": "[css-syntax-3][editorial] Removed old Changes section, started new one for the Oct 1 2026 draft",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+5 -355)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "9d0bb83",
+      "url": "https://github.com/w3c/csswg-drafts/commit/9d0bb83d67f8d74f0891b9cae2991195e7a3d1bf",
+      "author": "tabatkins",
+      "committedAt": "2026-10-16T19:51:29Z",
+      "title": "[css-syntax-3] Removing lingering reference to 'parse a block's contents'.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+0 -6)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

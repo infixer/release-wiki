@@ -1,0 +1,160 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-10-18T23:20:44Z",
+  "range": {
+    "from": "2026-10-15T23:36:01Z",
+    "to": "2026-10-18T23:20:44Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64840,
+      "title": "Allow CRLF line endings in release workflow whitespace checks",
+      "url": "https://github.com/microsoft/TypeScript/pull/64840",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-16T04:38:56Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 64845,
+      "title": " Fix incremental diagnostics after global file deletion",
+      "url": "https://github.com/microsoft/TypeScript/pull/64845",
+      "author": "johnfav03",
+      "mergedAt": "2026-10-16T21:37:31Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64552\n\nIncremental snapshot construction stopped after the first deleted file because the native `SyncMap.Range` callback used the opposite continuation convention from Strada, making global-scope invalidation depend on nondeterministic map iteration order. This means stale diagnostics or obsolete pending state could be persisted when `lib` or `target` changes removed multiple files.",
+      "files": [
+        "tsc/internal/execute/incremental/buildinfo_path_test.go (+412 -0)",
+        "tsc/internal/execute/incremental/programtosnapshot.go (+47 -21)",
+        "tsc/internal/execute/tsctests/tsc_test.go (+147 -0)",
+        "tsc/testdata/baselines/reference/tsc/incremental/lib-and-target-changes-delete-mixed-library-files-with-one-checker.js (+605 -0)",
+        "tsc/testdata/baselines/reference/tsc/incremental/lib-and-target-changes-delete-mixed-library-files-with-single-threaded.js (+605 -0)",
+        "tsc/testdata/baselines/reference/tsc/incremental/lib-and-target-changes-delete-mixed-library-files.js (+605 -0)",
+        "tsc/testdata/baselines/reference/tsc/incremental/mixed-file-deletion-with-add-and-change-with-one-checker.js (+538 -0)",
+        "tsc/testdata/baselines/reference/tsc/incremental/mixed-file-deletion-with-add-and-change-with-single-threaded.js (+538 -0)",
+        "tsc/testdata/baselines/reference/tsc/incremental/mixed-file-deletion-with-add-and-change.js (+538 -0)",
+        "tsc/testdata/baselines/reference/tsc/incremental/retained-library-diagnostics-after-global-deletion-cleared-false-with-one-checker.js (+326 -0)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 64846,
+      "title": "[api] Add timing collection and dump via environment variable",
+      "url": "https://github.com/microsoft/TypeScript/pull/64846",
+      "author": "andrewbranch",
+      "mergedAt": "2026-10-16T22:51:49Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Adds a `TS_API_TIMING_DIR` environment variable that causes the API client to collect timing info and write its results out to a file upon closing. I'm working on gathering an API benchmarking suite we can run on PRs with `@typescript-bot api perf test this` or something.",
+      "files": [
+        "packages/typescript/src/api/async/api.ts (+2 -2)",
+        "packages/typescript/src/api/async/client.ts (+53 -20)",
+        "packages/typescript/src/api/options.ts (+3 -0)",
+        "packages/typescript/src/api/sync/api.ts (+2 -2)",
+        "packages/typescript/src/api/sync/client.ts (+26 -1)",
+        "packages/typescript/src/api/syncChannel.ts (+12 -1)",
+        "packages/typescript/src/api/timing.ts (+1 -1)",
+        "packages/typescript/src/api/timingDump.ts (+55 -0)",
+        "packages/typescript/test/timingDump.test.ts (+132 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 64843,
+      "title": "Ensure `pathsBasePath` is correctly forwarded from the API",
+      "url": "https://github.com/microsoft/TypeScript/pull/64843",
+      "author": "dragomirtitian",
+      "mergedAt": "2026-10-16T23:19:26Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64842",
+      "files": [
+        "tsc/internal/api/session_createprogram_test.go (+46 -0)",
+        "tsc/internal/tsoptions/rawcompileroptions.go (+2 -0)",
+        "tsc/internal/tsoptions/rawcompileroptions_test.go (+2 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64850,
+      "title": "Reduce the last ~2 years of uncovered top1000 repo failures into local tests",
+      "url": "https://github.com/microsoft/TypeScript/pull/64850",
+      "author": "RyanCavanaugh",
+      "mergedAt": "2026-10-17T01:22:35Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "I had Copilot go through PRs from the last 2 years looking for places where the bot found a break in a user test that wasn't already covered by a unit test, then reduce each of these to a testcase that would have identified the change at that point in the PR. Each commit is a test plus baselines and links to the originating usertest run result comment that generated it.",
+      "files": [
+        "tsc/internal/execute/tsctests/tsc_test.go (+37 -0)",
+        "tsc/testdata/baselines/reference/compiler/assertedGenericPartialIndexedAssignment.symbols (+17 -0)",
+        "tsc/testdata/baselines/reference/compiler/assertedGenericPartialIndexedAssignment.types (+18 -0)",
+        "tsc/testdata/baselines/reference/compiler/assertedReadonlyParameterPropertyAssignment.symbols (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/assertedReadonlyParameterPropertyAssignment.types (+22 -0)",
+        "tsc/testdata/baselines/reference/compiler/callableConstructorUnionMetadata.symbols (+29 -0)",
+        "tsc/testdata/baselines/reference/compiler/callableConstructorUnionMetadata.types (+20 -0)",
+        "tsc/testdata/baselines/reference/compiler/callableWeakMetadata.symbols (+15 -0)",
+        "tsc/testdata/baselines/reference/compiler/callableWeakMetadata.types (+17 -0)",
+        "tsc/testdata/baselines/reference/compiler/callableWeakMetadataCallSuggestion.symbols (+19 -0)"
+      ],
+      "filesTotal": 438
+    },
+    {
+      "number": 64728,
+      "title": "Cache undefined widening properties per symbol, not per name",
+      "url": "https://github.com/microsoft/TypeScript/pull/64728",
+      "author": "maschwenk",
+      "mergedAt": "2026-10-18T04:59:09Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64727\n\ngetUndefinedProperty cached the synthetic `prop?: undefined` symbol by name, so the first object literal to widen a name decided how that property printed in later, unrelated types. declaration output then depended on which other files shared a checker, and on --checkers.\n\nthis keys the cache by the source property symbol instead. it's a 4 line change in checker.go.\n\n- new test undefinedPropertyDeclarationOrder covers the a.ts/b.ts repro\n- objectLiteralNormalization baselines reorder: c3, c4 and e2 now match 6.0.3 exactly, nothing moves further from it\n- emitted b.d.ts is byte-identical with and without a.ts at --checkers 1, 2, 4 and 8. before the fix it differed at 1, 2 and 4\n- hereby validate passes except test:extension, which fails the same way on clean main\n\nai disclosure: written with claude code. i've read the change and will handle review myself.",
+      "files": [
+        "tsc/internal/checker/checker.go (+4 -4)",
+        "tsc/testdata/baselines/reference/compiler/undefinedPropertyDeclarationOrder.js (+24 -0)",
+        "tsc/testdata/baselines/reference/compiler/undefinedPropertyDeclarationOrder.symbols (+20 -0)",
+        "tsc/testdata/baselines/reference/compiler/undefinedPropertyDeclarationOrder.types (+37 -0)",
+        "tsc/testdata/baselines/reference/conformance/objectLiteralNormalization.js (+8 -8)",
+        "tsc/testdata/baselines/reference/conformance/objectLiteralNormalization.symbols (+6 -6)",
+        "tsc/testdata/baselines/reference/conformance/objectLiteralNormalization.types (+21 -21)",
+        "tsc/testdata/tests/cases/compiler/undefinedPropertyDeclarationOrder.ts (+5 -0)"
+      ],
+      "filesTotal": 8
+    }
+  ],
+  "errors": []
+}

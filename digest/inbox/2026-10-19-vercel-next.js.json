@@ -1,0 +1,232 @@
+{
+  "kind": "repo",
+  "repo": "vercel/next.js",
+  "branch": "canary",
+  "collectedAt": "2026-10-18T23:20:44Z",
+  "range": {
+    "from": "2026-10-15T21:52:28Z",
+    "to": "2026-10-18T23:20:44Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v16.4.2",
+      "publishedAt": "2026-10-15T20:44:37Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.2"
+    },
+    "prerelease": {
+      "tag": "v16.5.0-canary.17",
+      "publishedAt": "2026-10-17T23:46:40Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.17"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v16.5.0-canary.15",
+      "name": "v16.5.0-canary.15",
+      "publishedAt": "2026-10-15T23:44:24Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.15",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.16",
+      "name": "v16.5.0-canary.16",
+      "publishedAt": "2026-10-16T23:47:57Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.16",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.17",
+      "name": "v16.5.0-canary.17",
+      "publishedAt": "2026-10-17T23:46:40Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.17",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 100256,
+      "title": "Respect release age when pinning the upgrade CLI",
+      "url": "https://github.com/vercel/next.js/pull/100256",
+      "author": "devjiwonchoi",
+      "mergedAt": "2026-10-16T11:46:57Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.17",
+      "body": "### Why?\n\n`next upgrade --agent` pins the latest canary without considering the package manager's minimum release age, so its delegated CLI can conflict with the configured policy.\n\n### How?\n\nRead npm, pnpm, and Yarn release-age settings and relevant exclusions, then pin the highest eligible canary at or below the fetched canary tag. Keep the delegated CLI's exact-version guard and stop when settings or metadata cannot be read or no eligible canary exists.\n\nFor npm, use merged JSON settings with `before` taking precedence over `min-release-age`. For pnpm, interpret only the first exclusion matching `next`. Read Yarn's effective settings directly. Metadata queries use the package manager's normal cache behavior, including cached responses when available.\n\nCloses NAR-950",
+      "files": [
+        "packages/next/src/cli/next-upgrade.ts (+5 -26)",
+        "packages/next/src/lib/upgrade/release-age.ts (+229 -0)",
+        "packages/next/src/lib/upgrade/resolve-canary-version.ts (+94 -0)",
+        "test/unit/agentic-upgrade-prompts.test.ts (+54 -0)",
+        "test/unit/upgrade-release-age.test.ts (+239 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 100302,
+      "title": "Revert \"Keep requests through middleware in a single OpenTelemetry trace\"",
+      "url": "https://github.com/vercel/next.js/pull/100302",
+      "author": "sokra",
+      "mergedAt": "2026-10-16T11:47:25Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.17",
+      "body": "Revert #100136",
+      "files": [
+        "packages/next/src/server/base-server.ts (+2 -21)",
+        "packages/next/src/server/lib/trace/tracer.ts (+13 -32)",
+        "packages/next/src/server/next-server.ts (+18 -15)",
+        "packages/next/src/server/web/adapter.ts (+1 -29)",
+        "packages/next/src/server/web/forward-trace-context.ts (+0 -90)",
+        "packages/next/src/server/web/forward-trace-context.test.ts (+0 -163)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/headers-echo/page.tsx (+0 -22)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/layout.tsx (+0 -9)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/page.tsx (+0 -3)",
+        "test/e2e/app-dir/otel-middleware-single-trace/app/page/page.tsx (+0 -25)"
+      ],
+      "filesTotal": 22
+    },
+    {
+      "number": 100257,
+      "title": "Fix upgrade eval worktree dependency links",
+      "url": "https://github.com/vercel/next.js/pull/100257",
+      "author": "devjiwonchoi",
+      "mergedAt": "2026-10-16T11:51:22Z",
+      "labels": [
+        "created-by: Next.js team"
+      ],
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.17",
+      "body": "### Why?\n\npnpm rejects symlinked task-state paths, so the upgrade evals fail while preparing the stable candidate build.\n\n### How?\n\nCreate a real `node_modules` directory in the isolated checkout and link the installed dependency entries into it. Leave pnpm task state local to that checkout.",
+      "files": [
+        "evals/next-upgrade/run.js (+15 -5)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 100274,
+      "title": "Pass Server Action request metadata into App rendering",
+      "url": "https://github.com/vercel/next.js/pull/100274",
+      "author": "kassens",
+      "mergedAt": "2026-10-16T14:08:54Z",
+      "labels": [
+        "type: next"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.17",
+      "body": "## Summary\n\nPass the existing Server Action classification result into App Router rendering instead of repeatedly inspecting the request. `ServerActionRequestMetadata` now flows from Node, Edge, direct-server, and export adapters through render preparation and action dispatch; `prepareAppPage` no longer needs the request object.\n\nClassification rules and action execution behavior are unchanged. This continues the request/response boundary cleanup in #99269.\n\n## Verification\n\nValidated on the exact #99269 base: the Node/Edge unrecognized-action suite passed in Turbopack development and Webpack production (26 tests each), plus standalone Server Actions in Turbopack production (2 tests).",
+      "files": [
+        "packages/next/src/build/templates/app-page-runtime.ts (+4 -2)",
+        "packages/next/src/build/templates/edge-ssr-app.ts (+4 -2)",
+        "packages/next/src/export/routes/app-page.ts (+3 -1)",
+        "packages/next/src/server/app-render/action-handler.ts (+4 -2)",
+        "packages/next/src/server/app-render/app-render.tsx (+29 -13)",
+        "packages/next/src/server/lib/server-action-request-meta.ts (+9 -7)",
+        "packages/next/src/server/next-server.ts (+3 -1)",
+        "packages/next/src/server/route-modules/app-page/module.ts (+6 -2)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 100284,
+      "title": "Remove dead NextNodeServer.renderHTML",
+      "url": "https://github.com/vercel/next.js/pull/100284",
+      "author": "kassens",
+      "mergedAt": "2026-10-16T17:12:01Z",
+      "labels": [
+        "type: next",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.17",
+      "body": "# Human Notes\n\nThis deletes some code that appears to be dead but would otherwise need to be updated as we refactor other code nearby to pull out `request` and `response` from inner functions.\n\n# AI\n\n## Summary\n\n`NextNodeServer.renderHTML` (and its abstract declaration on `BaseServer`) has had no callers since #81944, which removed the last call site. Nothing else in `packages/` or `test/` references it.\n\nThis removes the method along with everything only it used:\n\n- `lazyRenderAppPage` in `route-modules/app-page/module.render.ts`. `lazyPrerenderAppPage` stays because export uses it.\n- The `NextNodeServerSpan.renderHTML` trace span constant. It is no longer emitted and is not in either span allowlist.\n- `renderOpts.isPossibleServerAction`. `renderHTML` was its only reader. The App Router renderer reads `isPossibleServerAction` from its render context, not from `renderOpts`, so the Node and Edge templates no longer need to write it. The Pages `RenderOpts` field is unchanged.\n\nThis is not public API. The `next()` custom-server wrapper (`NextServer` in `server/next.ts`) never forwarded `renderHTML`; it only exposes the already-deprecated `render`, `renderToHTML`, `renderError`, `renderErrorToHTML` and `render404`. The method is `protected` on both server classes, and the only way to reach it is by subclassing `NextNodeServer` from `next/dist`. An override there has not run since #81944, because nothing calls the method. The span name is not in the span allowlists or the docs, an\n…(truncated)",
+      "files": [
+        "packages/next/src/build/templates/app-page-runtime.ts (+0 -1)",
+        "packages/next/src/build/templates/edge-ssr-app.ts (+0 -2)",
+        "packages/next/src/server/app-render/types.ts (+0 -1)",
+        "packages/next/src/server/base-server.ts (+0 -10)",
+        "packages/next/src/server/lib/trace/constants.ts (+0 -1)",
+        "packages/next/src/server/next-server.ts (+0 -128)",
+        "packages/next/src/server/route-modules/app-page/module.render.ts (+2 -10)",
+        "test/production/next-server-nft/next-server-nft.test.ts (+0 -23)",
+        "test/production/pages-dir/production/test/index.test.ts (+0 -5)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 99706,
+      "title": "Refactor fetchStrategy -> stage and completeness",
+      "url": "https://github.com/vercel/next.js/pull/99706",
+      "author": "acdlite",
+      "mergedAt": "2026-10-16T18:22:22Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.17",
+      "body": "This is a refactor of the FetchStrategy type.\n\nAs the Partial Prefetching design has evolved, FetchStrategy has come to represent two independent concepts, which we now model separately: the _stage_ (AppStage) of the navigation that an entry was rendered through (shell, prefetch, or navigation), and the _completeness_ (Completeness) of the rendering through that stage (needs runtime request, cache complete but with dynamic holes, or fully complete with no dynamic holes). Everywhere that used to accept a FetchStrategy now accepts either one or both of these types.\n\n(Note: I've called the type AppStage to distinguish it from the internal stages used on the server as part of the rendering algorithm. The stages used on the client are the ones we document publicly as part of `ensureStatic` and the `prefetch()` and `navigation()` APIs.)\n\nThe `completeness` field also replaces the `isPartial` field.\n\nIt's possible to express much of the logic using a single enum, as in the FetchStrategy model. To prove this, I've extracted most of the behavioral changes into earlier PRs, to make this one easier to review. But the resulting logic in the new model should be easier to follow. So on net, we have the same number of fields but expressed in a way that better fits the underlying design:\n\n- Every prefetch task (e.g. a visible Link) has a target stage and level of completeness. The task finishes when the cache has entries that match _both_ targets.\n- When deciding whether to overwrite an exis\n…(truncated)",
+      "files": [
+        "packages/next/src/client/app-dir/form.tsx (+2 -8)",
+        "packages/next/src/client/app-dir/link.tsx (+8 -34)",
+        "packages/next/src/client/components/app-router-state.ts (+5 -5)",
+        "packages/next/src/client/components/links.ts (+11 -15)",
+        "packages/next/src/client/components/prefetch.ts (+10 -16)",
+        "packages/next/src/client/components/render-tree.ts (+8 -6)",
+        "packages/next/src/client/components/segment-cache/cache.ts (+557 -680)",
+        "packages/next/src/client/components/segment-cache/navigation-testing-lock.disabled.ts (+2 -2)",
+        "packages/next/src/client/components/segment-cache/navigation-testing-lock.ts (+3 -4)",
+        "packages/next/src/client/components/segment-cache/scheduler.ts (+589 -624)"
+      ],
+      "filesTotal": 31
+    },
+    {
+      "number": 100285,
+      "title": "test: remove stale deploy gate on cold RSC navigation param caching test",
+      "url": "https://github.com/vercel/next.js/pull/100285",
+      "author": "lukesandberg",
+      "mergedAt": "2026-10-16T22:03:50Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.17",
+      "filesTotal": 1
+    },
+    {
+      "number": 100283,
+      "title": "turbo-persistence: prefetch multi-page SST blocks with MADV_WILLNEED",
+      "url": "https://github.com/vercel/next.js/pull/100283",
+      "author": "lukesandberg",
+      "mergedAt": "2026-10-16T23:50:55Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.17",
+      "body": "### What?\n\nturbo-persistence SST lookup mappings keep `MADV_RANDOM`, and also prefetch whole multi-page blocks:\n\n- **Block hint:** before a block's first full read in an SST open (CRC check and decompression), the block's page-aligned range gets `MADV_WILLNEED`. The hint is issued before any byte of the block is read, header included, and only when the block spans more than one page (using the system page size).\n  - Medium value blocks bypass the block cache, so they get the hint on every read.\n  - Already-verified blocks and single-page blocks get no syscall.\n- **Block-offset table:** gets `MADV_WILLNEED` at open, instead of `MADV_SEQUENTIAL`.\n- **Unknown page size:** if `sysconf(_SC_PAGESIZE)` fails, block hints can't be computed, so `MADV_RANDOM` isn't applied either and the mapping keeps default advice (read-around still prefetches). The offset-table hint is applied in both cases.\n- **Unchanged:** compaction iteration (`MADV_SEQUENTIAL`), meta/blob files, File access mode, non-Unix platforms and the on-disk format.\n\n### Why?\n\nSee #100250.\n- With `MADV_RANDOM` alone, a cold multi-page block is faulted in one page at a time.\n- Dropping the advice (the first version of this PR) lets kernel read-around fix that, but it also reads neighboring blocks that are often never used.\n\nThe two variants were compared on a real workload:\n- **Setup:** warm `next build`s of `bench/nested-deps-app-router-many-pages`, with a new `NEXT_DEPLOYMENT_ID` each build. The cache snapshot contained f\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "turbopack/crates/turbo-persistence/Cargo.toml (+3 -0)",
+        "turbopack/crates/turbo-persistence/src/db.rs (+3 -3)",
+        "turbopack/crates/turbo-persistence/src/static_sorted_file.rs (+130 -7)",
+        "turbopack/crates/turbo-persistence/src/static_sorted_file_builder.rs (+133 -0)",
+        "turbopack/crates/turbo-persistence/README.md (+18 -0)"
+      ],
+      "filesTotal": 6
+    }
+  ],
+  "errors": []
+}
