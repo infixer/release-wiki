@@ -1,6 +1,6 @@
 ---
 title: whatwg/html
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - repo/whatwg-html
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- 複製した Document のベース URL を考慮するように（`baseURI`・base URL override）（[#12674](https://github.com/whatwg/html/pull/12674)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/ベースURL|ベースURL]]
 - シリアライズと転送を同じ agent cluster に制限できるように（`[SameAgentCluster]`、`VideoFrame` などの向け）（[#13055](https://github.com/whatwg/html/pull/13055)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/シリアライズと転送|シリアライズと転送]]
 - 位置を指定して HTML を挿入する `appendHTML()`・`prependHTML()`・`beforeHTML()`・`afterHTML()`・`replaceWithHTML()`（と `*Unsafe()` 版）を追加（[#12753](https://github.com/whatwg/html/pull/12753)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
 - パースしながらサニタイズするように（独立した「sanitize」アルゴリズムを廃止）（[#12756](https://github.com/whatwg/html/pull/12756)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
@@ -23,7 +24,6 @@ tags:
 - フラグメントパーサーのオプションを Trusted Types と統合（default policy の `createParserOptions` で従来の挿入にもサニタイザーを）（[#12583](https://github.com/whatwg/html/pull/12583)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
 - worklet に cross-origin isolated capability と time origin を公開（AudioWorklet の `performance.now()` 向け）（[#13006](https://github.com/whatwg/html/pull/13006)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/ワークレット|ワークレット]]
 - 削除された・別の文書に移された popover が隠れない問題を修正（[#13001](https://github.com/whatwg/html/pull/13001)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/popover|popover]]
-- `HTMLScriptElement` の Trusted Types 向け IDL を HTML 本体に取り込む（[#12195](https://github.com/whatwg/html/pull/12195)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/script要素|script要素]]
 
 ## トピック
 
@@ -44,10 +44,11 @@ tags:
 - [[repos/whatwg-html/topics/タイマー|タイマー]] — `setTimeout()`・`setInterval()` の初期化手順（文字列の Trusted Types・CSP チェック）
 - [[repos/whatwg-html/topics/フォーカス|フォーカス]] — フォーカス移動時の `focus` イベント発火
 - [[repos/whatwg-html/topics/フレームとナビゲーブル|フレームとナビゲーブル]] — frame/iframe の子ナビゲーブル作成とナビゲート時の initialInsertion
+- [[repos/whatwg-html/topics/ベースURL|ベースURL]] — Document のベース URL（`baseURI`、複製時の base URL override）
 - [[repos/whatwg-html/topics/メディア要素|メディア要素]] — メディア要素の `loading` 属性とリソース選択（`source` 候補の扱い）
 - [[repos/whatwg-html/topics/ワークレット|ワークレット]] — worklet の環境設定（cross-origin isolated capability・time origin）
 
 ## 取り込み
 
 - [[repos/whatwg-html/log|取り込み履歴]]
-- 最近の変更: [[repos/whatwg-html/changes/2026-10-16|2026-10-16]]、[[repos/whatwg-html/changes/2026-10-14|2026-10-14]]、[[repos/whatwg-html/changes/2026-10-12|2026-10-12]]、[[repos/whatwg-html/changes/2026-10-09|2026-10-09]]、[[repos/whatwg-html/changes/2026-10-07|2026-10-07]]
+- 最近の変更: [[repos/whatwg-html/changes/2026-10-19|2026-10-19]]、[[repos/whatwg-html/changes/2026-10-16|2026-10-16]]、[[repos/whatwg-html/changes/2026-10-14|2026-10-14]]、[[repos/whatwg-html/changes/2026-10-12|2026-10-12]]、[[repos/whatwg-html/changes/2026-10-09|2026-10-09]]

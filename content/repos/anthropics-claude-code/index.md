@@ -1,6 +1,6 @@
 ---
 title: anthropics/claude-code
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - repo/anthropics-claude-code
 ---
@@ -9,11 +9,14 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v2.1.301](https://github.com/anthropics/claude-code/releases/tag/v2.1.301)（2026-10-15）→ [[repos/anthropics-claude-code/releases/v2.1.301|まとめ]]
+- 安定版: [v2.1.303](https://github.com/anthropics/claude-code/releases/tag/v2.1.303)（2026-10-19）→ [[repos/anthropics-claude-code/releases/v2.1.303|まとめ]]
 - プレリリース: なし
 
 ## 直近の注目変更
 
+- `CLAUDE_CODE_AUTO_MODE_MODEL`（クライアント側の auto mode 分類器のモデル）、Claude Design 単体版の終了予告（2026-12-14）、Read ツールで 128 MB 超の画像を拒否（[v2.1.302](https://github.com/anthropics/claude-code/releases/tag/v2.1.302)）📦 v2.1.302 · [[repos/anthropics-claude-code/releases/v2.1.302|まとめ]]
+- `/config` に `Idle compaction` の行、compact 中に止めたときの「Prompt is too long」を修正（[v2.1.302](https://github.com/anthropics/claude-code/releases/tag/v2.1.302)）📦 v2.1.302 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
+- OpenTelemetry の `tool_decision` の `classifier_category` 欠落と属性数上限での押し出しを修正（[v2.1.302](https://github.com/anthropics/claude-code/releases/tag/v2.1.302)）📦 v2.1.302 · トピック: [[repos/anthropics-claude-code/topics/テレメトリ|テレメトリ]]
 - `WorktreeCreate` フックの worktree を確認なしで削除する問題、Edit・Write を対象にした PreToolUse フックで artifact の更新が拒否される問題を修正（[v2.1.301](https://github.com/anthropics/claude-code/releases/tag/v2.1.301)）📦 v2.1.301 · トピック: [[repos/anthropics-claude-code/topics/フック|フック]]
 - OpenTelemetry の `tool_decision` に `classifier_verdict`・`permission_mode`・`classifier_category`、vim モードの `%`、`CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS`（[v2.1.301](https://github.com/anthropics/claude-code/releases/tag/v2.1.301)）📦 v2.1.301 · トピック: [[repos/anthropics-claude-code/topics/テレメトリ|テレメトリ]]
 - mod に `virtualText`・`$.ui.view({ agentId })`・`prompt.change` フック、`agent.spawn` でワークフローのエージェントを書き換え（[v2.1.300](https://github.com/anthropics/claude-code/releases/tag/v2.1.300)）📦 v2.1.300 · トピック: [[repos/anthropics-claude-code/topics/mod-API|mod API]]
@@ -21,9 +24,6 @@ tags:
 - エージェントビュー・`/tasks`・`claude agents` の表示や再開の扱いを修正（[v2.1.300](https://github.com/anthropics/claude-code/releases/tag/v2.1.300)）📦 v2.1.300 · トピック: [[repos/anthropics-claude-code/topics/エージェントビュー|エージェントビュー]]
 - アイドル時の compaction（200K トークン以上を約 54 分放置でキャッシュ切れ前に compact）と `CLAUDE_CODE_DISABLE_FILE_MENTIONS`（[v2.1.299](https://github.com/anthropics/claude-code/releases/tag/v2.1.299)）📦 v2.1.299 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
 - managed settings の mod 向けに `$.prompt.media`・`$.session.identity()`、`Text`・`Box` の書式の追加（[v2.1.299](https://github.com/anthropics/claude-code/releases/tag/v2.1.299)）📦 v2.1.299 · トピック: [[repos/anthropics-claude-code/topics/mod-API|mod API]]
-- HIPAA 向けの managed settings・`managed-mcp.json` の設定例を `examples/settings` に追加（[#100293](https://github.com/anthropics/claude-code/pull/100293)）📦 v2.1.296 · トピック: [[repos/anthropics-claude-code/topics/管理設定|管理設定]]
-- managed の `PreToolUse`・`prompt` フックの拒否でターンを終える、`UserPromptSubmit` 中の Esc でプロンプトが通る問題などを修正（[v2.1.296](https://github.com/anthropics/claude-code/releases/tag/v2.1.296)）📦 v2.1.296 · トピック: [[repos/anthropics-claude-code/topics/フック|フック]]
-- Claude apps gateway: `managed.policies[]` に `code` キー（Claude Desktop の Code タブ）、サインインの退行を修正（[v2.1.296](https://github.com/anthropics/claude-code/releases/tag/v2.1.296)）📦 v2.1.296 · トピック: [[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]
 
 ## トピック
 
@@ -41,4 +41,4 @@ tags:
 ## 取り込み
 
 - [[repos/anthropics-claude-code/log|取り込み履歴]]
-- 最近の変更: [[repos/anthropics-claude-code/changes/2026-10-16|2026-10-16]]、[[repos/anthropics-claude-code/changes/2026-10-12|2026-10-12]]、[[repos/anthropics-claude-code/changes/2026-10-09|2026-10-09]]、[[repos/anthropics-claude-code/changes/2026-10-07|2026-10-07]]、[[repos/anthropics-claude-code/changes/2026-10-05|2026-10-05]]
+- 最近の変更: [[repos/anthropics-claude-code/changes/2026-10-19|2026-10-19]]、[[repos/anthropics-claude-code/changes/2026-10-16|2026-10-16]]、[[repos/anthropics-claude-code/changes/2026-10-12|2026-10-12]]、[[repos/anthropics-claude-code/changes/2026-10-09|2026-10-09]]、[[repos/anthropics-claude-code/changes/2026-10-07|2026-10-07]]

@@ -1,6 +1,6 @@
 ---
 title: Anthropic News
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - blog/anthropic
 ---
@@ -9,6 +9,7 @@ tags:
 
 ## 記事
 
+- 2026-10-18 — [[blogs/anthropic/posts/2026-10-18-public-benefit-fund|Anthropic Public Benefit Fund を設立、株式の一部を公益に]] — 株式の 5% を拠出し、価値が 50% 増えるごとに 2% を追加できる LLC 形態の基金
 - 2026-10-15 — [[blogs/anthropic/posts/2026-10-15-an-update-on-independent-evaluators|独立した評価者との取り組みの最新状況]] — METR に社員と同等のアクセスを提供し、評価者のアクセスを 3 階層で整備
 - 2026-10-14 — [[blogs/anthropic/posts/2026-10-14-2026-us-midterms|2026 年米国中間選挙への備え]] — 公式な投票情報・開票結果の表示、政治的公平性の評価、多段階の悪用を検出する分類器
 - 2026-10-14 — [[blogs/anthropic/posts/2026-10-14-singapore-office-opening|シンガポールにオフィスを開設、シンガポール政府と MOU を締結]] — APAC で 5 つ目のオフィス。AI の安全性・評価などで MDDI と協力
@@ -26,6 +27,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-10-19 — 記事 1 件。エラー: なし
 - 2026-10-16 — 記事 3 件。エラー: なし
 - 2026-10-09 — 記事 3 件。エラー: なし
 - 2026-10-07 — 記事 1 件。エラー: なし

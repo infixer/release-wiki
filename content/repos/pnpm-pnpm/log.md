@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-10-19
+
+- 期間: 2026-10-15T22:03:59Z 〜 2026-10-18T23:20:44Z
+- PR 115 件（詳しく 27 件 / 1 行 88 件）、Release 0 件
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-10-19|changes]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 85 件（修正 47 件を含む）は「その他」に 1 行で書いた。詳しい情報のある 30 件のうち、CI の修正（#16995）・挙動の変わらないリファクタ（#16984）・開発用のエージェントスキル（#17021）も「その他」に入れた。bot の PR 3 件（dependabot）は collect で除外済み
+- エラー: なし
 
 ## 2026-10-16
 

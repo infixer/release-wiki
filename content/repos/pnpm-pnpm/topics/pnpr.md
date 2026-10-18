@@ -1,6 +1,6 @@
 ---
 title: pnpr
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-pnpm リポジトリで開発されているレジストリサーバー pnpr（`pnpr/` 配下、プレリリース `pnpr@0.1.0-alpha.*` として公開）。upstream のレジストリから packument を取得してキャッシュし、pnpm クライアントにメタデータと tarball を配る。upstream の packument に `dist.integrity` が無いバージョンについては、tarball をダウンロードして SHA-512 の integrity を計算し、正規化した packument を保存するようになった（未リリース）。pnpm v12 は pnpr へレジストリの宣言を送るが、クライアント側だけの設定（`registries` の `networkConcurrency`）は送らない。OCI のコンテナイメージの upstream では、`https://quay.io` の CDN へのリダイレクトも許可するようになった（それまではレイヤー取得が 502）。2026-10-09 の回では、実行時の管理（pnpm/tasks#111）が一通り入った（いずれも未リリース）。管理者ロール `auth.admins` を設け、`teamsManagedBy: api` のレジストリでは npm の team API（`pnpm team create/destroy/add/rm`）でチームを、`/-/pnpr/v0/admin/users` でアカウントを管理できる。`rulesManagedBy: api` のレジストリでは `/-/pnpr/v0/admin/rules/{ecosystem}/{name}` でパッケージルールを設定のデプロイなしに変えられ（`If-Match` による条件付き更新に対応）、`npm access grant`/`revoke` もルールに対応付けられる。OIDC のグループからセッションの間だけチームに参加させる設定、SCIM 2.0 によるアカウントの無効化、`/-/ui/` での Web UI（`@pnpm/pnpr-ui`）の配信も加わった。2026-10-12 の回では、Web UI のサインイン（pnpm/tasks#113）が入った。パスワードは npm のログインのエンドポイント、OIDC はコールバックが 1 回限りのコードを HttpOnly の Cookie に置き、UI が `POST /-/oidc/handoff` でトークンに引き換える（トークンもコードも URL に出ない）。UI は pnpr-web 0.2.7 から作る。gzip で圧縮した Web UI のファイルが途中で切れて画面が空白になる問題も直った。プレリリース pnpr@0.1.0-alpha.15 が出た。2026-10-16 の回では、運用向けの項目（pnpm/tasks#131 の C・D 節）がまとめて入った（いずれも未リリース）。`SIGTERM` での停止と `/-/ready`・`/-/live`、信頼するプロキシからのクライアント IP、ログインのレート制限・`requestTimeout`・upstream 取得のまとめ、Prometheus のメトリクスと要求 ID・アクセスログ、キャッシュの LRU・TTL 削除と `pnpr cache-gc`、npm の audit のエンドポイント（OSV）、`npm token create` と読み取り専用・期限付きトークン、`npm publish --provenance` と attestation、管理操作の監査ログ（`pnpr::audit`）。監査で見つかった権限・ユーザー列挙・bcrypt の切り詰めなどの問題も直り、upstream に zstd での応答を求めて zstd で配れるようになった。
+pnpm リポジトリで開発されているレジストリサーバー pnpr（`pnpr/` 配下、プレリリース `pnpr@0.1.0-alpha.*` として公開）。upstream のレジストリから packument を取得してキャッシュし、pnpm クライアントにメタデータと tarball を配る。upstream の packument に `dist.integrity` が無いバージョンについては、tarball をダウンロードして SHA-512 の integrity を計算し、正規化した packument を保存するようになった（未リリース）。pnpm v12 は pnpr へレジストリの宣言を送るが、クライアント側だけの設定（`registries` の `networkConcurrency`）は送らない。OCI のコンテナイメージの upstream では、`https://quay.io` の CDN へのリダイレクトも許可するようになった（それまではレイヤー取得が 502）。2026-10-09 の回では、実行時の管理（pnpm/tasks#111）が一通り入った（いずれも未リリース）。管理者ロール `auth.admins` を設け、`teamsManagedBy: api` のレジストリでは npm の team API（`pnpm team create/destroy/add/rm`）でチームを、`/-/pnpr/v0/admin/users` でアカウントを管理できる。`rulesManagedBy: api` のレジストリでは `/-/pnpr/v0/admin/rules/{ecosystem}/{name}` でパッケージルールを設定のデプロイなしに変えられ（`If-Match` による条件付き更新に対応）、`npm access grant`/`revoke` もルールに対応付けられる。OIDC のグループからセッションの間だけチームに参加させる設定、SCIM 2.0 によるアカウントの無効化、`/-/ui/` での Web UI（`@pnpm/pnpr-ui`）の配信も加わった。2026-10-12 の回では、Web UI のサインイン（pnpm/tasks#113）が入った。パスワードは npm のログインのエンドポイント、OIDC はコールバックが 1 回限りのコードを HttpOnly の Cookie に置き、UI が `POST /-/oidc/handoff` でトークンに引き換える（トークンもコードも URL に出ない）。UI は pnpr-web 0.2.7 から作る。gzip で圧縮した Web UI のファイルが途中で切れて画面が空白になる問題も直った。プレリリース pnpr@0.1.0-alpha.15 が出た。2026-10-16 の回では、運用向けの項目（pnpm/tasks#131 の C・D 節）がまとめて入った（いずれも未リリース）。`SIGTERM` での停止と `/-/ready`・`/-/live`、信頼するプロキシからのクライアント IP、ログインのレート制限・`requestTimeout`・upstream 取得のまとめ、Prometheus のメトリクスと要求 ID・アクセスログ、キャッシュの LRU・TTL 削除と `pnpr cache-gc`、npm の audit のエンドポイント（OSV）、`npm token create` と読み取り専用・期限付きトークン、`npm publish --provenance` と attestation、管理操作の監査ログ（`pnpr::audit`）。監査で見つかった権限・ユーザー列挙・bcrypt の切り詰めなどの問題も直り、upstream に zstd での応答を求めて zstd で配れるようになった。2026-10-19 の回では、pnpm/tasks#131 の項目がさらに入った（いずれも未リリース）。すべてのエコシステムを接頭辞で配るようになり（npm は常に `/npm/`、破壊的変更）、ホスト型ストアは衝突しないレイアウト（`layout.json`・`default/`・`orgs/`）に変わった（破壊的変更）。packument の `ETag`・`304`、`npm login` の Web ログインでの SSO、保守用のサブコマンド（`config check`・`verify`・`export`・`migrate-storage`・`import-htpasswd`）、本番向けの最小の既定設定、認証データベースのスキーマ移行、予約したユーザー名の保護と `pnpr add-user`、パッケージの所有者・メンテナー・tombstone も加わった。zstd の content coding で非圧縮の tar を配り、リビジョンは tar のダイジェストで指す。
 
 ## 主な API・オプション
 
@@ -32,9 +32,25 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 - `POST /-/npm/v1/security/advisories/bulk`・`/-/npm/v1/security/audits`・`/audits/quick` — OSV のデータベースか upstream で応答（未リリース）
 - `POST /-/npm/v1/tokens` — 読み取り専用・CIDR・有効期限・名前付きのトークン作成（未リリース）
 - `GET /-/npm/v1/attestations/{*spec}`・`GET /-/npm/v1/keys` — provenance の Sigstore バンドルの配信（未リリース）
+- `/npm/`・`/npm/~<name>/`・`/cargo/`・`/pypi/`・`/oci/` — エコシステムごとの接頭辞（`/v2/` は既定のイメージレジストリ）（未リリース）
+- `layout.json` と `default/packages/<name>/`・`orgs/<org>/packages/` — ホスト型ストアのレイアウト（未リリース）
+- `POST /-/v1/login`・`/-/v1/login/start`・`/-/v1/login/poll/{session}` — Web ログインの SSO（未リリース）
+- `pnpr config check`・`pnpr verify`（`--prune-orphans`）・`pnpr export --out`・`pnpr migrate-storage`・`pnpr import-htpasswd`・`pnpr add-user` — 保守用のコマンド（未リリース）
+- `$owners` — `publish`・`unpublish` をメンテナーか管理者に限るアクセスのトークン（未リリース）
 
 ## 変更履歴
 
+- 2026-10-19 — ホスト型ストアのレイアウトを衝突しない形に（`layout.json`、`default/packages/`・`orgs/<org>/packages/`、名前の `!xx` エンコード、破壊的変更）（[#17100](https://github.com/pnpm/pnpm/pull/17100)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — リビジョンを `revision: 0` から明示し、tar のダイジェストで指す（[#17092](https://github.com/pnpm/pnpm/pull/17092)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — すべてのエコシステムをそれぞれの接頭辞（`/npm/`・`/cargo/`・`/pypi/`・`/oci/`）で配る（破壊的変更）（[#17087](https://github.com/pnpm/pnpm/pull/17087)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — パッケージの所有者・メンテナー（`$owners`、`npm owner add/rm`）と tombstone（[#17060](https://github.com/pnpm/pnpm/pull/17060)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — 予約したユーザー名での自己登録を拒否、`pnpr add-user`（[#17046](https://github.com/pnpm/pnpm/pull/17046)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — zstd の content coding で非圧縮の tar を配る（[#17054](https://github.com/pnpm/pnpm/pull/17054)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — 認証データベースのスキーマ移行（`auth_schema_migrations`）とトークンの `scopes`・`kind`、MySQL の `username` の大文字小文字の区別（[#17039](https://github.com/pnpm/pnpm/pull/17039)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — 本番向けの最小の既定設定（テスト用の設定は `pnpr/.fixtures/config.yaml` へ）（[#17027](https://github.com/pnpm/pnpm/pull/17027)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — `pnpr config check`・`verify`・`export`・`migrate-storage`・`import-htpasswd` と Verdaccio の `{SHA}` パスワード（[#17002](https://github.com/pnpm/pnpm/pull/17002)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — `npm login`・`pnpm login` の Web ログイン（`/-/v1/login`）で OIDC の SSO（[#16969](https://github.com/pnpm/pnpm/pull/16969)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — packument の `ETag`・`Vary: Accept`・`Cache-Control` と `304 Not Modified`（[#16962](https://github.com/pnpm/pnpm/pull/16962)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
 - 2026-10-16 — pnpr の管理操作の監査ログ（[#16960](https://github.com/pnpm/pnpm/pull/16960)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
 - 2026-10-16 — zstd で圧縮した応答を配る（[#16585](https://github.com/pnpm/pnpm/pull/16585)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
 - 2026-10-16 — `npm publish --provenance` と attestation のエンドポイント（[#16956](https://github.com/pnpm/pnpm/pull/16956)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]

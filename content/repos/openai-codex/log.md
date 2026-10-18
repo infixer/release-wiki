@@ -1,9 +1,17 @@
 ---
 title: openai/codex 取り込み履歴
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - repo/openai-codex
 ---
+
+## 2026-10-19
+
+- 期間: 2026-10-15T22:32:38Z 〜 2026-10-18T23:20:44Z
+- PR 40 件（詳しく 21 件 / 1 行 19 件）、Release 3 件（安定版 0 件。プレリリース rust-v0.164.0-alpha.1、alpha.2、alpha.3）
+- 更新したページ: [[repos/openai-codex/changes/2026-10-19|changes]]、[[repos/openai-codex/topics/Code-Mode|Code Mode]]、[[repos/openai-codex/topics/Guardian|Guardian]]、[[repos/openai-codex/topics/MCP|MCP]]、[[repos/openai-codex/topics/TUI|TUI]]、[[repos/openai-codex/topics/サンドボックス|サンドボックス]]、[[repos/openai-codex/topics/デーモン|デーモン]]、[[repos/openai-codex/topics/プラグイン|プラグイン]]、[[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]、[[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]]
+- 備考: PR 数が `maxPrs`（30）を超えたため、`brief: true` の 10 件はタイトルから「その他」に記載した（CI・リリースの 5 件は 1 行にまとめた）。本文のある 30 件のうち、テスト・CI・ビルド・内部のリファクタ・性能の改善の 9 件も「その他」に 1 行で記載
+- エラー: なし
 
 ## 2026-10-16
 

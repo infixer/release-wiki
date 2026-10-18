@@ -1,9 +1,16 @@
 ---
 title: openui/open-ui 取り込み履歴
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - repo/openui-open-ui
 ---
+
+## 2026-10-19
+
+- 期間: 2026-10-14T05:27:52Z 〜 2026-10-18T23:20:44Z
+- PR 1 件（詳しく 0 件 / 1 行 1 件）、Release 0 件
+- 更新したページ: [[repos/openui-open-ui/changes/2026-10-19|changes]]（新規）
+- エラー: なし
 
 ## 2026-10-16
 

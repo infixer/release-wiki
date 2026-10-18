@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-10-16
+updated: 2026-10-19
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。v12.9.1 では再帰的な `pnpm update --interactive` の `Workspace` 列が 30 桁に収まり（超えた分は `+N more`）、未リリースの修正で `pnpm runtime --help` が `set <name> [<version>]` を示すようになった。未リリースの修正として、v11 の `pnpm dlx --package=<pkg>` がコマンドなしなら `ERR_PNPM_DLX_MISSING_COMMAND` で失敗し、対話的な `pnpm audit --fix` の Patched 列が `saveExact`・`savePrefix` に従うようになった。未リリースの変更として、v12 の `pnpm whoami` が `--registry` を受け付け、`pnpm outdated`・`pnpm update --interactive` が lockfile に記録された overrides を適用してから最新版を調べるようになった。v12.12.0 で、v12 の `pnpm update`・`pnpm why` が再び `--depth Infinity` を受け付けるようになった。v12.13.0 で、pnpm v12 に npm にならった `pnpm token`（トークンの一覧・作成・取り消し）と `pnpm profile`（プロフィールの表示・更新と 2FA の有効化・無効化）が実装された。`pnpm login` は Web ログインで `npm-notice` ヘッダー（確認コードなど）を表示する（v12.14.0）。読み取りだけのコマンドやエラーで終わるコマンドは `package.json` を作らず、stderr が閉じたパイプでも異常終了しない。
+個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。v12.9.1 では再帰的な `pnpm update --interactive` の `Workspace` 列が 30 桁に収まり（超えた分は `+N more`）、未リリースの修正で `pnpm runtime --help` が `set <name> [<version>]` を示すようになった。未リリースの修正として、v11 の `pnpm dlx --package=<pkg>` がコマンドなしなら `ERR_PNPM_DLX_MISSING_COMMAND` で失敗し、対話的な `pnpm audit --fix` の Patched 列が `saveExact`・`savePrefix` に従うようになった。未リリースの変更として、v12 の `pnpm whoami` が `--registry` を受け付け、`pnpm outdated`・`pnpm update --interactive` が lockfile に記録された overrides を適用してから最新版を調べるようになった。v12.12.0 で、v12 の `pnpm update`・`pnpm why` が再び `--depth Infinity` を受け付けるようになった。v12.13.0 で、pnpm v12 に npm にならった `pnpm token`（トークンの一覧・作成・取り消し）と `pnpm profile`（プロフィールの表示・更新と 2FA の有効化・無効化）が実装された。`pnpm login` は Web ログインで `npm-notice` ヘッダー（確認コードなど）を表示する（v12.14.0）。読み取りだけのコマンドやエラーで終わるコマンドは `package.json` を作らず、stderr が閉じたパイプでも異常終了しない。2026-10-19 の回では、`pnpm pkg fix` が `repository` を正規化し、`pnpm prune` が `trustLockfile` に従うようになった（未リリース）。
 
 ## 主な API・オプション
 
@@ -38,6 +38,8 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-19 — `pnpm prune` が `trustLockfile` に従う（オフラインでの失敗を修正）（[#17004](https://github.com/pnpm/pnpm/pull/17004)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
+- 2026-10-19 — `pnpm pkg fix` で `repository` フィールドを正規化（[#16981](https://github.com/pnpm/pnpm/pull/16981)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
 - 2026-10-16 — 読み取りだけのコマンドや拒否されたコマンドで `package.json` を作らない（[#16915](https://github.com/pnpm/pnpm/pull/16915)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
 - 2026-10-16 — `pnpm login` で `npm-notice` を表示（[#16697](https://github.com/pnpm/pnpm/pull/16697)）⏳ 未リリース（v12.14.0 に記載） · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
 - 2026-10-16 — stderr が閉じたパイプでも異常終了しない（[#16916](https://github.com/pnpm/pnpm/pull/16916)）⏳ 未リリース（v12.14.0 に記載） · [[repos/pnpm-pnpm/changes/2026-10-16|変更]]
