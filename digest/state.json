@@ -2,47 +2,47 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-10-15T08:14:36Z",
+      "lastMergedAt": "2026-10-20T16:46:11Z",
       "lastReleaseAt": "2026-10-14T17:06:15Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-16T23:50:55Z",
-      "lastReleaseAt": "2026-10-17T23:46:40Z"
+      "lastMergedAt": "2026-10-20T19:33:04Z",
+      "lastReleaseAt": "2026-10-20T23:51:32Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
-      "lastMergedAt": "2026-10-13T07:35:45Z",
+      "lastMergedAt": "2026-10-20T08:40:52Z",
       "lastReleaseAt": "2026-10-16T07:57:42Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-10-18T11:49:29Z",
+      "lastMergedAt": "2026-10-19T20:29:10Z",
       "lastReleaseAt": "2026-10-16T17:21:23Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-10-16T15:50:09Z",
+      "lastMergedAt": "2026-10-20T23:53:43Z",
       "lastReleaseAt": "2026-10-09T03:06:51Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-18T04:59:09Z",
-      "lastReleaseAt": "2026-09-30T19:10:03Z"
+      "lastMergedAt": "2026-10-20T20:37:25Z",
+      "lastReleaseAt": "2026-10-20T17:38:20Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-10-18T21:11:33Z",
-      "lastReleaseAt": "2026-10-13T09:47:50Z"
+      "lastMergedAt": "2026-10-20T07:54:33Z",
+      "lastReleaseAt": "2026-10-19T17:24:26Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
       "lastMergedAt": "2026-10-09T16:16:37Z",
-      "lastReleaseAt": "2026-10-18T22:26:54Z"
+      "lastReleaseAt": "2026-10-20T20:46:50Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-10-16T14:26:23Z",
+      "lastMergedAt": "2026-10-20T12:57:53Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
@@ -52,7 +52,7 @@
     },
     "w3c/wcag": {
       "fullName": "w3c/wcag",
-      "lastMergedAt": "2026-10-04T19:02:22Z",
+      "lastMergedAt": "2026-10-19T07:16:08Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "openui/open-ui": {
@@ -67,18 +67,18 @@
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-10-18T21:10:53Z",
+      "lastMergedAt": "2026-10-20T23:22:23Z",
       "lastReleaseAt": "2026-10-15T13:45:17Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-10-18T13:27:46Z",
-      "lastReleaseAt": "2026-10-15T14:36:29Z"
+      "lastMergedAt": "2026-10-20T14:32:25Z",
+      "lastReleaseAt": "2026-10-19T16:42:33Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-10-18T16:22:11Z",
-      "lastCommitAt": "2026-10-18T16:22:10Z",
+      "lastMergedAt": "2026-10-20T13:22:44Z",
+      "lastCommitAt": "2026-10-20T21:27:12Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
@@ -90,7 +90,7 @@
     "openai/codex": {
       "fullName": "openai/codex",
       "lastReleaseAt": "2026-10-17T04:03:25Z",
-      "lastMergedAt": "2026-10-18T22:44:11Z"
+      "lastMergedAt": "2026-10-20T23:42:34Z"
     }
   },
   "blogs": {
@@ -108,6 +108,7 @@
     },
     "firefox": {
       "seen": [
+        "https://www.firefox.com/firefox/158.0.1/releasenotes/",
         "https://www.firefox.com/firefox/158.0/releasenotes/",
         "https://www.firefox.com/firefox/157.0.1/releasenotes/",
         "https://www.firefox.com/firefox/157.0/releasenotes/",
@@ -117,6 +118,7 @@
         "https://www.firefox.com/firefox/155.0/releasenotes/",
         "https://www.firefox.com/firefox/154.0.1/releasenotes/",
         "https://www.firefox.com/firefox/154.0/releasenotes/",
+        "https://www.firefox.com/firefox/153.5.1/releasenotes/",
         "https://www.firefox.com/firefox/153.5.0/releasenotes/",
         "https://www.firefox.com/firefox/153.4.0/releasenotes/",
         "https://www.firefox.com/firefox/153.3.0/releasenotes/",
@@ -278,6 +280,7 @@
         "https://www.firefox.com/firefox/116.0.2/releasenotes/",
         "https://www.firefox.com/firefox/116.0.1/releasenotes/",
         "https://www.firefox.com/firefox/116.0/releasenotes/",
+        "https://www.firefox.com/firefox/115.43.1/releasenotes/",
         "https://www.firefox.com/firefox/115.43.0/releasenotes/",
         "https://www.firefox.com/firefox/115.42.0/releasenotes/",
         "https://www.firefox.com/firefox/115.41.0/releasenotes/",
@@ -937,15 +940,21 @@
       "seen": [
         "https://www.anthropic.com/news/public-benefit-fund",
         "https://www.anthropic.com/news/an-update-on-independent-evaluators",
+        "https://www.anthropic.com/news/policy",
         "https://www.anthropic.com/news/2026-us-midterms",
+        "https://www.anthropic.com/news/safeguards",
         "https://www.anthropic.com/news/singapore-office-opening",
+        "https://www.anthropic.com/news/distillation-defenses",
+        "https://www.anthropic.com/news/anthropic-cyber-mission",
+        "https://www.anthropic.com/news/security",
         "https://www.anthropic.com/news/2026-usage-policy-update",
         "https://www.anthropic.com/news/genesis-mission-commitment",
-        "https://www.anthropic.com/news/anthropic-cyber-mission",
         "https://www.anthropic.com/news/cyber-verification-program",
         "https://www.anthropic.com/news/claude-frontier-academy",
         "https://www.anthropic.com/news/barclays-scales-claude",
-        "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
+        "https://www.anthropic.com/news/announcements",
+        "https://www.anthropic.com/news/product",
+        "https://www.anthropic.com/news/partnerships",
         "https://www.anthropic.com/news/accenture-embedded-evaluation",
         "https://www.anthropic.com/news/life-sciences-verification-program",
         "https://www.anthropic.com/news/enterprise-frontier-safeguards",
@@ -954,6 +963,7 @@
         "https://www.anthropic.com/news/expanding-support-for-scientists",
         "https://www.anthropic.com/news/wellbeing-research-grants",
         "https://www.anthropic.com/news/claude-text-watermark",
+        "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
         "https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards"
       ]
     }

@@ -1,0 +1,37 @@
+{
+  "kind": "blog",
+  "id": "firefox",
+  "title": "Firefox リリースノート",
+  "relatedRepo": null,
+  "collectedAt": "2026-10-20T23:57:12Z",
+  "posts": [
+    {
+      "title": "Firefox 115.43.1",
+      "url": "https://www.firefox.com/firefox/115.43.1/releasenotes/",
+      "publishedAt": "2026-10-20T00:00:00.000Z",
+      "versions": [
+        "115.43.1"
+      ],
+      "text": "## 115.43.1 Firefox ESR\n\nOctober 20, 2026\n\nVersion 115.43.1, first offered to ESR channel users on October 20, 2026\n\nFirefox ESR 115 is now supported only on Windows 7-8.1 and macOS 10.12-10.14. Users on other operating systems should use Firefox ESR 140 instead.\n\n### Fixed\n\n-\n\nVarious security fixes.\n\n### Developer\n\n-\n\nDeveloper Information"
+    },
+    {
+      "title": "Firefox 153.5.1",
+      "url": "https://www.firefox.com/firefox/153.5.1/releasenotes/",
+      "publishedAt": "2026-10-20T00:00:00.000Z",
+      "versions": [
+        "153.5.1"
+      ],
+      "text": "Version 153.5.1, first offered to ESR channel users on October 20, 2026\n\nFirefox 153 Extended Support Release (ESR) includes all of the enhancements since Firefox 140, along with many new features to make your enterprise deployments easier and even more flexible."
+    },
+    {
+      "title": "Firefox 158.0.1",
+      "url": "https://www.firefox.com/firefox/158.0.1/releasenotes/",
+      "publishedAt": "2026-10-20T00:00:00.000Z",
+      "versions": [
+        "158.0.1"
+      ],
+      "text": "Version 158.0.1, first offered to Release channel users on October 20, 2026\n\n-\n\nMozilla blocked compromised eMudhra intermediate certificates via OneCRL on October 17th. The blocks were distributed to clients via Remote Settings the same day. This update contains the updated OneCRL block list, ensuring clients will block the compromised certificates even if RemoteSettings is disabled by policy or otherwise unavailable in the user's network environment. (Learn More)\n\n-\n\nFixed an issue where pages would unexpectedly scroll back to the top when selecting text. (Bug 2081016)\n\n-\n\nFixed a crash on Windows when printing or saving a page as PDF while a screen reader or other assistive technology was running. (Bug 2082376)\n\n-\n\nFixed an issue where Firefox was opening windows on the wrong monitor in multi-monitor setups on Linux. (Bug 2076558)\n\n-\n\nFixed an issue that could prevent the built-in VPN from turning on for some users. (Bug 2055094)\n\n-\n\nFixed an issue where files dragged into Firefox from other applications were not dropped onto the page on macOS. (Bug 2078954)\n\n-"
+    }
+  ],
+  "errors": []
+}

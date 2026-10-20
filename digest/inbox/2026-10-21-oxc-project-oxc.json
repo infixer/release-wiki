@@ -1,0 +1,581 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-10-20T23:57:12Z",
+  "range": {
+    "from": "2026-10-18T21:11:33Z",
+    "to": "2026-10-20T23:57:12Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.89.0",
+      "publishedAt": "2026-10-19T17:24:26Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.89.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "crates_v0.155.0",
+      "name": "oxc crates_v0.155.0",
+      "publishedAt": "2026-10-19T14:31:23Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/crates_v0.155.0",
+      "prerelease": false,
+      "body": "### 💥 BREAKING CHANGES\n\n- c7d229b transformer: [**BREAKING**] Decode JSX entities to lone surrogates (#26712) (Dunqing)\n- e3c1b11 ast: [**BREAKING**] Preserve lone surrogates in static property names (#27095) (Dunqing)\n- a0a987c ast: [**BREAKING**] Preserve lone surrogates in static member names (#26677) (Dunqing)\n\n### 🚀 Features\n\n- 7bb2697 minifier: Minimize array join expression (#27905) (Armano)\n- 5d91db8 ast: Generate node ID setters for enums (#27500) (camc314)\n- 6b5057b minifier: Add de morgan optimization for void expressions (#27375) (Armano)\n\n### 🐛 Bug Fixes\n\n- ce6a088 minifier: Fold string indices by UTF-16 code unit (#27096) (Dunqing)\n- 7c47246 linter: Check module specifiers and string values that contain lone surrogates (#26717) (Dunqing)\n- 782ab6e linter: Search string values without UTF-8 conversion (#26716) (Dunqing)\n- a5d8184 jsdoc: Parse code spans after quotes in descriptions (#27955) (leaysgur)\n- bd37e78 ecmascript: Look through sequence expressions in `to_primitive` (#27837) (baltasarblanco)\n- d92789d minifier: Drop debugger statements in unbraced bodies (#27867) (camc314)\n- 863b359 ecmascript: Correct parseFloat decimal prefix scanning (#27695) (camc314)\n- a2534c6 minifier: Preserve lexical initializers in dead for loops (#27676) (camc314)\n- 3543672 ecmascript: Do not fold Number.isInteger / isSafeInteger of tiny non-integers to true (#27622) (Baltasar Blanco)\n- 6987a61 ecmascript: BigInt loose equality folding (unknown operands and `StringToBigInt`) (#27656) (Baltasar Blanco)\n- 40e5644 minifier: Preserve indirect access when folding into call targets (#27082) (waltu)\n- 022306f ecmascript: Do not fold `Math.cbrt` of a negative number to `NaN` (#27621) (Baltasar Blanco)\n\n### ⚡ Performance\n\n- faa75d8 transformer: Remove redundant scratch vectors (#27922) (camc314)\n- 88b5c35 minifier: Reduce code branches when evaluating roots (#27906) (Armano)\n- fe1d367 codegen: Remove branches from loops printing arrays (#27840) (overlookmotel)\n- 7bb6b62 codegen: Reduce hashmap lookups in `print_annotation_comment` (#27845) (overlookmotel)\n- 31ffd08 codegen: Avoid unnecessary comment clone (#27843) (overlookmotel)\n- a6456b7 codegen: Remove branch from `print_space_before_identifier` (#27842) (overlookmotel)\n- eeff416 codegen: Simplify `print_space_before_identifier` (#27841) (overlookmotel)\n- 5d877b8 diagnostics: Speed up zero-context span lookups (#27770) (camc314)\n- 2ab6b63 packages/codegen: Remove redundant `printSpaceBeforeIdentifier` and `last` updates in `printParams` (#27652) (overlookmotel)\n- e533278 codegen: Reduce writes in `printDecorators` (#27651) (overlookmotel)\n\n### 📚 Documentation\n\n- 29caafd codegen: Format table in doc comment (#27839) (overlookmotel)\n- 3de03c1 packages/codegen: Correct outdated comments (#27838) (overlookmotel)"
+    },
+    {
+      "tag": "oxfmt_v0.74.0",
+      "name": "oxfmt v0.74.0",
+      "publishedAt": "2026-10-19T17:24:19Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxfmt_v0.74.0",
+      "prerelease": false,
+      "body": "### 🐛 Bug Fixes\n\n- e236de0 formatter_tests: Skip conformance spec calls with non-literal options (#27957) (leaysgur)\n- 782ab6e linter: Search string values without UTF-8 conversion (#26716) (Dunqing)\n- a5d8184 jsdoc: Parse code spans after quotes in descriptions (#27955) (leaysgur)\n- 2645d2c formatter_markdown: Treat link destinations and footnote references as opaque to code span fences (#27948) (leaysgur)\n- 4d8195c formatter_yaml: Keep a root plain scalar starting with a document marker verbatim (#27947) (leaysgur)\n- 529b057 formatter_core: Keep front matter verbatim when body starts with indented delimiter (#27946) (leaysgur)\n- c22a9b2 formatter: Treat static block with only empty statements as empty (#27945) (leaysgur)\n- d3ff3f6 formatter/jsdoc: Write descriptions as written to not close the comment (#27823) (leaysgur)\n- c4c1727 formatter/sort_imports: Keep comments after the last import (#27822) (leaysgur)\n- a64677e formatter: Print JSDoc embedded snippets with LF (#27821) (leaysgur)\n- 2c1cc20 formatter: Keep comment only Vue bindings as-is (#27820) (leaysgur)\n- 1bf236d formatter/sort_imports: Do not use comments as import source (#27819) (leaysgur)\n- 52ee29d formatter_yaml: Never start col-0 line with document marker or BOM (#27818) (leaysgur)\n- 81c75e7 formatter/css: Keep glued css-in-js statement placeholders glued (#27814) (leaysgur)\n- a1ef7f4 formatter: Keep typecast parens in same-operator binary and arrow chain (#27812) (leaysgur)\n- de110ce formatter: Keep more parens around `TSInstantiationExpression` (#27811) (leaysgur)\n- 8b02e90 formatter_json: Reject invalid JSON instead of dropping them (#27785) (leaysgur)\n- 6fe4c1b formatter: Treat lone CR in JSX text and argument blank lines (#27780) (leaysgur)\n- 5605362 oxfmt: Validate editorconfig as like oxfmtrc (#27778) (leaysgur)\n- 5b2acb0 formatter_core: Report error position releative to CRLF source (#27777) (leaysgur)\n- c78e80e formatter_core: Report parse error positions relative to the BOM-headed source (#27776) (leaysgur)\n- 3a980c9 formatter_toml: Handle BOM like other languages (#27775) (leaysgur)\n- 97c9fc4 oxfmt: Handle BOM in config JSON (#27774) (leaysgur)\n- 28eb4a7 oxfmt: Print trailing newline for `--list-different` (#27773) (leaysgur)\n- d2bea21 formatter: Glue comments to an opener in empty for-head slots and array holes (#27737) (leaysgur)\n- 6a95ec1 formatter: Keep comment position on holey array (#27730) (leaysgur)\n- 54769da formatter: Break after dangling line comment in holey array (#27729) (leaysgur)\n- 99077ef formatter_json: Reject unary expressions other than signed numbers (#27728) (leaysgur)\n- 22cd4cd formatter_json: Handle holey array and comments (#27727) (leaysgur)\n- 644ca1c formatter: Do not indent logical chains whose right sides all inline (#27667) (leaysgur)\n- a07a0fb formatter: Wrap comment-only JSX expression container in a group (#27666) (leaysgur)\n\n### ⚡ Performance\n\n- e220293 formatter: Check only the operator suppression mark in `is_quiet` (#27952) (leay\n…(truncated)"
+    },
+    {
+      "tag": "oxlint_v1.89.0",
+      "name": "oxlint v1.89.0",
+      "publishedAt": "2026-10-19T17:24:26Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.89.0",
+      "prerelease": false,
+      "body": "### 💥 BREAKING CHANGES\n\n- e3c1b11 ast: [**BREAKING**] Preserve lone surrogates in static property names (#27095) (Dunqing)\n- a0a987c ast: [**BREAKING**] Preserve lone surrogates in static member names (#26677) (Dunqing)\n\n### 🚀 Features\n\n- 770ada4 linter: Mark vue 3 rules as recommended (#27717) (Cam McHenry)\n- ba38c1d linter: Mark react/react-hooks rules as recommended (#27701) (Cam McHenry)\n- d85a3ba linter: Mark promise rules as recommended (#27693) (Cam McHenry)\n- e71c88a linter: Mark node rule as recommended (#27692) (Cam McHenry)\n- 7213f61 linter: Mark nextjs rules as recommended (#27691) (Cam McHenry)\n- d7c6b26 linter: Mark jsx-a11y rules as recommended (#27690) (Cam McHenry)\n- 199dfdc linter: Mark jsdoc rules as recommended (#27689) (Cam McHenry)\n- 780bff3 linter: Mark jest/vitest rules as recommended (#27672) (Cam McHenry)\n- 6ae6859 linter: Mark import rules as recommended (#27671) (Cam McHenry)\n- b7a1df3 linter: Mark unicorn rules as recommended (#27670) (Cam McHenry)\n- c44a355 linter: Mark typescript rules as recommended from upstream (#27634) (Cam McHenry)\n- 6b49dba linter: Mark eslint rules as recommended from upstream (#27632) (Cam McHenry)\n\n### 🐛 Bug Fixes\n\n- 7c47246 linter: Check module specifiers and string values that contain lone surrogates (#26717) (Dunqing)\n- 782ab6e linter: Search string values without UTF-8 conversion (#26716) (Dunqing)\n- 326904f linter/unicorn/no-useless-undefined: Allow `undefined` in `React.useRef` (#25027) (Chris Dokurno)\n- f9cf165 linter/unicorn/prefer-spread: Ignore super method calls (#27868) (camc314)\n- 00484e1 linter/eslint/prefer-const: Report destructuring assignments inside blocks (#27856) (camc314)\n- 9c35461 linter/eslint/sort-vars: Report every out-of-order declaration (#27767) (camc314)\n- 01e1c5e linter/unicorn/prefer-string-replace-all: Resolve regex variables (#27769) (camc314)\n- 7f474d5 linter/eslint/no-loop-func: Detect writes after the loop (#27754) (camc314)\n- 4b7fea6 linter/eslint/block-scoped-var: Ignore declarations without writes (#27760) (camc314)\n- 2947917 linter/eslint/no-lonely-if: Check final else blocks in else-if chains (#27759) (camc314)\n- fc039b5 linter/eslint/sort-imports: Check imports after other statements (#27749) (camc314)\n- 1acba97 linter/unicorn/prefer-at: Report slice index reads once (#27762) (camc314)\n- 6190e26 linter/eslint/prefer-arrow-callback: Ignore functions used as conditional tests (#27533) (Anzal Husain Abidi)\n- b3cdaaf linter/eslint/sort-keys: Check computed identifier names (#27748) (camc314)\n- 170e608 linter/unicorn/prefer-native-coercion-functions: Check object methods and function properties (#27750) (camc314)\n- 9261df7 linter/unicorn/prefer-string-raw: Check object property values (#27758) (camc314)\n- ddea86b linter/eslint/prefer-template: Report separate nested concatenations (#27764) (camc314)\n- 2c67197 linter/eslint/no-unused-vars: Count conditional calls in sequences as uses (#27755) (camc314)\n- 7f22fa0 linter/unicorn/prefer-regexp-test: Chec\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 27944,
+      "title": "docs(formatter): note lossy cooked round-trip in template embeds",
+      "url": "https://github.com/oxc-project/oxc/pull/27944",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T01:46:35Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.89.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 27945,
+      "title": "fix(formatter): treat static block with only empty statements as empty",
+      "url": "https://github.com/oxc-project/oxc/pull/27945",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T01:49:36Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "Fixed panic on `{ ; }`.\n\n`EmptyStatement` is removed, then `group` for `StaticBlock` failed to get its content.",
+      "files": [
+        "crates/oxc_formatter/src/print/class.rs (+2 -1)",
+        "crates/oxc_formatter/tests/fixtures/js/class/static-block-empty-statements.js (+15 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/class/static-block-empty-statements.js.snap (+52 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27946,
+      "title": "fix(formatter_core): keep front matter verbatim when body starts with indented delimiter",
+      "url": "https://github.com/oxc-project/oxc/pull/27946",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T01:50:04Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "```\n---\n --- # <- THIS should be kept, otherwise closes FM!\n---\n\n```",
+      "files": [
+        "crates/oxc_formatter_core/src/envelope/mod.rs (+11 -3)",
+        "apps/oxfmt/DIVERGENCES.md (+29 -0)",
+        "apps/oxfmt/conformance/fixtures/edge-cases/xxx-in-md/front-matter-indented-delimiter.md (+6 -0)",
+        "apps/oxfmt/conformance/snapshots/conformance.snap.md (+6 -2)",
+        "apps/oxfmt/conformance/snapshots/diffs/markdown/edge-cases__xxx-in-md__front-matter-indented-delimiter.md.md (+97 -0)",
+        "apps/oxfmt/test/api/front_matter.test.ts (+10 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 27947,
+      "title": "fix(formatter_yaml): keep a root plain scalar starting with a document marker verbatim",
+      "url": "https://github.com/oxc-project/oxc/pull/27947",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T01:51:35Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "Similar case with #27946, save more cases.",
+      "files": [
+        "crates/oxc_formatter_yaml/src/print/document.rs (+24 -11)",
+        "crates/oxc_formatter_yaml/AGENTS.md (+1 -0)",
+        "crates/oxc_formatter_yaml/DIVERGENCES.md (+8 -1)",
+        "crates/oxc_formatter_yaml/tests/fixtures/yaml/document-marker-content/indented.yaml (+12 -0)",
+        "crates/oxc_formatter_yaml/tests/fixtures/yaml/document-marker-content/indented.yaml.snap (+104 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27948,
+      "title": "fix(formatter_markdown): treat link destinations and footnote references as opaque to code span fences",
+      "url": "https://github.com/oxc-project/oxc/pull/27948",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T01:56:46Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "Fixes #27844, closes #27943.\n\nAlso fixed potential bugs with footnote.",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/inline.rs (+16 -10)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/stray-delimiters.md (+14 -1)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/prose-wrap/stray-delimiters.md.snap (+98 -7)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27952,
+      "title": "perf(formatter): check only the operator suppression mark in `is_quiet`",
+      "url": "https://github.com/oxc-project/oxc/pull/27952",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T04:10:33Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "In `is_quiet`, the preceding check already guarantees no unprinted comment ends before the node, so the `comments_before_iter` scan in `is_suppressed` always returns `false`.",
+      "files": [
+        "crates/oxc_formatter/src/formatter/comments.rs (+2 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27837,
+      "title": "fix(ecmascript): look through sequence expressions in `to_primitive`",
+      "url": "https://github.com/oxc-project/oxc/pull/27837",
+      "author": "baltasarblanco",
+      "mergedAt": "2026-10-19T04:25:16Z",
+      "labels": [
+        "A-minifier",
+        "A-ecmascript"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "Closes #27836\n\n`to_primitive` gave `Undetermined` for a sequence ending in an array or object literal, so constant evaluation of `+` took the numeric path (it only needs one operand to be numeric), and `evaluate_value_to_number`, which does look through the sequence, turned `[]` into `0`:\n\n```js\nconst u = true + (globalThis.x, []);\nconsole.log(u);\n// before: !0+(globalThis.x,[]),console.log(1);       -> 1\n// after:  !0+(globalThis.x,[]),console.log(`true`);  -> true\n```\n\n`to_primitive` now uses the last expression of a sequence, as `value_type` and `to_boolean` already do. Added `test_fold_add_sequence_ending_in_object`, which fails without the fix. No snapshot changes.\n\nFound with a differential fuzzer. Written with AI assistance; verified with `cargo test`, `clippy`, `fmt --check`, `minsize`, `allocs` and `coverage -- minifier`. I reviewed the diff.",
+      "files": [
+        "crates/oxc_ecmascript/src/to_primitive.rs (+4 -0)",
+        "crates/oxc_minifier/tests/peephole/fold_constants.rs (+20 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27955,
+      "title": "fix(jsdoc): parse code spans after quotes in descriptions",
+      "url": "https://github.com/oxc-project/oxc/pull/27955",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T07:10:34Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "Fixes #27852, closes #27925.\n\n- Recognize Markdown code spans after quotes in JSDoc descriptions, so a span wrapping onto the next line does not swallow subsequent tags.\n- Preserve quoted backticks inside types, optional parameter defaults, parenthesized function arguments, and `@import` specifiers.\n- Add parser regressions and formatter input/expected-output fixtures for single and double quotes.",
+      "files": [
+        "crates/oxc_jsdoc/src/parser/parse.rs (+59 -1)",
+        "crates/oxc_formatter/tests/jsdoc/fixtures/descriptions/046-quote-before-multiline-code-span.options.json (+8 -0)",
+        "crates/oxc_formatter/tests/jsdoc/fixtures/descriptions/046-quote-before-multiline-code-span.output.ts (+25 -0)",
+        "crates/oxc_formatter/tests/jsdoc/fixtures/descriptions/046-quote-before-multiline-code-span.ts (+26 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 27954,
+      "title": "perf(linter): disable papaya's `fast-barrier` to avoid a `membarrier` wait on Linux",
+      "url": "https://github.com/oxc-project/oxc/pull/27954",
+      "author": "magurotuna",
+      "mergedAt": "2026-10-19T07:30:23Z",
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "## Summary\n\nOn Linux, every `oxlint` run waits 20–40 ms when it creates its first papaya map. This PR removes the wait for both the CLI and the npm package by disabling `fast-barrier` feature of the papaya crate. It also adds a `cargo deny` rule that fails if any crate enables the feature again so we can notice it.\n\n## Why it waits\n\nWith `fast-barrier`, `seize::Collector::new()` calls `membarrier(MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED)`. If the process already has more than one thread, the kernel waits for an RCU grace period before it returns ([kernel/sched/membarrier.c](https://github.com/torvalds/linux/blob/v6.12/kernel/sched/membarrier.c#L442-L470)).\n\n`oxc_linter` has one papaya map: [`modules_by_path`](crates/oxc_linter/src/service/runtime.rs#L59-L66), the module graph that the import plugin uses for rules across files, such as `import/no-cycle`. The map is a field of [`Runtime`](crates/oxc_linter/src/service/runtime.rs#L45), which holds the state of one lint run. [`LintService::new()`](crates/oxc_linter/src/service/mod.rs#L68-L71) creates the `Runtime` once per run. [`Runtime::new()`](crates/oxc_linter/src/service/runtime.rs#L208) first starts the rayon thread pool ([#L227](crates/oxc_linter/src/service/runtime.rs#L227)), and then it creates the map ([#L268](crates/oxc_linter/src/service/runtime.rs#L268)). So the main thread waits on every run. This happens even with the default config, which does not use the import plugin.\n\nThe npm package waits too. Creating the ma\n…(truncated)",
+      "files": [
+        "Cargo.lock (+0 -4)",
+        "Cargo.toml (+1 -1)",
+        "deny.toml (+9 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 27950,
+      "title": "refactor(ast)!: replace `StaticPropertyName`'s `Display` with `display()`",
+      "url": "https://github.com/oxc-project/oxc/pull/27950",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-19T07:34:33Z",
+      "labels": [
+        "A-linter",
+        "A-semantic",
+        "A-minifier",
+        "A-ast",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "`StaticPropertyName` implemented `Display`, so `.to_string()` turned a name into escaped text without saying so. That matters where the text is used as a key rather than shown. It now has a `display()` adapter like `JSStr`'s, so each caller says what it wants. Both `display()` docs now note that the output is not injective (`\"\\uD800\"` and `\"\\\\ud800\"` print the same), so it must not be compared or used as a key.\n\nThe 31 current callers keep their output: they format diagnostics or messages, and the few that key by the text get the same keys as before.\n\n**Breaking:** `StaticPropertyName` no longer implements `Display`. Use `name.display()`.\n\nCame up in the review of rolldown/rolldown#11228. Part of #26242.\n\nImplemented with AI assistance.",
+      "files": [
+        "crates/oxc_ast/src/ast_kind_impl.rs (+1 -1)",
+        "crates/oxc_ast/src/static_property_name.rs (+10 -9)",
+        "crates/oxc_formatter_tests/src/conformance.rs (+2 -2)",
+        "crates/oxc_linter/src/ast_util.rs (+1 -1)",
+        "crates/oxc_linter/src/rules/eslint/class_methods_use_this.rs (+1 -1)",
+        "crates/oxc_linter/src/rules/eslint/func_name_matching.rs (+11 -11)",
+        "crates/oxc_linter/src/rules/eslint/grouped_accessor_pairs.rs (+2 -2)",
+        "crates/oxc_linter/src/rules/eslint/no_dupe_keys.rs (+1 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_empty_function.rs (+5 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_private_class_members.rs (+1 -1)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 26712,
+      "title": "fix(transformer)!: decode JSX entities to lone surrogates",
+      "url": "https://github.com/oxc-project/oxc/pull/26712",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-19T07:46:34Z",
+      "labels": [
+        "A-linter",
+        "A-semantic",
+        "A-ast",
+        "A-transformer",
+        "A-codegen",
+        "A-isolated-declarations",
+        "A-react-compiler"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "JSX numeric character references can name lone surrogates, as in `&#xD800;`. They are now decoded with `JSStrBuilder`, so the JSX transform and the React Compiler keep lone surrogates, and adjacent references that form a pair join into one character. Generated JSX attributes that contain a lone surrogate are printed as JavaScript string expressions.\n\nBoth now share one decoder that follows Babel: only lowercase `&#x` is hexadecimal, and signed references such as `&#+65;` stay text. The React Compiler therefore keeps `&#X41;` as text instead of decoding it to `A`, like Babel and the JSX transform.\n\n## Breaking changes\n\n- `oxc_syntax::xml_entities::decode_entities` accumulates into a `JSStrBuilder`, and the new `decode_entity` returns a `JSChar`.\n\nPart of #26242.\n\nImplemented with AI assistance.",
+      "files": [
+        "crates/oxc_ast/src/ast/jsx.rs (+5 -3)",
+        "crates/oxc_codegen/src/gen.rs (+10 -3)",
+        "crates/oxc_react_compiler/src/react_compiler_hir/mod.rs (+2 -1)",
+        "crates/oxc_react_compiler/src/react_compiler_lowering/build_hir.rs (+81 -123)",
+        "crates/oxc_react_compiler/src/react_compiler_reactive_scopes/codegen_reactive_function.rs (+16 -3)",
+        "crates/oxc_str/src/js_char.rs (+51 -0)",
+        "crates/oxc_syntax/src/xml_entities.rs (+125 -33)",
+        "crates/oxc_transformer/src/jsx/jsx_impl.rs (+15 -13)",
+        "crates/oxc_codegen/tests/integration/js.rs (+84 -0)",
+        "crates/oxc_react_compiler/fixtures/jsx-surrogate-entities.js (+9 -0)"
+      ],
+      "filesTotal": 22
+    },
+    {
+      "number": 26716,
+      "title": "fix(linter): search string values without UTF-8 conversion",
+      "url": "https://github.com/oxc-project/oxc/pull/26716",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-19T07:47:43Z",
+      "labels": [
+        "A-linter",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "A lone surrogate anywhere in a string made `as_str()` return `None`, so rules skipped checks on ordinary text elsewhere in the value. For example, `test(\" \\uD800 my title \", () => {})` got no leading/trailing-space diagnostic.\n\nThis adds `contains`, `starts_with`, `ends_with`, `find` and `rfind` to `JSStr`. They take a `&str`, a `char` or a predicate, search the WTF-8 bytes without converting or allocating, and never match a lone surrogate with a character pattern. Seven linter rules and the formatter's JSX attribute checks use them. Lowercase-title fixes now check the source spelling, so an escaped first letter is reported without a fix.\n\nBased on #26712. Part of #26242.\n\nImplemented with AI assistance.",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "crates/oxc_formatter/src/print/jsx/opening_element.rs (+8 -7)",
+        "crates/oxc_linter/src/rules/eslint/no_regex_spaces.rs (+5 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_script_url.rs (+6 -5)",
+        "crates/oxc_linter/src/rules/eslint/no_template_curly_in_string.rs (+8 -3)",
+        "crates/oxc_linter/src/rules/import/no_webpack_loader_syntax.rs (+18 -10)",
+        "crates/oxc_linter/src/rules/jest/prefer_lowercase_title.rs (+54 -0)",
+        "crates/oxc_linter/src/rules/jest/valid_title.rs (+14 -0)",
+        "crates/oxc_linter/src/rules/jsx_a11y/aria_props.rs (+1 -1)",
+        "crates/oxc_linter/src/rules/jsx_a11y/aria_proptypes.rs (+1 -1)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 27956,
+      "title": "docs(oxfmt): update useless comment prefix",
+      "url": "https://github.com/oxc-project/oxc/pull/27956",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T07:53:34Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.89.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 27957,
+      "title": "fix(formatter_tests): skip conformance spec calls with non-literal options",
+      "url": "https://github.com/oxc-project/oxc/pull/27957",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-19T08:02:35Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "Skip invalid spec like `printWidth: Infinity`.",
+      "files": [
+        "crates/oxc_formatter_tests/src/conformance.rs (+16 -5)",
+        "crates/oxc_formatter_markdown/tests/conformance.rs (+0 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 26717,
+      "title": "fix(linter): check module specifiers and string values that contain lone surrogates",
+      "url": "https://github.com/oxc-project/oxc/pull/26717",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-19T08:50:35Z",
+      "labels": [
+        "A-linter",
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "Lone surrogates disabled several lint checks and could count as allow-list matches. Module specifiers, names, whitespace and duplicate keys are now checked on the `JSStr` value. Fixes that need UTF-8 text keep the diagnostic and skip the fix.\n\nUser-configured regexes and globs only match UTF-8 text, so a value with a lone surrogate matches none of them. Allow-lists in `new-cap`, `no-unassigned-import`, `no-require-imports`, `no-large-snapshots` and `prop-name-casing` don't exempt it, `no-restricted-imports` and `valid-title` don't report it, and `valid-title`'s `mustMatch` does. `img-redundant-alt` searches the value's bytes directly. `import/extensions` (for `require()`) and `relative-url-style` still skip such values, as do static imports, because module records omit them.\n\n`no-require-imports` now matches `allow` against a template's cooked value, and only when the template has no expressions, like typescript-eslint. The TypeScript `rewriteImportExtensions` option also rewrites specifiers that contain a lone surrogate.\n\nBased on #26716. Part of #26242.\n\nImplemented with AI assistance.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/func_name_matching.rs (+6 -2)",
+        "crates/oxc_linter/src/rules/eslint/new_cap.rs (+88 -82)",
+        "crates/oxc_linter/src/rules/eslint/no_restricted_imports.rs (+7 -0)",
+        "crates/oxc_linter/src/rules/eslint/prefer_named_capture_group.rs (+45 -13)",
+        "crates/oxc_linter/src/rules/eslint/require_unicode_regexp.rs (+33 -12)",
+        "crates/oxc_linter/src/rules/eslint/yoda.rs (+34 -5)",
+        "crates/oxc_linter/src/rules/import/consistent_type_specifier_style.rs (+24 -2)",
+        "crates/oxc_linter/src/rules/import/extensions.rs (+2 -0)",
+        "crates/oxc_linter/src/rules/import/first.rs (+18 -3)",
+        "crates/oxc_linter/src/rules/import/no_absolute_path.rs (+22 -9)"
+      ],
+      "filesTotal": 83
+    },
+    {
+      "number": 27096,
+      "title": "fix(minifier): fold string indices by UTF-16 code unit",
+      "url": "https://github.com/oxc-project/oxc/pull/27096",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-19T08:51:46Z",
+      "labels": [
+        "A-linter",
+        "A-minifier",
+        "A-ast",
+        "A-ecmascript"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.89.0",
+      "body": "String indexing now folds by UTF-16 code unit, so `\"😀\"[0]` folds to `\"\\uD83D\"` and `\"a\\uD800b\"[1]` to `\"\\uD800\"`. The result is built with `JSStrBuilder` instead of a temporary heap string; ordinary strings keep the native UTF-8 path.\n\nCloses #26636. Based on #26717. Part of #26242. Continues #26752.\n\nImplemented with AI assistance.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/replace_known_methods.rs (+14 -11)",
+        "crates/oxc_minifier/tests/peephole/replace_known_methods.rs (+14 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27967,
+      "title": "refactor(linter/eslint/no-restricted-imports): remove use of `unreachable!`",
+      "url": "https://github.com/oxc-project/oxc/pull/27967",
+      "author": "camchenry",
+      "mergedAt": "2026-10-19T22:23:31Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Remove `Allowed` as an option and model that as `None` instead.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_restricted_imports.rs (+96 -93)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27978,
+      "title": "fix(linter/arrow-body-style): keep type assertions when adding a block body",
+      "url": "https://github.com/oxc-project/oxc/pull/27978",
+      "author": "yan-almeida",
+      "mergedAt": "2026-10-19T22:31:59Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #27977\n\nWith `arrow-body-style: [\"error\", \"always\"]`, the fix unwrapped the concise body with `get_inner_expression`, which strips TS wrappers together with the parentheses, so the type assertion was lost. Now only the parentheses around the leading object literal are removed (the same tokens ESLint removes) and the rest of the expression is kept.\n\n| Input | Before | After |\n| --- | --- | --- |\n| `() => <T>{ id }` | `() => {return { id }}` | `() => {return <T>{ id }}` |\n| `() => <T>({ id })` | `() => {return { id }}` | `() => {return <T>({ id })}` |\n| `() => ({ id }) as T` | `() => {return { id }}` | `() => {return { id } as T}` |\n| `() => ({ id }) satisfies T` | `() => {return { id }}` | `() => {return { id } satisfies T}` |\n\nPlain `() => ({ id })` still becomes `() => {return { id }}`.\n\nTests: added a `.ts` test (`test_typescript`) with pass/fail/fix cases (also `({ id })!`, `(({ id }) as T)` and `requireReturnForObjectLiteral`) and its snapshot. `cargo test --all-features -p oxc_linter` and `just lint -p oxc_linter` pass.\n\nAI disclosure: this PR was prepared with the help of an AI assistant (Claude).",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/arrow_body_style.rs (+102 -11)",
+        "crates/oxc_linter/src/snapshots/eslint_arrow_body_style@ts.snap (+59 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27098,
+      "title": "feat(ecmascript)!: fold surrogate strings with JSStr constants",
+      "url": "https://github.com/oxc-project/oxc/pull/27098",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-20T01:14:35Z",
+      "labels": [
+        "A-linter",
+        "A-minifier",
+        "A-ast",
+        "A-ecmascript"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "String constant evaluation used `Cow<str>`, so folds stopped at any string with a lone surrogate. `ConstantValue::String` now holds a `JSStr`, so these strings fold too, and results are built with `JSStrBuilder`, which joins surrogate halves the way the runtime does.\n\n`indexOf`, `lastIndexOf`, `substring` and `slice` now share one UTF-16 code-unit implementation for every string. This also fixes miscompiles on main: `'éx'.indexOf('x')` folded to 2, `'abc'.indexOf('a', 4294967296)` to 0, `'abab'.lastIndexOf('b', NaN)` to -1, and `'abc'.substring(1, void 0)` to `''`. It includes #27097, which is closed.\n\nString `concat` calls and chains fold into a template only when no argument with side effects follows one that may be an object, so `''.concat(a, (a.push(1), 'x'))` no longer becomes `` `${a}${(a.push(1), 'x')}` ``.\n\n## Breaking changes\n\n- `ConstantValue::String` holds `JSStr<'a>`, and `ConstantValue::into_string`, `evaluate_value_to_string` and `get_side_free_string_value` return `JSStr<'a>`.\n- `StringIndexOf` and `StringLastIndexOf` take the search value as `JSStr` and use UTF-16 code unit positions.\n- `StringSubstring` is removed.\n\nCloses #15524. Closes #25158. Closes #26053. Based on #27096. Part of #26242. Continues #26759.\n\nImplemented with AI assistance.",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "crates/oxc_ecmascript/Cargo.toml (+4 -0)",
+        "crates/oxc_ecmascript/src/constant_evaluation/call_expr.rs (+200 -44)",
+        "crates/oxc_ecmascript/src/constant_evaluation/mod.rs (+41 -16)",
+        "crates/oxc_ecmascript/src/global_context.rs (+10 -1)",
+        "crates/oxc_ecmascript/src/is_less_than.rs (+8 -5)",
+        "crates/oxc_ecmascript/src/lib.rs (+1 -2)",
+        "crates/oxc_ecmascript/src/string_char_code_at.rs (+52 -1)",
+        "crates/oxc_ecmascript/src/string_index_of.rs (+135 -29)",
+        "crates/oxc_ecmascript/src/string_last_index_of.rs (+114 -21)"
+      ],
+      "filesTotal": 32
+    },
+    {
+      "number": 27987,
+      "title": "fix(formatter_core): count a flat `line` space in `fits` only when text follows",
+      "url": "https://github.com/oxc-project/oxc/pull/27987",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-20T06:01:35Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Check overflow at every `Fits::Yes` exit like Prettier's loop head, replacing the expanded-line pending space resolution.\n\nSeems a side effect of #20954.",
+      "files": [
+        "crates/oxc_formatter_core/src/printer/mod.rs (+23 -18)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27988,
+      "title": "refactor(formatter_core): check width via `overflows()` in `fits_text()`",
+      "url": "https://github.com/oxc-project/oxc/pull/27988",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-20T06:17:33Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Now it uses `overflows()` everywhere.",
+      "files": [
+        "crates/oxc_formatter_core/src/printer/mod.rs (+7 -12)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27989,
+      "title": "fix(formatter): keep an arrow signature that exactly fills the line for any body",
+      "url": "https://github.com/oxc-project/oxc/pull/27989",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-20T06:18:34Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Revert #24440 and reclassify DIVERGENCES.md#arrow-exact-fill-signature as \"uniform-rule\".\n\n---\n\n> It seems like oxc is correct here and Prettier has a bug?\n> https://github.com/oxc-project/oxc/issues/24416\n\nHaving the opportunity to revisit the details..., I found that this is indeed the truth.",
+      "files": [
+        "crates/oxc_formatter/src/print/arrow_function_expression.rs (+24 -47)",
+        "tasks/track_memory_allocations/allocs_formatter.yaml (+1 -1)",
+        "crates/oxc_formatter/DIVERGENCES.md (+15 -9)",
+        "crates/oxc_formatter/tests/fixtures/js/arrow-function/chain-exact-fill-signature.js (+0 -12)",
+        "crates/oxc_formatter/tests/fixtures/js/arrow-function/chain-exact-fill-signature.js.snap (+0 -51)",
+        "crates/oxc_formatter/tests/fixtures/js/arrow-function/exact-fill-signature.js (+22 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/arrow-function/exact-fill-signature.js.snap (+81 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/whitespace-exact-fill.jsx (+17 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/whitespace-exact-fill.jsx.snap (+62 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/arrow-function/issue-24416.tsx (+0 -24)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 27983,
+      "title": "refactor(minifier): share string concat size estimation",
+      "url": "https://github.com/oxc-project/oxc/pull/27983",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-20T06:23:34Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The single-call and chained-call concat paths duplicated the syntax-size estimate. Share the predicate, name the concat and template overheads, and document the pure-coercion assumption used by the guard. The heuristic is unchanged.\n\nFollow-up to #27098.\n\nValidated with `just test -p oxc_minifier`, `just lint -p oxc_minifier`, `cargo fmt --all --check`, and `just minsize`. All 12 minsize outputs are byte-identical to before the refactor.\n\nImplemented with AI assistance.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/replace_known_methods.rs (+17 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 27817,
+      "title": "fix(react-compiler): let branches inside `try` control reactivity",
+      "url": "https://github.com/oxc-project/oxc/pull/27817",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-20T06:28:34Z",
+      "labels": [
+        "A-react-compiler"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #27400\nFixes #27808\n\nWhen a ternary, `if` or `switch` inside `try` picks a value based on a prop, the compiler treated that value as a constant, so anything built from it was cached once per mount.\n\n```jsx\nfunction Component({ cond }) {\n  let value;\n  try {\n    if (cond) {\n      value = \"a\";\n    } else {\n      value = \"b\";\n    }\n  } catch {\n    value = \"c\";\n  }\n  return <div>{value}</div>;\n}\n```\n\n```diff\n-  if ($[0] === Symbol.for(\"react.memo_cache_sentinel\")) {\n+  if ($[0] !== value) {\n     t1 = <div>{value}</div>;\n```\n\nBefore this PR, changing `cond` from `true` to `false` still rendered `a`.\n\n## Cause\n\nInside `try`, every assignment ends its block with a \"may throw\" edge to the `catch`. When `infer_reactive_places` looked for the branch that decides a value, it stopped at that edge and never reached `if (cond)`.\n\nThe same logic in Babel's React Compiler (facebook/react main, `098d2e87`):\n\n- [`HIRBuilder.push`](compiler/packages/babel-plugin-react-compiler/src/HIR/HIRBuilder.ts#L164-L181) ends the block after each instruction in `try` with a `maybe-throw` edge to the handler.\n- [`instructionMayThrow`](compiler/packages/babel-plugin-react-compiler/src/Optimization/PruneMaybeThrows.ts#L96-L107) keeps that edge for every store.\n- [`InferReactivePlaces`](compiler/packages/babel-plugin-react-compiler/src/Inference/InferReactivePlaces.ts#L235-L242) marks a phi with constant operands reactive only if a predecessor is controlled by a reactive branch.\n- [`isControlledBlock`](c\n…(truncated)",
+      "files": [
+        "crates/oxc_react_compiler/src/react_compiler_hir/dominator.rs (+83 -9)",
+        "crates/oxc_react_compiler/src/react_compiler_inference/infer_reactive_places.rs (+17 -3)",
+        "crates/oxc_react_compiler/fixtures/try-catch-conditional-assignment-reactive-test.js (+17 -0)",
+        "crates/oxc_react_compiler/fixtures/try-catch-if-statement-reactive-test.js (+21 -0)",
+        "crates/oxc_react_compiler/fixtures/try-catch-switch-reactive-test.js (+23 -0)",
+        "crates/oxc_react_compiler/fixtures/try-catch-ternary-reactive-test.js (+22 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/try-catch-conditional-assignment-reactive-test.snap (+35 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/try-catch-if-statement-reactive-test.snap (+39 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/try-catch-switch-reactive-test.snap (+43 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/try-catch-ternary-reactive-test.snap (+71 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 27990,
+      "title": "fix(minifier,linter): keep `delete` of constant members and later JSX keys",
+      "url": "https://github.com/oxc-project/oxc/pull/27990",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-20T07:54:33Z",
+      "labels": [
+        "A-linter",
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`delete \"a\"[0]`, `delete \"a\".length`, `delete [1].length` and `delete Number.NaN` delete a non-configurable property, so they are `false`, or a `TypeError` in strict mode. The minifier folded the member to its value first, and deleting a value is `true`:\n\n```js\nconsole.log(delete \"😀\"[0]); // false; minified to `console.log(!0)`\n```\n\n#27096 extended the string index fold to every string, so `delete \"😀\"[0]` became `!0` in 0.155.0. `delete \"abc\"[0]` and `delete \"abc\".length` were already wrong in 0.154.0. The member folds, the `Number.*` constant replacement and the `Number.NaN` normalization now skip the operand of `delete`. `delete obj[\"x\"]` still becomes `delete obj.x`, and `delete Number[\"NaN\"]` now minifies the same way every time.\n\n`react/jsx-key` with `warnOnDuplicates` stopped at a template key with a substitution, `` key={`${a}`} ``, instead of reading the element's next `key`. Since #26717 the duplicate in `[<li key={`${a}`} key=\"dup\" />, <li key={`${a}`} key=\"dup\" />]` went unreported. The rule now falls through to the next `key` as 0.154.0 did.\n\nFound by comparing 0.154.0 and 0.155.0 builds. Part of #26242.\n\nImplemented with AI assistance.",
+      "files": [
+        "crates/oxc_linter/src/rules/react/jsx_key.rs (+14 -1)",
+        "crates/oxc_linter/src/snapshots/react_jsx_key.snap (+14 -0)",
+        "crates/oxc_minifier/src/peephole/fold_constants.rs (+14 -1)",
+        "crates/oxc_minifier/src/peephole/normalize.rs (+4 -0)",
+        "crates/oxc_minifier/src/peephole/replace_known_methods.rs (+2 -1)",
+        "crates/oxc_minifier/tests/peephole/replace_known_methods.rs (+10 -0)"
+      ],
+      "filesTotal": 6
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "oxc-guard[bot]": 2,
+      "renovate[bot]": 3
+    }
+  }
+}

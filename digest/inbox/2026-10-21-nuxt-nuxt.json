@@ -1,0 +1,88 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-20T23:57:12Z",
+  "range": {
+    "from": "2026-10-18T11:49:29Z",
+    "to": "2026-10-20T23:57:12Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.2",
+      "publishedAt": "2026-10-16T17:21:23Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36638,
+      "title": "fix(nitro): don't scan app-only module code for nitro v2 compat",
+      "url": "https://github.com/nuxt/nuxt/pull/36638",
+      "author": "danielroe",
+      "mergedAt": "2026-10-19T14:03:53Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nspotted in https://github.com/nuxt-modules/i18n/pull/4166\n\n### 📚 Description\n\ncurrently we scan all aliases for nitro v2 imports, which can lead to issues with modules that explicitly support both.\n\nthey now only count if a server entry imports them.\n\nalso updated a couple of other false positives (and the docs)",
+      "files": [
+        "packages/kit/src/build.ts (+4 -0)",
+        "packages/nitro-server/src/compat.ts (+36 -28)",
+        "docs/1.getting-started/18.upgrade.md (+21 -1)",
+        "docs/4.api/5.kit/15.builder.md (+4 -0)",
+        "packages/nitro-server/test/compat.test.ts (+110 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36640,
+      "title": "docs: link to the 2.x docs",
+      "url": "https://github.com/nuxt/nuxt/pull/36640",
+      "author": "larbish",
+      "mergedAt": "2026-10-19T20:06:55Z",
+      "labels": [
+        "📚 documentation",
+        "3.x",
+        "4.x",
+        "5.x",
+        "preview:enabled"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 4
+    },
+    {
+      "number": 36641,
+      "title": "feat(nitro): scan nested `server/utils` with `nitroLegacy` & warn",
+      "url": "https://github.com/nuxt/nuxt/pull/36641",
+      "author": "danielroe",
+      "mergedAt": "2026-10-19T20:29:10Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nin nuxt v5, only top-level files in `server/utils/` are scanned, just like in `app/utils/`. this is a breaking change from nuxt v4 (where nitropack had different behaviour).\n\nthis adds detection of used auto-imports from nested directories, and disables this behaviour with `nitroLegacy.imports`",
+      "files": [
+        "packages/nitro-server/src/auto-imports.ts (+58 -11)",
+        "packages/nitro-server/src/compat.ts (+5 -3)",
+        "packages/nitro-server/src/diagnostics.ts (+5 -0)",
+        "packages/nitro-server/src/index.ts (+7 -5)",
+        "packages/nitro-server/src/utils.ts (+2 -0)",
+        "docs/1.getting-started/18.upgrade.md (+16 -3)",
+        "docs/2.directory-structure/1.server.md (+1 -1)",
+        "packages/nitro-server/test/auto-imports.test.ts (+84 -2)",
+        "packages/nuxt/test/shared-dir-config.test.ts (+7 -0)"
+      ],
+      "filesTotal": 9
+    }
+  ],
+  "errors": []
+}

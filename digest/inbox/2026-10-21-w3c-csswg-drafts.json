@@ -1,0 +1,78 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-20T23:57:12Z",
+  "range": {
+    "from": "2026-10-18T16:22:11Z",
+    "to": "2026-10-20T23:57:12Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14636,
+      "title": "[css-color-4] Update `Lab_to_XYZ` sample code to avoid issues in implementations that use floats as internal storage",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14636",
+      "author": "romainmenke",
+      "mergedAt": "2026-10-20T13:22:44Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "closes: https://github.com/w3c/csswg-drafts/issues/14629#issuecomment-6290805847",
+      "files": [
+        "css-color-4/conversions.js (+10 -5)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-10-18T16:22:10Z",
+    "to": "2026-10-20T23:57:12Z"
+  },
+  "commits": [
+    {
+      "sha": "5659de4",
+      "url": "https://github.com/w3c/csswg-drafts/commit/5659de4c4202290dff221da62106751661f373f1",
+      "author": "svgeesus",
+      "committedAt": "2026-10-20T15:41:25Z",
+      "title": "[css-color-4][editorial] Correct rec2020 values in leaf example. Fix #14631",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "160a00a",
+      "url": "https://github.com/w3c/csswg-drafts/commit/160a00acff045d99796606f502812c9462e110e2",
+      "author": "svgeesus",
+      "committedAt": "2026-10-20T15:44:56Z",
+      "title": "[css-color-4][editorial] Update changes",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+6 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "c410ee5",
+      "url": "https://github.com/w3c/csswg-drafts/commit/c410ee5e4d2afe6d8b2e8ce53723b8d1eb3b5b67",
+      "author": "tabatkins",
+      "committedAt": "2026-10-20T21:27:12Z",
+      "title": "[css-syntax-3][editorial] Use the right term for assigning declarations to a qualified rule.",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-syntax-3/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}
