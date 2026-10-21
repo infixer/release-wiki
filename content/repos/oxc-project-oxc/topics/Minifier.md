@@ -1,6 +1,6 @@
 ---
 title: Minifier
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,10 +8,14 @@ tags:
 
 ## 概要
 
-`oxc_minifier` と codegen。正しさの修正（ディレクティブを含む IIFE の保持、`arguments` コピーのループ書き換えで兄弟の宣言を残す、`BooleanLiteral` の否定処理、テンプレートリテラルの不要な `$` エスケープ削除など）と並行して、圧縮率を上げる最適化も追加されている。同じ内容の隣接する `if` 文の統合、抜ける `if` ブロックの後続文を else 側へまとめて条件式に畳み込む変換、3 項以上のシーケンスを含む条件式の畳み込み、ビット演算の二項式の簡約、同じモジュールからの import 文の統合や import + export の `export ... from` への統合など。条件式・論理式の中の入れ子のシーケンスの処理は `minimize_sequences.rs` にまとめられ、冪等になるよう修正された。crates_v0.152.0 では、式をその場で書き換えるなどアロケーションを減らす性能改善も多数入った。委譲しない `yield` の `undefined` 引数も畳み込む（グローバルなら `void 0`）。codegen では、`-` の後の負の `BigIntLiteral` が `--1n` と出力される問題（Minifier の出力でも発生）を Rust・JS の両方で直した（crates_v0.154.0 で公開）。定数の引数で呼ばれる未使用の IIFE（アロー関数と strict な通常関数）を除去する最適化と、空の `do…while` の本体の前に余分なインデントを出さない codegen の修正も入った（crates_v0.154.0 で公開）。`delete` 式の扱いも直り、NaN・Infinity への畳み込みで `delete` の結果が変わらないよう `delete 0` に変換し、さらに可能な場合は `delete` 式を `true` / `false` に畳み込むようになった（crates_v0.154.0 で公開）。codegen では `ArrayPattern` の先頭の `RestElement` の前の余分な空白を Rust・JS の両方で削除し、JS の codegen（`packages/codegen`）は `V8IntrinsicExpression` に対応したうえで megamorphic な `type` 読み取りの削減などで高速化した（crates_v0.154.0）。sloppy モードの `arguments` まわりでは、mapped arguments を通して見える引数への書き込みを保ち、semantic が通常の関数の暗黙の `arguments` を外側の宣言に解決しないよう直した（crates_v0.154.0）。`Math.cbrt` の負の数を `NaN` に畳み込む誤りも修正された（未リリース）。さらに未リリースの修正として、呼び出し先・タグへの畳み込みで `(0, x)` の間接アクセスを保つ、実行されない `for` ループの `let` / `const` の初期化子を保つ、定数評価で BigInt の `==`・`Number.isInteger` / `isSafeInteger`・`parseFloat` の誤った畳み込みを直す、といった変更が入った。void の文脈の論理式にド・モルガンの最適化も加わった（未リリース）。副作用の無い単純な値だけの配列の `join` も畳み込むようになった（未リリース）。
+`oxc_minifier` と codegen。正しさの修正（ディレクティブを含む IIFE の保持、`arguments` コピーのループ書き換えで兄弟の宣言を残す、`BooleanLiteral` の否定処理、テンプレートリテラルの不要な `$` エスケープ削除など）と並行して、圧縮率を上げる最適化も追加されている。同じ内容の隣接する `if` 文の統合、抜ける `if` ブロックの後続文を else 側へまとめて条件式に畳み込む変換、3 項以上のシーケンスを含む条件式の畳み込み、ビット演算の二項式の簡約、同じモジュールからの import 文の統合や import + export の `export ... from` への統合など。条件式・論理式の中の入れ子のシーケンスの処理は `minimize_sequences.rs` にまとめられ、冪等になるよう修正された。crates_v0.152.0 では、式をその場で書き換えるなどアロケーションを減らす性能改善も多数入った。委譲しない `yield` の `undefined` 引数も畳み込む（グローバルなら `void 0`）。codegen では、`-` の後の負の `BigIntLiteral` が `--1n` と出力される問題（Minifier の出力でも発生）を Rust・JS の両方で直した（crates_v0.154.0 で公開）。定数の引数で呼ばれる未使用の IIFE（アロー関数と strict な通常関数）を除去する最適化と、空の `do…while` の本体の前に余分なインデントを出さない codegen の修正も入った（crates_v0.154.0 で公開）。`delete` 式の扱いも直り、NaN・Infinity への畳み込みで `delete` の結果が変わらないよう `delete 0` に変換し、さらに可能な場合は `delete` 式を `true` / `false` に畳み込むようになった（crates_v0.154.0 で公開）。codegen では `ArrayPattern` の先頭の `RestElement` の前の余分な空白を Rust・JS の両方で削除し、JS の codegen（`packages/codegen`）は `V8IntrinsicExpression` に対応したうえで megamorphic な `type` 読み取りの削減などで高速化した（crates_v0.154.0）。sloppy モードの `arguments` まわりでは、mapped arguments を通して見える引数への書き込みを保ち、semantic が通常の関数の暗黙の `arguments` を外側の宣言に解決しないよう直した（crates_v0.154.0）。`Math.cbrt` の負の数を `NaN` に畳み込む誤りも修正された（未リリース）。さらに未リリースの修正として、呼び出し先・タグへの畳み込みで `(0, x)` の間接アクセスを保つ、実行されない `for` ループの `let` / `const` の初期化子を保つ、定数評価で BigInt の `==`・`Number.isInteger` / `isSafeInteger`・`parseFloat` の誤った畳み込みを直す、といった変更が入った。void の文脈の論理式にド・モルガンの最適化も加わった（未リリース）。副作用の無い単純な値だけの配列の `join` も畳み込むようになった（未リリース）。2026-10-19 公開の crates_v0.155.0 で、ここまで未リリースだった定数評価の修正・ド・モルガンの最適化・`join` の畳み込みが公開され、文字列の添字も UTF-16 コード単位で畳み込むようになった（孤立サロゲートにも対応）。その後（未リリース）、文字列の定数評価が `JSStr` を使うようになり孤立サロゲートを含む文字列も畳み込め、`indexOf`・`lastIndexOf`・`substring`・`slice` が UTF-16 単位の 1 つの実装を共有する（誤った畳み込みも解消。`ConstantValue::String` などの API は破壊的変更）。`to_primitive` はシーケンス式の最後の式を見るようになり（crates_v0.155.0）、定数メンバーの `delete`（`delete "a"[0]` など）を値へ畳み込まないよう直した（未リリース）。
 
 ## 変更履歴
 
+- 2026-10-21 — 定数メンバーの `delete` を値に畳み込まない（0.155.0 で生じた `delete "😀"[0]` → `!0` などを修正）（[#27990](https://github.com/oxc-project/oxc/pull/27990)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-21|変更]]
+- 2026-10-21 — 文字列の定数評価を `JSStr` に移行し、孤立サロゲートを含む文字列も畳み込む。`indexOf` などを UTF-16 単位の実装に統一（破壊的変更）（[#27098](https://github.com/oxc-project/oxc/pull/27098)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-21|変更]]
+- 2026-10-21 — 文字列の添字を UTF-16 コード単位で畳み込む（[#27096](https://github.com/oxc-project/oxc/pull/27096)） 📦 oxlint_v1.89.0 · [[repos/oxc-project-oxc/changes/2026-10-21|変更]]
+- 2026-10-21 — `to_primitive` がシーケンス式の最後の式を見る（`true + (x, [])` の誤った畳み込みを修正）（[#27837](https://github.com/oxc-project/oxc/pull/27837)） 📦 oxlint_v1.89.0 · [[repos/oxc-project-oxc/changes/2026-10-21|変更]]
 - 2026-10-19 — 副作用の無い値だけの配列の `join` 呼び出しを畳み込む（[#27905](https://github.com/oxc-project/oxc/pull/27905)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-19|変更]]
 - 2026-10-16 — void の文脈の論理式にド・モルガンの最適化を追加（[#27375](https://github.com/oxc-project/oxc/pull/27375)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-16|変更]]
 - 2026-10-16 — 実行されない `for` ループのレキシカル宣言の初期化子を保つ（[#27676](https://github.com/oxc-project/oxc/pull/27676)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-16|変更]]
@@ -58,3 +62,6 @@ tags:
 - [[repos/oxc-project-oxc/releases/crates_v0.154.0|crates_v0.154.0]]
 - [[repos/oxc-project-oxc/changes/2026-10-14|2026-10-14 の変更]]
 - [[repos/oxc-project-oxc/changes/2026-10-16|2026-10-16 の変更]]
+- [[repos/oxc-project-oxc/changes/2026-10-19|2026-10-19 の変更]]
+- [[repos/oxc-project-oxc/releases/crates_v0.155.0|crates_v0.155.0]]
+- [[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21 の変更]]

@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-21
+
+- 期間: 2026-10-18T21:11:33Z 〜 2026-10-20T23:57:12Z
+- PR 25 件（詳しく 18 件 / 1 行 7 件）、Release 3 件（安定版 3 件: crates_v0.155.0、oxfmt_v0.74.0、oxlint_v1.89.0）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-21|changes]]、[[repos/oxc-project-oxc/releases/crates_v0.155.0|crates_v0.155.0]]（新規）、[[repos/oxc-project-oxc/releases/oxfmt_v0.74.0|oxfmt_v0.74.0]]（新規）、[[repos/oxc-project-oxc/releases/oxlint_v1.89.0|oxlint_v1.89.0]]（新規）、[[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]（新規）、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/oxc_str|oxc_str]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/Markdownフォーマッタ|Markdownフォーマッタ]]、[[repos/oxc-project-oxc/topics/推奨ルール|推奨ルール]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 3 件、oxc-guard[bot] 2 件）
 
 ## 2026-10-19
 

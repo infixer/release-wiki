@@ -1,6 +1,6 @@
 ---
 title: UI
-updated: 2026-10-14
+updated: 2026-10-21
 tags:
   - repo/vitest-dev-vitest
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込みは単純なパイプラインに作り直され、検索が suite に一致したときはその下のツリー全体を表示する。HTML レポートのモジュールグラフはプロジェクト・環境ごとに 1 回だけ保存される。ブラウザモードのテストを表示する iframe と分割ペインのハンドルが重ならないよう、レイアウトが修正された。v5.0.2 では認証 cookie をブラウザのセッション終了後も保持するようになっている。`vitest --ui` でブラウザのタブが 2 つ開く不具合も修正された（Vite の `server.open` だけで開く）。設定の `test.ui.theme` で UI のテーマを指定できる（experimental）。トレースビューアーにはズームのポップオーバー（拡大・縮小・ペインに合わせる・リセット。デフォルト 100%、倍率はリロード後も保持）があり、複数の要素に一致したロケーターはすべてハイライトされる。UI のサーバーでは、認証と `index.html` のハンドラーをどちらも UI のベースパスにマウントするよう揃え、`..` を含むパスで HTML が返らないようにした。分割ペインのリサイズハンドルは境界線を中心に両側 2px になり、ドラッグ中もハイライトが残る（いずれも未リリース）。
+Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込みは単純なパイプラインに作り直され、検索が suite に一致したときはその下のツリー全体を表示する。HTML レポートのモジュールグラフはプロジェクト・環境ごとに 1 回だけ保存される。ブラウザモードのテストを表示する iframe と分割ペインのハンドルが重ならないよう、レイアウトが修正された。v5.0.2 では認証 cookie をブラウザのセッション終了後も保持するようになっている。`vitest --ui` でブラウザのタブが 2 つ開く不具合も修正された（Vite の `server.open` だけで開く）。設定の `test.ui.theme` で UI のテーマを指定できる（experimental）。トレースビューアーにはズームのポップオーバー（拡大・縮小・ペインに合わせる・リセット。デフォルト 100%、倍率はリロード後も保持）があり、複数の要素に一致したロケーターはすべてハイライトされる。UI のサーバーでは、認証と `index.html` のハンドラーをどちらも UI のベースパスにマウントするよう揃え、`..` を含むパスで HTML が返らないようにした。分割ペインのリサイズハンドルは境界線を中心に両側 2px になり、ドラッグ中もハイライトが残る（いずれも未リリース）。トレースビューアーのヘッダーで DOM と Aria（各ステップのアクセシビリティツリー）を切り替えられるようになった（v5.1.0-beta.1）。エクスプローラーの検索のハイライトは検索文字列をエスケープし、`nine (9` のような入力で例外にならない（未リリース）。
 
 ## 主な API・オプション
 
@@ -16,6 +16,8 @@ Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込�
 
 ## 変更履歴
 
+- 2026-10-21 — エクスプローラーのハイライトで検索文字列をエスケープ（[#11672](https://github.com/vitest-dev/vitest/pull/11672)） ⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-21|変更]]
+- 2026-10-21 — トレースビューアーで DOM / Aria を切り替え（[#11492](https://github.com/vitest-dev/vitest/pull/11492)） 📦 v5.1.0-beta.1 · [[repos/vitest-dev-vitest/changes/2026-10-21|変更]]
 - 2026-10-09 — `index.html` のハンドラーを UI のベースパスにマウント（[#11517](https://github.com/vitest-dev/vitest/pull/11517)） ⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-09|変更]]
 - 2026-10-09 — 分割ペインのリサイズハンドルを境界線の中央に（[#11506](https://github.com/vitest-dev/vitest/pull/11506)） ⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-09|変更]]
 - 2026-10-06 — `test.ui.theme` オプションを追加（直後の [#11509](https://github.com/vitest-dev/vitest/pull/11509) で experimental に）（[#11499](https://github.com/vitest-dev/vitest/pull/11499)）⏳ 未リリース · [[repos/vitest-dev-vitest/changes/2026-10-07|変更]]
@@ -35,3 +37,4 @@ Vitest UI（`packages/ui`）。エクスプローラーのツリーの絞り込�
 - [[repos/vitest-dev-vitest/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]（トレース）
 - [[repos/vitest-dev-vitest/releases/v5.0.4|v5.0.4]]
+- [[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21 の変更]]

@@ -1,6 +1,6 @@
 ---
 title: Firefox リリースノート
-updated: 2026-10-14
+updated: 2026-10-21
 tags:
   - blog/firefox
 ---
@@ -9,6 +9,9 @@ tags:
 
 ## 記事
 
+- 2026-10-20 — [[blogs/firefox/posts/2026-10-20-158.0.1|Firefox 158.0.1]] — 侵害された eMudhra 中間証明書の OneCRL ブロックリストを同梱、テキスト選択時のスクロールや Windows の印刷クラッシュなどを修正
+- 2026-10-20 — [[blogs/firefox/posts/2026-10-20-153.5.1|Firefox 153.5.1]] — ESR 153 の更新
+- 2026-10-20 — [[blogs/firefox/posts/2026-10-20-115.43.1|Firefox 115.43.1]] — ESR 115 のセキュリティ修正（Windows 7〜8.1・macOS 10.12〜10.14 のみサポート）
 - 2026-10-13 — [[blogs/firefox/posts/2026-10-13-158.0|Firefox 158.0]] — Smart Window のフォーム入力提案、JPEG XL 対応、アクセシブルな PDF、CSS `calc()` の型付き演算
 - 2026-10-13 — [[blogs/firefox/posts/2026-10-13-153.5.0|Firefox 153.5.0]] — ESR 153 の更新
 - 2026-10-13 — [[blogs/firefox/posts/2026-10-13-115.43.0|Firefox 115.43.0]] — ESR 115 の更新（Windows 7〜8.1・macOS 10.12〜10.14 のみサポート）
@@ -25,6 +28,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-10-21 — 記事 3 件。エラー: なし
 - 2026-10-14 — 記事 3 件。エラー: なし
 - 2026-10-07 — 記事 1 件。エラー: なし
 - 2026-09-30 — 記事 4 件。エラー: なし

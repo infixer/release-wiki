@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -11,20 +11,20 @@ tags:
 
 - 安定版: [v5.0.5](https://github.com/vitest-dev/vitest/releases/tag/v5.0.5)（2026-10-15）→ [[repos/vitest-dev-vitest/releases/v5.0.5|まとめ]]
 - v4 系: [v4.1.12](https://github.com/vitest-dev/vitest/releases/tag/v4.1.12)（2026-10-15）→ [[repos/vitest-dev-vitest/releases/v4.1.12|まとめ]]
-- プレリリース: なし
+- プレリリース: [v5.1.0-beta.1](https://github.com/vitest-dev/vitest/releases/tag/v5.1.0-beta.1)（2026-10-19）
 
 ## 直近の注目変更
 
-- coverage: v8 の `autoAttachSubprocess` で `.tmp` ディレクトリを使う（[#11632](https://github.com/vitest-dev/vitest/pull/11632)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
-- 並行する import にも同じモックを返す（automock・スパイの完了も待つ）（[#11623](https://github.com/vitest-dev/vitest/pull/11623)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
-- `--changed` の絞り込み後にセットアップファイルを再実行、静的な収集でも fs のモジュールキャッシュを使う（[#11621](https://github.com/vitest-dev/vitest/pull/11621)、[#11622](https://github.com/vitest-dev/vitest/pull/11622)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]、[[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
-- browser: トレースの位置は最初のフレームだけソースマップで解決（Firefox で 5674ms → 326ms の例）（[#11613](https://github.com/vitest-dev/vitest/pull/11613)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
-- 終了処理中に保留中の console のログで失敗しないように（[#11619](https://github.com/vitest-dev/vitest/pull/11619)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
-- `Chai` を使うすべての d.ts のチャンクで chai の型を参照（[#11618](https://github.com/vitest-dev/vitest/pull/11618)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
-- ルート・プロジェクトのサーバーで Vite の既定の `fs.deny`（`.env`・`*.pem`・`.git`）と API トークンのファイルを拒否（[#11578](https://github.com/vitest-dev/vitest/pull/11578)）📦 v5.0.5 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/プロジェクト|プロジェクト]]
-- `beforeAll` / `beforeEach` のクリーンアップを後のフックが失敗しても実行（[#11605](https://github.com/vitest-dev/vitest/pull/11605)）📦 v5.0.5 · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
-- `--bail` / `cancelCurrentRun` で並行実行中のテストをすべて中断（[#11606](https://github.com/vitest-dev/vitest/pull/11606)）📦 v5.0.5 · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
-- `isolate: false` で終わったファイルのモックファクトリーを解放（[#11607](https://github.com/vitest-dev/vitest/pull/11607)）📦 v5.0.5 · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
+- browser: 失敗時にターミナルへトレースのステップのタイムラインを表示（[#11594](https://github.com/vitest-dev/vitest/pull/11594)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
+- coverage: istanbul の計装を `magic-string` + `rolldown` にして 5〜10 倍高速化（[#11648](https://github.com/vitest-dev/vitest/pull/11648)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
+- 後から生じるモックファクトリーの循環を検出してタイムアウトを防ぐ（[#11642](https://github.com/vitest-dev/vitest/pull/11642)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
+- `expect`: 型付き配列の比較を高速化（2 MiB で約 1.5 s → 約 125 ms）（[#11658](https://github.com/vitest-dev/vitest/pull/11658)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
+- browser: import map でモジュールをモック（`browser.importMapMocks`。mock の多いスイートで約 2 倍速い例）（[#11534](https://github.com/vitest-dev/vitest/pull/11534)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/モック|モック]]
+- `--last-failed` と `--since-last-run` を追加（[#11558](https://github.com/vitest-dev/vitest/pull/11558)、[#11516](https://github.com/vitest-dev/vitest/pull/11516)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]
+- browser: 既定のポートを `63315` から `23315` に変更（Windows の予約範囲を回避）（[#11640](https://github.com/vitest-dev/vitest/pull/11640)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
+- browser: 実験的な `pointer` API、トレースビューの正式化と aria スナップショット（[#10780](https://github.com/vitest-dev/vitest/pull/10780)、[#11518](https://github.com/vitest-dev/vitest/pull/11518)、[#11492](https://github.com/vitest-dev/vitest/pull/11492)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
+- フェイクタイマー: `node:timers` 対応（`fakeNodeBuiltins`）、`vi.setSystemTime()` の Temporal 対応、ブラウザの操作中にタイマーを進める（[#10899](https://github.com/vitest-dev/vitest/pull/10899)、[#11321](https://github.com/vitest-dev/vitest/pull/11321)、[#11242](https://github.com/vitest-dev/vitest/pull/11242)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
+- `TestCase.attempts()` でリトライ・繰り返しごとの結果を取得（[#11232](https://github.com/vitest-dev/vitest/pull/11232)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
 
 ## トピック
 
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-19|2026-10-19]]、[[repos/vitest-dev-vitest/changes/2026-10-16|2026-10-16]]、[[repos/vitest-dev-vitest/changes/2026-10-14|2026-10-14]]、[[repos/vitest-dev-vitest/changes/2026-10-12|2026-10-12]]、[[repos/vitest-dev-vitest/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21]]、[[repos/vitest-dev-vitest/changes/2026-10-19|2026-10-19]]、[[repos/vitest-dev-vitest/changes/2026-10-16|2026-10-16]]、[[repos/vitest-dev-vitest/changes/2026-10-14|2026-10-14]]、[[repos/vitest-dev-vitest/changes/2026-10-12|2026-10-12]]

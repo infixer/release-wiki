@@ -1,6 +1,6 @@
 ---
 title: css-color-4
-updated: 2026-10-12
+updated: 2026-10-21
 tags:
   - repo/w3c-csswg-drafts
   - topic
@@ -16,6 +16,7 @@ CSS の色（`lch()`・`oklch()` などの色空間と、その変換）を定�
 
 ## 変更履歴
 
+- 2026-10-20 — `Lab_to_XYZ` のサンプルコードを、内部で float を使う実装でも問題が起きないように更新（[#14636](https://github.com/w3c/csswg-drafts/pull/14636)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-21|変更]]
 - 2026-10-12 — EdgeSeeker の疑似コードを修正（LUT を OkLCh の色相で索引、色相 60° ごとのサンプリング、hue fold の除去、数値的に安定な円弧交点、虚の原色を持たない RGB 色空間に限定、色域外の色だけをマッピング）（[`778ad60`](https://github.com/w3c/csswg-drafts/commit/778ad60bae76b750fdc96551f0410d72fcb3f9b9) ほか 5 件）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-12|変更]]
 - 2026-10-12 — EdgeSeeker 色域マッピングの疑似コードを追加（[#14426](https://github.com/w3c/csswg-drafts/pull/14426)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-12|変更]]
 - 2026-10-09 — `<opacity-value>` のシリアライズは、この値を取るすべてのプロパティに適用されると明確化（#10426）（[`4dd6b0d`](https://github.com/w3c/csswg-drafts/commit/4dd6b0d72c9dda90dc6dbe65ae3e8833a64d7446)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-09|変更]]
@@ -26,3 +27,4 @@ CSS の色（`lch()`・`oklch()` などの色空間と、その変換）を定�
 - [[repos/w3c-csswg-drafts/changes/2026-10-12|2026-10-12 の変更]]
 - [[repos/w3c-csswg-drafts/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/w3c-csswg-drafts/changes/2026-10-02|2026-10-02 の変更]]
+- [[repos/w3c-csswg-drafts/changes/2026-10-21|2026-10-21 の変更]]

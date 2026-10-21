@@ -1,6 +1,6 @@
 ---
 title: Server Components
-updated: 2026-10-16
+updated: 2026-10-21
 tags:
   - repo/react-react
   - topic
@@ -16,6 +16,7 @@ Flight プロトコル（React Server Components のシリアライズ形式）�
 
 ## 変更履歴
 
+- 2026-10-19 — I/O の名前から `<anonymous>.` の接頭辞を正しく取り除く（`ous>.fetch` のように壊れていた）（[#37856](https://github.com/react/react/pull/37856)）⏳ 未リリース · [[repos/react-react/changes/2026-10-21|変更]]
 - 2026-10-14 — Flight の転送プロトコルを改善（[#37846](https://github.com/react/react/pull/37846)）⏳ 未リリース（バックポートは v19.0.9〜v19.3.1 に収録） · [[repos/react-react/changes/2026-10-16|変更]]
 - 2026-10-07 — スタックフレームの無いエラーを debug info から復元できない問題を修正（#37728）（[#37730](https://github.com/react/react/pull/37730)）⏳ 未リリース · [[repos/react-react/changes/2026-10-07|変更]]
 - 2026-09-24 — Server Reference が任意のオブジェクトを参照できるように（実験的）（[#37636](https://github.com/react/react/pull/37636)）⏳ 未リリース · [[repos/react-react/changes/2026-09-24|変更]]
@@ -27,3 +28,4 @@ Flight プロトコル（React Server Components のシリアライズ形式）�
 - [[repos/react-react/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/react-react/changes/2026-10-16|2026-10-16 の変更]]
 - [[repos/react-react/releases/v19.3.1|v19.3.1]]、[[repos/react-react/releases/v19.2.9|v19.2.9]]、[[repos/react-react/releases/v19.1.10|v19.1.10]]、[[repos/react-react/releases/v19.0.9|v19.0.9]]
+- [[repos/react-react/changes/2026-10-21|2026-10-21 の変更]]

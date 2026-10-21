@@ -1,6 +1,6 @@
 ---
 title: script要素
-updated: 2026-10-09
+updated: 2026-10-21
 tags:
   - repo/whatwg-html
   - topic
@@ -9,6 +9,7 @@ tags:
 ## 概要
 
 `script` 要素の処理（`scripting`）に関する仕様。`type` 属性の値から先頭と末尾の ASCII 空白を取り除くのは JavaScript MIME type の判定のときだけで、`type=" module "` のように空白を含む値はモジュールスクリプトにならない（WebKit・Chromium の挙動に合わせた）。Trusted Types 向けの IDL も HTML 本体で定義され、`src` は `TrustedScriptURL`、`text`・`innerText`・`textContent` は `TrustedScript` を受け取る。
+`Fragment` のスクリプティングモード（`runScripts: true` の `setHTMLUnsafe()` など）では、パーサーは `force async` を false にしない。挿入前の `script.async` は `true` で、`async` の無い外部スクリプトは async として実行される（3 エンジンの挙動に一致、未リリース）。
 
 ## 主な API・オプション
 
@@ -18,6 +19,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-20 — `Fragment` のスクリプティングモードでは `force async` を false にしない（`async` の無い外部スクリプトは挿入後に async として実行）（[#13080](https://github.com/whatwg/html/pull/13080)）⏳ 未リリース · [[repos/whatwg-html/changes/2026-10-21|変更]]
 - 2026-10-09 — `HTMLScriptElement` の Trusted Types 向け IDL を Trusted Types 仕様の monkey patch から HTML 本体に取り込む（挙動の変更なし）（[#12195](https://github.com/whatwg/html/pull/12195)）⏳ 未リリース · [[repos/whatwg-html/changes/2026-10-09|変更]]
 - 2026-10-07 — classic 以外の script の `type` から空白を取り除かないように（`type=" module "` はモジュールスクリプトにならない）（#13012）（[#13031](https://github.com/whatwg/html/pull/13031)）⏳ 未リリース · [[repos/whatwg-html/changes/2026-10-07|変更]]
 
@@ -25,3 +27,4 @@ tags:
 
 - [[repos/whatwg-html/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/whatwg-html/changes/2026-10-07|2026-10-07 の変更]]
+- [[repos/whatwg-html/changes/2026-10-21|2026-10-21 の変更]]

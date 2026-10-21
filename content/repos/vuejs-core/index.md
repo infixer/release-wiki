@@ -1,6 +1,6 @@
 ---
 title: vuejs/core
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/vuejs-core
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- `disablepictureinpicture`・`disableremoteplayback` を真偽値の属性として扱う（[#15952](https://github.com/vuejs/core/pull/15952)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]]
 - SSR: 非同期 setup のエラーを呼び出し元に伝える（[#15857](https://github.com/vuejs/core/pull/15857)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - Transition: コメントで包まれたコンポーネントのルートの切り替え（`out-in` / `in-out`・KeepAlive）を修正（[#15853](https://github.com/vuejs/core/pull/15853)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/トランジション|トランジション]]
 - TransitionGroup: 入れ子のグループの移動アニメーションを修正（[#15848](https://github.com/vuejs/core/pull/15848)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/トランジション|トランジション]]
@@ -23,7 +24,6 @@ tags:
 - sync / immediate のウォッチャーのコールバックで外側の effect に依存を追跡させない（[#15782](https://github.com/vuejs/core/pull/15782)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]]
 - `hydrateOnVisible()` で `display: contents` のルートの子を監視（[#15773](https://github.com/vuejs/core/pull/15773)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - ルートの `mount()` は自分が積んだジョブだけを flush（他のアプリのウォッチャーを同期実行しない）（[#15757](https://github.com/vuejs/core/pull/15757)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
-- 不正な `v-for` の範囲を本番・SSR でも空のリストに（[#15742](https://github.com/vuejs/core/pull/15742)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]、[[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 
 ## トピック
 
@@ -34,10 +34,10 @@ tags:
 - [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]] — `watch`（`once`・sync）・`shallowReactive` のコレクション・配列のイテレーター
 - [[repos/vuejs-core/topics/レンダラー|レンダラー]] — runtime-core のレンダラー・スケジューラー・props の更新判定・`renderList`
 - [[repos/vuejs-core/topics/互換ビルド|互換ビルド]] — Vue 2 からの移行用の compat ビルド（`_setupProxy`）
-- [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]] — runtime-dom の属性（`playsinline` など真偽値の属性）とスタイルのパッチ
+- [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]] — runtime-dom の属性（`playsinline`・`disablepictureinpicture` など真偽値の属性）とスタイルのパッチ
 - [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]] — `<Suspense>`・`<KeepAlive>`・`<Teleport>`
 
 ## 取り込み
 
 - [[repos/vuejs-core/log|取り込み履歴]]
-- 最近の変更: [[repos/vuejs-core/changes/2026-10-14|2026-10-14]]、[[repos/vuejs-core/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/vuejs-core/changes/2026-10-21|2026-10-21]]、[[repos/vuejs-core/changes/2026-10-14|2026-10-14]]、[[repos/vuejs-core/changes/2026-09-24|2026-09-24]]

@@ -1,6 +1,6 @@
 ---
 title: mod API
-updated: 2026-10-16
+updated: 2026-10-21
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -16,6 +16,7 @@ UI の `Button` は子要素（文字列と `Text`）を持てるようになり
 v2.1.299〜v2.1.301 で UI 部品が増えた: `Text` の `size`・`weight`・`mono`・`tabular`・`dir`（右から左）、`Box` の名前付き間隔（`xs`〜`xl`）、`Input` の `rows`（複数行）、プロンプトの装飾の `virtualText`。`bold` は非推奨で `weight` に置き換え。
 フックでは `prompt.change` が加わり、`agent.spawn` でワークフローのエージェントの `prompt`・`model` を書き換えられ、`skill.prompt` はスキルの frontmatter などを受け取り、`session.append` には `queue` がある。`$.ui.view({ agentId })` でエージェントの transcript をメインビューに出せる。
 managed settings でインストールした mod は `$.prompt.media`（添付の画像・文書のバイト列）と `$.session.identity()` を使える。
+v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアログかホストのコールバックだけが承認でき、尋ねる相手がいなければ拒否）が、イベントに `e.isReadOnly` が加わった。
 
 ## 主な API・オプション
 
@@ -28,9 +29,11 @@ managed settings でインストールした mod は `$.prompt.media`（添付�
 - `$.ui.view({ agentId })` / `$.ui.view({})` — エージェントの transcript の表示と戻り
 - `prompt.change` / `agent.spawn` / `skill.prompt` / `session.append`（`queue`）— mod のフック
 - `$.prompt.media` / `$.session.identity()` — managed settings でインストールした mod 向け
+- `tool.check` の `decider: "person"` / `e.isReadOnly` — 人だけが承認できる ask と、読み取り専用の呼び出しの判定（v2.1.304）
 
 ## 変更履歴
 
+- 2026-10-19 — `tool.check` の回答に `decider: "person"`、イベントに `e.isReadOnly` を追加。先に動くプラグインが mod のフックを飛ばすと transcript に行を出すように。mod の再読み込み失敗で残る版のツール・コマンドが消える問題、同じラベルで `key` の無いボタンのクリックが失われる問題を修正 📦 v2.1.304 · [[repos/anthropics-claude-code/releases/v2.1.304|リリース]]
 - 2026-10-15 — `Input` に `rows`（複数行のテキスト欄）を追加 📦 v2.1.301 · [[repos/anthropics-claude-code/releases/v2.1.301|リリース]]
 - 2026-10-14 — `virtualText`、`$.ui.view({ agentId })`、`Text` の `dir`、`prompt.change` フックを追加、`agent.spawn` でワークフローのエージェントの `prompt`・`model` を書き換え可能に 📦 v2.1.300 · [[repos/anthropics-claude-code/releases/v2.1.300|リリース]]
 - 2026-10-14 — `$.prompt.media`・`$.session.identity()`、`Text` の `size`・`weight`・`mono`・`tabular`、`Box` の間隔、`skill.prompt` の追加情報、`session.append` の `queue` を追加。`/plugin`・`claude plugin validate` で飛ばされるフックを注記 📦 v2.1.299 · [[repos/anthropics-claude-code/releases/v2.1.299|リリース]]
@@ -48,3 +51,4 @@ managed settings でインストールした mod は `$.prompt.media`（添付�
 - [[repos/anthropics-claude-code/releases/v2.1.300|v2.1.300]]
 - [[repos/anthropics-claude-code/releases/v2.1.301|v2.1.301]]
 - [[repos/anthropics-claude-code/topics/エージェントビュー|エージェントビュー]]
+- [[repos/anthropics-claude-code/releases/v2.1.304|v2.1.304]]

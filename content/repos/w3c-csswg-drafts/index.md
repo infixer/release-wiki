@@ -1,6 +1,6 @@
 ---
 title: w3c/csswg-drafts
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/w3c-csswg-drafts
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- css-color-4: `Lab_to_XYZ` のサンプルコードを float を使う実装向けに更新（[#14636](https://github.com/w3c/csswg-drafts/pull/14636)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-color-4|css-color-4]]
 - 2026-10-18 — `content-visibility: hidden` でスキップされたメディア要素の再生の挙動を定義（[#14611](https://github.com/w3c/csswg-drafts/pull/14611)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-contain-2|css-contain-2]]
 - 2026-10-16 — `display-mode: application` を追加し、`display-mode` の複数の値が同時に一致するように（[#14587](https://github.com/w3c/csswg-drafts/pull/14587)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]]
 - 2026-10-16 — カーニングはプロポーショナルなグリフだけに適用されると明確化（[`b1af0bd`](https://github.com/w3c/csswg-drafts/commit/b1af0bd2f2d02dc19da3cbb584f3a7fa2dc0d83c)、[`a17071d`](https://github.com/w3c/csswg-drafts/commit/a17071ddd3a207698d6b5625234a71268a008c13)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]]
@@ -23,7 +24,6 @@ tags:
 - 2026-10-16 — `corner-shape || border-radius` の順序を #11623 の決定に合わせる（[#14607](https://github.com/w3c/csswg-drafts/pull/14607)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-borders-4|css-borders-4]]
 - 2026-10-14 — 新しい仕様 `css-overscroll-2` の最初の草案（`overscrollcontainer`・`overscrollareas`）（[#14532](https://github.com/w3c/csswg-drafts/pull/14532)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-overscroll-2|css-overscroll-2]]
 - 2026-10-14 — `::interest-invoker` 疑似要素の最初の草案を追加（[`9f78c40`](https://github.com/w3c/csswg-drafts/commit/9f78c40e1fa3afb1990224f1c7ab3946965a285b)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-pseudo-4|css-pseudo-4]]
-- 2026-10-14 — 「parse a block's contents」を削除し「parse a list of declarations」に戻す（[`fbd84ec`](https://github.com/w3c/csswg-drafts/commit/fbd84ec61ae093787ced21cd48d3a7536e04b50a)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-syntax-3|css-syntax-3]]
 
 ## トピック
 
@@ -54,4 +54,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-csswg-drafts/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-10-19|2026-10-19]]、[[repos/w3c-csswg-drafts/changes/2026-10-16|2026-10-16]]、[[repos/w3c-csswg-drafts/changes/2026-10-14|2026-10-14]]、[[repos/w3c-csswg-drafts/changes/2026-10-12|2026-10-12]]、[[repos/w3c-csswg-drafts/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-10-21|2026-10-21]]、[[repos/w3c-csswg-drafts/changes/2026-10-19|2026-10-19]]、[[repos/w3c-csswg-drafts/changes/2026-10-16|2026-10-16]]、[[repos/w3c-csswg-drafts/changes/2026-10-14|2026-10-14]]、[[repos/w3c-csswg-drafts/changes/2026-10-12|2026-10-12]]

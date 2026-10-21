@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-10-21
+
+- 期間: 2026-10-18T16:22:11Z 〜 2026-10-20T23:57:12Z（直接のコミット: 2026-10-18T16:22:10Z 〜 2026-10-20T23:57:12Z）
+- PR 1 件（詳しく 1 件 / 1 行 0 件）、直接のコミット 3 件（詳しく 0 件 / 1 行 3 件）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-10-21|changes]]（新規）、[[repos/w3c-csswg-drafts/topics/css-color-4|css-color-4]]、[[repos/w3c-csswg-drafts/index|index]]
+- エラー: なし
 
 ## 2026-10-19
 

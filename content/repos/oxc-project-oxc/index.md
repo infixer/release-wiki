@@ -1,6 +1,6 @@
 ---
 title: oxc-project/oxc
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/oxc-project-oxc
 ---
@@ -9,23 +9,23 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [oxlint_v1.88.0](https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.88.0)（2026-10-13）→ [[repos/oxc-project-oxc/releases/oxlint_v1.88.0|まとめ]]
+- 安定版: [oxlint_v1.89.0](https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.89.0)（2026-10-19）→ [[repos/oxc-project-oxc/releases/oxlint_v1.89.0|まとめ]]
 - プレリリース: なし
 
-同日に公開された他の安定版: [[repos/oxc-project-oxc/releases/crates_v0.154.0|crates_v0.154.0]]、[[repos/oxc-project-oxc/releases/oxfmt_v0.73.0|oxfmt_v0.73.0]]（いずれも 2026-10-13）
+同日に公開された他の安定版: [[repos/oxc-project-oxc/releases/crates_v0.155.0|crates_v0.155.0]]、[[repos/oxc-project-oxc/releases/oxfmt_v0.74.0|oxfmt_v0.74.0]]（いずれも 2026-10-19）
 
 ## 直近の注目変更
 
+- 定数評価: 孤立サロゲートを含む文字列も `JSStr` で畳み込み、`indexOf`・`substring` などを UTF-16 単位の実装に統一（破壊的変更）（[#27098](https://github.com/oxc-project/oxc/pull/27098)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
+- Minifier: 定数メンバーの `delete` を値に畳み込まない（0.155.0 で生じた誤りを修正）（[#27990](https://github.com/oxc-project/oxc/pull/27990)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
+- React Compiler: `try` の中の分岐で選ばれる値をリアクティブに扱う（[#27817](https://github.com/oxc-project/oxc/pull/27817)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]
+- Oxfmt: 行幅ちょうどのアローのシグネチャを保つ（[#27989](https://github.com/oxc-project/oxc/pull/27989)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
+- `eslint/arrow-body-style`: 自動修正で型アサーションを保つ（[#27978](https://github.com/oxc-project/oxc/pull/27978)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
+- oxlint: Linux での起動時の 20〜40 ms の `membarrier` 待ちを解消（[#27954](https://github.com/oxc-project/oxc/pull/27954)）📦 oxlint_v1.89.0 · トピック: [[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]
+- 孤立サロゲート対応: JSX の文字参照のデコード、lint ルールのチェック、文字列の添字の畳み込み、`StaticPropertyName::display()`（[#26712](https://github.com/oxc-project/oxc/pull/26712)、[#26716](https://github.com/oxc-project/oxc/pull/26716)、[#26717](https://github.com/oxc-project/oxc/pull/26717)、[#27096](https://github.com/oxc-project/oxc/pull/27096)、[#27950](https://github.com/oxc-project/oxc/pull/27950)）📦 oxlint_v1.89.0 · トピック: [[repos/oxc-project-oxc/topics/oxc_str|oxc_str]]
+- Oxfmt: 空文だけの静的ブロックの panic、front matter・YAML の文書マーカー、JSDoc のコードスパンの修正（[#27945](https://github.com/oxc-project/oxc/pull/27945)、[#27946](https://github.com/oxc-project/oxc/pull/27946)、[#27947](https://github.com/oxc-project/oxc/pull/27947)、[#27955](https://github.com/oxc-project/oxc/pull/27955)）📦 oxlint_v1.89.0 · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
 - レキサー: CPU 機能（AVX2・NEON）の検出を実行時に移行し、`DynCpu`・`cpu_select!`・`cpu_versions!` で実装を振り分ける（[#27712](https://github.com/oxc-project/oxc/pull/27712)、[#27713](https://github.com/oxc-project/oxc/pull/27713)、[#27909](https://github.com/oxc-project/oxc/pull/27909) ほか）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]
-- Oxfmt: 穴のある配列・for の先頭の空きでのコメントの位置を保つ（[#27730](https://github.com/oxc-project/oxc/pull/27730)、[#27729](https://github.com/oxc-project/oxc/pull/27729)、[#27737](https://github.com/oxc-project/oxc/pull/27737)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
-- フォーマッタ: BOM・CRLF のソースでの解析エラー位置を修正、BOM 付きの設定 JSON の読み込み、`.editorconfig` の検証（[#27776](https://github.com/oxc-project/oxc/pull/27776)、[#27777](https://github.com/oxc-project/oxc/pull/27777)、[#27774](https://github.com/oxc-project/oxc/pull/27774)、[#27778](https://github.com/oxc-project/oxc/pull/27778)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/設定ファイル|設定ファイル]]
-- JSON フォーマッタ: 不正な JSON を落とさずに拒否し、穴だけの配列とコメントでの panic を修正（[#27727](https://github.com/oxc-project/oxc/pull/27727)、[#27728](https://github.com/oxc-project/oxc/pull/27728)、[#27785](https://github.com/oxc-project/oxc/pull/27785)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
-- Minifier: 副作用の無い値だけの配列の `join` を畳み込む（[#27905](https://github.com/oxc-project/oxc/pull/27905)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- promise プラグインのルールに上流の recommended を反映（[#27693](https://github.com/oxc-project/oxc/pull/27693)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/推奨ルール|推奨ルール]]
-- oxlint の各ルールに上流の recommended を反映（ESLint・TypeScript・Unicorn の `unopinionated`・import・Next.js）（[#27632](https://github.com/oxc-project/oxc/pull/27632)、[#27634](https://github.com/oxc-project/oxc/pull/27634)、[#27670](https://github.com/oxc-project/oxc/pull/27670) ほか）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/推奨ルール|推奨ルール]]
-- ESLint・Unicorn との差異を埋める lint ルールの修正（`no-setter-return`・`no-useless-assignment`・`max-params`・`id-length`・`unicorn/catch-error-name` など）（[#27731](https://github.com/oxc-project/oxc/pull/27731)、[#27735](https://github.com/oxc-project/oxc/pull/27735)、[#27702](https://github.com/oxc-project/oxc/pull/27702) ほか）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
-- Minifier: 呼び出し先への畳み込みで `(0, x)` の間接アクセスを保ち、実行されない `for` ループの `let` / `const` の初期化子を保つ（[#27082](https://github.com/oxc-project/oxc/pull/27082)、[#27676](https://github.com/oxc-project/oxc/pull/27676)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- 定数評価: BigInt の `==`・`Number.isInteger` / `isSafeInteger`・`parseFloat` の誤った畳み込みを修正（[#27656](https://github.com/oxc-project/oxc/pull/27656)、[#27622](https://github.com/oxc-project/oxc/pull/27622)、[#27695](https://github.com/oxc-project/oxc/pull/27695)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
+- oxlint の各ルールに上流の recommended を反映（ESLint・TypeScript・Unicorn・import・Next.js・promise など）（[#27632](https://github.com/oxc-project/oxc/pull/27632)、[#27693](https://github.com/oxc-project/oxc/pull/27693) ほか）📦 oxlint_v1.89.0 · トピック: [[repos/oxc-project-oxc/topics/推奨ルール|推奨ルール]]
 
 ## トピック
 
@@ -41,6 +41,7 @@ tags:
 - [[repos/oxc-project-oxc/topics/no-unused-vars|no-unused-vars]] — ESLint `no-unused-vars` ルールの判定・自動修正
 - [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]] — Oxfmt（`oxc_formatter`、CSS・JSON・TOML フォーマッタを含む）の Prettier 互換性・コメント処理・同梱 Prettier の追従
 - [[repos/oxc-project-oxc/topics/oxc_str|oxc_str]] — `JSStr` などの文字列型を提供するクレート
+- [[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]] — oxlint の CLI・npm パッケージの実行時の挙動と性能
 - [[repos/oxc-project-oxc/topics/Playground|Playground]] — oxc Playground の機能
 - [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]] — `oxc_react_compiler` と `oxc-transform-react` のオプション
 - [[repos/oxc-project-oxc/topics/TypeScriptトランスフォーマー|TypeScriptトランスフォーマー]] — TypeScript の enum 等の変換処理と `ReplaceGlobalDefines`
@@ -55,4 +56,4 @@ tags:
 ## 取り込み
 
 - [[repos/oxc-project-oxc/log|取り込み履歴]]
-- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-19|2026-10-19]]、[[repos/oxc-project-oxc/changes/2026-10-16|2026-10-16]]、[[repos/oxc-project-oxc/changes/2026-10-14|2026-10-14]]、[[repos/oxc-project-oxc/changes/2026-10-12|2026-10-12]]、[[repos/oxc-project-oxc/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21]]、[[repos/oxc-project-oxc/changes/2026-10-19|2026-10-19]]、[[repos/oxc-project-oxc/changes/2026-10-16|2026-10-16]]、[[repos/oxc-project-oxc/changes/2026-10-14|2026-10-14]]、[[repos/oxc-project-oxc/changes/2026-10-12|2026-10-12]]

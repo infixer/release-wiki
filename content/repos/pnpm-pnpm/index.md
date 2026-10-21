@@ -1,6 +1,6 @@
 ---
 title: pnpm/pnpm
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/pnpm-pnpm
 ---
@@ -16,16 +16,16 @@ tags:
 
 ## 直近の注目変更
 
+- pnpr が tarball から確かめた `requiresBuild` を `dist.pnpr.requiresBuild` で配り、pnpm v12 がインストールに使う（[#17164](https://github.com/pnpm/pnpm/pull/17164)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]
+- pnpr の本番準備（文書の `formatVersion`、`pnpr serve`、厳密な設定の検証、`v0` プロトコルとハンドシェイク、秘密情報の検証とサブキー）（[#17112](https://github.com/pnpm/pnpm/pull/17112), [#17126](https://github.com/pnpm/pnpm/pull/17126)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
+- frozen install がローカルのディレクトリ依存を推移的に確かめ、tarball の URL・git のコミットの変更を拒否（[#17141](https://github.com/pnpm/pnpm/pull/17141), [#17143](https://github.com/pnpm/pnpm/pull/17143)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
+- `pnpm prune` が余分な直接依存を消し、`--filter`・`-r` に従う（[#17154](https://github.com/pnpm/pnpm/pull/17154)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]
+- `pnpm patch` がファイルの名前の変更と `sharedWorkspaceLockfile: false` に対応（[#17120](https://github.com/pnpm/pnpm/pull/17120), [#17155](https://github.com/pnpm/pnpm/pull/17155)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/パッチ|パッチ]]
 - pnpr がすべてのエコシステムを接頭辞（npm は常に `/npm/`）で配り、ホスト型ストアは衝突しないレイアウトに（破壊的変更）（[#17087](https://github.com/pnpm/pnpm/pull/17087), [#17100](https://github.com/pnpm/pnpm/pull/17100)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
 - `lockfile.integrityTarget: tar` で展開前の tar のハッシュを lockfile に固定し、リビジョンを tar のダイジェストで指す（[#17092](https://github.com/pnpm/pnpm/pull/17092)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]
 - zstd の content coding で tar を配るレジストリからインストール、`maxTarballUnpackedSize` を v11 と zip にも適用（[#17054](https://github.com/pnpm/pnpm/pull/17054), [#17014](https://github.com/pnpm/pnpm/pull/17014)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]
 - `pnpm-workspace.yaml` の `include` で設定を別ファイル・config 依存に分ける（[#16967](https://github.com/pnpm/pnpm/pull/16967)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/設定|設定]]
 - pnpr の Web ログインでの SSO、保守用のサブコマンド、パッケージの所有者・メンテナーと tombstone、予約ユーザー名の保護（[#16969](https://github.com/pnpm/pnpm/pull/16969), [#17002](https://github.com/pnpm/pnpm/pull/17002), [#17060](https://github.com/pnpm/pnpm/pull/17060), [#17046](https://github.com/pnpm/pnpm/pull/17046)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
-- 公式 Docker イメージに Alpine 版（`ghcr.io/pnpm/pnpm:12-alpine` など）（[#17069](https://github.com/pnpm/pnpm/pull/17069)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]
-- 別のパッケージを名乗るレジストリのメタデータを `ERR_PNPM_REGISTRY_NAME_MISMATCH` で拒否（[#16968](https://github.com/pnpm/pnpm/pull/16968)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]
-- フィルター付きのインストールの後も選んだプロジェクトを wanted lockfile と照らし、`verifyDepsBeforeRun` がパッチの中身で判断（[#17019](https://github.com/pnpm/pnpm/pull/17019), [#16992](https://github.com/pnpm/pnpm/pull/16992)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]
-- `pnpm pack`・`publish` が npm-packlist の既定の除外パターンを除き、`pnpm deploy` が lockfile の外の `file:` 依存を配置（[#16971](https://github.com/pnpm/pnpm/pull/16971), [#16998](https://github.com/pnpm/pnpm/pull/16998)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
-- `sideEffectsCache.exclude` で環境に左右されるパッケージのビルドを side-effects キャッシュから外す（[#15651](https://github.com/pnpm/pnpm/pull/15651)）⏳ 未リリース（v12.14.0 に記載）· トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]
 
 ## トピック
 
@@ -43,6 +43,7 @@ tags:
 - [[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]] — 自動重複排除・`pnpm dedupe` の収束・カタログ・lockfile の再利用・`minimumReleaseAge`
 - [[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]] — タスクの並行実行グループ、リモートキャッシュ、スクリプト実行と実行前の依存確認
 - [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]] — `pack`/`publish`/`deploy`/`dist-tag`・provenance・OIDC とバージョン更新
+- [[repos/pnpm-pnpm/topics/パッチ|パッチ]] — `pnpm patch`・`patch-commit`・`patch-remove` とパッチの適用（名前の変更、ワークスペースでの扱い）
 - [[repos/pnpm-pnpm/topics/プロジェクト移動|プロジェクト移動]] — 移動・コピーしたプロジェクトでの node_modules/bin シムの再利用
 - [[repos/pnpm-pnpm/topics/マルチエコシステム設定|マルチエコシステム設定]] — npm/Cargo/PyPI にまたがる設定スキーマの統合と Cargo 連携
 - [[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]] — グローバル Node シムのバージョン解決、エンジン/ランタイム・pnpm 本体の切り替え、配布バイナリと `self-update`・Windows の `pnpm.cmd`
@@ -51,4 +52,4 @@ tags:
 ## 取り込み
 
 - [[repos/pnpm-pnpm/log|取り込み履歴]]
-- 最近の変更: [[repos/pnpm-pnpm/changes/2026-10-19|2026-10-19]]、[[repos/pnpm-pnpm/changes/2026-10-16|2026-10-16]]、[[repos/pnpm-pnpm/changes/2026-10-14|2026-10-14]]、[[repos/pnpm-pnpm/changes/2026-10-12|2026-10-12]]、[[repos/pnpm-pnpm/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/pnpm-pnpm/changes/2026-10-21|2026-10-21]]、[[repos/pnpm-pnpm/changes/2026-10-19|2026-10-19]]、[[repos/pnpm-pnpm/changes/2026-10-16|2026-10-16]]、[[repos/pnpm-pnpm/changes/2026-10-14|2026-10-14]]、[[repos/pnpm-pnpm/changes/2026-10-12|2026-10-12]]

@@ -1,6 +1,6 @@
 ---
 title: openai/codex
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/openai-codex
 ---
@@ -14,16 +14,16 @@ tags:
 
 ## 直近の注目変更
 
+- TUI の `/permissions` を保留中の権限の変更のガードに通し、接続先のプロジェクトでモデルのアクセスを更新（[#55682](https://github.com/openai/codex/pull/55682)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
+- キューが満杯のときに in-process の app-server の終了が止まる問題を修正（[#55645](https://github.com/openai/codex/pull/55645)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
+- デーモンの機能フラグの上書きを照合し、不一致なら embedded へ黙って切り替えずに選択肢を表示（[#55442](https://github.com/openai/codex/pull/55442)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
+- V2 の executor のプラグインをクラウドのカタログと正規の ID で突き合わせる（[#55301](https://github.com/openai/codex/pull/55301)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/プラグイン|プラグイン]]
+- 起動前に設定と要件を JSON で出す `codex app-server --print-startup-config`（[#55300](https://github.com/openai/codex/pull/55300)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
+- Responses API プロキシに GitHub Actions の OIDC とフェデレーションの認証を追加（[#55297](https://github.com/openai/codex/pull/55297)、[#55298](https://github.com/openai/codex/pull/55298)、[#55299](https://github.com/openai/codex/pull/55299)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/認証|認証]]
+- スレッドごとのアンロードの遅延 `thread_unload_delay_secs`（[#55270](https://github.com/openai/codex/pull/55270)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]
+- フックの呼び出しで休止中の MCP サーバーを起動（[#55263](https://github.com/openai/codex/pull/55263)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/MCP|MCP]]
 - エージェントのメッセージでアイドルの root のセッションを起こす `wake_on_agent_messages`（既定は無効）（[#54961](https://github.com/openai/codex/pull/54961)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]
 - app-server の WebSocket の zstd 圧縮を `features.app_server_websocket_compression` で有効に（[#54949](https://github.com/openai/codex/pull/54949)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
-- TUI の設定の未知のフィールドで読み込みに失敗しないように（[#54766](https://github.com/openai/codex/pull/54766)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- 環境の間でファイルをコピーするオプトインの `multi_env_copy_file` ツール（[#54674](https://github.com/openai/codex/pull/54674)、[#54741](https://github.com/openai/codex/pull/54741)）📦 rust-v0.164.0-alpha.3 · トピック: [[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]]
-- TUI のセッションの選択をバックエンドに結び付け、別のバックエンドでの再開・fork を拒否（[#54681](https://github.com/openai/codex/pull/54681)）📦 rust-v0.164.0-alpha.3 · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- サーバーの状態で MCP のツール一覧のメタデータ `toolListMeta` を公開（[#54686](https://github.com/openai/codex/pull/54686)）📦 rust-v0.164.0-alpha.3 · トピック: [[repos/openai-codex/topics/MCP|MCP]]
-- MCP のツール一覧の変更をターンの途中でも反映する `mcp_tool_list_changed`（既定は無効）（[#54656](https://github.com/openai/codex/pull/54656)）📦 rust-v0.164.0-alpha.3 · トピック: [[repos/openai-codex/topics/MCP|MCP]]
-- Code Mode で動的ツールの呼び出しを並列に実行（`Promise.all`）（[#54654](https://github.com/openai/codex/pull/54654)）📦 rust-v0.164.0-alpha.3 · トピック: [[repos/openai-codex/topics/Code-Mode|Code Mode]]
-- プラグインのフックの承認をプラグインの内容のハッシュに結び付け、内容が変わると再承認が必要に（[#54619](https://github.com/openai/codex/pull/54619)）📦 rust-v0.164.0-alpha.3 · トピック: [[repos/openai-codex/topics/プラグイン|プラグイン]]
-- V8 を 152.2.0 に更新し `Array.sort` の安全性のチェックをバックポート（[#54519](https://github.com/openai/codex/pull/54519)）📦 rust-v0.164.0-alpha.3 · トピック: [[repos/openai-codex/topics/Code-Mode|Code Mode]]
 
 ## トピック
 
@@ -31,14 +31,14 @@ tags:
 - [[repos/openai-codex/topics/Guardian|Guardian]] — エージェント行動の自動レビュー・承認（認可の証跡、会話履歴の参照、チェックポイントからの復旧）
 - [[repos/openai-codex/topics/MCP|MCP]] — MCP サーバーへの接続とエンタープライズ管理（EMA）・OAuth の認証、ツール一覧の更新と `toolListMeta`、elicitation・承認
 - [[repos/openai-codex/topics/TUI|TUI]] — ターミナル上のフルスクリーン UI・トランスクリプト・コマンドセンター・権限設定・worktree のツール
-- [[repos/openai-codex/topics/インストール|インストール]] — インストールスクリプト（Windows PowerShell のチェックサム検証など）
+- [[repos/openai-codex/topics/インストール|インストール]] — インストールスクリプト（Windows PowerShell のチェックサム検証、古いリリースの片付けなど）
 - [[repos/openai-codex/topics/サンドボックス|サンドボックス]] — Windows・Linux・macOS 向けコマンド実行の隔離と権限チェック
 - [[repos/openai-codex/topics/シェル・コマンド実行|シェル・コマンド実行]] — シェルスナップショットやログインシェルの `PATH` など、コマンド実行時のシェル環境の扱い
 - [[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]] — サンドボックス設定に紐づくファイルシステムアクセス、exec-server のファイル読み書き（ストリーミングの書き込み）、環境間のファイルのコピー、環境ごとの必須スキル、`apply_patch`
 - [[repos/openai-codex/topics/状態データベース|状態データベース]] — スレッドのメタデータ・ログを保存するローカルの SQLite データベース
 - [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]] — スレッドの起動・再開・アーカイブ・ゴール・コンパクション（非同期コンパクションを含む）・既読状態・状態管理
-- [[repos/openai-codex/topics/デーモン|デーモン]] — app-server の共有デーモン/embedded モード、ソケット接続（WebSocket の zstd 圧縮）とリモートコントロールの再接続
-- [[repos/openai-codex/topics/認証|認証]] — ChatGPT へのブラウザサインインとアカウント切り替え時の扱い
+- [[repos/openai-codex/topics/デーモン|デーモン]] — app-server の共有デーモン/embedded モード（機能フラグの照合）、起動時の設定の確認（`--print-startup-config`）、ソケット接続（WebSocket の zstd 圧縮）とリモートコントロールの再接続
+- [[repos/openai-codex/topics/認証|認証]] — ChatGPT へのブラウザサインインとアカウント切り替え時の扱い、Responses API プロキシの認証（GitHub Actions の OIDC・フェデレーション）
 - [[repos/openai-codex/topics/フィードバック・診断|フィードバック・診断]] — 利用状況・設定のレポート機構と `codex doctor`
 - [[repos/openai-codex/topics/プラグイン|プラグイン]] — プラグインのマーケットプレイス・ソースのパスの照合と、内容に結び付いたフックの承認・アーカイブの展開
 - [[repos/openai-codex/topics/メモリ|メモリ]] — 過去のロールアウトからのメモリの抽出（入力の上限）と拡張のリソースの保持期間
@@ -50,4 +50,4 @@ tags:
 ## 取り込み
 
 - [[repos/openai-codex/log|取り込み履歴]]
-- 最近の変更: [[repos/openai-codex/changes/2026-10-19|2026-10-19]]、[[repos/openai-codex/changes/2026-10-16|2026-10-16]]、[[repos/openai-codex/changes/2026-10-14|2026-10-14]]、[[repos/openai-codex/changes/2026-10-12|2026-10-12]]、[[repos/openai-codex/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/openai-codex/changes/2026-10-21|2026-10-21]]、[[repos/openai-codex/changes/2026-10-19|2026-10-19]]、[[repos/openai-codex/changes/2026-10-16|2026-10-16]]、[[repos/openai-codex/changes/2026-10-14|2026-10-14]]、[[repos/openai-codex/changes/2026-10-12|2026-10-12]]

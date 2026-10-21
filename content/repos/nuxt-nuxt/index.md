@@ -1,6 +1,6 @@
 ---
 title: nuxt/nuxt
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/nuxt-nuxt
 ---
@@ -14,6 +14,8 @@ tags:
 
 ## 直近の注目変更
 
+- `nitroLegacy.imports` で入れ子の `server/utils` をスキャン、v5 で入れ子の自動 import を使うと警告（[#36641](https://github.com/nuxt/nuxt/pull/36641)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/サーバー互換性|サーバー互換性]]
+- Nitro v2 互換のスキャンでアプリ専用のモジュールコードを対象にしない（[#36638](https://github.com/nuxt/nuxt/pull/36638)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/サーバー互換性|サーバー互換性]]
 - `nuxt/schema` を `@nuxt/schema` と同じモジュールとして扱い、モジュールの `nuxt/schema` の拡張が無視される問題を修正（[#36633](https://github.com/nuxt/nuxt/pull/36633)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 - 5.x の nightly で、Nuxt のビルド外でも `nuxt/server` を import できるように（`nuxt` → `nuxt-nightly` のエイリアス）（[#36632](https://github.com/nuxt/nuxt/pull/36632)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 - nitro: `nitroViteEnvironment` 有効時、`nitro:build:public-assets` で書いたファイル（`@vite-pwa/nuxt` の `sw.js` など）が本番で配信されない問題を修正（[#36631](https://github.com/nuxt/nuxt/pull/36631)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
@@ -22,8 +24,6 @@ tags:
 - rspack・webpack: vue-loader のプラグインを設定ごとに 1 回だけ登録（[#36622](https://github.com/nuxt/nuxt/pull/36622)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 - ルート相対のパスを URL パーサーで判定（`/\t/example.com` の誤判定、#36459 からの退行の修正）（[#36617](https://github.com/nuxt/nuxt/pull/36617)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/ルーティング・レイアウト|ルーティング・レイアウト]]
 - `shared/` から `nuxt/app` に届いたときのサーバールートの型エラー（`defineEventHandler` が見つからない）を修正（[#36576](https://github.com/nuxt/nuxt/pull/36576)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
-- vue の `rawVaporSlotKey` で vapor のスロットを検出（[#36614](https://github.com/nuxt/nuxt/pull/36614)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/アプリコンテキスト・ランタイム|アプリコンテキスト・ランタイム]]
-- nitro: エラーページの描画中にレガシーな `event.$fetch` を呼ぶと止まる問題を修正（[#36598](https://github.com/nuxt/nuxt/pull/36598)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/サーバー互換性|サーバー互換性]]
 
 ## トピック
 
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/nuxt-nuxt/log|取り込み履歴]]
-- 最近の変更: [[repos/nuxt-nuxt/changes/2026-10-19|2026-10-19]]、[[repos/nuxt-nuxt/changes/2026-10-16|2026-10-16]]、[[repos/nuxt-nuxt/changes/2026-10-14|2026-10-14]]、[[repos/nuxt-nuxt/changes/2026-10-12|2026-10-12]]、[[repos/nuxt-nuxt/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/nuxt-nuxt/changes/2026-10-21|2026-10-21]]、[[repos/nuxt-nuxt/changes/2026-10-19|2026-10-19]]、[[repos/nuxt-nuxt/changes/2026-10-16|2026-10-16]]、[[repos/nuxt-nuxt/changes/2026-10-14|2026-10-14]]、[[repos/nuxt-nuxt/changes/2026-10-12|2026-10-12]]

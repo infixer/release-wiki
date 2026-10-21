@@ -1,6 +1,6 @@
 ---
 title: プログラム的API
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/microsoft-TypeScript
   - topic
@@ -9,6 +9,7 @@ tags:
 ## 概要
 
 tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScript 7）向けに、プログラムから使う API（`packages/typescript/src/api`、Go 側の `tsc/internal/api`）が急速に整備されている。中心は「スナップショット」の概念で、`api.createSnapshot(changes?)`（常に使える）と `api.getCurrentLanguageServerSnapshot(changes?)`（LSP モード専用）でスナップショットを作り、`snapshot.update(changes)` で新しいスナップショットへ更新する。`changes` にはプログラムの作成（`createPrograms`）・再設定（`reconfigurePrograms`）・最新化（`ensurePrograms`）を渡せる。以前あった `api.updateSnapshot()` や `oldProgram` オプションは廃止された。プロジェクトには Configured・Inferred・Synthetic の種別ごとに専用の型付き ID が導入され、`createProgram` は `compilerOptions` を第2引数のトップレベルに取るようになった。ソースファイルの生成（`createSourceFile` 系）、プリンター（`printFile`）、子ノードの列挙（`childrenIter`）、モジュール解決のオーバーライド（`createModuleResolver`）なども順次移植・追加されている。typescript-eslint からの要望（tsconfig の `plugins` 解析、`MappedType` プロパティの公開）にも対応した。`createSourceFile` 系は parse キャッシュから取得して破棄可能な lease を返すようになり（戻り値の変更）、同じファイル・テキストなら同一のソースファイルになる。TS 6 より前の `SolutionBuilder` に相当する `createBuildOrchestrator`（`BuildOrchestrator`）や、api-extractor 向けの AST ヘルパーも追加された。コールバック式のファイルシステムは、`createVirtualFileSystem` が公開 API から外れ、すべての関数について実装（コールバックか、サーバー側の実装を表すシンボル）の指定が必須になった（破壊的変更）。バインダーが作った Symbol はクライアント側でも SourceFile のキャッシュに保存され、スナップショットをまたいで同一になった。`getJSDocCommentsAndTags` も 6.0 と同じ動作で復活した。Declaration ノードからバインダーが作った Symbol を取り出す `getSymbol(decl)`（TS 6 の `declaration.symbol` 相当）が追加され、型チェッカーなしで `createSourceFile` で作ったファイルの Symbol も取れるようになった。補完 API が返す Symbol は常に現在のスナップショットのものになった。型付きパスの導入（#64159）に向けたバグ修正も先行して入っている。`getSymbol(decl)` の follow-up として、マージされた Symbol を扱うチェッカーのメソッドも API に追加された。型付きパス（#64159）も本体がマージされ、`RootedPath`・`RootedFilePath`・`RootedDirectoryPath` と、旧 `Path` を改名した `PathKey` が導入された。非同期 API では、いくつかのオブジェクトが `[Symbol.dispose]()` を使って破棄の Promise を捨てていたのが `[Symbol.asyncDispose]()` に直された。`createPrograms` で作った設定ファイルの無いプログラムでプロジェクト参照の診断が出ると API サーバーごとクラッシュしていた問題が直り（TS6306 を報告）、静的な `moduleResolutions` や `resolveModuleName` コールバックによるカスタマイズしたモジュール解決では、ディスク上の配置に依存する import の診断（TS2876 など）を出さなくなった。ベータ版のリリースに向けて API が整理され、モジュールの export から `/unstable` の接頭辞が外れ、`"typescript/ast"` から `factory` を export、`api.internal` は `api.debug` に改名、`formatNodeForInsertion` は `languageService` に移り、`@deprecated` の関数は削除、`api.createBuildOrchestrator` は当面 `@internal` になった。VS Code 拡張は、LSP サーバーとバージョンが揃った API クライアントのモジュールを他の拡張に渡すようになった（型は `typescript/vscode` の `ExtensionAPI`）。いずれも未リリース。同期接続（`SyncConn`）では、コールバックからの入れ子のリクエストと別スレッドの呼び出しが交差して応答が別のリクエストに届き、複数スレッドのローダーで import が誤ったモジュールに結び付く問題があったが、スタックの順に応答するよう修正された（未リリース）。`extends` が循環する設定ファイルを開くと `createSnapshot` がエラーも出さずに止まっていた問題も直り、`tsc -p` と同じく TS18000 を報告する（未リリース）。API クライアント用の UDS は tmp ディレクトリの中にパーミッション `0o600` で作り、Windows の同期 API はランダムなパイプ名を使うようになった。同期 API の実行済みジェネレーターの記録は WeakSet からシンボルに変わった（いずれも未リリース）。環境変数 `TS_API_TIMING_DIR` を設定すると、API クライアントがタイミング情報を集めて閉じるときにファイルへ書き出すようになり、API から `pathsBasePath` が正しく渡されるよう修正された（いずれも未リリース）。
+2026-10-19 のクライアントの性能改善でアロケーションが大きく減り、2026-10-20 には CDN から直接読み込むための前提として package.json の `"imports"` が削除された（enum は `enums` ディレクトリに生成）。
 
 ## 主な API・オプション
 
@@ -29,6 +30,8 @@ tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScr
 
 ## 変更履歴
 
+- 2026-10-20 — package.json の `"imports"` を削除し、enum をトップレベルの `enums` ディレクトリに生成（CDN から直接読み込むための前提）（[#64879](https://github.com/microsoft/TypeScript/pull/64879)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-21|変更]]
+- 2026-10-19 — クライアントの性能改善（typescript-eslint の推奨ルールセットで実行時間 5.8% 短縮・アロケーション 57% 減、バッチの `getSymbolAtLocation` が非同期 28%・同期 22% 高速化）（[#64823](https://github.com/microsoft/TypeScript/pull/64823)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-21|変更]]
 - 2026-10-16 — `pathsBasePath` が API から正しく渡されるように（[#64843](https://github.com/microsoft/TypeScript/pull/64843)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-19|変更]]
 - 2026-10-16 — 環境変数 `TS_API_TIMING_DIR` でタイミング情報を収集・出力（[#64846](https://github.com/microsoft/TypeScript/pull/64846)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-19|変更]]
 - 2026-10-15 — 実行済みジェネレーターの記録を WeakSet からシンボルに（バッチをまたいだ再利用も防ぐ）（[#64830](https://github.com/microsoft/TypeScript/pull/64830)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-16|変更]]
@@ -69,3 +72,4 @@ tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScr
 ## 関連
 
 - リポジトリ: [[repos/microsoft-TypeScript/index|microsoft/TypeScript]]
+- [[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21 の変更]]

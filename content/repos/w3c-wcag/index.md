@@ -1,6 +1,6 @@
 ---
 title: w3c/wcag
-updated: 2026-10-05
+updated: 2026-10-21
 tags:
   - repo/w3c-wcag
 ---
@@ -13,6 +13,7 @@ tags:
 
 ## 直近の注目変更
 
+- 3.3.2「ラベルまたは説明」の解説を明確化（`select` 自体のラベル、2.5.3 との関係）（[#4995](https://github.com/w3c/wcag/pull/4995)）⏳ 未リリース · トピック: [[repos/w3c-wcag/topics/ラベルまたは説明|ラベルまたは説明]]
 - 2.1.4「文字キーのショートカット」の解説を全面的に見直し（[#5336](https://github.com/w3c/wcag/pull/5336)）⏳ 未リリース · トピック: [[repos/w3c-wcag/topics/文字キーのショートカット|文字キーのショートカット]]
 - 「適合レベルの理解」の解説を拡充（[#5303](https://github.com/w3c/wcag/pull/5303)）⏳ 未リリース · トピック: [[repos/w3c-wcag/topics/適合レベル|適合レベル]]
 - G73 の文言を修正（[#5332](https://github.com/w3c/wcag/pull/5332)）⏳ 未リリース · トピック: [[repos/w3c-wcag/topics/リンクの達成方法|リンクの達成方法]]
@@ -23,9 +24,10 @@ tags:
 - [[repos/w3c-wcag/topics/ARIAの達成方法|ARIAの達成方法]] — ARIA に関連する達成方法・失敗例の解説
 - [[repos/w3c-wcag/topics/適合レベル|適合レベル]] — 適合レベル（A/AA/AAA）の解説
 - [[repos/w3c-wcag/topics/文字キーのショートカット|文字キーのショートカット]] — 達成基準 2.1.4 Character Key Shortcuts の解説
+- [[repos/w3c-wcag/topics/ラベルまたは説明|ラベルまたは説明]] — 達成基準 3.3.2 Labels or Instructions の解説
 - [[repos/w3c-wcag/topics/リンクの達成方法|リンクの達成方法]] — リンクに関する達成方法の解説
 
 ## 取り込み
 
 - [[repos/w3c-wcag/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-wcag/changes/2026-10-05|2026-10-05]]、[[repos/w3c-wcag/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/w3c-wcag/changes/2026-10-21|2026-10-21]]、[[repos/w3c-wcag/changes/2026-10-05|2026-10-05]]、[[repos/w3c-wcag/changes/2026-09-24|2026-09-24]]

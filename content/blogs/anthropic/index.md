@@ -1,6 +1,6 @@
 ---
 title: Anthropic News
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - blog/anthropic
 ---
@@ -13,6 +13,7 @@ tags:
 - 2026-10-15 — [[blogs/anthropic/posts/2026-10-15-an-update-on-independent-evaluators|独立した評価者との取り組みの最新状況]] — METR に社員と同等のアクセスを提供し、評価者のアクセスを 3 階層で整備
 - 2026-10-14 — [[blogs/anthropic/posts/2026-10-14-2026-us-midterms|2026 年米国中間選挙への備え]] — 公式な投票情報・開票結果の表示、政治的公平性の評価、多段階の悪用を検出する分類器
 - 2026-10-14 — [[blogs/anthropic/posts/2026-10-14-singapore-office-opening|シンガポールにオフィスを開設、シンガポール政府と MOU を締結]] — APAC で 5 つ目のオフィス。AI の安全性・評価などで MDDI と協力
+- 2026-10-12 — [[blogs/anthropic/posts/2026-10-12-distillation-defenses|蒸留攻撃への防御を強化]] — 推論へのアクセス制御（preserved thinking）・2 段階分類器・繰り返し対策で、蒸留者が抽出できる推論を 10〜100 分の 1 に
 - 2026-10-08 — [[blogs/anthropic/posts/2026-10-08-2026-usage-policy-update|2026 年版 Usage Policy の更新]] — 欺瞞的キャンペーンの新セクション、選挙・兵器・監視規定の明確化、物理動作やモデルへの虐待への対応（11 月 12 日発効）
 - 2026-10-08 — [[blogs/anthropic/posts/2026-10-08-genesis-mission-commitment|Genesis Mission に 3 年で 1.5 億ドルを拠出]] — NASA・NIH・NSF など 15 以上の連邦機関で Claude を使えるよう支援
 - 2026-10-08 — [[blogs/anthropic/posts/2026-10-08-anthropic-cyber-mission|Anthropic Cyber Mission を開始、重要インフラと OSS の防御を支援]] — 重要インフラ向けの CIDP と、OSS を無料でスキャンする OSS Scanner を開始
@@ -27,6 +28,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-10-21 — 記事 1 件（カテゴリ一覧ページ 6 件（Partnerships・Product・Announcements・Security・Safeguards・Policy）は記事ではないため除外）。エラー: なし
 - 2026-10-19 — 記事 1 件。エラー: なし
 - 2026-10-16 — 記事 3 件。エラー: なし
 - 2026-10-09 — 記事 3 件。エラー: なし

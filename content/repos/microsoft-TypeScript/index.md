@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -10,11 +10,14 @@ tags:
 ## 最新リリース
 
 - 安定版: [v7.0.2](https://github.com/microsoft/TypeScript/releases/tag/v7.0.2)（2026-08-20）
-- プレリリース: なし
+- プレリリース: [v7.1-beta](https://github.com/microsoft/TypeScript/releases/tag/v7.1-beta)（2026-10-20）
 - その他: [vscode-typescript/v1.0.1](https://github.com/microsoft/TypeScript/releases/tag/vscode-typescript/v1.0.1)（2026-09-30、VS Code 拡張。TypeScript 7.0.2 を同梱）→ [[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.1|まとめ]]
 
 ## 直近の注目変更
 
+- LSP サーバーがワークスペースフォルダ外の node_modules のコンテンツマッパーを読み込まないように（[#64837](https://github.com/microsoft/TypeScript/pull/64837)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/コンテンツマッパー|コンテンツマッパー]]
+- API: package.json の `"imports"` を削除（CDN から読み込むための前提）（[#64879](https://github.com/microsoft/TypeScript/pull/64879)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- API: クライアントの性能改善（アロケーション 57% 減）（[#64823](https://github.com/microsoft/TypeScript/pull/64823)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - `prop?: undefined` の合成プロパティのキャッシュをシンボルごとにし、宣言出力を `--checkers` に依存しないように（[#64728](https://github.com/microsoft/TypeScript/pull/64728)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - API: `pathsBasePath` が正しく渡されるように（[#64843](https://github.com/microsoft/TypeScript/pull/64843)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - API: 環境変数 `TS_API_TIMING_DIR` でタイミング情報を収集・出力（[#64846](https://github.com/microsoft/TypeScript/pull/64846)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
@@ -22,9 +25,6 @@ tags:
 - ネットワークパスを全面的に禁止し、資格情報の自動送信を防ぐ（[#64832](https://github.com/microsoft/TypeScript/pull/64832)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
 - ユーザーのキャッシュが無いときは tmp を使わず ATA を無効に（[#64836](https://github.com/microsoft/TypeScript/pull/64836)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
 - オートインポート・補完で生成するモジュール指定子のクォートをエスケープ（[#64839](https://github.com/microsoft/TypeScript/pull/64839)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
-- API: UDS を tmp ディレクトリ内に `0o600` で作成、Windows はランダムなパイプ名に（[#64818](https://github.com/microsoft/TypeScript/pull/64818)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- union・intersection の正規化でキャッシュヒット時の割り当てをなくし、割り当てバイト数を 8.51% 削減（[#64795](https://github.com/microsoft/TypeScript/pull/64795)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- AST の `nodeData` を生成したアクセサに置き換え、バイナリを 3.44% 縮小（[#64773](https://github.com/microsoft/TypeScript/pull/64773)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 
 ## トピック
 
@@ -38,4 +38,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]、[[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]、[[repos/microsoft-TypeScript/changes/2026-10-14|2026-10-14]]、[[repos/microsoft-TypeScript/changes/2026-10-12|2026-10-12]]、[[repos/microsoft-TypeScript/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]、[[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]、[[repos/microsoft-TypeScript/changes/2026-10-14|2026-10-14]]、[[repos/microsoft-TypeScript/changes/2026-10-12|2026-10-12]]

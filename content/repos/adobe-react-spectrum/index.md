@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-10-19
+updated: 2026-10-21
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -15,6 +15,9 @@ tags:
 
 ## 直近の注目変更
 
+- Select のタイプアヘッドで同じ文字の繰り返しが正しく動くように（[#10006](https://github.com/adobe/react-spectrum/pull/10006)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
+- `hasChildItems` の TreeItem が子の行なしでも展開できるように（[#10799](https://github.com/adobe/react-spectrum/pull/10799)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
+- テスト環境ではスタイルマクロのクラス名にバージョンの接尾辞を付けない（[#10736](https://github.com/adobe/react-spectrum/pull/10736)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
 - Select の props から効果のない `excludeFromTabOrder` を削除（型のみ）（[#10790](https://github.com/adobe/react-spectrum/pull/10790)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
 - ESM ビルドのスタイルマクロが `$kLxT8$propertiesmjs1 is not defined` で失敗する問題を修正（[#10785](https://github.com/adobe/react-spectrum/pull/10785)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
 - TokenField でユーザーのキャレット移動を毎回 `onChange` で通知（[#10766](https://github.com/adobe/react-spectrum/pull/10766)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/TokenField|TokenField]]
@@ -22,14 +25,11 @@ tags:
 - ユーザーのキーボードハンドラーを `useKeyboard` 経由にする変更（useMenu・useDateField・useDatePicker・useDateRangePicker）を再適用（[#10745](https://github.com/adobe/react-spectrum/pull/10745)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - コレクションの選択＋Home/End・PageUp/PageDown のハンドラー（`useSelectableCollection`）と DatePicker の `preventDefault` 漏れを修正（[#10728](https://github.com/adobe/react-spectrum/pull/10728)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]、[[repos/adobe-react-spectrum/topics/Collections|Collections]]
 - `useDescription` のマウント時の余分なレンダーをなくし、ドラッグ可能な行を持つ仮想化リストでの "Maximum update depth exceeded" を回避（[#10754](https://github.com/adobe/react-spectrum/pull/10754)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ドラッグアンドドロップ|ドラッグアンドドロップ]]
-- `getTargetRect` が返す独自の矩形を固定配置の計算で書き換えないように（[#10716](https://github.com/adobe/react-spectrum/pull/10716)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]
-- 入れ子の `Form` が親の `Form` の props（`onSubmit`・`validationErrors` など）を引き継がないように（[#10746](https://github.com/adobe/react-spectrum/pull/10746)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
-- 複数のトランジションがキャンセルされると `runAfterTransition` が要素を保持し続ける問題（メモリリーク）を修正（[#10730](https://github.com/adobe/react-spectrum/pull/10730)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ユーティリティ|ユーティリティ]]
 
 ## トピック
 
 - [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]] — `@react-spectrum/ai` の PromptField・Chat/Thread・AttachmentList・AttachmentGrid・AttachmentBadge など
-- [[repos/adobe-react-spectrum/topics/Collections|Collections]] — コレクションのキー管理（`Document`/`BaseCollection`）とキーボード・フォーカスの扱い
+- [[repos/adobe-react-spectrum/topics/Collections|Collections]] — コレクションのキー管理（`Document`/`BaseCollection`）とキーボード・フォーカス、Tree の展開
 - [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]] — 非同期アイテム読み込み時の開閉制御と VoiceOver での読み上げ
 - [[repos/adobe-react-spectrum/topics/DateField|DateField]] — 日付入力（`useDateSegment`・`DateField`）
 - [[repos/adobe-react-spectrum/topics/Menu|Menu]] — S2 の Menu（セパレーター表示・仮想化）
@@ -48,4 +48,4 @@ tags:
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
 - リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]、[[repos/adobe-react-spectrum/changes/2026-10-16|2026-10-16]]、[[repos/adobe-react-spectrum/changes/2026-10-14|2026-10-14]]、[[repos/adobe-react-spectrum/changes/2026-10-12|2026-10-12]]、[[repos/adobe-react-spectrum/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21]]、[[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]、[[repos/adobe-react-spectrum/changes/2026-10-16|2026-10-16]]、[[repos/adobe-react-spectrum/changes/2026-10-14|2026-10-14]]、[[repos/adobe-react-spectrum/changes/2026-10-12|2026-10-12]]
