@@ -2,52 +2,52 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-10-20T16:46:11Z",
+      "lastMergedAt": "2026-10-21T17:50:18Z",
       "lastReleaseAt": "2026-10-14T17:06:15Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-20T19:33:04Z",
-      "lastReleaseAt": "2026-10-20T23:51:32Z"
+      "lastMergedAt": "2026-10-22T20:20:49Z",
+      "lastReleaseAt": "2026-10-22T23:53:52Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
-      "lastMergedAt": "2026-10-20T08:40:52Z",
+      "lastMergedAt": "2026-10-21T02:36:54Z",
       "lastReleaseAt": "2026-10-16T07:57:42Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-10-19T20:29:10Z",
+      "lastMergedAt": "2026-10-22T11:14:02Z",
       "lastReleaseAt": "2026-10-16T17:21:23Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-10-20T23:53:43Z",
+      "lastMergedAt": "2026-10-22T23:04:22Z",
       "lastReleaseAt": "2026-10-09T03:06:51Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-20T20:37:25Z",
+      "lastMergedAt": "2026-10-22T19:20:22Z",
       "lastReleaseAt": "2026-10-20T17:38:20Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-10-20T07:54:33Z",
+      "lastMergedAt": "2026-10-22T23:28:56Z",
       "lastReleaseAt": "2026-10-19T17:24:26Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
       "lastMergedAt": "2026-10-09T16:16:37Z",
-      "lastReleaseAt": "2026-10-20T20:46:50Z"
+      "lastReleaseAt": "2026-10-22T22:18:57Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-10-20T12:57:53Z",
+      "lastMergedAt": "2026-10-22T21:25:03Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
       "fullName": "w3c/aria",
-      "lastMergedAt": "2026-10-15T16:49:24Z",
+      "lastMergedAt": "2026-10-21T18:19:50Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/wcag": {
@@ -57,28 +57,28 @@
     },
     "openui/open-ui": {
       "fullName": "openui/open-ui",
-      "lastMergedAt": "2026-10-16T14:57:23Z",
+      "lastMergedAt": "2026-10-22T23:24:24Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/ecma262": {
       "fullName": "tc39/ecma262",
-      "lastMergedAt": "2026-10-16T22:35:50Z",
+      "lastMergedAt": "2026-10-22T19:12:11Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-10-20T23:22:23Z",
-      "lastReleaseAt": "2026-10-15T13:45:17Z"
+      "lastMergedAt": "2026-10-22T23:38:50Z",
+      "lastReleaseAt": "2026-10-22T22:08:54Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-10-20T14:32:25Z",
+      "lastMergedAt": "2026-10-22T17:28:25Z",
       "lastReleaseAt": "2026-10-19T16:42:33Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-10-20T13:22:44Z",
-      "lastCommitAt": "2026-10-20T21:27:12Z",
+      "lastMergedAt": "2026-10-22T20:18:55Z",
+      "lastCommitAt": "2026-10-22T21:56:52Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
@@ -90,7 +90,7 @@
     "openai/codex": {
       "fullName": "openai/codex",
       "lastReleaseAt": "2026-10-17T04:03:25Z",
-      "lastMergedAt": "2026-10-20T23:42:34Z"
+      "lastMergedAt": "2026-10-22T23:48:34Z"
     }
   },
   "blogs": {
@@ -938,6 +938,10 @@
     },
     "anthropic": {
       "seen": [
+        "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+        "https://www.anthropic.com/news/product",
+        "https://www.anthropic.com/news/open-call-guest-investigators-life-sciences",
+        "https://www.anthropic.com/news/christopher-stubbs-joins-long-term-benefit-trust",
         "https://www.anthropic.com/news/public-benefit-fund",
         "https://www.anthropic.com/news/an-update-on-independent-evaluators",
         "https://www.anthropic.com/news/policy",
@@ -949,12 +953,12 @@
         "https://www.anthropic.com/news/security",
         "https://www.anthropic.com/news/2026-usage-policy-update",
         "https://www.anthropic.com/news/genesis-mission-commitment",
+        "https://www.anthropic.com/news/partnerships",
         "https://www.anthropic.com/news/cyber-verification-program",
         "https://www.anthropic.com/news/claude-frontier-academy",
         "https://www.anthropic.com/news/barclays-scales-claude",
         "https://www.anthropic.com/news/announcements",
-        "https://www.anthropic.com/news/product",
-        "https://www.anthropic.com/news/partnerships",
+        "https://www.anthropic.com/news/features",
         "https://www.anthropic.com/news/accenture-embedded-evaluation",
         "https://www.anthropic.com/news/life-sciences-verification-program",
         "https://www.anthropic.com/news/enterprise-frontier-safeguards",

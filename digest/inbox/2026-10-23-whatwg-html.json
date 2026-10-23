@@ -1,0 +1,33 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-10-23T00:00:27Z",
+  "range": {
+    "from": "2026-10-20T12:57:53Z",
+    "to": "2026-10-23T00:00:27Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 13087,
+      "title": "Only run the CORP check on HTTP(S) navigation responses",
+      "url": "https://github.com/whatwg/html/pull/13087",
+      "author": "shannonbooth",
+      "mergedAt": "2026-10-22T21:25:03Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Under COEP, the check previously blocked about:blank, data:, and blob:\nresponses in a child navigable. They have no CORP header, so it treated\nthem as same-origin, which an opaque origin never matches, nor does a\nblob: URL created by a cross-origin child. Chromium, Gecko, and WebKit\nallow about:blank and data:; Chromium and Gecko also allow blob:.\n\nTests:\n * https://github.com/web-platform-tests/wpt/blob/master/html/cross-origin-embedder-policy/non-initial-about-blank.https.html\n * https://github.com/web-platform-tests/wpt/blob/master/html/cross-origin-embedder-policy/data.https.html\n * https://github.com/web-platform-tests/wpt/pull/64047\n\nFixes #13086.\n\n- [x] At least two implementers are interested (and none opposed):\n   * Chromium (implements)\n   * Firefox (implements)\n   * Webkit (implements, beside from blob URL case)\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/blob/master/html/cross-origin-embedder-policy/non-initial-about-blank.https.html\n   * https://github.com/web-platform-tests/wpt/blob/master/html/cross-origin-embedder-policy/data.https.html\n   * https://github.com/web-platform-tests/wpt/pull/64047\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: n/a\n   * Gecko: n/a\n   * WebKit: https://bugs.webkit.org/show_bug.cgi?id=328493\n   * Deno (only for timers, structured clone\n…(truncated)",
+      "files": [
+        "source (+25 -12)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

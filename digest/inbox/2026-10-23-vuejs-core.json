@@ -1,0 +1,37 @@
+{
+  "kind": "repo",
+  "repo": "vuejs/core",
+  "branch": "main",
+  "collectedAt": "2026-10-23T00:00:27Z",
+  "range": {
+    "from": "2026-10-20T08:40:52Z",
+    "to": "2026-10-23T00:00:27Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v3.5.44",
+      "publishedAt": "2026-10-13T07:43:25Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.5.44"
+    },
+    "prerelease": {
+      "tag": "v3.6.0-rc.12",
+      "publishedAt": "2026-10-16T07:57:42Z",
+      "url": "https://github.com/vuejs/core/releases/tag/v3.6.0-rc.12"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 15960,
+      "title": "docs: add merchandise link to readme",
+      "url": "https://github.com/vuejs/core/pull/15960",
+      "author": "robbyrussell",
+      "mergedAt": "2026-10-21T02:36:54Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

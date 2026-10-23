@@ -1,0 +1,289 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-23T00:00:27Z",
+  "range": {
+    "from": "2026-10-20T13:22:44Z",
+    "to": "2026-10-23T00:00:27Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14642,
+      "title": "[pages-3] Margin rules should be for `@page`",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14642",
+      "author": "Elchi3",
+      "mergedAt": "2026-10-21T08:25:26Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "See https://github.com/w3c/reffy/issues/2044#issuecomment-6302981998\n\nFixes https://github.com/w3c/reffy/issues/2194",
+      "files": [
+        "css-page-3/Overview.bs (+16 -16)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14599,
+      "title": "[css-inline-3][editorial] Fix stale text left over from #5329",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14599",
+      "author": "shivamidow",
+      "mergedAt": "2026-10-21T08:27:46Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Issue #5329 made an initial letter whose size is less than its sink use over (top) alignment instead of under alignment. Some text was not updated to match:\n\n* The Changes entry for #5329 said \"under alignment point\", but the resolution and the Block-axis Positioning rules say \"over\".\n* The alt text of the 'initial-letter: 2.51 3' example image said the letter \"only aligns at base\", but the example text and the image show that only the top aligns.\n* The note after the Block-axis Positioning rules described only the under alignment case. It now also covers the size < sink case.",
+      "files": [
+        "css-inline-3/Overview.bs (+5 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14590,
+      "title": "Update column-gap specification references",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14590",
+      "author": "chinmayee5599",
+      "mergedAt": "2026-10-21T08:28:24Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n* Update the CSS Grid gaps reference from `css-align-3` to `css-gaps-1`.\n* Update the CSS Multi-column Layout `column-gap` property reference to `CSS-GAPS-1`.\n* Update the Multi-column link defaults for `column-gap` and its `normal` value to use `css-gaps-1`.\n\n## Changes\n\nUpdated the references in:\n\n* `css-grid-1/Overview.bs`\n* `css-multicol-1/Overview.bs`\n\n## Testing\n\n* Ran `git diff --check` successfully.\n* Verified that only the intended specification files were committed.",
+      "files": [
+        "css-grid-1/Overview.bs (+1 -1)",
+        "css-multicol-1/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 14497,
+      "title": "[css-overflow-5] Explicitly define that scroll-axis-lock propagates from root to viewport. #13207",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14497",
+      "author": "fred-wang",
+      "mergedAt": "2026-10-21T08:35:53Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The wording in this PR is based on similar statements in https://drafts.csswg.org/css-scrollbars/#scrollbar-width\n\nWPT tests:\n- https://wpt.fyi/results/css/css-overflow/scroll-axis-lock-none-touch-viewport.html\n- https://wpt.fyi/results/css/css-overflow/scroll-axis-lock-none-wheel-viewport.html\n- https://wpt.fyi/results/css/css-overflow/scroll-axis-lock-none-touch-subframe.html\n- https://wpt.fyi/results/css/css-overflow/scroll-axis-lock-none-wheel-subframe.html\n- https://wpt.fyi/results/css/css-overflow/scroll-axis-lock-not-propagated-from-body-quirks.html\n\nThis spec change aligns with what @flackr commented at https://github.com/w3c/csswg-drafts/issues/13207#issuecomment-5605720322\n\n`scroll-axis-lock` is currently only supported by Chromium and I landed a [patch to align Chromium's behavior with this change](https://chromium-review.googlesource.com/c/chromium/src/+/8412027).",
+      "files": [
+        "css-overflow-5/Overview.bs (+7 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14400,
+      "title": "[selectors-5] Add grammar of class prefix selector",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14400",
+      "author": "cdoublev",
+      "mergedAt": "2026-10-21T08:41:32Z",
+      "labels": [
+        "selectors-5"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Follow-up on 966052c, which defined the [class prefix selector](https://drafts.csswg.org/selectors-5/#class-prefix) as a general term. This pull request provides the [grammar](https://drafts.csswg.org/selectors-5/#grammar) specifics using the CSS value definition syntax.",
+      "files": [
+        "selectors-5/Overview.bs (+5 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14383,
+      "title": "[css-values-4][editorial] Separate ambiguous \"and\"/\"or\" with a comma",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14383",
+      "author": "cdoublev",
+      "mergedAt": "2026-10-21T08:41:58Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The title should say it all.",
+      "files": [
+        "css-values-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14353,
+      "title": "[css-text-decor-5] Updated the syntax of `alpha()`",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14353",
+      "author": "dletorey",
+      "mergedAt": "2026-10-21T08:43:06Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Updated the syntax of`alpha()` function to have the `<alpha>` value required\n\nBased upon [issue #14070](https://github.com/w3c/csswg-drafts/issues/14070)",
+      "files": [
+        "css-color-5/Overview.bs (+1 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14578,
+      "title": "[css-content-3] Fix missed rename",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14578",
+      "author": "cdoublev",
+      "mergedAt": "2026-10-21T08:58:28Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Oversight in 26ec9ea.",
+      "files": [
+        "css-content-3/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14342,
+      "title": "[css-masking-1] Clarify how clipping and masking respond to fragmentation (#6383)",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14342",
+      "author": "Psychpsyo",
+      "mergedAt": "2026-10-21T09:00:07Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Also changed the wording so that it can link to css-break. Also because I didn't find this bit of the spec before, as I expected that Ctrl+F > \"fragment\" would tell me if there's any considerations for fragmentation.",
+      "files": [
+        "css-masking-1/Overview.bs (+5 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14539,
+      "title": "[css-align-3][css-grid-3] Define flow-start/end alignment aliases (#14052)",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14539",
+      "author": "celestepan",
+      "mergedAt": "2026-10-21T17:11:07Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Adds specification text for the [CSSWG resolution on flow-start/flow-end](https://github.com/w3c/csswg-drafts/issues/14052#issuecomment-5193187791).\n\nDefines `flow-start` and `flow-end` as value aliases of `flex-start` and `flex-end`, respectively, and adds them to `<self-position>` and `<content-position>`.\n\nIn Grid Lanes, both spellings follow the container's item-placement direction in the aligned axis, including reversal. Without reversal in that axis, they behave as logical `start` and `end`. The existing Flexbox behavior is preserved.\n\nUpdates the corresponding Grid Lanes alignment text and removes statements that incorrectly limit placement-relative alignment to Flexbox.  Updates the Flexbox text to use `flow-start` and `flow-end` as the canonical values.\n\nSpecifies `flow-start`/`flow-end` as the canonical serialized spellings, with an issue retaining the resolution's web-compatibility caveat.\n\nReferences #14052.",
+      "files": [
+        "css-align-3/Overview.bs (+49 -37)",
+        "css-flexbox-2/Overview.bs (+21 -17)",
+        "css-flexbox-2/images/align-content-example.svg (+2 -2)",
+        "css-flexbox-2/images/flex-align.svg (+2 -2)",
+        "css-flexbox-2/images/flex-pack.svg (+2 -2)",
+        "css-grid-3/Overview.bs (+11 -3)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 14624,
+      "title": "[mediaqueries-5] Let browser match when the browser display mode is in use #14125",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14624",
+      "author": "marcoscaceres",
+      "mergedAt": "2026-10-22T20:18:55Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "A page whose manifest has no `display` member is an application context whose applied display mode is `browser`, so `browser` has to match there. This fixes the sentence from [the application display-mode change](https://github.com/w3c/csswg-drafts/pull/14587) that limited `browser` to non-application contexts.",
+      "files": [
+        "mediaqueries-5/Overview.bs (+2 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-10-20T21:27:12Z",
+    "to": "2026-10-23T00:00:27Z"
+  },
+  "commits": [
+    {
+      "sha": "b186fae",
+      "url": "https://github.com/w3c/csswg-drafts/commit/b186fae25203333688daa3e502eebe6b2aa608dc",
+      "author": "dletorey",
+      "committedAt": "2026-10-21T08:45:01Z",
+      "title": "[css-color-5] <alpha> is required in alpha() #14070",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Updated the syntax of`alpha()` function to have the `<alpha>` value required\n\nCo-authored-by: Keith Cirkel <keithamus@users.noreply.github.com>",
+      "files": [
+        "css-color-5/Overview.bs (+1 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "3eaa778",
+      "url": "https://github.com/w3c/csswg-drafts/commit/3eaa77879a6267f1eb9737cd8e051f81f921f427",
+      "author": "svgeesus",
+      "committedAt": "2026-10-21T16:34:47Z",
+      "title": "set css-image-animation-1 to autopublish",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 4
+    },
+    {
+      "sha": "981db3b",
+      "url": "https://github.com/w3c/csswg-drafts/commit/981db3b2ca7ebd2bbfcf11a33f9967f20b333260",
+      "author": "svgeesus",
+      "committedAt": "2026-10-21T16:46:12Z",
+      "title": "[css-image-animation-1][editorial] Update changes, also test auto-publish",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-image-animation-1/Overview.bs (+9 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "87bb2a4",
+      "url": "https://github.com/w3c/csswg-drafts/commit/87bb2a43c1050ea6be46084b476993c6038e684a",
+      "author": "SebastianZ",
+      "committedAt": "2026-10-22T19:35:49Z",
+      "title": "[css-egg-1][editorial] Corrected count of random value units",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-egg-1/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "79059f5",
+      "url": "https://github.com/w3c/csswg-drafts/commit/79059f56c6c50a836689ea418f932b1b704140e9",
+      "author": "tabatkins",
+      "committedAt": "2026-10-22T20:32:08Z",
+      "title": "[css-font-loading-3] Fix the IDL broken in 11aef64584da64cd350bd221fc598adf6ec40894",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-font-loading-3/Overview.bs (+22 -20)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "dba3578",
+      "url": "https://github.com/w3c/csswg-drafts/commit/dba3578b7ac1bbd53bea5541b0574ff77c071281",
+      "author": "tabatkins",
+      "committedAt": "2026-10-22T20:36:12Z",
+      "title": "[css-font-loading-3] More fixes to 11aef64584da64cd350bd221fc598adf6ec40894",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-font-loading-3/Overview.bs (+4 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "3a7b0fb",
+      "url": "https://github.com/w3c/csswg-drafts/commit/3a7b0fbdae9da8c4f86fcc32b57fb32e5dbe75a7",
+      "author": "svgeesus",
+      "committedAt": "2026-10-22T21:56:49Z",
+      "title": "[css-color-4][editorial] Start on explainer for TAG review",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "sha": "a1dd397",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a1dd3973e461e13cfe2d56a3513948882e595034",
+      "author": "svgeesus",
+      "committedAt": "2026-10-22T21:56:52Z",
+      "title": "[css-fonts-4] Normatively state the dependency on palt for kerning #6723",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-4/Overview.bs (+31 -5)",
+        "css-fonts-4/images/fonts/Lato.woff2 (+0 -0)",
+        "css-fonts-4/images/kerning.svg (+16 -0)"
+      ],
+      "filesTotal": 3
+    }
+  ]
+}

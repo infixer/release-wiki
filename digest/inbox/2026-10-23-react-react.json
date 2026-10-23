@@ -1,0 +1,40 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-10-23T00:00:27Z",
+  "range": {
+    "from": "2026-10-20T16:46:11Z",
+    "to": "2026-10-23T00:00:27Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.1",
+      "publishedAt": "2026-10-14T17:06:15Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 37898,
+      "title": "[rust-compiler] Fix Unicode diagnostic underline positions",
+      "url": "https://github.com/react/react/pull/37898",
+      "author": "chengchuu",
+      "mergedAt": "2026-10-21T17:50:18Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #37897\n\nThe experimental Rust Babel adapter misaligns diagnostic underlines after non-ASCII characters and can make underlines too long for multiline ranges. The formatter treats Babel’s UTF-16 source columns as UTF-8 byte offsets.\n\nTo reproduce, compile this component with the adapter configured to use `panicThreshold: 'all_errors'`:\n\n```jsx\nfunction App(props) {\n  const text = \"café\"; props.value = text;\n  return <h1>{props.value}</h1>;\n}\n```\n\nThe props-mutation error is expected, but the Rust adapter places the underline on the space before `props`:\n\n```text\n> 5 |   const text = \"café\"; props.value = text;\n    |                       ^^^^^ value cannot be modified\n```\n\nThis change measures marker spacing and multiline lengths in UTF-16 code units to match Babel. Tab handling and ASCII behavior remain unchanged.\n\n## How did you test this change?\n\nFrom the repository root on the PR branch, with Rust installed:\n\n```bash\ncd compiler\ncargo test -p react_compiler_diagnostics code_frame::tests\ncargo test -p react_compiler_diagnostics\n```\n\nBoth new regression tests failed with the original formatter and passed with the fix. All 9 diagnostics tests passed. Coverage includes ASCII, accented text, CJK characters, emoji, combining marks, tabs, and multiline ranges.",
+      "files": [
+        "compiler/crates/react_compiler_diagnostics/src/code_frame.rs (+46 -14)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

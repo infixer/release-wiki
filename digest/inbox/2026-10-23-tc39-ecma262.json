@@ -1,0 +1,98 @@
+{
+  "kind": "repo",
+  "repo": "tc39/ecma262",
+  "branch": "main",
+  "collectedAt": "2026-10-23T00:00:27Z",
+  "range": {
+    "from": "2026-10-16T22:35:50Z",
+    "to": "2026-10-23T00:00:27Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "es2026-errata",
+      "publishedAt": "2026-07-28T00:12:15Z",
+      "url": "https://github.com/tc39/ecma262/releases/tag/es2026-errata"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 3958,
+      "title": "Editorial: Define an algorithm for %TypedArray%.prototype.toLocaleString",
+      "url": "https://github.com/tc39/ecma262/pull/3958",
+      "author": "gibson042",
+      "mergedAt": "2026-10-22T17:10:53Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "I noticed while reviewing #3940 that [%TypedArray%.prototype.toLocaleString](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-%typedarray%.prototype.tolocalestring) gestures at Array.prototype.toLocaleString rather than defining its own \\<emu-alg>, and further that it requires analogous use of the superseding ECMA-402 Array.prototype.toLocaleString algorithm in relevant implementations while ECMA-402 does not mention TypedArrays at all.\n\nThis PR addresses the ECMA-262 issue by defining the %TypedArray%.prototype.toLocaleString algorithm using a new JoinIndexedProperties operation common to both it and Array.prototype.toLocaleString, and prepares for addressing the [ECMA-402 issue](https://github.com/tc39/ecma402/issues/1094) by defining that operation such that it will be usable by superseding definitions (specifically, that it accepts arguments for forwarding to \"toLocaleString\" method invocations, to be provided by ECMA-402 algorithms but not by ECMA-262 ones).\n\nAs its name suggests, JoinIndexedProperties is also used by {Array,%TypedArray%}.prototype.join methods.",
+      "files": [
+        "spec.html (+60 -41)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3970,
+      "title": "Normative: add Iterator.prototype.chunks and Iterator.prototype.windows",
+      "url": "https://github.com/tc39/ecma262/pull/3970",
+      "author": "michaelficarra",
+      "mergedAt": "2026-10-22T18:08:55Z",
+      "labels": [
+        "normative change",
+        "has test262 tests",
+        "proposal",
+        "has stage 4",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is the Stage 4 PR for https://github.com/tc39/proposal-iterator-chunking.",
+      "files": [
+        "spec.html (+71 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3997,
+      "title": "Meta: use UTF-8 for spell-checking",
+      "url": "https://github.com/tc39/ecma262/pull/3997",
+      "author": "nicolo-ribaudo",
+      "mergedAt": "2026-10-22T18:48:44Z",
+      "labels": [
+        "meta",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Otherwise aspell assumes Latin-1 (because why in 2026 would people not default to UTF-8, right?), reads my name from the dictionary as NicolÃ², and discards the whole dictionary because it contains invalid characters:\n```\n$ aspell --personal=./aspell.txt --add-html-check=alt,title,caption,variants --ignore-case --master=en_GB-ize --mode=html --run-together --run-together-limit=99 --run-together-min=2 list\n\nError: ./aspell.txt: The word \"NicolÃ²\" is invalid. The character '²' (U+B2) may not appear at the end of a word.\n```\n\nYou can see the difference by running `node scripts/spellcheck.mjs 'd093df57'` before/after this PR (d093df57 is where I added my name).",
+      "files": [
+        "scripts/spellcheck.mjs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3983,
+      "title": "Editorial: Rename CreateListFromArrayLike enum value from all to any",
+      "url": "https://github.com/tc39/ecma262/pull/3983",
+      "author": "linusg",
+      "mergedAt": "2026-10-22T19:12:11Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "https://github.com/tc39/ecma262/pull/3982#discussion_r4081863453\n\nSince this is an optional parameter that defaults to the enum value in question callers only need to pass in property-key, so this should be editorially backwards compatible. I also checked ECMA-402, HTML, and WebIDL and none of them use the AO so I suspect there won't be many external users to begin with.",
+      "files": [
+        "spec.html (+2 -2)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

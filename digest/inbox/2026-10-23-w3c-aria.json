@@ -1,0 +1,47 @@
+{
+  "kind": "repo",
+  "repo": "w3c/aria",
+  "branch": "main",
+  "collectedAt": "2026-10-23T00:00:27Z",
+  "range": {
+    "from": "2026-10-15T16:49:24Z",
+    "to": "2026-10-23T00:00:27Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 2928,
+      "title": "Chore: Enable stricter tooling -- enable respec validator and some specprod validators",
+      "url": "https://github.com/w3c/aria/pull/2928",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-10-21T18:18:20Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 2949,
+      "title": "Editorial: Aria 1.2 notes cleanup",
+      "url": "https://github.com/w3c/aria/pull/2949",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-10-21T18:19:50Z",
+      "labels": [
+        "editorial",
+        "spec:aria"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "🚀 **Netlify Preview**:\n🔄 **this PR updates the following specs**:\n- [ARIA preview](https://deploy-preview-2949--wai-aria.netlify.app/index.html) &mdash; [ARIA diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Faria%2F&doc2=https%3A%2F%2Fdeploy-preview-2949--wai-aria.netlify.app%2Findex.html)\n\nCloses #2809",
+      "files": [
+        "index.html (+10 -35)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}
