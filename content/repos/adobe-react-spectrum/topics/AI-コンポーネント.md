@@ -1,6 +1,6 @@
 ---
 title: AI-コンポーネント
-updated: 2026-10-12
+updated: 2026-10-23
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -9,6 +9,7 @@ tags:
 ## 概要
 
 `@react-spectrum/ai` パッケージにある S2 の AI 向けコンポーネント群。プロンプト入力欄の `PromptField`（音声入力ボタン `PromptFieldVoiceButton` を含む）、チャット UI の `Chat` / `Thread`、`AttachmentList`・`AttachmentGrid`・`AttachmentBadge`（無効状態を持つ `AttachmentPreview` も）、`ResponseStatus`（`ExecutionTraceItems`）などがある。`PromptField` は応答の生成中でも欄にテキストがあれば送信ボタンを表示して追加の指示（steering）を送れ、`renderCompletions` の補完メニューは S2 の仮想化 Menu で描画される。`Chat` / `Thread` はデザイン仕様に合わせた余白とスクロールフェードを持ち、スタイルをコンポーネント側に取り込んで API が簡素化された（スタイルなし版は今後の予定）。S2 docs では AI コンポーネントのページ（`ai-components.mdx`）で解説されている。`PromptField` はテキストが無くても添付ファイルだけで送信できるようになり、`AttachmentGrid`・`AttachmentList` には Safari 27 の flex のバグの回避策が入った。
+`AttachmentList` の card 型の添付は全幅で描画され、ファイル名と説明が見える（未リリース）。
 
 ## 主な API・オプション
 
@@ -23,6 +24,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-22 — `AttachmentList` の card 型の添付を全幅で表示し、ファイル名と説明が見えるように（[#10818](https://github.com/adobe/react-spectrum/pull/10818)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-23|変更]]
 - 2026-10-06 — Safari 27 の flex のバグを `AttachmentGrid`・`AttachmentList` で回避（[#10724](https://github.com/adobe/react-spectrum/pull/10724)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-07|変更]]
 - 2026-10-06 — `PromptField` で添付ファイルだけのプロンプトを送信できるように（[#10703](https://github.com/adobe/react-spectrum/pull/10703)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-07|変更]]
 - 2026-10-01 — `AttachmentBadge` を追加、`AttachmentPreview` に無効状態、`scrollFade` をエクスポート（[#10594](https://github.com/adobe/react-spectrum/pull/10594)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-02|変更]]
@@ -41,3 +43,4 @@ tags:
 - [[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-09-28|2026-09-28 の変更]]
 - [[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]（AI コンポーネントの更新）
+- [[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23 の変更]]

@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,6 +15,9 @@ tags:
 
 ## 直近の注目変更
 
+- ファイル監視の `Created` イベントでもキャッシュ済みのファイルを読み直す（アトミックな保存で診断が古いまま残る問題）（[#64909](https://github.com/microsoft/TypeScript/pull/64909)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
+- 変更のない `tsc -b` でルートファイルを繰り返し走査しないように（[#64898](https://github.com/microsoft/TypeScript/pull/64898)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
+- プロパティのホバーにインデックスシグネチャの詳細を戻す（[#64586](https://github.com/microsoft/TypeScript/pull/64586)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
 - LSP サーバーがワークスペースフォルダ外の node_modules のコンテンツマッパーを読み込まないように（[#64837](https://github.com/microsoft/TypeScript/pull/64837)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/コンテンツマッパー|コンテンツマッパー]]
 - API: package.json の `"imports"` を削除（CDN から読み込むための前提）（[#64879](https://github.com/microsoft/TypeScript/pull/64879)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - API: クライアントの性能改善（アロケーション 57% 減）（[#64823](https://github.com/microsoft/TypeScript/pull/64823)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
@@ -22,9 +25,6 @@ tags:
 - API: `pathsBasePath` が正しく渡されるように（[#64843](https://github.com/microsoft/TypeScript/pull/64843)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - API: 環境変数 `TS_API_TIMING_DIR` でタイミング情報を収集・出力（[#64846](https://github.com/microsoft/TypeScript/pull/64846)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - グローバルなファイルの削除後に、インクリメンタルの診断が古いまま残る問題を修正（[#64845](https://github.com/microsoft/TypeScript/pull/64845)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
-- ネットワークパスを全面的に禁止し、資格情報の自動送信を防ぐ（[#64832](https://github.com/microsoft/TypeScript/pull/64832)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
-- ユーザーのキャッシュが無いときは tmp を使わず ATA を無効に（[#64836](https://github.com/microsoft/TypeScript/pull/64836)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
-- オートインポート・補完で生成するモジュール指定子のクォートをエスケープ（[#64839](https://github.com/microsoft/TypeScript/pull/64839)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
 
 ## トピック
 
@@ -38,4 +38,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]、[[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]、[[repos/microsoft-TypeScript/changes/2026-10-14|2026-10-14]]、[[repos/microsoft-TypeScript/changes/2026-10-12|2026-10-12]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-23|2026-10-23]]、[[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]、[[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]、[[repos/microsoft-TypeScript/changes/2026-10-14|2026-10-14]]

@@ -1,6 +1,6 @@
 ---
 title: vuejs/core
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/vuejs-core
 ---
@@ -40,4 +40,4 @@ tags:
 ## 取り込み
 
 - [[repos/vuejs-core/log|取り込み履歴]]
-- 最近の変更: [[repos/vuejs-core/changes/2026-10-21|2026-10-21]]、[[repos/vuejs-core/changes/2026-10-14|2026-10-14]]、[[repos/vuejs-core/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/vuejs-core/changes/2026-10-23|2026-10-23]]、[[repos/vuejs-core/changes/2026-10-21|2026-10-21]]、[[repos/vuejs-core/changes/2026-10-14|2026-10-14]]、[[repos/vuejs-core/changes/2026-09-24|2026-09-24]]

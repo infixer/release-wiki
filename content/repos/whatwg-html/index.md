@@ -1,6 +1,6 @@
 ---
 title: whatwg/html
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/whatwg-html
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- CORP のチェックを HTTP(S) のナビゲーションのレスポンスだけで行うように（COEP の下で about:blank・data:・blob: をブロックしない）（[#13087](https://github.com/whatwg/html/pull/13087)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/COOP-COEP|COOP-COEP]]
 - ポップアップとトップレベルの data: 文書のセキュアコンテキスト判定を作成元に合わせる（[#13103](https://github.com/whatwg/html/pull/13103)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/セキュアコンテキスト|セキュアコンテキスト]]
 - Fragment のスクリプティングモードで `force async` を false にしない（[#13080](https://github.com/whatwg/html/pull/13080)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/script要素|script要素]]
 - `input` 要素の廃止された `hspace`・`vspace` 属性を追加（[#13095](https://github.com/whatwg/html/pull/13095)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/廃止された機能|廃止された機能]]
@@ -23,11 +24,10 @@ tags:
 - パースしながらサニタイズするように（独立した「sanitize」アルゴリズムを廃止）（[#12756](https://github.com/whatwg/html/pull/12756)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
 - 文字列を渡したタイマーの CSP チェックを同期的に（ブロック時は `0` を返す）（[#13023](https://github.com/whatwg/html/pull/13023)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/タイマー|タイマー]]
 - 取り除かれたメディアの `source` 候補に `error` を発火しないように（[#13043](https://github.com/whatwg/html/pull/13043)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/メディア要素|メディア要素]]
-- `body` の中で `style` 要素を使えるように（`<scope-start>` なしの `@scope` 内のルールに限る）（[#13007](https://github.com/whatwg/html/pull/13007)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/style要素|style要素]]
 
 ## トピック
 
-- [[repos/whatwg-html/topics/COOP-COEP|COOP-COEP]] — COOP・COEP のヘッダーの型とその違反レポート（`report-to` など）
+- [[repos/whatwg-html/topics/COOP-COEP|COOP-COEP]] — COOP・COEP のヘッダーの型とその違反レポート（`report-to` など）、COEP の下での CORP のチェック
 - [[repos/whatwg-html/topics/javascript-URL|javascript-URL]] — javascript: URL へのナビゲーションと評価
 - [[repos/whatwg-html/topics/MessagePort|MessagePort]] — `MessagePort` の GC の扱い（`close` イベントの削除）
 - [[repos/whatwg-html/topics/Navigation-API|Navigation-API]] — Navigation API のスクロール処理と ongoing API method tracker
@@ -53,4 +53,4 @@ tags:
 ## 取り込み
 
 - [[repos/whatwg-html/log|取り込み履歴]]
-- 最近の変更: [[repos/whatwg-html/changes/2026-10-21|2026-10-21]]、[[repos/whatwg-html/changes/2026-10-19|2026-10-19]]、[[repos/whatwg-html/changes/2026-10-16|2026-10-16]]、[[repos/whatwg-html/changes/2026-10-14|2026-10-14]]、[[repos/whatwg-html/changes/2026-10-12|2026-10-12]]
+- 最近の変更: [[repos/whatwg-html/changes/2026-10-23|2026-10-23]]、[[repos/whatwg-html/changes/2026-10-21|2026-10-21]]、[[repos/whatwg-html/changes/2026-10-19|2026-10-19]]、[[repos/whatwg-html/changes/2026-10-16|2026-10-16]]、[[repos/whatwg-html/changes/2026-10-14|2026-10-14]]

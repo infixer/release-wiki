@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-10-23
+
+- 期間: 2026-10-20T23:22:23Z 〜 2026-10-23T00:00:27Z
+- PR 45 件（詳しく 28 件 / 1 行 17 件）、Release 4 件（安定版 3 件: v12.15.0, v11.28.7, v11.28.8。プレリリース pnpr@0.1.0-alpha.16）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-10-23|changes]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/パッチ|パッチ]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/releases/v12.15.0|v12.15.0]]（新規）、[[repos/pnpm-pnpm/releases/v11.28.7|v11.28.7]]（新規）、[[repos/pnpm-pnpm/releases/v11.28.8|v11.28.8]]（新規）、[[repos/pnpm-pnpm/releases/v12.14.0|v12.14.0]]・[[repos/pnpm-pnpm/releases/v11.28.6|v11.28.6]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 15 件（すべて docs・CI・テスト・依存関係の更新・リリース作業）は「その他」に 1 行で書いた。詳しい情報のある 30 件のうち、挙動の変わらないリファクタ 2 件（#17194・#16501）も「その他」に入れた。v12.15.0・v11.28.7 のリリースノート本文は途中で切れている。v11.28.8 の内容の PR（#17228）は inbox では ⏳ 未リリースと表記されており、そのまま書いた。公開日は JST で書いた（v11.28.8 は 2026-10-22T22:08:54Z）
+- エラー: なし
 
 ## 2026-10-21
 

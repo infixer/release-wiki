@@ -1,6 +1,6 @@
 ---
 title: pnpr
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -40,6 +40,13 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 
 ## 変更履歴
 
+- 2026-10-23 — libsql の認証の読み取りと書き込みの接続待ちを認証の期限で区切る（[#17252](https://github.com/pnpm/pnpm/pull/17252)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — libsql の認証の操作を接続のプールで行い、使用済みの baton による 500 を防ぐ（[#17237](https://github.com/pnpm/pnpm/pull/17237)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — 組み込みレプリカの同期を専用の接続で行う（read-your-writes を切る）（[#17232](https://github.com/pnpm/pnpm/pull/17232)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — 組み込みレプリカが Turso Cloud のプライマリに新しい sync プロトコルで追従（[#17225](https://github.com/pnpm/pnpm/pull/17225)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — Turso が報告する一意制約の違反を認識、Cloudflare へのデプロイの文書（[#17223](https://github.com/pnpm/pnpm/pull/17223)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — bin とシバンのランタイムを `dist.pnpr.bins` で配る（[#17186](https://github.com/pnpm/pnpm/pull/17186)）📦 v12.15.0 · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — pnpr を通したインストールのメタデータの扱いを最適化（ファイル数・展開後のサイズなど）（[#17169](https://github.com/pnpm/pnpm/pull/17169)）📦 v12.15.0 · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
 - 2026-10-21 — tarball から確かめた `requiresBuild` を配り、pnpm v12 が使う（[#17164](https://github.com/pnpm/pnpm/pull/17164)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-21|変更]]
 - 2026-10-21 — 秘密情報の検証とサブキーの導出、エコシステムごとの設定の検証（Section B）（[#17126](https://github.com/pnpm/pnpm/pull/17126)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-21|変更]]
 - 2026-10-21 — 文書の形式バージョン・`pnpr serve`・厳密な設定・`v0` プロトコル（Section A）（[#17112](https://github.com/pnpm/pnpm/pull/17112)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-21|変更]]
@@ -81,6 +88,8 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-10-23|2026-10-23 の変更]]
+- [[repos/pnpm-pnpm/releases/v12.15.0|v12.15.0]]
 - [[repos/pnpm-pnpm/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-16|2026-10-16 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-12|2026-10-12 の変更]]

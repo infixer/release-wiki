@@ -1,6 +1,6 @@
 ---
 title: SideNav
-updated: 2026-10-12
+updated: 2026-10-23
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -10,6 +10,7 @@ tags:
 
 S2（`@react-spectrum/s2`）のサイドナビゲーション `SideNav`。SidePanel の中に置いたときの折りたたみ動作の実装が始まっており、折りたたみ時は子を持たないトップレベルのリンクはすぐに遷移し、子を持つ項目は SidePanel を開いて下の階層へ進む。項目が展開するのか遷移するのか分かりにくい点はデザインと検討が続いている。SidePanel 展開時のアバターのずれ、フォーカスリングの欠け、アカウントメニューの位置ずれも修正され、docs では AccountFooter と組み合わせたスクロールを試せる。React 18（`ViewTransition` が無い環境）でもビルドできるよう、React のデフォルトエクスポート経由で参照している。
 SidePanel は `SideNavPanel` に改名された（[#10734](https://github.com/adobe/react-spectrum/pull/10734)）。
+移動先を持たないトップレベルの項目も SideNavPanel で隠れず、押すと SidePanel を展開して子も展開する（未リリース）。
 
 ## 主な API・オプション
 
@@ -17,6 +18,7 @@ SidePanel は `SideNavPanel` に改名された（[#10734](https://github.com/ad
 
 ## 変更履歴
 
+- 2026-10-22 — SideNavPanel で移動先の無いトップレベルの項目が隠れ、押しても展開されない問題を修正（[#10778](https://github.com/adobe/react-spectrum/pull/10778)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-23|変更]]
 - 2026-10-07 — `SidePanel` を `SideNavPanel` に改名（[#10734](https://github.com/adobe/react-spectrum/pull/10734)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-09|変更]]
 - 2026-09-30 — SidePanel 展開時のアバターのずれ・フォーカスリングの欠け・アカウントメニューの位置ずれ・スクロールを修正（[#10678](https://github.com/adobe/react-spectrum/pull/10678)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-02|変更]]
 - 2026-09-30 — React 18 で `ViewTransition` が見つからずビルドエラーになる問題を修正（[#10675](https://github.com/adobe/react-spectrum/pull/10675)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-09-30|変更]]
@@ -28,3 +30,4 @@ SidePanel は `SideNavPanel` に改名された（[#10734](https://github.com/ad
 - [[repos/adobe-react-spectrum/changes/2026-09-30|2026-09-30 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]（`SideNavPanel` の追加）
+- [[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23 の変更]]

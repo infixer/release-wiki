@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -38,6 +38,10 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-23 — `pnpm dedupe` がメタデータを取り直す（[#17215](https://github.com/pnpm/pnpm/pull/17215)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — `pnpm dedupe --check` が deprecated の通知の違いだけでは失敗しない（[#17199](https://github.com/pnpm/pnpm/pull/17199)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — `why` の木をまとめるときにプロジェクトとパスを保つ（`--parseable --long`）（[#17180](https://github.com/pnpm/pnpm/pull/17180)）📦 v12.15.0 · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
+- 2026-10-23 — `pnpm update --interactive` のカーソルの行をシアンで強調（[#17168](https://github.com/pnpm/pnpm/pull/17168)）📦 v12.15.0 · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
 - 2026-10-21 — v11 の `pnpm sbom` がプロジェクトごとの lockfile から SBOM を作る（[#17163](https://github.com/pnpm/pnpm/pull/17163)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-21|変更]]
 - 2026-10-21 — `pnpm prune` が余分な直接依存を消し、ワークスペースの選択に従う（[#17154](https://github.com/pnpm/pnpm/pull/17154)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-21|変更]]
 - 2026-10-19 — `pnpm prune` が `trustLockfile` に従う（オフラインでの失敗を修正）（[#17004](https://github.com/pnpm/pnpm/pull/17004)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-19|変更]]
@@ -74,6 +78,8 @@ tags:
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-10-23|2026-10-23 の変更]]
+- [[repos/pnpm-pnpm/releases/v12.15.0|v12.15.0]]
 - [[repos/pnpm-pnpm/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-16|2026-10-16 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.14.0|v12.14.0]]

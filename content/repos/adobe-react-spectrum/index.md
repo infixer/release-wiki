@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -15,27 +15,28 @@ tags:
 
 ## 直近の注目変更
 
+- SideNavPanel で移動先の無いトップレベルの項目が隠れ・展開されない問題を修正（[#10778](https://github.com/adobe/react-spectrum/pull/10778)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/SideNav|SideNav]]
+- `AttachmentList` の card 型の添付を全幅で表示し、ファイル名と説明が見えるように（[#10818](https://github.com/adobe/react-spectrum/pull/10818)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
+- タッチ操作の後に `useHover` のホバー状態が残る問題を修正（[#10824](https://github.com/adobe/react-spectrum/pull/10824)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]
+- `GridListItem` に `onFocus`・`onBlur`・`onFocusChange` を追加（[#10822](https://github.com/adobe/react-spectrum/pull/10822)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
+- `Sheet` が開くときに画面外で待たされる時間をなくす（[#10815](https://github.com/adobe/react-spectrum/pull/10815)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]
 - Select のタイプアヘッドで同じ文字の繰り返しが正しく動くように（[#10006](https://github.com/adobe/react-spectrum/pull/10006)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - `hasChildItems` の TreeItem が子の行なしでも展開できるように（[#10799](https://github.com/adobe/react-spectrum/pull/10799)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
 - テスト環境ではスタイルマクロのクラス名にバージョンの接尾辞を付けない（[#10736](https://github.com/adobe/react-spectrum/pull/10736)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
 - Select の props から効果のない `excludeFromTabOrder` を削除（型のみ）（[#10790](https://github.com/adobe/react-spectrum/pull/10790)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
 - ESM ビルドのスタイルマクロが `$kLxT8$propertiesmjs1 is not defined` で失敗する問題を修正（[#10785](https://github.com/adobe/react-spectrum/pull/10785)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
-- TokenField でユーザーのキャレット移動を毎回 `onChange` で通知（[#10766](https://github.com/adobe/react-spectrum/pull/10766)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/TokenField|TokenField]]
-- `window.screen` が無い環境（React Native の Jest・Deno）で import 時に例外を投げないように（[#10774](https://github.com/adobe/react-spectrum/pull/10774)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
-- ユーザーのキーボードハンドラーを `useKeyboard` 経由にする変更（useMenu・useDateField・useDatePicker・useDateRangePicker）を再適用（[#10745](https://github.com/adobe/react-spectrum/pull/10745)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
-- コレクションの選択＋Home/End・PageUp/PageDown のハンドラー（`useSelectableCollection`）と DatePicker の `preventDefault` 漏れを修正（[#10728](https://github.com/adobe/react-spectrum/pull/10728)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]、[[repos/adobe-react-spectrum/topics/Collections|Collections]]
-- `useDescription` のマウント時の余分なレンダーをなくし、ドラッグ可能な行を持つ仮想化リストでの "Maximum update depth exceeded" を回避（[#10754](https://github.com/adobe/react-spectrum/pull/10754)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ドラッグアンドドロップ|ドラッグアンドドロップ]]
 
 ## トピック
 
 - [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]] — `@react-spectrum/ai` の PromptField・Chat/Thread・AttachmentList・AttachmentGrid・AttachmentBadge など
-- [[repos/adobe-react-spectrum/topics/Collections|Collections]] — コレクションのキー管理（`Document`/`BaseCollection`）とキーボード・フォーカス、Tree の展開
+- [[repos/adobe-react-spectrum/topics/Collections|Collections]] — コレクションのキー管理（`Document`/`BaseCollection`）とキーボード・フォーカス、Tree の展開、`GridListItem` のフォーカスイベント
 - [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]] — 非同期アイテム読み込み時の開閉制御と VoiceOver での読み上げ
 - [[repos/adobe-react-spectrum/topics/DateField|DateField]] — 日付入力（`useDateSegment`・`DateField`）
 - [[repos/adobe-react-spectrum/topics/Menu|Menu]] — S2 の Menu（セパレーター表示・仮想化）
 - [[repos/adobe-react-spectrum/topics/SideNav|SideNav]] — S2 の SideNav と SideNavPanel（旧 SidePanel）内での折りたたみ
 - [[repos/adobe-react-spectrum/topics/Toast|Toast]] — S2 の Toast（展開したリストとボタンの間隔）
 - [[repos/adobe-react-spectrum/topics/TokenField|TokenField]] — トークン入力欄（`useTokenField`）のキャレット位置・スクロール・選択の `onChange`
+- [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]] — react-aria のインタラクション用フック（`useHover` のタッチ・マウス併用時のホバー状態）
 - [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]] — Modal・Popover・Sheet の配置とスクリーンキーボードへの対応
 - [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]] — `useKeyboard`（コレクション・DatePicker・Toolbar のキーボード処理）とパッケージ import 時のグローバルイベント
 - [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]] — S2 の `style` マクロ（ESM ビルド）とテーマで使えるプロパティ
@@ -48,4 +49,4 @@ tags:
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
 - リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21]]、[[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]、[[repos/adobe-react-spectrum/changes/2026-10-16|2026-10-16]]、[[repos/adobe-react-spectrum/changes/2026-10-14|2026-10-14]]、[[repos/adobe-react-spectrum/changes/2026-10-12|2026-10-12]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23]]、[[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21]]、[[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]、[[repos/adobe-react-spectrum/changes/2026-10-16|2026-10-16]]、[[repos/adobe-react-spectrum/changes/2026-10-14|2026-10-14]]

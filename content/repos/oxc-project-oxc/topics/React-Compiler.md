@@ -1,6 +1,6 @@
 ---
 title: React-Compiler
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-transform-react`。React 本家のコミットを移植する形で正しさの修正が進んでいる（暗黙の `arguments` を使うコードでのコンパイル中止、`**` / `**=` の意味、引数なしの `new Date` を不純として扱う、再帰する名前付き関数式への対応）。`oxc-transform-react` では、オプトインの `reactCompiler.reportDiagnostics` で回復可能な診断を `result.errors` に出せるようになった（既定では出さない）。JSX の文字参照は JSX 変換と共通の Babel 準拠のデコーダーで扱い、孤立サロゲートを保つようになった（`&#X41;` は文字のまま。oxlint_v1.89.0）。`try` の中の三項演算子・`if`・`switch` で props に応じて選ばれる値を定数として扱い、マウントごとに 1 回だけキャッシュしていた不具合も直った（未リリース）。
+oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-transform-react`。React 本家のコミットを移植する形で正しさの修正が進んでいる（暗黙の `arguments` を使うコードでのコンパイル中止、`**` / `**=` の意味、引数なしの `new Date` を不純として扱う、再帰する名前付き関数式への対応）。`oxc-transform-react` では、オプトインの `reactCompiler.reportDiagnostics` で回復可能な診断を `result.errors` に出せるようになった（既定では出さない）。JSX の文字参照は JSX 変換と共通の Babel 準拠のデコーダーで扱い、孤立サロゲートを保つようになった（`&#X41;` は文字のまま。oxlint_v1.89.0）。`try` の中の三項演算子・`if`・`switch` で props に応じて選ばれる値を定数として扱い、マウントごとに 1 回だけキャッシュしていた不具合も直った（未リリース）。さらに、`try` の中で throw しうる呼び出しもリアクティブさを決める分岐として扱い、`catch` に到達しない `try` でアサーション失敗により panic していた（`catch` が複数ブロックなら後続のコードが消えていた）問題も直った（いずれも未リリース）。
 
 ## 主な API・オプション
 
@@ -17,6 +17,8 @@ oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-trans
 
 ## 変更履歴
 
+- 2026-10-23 — `try` の中で throw しうる呼び出しで `catch` の代入値をリアクティブに扱う（#27809）（[#28005](https://github.com/oxc-project/oxc/pull/28005)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-23|変更]]
+- 2026-10-23 — `catch` に到達しない `try` で panic せずにコンパイルし、アサーションを Invariant の診断に（#27404）（[#28066](https://github.com/oxc-project/oxc/pull/28066)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-23|変更]]
 - 2026-10-21 — `try` の中の分岐で選ばれる値をリアクティブに扱う（[#27817](https://github.com/oxc-project/oxc/pull/27817)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-21|変更]]
 - 2026-10-21 — JSX の文字参照を孤立サロゲートとしてデコード（`&#X41;` は文字のまま）（[#26712](https://github.com/oxc-project/oxc/pull/26712)） 📦 oxlint_v1.89.0 · [[repos/oxc-project-oxc/changes/2026-10-21|変更]]
 - 2026-09-28 — 再帰する名前付き関数式を内部エラーなくコンパイルできるように（[#26796](https://github.com/oxc-project/oxc/pull/26796)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-09-28|変更]]
@@ -31,3 +33,4 @@ oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-trans
 - [[repos/oxc-project-oxc/releases/oxlint_v1.86.0|oxlint_v1.86.0]]
 - [[repos/oxc-project-oxc/releases/crates_v0.152.0|crates_v0.152.0]]
 - [[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21 の変更]]
+- [[repos/oxc-project-oxc/changes/2026-10-23|2026-10-23 の変更]]

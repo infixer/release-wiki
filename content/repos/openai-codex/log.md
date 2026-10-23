@@ -1,9 +1,17 @@
 ---
 title: openai/codex 取り込み履歴
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/openai-codex
 ---
+
+## 2026-10-23
+
+- 期間: 2026-10-20T23:42:34Z 〜 2026-10-23T00:00:27Z
+- PR 97 件（詳しく 15 件 / 1 行 82 件）、Release 0 件（取得に失敗）
+- 更新したページ: [[repos/openai-codex/changes/2026-10-23|changes]]、[[repos/openai-codex/topics/Guardian|Guardian]]、[[repos/openai-codex/topics/MCP|MCP]]、[[repos/openai-codex/topics/シェル・コマンド実行|シェル・コマンド実行]]、[[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]、[[repos/openai-codex/topics/デーモン|デーモン]]、[[repos/openai-codex/topics/フィードバック・診断|フィードバック・診断]]、[[repos/openai-codex/topics/プラグイン|プラグイン]]、[[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]、[[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]、[[repos/openai-codex/topics/状態データベース|状態データベース]]、[[repos/openai-codex/topics/管理要件|管理要件]]
+- 備考: PR 数が `maxPrs`（30）を超えたため、`brief: true` の 67 件はタイトルから領域ごとにまとめて「その他」に記載した。本文のある 30 件のうち、内部のリファクタ・性能の改善・計測・テストの 15 件も「その他」に 1 行で記載。Release を取得できなかったため、index.md の最新リリースは前回のまま
+- エラー: `Release を取得できませんでした: terminated`
 
 ## 2026-10-21
 

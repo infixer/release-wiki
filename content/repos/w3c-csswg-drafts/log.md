@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-10-23
+
+- 期間: 2026-10-20T13:22:44Z 〜 2026-10-23T00:00:27Z（直接のコミット: 2026-10-20T21:27:12Z 〜 2026-10-23T00:00:27Z）
+- PR 11 件（詳しく 6 件 / 1 行 5 件）、直接のコミット 8 件（詳しく 4 件 / 1 行 4 件）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-10-23|changes]]（新規）、[[repos/w3c-csswg-drafts/topics/css-align-3|css-align-3]]（新規）、[[repos/w3c-csswg-drafts/topics/css-overflow-5|css-overflow-5]]（新規）、[[repos/w3c-csswg-drafts/topics/selectors-5|selectors-5]]（新規）、[[repos/w3c-csswg-drafts/topics/css-color-5|css-color-5]]（新規）、[[repos/w3c-csswg-drafts/topics/css-masking-1|css-masking-1]]（新規）、[[repos/w3c-csswg-drafts/topics/css-font-loading-3|css-font-loading-3]]（新規）、[[repos/w3c-csswg-drafts/topics/css-grid-3|css-grid-3]]、[[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]]、[[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]]、[[repos/w3c-csswg-drafts/index|index]]
+- エラー: なし
 
 ## 2026-10-21
 

@@ -1,6 +1,6 @@
 ---
 title: レンダリング・DevTools
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,10 +8,13 @@ tags:
 
 ## 概要
 
-メタデータのレンダリング経路、オンデマンド生成時のエラーハンドリング、開発オーバーレイ（dev overlay）の表示まわりの実装。ストリーミングとブロッキングでメタデータの扱いを揃える変更に続き、Edge SSR でも Node SSR と同じユーザーエージェントベースのメタデータ方針（HTML 制限ボットにはブロッキング）が使われるようになった。`error.tsx` が正しく使われるようにする修正、開発オーバーレイのハイドレーションエラー表示・レイアウトの改善も含まれる。クライアントコンポーネントの読み込み時間のテレメトリは、HTML を生成するレンダーごとに計測するようになった（非同期モジュールの評価時間も含む）。App Router の開発インジケーターは出力完了時に分類を確定するようになり、OpenTelemetry のトレーサーには正しい Next.js のバージョンが設定される。Instant Navigation の検証では、`prefetch()` / `navigation()` による待ちを URL データと区別し、ブロッキングにならない指摘をアンバーの「Instant Insights」として表示するようになった。完全に静的なルートのエラーには、クライアント側での修正方法が加わり、オーバーレイ・ビルドメッセージ・エラーページの説明が揃えられた。サーバーのエラー表示（`patch-error-inspect.ts`）は、複数行のメッセージをスタックフレームと誤って解釈しなくなった（v16.5.0-canary.8）。`next dev` のコードフレームはターミナルのサイズ変更に追従し、マルチバイト文字（CJK など）を含むソースでの `next-code-frame` の panic も修正された。Client Component 経由で `next/headers` を使ったときのエラーは、Pages Router と誤って表示されなくなった（いずれも v16.5.0-canary.10）。安定版 v16.4.2 には `next-code-frame` のマルチバイト文字での修正がバックポートされた。エラーオーバーレイの「Open in editor」ボタンは共通のコンポーネントになり、Code Wrap アイコンで見つけやすくなった（未リリース）。開発時の HMR では、ルーターの初期化前に届いた更新が失われたり（App Router）警告になったり（Pages Router の ISR マニフェスト）する問題が修正され、DevTools インジケーターは問題とコンパイル中の状態を同時に表示する（いずれも v16.5.0-canary.21）。
+メタデータのレンダリング経路、オンデマンド生成時のエラーハンドリング、開発オーバーレイ（dev overlay）の表示まわりの実装。ストリーミングとブロッキングでメタデータの扱いを揃える変更に続き、Edge SSR でも Node SSR と同じユーザーエージェントベースのメタデータ方針（HTML 制限ボットにはブロッキング）が使われるようになった。`error.tsx` が正しく使われるようにする修正、開発オーバーレイのハイドレーションエラー表示・レイアウトの改善も含まれる。クライアントコンポーネントの読み込み時間のテレメトリは、HTML を生成するレンダーごとに計測するようになった（非同期モジュールの評価時間も含む）。App Router の開発インジケーターは出力完了時に分類を確定するようになり、OpenTelemetry のトレーサーには正しい Next.js のバージョンが設定される。Instant Navigation の検証では、`prefetch()` / `navigation()` による待ちを URL データと区別し、ブロッキングにならない指摘をアンバーの「Instant Insights」として表示するようになった。完全に静的なルートのエラーには、クライアント側での修正方法が加わり、オーバーレイ・ビルドメッセージ・エラーページの説明が揃えられた。サーバーのエラー表示（`patch-error-inspect.ts`）は、複数行のメッセージをスタックフレームと誤って解釈しなくなった（v16.5.0-canary.8）。`next dev` のコードフレームはターミナルのサイズ変更に追従し、マルチバイト文字（CJK など）を含むソースでの `next-code-frame` の panic も修正された。Client Component 経由で `next/headers` を使ったときのエラーは、Pages Router と誤って表示されなくなった（いずれも v16.5.0-canary.10）。安定版 v16.4.2 には `next-code-frame` のマルチバイト文字での修正がバックポートされた。エラーオーバーレイの「Open in editor」ボタンは共通のコンポーネントになり、Code Wrap アイコンで見つけやすくなった（未リリース）。開発時の HMR では、ルーターの初期化前に届いた更新が失われたり（App Router）警告になったり（Pages Router の ISR マニフェスト）する問題が修正され、DevTools インジケーターは問題とコンパイル中の状態を同時に表示する（いずれも v16.5.0-canary.21）。ボットの判定は 1KB を超える User-Agent を対象外にし（`htmlLimitedBots` を含む正規表現の処理量を抑える DoS 対策）、サーバーの起動時には描画の検証や fetch の重複排除のために React を読み込まなくなった（いずれも v16.5.0-canary.24）。
 
 ## 変更履歴
 
+- 2026-10-22 — ボットの User-Agent 判定を 1KB までに制限（超えたものはボットとして扱わない）（[#100604](https://github.com/vercel/next.js/pull/100604)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
+- 2026-10-22 — fetch の重複排除で、React の読み込みをヘルパーの生成時まで遅らせる（[#100401](https://github.com/vercel/next.js/pull/100401)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
+- 2026-10-22 — 描画の検証を分離し、サーバーの起動時に単体の React を読み込まないように（[#100467](https://github.com/vercel/next.js/pull/100467)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
 - 2026-10-20 — App Router: 初期化前に届いた HMR の更新を保留し、ルーターのマウント後に実行（[#100113](https://github.com/vercel/next.js/pull/100113)）📦 v16.5.0-canary.21 · [[repos/vercel-next.js/changes/2026-10-21|変更]]
 - 2026-10-19 — DevTools インジケーターで、問題の表示中もコンパイル中の状態を表示（[#100178](https://github.com/vercel/next.js/pull/100178)）📦 v16.5.0-canary.21 · [[repos/vercel-next.js/changes/2026-10-21|変更]]
 - 2026-10-19 — Pages Router: ルーターより先に ISR マニフェストが届くと HMR で警告が出る問題を修正（[#100095](https://github.com/vercel/next.js/pull/100095)）📦 v16.5.0-canary.21 · [[repos/vercel-next.js/changes/2026-10-21|変更]]
@@ -45,3 +48,4 @@ tags:
 - [[repos/vercel-next.js/changes/2026-10-16|2026-10-16 の変更]]
 - [[repos/vercel-next.js/releases/v16.4.2|v16.4.2]]
 - [[repos/vercel-next.js/changes/2026-10-21|2026-10-21 の変更]]
+- [[repos/vercel-next.js/changes/2026-10-23|2026-10-23 の変更]]

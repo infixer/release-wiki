@@ -1,6 +1,6 @@
 ---
 title: react/react
-updated: 2026-10-21
+updated: 2026-10-23
 tags:
   - repo/react-react
 ---
@@ -15,6 +15,7 @@ tags:
 
 ## 直近の注目変更
 
+- Rust 版コンパイラ: 非 ASCII 文字を含む行の診断の下線位置を修正（[#37898](https://github.com/react/react/pull/37898)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 - 大きなツリーでも `useId` の値が一意になるように（[#37916](https://github.com/react/react/pull/37916)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
 - バックプレッシャー下でプリレンダーの出力が途中で切れる問題を修正（[#37901](https://github.com/react/react/pull/37901)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - `resumeAndPrerender` で出力済みの境界を再び postpone できるように（[#37876](https://github.com/react/react/pull/37876)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
@@ -24,7 +25,6 @@ tags:
 - Flight の転送プロトコルを改善（バックポートは v19.0.9〜v19.3.1 に収録）（[#37846](https://github.com/react/react/pull/37846)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
 - `IntersectionObserver` のコールバックでの ref の誤検知を修正（[#37764](https://github.com/react/react/pull/37764)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 - 拡張不可の thenable を `use()` に渡すと DEV でクラッシュする問題を修正（[#37796](https://github.com/react/react/pull/37796)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
-- ref を読む関数の比較を `react-hooks/refs` が誤検知しないよう修正（[#37688](https://github.com/react/react/pull/37688)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 
 ## トピック
 
@@ -37,4 +37,4 @@ tags:
 ## 取り込み
 
 - [[repos/react-react/log|取り込み履歴]]
-- 最近の変更: [[repos/react-react/changes/2026-10-21|2026-10-21]]、[[repos/react-react/changes/2026-10-16|2026-10-16]]、[[repos/react-react/changes/2026-10-14|2026-10-14]]、[[repos/react-react/changes/2026-10-09|2026-10-09]]、[[repos/react-react/changes/2026-10-07|2026-10-07]]
+- 最近の変更: [[repos/react-react/changes/2026-10-23|2026-10-23]]、[[repos/react-react/changes/2026-10-21|2026-10-21]]、[[repos/react-react/changes/2026-10-16|2026-10-16]]、[[repos/react-react/changes/2026-10-14|2026-10-14]]、[[repos/react-react/changes/2026-10-09|2026-10-09]]
