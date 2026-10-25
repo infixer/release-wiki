@@ -1,0 +1,259 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-10-25T23:19:53Z",
+  "range": {
+    "from": "2026-10-22T23:28:56Z",
+    "to": "2026-10-25T23:19:53Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.89.0",
+      "publishedAt": "2026-10-19T17:24:26Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.89.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 28115,
+      "title": "chore(deps): update oxlint-tsgolint to 7.0.2005",
+      "url": "https://github.com/oxc-project/oxc/pull/28115",
+      "author": "camc314",
+      "mergedAt": "2026-10-23T01:08:33Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 28116,
+      "title": "feat(linter/typescript/await-thenable): support `allowMixedPromiseArrays` option",
+      "url": "https://github.com/oxc-project/oxc/pull/28116",
+      "author": "camc314",
+      "mergedAt": "2026-10-23T01:27:35Z",
+      "labels": [
+        "A-linter",
+        "A-cli"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Add `allowMixedPromiseArrays` to `typescript/await-thenable`, following https://github.com/oxc-project/tsgolint/pull/1307. Oxlint now validates and forwards the option, and exposes it in the JSON schema and TypeScript config types. It defaults to `false`; when enabled, Promise aggregators accept mixed synchronous and Promise-like inputs while synchronous-only inputs still report errors.",
+      "files": [
+        "apps/oxlint/src-js/package/config.generated.ts (+10 -1)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_rule_options_--type-aware@oxlint.snap (+22 -2)",
+        "crates/oxc_linter/src/generated/rules_enum.rs (+4 -0)",
+        "crates/oxc_linter/src/rules/typescript/await_thenable.rs (+24 -4)",
+        "npm/oxlint/configuration_schema.json (+30 -1)",
+        "apps/oxlint/fixtures/cli/tsgolint_rule_options/.oxlintrc.json (+6 -0)",
+        "apps/oxlint/fixtures/cli/tsgolint_rule_options/test.ts (+6 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 28117,
+      "title": "feat(linter/typescript): implement no-unsafe-enum-assignment rule",
+      "url": "https://github.com/oxc-project/oxc/pull/28117",
+      "author": "camc314",
+      "mergedAt": "2026-10-23T01:33:33Z",
+      "labels": [
+        "A-linter",
+        "A-cli"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Register `typescript/no-unsafe-enum-assignment` as a type-aware rule backed by oxlint-tsgolint 7.0.2005, following https://github.com/oxc-project/tsgolint/pull/1316. Add rule documentation and regenerate the rule registry, JSON schema, and TypeScript config types.\n\nExtend the existing type-aware CLI fixture with unsafe assignments, arguments, returns, assertions, mutations, and enum-key access, plus valid enum-member and bitwise-combination cases. Reuse the existing tests and update their diagnostic and count snapshots.",
+      "files": [
+        "apps/oxlint/src-js/package/config.generated.ts (+1 -0)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_--type-aware --silent@oxlint.snap (+2 -2)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_--type-aware -c config-test.json@oxlint.snap (+1 -1)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_--type-aware test.svelte@oxlint.snap (+1 -1)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_--type-aware@oxlint.snap (+50 -2)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_-c config-type-aware.json@oxlint.snap (+1 -1)",
+        "crates/oxc_linter/src/generated/rule_runner_impls.rs (+5 -0)",
+        "crates/oxc_linter/src/generated/rules_enum.rs (+611 -586)",
+        "crates/oxc_linter/src/rules.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/typescript/no_unsafe_enum_assignment.rs (+61 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 28118,
+      "title": "feat(oxlint): require mininum oxlint-tsgolint version v7.0.2005",
+      "url": "https://github.com/oxc-project/oxc/pull/28118",
+      "author": "camc314",
+      "mergedAt": "2026-10-23T01:52:34Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Raise Oxlint's optional `oxlint-tsgolint` peer dependency from `>=7.0.2003` to `>=7.0.2005` and update the lockfile specifier. Version 7.0.2005 is the latest published release and is already pinned by the workspace.",
+      "files": [
+        "npm/oxlint/package.json (+1 -1)",
+        "pnpm-lock.yaml (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27953,
+      "title": "perf(data_structures): copy short strings without a memcpy call",
+      "url": "https://github.com/oxc-project/oxc/pull/27953",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-23T02:57:34Z",
+      "labels": [
+        "A-codegen",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fast path for short strings.\n\n---\n\nAccording to local benchmark, it seemed to be effective for the formatter as well, but on CodSpeed, it appears to be effective only for codegen... 🤔",
+      "files": [
+        "crates/oxc_codegen/src/lib.rs (+2 -2)",
+        "crates/oxc_data_structures/src/code_buffer.rs (+109 -0)",
+        "crates/oxc_estree/src/serialize/strings.rs (+2 -2)",
+        "crates/oxc_formatter_core/src/printer/mod.rs (+3 -6)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 28007,
+      "title": "perf(tasks): build the coverage profile without cross-crate LTO",
+      "url": "https://github.com/oxc-project/oxc/pull/28007",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-23T03:09:34Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "> AI disclosure: this PR, the measurements behind it, and this description were produced with Claude Code at a maintainer's request. It should get human review before it leaves draft.\n\n## Summary\n\nThis PR does three things:\n- **`Cargo.toml`:** `[profile.coverage]` changes from `lto = \"thin\"` to `lto = false`.\n- **`AGENTS.md`:** adds an opt-in note on incremental compilation for this profile, with its measured cost.\n- **`AGENTS.md`:** the `cargo coverage -- <tool>` examples become `cargo coverage <tool>`; the old form runs every suite.\n\n## Why\n\nWith `lto = \"thin\"`, the library crates are compiled to bitcode only (`-C linker-plugin-lto`). The final binary (`-C lto=thin`) then re-optimizes and re-codegens the whole program on every rebuild. After a one-line `oxc_minifier` edit, `cargo build --timings` showed where the time went:\n\n| | `oxc_minifier` lib | `oxc_minsize` lib | `oxc_minsize` bin |\n|---|---|---|---|\n| `lto = \"thin\"` | 5.2s | 1.9s | **19.4s** (whole-program ThinLTO) |\n| `lto = false` | 7.2s | 2.3s | **0.7s** (plain link) |\n\nEvery binary built with this profile pays that step separately. That covers the harnesses (`oxc_minsize`, `oxc_track_memory_allocations`, `oxc_coverage`) and the NAPI test builds (`pnpm build-test`). The profile's own comment says `lto = \"thin\"` was chosen for \"faster compile time\", and turning LTO off is faster still. The profile exists to run the harnesses with debug assertions, which doesn't need cross-crate LTO.\n\n## Evidence: replaying 11 real \n…(truncated)",
+      "files": [
+        "Cargo.toml (+1 -1)",
+        "AGENTS.md (+3 -3)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27745,
+      "title": "fix(lsp): return default diagnostic report when server is not in pull mode",
+      "url": "https://github.com/oxc-project/oxc/pull/27745",
+      "author": "Sysix",
+      "mergedAt": "2026-10-23T15:22:36Z",
+      "labels": [
+        "A-editor"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Addresses one problem in #27736.\nClients should respect the the `ServerCapabilities` from the `intialize` response.\nWhen no `diagnosticProvider` is provided, the server says to the client that `textDocument/diagnostic` is not supported.\n\n```\n        /**\n\t * The server has support for pull model diagnostics.\n\t *\n\t * @since 3.17.0\n\t */\n\tdiagnosticProvider?: DiagnosticOptions | DiagnosticRegistrationOptions;\n```\n_https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/#pull-diagnostics_\n\nSadly the client does not need to respect them and can requzest `textDocument/diagnostic` even if we told him not to do.\nTo avoid duplicate linting processes on push mode (server is sending diagnostics to the client on `didOpen/didChange`, we check if we are in the right mode, or else bail out earlier.",
+      "files": [
+        "crates/oxc_language_server/src/backend.rs (+8 -0)",
+        "crates/oxc_language_server/src/tests.rs (+34 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28132,
+      "title": "feat(oxlint): export `Oxlintrc` type",
+      "url": "https://github.com/oxc-project/oxc/pull/28132",
+      "author": "Sysix",
+      "mergedAt": "2026-10-23T18:26:36Z",
+      "labels": [
+        "A-linter",
+        "A-cli",
+        "A-linter-plugins"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Exporting the `Oxlintrc` type with all expected values (including `$schema` and the json form of `extends`).\nThe background is that the `eslint-plugin-oxlint` package currently needs to rebuild this type manually.\n\nsrc/build-from-oxlint-config/types.ts#L26-L35\n\nInstead of rebuilding  `Oxlintrc` by hand, I would prefer to import the original JSON-Struct from `oxlint` itself.",
+      "files": [
+        "apps/oxlint/src-js/index.ts (+1 -0)",
+        "apps/oxlint/src-js/package/config.ts (+4 -6)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28138,
+      "title": "fix(linter): use the type-aware rule's severity when another plugin has a rule with the same name",
+      "url": "https://github.com/oxc-project/oxc/pull/28138",
+      "author": "NavpreetSSidhu",
+      "mergedAt": "2026-10-23T21:22:36Z",
+      "labels": [
+        "A-linter",
+        "A-cli"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #28136\n\nSeverity for tsgolint diagnostics was looked up in the file's resolved rules by name only. `unicorn/prefer-string-starts-ends-with` has the same name as `typescript/prefer-string-starts-ends-with`, so whichever came first in the list won, and the order differs for files that match an `overrides` entry. Both lookups (CLI and `lint_source`) now only match type-aware rules.\n\nAdded a CLI fixture with the config from the issue; the snapshot shows a warning for both files, and it fails on main with an error for `b.tsx`. `cargo test -p oxlint --lib tsgolint`, `cargo test -p oxc_linter --lib`, clippy and fmt pass.\n\nAI disclosure: I used Claude Code to help trace the cause and write the patch, and I reviewed and tested it myself.",
+      "files": [
+        "apps/oxlint/src/lint.rs (+11 -0)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_same_name_overrides_a.ts b.tsx@oxlint.snap (+25 -0)",
+        "crates/oxc_linter/src/tsgolint.rs (+5 -2)",
+        "apps/oxlint/fixtures/cli/tsgolint_same_name_overrides/.oxlintrc.json (+7 -0)",
+        "apps/oxlint/fixtures/cli/tsgolint_same_name_overrides/a.ts (+1 -0)",
+        "apps/oxlint/fixtures/cli/tsgolint_same_name_overrides/b.tsx (+1 -0)",
+        "apps/oxlint/fixtures/cli/tsgolint_same_name_overrides/tsconfig.json (+1 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 28133,
+      "title": "fix(linter/eslint/array-callback-return): check callbacks passed with extra arguments",
+      "url": "https://github.com/oxc-project/oxc/pull/28133",
+      "author": "sarankumar1325",
+      "mergedAt": "2026-10-23T22:00:30Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #28128\n\n`array-callback-return` only checked array method calls with exactly one argument, so a callback followed by anything else was skipped. That's why `reduce`/`reduceRight` with an initial value were never reported. The same thing happened to `foo.map(cb, thisArg)` and `Array.from(x, cb, thisArg)`.\n\nESLint's rule checks the first argument (the second for `Array.from`/`Array.fromAsync`) no matter how many arguments follow it. This PR does the same.\n\n```js\n[1, 2].reduce((total, x) => {\n  if (x > 1) {\n    return total + x;\n  }\n}, 0); // now reported, same as ESLint\n```\n\nTests: new pass/fail cases for `reduce`/`reduceRight` with an initial value, `map` with `thisArg`, `Array.from` with `thisArg`, and a callback that isn't the first argument (`foo.reduce(bar, function() {})` stays unreported). Snapshot updated. `cargo test -p oxc_linter`, `cargo clippy -p oxc_linter --all-targets -- -D warnings` and `cargo fmt --check` pass.\n\nAI disclosure: I used an AI assistant while writing this change. I reviewed the code and tests myself.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/array_callback_return/mod.rs (+14 -3)",
+        "crates/oxc_linter/src/snapshots/eslint_array_callback_return.snap (+44 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28139,
+      "title": "perf(parser): move annotation comment handling out of hot paths",
+      "url": "https://github.com/oxc-project/oxc/pull/28139",
+      "author": "camc314",
+      "mergedAt": "2026-10-23T23:02:33Z",
+      "labels": [
+        "A-parser"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Applying `@__PURE__` and `@__NO_SIDE_EFFECTS__` comments is rare, so move it into `#[cold]` helpers to keep `with_pure_comments`, `parse_assignment_expression` and `parse_statement_list_item` small.",
+      "files": [
+        "crates/oxc_parser/src/js/expression.rs (+30 -8)",
+        "crates/oxc_parser/src/js/module.rs (+2 -4)",
+        "crates/oxc_parser/src/js/statement.rs (+17 -5)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28149,
+      "title": "perf(minifier): reuse is_error_constructor and simplify substitute_global_new_expression",
+      "url": "https://github.com/oxc-project/oxc/pull/28149",
+      "author": "armano2",
+      "mergedAt": "2026-10-25T01:13:05Z",
+      "labels": [
+        "A-minifier",
+        "A-ecmascript"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "remove redundant string comparisons when replacing global new expression with call.\nreuse `is_error_constructor` from ecma",
+      "files": [
+        "crates/oxc_ecmascript/src/side_effects/known_globals.rs (+3 -1)",
+        "crates/oxc_ecmascript/src/side_effects/mod.rs (+3 -1)",
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+8 -24)"
+      ],
+      "filesTotal": 3
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 2
+    }
+  }
+}

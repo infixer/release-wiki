@@ -1,0 +1,37 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-25T23:19:53Z",
+  "range": {
+    "from": "2026-10-22T20:18:55Z",
+    "to": "2026-10-25T23:19:53Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-10-22T21:56:52Z",
+    "to": "2026-10-25T23:19:53Z"
+  },
+  "commits": [
+    {
+      "sha": "e1bd391",
+      "url": "https://github.com/w3c/csswg-drafts/commit/e1bd39185acd650512f82e1eeb7b94da21b686c7",
+      "author": "JoshTumath",
+      "committedAt": "2026-10-23T11:19:16Z",
+      "title": "[css-images-5][editorial] Update Josh Tumath contact URL",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-images-5/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

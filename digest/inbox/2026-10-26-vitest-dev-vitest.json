@@ -1,0 +1,162 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-10-25T23:19:53Z",
+  "range": {
+    "from": "2026-10-22T17:28:25Z",
+    "to": "2026-10-25T23:19:53Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.0.5",
+      "publishedAt": "2026-10-15T14:22:50Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.5"
+    },
+    "prerelease": {
+      "tag": "v5.1.0-beta.1",
+      "publishedAt": "2026-10-19T16:42:33Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0-beta.1"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 11693,
+      "title": "fix(ui): fix html reporter crash when --bail cancels files",
+      "url": "https://github.com/vitest-dev/vitest/pull/11693",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-23T01:12:34Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- closes https://github.com/vitest-dev/vitest/issues/11689\n\nWhen building the module graph, the HTML reporter assumed `TestModule.viteEnvironment` is always set. But that assumption is wrong for test files that never reached a worker, for example files that `--bail` cancels before they start. This PR fixes it by skipping those files, so they show up in the report with an empty module graph.\n\nOther places already handle this case, and only the HTML reporter missed it:\n\n- packages/vitest/src/node/core.ts#L1116-L1120\n- packages/ui/client/composables/client/static.ts#L43-L47",
+      "files": [
+        "packages/vitest/src/utils/graph.ts (+15 -17)",
+        "test/e2e/test/reporters/html.test.ts (+51 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11694,
+      "title": "fix(browser): keep failure screenshot per attempt",
+      "url": "https://github.com/vitest-dev/vitest/pull/11694",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-23T01:13:18Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- closes https://github.com/vitest-dev/vitest/issues/11614\n\nWhen a browser test failed on several retries, every attempt wrote its failure screenshot to the same file, and the reporter output listed that file under every attempt's error.\n\nThis PR saves failure screenshots of tests with `retry` or `repeats` as `<test>-<repeat>-<retry>.png`, like trace files. Tests without them are still saved as `<test>.png`.\n\nIn the reporter output, errors and screenshots are now matched by attempt, so each error lists only the screenshot of the attempt that produced it.\n\n---\n\nFor the repro in the issue (a test with `retry: 2`), the reporter output changes like this (diff and code frame omitted):\n\nBefore:\n\n```\n FAIL  |chromium| basic.test.ts > retried\nAssertionError: expected 1 to be 10\nFailure screenshot:\n  - .vitest/attachments/failure-screenshots/basic.test.ts/retried.png\n⎯⎯⎯[1/3]⎯\n FAIL  |chromium| basic.test.ts > retried\nAssertionError: expected 2 to be 10\nFailure screenshot:\n  - .vitest/attachments/failure-screenshots/basic.test.ts/retried.png\n⎯⎯⎯[2/3]⎯\n FAIL  |chromium| basic.test.ts > retried\nAssertionError: expected 3 to be 10\nFailure screenshot:\n  - .vitest/attachments/failure-screenshots/basic.test.ts/retried.png\n⎯⎯⎯[3/3]⎯\n```\n\nAfter:\n\n```\n FAIL  |chromium| basic.test.ts > retried\nAssertionError: expected 1 to be 10\nFailure screenshot:\n  - .vitest/attachments/failure-screenshots/basic.test.ts/retried-0-0.png  👈\n⎯⎯⎯[1/3]⎯\n FAIL  |chromium| basic.test.ts > retried\nAssertionError: ex\n…(truncated)",
+      "files": [
+        "packages/browser/src/client/tester/runner.ts (+17 -1)",
+        "packages/ui/client/components/FailureScreenshot.vue (+2 -1)",
+        "packages/vitest/src/node/reporters/base.ts (+55 -26)",
+        "packages/vitest/src/runtime/runner/types.ts (+4 -0)",
+        "test/browser/specs/failure-screenshot.test.ts (+84 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 11695,
+      "title": "fix(browser): print trace timeline of each attempt",
+      "url": "https://github.com/vitest-dev/vitest/pull/11695",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-23T05:47:06Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- follow-up to https://github.com/vitest-dev/vitest/pull/11594\n- stacked on https://github.com/vitest-dev/vitest/pull/11694\n\nThe trace timeline per-attempt printing is broken by the same reason as failure screenshot. This PR fixes one deferred test case `prints trace timeline of the last retry` from https://github.com/vitest-dev/vitest/pull/11594.",
+      "files": [
+        "packages/vitest/src/node/reporters/base.ts (+9 -7)",
+        "packages/vitest/src/node/reporters/renderers/trace-timeline.ts (+10 -4)",
+        "test/browser/specs/trace-timeline.test.ts (+2 -4)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11705,
+      "title": "fix: keep syntax highlighting in code frames",
+      "url": "https://github.com/vitest-dev/vitest/pull/11705",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-23T09:00:35Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`truncateString` stripped ANSI colors even when the line fit, so code frames lost syntax highlighting (regressed in #10170).",
+      "files": [
+        "packages/vitest/src/node/reporters/renderers/utils.ts (+5 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 11706,
+      "title": "fix: respect CLI filters when prewarming browsers",
+      "url": "https://github.com/vitest-dev/vitest/pull/11706",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-23T09:11:17Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "CLI file filters are now passed into config resolution, so browser projects without matching files are not prewarmed. Based on #11530.\n\nFixes #11546",
+      "files": [
+        "packages/vitest/src/node/cli/cli-api.ts (+1 -1)",
+        "packages/vitest/src/node/config/resolveConfig.ts (+2 -0)",
+        "packages/vitest/src/node/core.ts (+6 -0)",
+        "packages/vitest/src/node/create.ts (+6 -1)",
+        "packages/vitest/src/node/project.ts (+5 -30)",
+        "packages/vitest/src/node/projects/globProjectFiles.ts (+28 -0)",
+        "packages/vitest/src/node/projects/resolveProjects.ts (+6 -3)",
+        "packages/vitest/src/node/types/config.ts (+9 -3)",
+        "test/browser/specs/prewarm.test.ts (+41 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 11708,
+      "title": "test: run scoped fixtures tests on rolldown",
+      "url": "https://github.com/vitest-dev/vitest/pull/11708",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-23T23:53:34Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11709,
+      "title": "fix: read cached source as utf-8 (fix #11682)",
+      "url": "https://github.com/vitest-dev/vitest/pull/11709",
+      "author": "juan-fernandez",
+      "mergedAt": "2026-10-24T02:12:43Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Prepared with AI assistance for @juan-fernandez, who reviewed the code and description.\n\nFixes #11682.\n\nRead cached server modules as UTF-8 so Vite receives source text and stack formatting preserves the original error.\n\nRegression coverage checks cached and uncached modules, UTF-8 text, and TypeScript source-map locations. Verified with Vite 8.0.11 and 8.3.5, including Node 24 and 26 reproductions.",
+      "files": [
+        "packages/vitest/src/node/environments/serverRunner.ts (+1 -1)",
+        "test/e2e/test/server-runner.test.ts (+65 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11713,
+      "title": "perf(coverage): istanbul to collect uncovered files in `Promise.all`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11713",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-25T14:01:38Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Since https://github.com/vitest-dev/vitest/pull/11529/changes#diff-a0a730c31ce78cf1c3cb20d55daa7167ff57fa8e062df213c6eeb918582d1cb5L226 we've been able to run this loop with `Promise.all` like v8 provider does.",
+      "files": [
+        "packages/coverage-istanbul/src/provider.ts (+37 -27)",
+        "test/coverage-test/fixtures/configs/vitest.config.conditional.ts (+4 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11714,
+      "title": "test(coverage): skip native runner test that fails on Node 22 with `ERR_VM_MODULE_LINK_FAILURE`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11714",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-25T14:02:03Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

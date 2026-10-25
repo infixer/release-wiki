@@ -1,0 +1,751 @@
+{
+  "kind": "repo",
+  "repo": "openai/codex",
+  "branch": "main",
+  "collectedAt": "2026-10-25T23:19:53Z",
+  "range": {
+    "from": "2026-10-22T23:48:34Z",
+    "to": "2026-10-25T23:19:53Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "rust-v0.164.0",
+      "publishedAt": "2026-10-23T04:48:10Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0"
+    },
+    "prerelease": {
+      "tag": "rust-v0.165.0-alpha.1",
+      "publishedAt": "2026-10-23T14:09:53Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0-alpha.1"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "rust-v0.164.0-alpha.4",
+      "name": "0.164.0-alpha.4",
+      "publishedAt": "2026-10-19T10:42:34Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.4",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.5",
+      "name": "0.164.0-alpha.5",
+      "publishedAt": "2026-10-19T14:23:35Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.5",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.6",
+      "name": "0.164.0-alpha.6",
+      "publishedAt": "2026-10-19T22:48:51Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.6",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.7",
+      "name": "0.164.0-alpha.7",
+      "publishedAt": "2026-10-20T13:47:31Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.7",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.8",
+      "name": "0.164.0-alpha.8",
+      "publishedAt": "2026-10-20T22:15:45Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.8",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.9",
+      "name": "0.164.0-alpha.9",
+      "publishedAt": "2026-10-21T14:12:01Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.9",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.163.0-alpha.11.1",
+      "name": "0.163.0-alpha.11.1",
+      "publishedAt": "2026-10-21T22:18:14Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0-alpha.11.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.10",
+      "name": "0.164.0-alpha.10",
+      "publishedAt": "2026-10-22T00:04:24Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.10",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.11",
+      "name": "0.164.0-alpha.11",
+      "publishedAt": "2026-10-22T04:22:12Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.11",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.163.0-alpha.11.2",
+      "name": "0.163.0-alpha.11.2",
+      "publishedAt": "2026-10-22T06:41:14Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0-alpha.11.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.12",
+      "name": "0.164.0-alpha.12",
+      "publishedAt": "2026-10-22T11:11:51Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.12",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0-alpha.11.1",
+      "name": "0.164.0-alpha.11.1",
+      "publishedAt": "2026-10-23T01:58:13Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0-alpha.11.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.164.0",
+      "name": "0.164.0",
+      "publishedAt": "2026-10-23T04:48:10Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0",
+      "prerelease": false,
+      "body": "## New Features\n\n- Save reusable prompts and slash commands in ten numbered `/presets` slots, with a keyboard menu for quick access. (#54380, #54381)\n- Set model, reasoning effort, speed, and permission profiles directly with inline `/model` and `/permissions` arguments. (#54378, #54383)\n- Preview viewed and generated images in the fullscreen transcript on terminals supporting Kitty or Sixel graphics. (#54216)\n- Authenticate enterprise MCP connections using eligible Codex account grants or dedicated sign-in, including OAuth clients requiring secrets. (#55334, #55859, #56001)\n- Mask credentials during supported remote Bash commands and Zsh snapshot sessions, including credentials from custom providers. (#54309, #54432, #56049)\n- The Amazon Bedrock setup wizard is now enabled by default, with API key entry grouped alongside other AWS sign-in methods when credentials are detected. (#56033, #56023)\n\n## Bug Fixes\n\n- Failed compaction no longer leaves partial summaries in conversation history, and background compaction failures fall back without panicking. (#53932, #55581)\n- Resuming sessions now finds compressed histories and restores saved thread settings instead of replacing them with global defaults. (#54008, #55923)\n- Windows HTTPS and WebSocket connections now handle proxy authentication challenges using the signed-in user’s Negotiate or NTLM credentials. (#55994, #56000)\n- CLI configuration overrides are preserved when `-c` or `--config` appears at multiple subcommand levels. (#56022)\n- Queued prompts now wait for pending permission selections to resolve before continuing. (#55682)\n- Hardened sandbox checks for case-variant metadata paths on macOS and replaceable symlinks used to locate executables. (#54273, #55384)\n\n## Chores\n\n- Reduced disk usage by pruning unused installations, cleaning abandoned marketplace checkouts, and bounding daemon logs. (#53827, #55149, #55689, #55690, #55856)\n- Updated the embedded JavaScript runtime with safety checks for optimized `Array.sort` operations. (#54519)\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.163.0...rust-v0.164.0\n\n- #53725 Render Markdown web links as labels in Rex @bc-openai\n- #53728 Preserve the remote cwd filter in the in-app resume picker @fcoury-oai\n- #53732 Reuse compiled search patterns across compressed rollouts @ethernetdan-openai\n- #53733 Default Guardian v2 async classification to conversation mode @felixxia-oai\n- #53736 Acquire and cache opt-in executor capability inventories via V2 @TAFOYA-OAI\n- #53745 Remove `modelSlug` from the latest-model resolver output @kkahadze-oai\n- #53747 Prefer remote Visualize installs over the bundled plugin @philipp-oai\n- #53751 Apply feature overrides when restarting the app-server daemon @jif-oai\n- #53753 Extend copy-on-select to composer text @fcoury-oai\n- #53754 Support Command/Super shortcuts in the TUI keymap @fcoury-oai\n- #53763 Enrich V2 capability discovery with resolved plugin and skill metadata @TAFOYA-OAI\n- #53\n…(truncated)"
+    },
+    {
+      "tag": "rust-v0.165.0-alpha.1",
+      "name": "0.165.0-alpha.1",
+      "publishedAt": "2026-10-23T14:09:53Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0-alpha.1",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 56301,
+      "title": "Add TLS forwarding tests for MITM SigV4 requests",
+      "url": "https://github.com/openai/codex/pull/56301",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:01:34Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add TLS forwarding tests for MITM SigV4 requests\n\n## What changed\n\nAdd a test-only MITM CA constructor and local TLS origin fixtures to exercise AWS SigV4 forwarding:\n\n- Check `aoss` payload hashes and credential replacement for GET and POST requests, while preserving unsigned requests and requests using another access key.\n- Verify rejection of unsupported HTTP/1.1 framing and signing headers, and check the forwarded body, payload hash, and signed header presence at an HTTP/2 origin.\n- Verify that draining signed request bodies releases buffering capacity before response headers arrive, allowing a ninth request to complete while eight responses remain pending.",
+      "files": [
+        "codex-rs/network-proxy/src/certs.rs (+5 -0)",
+        "codex-rs/network-proxy/src/mitm.rs (+4 -0)",
+        "codex-rs/network-proxy/src/mitm_forwarding_tests.rs (+452 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 56302,
+      "title": "Add hook configuration to environment attachments",
+      "url": "https://github.com/openai/codex/pull/56302",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:02:43Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add hook configuration to environment attachments\n\n## What changed\n\n- Add `environment_hooks` to `EnvironmentConfig` for hooks from an environment's effective managed requirements. Initialize it empty for inferred thread configurations and report the handler count in debug output.\n- Move `HookEventsToml`, `MatcherGroup`, and `HookHandlerConfig` into `codex_protocol::hooks`, with re-exports from `codex_config::hook_config`.\n- Validate MCP hook input recursively to reject nulls and integers outside the signed 64-bit range without converting through `toml::Value`.",
+      "files": [
+        "codex-rs/config/src/hook_config.rs (+3 -199)",
+        "codex-rs/core/src/agents_md_tests.rs (+1 -0)",
+        "codex-rs/core/src/environment_selection.rs (+8 -0)",
+        "codex-rs/core/src/mcp_tool_call_tests.rs (+1 -0)",
+        "codex-rs/core/src/session/session.rs (+1 -0)",
+        "codex-rs/core/src/shell_snapshot_tests.rs (+1 -0)",
+        "codex-rs/core/src/thread_manager_tests.rs (+1 -0)",
+        "codex-rs/core/src/tools/runtimes/apply_patch_tests.rs (+1 -0)",
+        "codex-rs/core/src/tools/runtimes/unified_exec.rs (+1 -0)",
+        "codex-rs/protocol/src/environment.rs (+3 -0)"
+      ],
+      "filesTotal": 28
+    },
+    {
+      "number": 56304,
+      "title": "Add support for environment-scoped managed hooks",
+      "url": "https://github.com/openai/codex/pull/56304",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:09:39Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add support for environment-scoped managed hooks\n\n## What changed\n\n- Add discovery and listing APIs for environment-owned required hooks, with command and MCP execution routed to the owning environment.\n- Use each environment's working directory in hook input, withhold controller transcript paths, and prevent environment hooks from granting permission requests.\n- Resolve `command_windows` against the environment's platform and, when hooks are enabled, reject unloadable required hooks before accepting environment configurations at startup or readiness.\n\n## Testing\n\nAdd regression coverage for invalid managed hook matchers at startup and readiness, successful readiness after correction, and per-hook working directory and transcript path scoping for `SubagentStop`.",
+      "files": [
+        "codex-rs/core/src/session/environment.rs (+15 -2)",
+        "codex-rs/core/src/session/session.rs (+8 -2)",
+        "codex-rs/core/src/session/step_activation.rs (+3 -2)",
+        "codex-rs/hooks/src/engine/command_runner.rs (+46 -8)",
+        "codex-rs/hooks/src/engine/command_runner_tests.rs (+2 -0)",
+        "codex-rs/hooks/src/engine/discovery.rs (+107 -0)",
+        "codex-rs/hooks/src/engine/dispatcher.rs (+36 -18)",
+        "codex-rs/hooks/src/engine/mcp_runner.rs (+5 -4)",
+        "codex-rs/hooks/src/engine/mcp_runner_tests.rs (+1 -1)",
+        "codex-rs/hooks/src/engine/mod.rs (+36 -1)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 56308,
+      "title": "Separate directory and repository scopes in the TUI",
+      "url": "https://github.com/openai/codex/pull/56308",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:29:29Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Separate directory and repository scopes in the TUI\n\n## Why\n\nThe `Cwd` session filter included sessions from linked worktrees, leaving no way to restrict the picker to the current directory. Project grouping also combined tasks across linked worktrees.\n\n## What changed\n\n- Keep `Cwd` filtering and directory-scoped `resume --last` and `fork --last` lookups limited to the current directory.\n- Add an explicit `Repo` picker filter when multiple local worktrees are available, including sessions from corresponding directories across linked worktrees. Cycle between `Cwd`, `Repo`, and `All` in either direction.\n- Add `Directory` grouping to the agent command center alongside `Project`, `Status`, and `Model`. Keep this choice in memory without writing a configuration value older clients cannot read.\n\n## Testing\n\nExtend coverage for directory and repository filtering, pagination scope, linked-worktree grouping, directory aliases, grouping persistence, and adjacent selection after task removal. Update picker and command center snapshots.",
+      "files": [
+        "codex-rs/tui/src/app/agent_center/render.rs (+1 -0)",
+        "codex-rs/tui/src/app/agent_center/rows.rs (+8 -2)",
+        "codex-rs/tui/src/app/agents_overview_actions_tests.rs (+29 -5)",
+        "codex-rs/tui/src/app/agents_overview_grouping.rs (+42 -4)",
+        "codex-rs/tui/src/app/agents_overview_tests.rs (+158 -46)",
+        "codex-rs/tui/src/app/agents_overview_view.rs (+21 -4)",
+        "codex-rs/tui/src/app/snapshots/codex_tui__app__agents_overview__tests__actions__hiding_tasks_keeps_selection_adjacent_in_display_order.snap (+7 -0)",
+        "codex-rs/tui/src/keymap_setup/actions.rs (+1 -1)",
+        "codex-rs/tui/src/lib.rs (+1 -11)",
+        "codex-rs/tui/src/lib_tests.rs (+1 -10)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 56309,
+      "title": "Support model-specific writable-root permission wording",
+      "url": "https://github.com/openai/codex/pull/56309",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:40:22Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Support model-specific writable-root permission wording\n\n## What changed\n\nAdd optional `writable_root` and `writable_roots` templates to model-catalog permission messages. Select the template by the number of displayed roots and substitute exactly one `{{ roots }}` placeholder with the existing formatted path list.\n\nFall back to the bundled sentence for missing, empty, invalid, or oversized templates. Preserve path contents, permission-path limits, and denied-read instructions. Update the permission wording when the selected model changes.\n\n## Testing\n\nAdd coverage for template validation and size limits, singular/plural selection after path truncation, path preservation, sparse serialization, and model switches that append changed permissions once while preserving request history.",
+      "files": [
+        "codex-rs/core/src/context/world_state/permissions_tests.rs (+1 -0)",
+        "codex-rs/core/src/session/world_state.rs (+3 -1)",
+        "codex-rs/models-manager/src/model_info_tests.rs (+1 -0)",
+        "codex-rs/prompts/src/model_messages/permissions.rs (+12 -0)",
+        "codex-rs/prompts/src/permissions_instructions.rs (+6 -17)",
+        "codex-rs/prompts/src/permissions_instructions/writable_roots.rs (+72 -0)",
+        "codex-rs/prompts/src/permissions_instructions/writable_roots_tests.rs (+80 -0)",
+        "codex-rs/prompts/src/permissions_instructions_tests.rs (+76 -0)",
+        "codex-rs/protocol/src/openai_models.rs (+33 -1)",
+        "codex-rs/core/tests/suite/catalog_permission_messages.rs (+1 -0)"
+      ],
+      "filesTotal": 14
+    },
+    {
+      "number": 56312,
+      "title": "Track accepted conversation history in rollout traces",
+      "url": "https://github.com/openai/codex/pull/56312",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:45:35Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Track accepted conversation history in rollout traces\n\n## Why\n\nModel output alone does not establish that an item entered conversation history. Treating every response item as accepted can include discarded attempts, while relying on a later request misses accepted final output when a turn ends or is interrupted.\n\n## What changed\n\n- Record `HistoryItemAccepted` events and retain Responses item IDs, generating missing IDs consistently across item events.\n- Build thread conversation history from request inputs, compaction checkpoints, and explicit acceptance. Keep unaccepted output accessible through its inference call.\n- Preserve inference provenance across retries and late response records without overwriting newer request or compaction snapshots.\n- Mark turns with errors as failed. Bump trace schemas to version 2 and reject incompatible bundles and event schemas during replay.\n\n## Testing\n\nAdd reducer coverage for discarded attempts with identical text, late responses, compaction, inherited context, and legacy bundle rejection. Add CLI integration tests that run `debug trace-reduce` after success, stream failure, and interruption followed by shutdown, including responses without provider item IDs.",
+      "files": [
+        "codex-rs/Cargo.lock (+1 -0)",
+        "codex-rs/cli/Cargo.toml (+1 -0)",
+        "codex-rs/core/src/client.rs (+19 -2)",
+        "codex-rs/core/src/client_tests.rs (+5 -0)",
+        "codex-rs/rollout-trace/src/bundle.rs (+2 -2)",
+        "codex-rs/rollout-trace/src/model/conversation.rs (+4 -0)",
+        "codex-rs/rollout-trace/src/model/session.rs (+2 -1)",
+        "codex-rs/rollout-trace/src/protocol_event.rs (+11 -1)",
+        "codex-rs/rollout-trace/src/raw_event.rs (+7 -1)",
+        "codex-rs/rollout-trace/src/reducer/acceptance_tests.rs (+249 -0)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 56313,
+      "title": "Apply model catalog overrides to history, notes, and context tools",
+      "url": "https://github.com/openai/codex/pull/56313",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:46:46Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Apply model catalog overrides to history, notes, and context tools\n\n## What changed\n\n- Read optional tool descriptions and parameter schemas for `history`, `notes`, `new_context`, and `get_context_remaining` from the acting model's catalog messages.\n- Support catalog namespace descriptions for history and notes, preserving explicit empty and whitespace descriptions.\n- Share catalog override handling across native tools and MCP resource helpers. Keep bundled schemas when overrides are invalid, preserve encrypted parameters, and leave tool identity and transport fields unchanged.\n\n## Testing\n\nAdd coverage for sparse catalog serialization, schema fallback and encryption preservation, per-step tool definitions, and context tool updates when switching models. Extend outgoing-request tests to verify history and notes overrides while retaining history image attachments.",
+      "files": [
+        "codex-rs/Cargo.lock (+2 -0)",
+        "codex-rs/core/src/session/mod.rs (+8 -0)",
+        "codex-rs/core/src/tools/catalog_parameters.rs (+0 -14)",
+        "codex-rs/core/src/tools/code_mode/wait_spec.rs (+1 -1)",
+        "codex-rs/core/src/tools/handlers/get_context_remaining.rs (+13 -3)",
+        "codex-rs/core/src/tools/handlers/get_context_remaining_spec.rs (+6 -3)",
+        "codex-rs/core/src/tools/handlers/mcp_resource_spec.rs (+4 -22)",
+        "codex-rs/core/src/tools/handlers/mcp_resource_spec_tests.rs (+0 -39)",
+        "codex-rs/core/src/tools/handlers/new_context_window.rs (+13 -3)",
+        "codex-rs/core/src/tools/handlers/new_context_window_spec.rs (+6 -3)"
+      ],
+      "filesTotal": 35
+    },
+    {
+      "number": 56314,
+      "title": "Add managed configuration loaders for custom config servers",
+      "url": "https://github.com/openai/codex/pull/56314",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T00:54:21Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add managed configuration loaders for custom config servers\n\n## What changed\n\n- Add loaders that select `config_server` when configured and otherwise use the existing ChatGPT bundle source. Fetch custom bundles from `<base_url>/codex/config/bundle` without redirects or request logging.\n- Support optional OAuth sessions without interactive login during bundle fetches, recover credentials after a `401`, and scope cached bundles to the endpoint and authorization identity.\n- Restrict bootstrap network access to configuration and OAuth endpoints using local administrator rules when available.\n- Return generic bundle validation errors so invalid TOML, requirements, and provider settings do not expose configuration contents.\n\n## Testing\n\nAdd tests for missing configuration-server sign-in, replacement OAuth credentials, endpoint-specific cache reuse, and validation errors that omit sensitive values while preserving cached bundles.",
+      "files": [
+        "codex-rs/Cargo.lock (+2 -0)",
+        "codex-rs/backend-client/src/client.rs (+31 -3)",
+        "codex-rs/backend-client/src/client/rate_limit_resets_tests.rs (+1 -0)",
+        "codex-rs/cloud-config/Cargo.toml (+2 -0)",
+        "codex-rs/cloud-config/src/backend.rs (+0 -3)",
+        "codex-rs/cloud-config/src/bundle_loader.rs (+60 -0)",
+        "codex-rs/cloud-config/src/config_server.rs (+272 -0)",
+        "codex-rs/cloud-config/src/config_server_tests.rs (+195 -0)",
+        "codex-rs/cloud-config/src/lib.rs (+6 -0)",
+        "codex-rs/cloud-config/src/service_tests.rs (+12 -4)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 56330,
+      "title": "Make agent-message wakes respect interrupts and Plan mode",
+      "url": "https://github.com/openai/codex/pull/56330",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T02:22:03Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Make agent-message wakes respect interrupts and Plan mode\n\n## Why\n\nA pending agent-message wake can outlive an interrupt or a switch to Plan mode while model discovery is waiting. It must recheck whether it can start before consuming queued messages.\n\n## What changed\n\n- Revalidate reserved wakes after discovery and build the turn with the configuration selected during admission.\n- Mark interrupted wake reservations as stopped so later agent messages cannot restart automatic work, while preserving queued messages for explicit turns.\n- Keep finishing turns marked as running until completion is persisted, protecting their rollout writer from capacity eviction.\n\n## Testing\n\nAdd regression tests for interrupts and Plan-mode changes during discovery, queued-message preservation, explicit follow-ups with `wake_on_agent_messages` disabled, and completion status and persistence with the feature enabled and disabled.",
+      "files": [
+        "codex-rs/core/src/session/turn_context.rs (+11 -0)",
+        "codex-rs/core/src/session/turn_input.rs (+32 -0)",
+        "codex-rs/core/src/tasks/mod.rs (+37 -23)",
+        "codex-rs/core/tests/suite/agent_message_wake.rs (+425 -0)",
+        "codex-rs/core/tests/suite/mod.rs (+1 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 56342,
+      "title": "Match rollout trace image content across request snapshots",
+      "url": "https://github.com/openai/codex/pull/56342",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T03:40:05Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Match rollout trace image content across request snapshots\n\n## Why\n\nRepeated image outputs in different request payloads could fail replay with a call ID reuse error even when their content was unchanged.\n\n## What changed\n\n- Hash canonical JSON for non-text content parts and compare their `content_sha256` values independently of payload location.\n- Preserve empty content arrays as empty bodies so they also match across snapshots.\n\n## Testing\n\nAdd a regression test verifying that repeated image and empty tool outputs reuse conversation items, while changed image content with the same call and item IDs still fails replay.",
+      "files": [
+        "codex-rs/Cargo.lock (+1 -0)",
+        "codex-rs/rollout-trace/Cargo.toml (+1 -0)",
+        "codex-rs/rollout-trace/src/model/conversation.rs (+3 -0)",
+        "codex-rs/rollout-trace/src/reducer/conversation.rs (+10 -0)",
+        "codex-rs/rollout-trace/src/reducer/conversation/normalize.rs (+32 -16)",
+        "codex-rs/rollout-trace/src/reducer/conversation_tests.rs (+47 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 56343,
+      "title": "Run environment hooks on their owning executors",
+      "url": "https://github.com/openai/codex/pull/56343",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T04:01:55Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Run environment hooks on their owning executors\n\n## What changed\n\n- Include ready environments' configured hooks in lifecycle events and execute command hooks using each owner's shell, working directory, shell environment policy, and managed network policy.\n- Resolve tool environments before `PreToolUse` and use those targets for tool hooks, execution, and permission review. Route MCP hooks by server ownership and file-copy hooks to both endpoints.\n- Preserve environment, MCP server, and terminal session selectors across hook input rewrites, rejecting attempts to switch targets.\n\n## Testing\n\nAdd regression coverage for permission-request selector preservation, MCP resource hook ownership, and file-copy hooks that rewrite paths while preserving source and target environments.",
+      "files": [
+        "codex-rs/codex-mcp/src/binding.rs (+5 -0)",
+        "codex-rs/codex-mcp/src/connection_manager/resources.rs (+6 -0)",
+        "codex-rs/core/src/guardian/permissions.rs (+15 -37)",
+        "codex-rs/core/src/hook_environment_executor.rs (+255 -0)",
+        "codex-rs/core/src/hook_runtime.rs (+84 -20)",
+        "codex-rs/core/src/lib.rs (+1 -0)",
+        "codex-rs/core/src/mcp_tool_call.rs (+3 -0)",
+        "codex-rs/core/src/mcp_tool_call_tests.rs (+12 -0)",
+        "codex-rs/core/src/session/step_context.rs (+11 -6)",
+        "codex-rs/core/src/session/tests.rs (+64 -47)"
+      ],
+      "filesTotal": 47
+    },
+    {
+      "number": 56351,
+      "title": "Add experimental attached thread forks",
+      "url": "https://github.com/openai/codex/pull/56351",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T04:53:02Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add experimental attached thread forks\n\n## What changed\n\n- Add `attachToSource` to `thread/fork` to persist a fork attached to its source without emitting `thread/started`. Attached forks require local storage and cannot use `ephemeral` or `deferGoalContinuation`.\n- Hide attached threads from ordinary listings and add `attachedToThreadId` to `thread/list` for explicit discovery, including empty threads. Keep this relationship separate from spawned-agent parent and ancestor filters.\n- Persist attachment metadata in rollouts and SQLite so it survives restarts and database recovery. Reject source deletion until its attached threads are deleted.\n\n## Testing\n\nAdd coverage for legacy and paginated history, restart and missing or corrupt database recovery, filtered listings and pagination, resume, conflicting options, and deletion safeguards across store instances.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-experimental.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-stable.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/src/protocol/v2/thread.rs (+12 -0)",
+        "codex-rs/app-server-test-client/src/lib.rs (+1 -0)",
+        "codex-rs/app-server/src/external_agent_migration/session_importer.rs (+1 -0)",
+        "codex-rs/app-server/src/request_processors/thread_delete.rs (+10 -0)",
+        "codex-rs/app-server/src/request_processors/thread_processor.rs (+50 -14)",
+        "codex-rs/core/src/codex_delegate.rs (+1 -0)",
+        "codex-rs/core/src/session/mod.rs (+3 -0)",
+        "codex-rs/core/src/session/session.rs (+2 -0)"
+      ],
+      "filesTotal": 70
+    },
+    {
+      "number": 56364,
+      "title": "Allow callers to set the thread source for sampling",
+      "url": "https://github.com/openai/codex/pull/56364",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T06:07:26Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Allow callers to set the thread source for sampling\n\n## What changed\n\nAdd optional `threadSource` to `thread/sample` requests and apply it to the ephemeral fork. Keep `thread_sample` as the default when omitted.\n\n## Testing\n\nExtend sampling tests to assert that turn metadata includes the supplied thread source and retains the default when no source is provided.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-experimental.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/src/protocol/v2/thread_sample.rs (+3 -0)",
+        "codex-rs/app-server/src/thread_sample.rs (+6 -1)",
+        "codex-rs/app-server/tests/suite/v2/thread_sample.rs (+4 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 56371,
+      "title": "Make the Guardian review timeout configurable",
+      "url": "https://github.com/openai/codex/pull/56371",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T06:34:16Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Make the Guardian review timeout configurable\n\n## What changed\n\nAdd `auto_review.timeout_ms` to configure the overall Guardian review budget, including setup and retries. Keep the default at 90,000 milliseconds; setting it to `0` disables the review deadline while preserving cancellation, retry attempt limits, and independent transport timeouts.\n\nCarry the configured deadline through review execution and report the configured budget in review telemetry, using zero for unlimited reviews.\n\n## Testing\n\nAdd coverage for shared setup budgets, configured timeouts, cancellation with unlimited reviews, and retry attempt limits without a deadline.",
+      "files": [
+        "codex-rs/analytics/src/events.rs (+1 -0)",
+        "codex-rs/config/src/config_toml.rs (+4 -0)",
+        "codex-rs/core/config.schema.json (+6 -0)",
+        "codex-rs/core/src/config/config_tests.rs (+3 -0)",
+        "codex-rs/core/src/config/mod.rs (+10 -0)",
+        "codex-rs/core/src/guardian/decision.rs (+1 -0)",
+        "codex-rs/core/src/guardian/review.rs (+3 -2)",
+        "codex-rs/core/src/guardian/review_request.rs (+6 -6)",
+        "codex-rs/core/src/guardian/review_session.rs (+3 -2)",
+        "codex-rs/core/src/guardian/review_session_setup.rs (+2 -1)"
+      ],
+      "filesTotal": 27
+    },
+    {
+      "number": 56414,
+      "title": "Support memory v2 in external-agent memory imports",
+      "url": "https://github.com/openai/codex/pull/56414",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T09:06:28Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Support memory v2 in external-agent memory imports\n\n## Why\n\nExternal-agent memory imports previously wrote only to the v1 workspace and queued only v1 consolidation, leaving the v2 pipeline without imported resources.\n\n## What changed\n\n- Always import selected resources into `memories_v2`. Also update `memories` when v1 is selected or a legacy workspace exists.\n- Read `memories.version` for detection and import, detect pending changes across the applicable namespaces, and enqueue consolidation separately for each updated namespace.\n- Combine project results across namespaces so cleanup in either can succeed while failures in either are reported.\n- Adapt imported-memory consolidation instructions to the active pipeline's output format.\n\n## Testing\n\nExpand app-server integration coverage for v2 profiles, explicit v1 selection, default profiles, and existing legacy workspaces. Verify resource copies, consolidation queues, repeat detection, and cleanup of deleted or unscoped projects.",
+      "files": [
+        "codex-rs/app-server/src/external_agent_migration/processor.rs (+15 -7)",
+        "codex-rs/external-agent-migration/src/detect/memory.rs (+12 -2)",
+        "codex-rs/external-agent-migration/src/detect/mod.rs (+5 -1)",
+        "codex-rs/external-agent-migration/src/memory_import.rs (+98 -63)",
+        "codex-rs/external-agent-migration/src/memory_import_tests.rs (+12 -23)",
+        "codex-rs/external-agent-migration/src/service.rs (+15 -1)",
+        "codex-rs/app-server/tests/suite/v2/external_agent_config.rs (+100 -10)",
+        "codex-rs/app-server/tests/suite/v2/memory_reset.rs (+2 -2)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 56439,
+      "title": "Update `ctutils` from 0.4.2 to 0.4.5",
+      "url": "https://github.com/openai/codex/pull/56439",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T11:16:09Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Update `ctutils` from 0.4.2 to 0.4.5",
+      "files": [
+        "MODULE.bazel.lock (+1 -1)",
+        "codex-rs/Cargo.lock (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 56445,
+      "title": "Treat model-not-found provider errors as terminal failures",
+      "url": "https://github.com/openai/codex/pull/56445",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T11:43:29Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Treat model-not-found provider errors as terminal failures\n\n## Why\n\nProvider errors with code `model_not_found` should end the turn immediately and preserve the provider's message instead of triggering retries.\n\n## What changed\n\n- Recognize `model_not_found` in HTTP 400, 403, and 404 responses and in streamed `error` and `response.failed` events.\n- Preserve the provider message and any available HTTP status, and expose `modelNotFound` through the app-server protocol and generated schemas and SDK types.\n\n## Testing\n\nAdd coverage for HTTP classification, statusless stream errors, and terminal failures without retries across HTTP, SSE, and WebSocket responses. Verify that `thread/read` preserves the error reported by the live notification.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/json/ServerNotification.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.schemas.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/codex_app_server_protocol.v2.schemas.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ErrorNotification.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ReviewStartResponse.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadForkResponse.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadListResponse.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadMetadataUpdateResponse.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadReadResponse.json (+1 -0)",
+        "codex-rs/app-server-protocol/schema/json/v2/ThreadResumeResponse.json (+1 -0)"
+      ],
+      "filesTotal": 39
+    },
+    {"number":56453,"title":"Make the Realtime V2 background-agent steering test deterministic","hint":"other","release":"📦 rust-v0.165.0-alpha.1","brief":true},
+    {
+      "number": 56454,
+      "title": "Make sandbox mount cleanup tests tolerate file descriptor reuse",
+      "url": "https://github.com/openai/codex/pull/56454",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T12:08:53Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Make sandbox mount cleanup tests tolerate file descriptor reuse\n\n## Why\n\nConcurrent tests can reuse a closed file descriptor number, causing cleanup assertions that require `EBADF` to fail even when the inherited directory descriptor was closed.\n\n## What changed\n\nCapture the inherited directory's device and inode before mount verification. Check `/proc/self/fd` afterward and accept either a missing descriptor or one referring to a different inode, while still rejecting a leaked descriptor to the original directory. Apply this check to successful verification and rejected mount markers.",
+      "files": [
+        "codex-rs/linux-sandbox/src/fd_mount_tests.rs (+39 -17)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 56459,
+      "title": "Add Guardian V3 feature configuration",
+      "url": "https://github.com/openai/codex/pull/56459",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T12:16:53Z",
+      "hint": "feature",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add Guardian V3 feature configuration\n\n## What changed\n\nRegister `guardianv3` as an under-development feature disabled by default. Accept either a boolean toggle or a table with an optional `enabled` field, and include both forms in the configuration schema.\n\n## Testing\n\nAdd coverage for boolean and table configuration, default behavior, and profile overrides, including inheritance when a profile omits `enabled`.",
+      "files": [
+        "codex-rs/config/src/schema.rs (+9 -0)",
+        "codex-rs/core/config.schema.json (+26 -0)",
+        "codex-rs/features/src/feature_configs.rs (+14 -0)",
+        "codex-rs/features/src/lib.rs (+14 -0)",
+        "codex-rs/features/src/tests.rs (+37 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 56460,
+      "title": "Add Guardian v3 local board helpers",
+      "url": "https://github.com/openai/codex/pull/56460",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T12:18:10Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add Guardian v3 local board helpers\n\n## What changed\n\nAdd the `codex-guardian-v3` crate to the Cargo workspace with a Bazel target. Expose helpers to configure the `guardian` storage namespace and construct a `LocalBoard` for the owning main thread's session ID.",
+      "files": [
+        "codex-rs/Cargo.lock (+9 -0)",
+        "codex-rs/Cargo.toml (+1 -0)",
+        "codex-rs/ext/guardian-v3/BUILD.bazel (+6 -0)",
+        "codex-rs/ext/guardian-v3/Cargo.toml (+17 -0)",
+        "codex-rs/ext/guardian-v3/src/lib.rs (+22 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 56461,
+      "title": "Add silent append support to message boards",
+      "url": "https://github.com/openai/codex/pull/56461",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T12:18:34Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add silent append support to message boards\n\n## Why\n\nRecording evidence on a message board needs a write operation that does not automatically subscribe the author or notify existing subscribers.\n\n## What changed\n\n- Add `AppendRequest` and `AgentMessageBoard::append` for local and in-memory boards, supporting new channels, existing channels, and thread replies without subscription or notification side effects.\n- Expose an explicitly selected `append` tool that accepts a destination and text, with no notification recipients.\n- Share caller-scoped request IDs with `post`: identical retries return the original metadata, while changes to the payload or operation are rejected. Local appends retain write permission checks and durable storage.\n- Reject remote appends as unsupported without issuing an HTTP request.\n\n## Testing\n\nAdd coverage for silent writes on both supported backends, tool argument validation and retry conflicts, local read-only access and retries after reopening storage, and remote rejection without network requests.",
+      "files": [
+        "codex-rs/agent-message-board-client/src/client.rs (+13 -0)",
+        "codex-rs/message-board/src/api.rs (+24 -0)",
+        "codex-rs/message-board/src/in_memory.rs (+53 -8)",
+        "codex-rs/message-board/src/in_memory/queries.rs (+9 -0)",
+        "codex-rs/message-board/src/lib.rs (+1 -0)",
+        "codex-rs/message-board/src/local.rs (+75 -24)",
+        "codex-rs/message-board/src/local/queries.rs (+9 -0)",
+        "codex-rs/message-board/src/tools.rs (+30 -6)",
+        "codex-rs/message-board/src/tools/arguments.rs (+9 -0)",
+        "codex-rs/message-board/src/tools/selection.rs (+3 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 56462,
+      "title": "Prevent memory imports from racing with consolidation",
+      "url": "https://github.com/openai/codex/pull/56462",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T12:23:26Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Prevent memory imports from racing with consolidation\n\n## Why\n\nConcurrent imports and consolidation can modify the same memory workspace, leaving a partial import across memory versions or interfering with consolidation snapshots and baselines.\n\n## What changed\n\n- Add a cross-process workspace lock shared by memory imports and consolidation.\n- Acquire locks for every import destination before modifying any workspace. Return a retryable busy error if a destination is locked, and skip consolidation when its workspace is busy.\n- Hold locks through import completion even if the caller drops the future, and through consolidation agent termination and baseline finalization.\n\n## Testing\n\nAdd an app-server integration test that blocks an active consolidation, verifies import rejection without partial writes or snapshot changes, then retries successfully and confirms imported resources remain visible to the next consolidation.",
+      "files": [
+        "codex-rs/external-agent-migration/src/memory_import.rs (+63 -45)",
+        "codex-rs/memories/write/src/lib.rs (+2 -0)",
+        "codex-rs/memories/write/src/phase2.rs (+19 -1)",
+        "codex-rs/memories/write/src/runtime.rs (+10 -0)",
+        "codex-rs/memories/write/src/workspace_lock.rs (+35 -0)",
+        "codex-rs/app-server/tests/suite/v2/external_agent_memory_concurrency.rs (+188 -0)",
+        "codex-rs/app-server/tests/suite/v2/mod.rs (+1 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 56465,
+      "title": "Add experimental thread memory summary reads",
+      "url": "https://github.com/openai/codex/pull/56465",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T12:36:13Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.165.0-alpha.1",
+      "body": "Add experimental thread memory summary reads\n\n## What changed\n\nAdd `thread/memory/read` to return `{summary}` for a thread that has been started or resumed. Read `memory_summary.md` from the thread's resolved memory version, honoring thread-specific configuration overrides without falling back to another version.\n\nReturn `null` when memory use is disabled or the selected summary is missing, unreadable, or blank.\n\n## Testing\n\nExtend app-server integration coverage to check explicit and automatic memory version selection, disabled memory use, and missing summaries without fallback.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-experimental.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/src/protocol/common.rs (+6 -0)",
+        "codex-rs/app-server-protocol/src/protocol/v2/memory.rs (+18 -1)",
+        "codex-rs/app-server/src/message_processor.rs (+3 -0)",
+        "codex-rs/app-server/src/request_processors.rs (+1 -0)",
+        "codex-rs/app-server/src/request_processors/thread_memory.rs (+30 -0)",
+        "codex-rs/app-server/src/request_processors/thread_processor.rs (+1 -1)",
+        "codex-rs/app-server/README.md (+8 -0)",
+        "codex-rs/app-server/tests/suite/v2/memory_read.rs (+59 -11)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 56468,
+      "title": "Preserve `SystemRoot` for Windows filesystem sandbox helpers",
+      "url": "https://github.com/openai/codex/pull/56468",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T12:42:55Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Preserve `SystemRoot` for Windows filesystem sandbox helpers\n\n## Why\n\nMXC needs `SystemRoot` to create the sandboxed filesystem helper process.\n\n## What changed\n\nAllow `SystemRoot` through the Windows helper environment filter using case-insensitive matching.\n\n## Testing\n\nExtend the environment-filter test to cover mixed-case `SystemRoot` and the Windows sandbox write-policy test to verify that writes to an allowed directory succeed.",
+      "files": [
+        "codex-rs/exec-server/src/fs_sandbox.rs (+5 -3)",
+        "codex-rs/exec-server/tests/file_system_windows.rs (+13 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 56477,
+      "title": "Move Guardian approval reason caps into context composition",
+      "url": "https://github.com/openai/codex/pull/56477",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T13:32:50Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Move Guardian approval reason caps into context composition\n\n## What changed\n\nApply the 512-token approval reason cap in `guardian-context` when composing synchronous full and delta reviews, before request budget enforcement. Remove truncation from the requesting host and preserve exact action JSON.\n\n## Testing\n\nExtend the planned-action budget test to cover long approval reasons in both synchronous presentations, verifying that optional tool descriptions can be omitted without changing action arguments.",
+      "files": [
+        "codex-rs/Cargo.lock (+1 -0)",
+        "codex-rs/core/src/guardian/prompt.rs (+1 -9)",
+        "codex-rs/guardian-context/Cargo.toml (+1 -0)",
+        "codex-rs/guardian-context/src/composition.rs (+14 -2)",
+        "codex-rs/guardian-context/src/enforcement_tests.rs (+58 -35)",
+        "codex-rs/guardian-context/src/lib.rs (+1 -1)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 56483,
+      "title": "Allow installed plugin metadata to skip display enrichment",
+      "url": "https://github.com/openai/codex/pull/56483",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T14:15:21Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Allow installed plugin metadata to skip display enrichment\n\n## Why\n\nRuntime metadata and tool suggestions do not require resolved image URLs or creator names. Callers that need display enrichment must still be able to distinguish a complete display snapshot from one fetched without it.\n\n## What changed\n\n- Add `InstalledPluginDisplayAssets` to select whether installed plugin requests include display enrichment, preserving `Include` as the default.\n- Send `includeDisplayAssets=false` on every request page when `Skip` is selected.\n- Track display enrichment in the installed plugin cache. Allow tool suggestions to use snapshots without enrichment, while treating those snapshots as cache misses for display callers.\n- Avoid invalidating effective runtime metadata when only the cache's display enrichment state changes.\n\n## Testing\n\nAdd coverage for paginated requests without display enrichment, cache eligibility and enrichment state transitions, and discovery using snapshots fetched with or without display assets.",
+      "files": [
+        "codex-rs/core-plugins/src/discoverable.rs (+5 -3)",
+        "codex-rs/core-plugins/src/discoverable_tests.rs (+26 -3)",
+        "codex-rs/core-plugins/src/manager.rs (+56 -5)",
+        "codex-rs/core-plugins/src/manager_tests.rs (+67 -2)",
+        "codex-rs/core-plugins/src/plugin_measurement_catalog.rs (+1 -0)",
+        "codex-rs/core-plugins/src/remote.rs (+32 -0)",
+        "codex-rs/core-plugins/src/remote/remote_installed_plugin_sync.rs (+2 -0)",
+        "codex-rs/core-plugins/src/remote_tests.rs (+49 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 56493,
+      "title": "Move Guardian tool description preparation into context composition",
+      "url": "https://github.com/openai/codex/pull/56493",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T14:58:37Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Move Guardian tool description preparation into context composition\n\n## What changed\n\nMove `GuardianToolDescriptions` into `codex-guardian-context` and carry structured tool and connector descriptions in `PlannedAction` instead of pre-rendered text. Prepare them during synchronous context composition, escaping closing tags before applying the existing 400-token limit to each source and rendering the untrusted-description fragment.\n\nKeep descriptions optional under the context budget and preserve the complete action JSON. Reject descriptions that reach rendering without preparation.\n\n## Testing\n\nStrengthen the MCP approval integration test to assert the exact rendered descriptions, including independent truncation and escaped closing markers. Adapt the budget enforcement test to use structured descriptions.",
+      "files": [
+        "codex-rs/core/src/context/mod.rs (+1 -2)",
+        "codex-rs/core/src/guardian/prompt.rs (+0 -2)",
+        "codex-rs/guardian-context/src/action.rs (+3 -2)",
+        "codex-rs/guardian-context/src/composition.rs (+36 -4)",
+        "codex-rs/guardian-context/src/enforcement_tests.rs (+6 -3)",
+        "codex-rs/guardian-context/src/guardian_tool_descriptions.rs (+13 -18)",
+        "codex-rs/guardian-context/src/lib.rs (+3 -1)",
+        "codex-rs/core/tests/suite/mcp_turn_metadata.rs (+16 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 56494,
+      "title": "Add channel upserts to message boards",
+      "url": "https://github.com/openai/codex/pull/56494",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T14:59:57Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Add channel upserts to message boards\n\n## What changed\n\nAdd an `upsert_channel` API and selectable tool to create a channel or replace only its description. Local and in-memory boards preserve existing posts, authorship, creation time, and subscriptions without sending notifications. Updating an existing channel does not require the host clock.\n\nRequire write access for local boards and reject upserts on remote boards, whose service lacks description updates.\n\n## Testing\n\nAdd coverage for both local and in-memory upserts, argument validation, mutation budgets, metadata preservation, and clock failures. Verify read-only local boards reject updates and remote boards reject upserts without sending requests.",
+      "files": [
+        "codex-rs/agent-message-board-client/src/client.rs (+13 -0)",
+        "codex-rs/message-board/src/api.rs (+17 -0)",
+        "codex-rs/message-board/src/in_memory.rs (+43 -9)",
+        "codex-rs/message-board/src/in_memory/queries.rs (+9 -0)",
+        "codex-rs/message-board/src/lib.rs (+1 -0)",
+        "codex-rs/message-board/src/local/queries.rs (+55 -1)",
+        "codex-rs/message-board/src/tools.rs (+5 -0)",
+        "codex-rs/message-board/src/tools/selection.rs (+3 -0)",
+        "codex-rs/message-board/src/tools/spec.rs (+8 -0)",
+        "codex-rs/agent-message-board-client/tests/remote_board.rs (+15 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 56495,
+      "title": "Add paginated channel subscription queries to the local message board",
+      "url": "https://github.com/openai/codex/pull/56495",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T15:00:30Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Add paginated channel subscription queries to the local message board\n\n## What changed\n\nAdd `LocalAgentMessageBoard::subscribed_channels` to list the caller's subscribed channel names on the current board in name order, using the existing `PageRequest` limits and cursors.\n\n## Testing\n\nExtend the local board test to verify that a read-only connection can retrieve two subscribed channels across successive one-item pages, with no cursor after the final page.",
+      "files": [
+        "codex-rs/message-board/src/local/queries.rs (+26 -0)",
+        "codex-rs/message-board/tests/local_board.rs (+28 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 56505,
+      "title": "Defer synchronous Guardian tool-call truncation to preparation",
+      "url": "https://github.com/openai/codex/pull/56505",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-10-23T15:37:55Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Defer synchronous Guardian tool-call truncation to preparation\n\n## What changed\n\nPreserve complete tool-call text when collecting synchronous Guardian context, then apply the profile's tool token limit when preparing the transcript. Calculate retained bytes and token usage from the truncated text.\n\n## Testing\n\nExtend the oversized-action regression test to verify that a subsequent review includes the previous call's arguments truncated to the 1,000-token history limit.",
+      "files": [
+        "codex-rs/core/src/guardian/prompt.rs (+2 -2)",
+        "codex-rs/guardian-context/src/enforcement_tests.rs (+9 -11)",
+        "codex-rs/guardian-context/src/profile.rs (+24 -3)",
+        "codex-rs/guardian-context/src/transcript.rs (+15 -2)",
+        "codex-rs/core/tests/suite/guardian_context_budget.rs (+3 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":56514,"title":"Preserve tracing context throughout tool dispatch","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56515,"title":"Add trace instrumentation for turn startup and response streaming","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56516,"title":"Respect server approval policy defaults during TUI startup","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56524,"title":"Add turn, tool, and skill attribution to traces","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56525,"title":"Remove the 1 MiB response limit for explicit model catalogs","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56530,"title":"Record skill and plugin catalog sizes on publication","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56533,"title":"Defer sync Guardian tool-output truncation to transcript preparation","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56535,"title":"Extract the head-tail buffer into a utility crate","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56543,"title":"Track resume picker pagination and selection metadata per backend","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56552,"title":"Initialize SQLite databases with DELETE journaling on NFS","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56553,"title":"Include environment hooks in thread hook listings","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56554,"title":"Enable masked AWS credentials for local proxy signing","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56555,"title":"Apply sync Guardian message limits during transcript preparation","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56556,"title":"Use conversations for all Guardian v2 async classification","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56557,"title":"Exercise retained sampling in Guardian transport tests","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56559,"title":"Remove Guardian snapshot-specific context helpers","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":56560,"title":"Allow configuring GCP project and location in provider settings","hint":"unknown","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}

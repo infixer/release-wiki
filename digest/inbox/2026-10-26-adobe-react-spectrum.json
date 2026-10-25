@@ -1,0 +1,93 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-10-25T23:19:53Z",
+  "range": {
+    "from": "2026-10-22T23:04:22Z",
+    "to": "2026-10-25T23:19:53Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10820,
+      "title": "fix(usePress): only skip Enter default prevention on macOS for Control + Enter",
+      "url": "https://github.com/adobe/react-spectrum/pull/10820",
+      "author": "jsabutis",
+      "mergedAt": "2026-10-23T05:17:40Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10741\n\nOn macOS, `shouldPreventDefaultKeyboard` returned `false` for every Enter keypress. The #10237 exemption for Control + Enter (native context menu) only checked the key, so plain Enter stopped being default-prevented too. When a press handler moves focus during keydown, as a Select option does when it restores focus to its trigger, the browser fires its native click on the newly focused trigger and the Select reopens.\n\nThis passes the event to `shouldPreventDefaultKeyboard` and requires `ctrlKey` for the exemption. Control + Enter keeps its default, so the `contextmenu` path is unchanged. Plain Enter falls through to the existing rules, so links, submit buttons and inputs keep their native Enter behaviour.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [x] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/ad\n…(truncated)",
+      "files": [
+        "packages/react-aria/src/interactions/usePress.ts (+9 -5)",
+        "packages/react-aria-components/test/ListBox.test.js (+33 -0)",
+        "packages/react-aria/test/interactions/usePress.test.js (+23 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10831,
+      "title": "chore: move layout types",
+      "url": "https://github.com/adobe/react-spectrum/pull/10831",
+      "author": "nwidynski",
+      "mergedAt": "2026-10-23T18:32:42Z",
+      "labels": [
+        "small review",
+        "ready for review",
+        "no testing"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 10600,
+      "title": "fix: scroll anchoring improvements for chat",
+      "url": "https://github.com/adobe/react-spectrum/pull/10600",
+      "author": "yihuiliao",
+      "mergedAt": "2026-10-23T18:58:24Z",
+      "labels": [
+        "ready for review",
+        "ResponseStatus",
+        "AI"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "This PR fixes a couple of things. Some of which were from testing in July and some that were noticed while making the ai component docs.\n\n1) Updates the width of the Chat in storybook so it fits on mobile screens\n2) Removes unneeded state to calculate scroll anchoring (see devon's [comment](https://github.com/adobe/react-spectrum/pull/10258#discussion_r3659717895))\n3) Fixes the scroll positioning from jumping on mobile\n4) Expanding and collapsing response status in virtualized chat thread has weird scroll behavior (like it is opening upward).\n\nFor 2, I removed the `hadEstimatedVisibleItems` / `wasNearAnchorEdge` fields that tried to remember whether we were near the bottom while estimated items were measuring and used that to skip preserving the item anchor on later passes. Now, we check proximity before each layout pass. Separately, we check whether the resize batch includes the newest content. If only older items resized, we preserve the reading position instead of snapping to the bottom just because we’re within the threshold.\n\nFor 3, scroll position jumped on mobile, an item can only be anchored if it fits fully inside the viewport. On mobile, one tall item can fill the whole screen, so nothing ever fully fit and no anchor was picked. Now we anchor to the item closest to the edge even if it's partly cut off, falling back to the least-cut-off item if none fit.\n\nFor 4, expanding/collapsing response status scrolled upward instead of staying put, a resize anywhere in the list\n…(truncated)",
+      "files": [
+        "packages/@react-spectrum/ai/src/ListLayout.ts (+22 -1)",
+        "packages/@react-spectrum/ai/src/ResponseStatus.tsx (+35 -4)",
+        "packages/@react-spectrum/ai/stories/Chat.stories.tsx (+6 -9)",
+        "packages/react-stately/src/virtualizer/ScrollAnchor.ts (+54 -63)",
+        "packages/react-stately/src/virtualizer/Virtualizer.ts (+31 -3)",
+        "packages/react-stately/test/virtualizer/ScrollAnchor.test.ts (+281 -98)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 10832,
+      "title": "chore: move type guards",
+      "url": "https://github.com/adobe/react-spectrum/pull/10832",
+      "author": "nwidynski",
+      "mergedAt": "2026-10-23T20:02:08Z",
+      "labels": [
+        "small review",
+        "ready for review",
+        "no testing"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 7
+    }
+  ],
+  "errors": []
+}

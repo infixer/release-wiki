@@ -1,0 +1,528 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-25T23:19:53Z",
+  "range": {
+    "from": "2026-10-22T11:14:02Z",
+    "to": "2026-10-25T23:19:53Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.2",
+      "publishedAt": "2026-10-16T17:21:23Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.2"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36675,
+      "title": "docs: update StackBlitz link to point to nightly version",
+      "url": "https://github.com/nuxt/nuxt/pull/36675",
+      "author": "atinux",
+      "mergedAt": "2026-10-23T13:36:06Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 36682,
+      "title": "fix(nuxt): apply route rule coverage under a base url",
+      "url": "https://github.com/nuxt/nuxt/pull/36682",
+      "author": "danielroe",
+      "mergedAt": "2026-10-23T15:09:03Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nnitro registers every route rule under the base URL, but the probe paths we try do not have a base, so we were missing out on a perf optimisation when running nuxt with a base URL that was configured at build time 🤷\n\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36682?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36682?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/pages/route-coverage.ts (+2 -1)",
+        "packages/nuxt/test/route-coverage.test.ts (+35 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36639,
+      "title": "fix(nuxt): handle rejected `updateCallbackDone` of aborted view transition",
+      "url": "https://github.com/nuxt/nuxt/pull/36639",
+      "author": "0xgdr",
+      "mergedAt": "2026-10-23T15:22:38Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36626\n\n### 📚 Description\n\nWith `experimental.viewTransition` enabled, a client-side navigation that fails (`router.onError`, `app:error` or `vue:error`, e.g. a page whose setup throws `createError`) logs `Uncaught (in promise) undefined`.\n\n**Cause:** the plugin aborts the transition with `abortTransition()`, which rejects the promise returned from the update callback. Per the View Transitions spec that rejects `updateCallbackDone` as well as `ready` and `finished`. `finished` (#34515) and `ready` (#35537) are already caught, but `updateCallbackDone` isn't.\n\n**Fix:** catch `updateCallbackDone` alongside the existing handlers.\n\n**Tests:**\n\n- In `test/nuxt/view-transitions.test.ts`, the mock's `updateCallbackDone` now follows the promise returned by the update callback, as in the browser.\n- A new test fires `app:error` while the transition is in progress and asserts no unhandled rejection is reported. It fails on `main` and passes with the fix; the file's other 18 tests still pass. I haven't run the full suite locally.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+      "files": [
+        "packages/nuxt/src/app/plugins/view-transitions.client.ts (+1 -0)",
+        "test/nuxt/view-transitions.test.ts (+27 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36683,
+      "title": "fix(nuxt): encode page paths before matching route rule keys",
+      "url": "https://github.com/nuxt/nuxt/pull/36683",
+      "author": "danielroe",
+      "mergedAt": "2026-10-24T12:45:54Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nwith route rules like this, `/café/about` never gets stubbed out of the client bundle, even though `/café/**` should cover it:\n\n```ts\nrouteRules: {\n  '/café/**': { ssr: false },\n  '/café/secret': { ssr: true },\n}\n```\n\nthis is because of a divergence between h3 + `markPagesCoveredByRouteRule` (similarly to https://github.com/nuxt/nuxt/pull/36682, this means we miss a perf optimisation)\n\nso this PR encodes each page pattern with the same character set h3 uses before checking coverage.\n\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36683?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/pages/route-coverage.ts (+7 -1)",
+        "packages/nuxt/test/route-coverage.test.ts (+30 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36686,
+      "title": "fix(nuxt): match method-scoped route rules",
+      "url": "https://github.com/nuxt/nuxt/pull/36686",
+      "author": "danielroe",
+      "mergedAt": "2026-10-24T13:46:22Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nh3 (now?) accepts method-scoped route rule keys, and nitro applies them per request method at runtime:\n\n```ts\nrouteRules: {\n  'GET /admin/**': { appMiddleware: 'auth' },\n}\n```\n\nbut this is not something we have hitherto handled in nuxt - we'd just end up handling that like an absolute path\n\nthis PR parses the method prefix the same way h3's `parseRouteKey` does, everywhere we handle route rules within nuxt itself.\n\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36686?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36686?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nitro-server/src/index.ts (+3 -3)",
+        "packages/nuxt/src/core/utils/route-rules.ts (+77 -15)",
+        "packages/nuxt/src/pages/module.ts (+2 -2)",
+        "packages/vite-server/src/route-rules.ts (+21 -10)",
+        "packages/vite-server/src/runtime/renderer.ts (+4 -4)",
+        "packages/vite-server/src/runtime/server.ts (+2 -2)",
+        "packages/nitro-server/test/nitro-config.test.ts (+14 -0)",
+        "packages/nuxt/test/payload-route-rules.test.ts (+29 -0)",
+        "packages/nuxt/test/route-coverage.test.ts (+20 -27)",
+        "packages/nuxt/test/route-rules-template.test.ts (+44 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 36693,
+      "title": "fix(nitro): respect `sensitive` when matching server route rules",
+      "url": "https://github.com/nuxt/nuxt/pull/36693",
+      "author": "danielroe",
+      "mergedAt": "2026-10-24T14:42:00Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nwith `router.options.sensitive: false`, `/Admin` renders the same page as `/admin`, but none of the server route rules for `/admin` apply to it:\n\n```ts\nrouter: { options: { sensitive: false } },\nrouteRules: {\n  '/admin/**': { redirect: '/login' },\n  '/Docs': { headers: { 'x-docs': '1' } },\n}\n```\n\nwe'd highly recommend users keep `sensitive` enabled to match h3's defaults, but this adds some normalisation to keep route rules matching case-insensitively in that case....\n\nideally this would be a `caseSensitive` option in h3's rules matcher that nitro passes through... 👀\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36693?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36693?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nitro-server/src/index.ts (+5 -1)",
+        "packages/nitro-server/src/route-rules.ts (+110 -1)",
+        "pnpm-lock.yaml (+10 -0)",
+        "packages/nitro-server/test/route-rules.test.ts (+113 -2)",
+        "test/basic.test.ts (+24 -0)",
+        "test/fixtures/insensitive-routing/app/app.vue (+3 -0)",
+        "test/fixtures/insensitive-routing/app/pages/headers/[slug].vue (+3 -0)",
+        "test/fixtures/insensitive-routing/app/pages/index.vue (+3 -0)",
+        "test/fixtures/insensitive-routing/app/pages/mixed-case.vue (+3 -0)",
+        "test/fixtures/insensitive-routing/app/pages/no-scripts.vue (+3 -0)"
+      ],
+      "filesTotal": 21
+    },
+    {
+      "number": 36695,
+      "title": "docs: document controlling prefetch hints via `build:manifest` hook",
+      "url": "https://github.com/nuxt/nuxt/pull/36695",
+      "author": "danielroe",
+      "mergedAt": "2026-10-24T14:42:00Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 36697,
+      "title": "fix(nuxt): hash keyed function ids + page import names relative to `rootDir`",
+      "url": "https://github.com/nuxt/nuxt/pull/36697",
+      "author": "onmax",
+      "mergedAt": "2026-10-24T21:29:58Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nNo issue. Regression from #33446, released in v4.3.0 and v3.21.0. Reproduction: [`onmax/repros` at `repro/nuxt-keyed-functions-absolute-path`](https://github.com/onmax/repros/tree/repro/nuxt-keyed-functions-absolute-path/nuxt-keyed-functions-absolute-path)\n\n### 📚 Description\n\nKeyed functions like `useAsyncData` and `useState` get an auto-generated key when you don't pass one.\n\nSince #33446 that key is a hash of the absolute file path, so it changes with the directory you build in. The same commit built in two places gives different chunk hashes and HTML.\n\nThis PR hashes the path relative to `rootDir` again, like the old `composable-keys` plugin did:\n\n```diff\n transform(code, id)\n   count = 0\n+  relativeID = isAbsolute(id) ? relative(rootDir, id) : id\n   for each keyed call with no key\n-    key = '$' + hash(`${id}-${++count}`)\n+    key = '$' + hash(`${relativeID}-${++count}`)\n     append key as the last argument\n```\n\nKeys for the first keyed call in `app/pages/index.vue`:\n\n| Built in | Before | After |\n|---|---|---|\n| `/home/runner/work/project` | `$2h7GcfUpwJ` | `$orW8SXrfeA` |\n| `/builds/project` | `$5KDxdpXAPq` | `$orW8SXrfeA` |\n\nThis PR should target Nuxt nightly and Nuxt 4",
+      "files": [
+        "packages/nuxt/src/compiler/module.ts (+1 -0)",
+        "packages/nuxt/src/compiler/plugins/keyed-functions.ts (+4 -2)",
+        "packages/nuxt/src/pages/utils.ts (+4 -3)",
+        "packages/nuxt/test/keyed-functions.test.ts (+33 -3)",
+        "packages/nuxt/test/page-metadata.test.ts (+34 -18)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36701,
+      "title": "fix(nuxt): don't treat constrained route rules as covering dynamic pages",
+      "url": "https://github.com/nuxt/nuxt/pull/36701",
+      "author": "danielroe",
+      "mergedAt": "2026-10-25T11:55:55Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\na route rule with a regex-constrained param currently counts as covering an entire dynamic page, even though it only matches a subset of the values that page accepts\n\n```ts\nrouteRules: {\n  '/foo/:x([a-z_]+)': { ssr: false },\n}\n```\n\nwith `pages/foo/[x].vue`, `/foo/123` doesn't match that rule at runtime, but the page is still treated as covered, for the purposes of stubbing it out of the `ssr: false` bundle\n\nnow we treat a regex-constrained param in a route rule as never covering a dynamic page segment, erring on the side of under-coverage\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36701?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/pages/route-coverage.ts (+7 -3)",
+        "packages/nuxt/test/route-coverage.test.ts (+29 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36704,
+      "title": "fix(nuxt): include `shared/` in build cache hash",
+      "url": "https://github.com/nuxt/nuxt/pull/36704",
+      "author": "onmax",
+      "mergedAt": "2026-10-25T11:55:55Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nWith `experimental.buildCache`, editing a file in `shared/` could still give a cache hit and restore the old build.\n\n`getVueHash` hashes files under each layer's `srcDir`. `shared/` resolves from the layer root, not from `srcDir`. In a project with an `app/` directory, `srcDir` is `app/` and `shared/` sits next to it, so the hash never saw files in `shared/`.\n\nThis change resolves the layer's shared dir (`dir.shared`, default `shared`) against `rootDir`. If it falls outside `srcDir`, it is hashed as a second `cwd`. To support this, `GetHashOptions['cwd']` now accepts `string | string[]`.\n\nI made this repro: https://github.com/onmax/repros/tree/repro/nuxt-build-cache-shared-dir/nuxt-build-cache-shared-dir\n```bash\ngit clone --branch repro/nuxt-build-cache-shared-dir https://github.com/onmax/repros.git\ncd repros\nnode verify.mjs\n```\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36704?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/core/cache.ts (+7 -2)",
+        "packages/nuxt/test/cache.test.ts (+43 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36706,
+      "title": "docs: use American spelling in a few guides",
+      "url": "https://github.com/nuxt/nuxt/pull/36706",
+      "author": "Ibochkarev",
+      "mergedAt": "2026-10-25T11:55:55Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 15
+    },
+    {
+      "number": 36692,
+      "title": "fix(nuxt,vite): restore client build state on build cache hits",
+      "url": "https://github.com/nuxt/nuxt/pull/36692",
+      "author": "onmax",
+      "mergedAt": "2026-10-25T12:39:34Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nNo issue. Reproduction: [`onmax/repros` at `repro/nuxt-build-cache-inlined-css`](https://github.com/onmax/repros/tree/repro/nuxt-build-cache-inlined-css/nuxt-build-cache-inlined-css)\n\n### 📚 Description\n\nWith `experimental.buildCache`, a cache hit skips the client build and restores its files from the cache. But the ssr build also reads state that the client build keeps in memory:\n\n- the `ssr-styles` maps (`clientCSSMap`, `clientImporters`, `cssSourcesByCSSFile`)\n- the entry file name from `stable-entry`\n- the raw client manifest, which `build:manifest` finalises\n\nOnly the final `clientManifest`, `clientPrecomputed` and `entryChunkName` strings were replayed. On a cache hit, the ssr build saw empty maps and emitted no render-time `inlinedCSS` conditions, so pages kept `<link rel=\"stylesheet\">` tags for CSS they had already inlined. The HTML differed from a cold build.\n\nThe reproduction builds a page with a scoped style twice, once cold and once from the cache. The cold build inlines the style and links no stylesheet. The cache-hit build on main also links `pages.<hash>.css`; with this PR (from pkg.pr.new) it renders the same HTML as the cold build:\n\n```sh\ngit clone --branch repro/nuxt-build-cache-inlined-css https://github.com/onmax/repros\ncd repros && node verify.mjs\n```\n\nThis PR:\n\n1. adds an internal `addClientBuildState(key, { save, restore })` to `@nuxt/kit/internal`\n2. registers the state of `ssr-styles`, `stable-entry` and `client-manifest` with it\n\n…(truncated)",
+      "files": [
+        "packages/kit/src/internal/client-build-state.ts (+45 -0)",
+        "packages/kit/src/internal/index.ts (+3 -0)",
+        "packages/nuxt/src/core/cache.ts (+39 -23)",
+        "packages/schema/src/types/nuxt.ts (+5 -0)",
+        "packages/vite/src/plugins/client-manifest.ts (+17 -2)",
+        "packages/vite/src/plugins/ssr-styles.ts (+17 -1)",
+        "packages/vite/src/plugins/stable-entry.ts (+5 -0)",
+        "packages/nuxt/test/cache.test.ts (+110 -1)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 36696,
+      "title": "fix(nuxt): tree-shake auto-imported `#app` composables",
+      "url": "https://github.com/nuxt/nuxt/pull/36696",
+      "author": "onmax",
+      "mergedAt": "2026-10-25T12:59:50Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nNo issue. Reproduction: [`onmax/repros` at `repro/nuxt-definepagemeta-treeshake`](https://github.com/onmax/repros/tree/repro/nuxt-definepagemeta-treeshake/nuxt-definepagemeta-treeshake)\n\n### 📚 Description\n\n`TreeShakeComposablesPlugin` skips `definePageMeta`, `definePayloadReducer`, `definePayloadReviver` and `onPrehydrate` when they're auto-imported. The defaults in `optimization.treeShake.composables` list them under `#app` only, but auto-imports bring them in from subpaths:\n\n- `definePageMeta` from `#app/composables/pages`\n- `definePayloadReducer` and `definePayloadReviver` from `#app/composables/payload`\n- `onPrehydrate` from `#app/composables/ssr`\n\nSince v4.1.1, every page chunk keeps its `definePageMeta()` call and import, on the client and the server. This also affects `4.x`.\n\n```sh\ngit clone --depth 1 --branch repro/nuxt-definepagemeta-treeshake https://github.com/onmax/repros.git\ncd repros/nuxt-definepagemeta-treeshake\npnpm install --frozen-lockfile && pnpm verify\n```\n\nthis PR makes the tree-shake plugin check the auto-import registry, so a composable listed under `#app` is also tree-shaken when it's imported from the subpath it's auto-imported from (like `#app/composables/pages`). it works the same way for any other configured import path, and the defaults stay as they are, so removing a name from `#app` still opts out.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36696?utm_source=github&amp;utm_medium=pr_description#architect\n…(truncated)",
+      "files": [
+        "packages/nuxt/src/core/nuxt.ts (+7 -0)",
+        "packages/nuxt/src/core/plugins/tree-shake.ts (+24 -6)",
+        "packages/nuxt/test/tree-shake.test.ts (+70 -26)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36699,
+      "title": "perf(vite): pass `serverEntry` to `ServerEntryPlugin`",
+      "url": "https://github.com/nuxt/nuxt/pull/36699",
+      "author": "onmax",
+      "mergedAt": "2026-10-25T12:59:50Z",
+      "labels": [
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nNo issue. Reproduction: [`onmax/repros` at `repro/nuxt-spa-full-server-bundle`](https://github.com/onmax/repros/tree/repro/nuxt-spa-full-server-bundle/nuxt-spa-full-server-bundle)\n\n### 📚 Description\n\nWhen the nitro Vite environment is on (the default with the Vite build), `buildsSeparately` is false, and in that mode `ServerEntryPlugin` uses whatever entry it receives as the server entry. Since it receives the full app entry, the whole app goes into the server bundle, even though the server only sends the SPA shell.\n\nOn a generated 12-layer app with `ssr: false`, the SSR environment goes from 5,332 modules in 12.0 s to 104 modules in 0.3 s, and the whole build from 30.6 s to 15.1 s.\n\nThe reproduction checks that page and component code stays out of `.output/server`, and that the server still sends the same SPA shell:\n\n```sh\ngit clone --depth 1 --branch repro/nuxt-spa-full-server-bundle https://github.com/onmax/repros.git\ncd repros/nuxt-spa-full-server-bundle\npnpm install && pnpm verify\n```\n\nRelated #35604\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36699?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/vite/src/vite.ts (+1 -1)",
+        "test/bundle.test.ts (+11 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36707,
+      "title": "perf(nuxt): server render internal custom links without RouterLink",
+      "url": "https://github.com/nuxt/nuxt/pull/36707",
+      "author": "danielroe",
+      "mergedAt": "2026-10-25T13:35:31Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis is one of several PRs from profiling SSR of a Nuxt UI 4 marketing page. it takes #36015 a bit further to now directly pass values to _custom_ links...\n\nperformance improvement of total rendering time improved by roughly 3% in a `<UButton>` or link-heavy page using ui libraries with their own custom implementation of a NuxtLink\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36707?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36707?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/app/components/nuxt-link.ts (+44 -19)",
+        "packages/nuxt/test/nuxt-link-ssr.test.ts (+50 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36687,
+      "title": "fix(nitro): follow module virtuals instead of aliased files in compat scan",
+      "url": "https://github.com/nuxt/nuxt/pull/36687",
+      "author": "MaksZhukov",
+      "mergedAt": "2026-10-25T13:53:14Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nCloses #36648\n\n### 📚 Description\n\nWhen the Nitro compat layer works out which module code the server build reaches, it walks the import graph of the registered entries. A module virtual such as `#meta/nitro` was resolved there like any other specifier, through `resolveAlias`. So when a module also defined a `#meta` alias:\n\n- **Directory alias:** `#meta/nitro` resolved to `<dir>/nitro.ts`. The scan then attributed that file, and its `h3` import, to the server build, which reported a false `NUXT_B9003` and bundled the compat runtime plugins. The build itself loads the virtual, so the file is never bundled.\n- **File alias:** resolving `<file>/nitro` threw `ENOTDIR` from `resolveModulePath` in `registrationPaths`.\n\nThe fix returns module virtuals by their id in both `registrationPaths` and `resolveScopeImport`. This matches what the build does. `reachableFiles` already reads virtuals from `virtualSources` by id, so their contents are still scanned. The check uses `isModuleVirtual`, so virtuals with deferred (function) templates are covered too.\n\n### How to test\n\nThe two regression cases come from @OrbisK's #36619, turned from `it.fails` into normal tests. Both fail without the change and pass with it:\n\n```sh\npnpm vitest run --project unit packages/nitro-server/test/compat.test.ts\n```\n\nI ran all `packages/nitro-server` unit tests, ESLint on the changed files, and `vue-tsc --noEmit`. All pass except `nitro-config.test.ts > emits valid single-segment URLPattern\n…(truncated)",
+      "files": [
+        "packages/nitro-server/src/compat.ts (+29 -13)",
+        "packages/nitro-server/test/compat.test.ts (+58 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36700,
+      "title": "perf(nitro): register server auto-imports plugin once",
+      "url": "https://github.com/nuxt/nuxt/pull/36700",
+      "author": "onmax",
+      "mergedAt": "2026-10-25T13:55:27Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nNo issue. Reproduction: [`onmax/repros` at `repro/nuxt-server-auto-imports-twice`](https://github.com/onmax/repros/tree/repro/nuxt-server-auto-imports-twice/nuxt-server-auto-imports-twice)\n\n### 📚 Description\n\nNow nitro passes `rollupConfig.plugins` to the `nitro` Vite environment, so the extra Vite copy made the plugin run twice on every server module. Also skip the `ssr` environment's output in `<buildDir>/vite/services/`, which the app's auto-imports have already transformed.\n\nThe Rollup copy needs to stay since the prerender build only sees `rollupConfig`; without it you get `ReferenceError: xxxx is not defined`.\n\nOn a generated 12-layer app, the nitro build step goes from 7.05 s to 3.4 s, and `.output` is identical.\n\nThe reproduction lists two active copies of `nuxt:server-auto-imports` in the nitro environment, and one with this change. Both builds give the same `.output` (63 of 63 files equal after normalizing):\n\n```sh\ngit clone --depth 1 --branch repro/nuxt-server-auto-imports-twice https://github.com/onmax/repros.git\ncd repros && node verify.mjs\n```\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36700?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nitro-server/src/auto-imports-plugin.ts (+8 -9)",
+        "packages/nitro-server/src/index.ts (+5 -11)",
+        "packages/nitro-server/test/auto-imports.test.ts (+15 -0)",
+        "packages/nitro-server/test/nitro-config.test.ts (+11 -3)",
+        "test/basic.test.ts (+3 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36702,
+      "title": "perf(vite): avoid quadratic nested dir check for `fs.allow`",
+      "url": "https://github.com/nuxt/nuxt/pull/36702",
+      "author": "onmax",
+      "mergedAt": "2026-10-25T13:55:27Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\n`allowDirs` gets one entry per component, plugin, middleware and layout directory, so large apps have thousands of entries, mostly repeats. Nested dirs were removed by comparing every entry with every other entry, and duplicates were only removed at the end.\n\n```diff\n allowDirs = [appDir, workspaceDir, ...modulesDir, ...layerRoots,\n              ...one dir per component / plugin / middleware / layout]\n   .filter(exists)\n\n-for each dir d                      # n entries, duplicates included\n-  for each other entry o            # n again → O(n²)\n-    if d starts with o + \"/\"\n-      drop d\n-fs.allow = unique(allowDirs)\n\n+unique = Set(allowDirs)             # duplicates removed first\n+for each dir d in unique\n+  for each \"/\" in d                 # path depth\n+    if unique has d[0 : that \"/\"]\n+      drop d                        # Set lookup → O(n × depth)\n+fs.allow = allowDirs\n```\n\nThere is now `removeNestedDirs` helper in `packages/vite/src/utils`. The output is the same as before:\n\n| input | before | after |\n|---|---|---|\n| `/app/components` when `/app` is in the list | dropped | dropped |\n| `/app-layer/x` when `/app` is in the list | kept | kept |\n| `/layer/components` when `/layer/` is in the list | kept | kept |\n| `/a` listed twice | merged at the end | merged first |\n\nIn a lab project, the time from `build:before` to `vite:extend` (where `fs.allow` is built), 5,000 components, the time went from 454 ms to 24 ms\n\n<br>\n<p align=\"cente\n…(truncated)",
+      "files": [
+        "packages/vite/src/utils/index.ts (+20 -0)",
+        "packages/vite/src/vite.ts (+4 -8)",
+        "packages/vite/test/remove-nested-dirs.test.ts (+30 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36691,
+      "title": "fix(nuxt): hide RouteLocationRaw from navigateTo's public return type",
+      "url": "https://github.com/nuxt/nuxt/pull/36691",
+      "author": "Ibochkarev",
+      "mergedAt": "2026-10-25T14:10:08Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36658\n\n### 📚 Description\n\n- The public `navigateTo` type no longer includes `RouteLocationRaw`. Externally, it remains `Promise<void | NavigationFailure | false> | false | void`.\n- Internally, the second signature still allows `RouteLocationRaw` because the function still returns the original route from the route middleware, and the redirect runner reads it.\n- With experimental.typedPages, the RouteLocationRaw type expands to the union of all routes. A function that returns `navigateTo()` alongside another value runs into TS2590.\n- The signature in `docs/4.api/3.utils/navigate-to.md` has been converted to a public type, and it also states that the middleware still returns the route at runtime.",
+      "files": [
+        "packages/nuxt/src/app/composables/router.ts (+3 -2)",
+        "docs/4.api/3.utils/navigate-to.md (+1 -1)",
+        "test/fixtures/basic-types/app/app-types.ts (+1 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36703,
+      "title": "fix(vite): skip quoted `import.meta` keys + limit replace to client dev",
+      "url": "https://github.com/nuxt/nuxt/pull/36703",
+      "author": "FelixFangX",
+      "mergedAt": "2026-10-25T14:51:10Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nFixes #36657\n\n### ❓ Type of change\n\n- [x] bugfix\n\n### 📚 Description\n\nVite serves `@vite-ignore` workers as `?worker_file&type=ignore` and injects an env preamble whose `defines` object uses string keys like `\"import.meta.envName\"`. `nuxt:replace` text-replaced those keys into invalid JS (`\"\"development\"\"`), causing a PARSE_ERROR in dev.\n\nExclude ignore-worker module ids from the replace transform so Vite can handle those modules itself. Normal modules still get `import.meta.*` defines replaced.\n\n### 📝 Checklist\n\n- [x] I have linked an issue or discussion.\n- [x] I have added tests where possible.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36703?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/vite/src/plugins/replace.ts (+9 -1)",
+        "packages/vite/test/replace.test.ts (+81 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36709,
+      "title": "fix(nuxt): remove purged entries from `_asyncData`",
+      "url": "https://github.com/nuxt/nuxt/pull/36709",
+      "author": "danielroe",
+      "mergedAt": "2026-10-25T16:16:17Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36676\n\n### 📚 Description\n\nonce the last component using a key unmounts, its `useAsyncData` entry gets purged but stays in `nuxtApp._asyncData`.\n\nit's never reused, but `execute` closes over the options/handler of the last caller, meaning the previous page's setup scope (and anything else there) stays alive...\n\nthis seems to have been the case since v3.17.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36709?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/app/composables/asyncData.ts (+15 -6)",
+        "test/nuxt/use-async-data.test.ts (+81 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36710,
+      "title": "perf(nitro,nuxt,rspack,vite-server,webpack): bundle esm vue + reuse caches",
+      "url": "https://github.com/nuxt/nuxt/pull/36710",
+      "author": "danielroe",
+      "mergedAt": "2026-10-25T16:27:04Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis is one of several PRs from looking at SSR performance based on a Nuxt UI 4 marketing page, as a stand-in for a reasonably heavy component-focused site ...\n\n| | `main` | this PR | delta |\n| - | - | - | - |\n| Nuxt UI page (median, µs) | 15551 / 14731 | 11868 / 11761 | -24% / -20% |\n| static single-SFC page (median, µs) | 412 / 395 | 363 / 358 | -12% / -9% |\n| static page with webpack (median, µs) | 362 / 355 | 317 / 316 | -12% / -11% |\n\nthis _significantly_ improves performance by forcing the esm bundler vue build, which has performance optimisations (ie vue feature flags) and also avoids the cjs interop helpers.\n\nadditionally, this prevents multiple copies of vue being installed, we enable dead-code elimination in nitro with process.env.NODE_ENV` - with nice improvements!\n\n| server JS (static page) | `main` | this PR |\n| - | - | - |\n| Vite | 837 KB | 700 KB |\n| Vite (`nitroViteEnvironment: false`) | 914 KB | 732 KB |\n| webpack | 2.87 MB | 1.54 MB |\n| rspack | 2.94 MB | 1.72 MB |\n| `@nuxt/vite-server` | 1.64 MB | 652 KB |\n\nand we fix a bug whereby webpack ssr inlining wouldn't have worked at all with optionsApi off...\n\nand, finally, we share Vue's `propsCache` and `emitsCache` across requests so we don't have to re-normalise every component's props and emits on a per-request basis... (an extra 3% faster render on the full example ui page - on top of everything else)\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/367\n…(truncated)",
+      "files": [
+        "packages/nitro-server/src/utils.ts (+3 -0)",
+        "packages/nuxt/src/app/entry.ts (+10 -0)",
+        "packages/nuxt/src/app/plugins/preload.server.ts (+0 -19)",
+        "packages/nuxt/src/core/nuxt.ts (+10 -6)",
+        "packages/nuxt/src/core/plugins/bundled-vue.ts (+35 -0)",
+        "packages/schema/src/types/nitro.ts (+1 -0)",
+        "packages/vite-server/src/ssr.ts (+0 -31)",
+        "packages/webpack/src/configs/server.ts (+4 -2)",
+        "packages/webpack/src/loaders/vue-module-identifier.ts (+10 -2)",
+        "packages/nitro-server/test/nitro-config.test.ts (+14 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 35837,
+      "title": "docs: note provide/inject limit in server components",
+      "url": "https://github.com/nuxt/nuxt/pull/35837",
+      "author": "Ibochkarev",
+      "mergedAt": "2026-10-25T16:43:44Z",
+      "labels": [
+        "📚 documentation",
+        "5.x",
+        "possible bot",
+        "agentscan:mixed-signals"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 36650,
+      "title": "fix(nuxt): only return redirects from `navigateTo` while middleware runs",
+      "url": "https://github.com/nuxt/nuxt/pull/36650",
+      "author": "volkanakyel",
+      "mergedAt": "2026-10-25T17:11:59Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nRan into this when `navigateTo()` from a component just... didn't navigate.\n\n`_processingMiddleware` gets set when a navigation starts, but it's only cleared in `afterEach` / `onError`. So if a navigation is still pending after middleware already ran (a slow `beforeResolve` guard, an async page chunk loading), any `navigateTo()` called from a component during that window returns a route object instead of navigating. The navigation is silently lost.\n\n**Fix:** on the client, clear the flag as soon as Nuxt's middleware guard is done, by registering a `beforeEach` right after it. Applied to both the vue-router plugin and the universal router.\n\n**Heads up on one behavior change:** `navigateTo()` inside a custom `router.beforeResolve` or `onBeforeRouteUpdate` now starts a new navigation instead of returning a redirect location. You end up on the same route either way.\n\n**Tests:** added one per router that reproduces the bug. They fail before this change and pass after.",
+      "files": [
+        "packages/nuxt/src/app/composables/router.ts (+8 -3)",
+        "packages/nuxt/src/app/nuxt.ts (+1 -1)",
+        "packages/nuxt/src/app/plugins/router.ts (+23 -10)",
+        "packages/nuxt/src/pages/runtime/plugins/router.ts (+31 -14)",
+        "test/nuxt/composables.test.ts (+127 -0)",
+        "test/nuxt/dev/diagnostics.dev.test.ts (+29 -1)",
+        "test/nuxt/universal/router.test.ts (+26 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36711,
+      "title": "perf(vite): skip compiling plain style blocks in the server build",
+      "url": "https://github.com/nuxt/nuxt/pull/36711",
+      "author": "onmax",
+      "mergedAt": "2026-10-25T17:15:39Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nNo issue.\n\n### 📚 Description\n\nThe server build compiles every `<style>` block of every component and then throws the CSS away. A plain style block (not a CSS module, not `?inline`) reaches the server bundle only as a side-effect import. Its CSS goes through `vite:vue`, `vite:css` and `vite:css-post`, which keeps an empty `no-treeshake` module. With Nitro's Vite builder, `fullstack:assets` also sets `build.emitAssets` on `ssr`, so that CSS is written as `.css` files under `.nuxt/vite/services/ssr`, and nothing copies them to `.output`.\n\nWith `features.inlineStyles`, each block is compiled a second time from its `?inline&used` id, which is the copy the renderer inlines. So the first compile is wasted with either setting.\n\nThis PR resolves those imports in the `ssr` environment to one empty, side-effect-free module. Styles with exports still compile: CSS modules (the render function reads their class names) and anything with `?inline` (inlined styles, custom elements). `ssr-styles` resolves its `?inline&used` copies with `this.resolve`, which skips the plugin's own hook, so inlining doesn't change.\n\nOn a generated app with 12 layers and 2,860 components (1,396 with a scoped style), Nuxt 5 nightly with Vite 8.3.5 and Rolldown 1.2.15:\n\n| | inline styles on, before → after | inline styles off, before → after |\n|---|---|---|\n| ssr modules | 6,727 → 5,332 | 5,331 → 3,936 |\n| ssr output files | 4,886 → 4,126 | 1,937 → 1,177 |\n| `vite:vue` transforms in ssr | 5,98\n…(truncated)",
+      "files": [
+        "packages/vite/src/plugins/ssr-styles.ts (+13 -0)",
+        "packages/vite/test/ssr-styles.test.ts (+101 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 2
+    }
+  }
+}
