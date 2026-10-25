@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -15,16 +15,16 @@ tags:
 
 ## 直近の注目変更
 
+- browser: 失敗時のスクリーンショット・トレースのタイムラインを試行ごとに保存・表示（`<test>-<repeat>-<retry>.png`）（[#11694](https://github.com/vitest-dev/vitest/pull/11694)、[#11695](https://github.com/vitest-dev/vitest/pull/11695)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
+- browser: CLI のフィルターに一致するファイルの無いプロジェクトはブラウザを事前起動しない（[#11706](https://github.com/vitest-dev/vitest/pull/11706)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
+- HTML レポーターが `--bail` で落ちる問題と、コードフレームのシンタックスハイライトが消える退行を修正（[#11693](https://github.com/vitest-dev/vitest/pull/11693)、[#11705](https://github.com/vitest-dev/vitest/pull/11705)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/レポーター|レポーター]]、[[repos/vitest-dev-vitest/topics/UI|UI]]
+- キャッシュしたサーバーのモジュールを UTF-8 で読み、スタックの整形で元のエラーを保つ（[#11709](https://github.com/vitest-dev/vitest/pull/11709)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - coverage: v8 プロバイダーで `coverage.ignoreNode` に対応（AST のノードでカバレッジから除外）（[#11688](https://github.com/vitest-dev/vitest/pull/11688)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
 - browser: 失敗時にターミナルへトレースのステップのタイムラインを表示（[#11594](https://github.com/vitest-dev/vitest/pull/11594)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
 - coverage: istanbul の計装を `magic-string` + `rolldown` にして 5〜10 倍高速化（[#11648](https://github.com/vitest-dev/vitest/pull/11648)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
 - 後から生じるモックファクトリーの循環を検出してタイムアウトを防ぐ（[#11642](https://github.com/vitest-dev/vitest/pull/11642)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
 - `expect`: 型付き配列の比較を高速化（2 MiB で約 1.5 s → 約 125 ms）（[#11658](https://github.com/vitest-dev/vitest/pull/11658)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
 - browser: import map でモジュールをモック（`browser.importMapMocks`。mock の多いスイートで約 2 倍速い例）（[#11534](https://github.com/vitest-dev/vitest/pull/11534)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/モック|モック]]
-- `--last-failed` と `--since-last-run` を追加（[#11558](https://github.com/vitest-dev/vitest/pull/11558)、[#11516](https://github.com/vitest-dev/vitest/pull/11516)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]
-- browser: 既定のポートを `63315` から `23315` に変更（Windows の予約範囲を回避）（[#11640](https://github.com/vitest-dev/vitest/pull/11640)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
-- browser: 実験的な `pointer` API、トレースビューの正式化と aria スナップショット（[#10780](https://github.com/vitest-dev/vitest/pull/10780)、[#11518](https://github.com/vitest-dev/vitest/pull/11518)、[#11492](https://github.com/vitest-dev/vitest/pull/11492)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
-- フェイクタイマー: `node:timers` 対応（`fakeNodeBuiltins`）、`vi.setSystemTime()` の Temporal 対応、ブラウザの操作中にタイマーを進める（[#10899](https://github.com/vitest-dev/vitest/pull/10899)、[#11321](https://github.com/vitest-dev/vitest/pull/11321)、[#11242](https://github.com/vitest-dev/vitest/pull/11242)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
 
 ## トピック
 
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-23|2026-10-23]]、[[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21]]、[[repos/vitest-dev-vitest/changes/2026-10-19|2026-10-19]]、[[repos/vitest-dev-vitest/changes/2026-10-16|2026-10-16]]、[[repos/vitest-dev-vitest/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-26|2026-10-26]]、[[repos/vitest-dev-vitest/changes/2026-10-23|2026-10-23]]、[[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21]]、[[repos/vitest-dev-vitest/changes/2026-10-19|2026-10-19]]、[[repos/vitest-dev-vitest/changes/2026-10-16|2026-10-16]]

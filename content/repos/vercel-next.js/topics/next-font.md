@@ -1,6 +1,6 @@
 ---
 title: next/font
-updated: 2026-10-16
+updated: 2026-10-26
 tags:
   - repo/vercel-next.js
   - topic
@@ -24,3 +24,4 @@ tags:
 
 - [[repos/vercel-next.js/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-16|2026-10-16 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.3|v16.4.3]]

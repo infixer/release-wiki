@@ -1,9 +1,16 @@
 ---
 title: react/react 取り込み履歴
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/react-react
 ---
+
+## 2026-10-26
+
+- 期間: 2026-10-21T17:50:18Z 〜 2026-10-25T23:19:53Z
+- PR 2 件（詳しく 2 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/react-react/changes/2026-10-26|changes]]（新規）、[[repos/react-react/topics/React-Compiler|React Compiler]]、[[repos/react-react/index|index]]
+- エラー: なし
 
 ## 2026-10-23
 

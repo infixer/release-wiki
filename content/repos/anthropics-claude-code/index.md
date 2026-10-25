@@ -1,6 +1,6 @@
 ---
 title: anthropics/claude-code
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/anthropics-claude-code
 ---
@@ -9,11 +9,14 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v2.1.309](https://github.com/anthropics/claude-code/releases/tag/v2.1.309)（2026-10-22）→ [[repos/anthropics-claude-code/releases/v2.1.309|まとめ]]
+- 安定版: [v2.1.310](https://github.com/anthropics/claude-code/releases/tag/v2.1.310)（2026-10-24）→ [[repos/anthropics-claude-code/releases/v2.1.310|まとめ]]
 - プレリリース: なし
 
 ## 直近の注目変更
 
+- Monitor ツールとプラグインの monitor が Bedrock・Vertex・Foundry やテレメトリ無効の環境でも使えるように、`effort-2025-11-24` などを拒否するゲートウェイでの失敗を再試行で回避（[v2.1.310](https://github.com/anthropics/claude-code/releases/tag/v2.1.310)）📦 v2.1.310 · [[repos/anthropics-claude-code/releases/v2.1.310|まとめ]]
+- 「Prompt is too long」の後の compaction が密なテキストを残しすぎる問題を修正、非対話セッションの compaction のメモリ使用量を改善（[v2.1.310](https://github.com/anthropics/claude-code/releases/tag/v2.1.310)）📦 v2.1.310 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
+- Windows で引用符だけのコマンドのフックが PreToolUse・PermissionRequest を通してしまう問題を修正（[v2.1.310](https://github.com/anthropics/claude-code/releases/tag/v2.1.310)）📦 v2.1.310 · トピック: [[repos/anthropics-claude-code/topics/フック|フック]]
 - サンドボックスの Bash が起動ファイルをサンドボックス外で実行する問題、`--mcp-config` の MCP 設定ファイルを変更できる問題、Bash の権限チェック・worktree の隔離のすり抜けを修正（[v2.1.309](https://github.com/anthropics/claude-code/releases/tag/v2.1.309)）📦 v2.1.309 · [[repos/anthropics-claude-code/releases/v2.1.309|まとめ]]
 - 大きなネストした CLAUDE.md で compact を繰り返す問題を修正（上限超えは先頭だけ読み込む）（[v2.1.309](https://github.com/anthropics/claude-code/releases/tag/v2.1.309)）📦 v2.1.309 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
 - `/claude-api api-version`（API バージョン `2026-10-21` への移行）、HTTP MCP のツール呼び出しの二重送信など MCP の修正（[v2.1.307](https://github.com/anthropics/claude-code/releases/tag/v2.1.307)）📦 v2.1.307 · [[repos/anthropics-claude-code/releases/v2.1.307|まとめ]]
@@ -21,9 +24,6 @@ tags:
 - gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` が無視される問題などを修正（[v2.1.307](https://github.com/anthropics/claude-code/releases/tag/v2.1.307)）📦 v2.1.307 · トピック: [[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]
 - 「Autocompact is thrashing」の一部、MCP ツールが多いセッションでの「prompt is too long」と不要な compaction を修正（[v2.1.306](https://github.com/anthropics/claude-code/releases/tag/v2.1.306)・[v2.1.307](https://github.com/anthropics/claude-code/releases/tag/v2.1.307)）📦 v2.1.306 / v2.1.307 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
 - `sandbox.allowNestedUserNamespaces`、`CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS`、2.1.304 のツール検索拒否で全リクエストが失敗するリグレッションを修正（[v2.1.305](https://github.com/anthropics/claude-code/releases/tag/v2.1.305)）📦 v2.1.305 · [[repos/anthropics-claude-code/releases/v2.1.305|まとめ]]
-- transcript ビューの compaction の要約にツール名、`modelOverrides` の表記ゆれで `/autocompact` が効かない問題を修正（[v2.1.305](https://github.com/anthropics/claude-code/releases/tag/v2.1.305)）📦 v2.1.305 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
-- `/auto-mode-setup`、`/claude-api managed-agents-secure`、再開時の使用上限の警告（Pro・Max）（[v2.1.304](https://github.com/anthropics/claude-code/releases/tag/v2.1.304)）📦 v2.1.304 · [[repos/anthropics-claude-code/releases/v2.1.304|まとめ]]
-- mod の `tool.check` に `decider: "person"`・`e.isReadOnly`（[v2.1.304](https://github.com/anthropics/claude-code/releases/tag/v2.1.304)）📦 v2.1.304 · トピック: [[repos/anthropics-claude-code/topics/mod-API|mod API]]
 
 ## トピック
 
@@ -41,4 +41,4 @@ tags:
 ## 取り込み
 
 - [[repos/anthropics-claude-code/log|取り込み履歴]]
-- 最近の変更: [[repos/anthropics-claude-code/changes/2026-10-23|2026-10-23]]、[[repos/anthropics-claude-code/changes/2026-10-21|2026-10-21]]、[[repos/anthropics-claude-code/changes/2026-10-19|2026-10-19]]、[[repos/anthropics-claude-code/changes/2026-10-16|2026-10-16]]、[[repos/anthropics-claude-code/changes/2026-10-12|2026-10-12]]
+- 最近の変更: [[repos/anthropics-claude-code/changes/2026-10-26|2026-10-26]]、[[repos/anthropics-claude-code/changes/2026-10-23|2026-10-23]]、[[repos/anthropics-claude-code/changes/2026-10-21|2026-10-21]]、[[repos/anthropics-claude-code/changes/2026-10-19|2026-10-19]]、[[repos/anthropics-claude-code/changes/2026-10-16|2026-10-16]]

@@ -1,6 +1,6 @@
 ---
 title: OpenTelemetry
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/vercel-next.js
   - topic
@@ -29,3 +29,4 @@ tags:
 - [[repos/vercel-next.js/topics/テレメトリ|テレメトリ]]
 - [[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]（OTel のトレーサーのバージョン設定）
 - [[repos/vercel-next.js/changes/2026-10-23|2026-10-23 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.3|v16.4.3]]

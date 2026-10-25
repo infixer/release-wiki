@@ -1,6 +1,6 @@
 ---
 title: oxc-project/oxc
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/oxc-project-oxc
 ---
@@ -16,16 +16,16 @@ tags:
 
 ## 直近の注目変更
 
+- 型認識 lint: `typescript/no-unsafe-enum-assignment` を追加、`typescript/await-thenable` に `allowMixedPromiseArrays`、`oxlint-tsgolint` は `>=7.0.2005` が必要に（[#28117](https://github.com/oxc-project/oxc/pull/28117)、[#28116](https://github.com/oxc-project/oxc/pull/28116)、[#28118](https://github.com/oxc-project/oxc/pull/28118)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]
+- 型認識 lint: 同名のルールが他のプラグインにあっても型認識ルールの重大度を使う（[#28138](https://github.com/oxc-project/oxc/pull/28138)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]
+- `oxlint` パッケージから設定の型 `Oxlintrc` をエクスポート（[#28132](https://github.com/oxc-project/oxc/pull/28132)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/設定ファイル|設定ファイル]]
+- `eslint/array-callback-return`: 初期値付きの `reduce` や `thisArg` 付きのコールバックもチェック（[#28133](https://github.com/oxc-project/oxc/pull/28133)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
+- LSP: pull モードでないときは `textDocument/diagnostic` に既定の結果を返し、lint の二重実行を防ぐ（[#27745](https://github.com/oxc-project/oxc/pull/27745)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/LSP|LSP]]
 - Minifier: 範囲外の文字列の添字（`"a"[1]` など）を `void 0` に畳み込む（[#28004](https://github.com/oxc-project/oxc/pull/28004)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
 - React Compiler: `catch` に到達しない `try` での panic（リリースビルドでプロセスが落ちる）を修正し、`try` 内で throw しうる呼び出しもリアクティブさに反映（[#28066](https://github.com/oxc-project/oxc/pull/28066)、[#28005](https://github.com/oxc-project/oxc/pull/28005)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]
 - パーサー: sloppy モードの `let--`、エスケープされたクラスフィールド名、`import source type from` を正しく解析（[#28060](https://github.com/oxc-project/oxc/pull/28060)、[#28061](https://github.com/oxc-project/oxc/pull/28061)、[#28062](https://github.com/oxc-project/oxc/pull/28062)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
 - Oxfmt: インスタンス化式・プライベートの `in` 式のかっこを保ち、幅を表示幅で測る（[#28025](https://github.com/oxc-project/oxc/pull/28025)、[#28096](https://github.com/oxc-project/oxc/pull/28096)、[#28026](https://github.com/oxc-project/oxc/pull/28026)、[#28098](https://github.com/oxc-project/oxc/pull/28098)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
 - Minifier: rest 引数の分割代入の副作用を保ち、`parseFloat`・`trim` などの畳み込みで ECMAScript の空白を使う（[#27981](https://github.com/oxc-project/oxc/pull/27981)、[#27719](https://github.com/oxc-project/oxc/pull/27719)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- `eslint/prefer-const`・`jest/no-conditional-expect`・`eslint/no-useless-concat` の修正と、孤立サロゲートを含む名前の報告（[#28008](https://github.com/oxc-project/oxc/pull/28008)、[#28055](https://github.com/oxc-project/oxc/pull/28055)、[#27984](https://github.com/oxc-project/oxc/pull/27984)、[#27991](https://github.com/oxc-project/oxc/pull/27991)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
-- 定数評価: 孤立サロゲートを含む文字列も `JSStr` で畳み込み、`indexOf`・`substring` などを UTF-16 単位の実装に統一（破壊的変更）（[#27098](https://github.com/oxc-project/oxc/pull/27098)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- Minifier: 定数メンバーの `delete` を値に畳み込まない（0.155.0 で生じた誤りを修正）（[#27990](https://github.com/oxc-project/oxc/pull/27990)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- React Compiler: `try` の中の分岐で選ばれる値をリアクティブに扱う（[#27817](https://github.com/oxc-project/oxc/pull/27817)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]
-- Oxfmt: 行幅ちょうどのアローのシグネチャを保つ（[#27989](https://github.com/oxc-project/oxc/pull/27989)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
 
 ## トピック
 
@@ -57,4 +57,4 @@ tags:
 ## 取り込み
 
 - [[repos/oxc-project-oxc/log|取り込み履歴]]
-- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-23|2026-10-23]]、[[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21]]、[[repos/oxc-project-oxc/changes/2026-10-19|2026-10-19]]、[[repos/oxc-project-oxc/changes/2026-10-16|2026-10-16]]、[[repos/oxc-project-oxc/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-26|2026-10-26]]、[[repos/oxc-project-oxc/changes/2026-10-23|2026-10-23]]、[[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21]]、[[repos/oxc-project-oxc/changes/2026-10-19|2026-10-19]]、[[repos/oxc-project-oxc/changes/2026-10-16|2026-10-16]]

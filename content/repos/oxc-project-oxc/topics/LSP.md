@@ -1,6 +1,6 @@
 ---
 title: LSP
-updated: 2026-10-09
+updated: 2026-10-26
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-oxlint（`oxlint --lsp`）と oxfmt（`oxfmt --lsp`）の言語サーバー。共通部分は `oxc_language_server` クレート（`Backend`）にある。設定のエラーをエディタから見えるようにする改善が進んでおり、oxlint はワークスペース初期化時のルート・入れ子・カスタムパスの設定の読み込み・構築の失敗を、oxfmt はルート設定の解決エラーを、`window/showMessage` 通知として LSP クライアントに表示するようになった。oxfmt では整形時に設定の解決に失敗すると、黙って整形をやめるのではなくエラーを返す。oxfmt の LSP は `astro` の言語 ID にも対応した（各 IDE 拡張側の対応も必要）。いずれも未リリース。
+oxlint（`oxlint --lsp`）と oxfmt（`oxfmt --lsp`）の言語サーバー。共通部分は `oxc_language_server` クレート（`Backend`）にある。設定のエラーをエディタから見えるようにする改善が進んでおり、oxlint はワークスペース初期化時のルート・入れ子・カスタムパスの設定の読み込み・構築の失敗を、oxfmt はルート設定の解決エラーを、`window/showMessage` 通知として LSP クライアントに表示するようになった。oxfmt では整形時に設定の解決に失敗すると、黙って整形をやめるのではなくエラーを返す。oxfmt の LSP は `astro` の言語 ID にも対応した（各 IDE 拡張側の対応も必要）。いずれも未リリース。クライアントが pull 型の診断（`textDocument/diagnostic`）を要求しても、サーバーが pull モードでなければ既定の結果を返し、push モードでの lint の二重実行を避ける（未リリース）。
 
 ## 主な API・オプション
 
@@ -17,6 +17,7 @@ oxlint（`oxlint --lsp`）と oxfmt（`oxfmt --lsp`）の言語サーバー。�
 
 ## 変更履歴
 
+- 2026-10-26 — pull モードでないときは `textDocument/diagnostic` に既定の診断レポートを返す（[#27745](https://github.com/oxc-project/oxc/pull/27745)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-26|変更]]
 - 2026-10-09 — oxlint の LSP が設定のエラーをクライアントに表示（[#25486](https://github.com/oxc-project/oxc/pull/25486)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
 - 2026-10-09 — oxfmt の LSP がルート設定のエラーをクライアントに表示（[#26014](https://github.com/oxc-project/oxc/pull/26014)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]
 - 2026-10-09 — `oxfmt --lsp` が設定の解決エラー時にエラーを返すように（[#26003](https://github.com/oxc-project/oxc/pull/26003)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-09|変更]]

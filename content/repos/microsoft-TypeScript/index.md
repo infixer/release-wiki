@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,6 +15,8 @@ tags:
 
 ## 直近の注目変更
 
+- mapped type のシグネチャを調べるためにメンバーを解決しない（mui-docs で 8.10% 高速化）（[#64873](https://github.com/microsoft/TypeScript/pull/64873)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- クラス・インターフェースの型のメンバーを遅延して解決（[#64915](https://github.com/microsoft/TypeScript/pull/64915)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - ファイル監視の `Created` イベントでもキャッシュ済みのファイルを読み直す（アトミックな保存で診断が古いまま残る問題）（[#64909](https://github.com/microsoft/TypeScript/pull/64909)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
 - 変更のない `tsc -b` でルートファイルを繰り返し走査しないように（[#64898](https://github.com/microsoft/TypeScript/pull/64898)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
 - プロパティのホバーにインデックスシグネチャの詳細を戻す（[#64586](https://github.com/microsoft/TypeScript/pull/64586)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
@@ -38,4 +40,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-23|2026-10-23]]、[[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]、[[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]、[[repos/microsoft-TypeScript/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-26|2026-10-26]]、[[repos/microsoft-TypeScript/changes/2026-10-23|2026-10-23]]、[[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]、[[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]

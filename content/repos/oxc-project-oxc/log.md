@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-26
+
+- 期間: 2026-10-22T23:28:56Z 〜 2026-10-25T23:19:53Z
+- PR 12 件（詳しく 7 件 / 1 行 5 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-26|changes]]（新規）、[[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]、[[repos/oxc-project-oxc/topics/設定ファイル|設定ファイル]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/LSP|LSP]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 2 件）
 
 ## 2026-10-23
 

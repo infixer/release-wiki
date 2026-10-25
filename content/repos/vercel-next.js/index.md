@@ -1,6 +1,6 @@
 ---
 title: vercel/next.js
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/vercel-next.js
 ---
@@ -9,21 +9,21 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v16.4.2](https://github.com/vercel/next.js/releases/tag/v16.4.2)（2026-10-15）→ [[repos/vercel-next.js/releases/v16.4.2|まとめ]]（前の安定版: [[repos/vercel-next.js/releases/v16.4.1|v16.4.1]]（セキュリティ修正）、v15 系: [[repos/vercel-next.js/releases/v15.5.28|v15.5.28]]）
-- プレリリース: [v16.5.0-canary.24](https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.24)（2026-10-22）
+- 安定版: [v16.4.3](https://github.com/vercel/next.js/releases/tag/v16.4.3)（2026-10-23）→ [[repos/vercel-next.js/releases/v16.4.3|まとめ]]（前の安定版: [[repos/vercel-next.js/releases/v16.4.2|v16.4.2]]、v15 系: [[repos/vercel-next.js/releases/v15.5.28|v15.5.28]]）
+- プレリリース: [v16.5.0-canary.27](https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.27)（2026-10-25）
 
 ## 直近の注目変更
 
-- ボットの User-Agent 判定を 1KB までに制限（超えたものはボットとして扱わない、DoS 対策）（[#100604](https://github.com/vercel/next.js/pull/100604)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]
-- 開発時の遅延サーバー import をルートハンドラー・Pages の API ルート・Pages の SSR に拡大（[#99541](https://github.com/vercel/next.js/pull/99541)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- 描画の検証を分離し、サーバーの起動時に単体の React を読み込まないように（[#100467](https://github.com/vercel/next.js/pull/100467)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]
-- ストリーミング中に積まれたキャッシュの再検証をレスポンスのクローズ時に flush（[#100448](https://github.com/vercel/next.js/pull/100448)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
-- `experimental.turbopackLazyDynamicImports` で遅延 `import.meta.glob` のマッチも遅延コンパイル（[#100523](https://github.com/vercel/next.js/pull/100523)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- Turbopack: 遅延 `import.meta.glob` のマッチが実際にはコード分割されていなかった問題を修正（[#100522](https://github.com/vercel/next.js/pull/100522)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- OpenTelemetry: リクエストのスパンをルートモジュールの準備より前に開始（親の無い `prepare route module` のトレースを解消）（[#100349](https://github.com/vercel/next.js/pull/100349)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/OpenTelemetry|OpenTelemetry]]
-- トレースのメモリサンプルにプロセスの RSS（`memory_footprint`）を記録（[#99527](https://github.com/vercel/next.js/pull/99527)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- 最終のランタイムプリレンダーでキャッシュ済みの値を保持（バックグラウンドの再検証は RDC を書き換えない）（[#100447](https://github.com/vercel/next.js/pull/100447)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
-- Pages Router: ISR のエントリのキャッシュ期間が再起動で 1 秒に戻る問題を修正（[#100495](https://github.com/vercel/next.js/pull/100495)）📦 v16.5.0-canary.24 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
+- Turbopack: クライアント参照とサーバーユーティリティのチャンク化に、グラフが導いたマージ済みチャンクグループを使う（[#98734](https://github.com/vercel/next.js/pull/98734)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- turbo-tasks-backend: スナップショットの操作数をスレッドごとのストライプで数える（192 CPU で `run-turbopack` が 4.7〜6.5 秒短縮）（[#100280](https://github.com/vercel/next.js/pull/100280)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- インラインの Flight スクリプト（`__next_f`）を React の文字列から直接組み立てる（Buffer への再エンコードをやめる）（[#100142](https://github.com/vercel/next.js/pull/100142)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]
+- NFS など、ロックファイルの実装が無い・限られたファイルシステムでの dist ディレクトリのロックの失敗を修正（[#100684](https://github.com/vercel/next.js/pull/100684)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- turbo-persistence: 最初の bottom マージまでシャード数を減らさない（初回の圧縮ジョブを小さく）（[#100424](https://github.com/vercel/next.js/pull/100424)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- Turbopack: トレースファイルのタイムスタンプを差分で記録（[#99809](https://github.com/vercel/next.js/pull/99809)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- `global-not-found` から App のルートへの遷移で 404 から抜けられない問題を修正（ページ全体のナビゲーションに）（[#100592](https://github.com/vercel/next.js/pull/100592)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ルーティング|ルーティング]]
+- `partialPrefetching` で、束縛引数付きのインライン Server Function を描画するページのレスポンスが終わらない問題を修正（[#100622](https://github.com/vercel/next.js/pull/100622)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
+- Revert: webpack ローダーのビルド依存の追跡の拡張（#99549）をリグレッションのため取り消し（[#100634](https://github.com/vercel/next.js/pull/100634)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- バンドル分析を出力ファイルごとにキャッシュ（`next build --analyze` の分析の CPU 時間 150 秒 → 124 秒）（[#100475](https://github.com/vercel/next.js/pull/100475)）📦 v16.5.0-canary.27 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
 
 ## トピック
 
@@ -39,10 +39,10 @@ tags:
 - [[repos/vercel-next.js/topics/テレメトリ|テレメトリ]] — CLI の匿名テレメトリの送信処理
 - [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]] — Turbopack・webpack のビルド/開発サーバーと関連 CLI（`--custom-webpack` を含む）・バンドルアナライザー・トレースツール・turbo-tasks の GC
 - [[repos/vercel-next.js/topics/リリース・CD|リリース・CD]] — リポジトリ自身のリリース・CI/CD パイプライン
-- [[repos/vercel-next.js/topics/ルーティング|ルーティング]] — App Router のルートマッチング・クライアント側のルート予測・`forbidden()` / `unauthorized()`・`proxy.ts` の読み込み
+- [[repos/vercel-next.js/topics/ルーティング|ルーティング]] — App Router のルートマッチング・クライアント側のルート予測・`forbidden()` / `unauthorized()`・`proxy.ts` の読み込み・`global-not-found` からの遷移
 - [[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]] — メタデータのレンダリング経路（ボット判定を含む）・開発オーバーレイ・Instant Navigation のエラー案内・ターミナルのコードフレーム
 
 ## 取り込み
 
 - [[repos/vercel-next.js/log|取り込み履歴]]
-- 最近の変更: [[repos/vercel-next.js/changes/2026-10-23|2026-10-23]]、[[repos/vercel-next.js/changes/2026-10-21|2026-10-21]]、[[repos/vercel-next.js/changes/2026-10-19|2026-10-19]]、[[repos/vercel-next.js/changes/2026-10-16|2026-10-16]]、[[repos/vercel-next.js/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/vercel-next.js/changes/2026-10-26|2026-10-26]]、[[repos/vercel-next.js/changes/2026-10-23|2026-10-23]]、[[repos/vercel-next.js/changes/2026-10-21|2026-10-21]]、[[repos/vercel-next.js/changes/2026-10-19|2026-10-19]]、[[repos/vercel-next.js/changes/2026-10-16|2026-10-16]]

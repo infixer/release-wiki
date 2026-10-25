@@ -1,6 +1,6 @@
 ---
 title: レンダリング・DevTools
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/vercel-next.js
   - topic
@@ -12,6 +12,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-24 — インラインの Flight スクリプト（`__next_f`）を React の文字列から直接組み立て、Buffer への再エンコードをやめる（[#100142](https://github.com/vercel/next.js/pull/100142)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
 - 2026-10-22 — ボットの User-Agent 判定を 1KB までに制限（超えたものはボットとして扱わない）（[#100604](https://github.com/vercel/next.js/pull/100604)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
 - 2026-10-22 — fetch の重複排除で、React の読み込みをヘルパーの生成時まで遅らせる（[#100401](https://github.com/vercel/next.js/pull/100401)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
 - 2026-10-22 — 描画の検証を分離し、サーバーの起動時に単体の React を読み込まないように（[#100467](https://github.com/vercel/next.js/pull/100467)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
@@ -49,3 +50,5 @@ tags:
 - [[repos/vercel-next.js/releases/v16.4.2|v16.4.2]]
 - [[repos/vercel-next.js/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-23|2026-10-23 の変更]]
+- [[repos/vercel-next.js/changes/2026-10-26|2026-10-26 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.3|v16.4.3]]

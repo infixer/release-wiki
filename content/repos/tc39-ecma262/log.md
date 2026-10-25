@@ -1,9 +1,16 @@
 ---
 title: tc39/ecma262 取り込み履歴
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/tc39-ecma262
 ---
+
+## 2026-10-26
+
+- 期間: 2026-10-22T19:12:11Z 〜 2026-10-25T23:19:53Z
+- PR 1 件（詳しく 0 件 / 1 行 1 件）、Release 0 件（安定版 0 件）
+- 更新したページ: [[repos/tc39-ecma262/changes/2026-10-26|changes]]（新規）、[[repos/tc39-ecma262/index|index]]
+- エラー: なし
 
 ## 2026-10-23
 

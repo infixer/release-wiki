@@ -1,6 +1,6 @@
 ---
 title: AI-コンポーネント
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -10,6 +10,7 @@ tags:
 
 `@react-spectrum/ai` パッケージにある S2 の AI 向けコンポーネント群。プロンプト入力欄の `PromptField`（音声入力ボタン `PromptFieldVoiceButton` を含む）、チャット UI の `Chat` / `Thread`、`AttachmentList`・`AttachmentGrid`・`AttachmentBadge`（無効状態を持つ `AttachmentPreview` も）、`ResponseStatus`（`ExecutionTraceItems`）などがある。`PromptField` は応答の生成中でも欄にテキストがあれば送信ボタンを表示して追加の指示（steering）を送れ、`renderCompletions` の補完メニューは S2 の仮想化 Menu で描画される。`Chat` / `Thread` はデザイン仕様に合わせた余白とスクロールフェードを持ち、スタイルをコンポーネント側に取り込んで API が簡素化された（スタイルなし版は今後の予定）。S2 docs では AI コンポーネントのページ（`ai-components.mdx`）で解説されている。`PromptField` はテキストが無くても添付ファイルだけで送信できるようになり、`AttachmentGrid`・`AttachmentList` には Safari 27 の flex のバグの回避策が入った。
 `AttachmentList` の card 型の添付は全幅で描画され、ファイル名と説明が見える（未リリース）。
+仮想化した Chat のスレッドのスクロールアンカーは、モバイルで位置が飛ぶ問題と `ResponseStatus` の展開・折りたたみでのスクロールが直り、古い項目のリサイズでは読んでいる位置を保つ（未リリース）。
 
 ## 主な API・オプション
 
@@ -24,6 +25,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-23 — Chat のスクロールアンカーを改善（モバイルでの位置飛び、`ResponseStatus` の展開時のスクロール）（[#10600](https://github.com/adobe/react-spectrum/pull/10600)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-26|変更]]
 - 2026-10-22 — `AttachmentList` の card 型の添付を全幅で表示し、ファイル名と説明が見えるように（[#10818](https://github.com/adobe/react-spectrum/pull/10818)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-23|変更]]
 - 2026-10-06 — Safari 27 の flex のバグを `AttachmentGrid`・`AttachmentList` で回避（[#10724](https://github.com/adobe/react-spectrum/pull/10724)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-07|変更]]
 - 2026-10-06 — `PromptField` で添付ファイルだけのプロンプトを送信できるように（[#10703](https://github.com/adobe/react-spectrum/pull/10703)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-07|変更]]
@@ -36,6 +38,7 @@ tags:
 
 ## 関連
 
+- [[repos/adobe-react-spectrum/changes/2026-10-26|2026-10-26 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
 - [[repos/adobe-react-spectrum/changes/2026-10-02|2026-10-02 の変更]]

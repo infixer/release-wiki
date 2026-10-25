@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-10-26
+
+- 期間: 2026-10-22T20:18:55Z 〜 2026-10-25T23:19:53Z（直接のコミット: 2026-10-22T21:56:52Z 〜 2026-10-25T23:19:53Z）
+- PR 0 件、直接のコミット 1 件（詳しく 0 件 / 1 行 1 件）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-10-26|changes]]（新規）、[[repos/w3c-csswg-drafts/index|index]]
+- エラー: なし
 
 ## 2026-10-23
 

@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -15,6 +15,8 @@ tags:
 
 ## 直近の注目変更
 
+- macOS で Enter を押すと Select が開き直る問題を修正（`usePress`）（[#10820](https://github.com/adobe/react-spectrum/pull/10820)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]
+- Chat のスクロールアンカーを改善（モバイルでの位置飛び、`ResponseStatus` の展開時のスクロール）（[#10600](https://github.com/adobe/react-spectrum/pull/10600)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
 - SideNavPanel で移動先の無いトップレベルの項目が隠れ・展開されない問題を修正（[#10778](https://github.com/adobe/react-spectrum/pull/10778)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/SideNav|SideNav]]
 - `AttachmentList` の card 型の添付を全幅で表示し、ファイル名と説明が見えるように（[#10818](https://github.com/adobe/react-spectrum/pull/10818)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
 - タッチ操作の後に `useHover` のホバー状態が残る問題を修正（[#10824](https://github.com/adobe/react-spectrum/pull/10824)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]
@@ -23,8 +25,6 @@ tags:
 - Select のタイプアヘッドで同じ文字の繰り返しが正しく動くように（[#10006](https://github.com/adobe/react-spectrum/pull/10006)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - `hasChildItems` の TreeItem が子の行なしでも展開できるように（[#10799](https://github.com/adobe/react-spectrum/pull/10799)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
 - テスト環境ではスタイルマクロのクラス名にバージョンの接尾辞を付けない（[#10736](https://github.com/adobe/react-spectrum/pull/10736)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
-- Select の props から効果のない `excludeFromTabOrder` を削除（型のみ）（[#10790](https://github.com/adobe/react-spectrum/pull/10790)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
-- ESM ビルドのスタイルマクロが `$kLxT8$propertiesmjs1 is not defined` で失敗する問題を修正（[#10785](https://github.com/adobe/react-spectrum/pull/10785)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
 
 ## トピック
 
@@ -36,7 +36,7 @@ tags:
 - [[repos/adobe-react-spectrum/topics/SideNav|SideNav]] — S2 の SideNav と SideNavPanel（旧 SidePanel）内での折りたたみ
 - [[repos/adobe-react-spectrum/topics/Toast|Toast]] — S2 の Toast（展開したリストとボタンの間隔）
 - [[repos/adobe-react-spectrum/topics/TokenField|TokenField]] — トークン入力欄（`useTokenField`）のキャレット位置・スクロール・選択の `onChange`
-- [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]] — react-aria のインタラクション用フック（`useHover` のタッチ・マウス併用時のホバー状態）
+- [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]] — react-aria のインタラクション用フック（`useHover` のタッチ・マウス併用時のホバー状態、`usePress` の macOS での Enter）
 - [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]] — Modal・Popover・Sheet の配置とスクリーンキーボードへの対応
 - [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]] — `useKeyboard`（コレクション・DatePicker・Toolbar のキーボード処理）とパッケージ import 時のグローバルイベント
 - [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]] — S2 の `style` マクロ（ESM ビルド）とテーマで使えるプロパティ
@@ -49,4 +49,4 @@ tags:
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
 - リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23]]、[[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21]]、[[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]、[[repos/adobe-react-spectrum/changes/2026-10-16|2026-10-16]]、[[repos/adobe-react-spectrum/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-26|2026-10-26]]、[[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23]]、[[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21]]、[[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]、[[repos/adobe-react-spectrum/changes/2026-10-16|2026-10-16]]

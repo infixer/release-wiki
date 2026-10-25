@@ -1,6 +1,6 @@
 ---
 title: mod API
-updated: 2026-10-21
+updated: 2026-10-26
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -16,6 +16,7 @@ UI の `Button` は子要素（文字列と `Text`）を持てるようになり
 v2.1.299〜v2.1.301 で UI 部品が増えた: `Text` の `size`・`weight`・`mono`・`tabular`・`dir`（右から左）、`Box` の名前付き間隔（`xs`〜`xl`）、`Input` の `rows`（複数行）、プロンプトの装飾の `virtualText`。`bold` は非推奨で `weight` に置き換え。
 フックでは `prompt.change` が加わり、`agent.spawn` でワークフローのエージェントの `prompt`・`model` を書き換えられ、`skill.prompt` はスキルの frontmatter などを受け取り、`session.append` には `queue` がある。`$.ui.view({ agentId })` でエージェントの transcript をメインビューに出せる。
 managed settings でインストールした mod は `$.prompt.media`（添付の画像・文書のバイト列）と `$.session.identity()` を使える。
+v2.1.310 で `Image` が tmux（`allow-passthrough`・`focus-events` 有効）や kitty・Ghostty・iTerm2 3.5+ の全画面描画でも描画されるようになった（以前は `alt` テキストだけ）。
 v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアログかホストのコールバックだけが承認でき、尋ねる相手がいなければ拒否）が、イベントに `e.isReadOnly` が加わった。
 
 ## 主な API・オプション
@@ -33,6 +34,7 @@ v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアロ�
 
 ## 変更履歴
 
+- 2026-10-24 — `Image` を tmux（`allow-passthrough`・`focus-events` 有効）、kitty・Ghostty・iTerm2 3.5+ の全画面描画で描画できるように 📦 v2.1.310 · [[repos/anthropics-claude-code/releases/v2.1.310|リリース]]
 - 2026-10-19 — `tool.check` の回答に `decider: "person"`、イベントに `e.isReadOnly` を追加。先に動くプラグインが mod のフックを飛ばすと transcript に行を出すように。mod の再読み込み失敗で残る版のツール・コマンドが消える問題、同じラベルで `key` の無いボタンのクリックが失われる問題を修正 📦 v2.1.304 · [[repos/anthropics-claude-code/releases/v2.1.304|リリース]]
 - 2026-10-15 — `Input` に `rows`（複数行のテキスト欄）を追加 📦 v2.1.301 · [[repos/anthropics-claude-code/releases/v2.1.301|リリース]]
 - 2026-10-14 — `virtualText`、`$.ui.view({ agentId })`、`Text` の `dir`、`prompt.change` フックを追加、`agent.spawn` でワークフローのエージェントの `prompt`・`model` を書き換え可能に 📦 v2.1.300 · [[repos/anthropics-claude-code/releases/v2.1.300|リリース]]
@@ -52,3 +54,4 @@ v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアロ�
 - [[repos/anthropics-claude-code/releases/v2.1.301|v2.1.301]]
 - [[repos/anthropics-claude-code/topics/エージェントビュー|エージェントビュー]]
 - [[repos/anthropics-claude-code/releases/v2.1.304|v2.1.304]]
+- [[repos/anthropics-claude-code/releases/v2.1.310|v2.1.310]]

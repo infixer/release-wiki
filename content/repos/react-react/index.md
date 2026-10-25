@@ -1,6 +1,6 @@
 ---
 title: react/react
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/react-react
 ---
@@ -15,6 +15,8 @@ tags:
 
 ## 直近の注目変更
 
+- コンパイラ: 既に freeze された値でも `Freeze` 効果を ref の検証に残す（`PanResponder.create` の誤検知を修正）（[#37975](https://github.com/react/react/pull/37975)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
+- コンパイラ: `ResizeObserver` / `MutationObserver` のコールバックでの ref アクセスを許可（[#37895](https://github.com/react/react/pull/37895)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 - Rust 版コンパイラ: 非 ASCII 文字を含む行の診断の下線位置を修正（[#37898](https://github.com/react/react/pull/37898)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 - 大きなツリーでも `useId` の値が一意になるように（[#37916](https://github.com/react/react/pull/37916)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
 - バックプレッシャー下でプリレンダーの出力が途中で切れる問題を修正（[#37901](https://github.com/react/react/pull/37901)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
@@ -23,8 +25,6 @@ tags:
 - Flight: I/O の名前の `<anonymous>.` 接頭辞を正しく除去（[#37856](https://github.com/react/react/pull/37856)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
 - プリレンダーの中断時の replay 復元（#37710・#37850）を revert し、見直しへ（#37709 の退行が戻る）（[#37852](https://github.com/react/react/pull/37852)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - Flight の転送プロトコルを改善（バックポートは v19.0.9〜v19.3.1 に収録）（[#37846](https://github.com/react/react/pull/37846)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
-- `IntersectionObserver` のコールバックでの ref の誤検知を修正（[#37764](https://github.com/react/react/pull/37764)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- 拡張不可の thenable を `use()` に渡すと DEV でクラッシュする問題を修正（[#37796](https://github.com/react/react/pull/37796)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
 
 ## トピック
 
@@ -37,4 +37,4 @@ tags:
 ## 取り込み
 
 - [[repos/react-react/log|取り込み履歴]]
-- 最近の変更: [[repos/react-react/changes/2026-10-23|2026-10-23]]、[[repos/react-react/changes/2026-10-21|2026-10-21]]、[[repos/react-react/changes/2026-10-16|2026-10-16]]、[[repos/react-react/changes/2026-10-14|2026-10-14]]、[[repos/react-react/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/react-react/changes/2026-10-26|2026-10-26]]、[[repos/react-react/changes/2026-10-23|2026-10-23]]、[[repos/react-react/changes/2026-10-21|2026-10-21]]、[[repos/react-react/changes/2026-10-16|2026-10-16]]、[[repos/react-react/changes/2026-10-14|2026-10-14]]

@@ -1,6 +1,6 @@
 ---
 title: vuejs/core
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/vuejs-core
 ---
@@ -10,7 +10,7 @@ tags:
 ## 最新リリース
 
 - 安定版: [v3.5.44](https://github.com/vuejs/core/releases/tag/v3.5.44)（2026-10-13）→ [[repos/vuejs-core/releases/v3.5.44|まとめ]]
-- プレリリース: [v3.6.0-rc.12](https://github.com/vuejs/core/releases/tag/v3.6.0-rc.12)（2026-10-16）
+- プレリリース: [v3.6.0-rc.13](https://github.com/vuejs/core/releases/tag/v3.6.0-rc.13)（2026-10-23）
 
 ## 直近の注目変更
 
@@ -40,4 +40,4 @@ tags:
 ## 取り込み
 
 - [[repos/vuejs-core/log|取り込み履歴]]
-- 最近の変更: [[repos/vuejs-core/changes/2026-10-23|2026-10-23]]、[[repos/vuejs-core/changes/2026-10-21|2026-10-21]]、[[repos/vuejs-core/changes/2026-10-14|2026-10-14]]、[[repos/vuejs-core/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/vuejs-core/changes/2026-10-26|2026-10-26]]、[[repos/vuejs-core/changes/2026-10-23|2026-10-23]]、[[repos/vuejs-core/changes/2026-10-21|2026-10-21]]、[[repos/vuejs-core/changes/2026-10-14|2026-10-14]]、[[repos/vuejs-core/changes/2026-09-24|2026-09-24]]

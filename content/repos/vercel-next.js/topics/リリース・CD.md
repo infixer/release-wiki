@@ -1,6 +1,6 @@
 ---
 title: リリース・CD
-updated: 2026-10-14
+updated: 2026-10-26
 tags:
   - repo/vercel-next.js
   - topic
@@ -24,3 +24,4 @@ next.js リポジトリ自身のリリース・CI/CD パイプラインまわり
 - [[repos/vercel-next.js/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-12|2026-10-12 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-14|2026-10-14 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.3|v16.4.3]]

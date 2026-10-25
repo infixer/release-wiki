@@ -1,6 +1,6 @@
 ---
 title: Server Actions
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/vercel-next.js
   - topic
@@ -12,6 +12,7 @@ App Router の Server Actions（サーバー上で実行される関数をクラ
 
 ## 変更履歴
 
+- 2026-10-23 — `encryptActionBoundArgs` が RDC にヒットしたとき `CacheSignal` の読み取りを終えず、`partialPrefetching` のページのレスポンスが終わらない問題を修正（[#100622](https://github.com/vercel/next.js/pull/100622)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
 - 2026-10-21 — `generateStaticParams` から Server Action を呼ぶと `__next_require__ is not a function` になる問題を修正（[#99912](https://github.com/vercel/next.js/pull/99912)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
 - 2026-09-28 — PPR ページへ遷移した後に Server Action がハングする不具合を修正（[#99252](https://github.com/vercel/next.js/pull/99252)）📦 v16.4.0-canary.51 · [[repos/vercel-next.js/changes/2026-09-28|変更]]
 
@@ -22,3 +23,4 @@ App Router の Server Actions（サーバー上で実行される関数をクラ
 - [[repos/vercel-next.js/releases/v16.4.1|v16.4.1]]
 - [[repos/vercel-next.js/releases/v15.5.28|v15.5.28]]
 - [[repos/vercel-next.js/changes/2026-10-23|2026-10-23 の変更]]
+- [[repos/vercel-next.js/changes/2026-10-26|2026-10-26 の変更]]

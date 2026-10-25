@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-10-26
+
+- 期間: 2026-10-22T23:38:50Z 〜 2026-10-25T23:19:53Z
+- PR 64 件（詳しく 30 件 / 1 行 34 件）、Release 2 件（安定版 2 件: v10.34.8, v10.34.9）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-10-26|changes]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/releases/v10.34.8|v10.34.8]]（新規）、[[repos/pnpm-pnpm/releases/v10.34.9|v10.34.9]]（新規）、[[repos/pnpm-pnpm/releases/v10.34.7|v10.34.7]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 34 件（修正 19 件・性能改善 3 件・リファクタ 1 件を含む）は「その他」に 1 行で書いた。期間内の PR はすべて ⏳ 未リリース。inbox の `latest.stable` は v12.15.0 のままで、最新の安定版は v12.15.0 とし、v10 系の最新を v10.34.9 にした。v10.34.9（2026-10-25T17:54:24Z）は v10.34.8（17:54:42Z）より先に公開されている。公開日は JST で書いた。リリースノート本文はスポンサーの表の途中で切れている（要点の部分は取り込めた）。bot の PR 3 件（dependabot）は collect で除外済み。インストールのトピックは v10.34.8 へのリンクの追記だけ
+- エラー: なし
 
 ## 2026-10-23
 

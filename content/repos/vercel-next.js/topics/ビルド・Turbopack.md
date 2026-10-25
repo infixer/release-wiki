@@ -1,6 +1,6 @@
 ---
 title: ビルド・Turbopack
-updated: 2026-10-23
+updated: 2026-10-26
 tags:
   - repo/vercel-next.js
   - topic
@@ -28,6 +28,14 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 変更履歴
 
+- 2026-10-25 — Turbopack: クライアント参照とサーバーユーティリティのチャンク化に、グラフが導いたマージ済みチャンクグループを使う（[#98734](https://github.com/vercel/next.js/pull/98734)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
+- 2026-10-25 — turbo-tasks-backend: スナップショットの操作数をスレッドごとのストライプで数え、完了待ちをポーリングに（192 CPU で `run-turbopack` が 4.7〜6.5 秒短縮）（[#100280](https://github.com/vercel/next.js/pull/100280)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
+- 2026-10-24 — turbo-tasks-backend: 2048 件以上のバッチ読み込みのデコードを並列化（[#100453](https://github.com/vercel/next.js/pull/100453)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
+- 2026-10-24 — turbo-persistence: 最初の bottom マージまでシャード数を減らさない（初回の圧縮ジョブを小さく）（[#100424](https://github.com/vercel/next.js/pull/100424)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
+- 2026-10-24 — NFS など、ロックファイルの実装が無い・限られたファイルシステムでの dist ディレクトリのロックの失敗を修正（[#100684](https://github.com/vercel/next.js/pull/100684)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
+- 2026-10-23 — Turbopack: トレースファイルのタイムスタンプを差分で記録（`TimestampBase` 行を追加）（[#99809](https://github.com/vercel/next.js/pull/99809)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
+- 2026-10-23 — Revert: webpack ローダーのビルド依存の追跡の拡張（#99549）をリグレッションのため取り消し（[#100634](https://github.com/vercel/next.js/pull/100634)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
+- 2026-10-23 — バンドル分析を出力ファイルごとにキャッシュ（`next build --analyze` の分析の CPU 時間 150 秒 → 124 秒の計測）（[#100475](https://github.com/vercel/next.js/pull/100475)）📦 v16.5.0-canary.27 · [[repos/vercel-next.js/changes/2026-10-26|変更]]
 - 2026-10-22 — Turbopack: PURE 注釈付きの `new` でもコンストラクタ側の式の副作用を残す（[#100588](https://github.com/vercel/next.js/pull/100588)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
 - 2026-10-22 — Turbopack の webpack ローダーに webpack の utils（JS 実装のハッシュ関数）を追加（[#99826](https://github.com/vercel/next.js/pull/99826)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
 - 2026-10-22 — Turbopack: webpack ローダーのビルド依存として推移的なモジュール・解決のリクエスト・パッケージのディレクトリも追跡（[#99549](https://github.com/vercel/next.js/pull/99549)）📦 v16.5.0-canary.24 · [[repos/vercel-next.js/changes/2026-10-23|変更]]
@@ -172,3 +180,5 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 - [[repos/vercel-next.js/releases/v16.4.2|v16.4.2]]
 - [[repos/vercel-next.js/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-23|2026-10-23 の変更]]
+- [[repos/vercel-next.js/changes/2026-10-26|2026-10-26 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.3|v16.4.3]]
