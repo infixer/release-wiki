@@ -1,0 +1,313 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-10-28T00:33:26Z",
+  "range": {
+    "from": "2026-10-22T20:18:55Z",
+    "to": "2026-10-28T00:33:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14669,
+      "title": "[css-color] fix typos and update examples",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14669",
+      "author": "romainmenke",
+      "mergedAt": "2026-10-26T10:19:00Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "css-color-4/Overview.bs (+16 -16)",
+        "css-color-5/Overview.bs (+4 -4)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 14667,
+      "title": "Correct matrix multiplication order in Jzazbz inverse conversions",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14667",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T10:23:30Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Correct matrix multiplication order in Jzazbz inverse conversions.\n\nPass the inverse matrix as the first argument and the column vector as the second argument in both Jzazbz inverse stages. With the missing inverse exponent supplied separately for isolation, this recovers the expected absolute XYZ white instead of NaN.",
+      "files": [
+        "css-color-hdr-1/jzazbz.js (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14666,
+      "title": "Define the inverse PQ exponent in Jzazbz_to_LMS",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14666",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T10:25:12Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Define the inverse PQ exponent in Jzazbz_to_LMS.\n\nDeclare the reciprocal of the forward PQ exponent n. Jzazbz_to_LMS currently references an undefined ninv and throws a ReferenceError.",
+      "files": [
+        "css-color-hdr-1/jzazbz.js (+2 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14665,
+      "title": "Fix the missing parenthesis in the PQ decoding example",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14665",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T10:26:51Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix the missing parenthesis in the PQ decoding example.\n\nRemove one unmatched opening parenthesis in the inline PQ inverse-transfer example. The current snippet produces a JavaScript SyntaxError; the balanced expression parses successfully.",
+      "files": [
+        "css-color-hdr-1/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14664,
+      "title": "Remove the duplicated is in the JND description",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14664",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T10:27:49Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Remove the duplicated is in the JND description.\n\nRemove a duplicated word in the just-noticeable-difference description.",
+      "files": [
+        "css-color-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14663,
+      "title": "Fix the spelling of non-noticeable",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14663",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T11:06:24Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fix the spelling of non-noticeable.\n\nCorrect a spelling error in the gamut-mapping explanation.",
+      "files": [
+        "css-color-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14661,
+      "title": "Remove a duplicated that in the empty pseudo-class note",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14661",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T11:10:38Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Remove a duplicated that in the empty pseudo-class note.\n\nRemove the duplicated that before the parenthetical explanation in the :empty note.",
+      "files": [
+        "selectors-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14659,
+      "title": "[css-color-5] fix links to `none`",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14659",
+      "author": "romainmenke",
+      "mergedAt": "2026-10-26T12:08:17Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "After the addition of `none` in `light-dark()` all links started pointing to that definition instead of linking to `css-color-4` `none`.",
+      "files": [
+        "css-color-5/Overview.bs (+15 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13551,
+      "title": "[css-conditional-5] Add `matchContainer()` and `ContainerQueryList` API text",
+      "url": "https://github.com/w3c/csswg-drafts/pull/13551",
+      "author": "meyerweb",
+      "mergedAt": "2026-10-27T08:22:41Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "As per #6205.",
+      "files": [
+        "css-conditional-5/Overview.bs (+78 -10)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14674,
+      "title": "[css-color-4] Add sample JavaScript for powerless to missing handling",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14674",
+      "author": "romainmenke",
+      "mergedAt": "2026-10-27T09:08:37Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "See: https://github.com/w3c/csswg-drafts/issues/14531\n\nThe color conversion samples do not exactly follow the spec.\nThey don't implement powerless handling, carry forward, ...\n\nSo I chose to instead add a separate sample without integrating it in the other samples.",
+      "files": [
+        "css-color-4/Overview.bs (+8 -0)",
+        "css-color-4/powerlessToMissing.js (+80 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-10-23T11:19:16Z",
+    "to": "2026-10-28T00:33:26Z"
+  },
+  "commits": [
+    {
+      "sha": "7d677b2",
+      "url": "https://github.com/w3c/csswg-drafts/commit/7d677b2f04a68fb1795dc3a92f36d57fdb427bbc",
+      "author": "svgeesus",
+      "committedAt": "2026-10-26T11:38:04Z",
+      "title": "[css-color-5] Clarify channel keywords with \"none\" in math expressions #10280",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-5/Overview.bs (+1 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "be84fe9",
+      "url": "https://github.com/w3c/csswg-drafts/commit/be84fe9ea0871e580eb1e4b6e90dacc8e9ea88f3",
+      "author": "svgeesus",
+      "committedAt": "2026-10-26T11:46:16Z",
+      "title": "[css-color-5][editorial] wpt",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-5/Overview.bs (+5 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "06088e7",
+      "url": "https://github.com/w3c/csswg-drafts/commit/06088e7d636d2d5399c93a723d6783ba7fa71754",
+      "author": "fantasai",
+      "committedAt": "2026-10-26T16:16:12Z",
+      "title": "[css-text-4] Clarify text-spacing: insert | replace #13774",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-text-4/Overview.bs (+6 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "6dbb905",
+      "url": "https://github.com/w3c/csswg-drafts/commit/6dbb905c3fb7f72fdd981a56761ff0e8397dd3a2",
+      "author": "fantasai",
+      "committedAt": "2026-10-26T18:48:24Z",
+      "title": "[css-text-4] Add back full value space of text-spacing-trim #13789",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-text-4/Overview.bs (+154 -83)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "33d168d",
+      "url": "https://github.com/w3c/csswg-drafts/commit/33d168d9c3bfd7bda4babaa208edfd13c82fbb52",
+      "author": "fantasai",
+      "committedAt": "2026-10-26T18:51:03Z",
+      "title": "[css-text-4][editorial] Changes section #13789",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-text-4/Overview.bs (+2 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "1da0d9f",
+      "url": "https://github.com/w3c/csswg-drafts/commit/1da0d9fb61d62f53e893b58f85bd109f0c8b9321",
+      "author": "svgeesus",
+      "committedAt": "2026-10-27T09:20:53Z",
+      "title": "[css-color-4] Clarified setting \"colorful\" components to zero when changing a powerless hue component to a missing component, #14531",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+5 -1)",
+        "css-color-4/better-rgbToHsl.js (+1 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "sha": "ee30871",
+      "url": "https://github.com/w3c/csswg-drafts/commit/ee30871a66d312e3ea0e1025f383cdca9cebd64a",
+      "author": "tabatkins",
+      "committedAt": "2026-10-27T14:47:51Z",
+      "title": "[css-sizing-4][css-values-5] Move calc-size() and interpolate-size to Sizing 4. #14502",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-sizing-4/Overview.bs (+608 -2)",
+        "css-values-5/Overview.bs (+1 -604)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "sha": "85dd3a9",
+      "url": "https://github.com/w3c/csswg-drafts/commit/85dd3a951d5fee607215944ae51a91a45722c5a5",
+      "author": "tabatkins",
+      "committedAt": "2026-10-27T15:19:58Z",
+      "title": "[css-sizing-4][css-values-5][editorial] Updated Changes",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-sizing-4/Overview.bs (+2 -0)",
+        "css-values-5/Overview.bs (+2 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "sha": "10ae270",
+      "url": "https://github.com/w3c/csswg-drafts/commit/10ae270718401a8daf9dc02def5a8e065744d2ad",
+      "author": "tabatkins",
+      "committedAt": "2026-10-27T16:03:47Z",
+      "title": "[css-counter-styles-3] Drop the -informal suffixes (and -formal from korean-hangul), leaving the old values as aliases. #12312",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-counter-styles-3/Overview.bs (+37 -30)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "674d876",
+      "url": "https://github.com/w3c/csswg-drafts/commit/674d876257873dddad2648315e32b2e5bcc789ac",
+      "author": "tabatkins",
+      "committedAt": "2026-10-27T17:00:41Z",
+      "title": "[css-counter-styles-3] Add nko-ordinal. #8988",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-counter-styles-3/Overview.bs (+36 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "700ba7b",
+      "url": "https://github.com/w3c/csswg-drafts/commit/700ba7b5e6ea39623b68a2a0575c2bb89c640d54",
+      "author": "tabatkins",
+      "committedAt": "2026-10-27T17:01:28Z",
+      "title": "[css-counter-styles-3][editorial] fix biblio ref",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-counter-styles-3/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

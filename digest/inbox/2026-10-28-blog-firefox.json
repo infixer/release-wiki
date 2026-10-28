@@ -1,0 +1,37 @@
+{
+  "kind": "blog",
+  "id": "firefox",
+  "title": "Firefox リリースノート",
+  "relatedRepo": null,
+  "collectedAt": "2026-10-28T00:33:26Z",
+  "posts": [
+    {
+      "title": "Firefox 115.44.0",
+      "url": "https://www.firefox.com/firefox/115.44.0/releasenotes/",
+      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "versions": [
+        "115.44.0"
+      ],
+      "text": "Version 115.44.0, first offered to ESR channel users on October 27, 2026\n\nFirefox ESR 115 is now supported only on Windows 7-8.1 and macOS 10.12-10.14. Users on other operating systems should use Firefox ESR 140 instead."
+    },
+    {
+      "title": "Firefox 153.6.0",
+      "url": "https://www.firefox.com/firefox/153.6.0/releasenotes/",
+      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "versions": [
+        "153.6.0"
+      ],
+      "text": "Version 153.6.0, first offered to ESR channel users on October 27, 2026\n\nFirefox 153 Extended Support Release (ESR) includes all of the enhancements since Firefox 140, along with many new features to make your enterprise deployments easier and even more flexible."
+    },
+    {
+      "title": "Firefox 159.0",
+      "url": "https://www.firefox.com/firefox/159.0/releasenotes/",
+      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "versions": [
+        "159.0"
+      ],
+      "text": "Version 159.0, first offered to Release channel users on October 27, 2026\n\n-\n\nSharing on macOS now uses the native macOS share picker, which shows a preview of the page and recent contacts alongside AirDrop, Messages, and other apps. Several selected tabs can also be shared at once.\n\n-\n\nSaved passwords are now available from the sidebar by default, without having to add the Passwords tool first.\n\n-\n\nSmart Window can now watch pages for changes such as price drops or restocks. Type /watch in the chat to set one up, and Firefox sends a desktop notification when it finds a match. Watches can be managed from the Tasks button in the toolbar or the about:smartwindowtasks page.\n\nThis feature is part of a progressive roll out.\n\nWhat is a progressive roll out?\n\nCertain new Firefox features are released gradually. This means some users will see the feature before everyone does. This approach helps to get early feedback to catch bugs and improve behavior quickly, meaning more Firefox users overall have a better experience.\n\n-\n\nFixed the file upload dialog opening in the last folder a file was saved to, such as Downloads, instead of the folder last used for uploads.\n\n-\n\nFixed memory usage growing rapidly when sites such as the Zoom web app were left open in a minimized window.\n\n-\n\nFixed some videos displaying incorrectly on Windows when NVIDIA RTX Video HDR is enabled.\n\n-\n\nFixed bookmarks not being imported from Google Chrome profiles that are signed in to a Google account.\n\n-\n\nFixed the Replace button in Apple Writing Tools on macOS inserting the clipboard contents instead of the rewritten text on some sites, such as Gmail.\n\n-\n\nFixed long drop-down lists on web pages sometimes showing blank space in place of the last options until the list was scrolled.\n\n-\n\nFixed some sites, such as Slack, failing to load instead of falling back to HTTP/2 when the site rejected an HTTP/3 request.\n\n-\n\nFixed Firefox using excessive memory on Linux with AMD graphics when viewing map or place results on sites such as ChatGPT.\n\n-\n\nFixed quick gamepad button presses sometimes being missed in web games on macOS.\n\n-\n\nFixed tabs sometimes detaching into a new window when clicked on Linux with Wayland.\n\n-\n\nFixed menus and panels fading in on Windows and Linux when animation effects are turned off in the operating system.\n\n-\n\n-\n\nOn macOS, apps that sign in through the default browser, such as ChatGPT, now open their sign-in page in Firefox instead of Safari when Firefox is the default browser.\n\n-\n\nThe AI chatbot's Summarize page option now sends the page's address to the chatbot provider instead of the page's text, so long pages are no longer cut short to a partial summary.\n\n-\n\nOpen tabs can now be searched with a keyboard shortcut: Ctrl+Shift+A on Windows and Linux, Cmd+Shift+A on macOS. The Extensions and Themes shortcut is now Ctrl+Shift+F on Windows and Linux, and Cmd+Shift+E on macOS. These shortcuts can be changed in about:keyboard.\n\n-\n\nWeb addresses written in the Javanese, Balinese, Canadian Aboriginal Syllabics, and N'Ko scripts are now displayed in their own script instead of as encoded \"xn--\" text.\n\n-\n\nFor Firefox Enterprise updates and fixes, see the Firefox Enterprise release notes. For policy changes, see the Firefox admin docs changelog.\n\n-\n\n-\n\nThe Web Console now allows let, const, and class variables to be declared again, so a snippet can be edited and re-run without a redeclaration error.\n\n-\n\nFirefox now supports scroll-driven animations, so CSS animations and Web Animations API animations can progress with the scroll position of a container or with an element's visibility as it scrolls into view. This adds the animation-timeline, scroll-timeline, view-timeline, and animation-range properties and the ScrollTimeline and ViewTimeline interfaces.\n\n-\n\nFirefox now supports scoped custom element registries. A registry created with the CustomElementRegistry() constructor is separate from the global window.customElements registry, so custom elements that share a tag name can coexist on the same page.\n\n-\n\nOn compatible devices, WebGL now supports the EXT_clip_control and EXT_texture_mirror_clamp_to_edge extensions and WebGL 2 supports EXT_texture_norm16.\n\n-\n\nThe Sanitizer API now sanitizes HTML as it is parsed rather than afterwards, so custom element constructors no longer run for elements the sanitizer removes.\n\n-\n\nWith the release of Firefox 159, we are pleased to welcome the developers who contributed their first code change to Firefox in this release, 12 of whom were brand new volunteers! Please join us in thanking each of these diligent and enthusiastic individuals, and take a look at their contributions:\n\n- Abhinav Singh: 2070629\n\n- Atharva Wadodkar[:atharva]: 2070702\n\n- corpus_e: 2070325\n\n- csalinezh: 1970969\n\n- Dmitry Gozman: 2076389\n\n- eldjiikgull (EDS): 2076744\n\n- Fabio: 1735401\n\n- Feng Yu: 2073811\n\n- Jaron: 2069726\n\n- Jason Salerno: 2076831\n\n- Lander Feldman: 2067952\n\n- 赤坂理子: 2044440"
+    }
+  ],
+  "errors": []
+}

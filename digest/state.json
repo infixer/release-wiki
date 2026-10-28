@@ -2,52 +2,52 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-10-23T15:00:25Z",
+      "lastMergedAt": "2026-10-27T15:01:43Z",
       "lastReleaseAt": "2026-10-14T17:06:15Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-24T18:36:05Z",
-      "lastReleaseAt": "2026-10-24T23:47:46Z"
+      "lastMergedAt": "2026-10-27T23:37:41Z",
+      "lastReleaseAt": "2026-10-27T23:46:43Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
-      "lastMergedAt": "2026-10-21T02:36:54Z",
+      "lastMergedAt": "2026-10-26T00:33:12Z",
       "lastReleaseAt": "2026-10-23T07:59:39Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-10-25T20:24:51Z",
-      "lastReleaseAt": "2026-10-16T17:21:23Z"
+      "lastMergedAt": "2026-10-28T00:10:55Z",
+      "lastReleaseAt": "2026-10-27T01:02:52Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-10-23T20:02:08Z",
+      "lastMergedAt": "2026-10-27T23:47:21Z",
       "lastReleaseAt": "2026-10-09T03:06:51Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-24T16:37:24Z",
+      "lastMergedAt": "2026-10-28T00:01:14Z",
       "lastReleaseAt": "2026-10-20T17:38:20Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-10-25T22:36:05Z",
-      "lastReleaseAt": "2026-10-19T17:24:26Z"
+      "lastMergedAt": "2026-10-27T19:13:53Z",
+      "lastReleaseAt": "2026-10-27T05:51:29Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
-      "lastMergedAt": "2026-10-09T16:16:37Z",
-      "lastReleaseAt": "2026-10-23T23:39:00Z"
+      "lastMergedAt": "2026-10-27T20:03:06Z",
+      "lastReleaseAt": "2026-10-27T20:24:20Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-10-22T21:25:03Z",
+      "lastMergedAt": "2026-10-26T07:05:01Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
       "fullName": "w3c/aria",
-      "lastMergedAt": "2026-10-21T18:19:50Z",
+      "lastMergedAt": "2026-10-26T14:49:37Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/wcag": {
@@ -67,18 +67,18 @@
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-10-25T22:42:23Z",
-      "lastReleaseAt": "2026-10-25T17:54:42Z"
+      "lastMergedAt": "2026-10-28T00:31:29Z",
+      "lastReleaseAt": "2026-10-27T15:28:26Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-10-25T14:02:03Z",
+      "lastMergedAt": "2026-10-26T16:09:28Z",
       "lastReleaseAt": "2026-10-19T16:42:33Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-10-22T20:18:55Z",
-      "lastCommitAt": "2026-10-23T11:19:16Z",
+      "lastMergedAt": "2026-10-27T09:08:37Z",
+      "lastCommitAt": "2026-10-27T17:01:28Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
@@ -89,8 +89,8 @@
     },
     "openai/codex": {
       "fullName": "openai/codex",
-      "lastReleaseAt": "2026-10-23T14:09:53Z",
-      "lastMergedAt": "2026-10-23T18:51:09Z"
+      "lastReleaseAt": "2026-10-27T20:09:38Z",
+      "lastMergedAt": "2026-10-27T23:53:49Z"
     }
   },
   "blogs": {
@@ -108,6 +108,7 @@
     },
     "firefox": {
       "seen": [
+        "https://www.firefox.com/firefox/159.0/releasenotes/",
         "https://www.firefox.com/firefox/158.0.1/releasenotes/",
         "https://www.firefox.com/firefox/158.0/releasenotes/",
         "https://www.firefox.com/firefox/157.0.1/releasenotes/",
@@ -118,6 +119,7 @@
         "https://www.firefox.com/firefox/155.0/releasenotes/",
         "https://www.firefox.com/firefox/154.0.1/releasenotes/",
         "https://www.firefox.com/firefox/154.0/releasenotes/",
+        "https://www.firefox.com/firefox/153.6.0/releasenotes/",
         "https://www.firefox.com/firefox/153.5.1/releasenotes/",
         "https://www.firefox.com/firefox/153.5.0/releasenotes/",
         "https://www.firefox.com/firefox/153.4.0/releasenotes/",
@@ -280,6 +282,7 @@
         "https://www.firefox.com/firefox/116.0.2/releasenotes/",
         "https://www.firefox.com/firefox/116.0.1/releasenotes/",
         "https://www.firefox.com/firefox/116.0/releasenotes/",
+        "https://www.firefox.com/firefox/115.44.0/releasenotes/",
         "https://www.firefox.com/firefox/115.43.1/releasenotes/",
         "https://www.firefox.com/firefox/115.43.0/releasenotes/",
         "https://www.firefox.com/firefox/115.42.0/releasenotes/",
@@ -938,6 +941,9 @@
     },
     "anthropic": {
       "seen": [
+        "https://www.anthropic.com/news/expanding-partnership-gsa",
+        "https://www.anthropic.com/news/partnerships",
+        "https://www.anthropic.com/news/s1-sec",
         "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
         "https://www.anthropic.com/news/product",
         "https://www.anthropic.com/news/open-call-guest-investigators-life-sciences",
@@ -953,7 +959,6 @@
         "https://www.anthropic.com/news/security",
         "https://www.anthropic.com/news/2026-usage-policy-update",
         "https://www.anthropic.com/news/genesis-mission-commitment",
-        "https://www.anthropic.com/news/partnerships",
         "https://www.anthropic.com/news/cyber-verification-program",
         "https://www.anthropic.com/news/claude-frontier-academy",
         "https://www.anthropic.com/news/barclays-scales-claude",

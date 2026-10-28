@@ -1,0 +1,131 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-10-28T00:33:26Z",
+  "range": {
+    "from": "2026-10-23T15:00:25Z",
+    "to": "2026-10-28T00:33:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.1",
+      "publishedAt": "2026-10-14T17:06:15Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 37970,
+      "title": "[compiler] Type react-native PanResponder.create to fix react-hooks/refs false positive",
+      "url": "https://github.com/react/react/pull/37970",
+      "author": "Gourav224",
+      "mergedAt": "2026-10-26T11:33:38Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #37955\n\n**Depends on #37975** (retains declared `Freeze` effects for already-frozen values, as suggested by @javache). Until that merges this PR's diff also shows its commit.\n\n## Summary\n\n`react-hooks/refs` reports \"Passing a ref to a function may read its value during render\" for callbacks passed to React Native's `PanResponder.create({...})`, because the compiler treats `PanResponder` imported from `react-native` as an unknown function that may call its arguments during render. `PanResponder.create()` only stores the handlers and invokes them later from gesture events.\n\nThe compiler already has a signature for exactly this (`PanResponder.create` freezes its config and doesn't call it during render), but it only exists in the test-only `shared-runtime` type provider in `snap`, so real code never gets it. This adds the same signature for `react-native` to `defaultModuleTypeProvider` (TypeScript, and the Rust port in `default_module_type_provider.rs`), so the callbacks are treated as deferred, like the `IntersectionObserver` fix in #37764.\n\nOther unknown functions still report errors when given ref-accessing callbacks.\n\n## How did you test this change?\n\nAdded a valid case to `packages/eslint-plugin-react-hooks/__tests__/ReactCompilerRuleTypescript-test.ts` (the repro shape from the issue). Snap fixtures can't cover this because `snap` replaces the module type provider with its own.\n\n- Without the fix: `cd packages/eslint-plugin-react-hooks && npx jest ReactCompilerRuleTy\n…(truncated)",
+      "files": [
+        "compiler/crates/react_compiler_hir/src/default_module_type_provider.rs (+54 -2)",
+        "compiler/packages/babel-plugin-react-compiler/src/HIR/DefaultModuleTypeProvider.ts (+51 -1)",
+        "packages/eslint-plugin-react-hooks/__tests__/ReactCompilerRuleTypescript-test.ts (+47 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 37996,
+      "title": "[compiler] Allow ref access in PerformanceObserver / ReportingObserver callbacks",
+      "url": "https://github.com/react/react/pull/37996",
+      "author": "zhoubiao188",
+      "mergedAt": "2026-10-26T11:40:14Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`new PerformanceObserver(cb)` and `new ReportingObserver(cb)` are compiled with a false positive when the callback touches a ref:\n\n```\nError: Cannot access refs during render\n  4 |   return new PerformanceObserver(() => {\n    |                                  ^^^^^^^^^^^^^^ Passing a ref to a function may read its value during render\n```\n\nBoth constructors only *retain* the callback and invoke it asynchronously once the observation fires — never during render — so reading (or writing) a ref from the callback is safe. `IntersectionObserver` (#37764) and `ResizeObserver` / `MutationObserver` (#37895) are already modelled exactly this way; these two were just missed and fall back to the unknown-constructor default, whose `Freeze` on the callback trips `ValidateNoRefAccessInRender`.\n\nThis is the same class of fix as #37895, which is now on `main`.\n\n## Fix\n\nAdd both to `TYPED_GLOBALS` (TypeScript) and `build_typed_globals` (Rust) using the same signature shape as the existing observers:\n\n| Global | Constructor signature |\n| --- | --- |\n| `PerformanceObserver` | `(callback)` → `[Freeze]` |\n| `ReportingObserver` | `(callback, options)` → `[Freeze, Read]` |\n\n`ReportingObserver`'s second argument is a genuine constructor argument (unlike the observers whose options belong to `observe()`), so it is read rather than retained.\n\nBoth backends are updated so TS and Rust stay in parity.\n\n## Tests\n\nFour new fixtures:\n\n- `allow-ref-access-in-performance-observer.ts`\n- `allow-ref-\n…(truncated)",
+      "files": [
+        "compiler/crates/react_compiler_hir/src/globals.rs (+40 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/HIR/Globals.ts (+38 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-ref-access-in-performance-observer.expect.md (+41 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-ref-access-in-performance-observer.ts (+9 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-ref-access-in-reporting-observer.expect.md (+48 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-ref-access-in-reporting-observer.ts (+12 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-mutate-hook-value-in-performance-observer.expect.md (+36 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-mutate-hook-value-in-performance-observer.js (+8 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-mutate-hook-value-in-reporting-observer.expect.md (+39 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-mutate-hook-value-in-reporting-observer.js (+11 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 37995,
+      "title": "[compiler] Preserve signed zero in constant propagation and code generation",
+      "url": "https://github.com/react/react/pull/37995",
+      "author": "chengchuu",
+      "mergedAt": "2026-10-26T11:40:43Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFixes #37994\n\nThe TypeScript and Rust compilers lose the distinction between `0` and `-0` when merging branch constants and generating code. This can make `1 / value` return the wrong infinity.\n\nTo reproduce, compile this component and toggle `condition`:\n\n```jsx\nfunction Component({condition}) {\n  let value;\n  if (condition) {\n    value = 0;\n  } else {\n    value = -0;\n  }\n  return <div>{1 / value}</div>;\n}\n```\n\nThe result should alternate between `Infinity` and `-Infinity`, but the compiled component keeps returning `Infinity`.\n\nBoth backends now preserve signed zero when merging constants and emit negative zero explicitly. NaN merging behavior and JavaScript equality semantics remain unchanged.\n\n## How did you test this change?\n\nOn macOS arm64 with Rust installed through Homebrew, I first created a Cargo symlink for the path used by `test-babel-ast.sh`:\n\n```bash\nmkdir -p ~/.cargo/bin\nln -s /opt/homebrew/opt/rustup/bin/cargo ~/.cargo/bin/cargo\n```\n\nI then manually ran these commands from the repository root:\n\n```bash\ncd compiler\nyarn install --frozen-lockfile\ncargo test --workspace --locked\nyarn snap:build\nyarn snap\nyarn snap --rust\ncd ..\nbash compiler/scripts/test-babel-ast.sh\n```\n\nRust workspace tests and Babel AST/scope checks passed. All tests in the full compiler snapshot suite passed on both TypeScript and Rust backends. The selected fixtures also passed runtime evaluation on each backend.",
+      "files": [
+        "compiler/crates/react_compiler_optimization/src/constant_propagation.rs (+65 -0)",
+        "compiler/crates/react_compiler_reactive_scopes/src/codegen_reactive_function.rs (+2 -1)",
+        "compiler/packages/babel-plugin-react-compiler/src/Optimization/ConstantPropagation.ts (+5 -2)",
+        "compiler/packages/babel-plugin-react-compiler/src/ReactiveScopes/CodegenReactiveFunction.ts (+2 -1)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/constant-propagation-phi-signed-zero-controls.expect.md (+82 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/constant-propagation-phi-signed-zero-controls.js (+28 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/constant-propagation-phi-signed-zero-reversed.expect.md (+64 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/constant-propagation-phi-signed-zero-reversed.js (+15 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/constant-propagation-phi-signed-zero.expect.md (+64 -0)",
+        "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/constant-propagation-phi-signed-zero.js (+15 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 37985,
+      "title": "[DOM] Use SyntheticTransitionEvent for onTransitionRun, onTransitionStart, and onTransitionCancel",
+      "url": "https://github.com/react/react/pull/37985",
+      "author": "ShakilUrRehman21",
+      "mergedAt": "2026-10-27T07:30:50Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #37984\n\n## Summary\n\nWhen support for CSS transition events (`onTransitionRun`, `onTransitionStart`, `onTransitionCancel`) was added in #27345 alongside `onTransitionEnd`, the events were registered as simple events in `DOMEventProperties.js` and defined in `DOMEventNames.js`, but they were not added to the switch statement in `SimpleEventPlugin.js`.\n\nAs a result, while `onTransitionEnd` uses `SyntheticTransitionEvent`, `onTransitionRun`, `onTransitionStart`, and `onTransitionCancel` were defaulting to base `SyntheticEvent`. Because `SyntheticEvent` does not implement `TransitionEventInterface`, properties such as `propertyName`, `elapsedTime`, and `pseudoElement` were not normalized onto the synthetic event object, evaluating to `undefined`.\n\nThis PR:\n1. Imports `TRANSITION_CANCEL`, `TRANSITION_RUN`, and `TRANSITION_START` into `SimpleEventPlugin.js`.\n2. Adds cases for them in `extractEvents` so they instantiate `SyntheticTransitionEvent`.\n3. Adds a regression test suite `SyntheticTransitionEvent-test.js` validating property normalization across all four transition events.\n\n## How did you test this change?\n\n- Added `packages/react-dom/src/events/__tests__/SyntheticTransitionEvent-test.js` covering `onTransitionEnd`, `onTransitionRun`, `onTransitionStart`, and `onTransitionCancel` (fails on `main` with `propertyName: undefined` and passes with this fix).\n- Ran `yarn test SyntheticTransitionEvent-test` (passed).\n- Ran `yarn test SyntheticAnimationEvent-test ReactDOMEventP\n…(truncated)",
+      "files": [
+        "packages/react-dom-bindings/src/events/plugins/SimpleEventPlugin.js (+6 -0)",
+        "packages/react-dom/src/events/__tests__/SyntheticTransitionEvent-test.js (+134 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 38007,
+      "title": "[RN] Call dispatchNativeEvent when the event target is null",
+      "url": "https://github.com/react/react/pull/38007",
+      "author": "lazerg",
+      "mergedAt": "2026-10-27T15:01:43Z",
+      "labels": [
+        "CLA Signed"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith `enableNativeEventTargetEventDispatching` on, the Fabric renderer skipped `dispatchNativeEvent` when the touched view had already unmounted, so the touch end never reached the JS responder and the next tap got lost. This passes the null target through instead, so React Native can still release the responder. It needs react/react-native#59522 to land first, since `dispatchNativeEvent` there throws on a null target today.\n\nFixes #38006\n\n## How did you test this change?\n\nAdded a test in `ReactFabric-test.internal.js` that unmounts a view, dispatches a touch end to its old instance handle, and expects `dispatchNativeEvent` to get a null target. It fails on main and passes with this change. Also ran `yarn test packages/react-native-renderer` (default, `--prod`, www-modern), `yarn flow fabric`, `yarn linc` and `yarn prettier-check`.",
+      "files": [
+        "packages/react-native-renderer/src/ReactFabricEventEmitter.js (+1 -3)",
+        "scripts/flow/react-native-host-hooks.js (+1 -1)",
+        "packages/react-native-renderer/src/__tests__/ReactFabric-test.internal.js (+37 -0)"
+      ],
+      "filesTotal": 3
+    }
+  ],
+  "errors": []
+}

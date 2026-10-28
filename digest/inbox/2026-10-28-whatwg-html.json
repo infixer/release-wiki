@@ -1,0 +1,75 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-10-28T00:33:26Z",
+  "range": {
+    "from": "2026-10-22T21:25:03Z",
+    "to": "2026-10-28T00:33:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 13125,
+      "title": "Editorial: Correct the close watcher cancel action return value",
+      "url": "https://github.com/whatwg/html/pull/13125",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T06:29:31Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Correct the cancel action contract to require true when its boolean argument is false. A true result allows the close request to proceed, while false prevents it.\n\nThis agrees with the request-to-close assertion that a false result requires canPreventClose to be true, and with the existing popover cancel action.\n\nSpec: https://html.spec.whatwg.org/multipage/interaction.html#close-watcher-cancel-action\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://what\n…(truncated)",
+      "files": [
+        "source (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13141,
+      "title": "Editorial: Pass true to the classic worker import fetch hook",
+      "url": "https://github.com/whatwg/html/pull/13141",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T06:31:26Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pass true as the fetch-hook flag for a classic worker-imported script. The algorithm currently refers to an isTopLevel variable that is neither a parameter nor a local binding.\n\nThe fetch-hook contract already states that the flag is true for all classic script fetches.\n\nSpec: https://html.spec.whatwg.org/multipage/webappapis.html#fetch-a-classic-worker-imported-script\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13141/webappapis.html\n…(truncated)",
+      "files": [
+        "source (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13132,
+      "title": "Editorial: Inspect close watcher groups when checking activity",
+      "url": "https://github.com/whatwg/html/pull/13132",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T06:44:13Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Check the groups member of the close watcher manager when determining whether a close watcher is active. The manager itself is a struct; its groups member is the list of close-watcher lists.\n\nThis supplies the missing list operand for the existing contains operation.\n\nSpec: https://html.spec.whatwg.org/multipage/interaction.html#close-watcher-active\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13132/interaction.html\" title=\"Last updat\n…(truncated)",
+      "files": [
+        "source (+3 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13136,
+      "title": "Editorial: Fix the rgba-float16 reference in ImageData initialization",
+      "url": "https://github.com/whatwg/html/pull/13136",
+      "author": "JinDX",
+      "mergedAt": "2026-10-26T07:05:01Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Link the rgba-float16 value in ImageData initialization to dom-ImageDataPixelFormat-rgba-float16.\n\nThe current reference displays rgba-float16 but points to the rgba-unorm8 definition.\n\nSpec: https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#initialize-an-imagedata-object\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13136/imagebitmap-and-animations.html\" title=\"Last updated on Oct 25, 2026, 6:58 AM UTC (24e4a40)\">\n…(truncated)",
+      "files": [
+        "source (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,655 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-10-28T00:33:26Z",
+  "range": {
+    "from": "2026-10-25T22:36:05Z",
+    "to": "2026-10-28T00:33:26Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.90.0",
+      "publishedAt": "2026-10-27T05:51:29Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.90.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "crates_v0.156.0",
+      "name": "oxc crates_v0.156.0",
+      "publishedAt": "2026-10-27T03:26:14Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/crates_v0.156.0",
+      "prerelease": false,
+      "body": "### 💥 BREAKING CHANGES\n\n- cf8296f ecmascript: [**BREAKING**] Fold surrogate strings with JSStr constants (#27098) (Dunqing)\n\n### 🚀 Features\n\n- dd6cb2b minifier: Fold out-of-bounds string indices to `void 0` (#28004) (Dunqing)\n\n### 🐛 Bug Fixes\n\n- f4dac9e semantic: Separate hoisted vars from block type bindings (#27936) (limadog9)\n- 9ec6617 minifier: Keep brackets on negative and non-finite numeric keys (#27855) (Yunus Ozen)\n- 520a26e minifier: Keep the default in shorthand assignment targets (#28183) (waltu)\n- def47b8 react-compiler: Keep manual memoization as written when its dependencies can't be honoured (#28101) (Dunqing)\n- 704d8cf transformer_plugins: Keep the bare inject when references to it remain (#26965) (Bharadwaj Pendyala)\n- 6d7b372 minifier: Handle sequence exprs when folding if to expr statement (#27939) (Armano)\n- e3eca41 runtime: Align async iterator throw with Babel (#28059) (camc314)\n- af0258d parser: Parse source imports named type (#28062) (camc314)\n- 83633a7 parser: Parse escaped class field names after initializers (#28061) (camc314)\n- 90c58ac parser: Parse postfix updates of sloppy `let` identifiers (#28060) (camc314)\n- 0e2934f codegen: Preserve default import names in source maps (#28058) (camc314)\n- 09bdb80 minifier: Allow argument rewrite with with leading var assignments (#28056) (Armano)\n- ebcdcd9 minifier: Preserve rest destructuring side effects (#27981) (camc314)\n- 5c84098 semantic,linter: Report names with lone surrogates in enum and lint checks (#27991) (Dunqing)\n- bd70a9b ecmascript: Use ECMAScript whitespace when folding `parseFloat`/`parseInt`/`trim` (#27719) (Dunqing)\n- 4c0fa90 minifier,linter: Keep `delete` of constant members and later JSX keys (#27990) (Dunqing)\n\n### ⚡ Performance\n\n- 3493ce3 minifier: Reuse is_error_constructor and simplify substitute_global_new_expression (#28149) (Armano)\n- a22c9f2 parser: Move annotation comment handling out of hot paths (#28139) (camc314)\n- 1ed93af data_structures: Copy short strings without a memcpy call (#27953) (leaysgur)\n\n### 🛡️ Security\n\n- b93e169 deps: Bump .node-version to 26.12.1 (#28090) (leaysgur)"
+    },
+    {
+      "tag": "oxfmt_v0.75.0",
+      "name": "oxfmt v0.75.0",
+      "publishedAt": "2026-10-27T05:51:23Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxfmt_v0.75.0",
+      "prerelease": false,
+      "body": "### 🐛 Bug Fixes\n\n- 5042019 formatter: Keep fill layout for array with comment after [ (#28170) (leaysgur)\n- 9d37ff6 formatter: Use position-based comment checks for concise arrays (#28169) (leaysgur)\n- 016c4a2 formatter: Keep a comment before `}` inside a JSX spread child (#28103) (vidigoat)\n- 190bb1e formatter: Keep parens around an instantiation expression ending an operand through any tight parent (#28168) (leaysgur)\n- a5314a1 formatter: Keep `;` before `in` and `instanceof` class members (#28166) (leaysgur)\n- 3a56e7c formatter: Keep closing HTML comments at the start of a line (#28064) (Cameron)\n- 23d23d6 formatter_markdown: Honor range ignore inside directives (#28164) (leaysgur)\n- 5f1fd3d formatter: Measure width heuristics by display width (#28098) (leaysgur)\n- a5a52cf formatter: Keep parens around private `in` expressions (#28096) (leaysgur)\n- 999496e formatter: Measure a short key by its display width (#28026) (vidigoat)\n- 7e9aa44 formatter: Keep parens around a looser operand of an instantiation expression (#28025) (vidigoat)\n- 6912d1f formatter: Keep an arrow signature that exactly fills the line for any body (#27989) (leaysgur)\n- eb1d9f9 formatter_core: Count a flat `line` space in `fits` only when text follows (#27987) (leaysgur)\n\n### ⚡ Performance\n\n- 1ed93af data_structures: Copy short strings without a memcpy call (#27953) (leaysgur)\n- 7948f0b formatter_core: Shrink `FormatElement` to 16B (#28012) (leaysgur)\n- 788af22 formatter: Keep `AstNode`s on the stack, and only chain links in the arena (#27963) (leaysgur)\n\n### 📚 Documentation\n\n- 068a8ea formatter: Fix up wording (#28167) (leaysgur)\n- db55461 formatter_core: Document text width divergence (#28095) (leaysgur)\n- 880d229 formatter: Add vitest-test-call to known divergences (#28006) (leaysgur)"
+    },
+    {
+      "tag": "oxlint_v1.90.0",
+      "name": "oxlint v1.90.0",
+      "publishedAt": "2026-10-27T05:51:29Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.90.0",
+      "prerelease": false,
+      "body": "### 🚀 Features\n\n- cf34678 oxlint: Export `Oxlintrc` type (#28132) (Sysix)\n- 831cdf1 oxlint: Require mininum oxlint-tsgolint version v7.0.2005 (#28118) (camc314)\n- d1b00f4 linter/typescript: Implement no-unsafe-enum-assignment rule (#28117) (camc314)\n- 165c91f linter/typescript/await-thenable: Support `allowMixedPromiseArrays` option (#28116) (camc314)\n\n### 🐛 Bug Fixes\n\n- 7f3c908 linter/eslint/array-callback-return: Check callbacks passed with extra arguments (#28133) (sarankumar)\n- 53be530 linter: Filter by type aware rules when looking up tsgolint rule severity (#28138) (NavpreetSSidhu)\n- e0f8937 react-compiler: Compile a `try` whose `catch` is unreachable instead of panicking (#28066) (Dunqing)\n- f5b625f linter/eslint/no-useless-concat: See through parenthesized expressions (#27984) (Rahul Kashyap)\n- 4629bb2 linter/jest/no-conditional-expect: Check function expression callbacks (#28055) (camc314)\n- 5c84098 semantic,linter: Report names with lone surrogates in enum and lint checks (#27991) (Dunqing)\n- f3705a9 linter/eslint/prefer-const: Skip fixers if any declarator is reassigned (#28008) (Prince Jain)\n- 4c0fa90 minifier,linter: Keep `delete` of constant members and later JSX keys (#27990) (Dunqing)\n- 0298062 linter/arrow-body-style: Keep type assertions when adding a block body (#27978) (Yan Almeida)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 28148,
+      "title": "refactor(minifier): use ast helpers for enum tests",
+      "url": "https://github.com/oxc-project/oxc/pull/28148",
+      "author": "armano2",
+      "mergedAt": "2026-10-25T23:37:33Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "reuse helpers instead of recreating new matches",
+      "files": [
+        "crates/oxc_minifier/src/peephole/fold_constants.rs (+2 -2)",
+        "crates/oxc_minifier/src/peephole/inline.rs (+3 -7)",
+        "crates/oxc_minifier/src/peephole/minimize_conditional_expression.rs (+1 -1)",
+        "crates/oxc_minifier/src/peephole/minimize_conditions.rs (+1 -1)",
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+2 -3)",
+        "crates/oxc_minifier/src/peephole/normalize.rs (+2 -2)",
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+1 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 28163,
+      "title": "chore(deps): bump tokio to 1.54.1",
+      "url": "https://github.com/oxc-project/oxc/pull/28163",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T02:26:29Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.90.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 28159,
+      "title": "refactor(formatter_core): make embedded dispatch parent-to-child only",
+      "url": "https://github.com/oxc-project/oxc/pull/28159",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T03:56:37Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Remove `child_context`, every usecases are handled only parent -> child direction.",
+      "files": [
+        "apps/oxfmt/src/core/embed/dispatcher.rs (+6 -6)",
+        "apps/oxfmt/src/core/embed/prettier_doc.rs (+59 -42)",
+        "apps/oxfmt/src/core/support.rs (+0 -6)",
+        "crates/oxc_formatter/src/embed_context.rs (+5 -5)",
+        "crates/oxc_formatter/src/lib.rs (+1 -1)",
+        "crates/oxc_formatter/src/print/template/embed/html.rs (+21 -59)",
+        "crates/oxc_formatter_core/src/lib.rs (+2 -2)",
+        "crates/oxc_formatter_core/src/session/embedded.rs (+7 -27)",
+        "crates/oxc_formatter_core/src/session/mod.rs (+8 -15)",
+        "crates/oxc_formatter_core/AGENTS.md (+3 -2)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 28160,
+      "title": "chore(oxfmt): remove stale DIVERGENCES comment from fixtures",
+      "url": "https://github.com/oxc-project/oxc/pull/28160",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T03:56:56Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.90.0",
+      "filesTotal": 3
+    },
+    {
+      "number": 28161,
+      "title": "chore(formatter_css): bump oxc-css-parser to 0.0.18",
+      "url": "https://github.com/oxc-project/oxc/pull/28161",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T03:58:34Z",
+      "hint": "other",
+      "release": "📦 oxlint_v1.90.0",
+      "filesTotal": 2
+    },
+    {
+      "number": 28162,
+      "title": "chore(oxfmt): bump prettier-plugin-astro to 1.1.2",
+      "url": "https://github.com/oxc-project/oxc/pull/28162",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T03:58:53Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "other",
+      "release": "📦 oxlint_v1.90.0",
+      "filesTotal": 4
+    },
+    {
+      "number": 28164,
+      "title": "fix(formatter_markdown): honor range ignore inside directives",
+      "url": "https://github.com/oxc-project/oxc/pull/28164",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T03:59:24Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Fixes #28154\n\nRange ignore is supported only at the top level.\n\nPrettier does not support directives, so the contents of `:::` end up at the top level and the range works there.\nWe parse `:::` as a container directive, so its contents were not top-level and the range was ignored.\n\nThis PR treats a `:::` directive with no blockquote / list item / footnote above it as top-level.\n\nSupporting ranges everywhere is possible, but it has concerns such as indentation drift in verbatim output. So this starts small.",
+      "files": [
+        "crates/oxc_formatter_markdown/src/print/block.rs (+19 -7)",
+        "crates/oxc_formatter_markdown/src/print/blockquote.rs (+3 -1)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/oxfmt-ignore.md (+19 -0)",
+        "crates/oxc_formatter_markdown/tests/fixtures/markdown/oxfmt-ignore.md.snap (+61 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 28064,
+      "title": "fix(formatter): keep closing HTML comments at the start of a line",
+      "url": "https://github.com/oxc-project/oxc/pull/28064",
+      "author": "camc314",
+      "mergedAt": "2026-10-26T04:40:02Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "The three new Annex B declaration fixtures in #28057 parse successfully but fail after formatting. A comment between `let` and its binding moves onto the keyword's line: `let --> comment`. A closing HTML comment is recognized only at the start of a line, so this changes the program or produces invalid syntax.\n\nForce a hard line break before closing HTML comments. Add a formatter snapshot covering `let`, `const`, and destructuring declarations, and document the divergence from Prettier 3.9.10, whose output is rejected by `node --check`.\n\nBased on the merged submodule update. `just submodules`, `just coverage`, full `just test -p oxc_formatter` (including Prettier conformance), `just lint -p oxc_formatter`, and the default-feature check completed. All three upstream failures disappear: formatter Babel positives improve from 2271/2280 to 2274/2280. Updated the coverage and fixture snapshots; output is stable on a second formatting pass.\n\nAI disclosure: prepared and verified with Codex assistance.",
+      "files": [
+        "crates/oxc_formatter/src/formatter/trivia.rs (+6 -0)",
+        "tasks/coverage/snapshots/formatter_babel.snap (+1 -7)",
+        "crates/oxc_formatter/DIVERGENCES.md (+29 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/comments/html-close-declaration.cjs (+15 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/comments/html-close-declaration.cjs.snap (+62 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28166,
+      "title": "fix(formatter): keep `;` before `in` and `instanceof` class members",
+      "url": "https://github.com/oxc-project/oxc/pull/28166",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T05:46:32Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Closes #28065\n\nPrettier's `shouldPrintSemicolonAfterClassProperty` (and also biome) already has this rule, but our port missed it.\n\n- Treat an `in` / `instanceof` key like a computed key in `needs_semicolon`, with the same modifier exclusions\n- Check a string key by its value, since `\"in\"` may be printed unquoted\n  - Prettier unquotes it and drops the `;`, producing invalid code\n  - DIVERGENCES.md#string-binary-keyword-class-key",
+      "files": [
+        "crates/oxc_formatter/src/print/class.rs (+23 -4)",
+        "tasks/coverage/snapshots/formatter_babel.snap (+1 -5)",
+        "crates/oxc_formatter/DIVERGENCES.md (+29 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/semicolons/binary-keyword-class-key.js (+22 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/semicolons/binary-keyword-class-key.js.snap (+133 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/semicolons/binary-keyword-class-key-quoted.ts (+5 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/semicolons/binary-keyword-class-key-quoted.ts.snap (+48 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 28168,
+      "title": "fix(formatter): keep parens around an instantiation expression ending an operand through any tight parent",
+      "url": "https://github.com/oxc-project/oxc/pull/28168",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T06:26:33Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Closes #28108\n\nFixes `(<any>(make<T>)) + y` (#28108) case, and also `(#p in make<T>) > y` and `(<A>await make<T>) + y` cases.",
+      "files": [
+        "crates/oxc_formatter/src/parentheses/expression.rs (+33 -24)",
+        "crates/oxc_formatter/tests/fixtures/ts/parenthesis/instantiation-expression-parens.ts (+3 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/parenthesis/instantiation-expression-parens.ts.snap (+19 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28103,
+      "title": "fix(formatter): keep a comment before `}` inside a JSX spread child",
+      "url": "https://github.com/oxc-project/oxc/pull/28103",
+      "author": "vidigoat",
+      "mergedAt": "2026-10-26T07:10:46Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "`jsx/spread/child.js` is in the \"Not idempotent\" list of both Prettier conformance reports. Its own-line comment before `}` survives the first pass, but on the second pass it moves out of the spread child:\n\n```jsx\n// pass 1 (same as Prettier)\n<div>\n  {\n    ...a\n    //comment\n  }\n</div>;\n\n// pass 2\n<div>\n  {\n    ...a\n  }\n//comment\n</div>;\n```\n\n`JSXExpressionContainer` prints the comments before `}` inside its braces (`FormatTrailingComments::Comments(comments_before(self.span.end))`), so `{a //comment}` is stable; `JSXSpreadChild` printed only the leading comments and the expression, so once the child sits on its own lines the comment is left for the parent to print after `}`. This adds the same trailing-comment print to `JSXSpreadChild`. (`JSXSpreadAttribute` already keeps it.)\n\nTests:\n- New fixture `js/jsx/spread-child-trailing-comment.jsx`; it fails on `main`, and its output is identical to Prettier 3.9.10 (the pinned version) at both option sets and stable on a second pass.\n- `jsx/spread/child.js` drops out of the \"Not idempotent\" lists in `conformance__prettier-js.snap` and `conformance__prettier-ts.snap`; no other conformance change.\n- `cargo test -p oxc_formatter --all-features`, `cargo fmt --check`, `just lint -p oxc_formatter` (clippy with warnings denied) and `typos` pass.\n\nAI disclosure: this PR (code, tests and description) was written with Claude Code (Claude Opus 5.5); the verification above is what was run.",
+      "files": [
+        "crates/oxc_formatter/src/print/jsx/mod.rs (+30 -33)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/spread-trailing-comment.jsx (+21 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/spread-trailing-comment.jsx.snap (+78 -0)",
+        "crates/oxc_formatter/tests/snapshots/conformance__prettier-js.snap (+0 -1)",
+        "crates/oxc_formatter/tests/snapshots/conformance__prettier-ts.snap (+0 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":28167,"title":"docs(formatter): fix up wording","hint":"other","release":"📦 oxlint_v1.90.0","brief":true},
+    {
+      "number": 28169,
+      "title": "fix(formatter): use position-based comment checks for concise arrays",
+      "url": "https://github.com/oxc-project/oxc/pull/28169",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T08:35:35Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Closes #28104.\n\n`can_concisely_print_array_list` shared one cursor-based comments iterator across elements.\nChecking an element consumed the comments of later ones, so a comment inside a later signed number was missed and the array fill-printed on the second pass.\n\n- Check each element with the position-based `has_any_comment_in_range`, and the trailing line comment check with `all_comments_in_range` over the array\n  - Layout decisions use the position-based queries, see `crates/oxc_formatter/AGENTS.md`\n- `js/arrays/numbers-negative-comment-after-minus.js` is now idempotent",
+      "files": [
+        "crates/oxc_formatter/src/print/array_element_list.rs (+3 -21)",
+        "crates/oxc_formatter/tests/fixtures/js/arrays/concise-unary-comment.js (+10 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/arrays/concise-unary-comment.js.snap (+63 -0)",
+        "crates/oxc_formatter/tests/snapshots/conformance__prettier-js.snap (+0 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 28170,
+      "title": "fix(formatter): keep fill layout for array with comment after [",
+      "url": "https://github.com/oxc-project/oxc/pull/28170",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T08:36:05Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Aligned with Prettier and also fix idempotency issue.",
+      "files": [
+        "crates/oxc_formatter/src/print/array_element_list.rs (+5 -1)",
+        "crates/oxc_formatter/tests/fixtures/js/arrays/concise-opener-line-comment.js (+7 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/arrays/concise-opener-line-comment.js.snap (+91 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28174,
+      "title": "refactor(formatter): treat a sibling starting at the enclosing end as outside for trailing comments",
+      "url": "https://github.com/oxc-project/oxc/pull/28174",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-26T08:36:38Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "- Use `>=` for trailing comment bound\n- Remove the explicit trailing comment prints that worked around it in `JSXExpressionContainer`, `write_jsx_spread` and `FormatOpeningElement`",
+      "files": [
+        "crates/oxc_formatter/src/formatter/comments.rs (+5 -3)",
+        "crates/oxc_formatter/src/print/jsx/mod.rs (+4 -20)",
+        "crates/oxc_formatter/src/print/jsx/opening_element.rs (+1 -8)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/opening-element-trailing-comment.jsx (+10 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/jsx/opening-element-trailing-comment.jsx.snap (+59 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28144,
+      "title": "fix(react-compiler): keep the optional chain through a non-null assertion",
+      "url": "https://github.com/oxc-project/oxc/pull/28144",
+      "author": "sarankumar1325",
+      "mergedAt": "2026-10-26T09:35:40Z",
+      "labels": [
+        "A-react-compiler"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Fixes #28142\n\n### Before / After\n\n```tsx\nusers?.find((user) => user.id === userId)!.name\n```\n\nBefore: `users.find((user) => user.id === userId).name` (the `?.` was dropped, so this throws when `users` is undefined)\nAfter: `users?.find((user) => user.id === userId).name`\n\n### Cause\n\nIn oxc the whole chain is one `ChainExpression`, and the lowering decides whether a member or call is optional by walking its receiver spine (`expr_contains_optional`). A `TSNonNullExpression` stopped that walk, and the `other` arm in the optional member/call lowering then lowered it as a plain expression. Babel keeps the chain going through `!`, so the inner link should still be an optional member/call.\n\n### Fix\n\n- `expr_contains_optional` looks through `TSNonNullExpression`.\n- When the object of an optional member, or the callee of an optional call, is a `TSNonNullExpression`, it is lowered with `lower_chain_subexpr` so the inner link keeps its optional semantics.\n\n### Tests\n\n- New fixtures `optional-chain-non-null-assertion.tsx` (the issue repro) and `optional-chain-non-null-assertion-call.tsx` (`obj?.get!().value` and `obj?.get?.()!.value`), with snapshots.\n- `cargo test -p oxc_react_compiler` passes with no changes to existing snapshots; `cargo clippy -p oxc_react_compiler --all-targets -- -D warnings` and `cargo fmt` are clean.\n\nAI disclosure: this change was written with help from an AI assistant and reviewed and tested by me.",
+      "files": [
+        "crates/oxc_react_compiler/src/react_compiler_lowering/build_hir.rs (+40 -0)",
+        "crates/oxc_react_compiler/fixtures/optional-chain-non-null-assertion-call.tsx (+12 -0)",
+        "crates/oxc_react_compiler/fixtures/optional-chain-non-null-assertion.tsx (+5 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/optional-chain-non-null-assertion-call.snap (+44 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/optional-chain-non-null-assertion.snap (+34 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28180,
+      "title": "refactor(minifier): reuse preserve_indirect_access_if_needed helper",
+      "url": "https://github.com/oxc-project/oxc/pull/28180",
+      "author": "armano2",
+      "mergedAt": "2026-10-26T13:13:57Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "unknown",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "replace `should_keep_indirect_access` + `preserve_indirect_access` with  `preserve_indirect_access_if_needed` helper that has been introduced in https://github.com/oxc-project/oxc/pull/27082#discussion_r4124338276",
+      "files": [
+        "crates/oxc_minifier/src/peephole/fold_constants.rs (+8 -15)",
+        "crates/oxc_minifier/src/peephole/minimize_conditional_expression.rs (+1 -4)",
+        "crates/oxc_minifier/src/peephole/remove_dead_code.rs (+1 -5)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28165,
+      "title": "fix(react-compiler): preserve optional-chain cache guards",
+      "url": "https://github.com/oxc-project/oxc/pull/28165",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-26T13:28:58Z",
+      "labels": [
+        "A-react-compiler"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Memoization can hide a required `TypeError` after an optional chain short-circuits on an earlier render. For `obj?.a.b(getArg())`, rendering first with `obj = undefined` caches `undefined`; rendering again with `obj = {}` can reuse that result because the reduced dependency `obj?.a` is still `undefined`. The second render should throw when reading `.b`.\n\nKeep non-optional continuation dependencies below optional prefixes instead of letting the prefix subsume them. When a computed or call continuation cannot be represented as a property path, retain the original optional guard dependency. For conditionally evaluated chains such as `getArg() ? obj?.a.b(getArg()) : null`, truncate an unhoistable dependency before its last optional link. This tracks the guard without moving a throwing read ahead of its condition. Fully optional chains keep their existing dependency reduction.\n\nAdds 11 focused Node runtime cases comparing compiled and original JavaScript over two consecutive renders, with truthy and falsy conditions. They cover static, computed, optional-call, nested, conditional, and fully optional chains, plus method receivers. Output snapshots cover the generated dependencies.\n\nThis bug predates and is independent of https://github.com/oxc-project/oxc/pull/28144. The same static, computed, and optional-call failures were reproduced with `babel-plugin-react-compiler@1.0.0` and `@babel/core@8.0.9`; this intentionally corrects behavior also present upstream.\n\nValidation:\n- `cargo \n…(truncated)",
+      "files": [
+        "crates/oxc_react_compiler/src/react_compiler_inference/propagate_scope_dependencies_hir.rs (+50 -53)",
+        "crates/oxc_react_compiler/fixtures/optional-chain-cache-guard.jsx (+39 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/error.todo-preserve-memo-deps-mixed-optional-nonoptional-property-chain.snap (+1 -1)",
+        "crates/oxc_react_compiler/tests/snapshots/nested-optional-chains.snap (+4 -4)",
+        "crates/oxc_react_compiler/tests/snapshots/optional-chain-cache-guard.snap (+230 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/optional-member-expression-as-memo-dep.snap (+14 -13)",
+        "crates/oxc_react_compiler/tests/snapshots/propagate-scope-deps-hir-fork__nested-optional-chains.snap (+4 -4)",
+        "crates/oxc_react_compiler/tests/snapshots/propagate-scope-deps-hir-fork__optional-member-expression-as-memo-dep.snap (+14 -13)",
+        "crates/oxc_react_compiler/tests/transform.rs (+77 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 26965,
+      "title": "fix(transformer_plugins): keep the bare inject when references to it remain",
+      "url": "https://github.com/oxc-project/oxc/pull/26965",
+      "author": "bharadwaj-pendyala",
+      "mergedAt": "2026-10-26T13:47:11Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Closes #26928.\n\n## Problem\n\n`Symbol` and `Symbol.iterator` both configured as injects, module uses both forms. Only the member form gets replaced:\n\n```js\n// in\nconst supported = typeof Symbol !== \"undefined\" && typeof Symbol.iterator === \"symbol\";\nconst sym = Symbol(\"x\");\n\n// out, on main\nimport { symbolIterator as $inject_Symbol_iterator } from \"./symbol-polyfill.js\";\nconst supported = typeof Symbol !== \"undefined\" && typeof $inject_Symbol_iterator === \"symbol\";\nconst sym = Symbol(\"x\");\n```\n\n`typeof Symbol` and `Symbol(\"x\")` still reach the global. esbuild and `@rollup/plugin-inject` replace all three.\n\n`inject_global_variables.rs:194` dropped a bare inject once any member inject rooted at the same name had been replaced. That handles `Buffer` + `Buffer.isBuffer`, where `Buffer.isBuffer('foo')` shouldn't pull in an unused `Buffer` import. It didn't check whether other references survived.\n\n## Solution\n\n`replace_dot_defines` records the `ReferenceId` of the object identifier each replaced member expression was rooted at. The bare inject stays when an unresolved reference to that name isn't one of them. `Buffer.isBuffer('foo')` alone still drops the import.\n\nThe issue suggests two approaches. Reference ids rather than counts, because `replaced_dot_defines` only records the first replacement per dot define, so a count is wrong for a module using `Symbol.iterator` twice.\n\n`build()` now clears that set, `replaced_dot_defines` and `changed` first. `ReferenceId`s only mean anything\n…(truncated)",
+      "files": [
+        "crates/oxc_transformer_plugins/src/inject_global_variables.rs (+46 -19)",
+        "crates/oxc_transformer_plugins/tests/integrations/inject_global_variables.rs (+40 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28101,
+      "title": "fix(react-compiler): keep manual memoization as written when its dependencies can't be honoured",
+      "url": "https://github.com/oxc-project/oxc/pull/28101",
+      "author": "Dunqing",
+      "mergedAt": "2026-10-26T14:37:36Z",
+      "labels": [
+        "A-transformer",
+        "A-react-compiler"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "The compiler could change when a manual `useMemo` or `useCallback` updates by replacing the author's dependency list with the dependencies it inferred. In the reported case, a list sorted with `useMemo(() => sortBy(items, s ?? props.value), [items])` started sorting again when `s` changed, even though the author had left `s` out of the dependency list. Extra dependencies could also be dropped.\n\nEnable exhaustive memo dependency validation by default, matching current React Compiler upstream. When dependencies are missing or extra, skip the whole component or hook and leave its manual memoization intact. Other functions in the file can still compile. ESLint and Oxlint suppressions continue to work as before.\n\nRegression tests cover missing and extra dependencies, partial `useCallback` dependencies, non-inline callbacks, property reads inside callbacks, and sibling compilation after a bailout. Validation passed: the full React compiler test suite, all 1,844 fixture snapshots, Clippy, and all 37 NAPI tests.\n\nFixes #27113\n\nAI disclosure: written with Claude Code.",
+      "files": [
+        "crates/oxc_react_compiler/src/react_compiler_hir/environment_config.rs (+4 -4)",
+        "napi/transform-react/index.d.ts (+1 -1)",
+        "napi/transform-react/src/options.rs (+1 -1)",
+        "napi/transform-react/transform-react.wasi.d.cts (+1 -1)",
+        "napi/transform-react/transform-react.wasip1.d.cts (+1 -1)",
+        "crates/oxc_react_compiler/fixtures/keep-manual-memo-extra-deps.jsx (+8 -0)",
+        "crates/oxc_react_compiler/fixtures/keep-manual-memo-missing-deps-rest-props.jsx (+12 -0)",
+        "crates/oxc_react_compiler/fixtures/keep-manual-memo-missing-deps.jsx (+8 -0)",
+        "crates/oxc_react_compiler/fixtures/keep-manual-memo-no-hoisted-property-read.jsx (+9 -0)",
+        "crates/oxc_react_compiler/fixtures/keep-manual-memo-non-inline-callback.jsx (+9 -0)"
+      ],
+      "filesTotal": 31
+    },
+    {
+      "number": 28183,
+      "title": "fix(minifier): keep the default in shorthand assignment targets",
+      "url": "https://github.com/oxc-project/oxc/pull/28183",
+      "author": "waltuov",
+      "mergedAt": "2026-10-27T01:40:54Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "`try_compress_assignment_target_property` rewrites `{ a: a }` to `{ a }` in assignment patterns. It found the target with `AssignmentTargetMaybeDefault::identifier_mut()`, which also matches `a: a = b`, and then built the shorthand without an initializer, so the default was dropped:\n\n```js\n({ x: x = f() } = o);\n// before: ({ x } = o);\n// after:  ({ x = f() } = o);\n```\n\nWhen `o.x` is `undefined`, `x` stayed `undefined` and `f()` was not called. The rewrite now moves the initializer into the shorthand. Both forms name an anonymous function default after the identifier, so `.name` does not change.\n\nThis causes 9 of the 21 `obj-prop-elem-init-*` minify failures in `runtime.snap` (the `evaluation`, `yield-expr` and `let` cases under `expressions/assignment/dstr/`, `statements/for-of/dstr/` and `statements/for-await-of/`). Their minified output now keeps the default. The other 12 are `fn-name-*` cases with a different cause, and their output is unchanged. `runtime.snap` is not regenerated here.\n\nTests cover literal, call, `yield` and `await` defaults, a default that reads the target, nested and array patterns, `for...in`, `for...of` and `for await...of` heads, a rest sibling and a computed string key, plus forms that must stay unchanged. `cargo minsize` and `cargo allocs` show no change.\n\nAI-assisted (Claude Code).",
+      "files": [
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+10 -5)",
+        "crates/oxc_minifier/tests/peephole/substitute_alternate_syntax.rs (+27 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 27855,
+      "title": "fix(minifier): keep brackets on negative and non-finite numeric keys",
+      "url": "https://github.com/oxc-project/oxc/pull/27855",
+      "author": "ozenyunus35",
+      "mergedAt": "2026-10-27T01:43:53Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Fixes #27834\n\n`try_compress_property_key` cleared `computed` for every numeric key, while the string branch only turns a key into a number when it is `>= 0`. A computed `-2` or `Infinity` key folded to a numeric literal then lost its brackets. Codegen puts them back for a non-method `ObjectProperty`, but not for methods, binding and assignment-target properties, or class members, so `{ [-1]() {} }` was printed as `{ -1() {} }`, which doesn't parse.\n\nThe numeric branch now only drops the brackets when the value is finite and has a positive sign, so `-2`, `-0`, `Infinity` and `NaN` keep them.\n\nAdded cases to `test_property_key` for each key position (object method, assignment target, binding, class field, static method, accessor) plus `Infinity`, `-Infinity`, `NaN` and `-0`; the method case fails without the change. `cargo test -p oxc_minifier` and clippy pass, and the five snippets from the issue now minify to code that runs and prints `7`, `7`, `1 3`, `5` and `7` in Node.\n\nI used an AI assistant to help draft parts of the code and tests; I reviewed the changes and ran the tests myself.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/substitute_alternate_syntax.rs (+4 -1)",
+        "crates/oxc_minifier/tests/peephole/substitute_alternate_syntax.rs (+13 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28111,
+      "title": "fix(react-compiler): emit valid binding names for hyphenated props in JSX outlining",
+      "url": "https://github.com/oxc-project/oxc/pull/28111",
+      "author": "HawkForge",
+      "mergedAt": "2026-10-27T01:49:39Z",
+      "labels": [
+        "A-react-compiler"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Fixes #26288\n\nThanks to @ADSA-DR for the report, and to @alfafc for narrowing it down and pointing to the upstream report (facebook/react#36218).\n\nAI assistance (Claude) was used to prepare this change. It was verified with `cargo test -p oxc_react_compiler` and the new fixture snapshot.\n\nRoot cause: with `enableJsxOutlining`, `collect_props` used the JSX attribute name as the outlined component's prop name and as the binding name in its destructure. For names like `data-testid` or `aria-label` that is not a valid identifier, so the output contained `const { \"data-testid\": data-testid } = t0`, and `result.errors` was empty.\n\nChange: derive a valid identifier from the attribute name (`data-testid` -> `dataTestid`, prefixed with `_` if the result is empty, starts with a digit or is a reserved word). The existing de-duplication then handles collisions. The original name is still used as the attribute on the JSX inside the outlined component, so the rendered DOM is unchanged.\n\nTest: new fixture `jsx-outlining-hyphenated-attr.js` with its snapshot. Without the fix the snapshot shows the invalid destructure; with it the output parses.",
+      "files": [
+        "crates/oxc_react_compiler/src/react_compiler_optimization/outline_jsx.rs (+9 -1)",
+        "crates/oxc_react_compiler/fixtures/jsx-outlining-hyphenated-attr.js (+17 -0)",
+        "crates/oxc_react_compiler/fixtures/jsx-outlining-safe-binding-names.js (+17 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/jsx-outlining-hyphenated-attr.snap (+63 -0)",
+        "crates/oxc_react_compiler/tests/snapshots/jsx-outlining-safe-binding-names.snap (+71 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 27936,
+      "title": "fix(semantic): separate hoisted vars from block type bindings",
+      "url": "https://github.com/oxc-project/oxc/pull/27936",
+      "author": "limadog9",
+      "mergedAt": "2026-10-27T02:47:54Z",
+      "labels": [
+        "A-semantic"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.90.0",
+      "body": "Fixes #22785.\n\nWhen hoisting a `var`, the binder reused a same-name type alias or interface from an intermediate block scope. This lost the function-scoped value binding and left later value references unresolved. Only reuse intermediate bindings that can be referenced as values, so the block's type binding and the hoisted variable retain their own scopes and references.\n\nThe regression checks separate symbols and type/value references for aliases, interfaces, and nested blocks. The alias case fails before this change; TypeScript 6.0.3 accepts all three inputs.\n\nValidation:\n\n- `cargo test -p oxc_semantic --all-features`\n- `CARGO_BUILD_WARNINGS=deny cargo lint -p oxc_semantic`\n- `cargo test -p oxc_linter --all-features`\n- `cargo test -p oxc_minifier --all-features`\n- `cargo run -p oxc_transform_conformance` — committed conformance snapshots match.\n- `cargo fmt --all -- --check`",
+      "files": [
+        "crates/oxc_semantic/src/binder.rs (+4 -0)",
+        "crates/oxc_semantic/tests/integration/symbols.rs (+30 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":28192,"title":"test(react-compiler): replace Node.js runtime test with the optional-chain fixture","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28188,
+      "title": "fix(formatter): keep parens for private field",
+      "url": "https://github.com/oxc-project/oxc/pull/28188",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-27T06:13:36Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #28123, closes #28124.\n\n- Keep parens around `(a ?? b)?.#x`\n- Add a helper to handle similar cases together\n  - `PrivateFieldExpression` was often missed...",
+      "files": [
+        "crates/oxc_formatter/src/ast_nodes/impls/ast_nodes.rs (+10 -0)",
+        "crates/oxc_formatter/src/parentheses/expression.rs (+18 -36)",
+        "crates/oxc_formatter/tests/fixtures/js/private-fields/parenthesis.js (+17 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/private-fields/parenthesis.js.snap (+51 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 28193,
+      "title": "fix(formatter): print `x.b` and `x.#b` samely",
+      "url": "https://github.com/oxc-project/oxc/pull/28193",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-27T06:14:07Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "There is no reason to handle them separately.\n\nThis change also fixes idempotency issue with comments.",
+      "files": [
+        "crates/oxc_formatter/src/ast_nodes/impls/ast_nodes.rs (+15 -0)",
+        "crates/oxc_formatter/src/parentheses/expression.rs (+1 -5)",
+        "crates/oxc_formatter/src/print/as_or_satisfies_expression.rs (+3 -8)",
+        "crates/oxc_formatter/src/print/binary_like_expression.rs (+5 -2)",
+        "crates/oxc_formatter/src/print/call_like_expression/arguments.rs (+10 -6)",
+        "crates/oxc_formatter/src/print/call_like_expression/mod.rs (+2 -4)",
+        "crates/oxc_formatter/src/print/decorators.rs (+9 -9)",
+        "crates/oxc_formatter/src/print/jsx/element.rs (+0 -14)",
+        "crates/oxc_formatter/src/print/member_expression.rs (+71 -60)",
+        "crates/oxc_formatter/src/print/mod.rs (+2 -5)"
+      ],
+      "filesTotal": 27
+    },
+    {
+      "number": 28199,
+      "title": "fix(formatter): break parens of `(a + b)[c]` like `(a + b).c`",
+      "url": "https://github.com/oxc-project/oxc/pull/28199",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-27T06:14:36Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "```js\n// before\n(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +\n  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)[c];\n\n// after\n(\n  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +\n  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n)[c];\n```",
+      "files": [
+        "crates/oxc_formatter/src/ast_nodes/impls/ast_nodes.rs (+0 -5)",
+        "crates/oxc_formatter/src/print/binary_like_expression.rs (+2 -2)",
+        "crates/oxc_formatter/src/utils/conditional.rs (+3 -16)",
+        "tasks/track_memory_allocations/allocs_formatter.yaml (+2 -2)",
+        "crates/oxc_formatter/DIVERGENCES.md (+33 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/parenthesis/computed-member-object-paren-break.js (+9 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/parenthesis/computed-member-object-paren-break.js.snap (+78 -0)",
+        "crates/oxc_formatter/tests/snapshots/conformance__prettier-js.snap (+2 -1)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 28200,
+      "title": "fix(formatter): handle `this.b` and `super.b` like `foo.b`",
+      "url": "https://github.com/oxc-project/oxc/pull/28200",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-27T06:15:05Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "For consistency.",
+      "files": [
+        "crates/oxc_formatter/src/print/member_expression.rs (+12 -1)",
+        "tasks/track_memory_allocations/allocs_formatter.yaml (+10 -10)",
+        "crates/oxc_formatter/DIVERGENCES.md (+36 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/member-expression/single-level-member-no-break.mjs (+20 -0)",
+        "crates/oxc_formatter/tests/fixtures/js/member-expression/single-level-member-no-break.mjs.snap (+101 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28173,
+      "title": "fix(formatter): keep parens around a generic function type in a type assertion",
+      "url": "https://github.com/oxc-project/oxc/pull/28173",
+      "author": "vidigoat",
+      "mergedAt": "2026-10-27T08:23:46Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "A generic function type right after the `<` of a type assertion is printed without parens, so the output starts with `<<` and no longer parses:\n\n```ts\n// input (parses)\nvar a = < <T>(x: T) => T>f;\nvar g = < <T>() => T>< <U>() => U>h;\n\n// main (tsc: \"Expression expected\")\nvar a = <<T>(x: T) => T>f;\nvar g = <<T>() => T>(<<U>() => U>h);\n```\n\nIn an expression, `<<` is read as a left shift, so the type assertion is gone. Prettier 3.9.10 prints the same, so this follows Prettier into invalid code. `TSFunctionType::needs_parentheses` now returns true for a function type with type parameters whose parent is a `TSTypeAssertion`:\n\n```ts\nvar a = <(<T>(x: T) => T)>f;\nvar g = <(<T>() => T)>(<(<U>() => U)>h);\n```\n\nOnly that position needs it. In type arguments TypeScript re-scans `<<` as two tokens, so `Array<<T>() => T>`, `f<<T>() => T>()`, `new C<<T>() => T>()` and an instantiation expression all parse and keep their output. A function type without type parameters, a constructor type (`<new <T>() => T>f`) and a function type nested inside another type don't start with `<` and don't change.\n\nThis is a divergence from the pin, so it has a `DIVERGENCES.md#type-assertion-generic-function-parens` entry, under `semantics (Prettier's output no longer parses)`, and a pin fixture.\n\nTests:\n- New fixture `ts/parenthesis/type-assertion-generic-function-parens.ts`. It fails on `main`. Its output matches Prettier 3.9.10 at both option sets except the three statements the fixture marks as deviating, an\n…(truncated)",
+      "files": [
+        "crates/oxc_formatter/src/parentheses/ts_type.rs (+23 -0)",
+        "tasks/coverage/snapshots/formatter_typescript.snap (+1 -5)",
+        "crates/oxc_formatter/DIVERGENCES.md (+32 -0)",
+        "crates/oxc_formatter/tests/conformance.rs (+3 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/parenthesis/generic-function-type-after-lt-parens-jsx.tsx (+2 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/parenthesis/generic-function-type-after-lt-parens-jsx.tsx.snap (+21 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/parenthesis/generic-function-type-after-lt-parens.ts (+16 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/parenthesis/generic-function-type-after-lt-parens.ts.snap (+63 -0)",
+        "crates/oxc_formatter/tests/snapshots/conformance__prettier-ts.snap (+1 -1)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 28204,
+      "title": "feat(oxfmt): add debug span for reading files",
+      "url": "https://github.com/oxc-project/oxc/pull/28204",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-27T09:29:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Reading a file happens outside the `oxfmt::format` span, so time spent in I/O did not show up with `OXC_LOG=debug`.\n\nOn a machine where an endpoint security agent scans every `open()`/`close()`, most of the wall time was spent there, but the log only showed formatting time.\n\n```\nDEBUG oxfmt::read{path=src/foo.tsx}: oxfmt::cli::service: close time.busy=92.6µs time.idle=2.38µs\n```\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+      "files": [
+        "apps/oxfmt/src/cli/service.rs (+4 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":28206,"title":"docs(formatter_core): tighten FORMATTER_POLICY","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28207,
+      "title": "refactor(linter): add helper to get jest node from call expr",
+      "url": "https://github.com/oxc-project/oxc/pull/28207",
+      "author": "camchenry",
+      "mergedAt": "2026-10-27T19:13:53Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Used in subsequent PRs. This helper is used for getting `PossibleJestNode` from `CallExpression` so that instead of the jest rules primarily operating on `PossibleJestNode` instead they operate on `CallExpression`.",
+      "files": [
+        "crates/oxc_linter/src/utils/jest.rs (+50 -0)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "oxc-guard[bot]": 2,
+      "renovate[bot]": 4
+    }
+  }
+}

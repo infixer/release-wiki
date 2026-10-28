@@ -1,0 +1,80 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-10-28T00:33:26Z",
+  "range": {
+    "from": "2026-10-23T20:02:08Z",
+    "to": "2026-10-28T00:33:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10853,
+      "title": "docs(s2): close CardPreview with matching tag in Card anatomy",
+      "url": "https://github.com/adobe/react-spectrum/pull/10853",
+      "author": "mangeshraut712",
+      "mergedAt": "2026-10-26T20:34:41Z",
+      "labels": [
+        "S2"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 10834,
+      "title": "chore: add shadow-safe parent lint rules",
+      "url": "https://github.com/adobe/react-spectrum/pull/10834",
+      "author": "nwidynski",
+      "mergedAt": "2026-10-27T19:37:53Z",
+      "labels": [
+        "TableView",
+        "Breadcrumbs",
+        "ButtonGroup",
+        "small review",
+        "TagGroup",
+        "DropZone",
+        "ready for review",
+        "RAC",
+        "S2",
+        "Table",
+        "AI"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 45
+    },
+    {
+      "number": 10863,
+      "title": "fix(react-aria-components): inherit Form validationBehavior in ColorField",
+      "url": "https://github.com/adobe/react-spectrum/pull/10863",
+      "author": "mangeshraut712",
+      "mergedAt": "2026-10-27T23:47:21Z",
+      "labels": [
+        "ColorField",
+        "small review",
+        "RAC",
+        "no testing"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n- `ColorField` now inherits `validationBehavior` from a parent `Form` (same pattern as `TextField` / `NumberField` / …).\n- Adds a regression test that `Form validationBehavior=\\\"aria\\\"` yields `aria-required` without native `required`.\n\nFixes #10862\n\n## Test plan\n- [x] `yarn jest packages/react-aria-components/test/ColorField.test.js --no-coverage`",
+      "files": [
+        "packages/react-aria-components/src/ColorField.tsx (+6 -1)",
+        "packages/react-aria-components/test/ColorField.test.js (+17 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}
