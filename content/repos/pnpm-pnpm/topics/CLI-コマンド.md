@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。v12.9.1 では再帰的な `pnpm update --interactive` の `Workspace` 列が 30 桁に収まり（超えた分は `+N more`）、未リリースの修正で `pnpm runtime --help` が `set <name> [<version>]` を示すようになった。未リリースの修正として、v11 の `pnpm dlx --package=<pkg>` がコマンドなしなら `ERR_PNPM_DLX_MISSING_COMMAND` で失敗し、対話的な `pnpm audit --fix` の Patched 列が `saveExact`・`savePrefix` に従うようになった。未リリースの変更として、v12 の `pnpm whoami` が `--registry` を受け付け、`pnpm outdated`・`pnpm update --interactive` が lockfile に記録された overrides を適用してから最新版を調べるようになった。v12.12.0 で、v12 の `pnpm update`・`pnpm why` が再び `--depth Infinity` を受け付けるようになった。v12.13.0 で、pnpm v12 に npm にならった `pnpm token`（トークンの一覧・作成・取り消し）と `pnpm profile`（プロフィールの表示・更新と 2FA の有効化・無効化）が実装された。`pnpm login` は Web ログインで `npm-notice` ヘッダー（確認コードなど）を表示する（v12.14.0）。読み取りだけのコマンドやエラーで終わるコマンドは `package.json` を作らず、stderr が閉じたパイプでも異常終了しない。2026-10-19 の回では、`pnpm pkg fix` が `repository` を正規化し、`pnpm prune` が `trustLockfile` に従うようになった（未リリース）。未リリースの修正として、`pnpm prune` が余分な直接依存を消してワークスペースの選択に従い、v11 の `pnpm sbom` がプロジェクトごとの lockfile から SBOM を作る。2026-10-26 の回では（v12、未リリース）、`pnpm help --all`・`-a` を受け付け、`pnpm add` が小文字の短縮形 `-p`・`-d`・`-o`・`-e` を受け付けるようになった。
+個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。v12.9.1 では再帰的な `pnpm update --interactive` の `Workspace` 列が 30 桁に収まり（超えた分は `+N more`）、未リリースの修正で `pnpm runtime --help` が `set <name> [<version>]` を示すようになった。未リリースの修正として、v11 の `pnpm dlx --package=<pkg>` がコマンドなしなら `ERR_PNPM_DLX_MISSING_COMMAND` で失敗し、対話的な `pnpm audit --fix` の Patched 列が `saveExact`・`savePrefix` に従うようになった。未リリースの変更として、v12 の `pnpm whoami` が `--registry` を受け付け、`pnpm outdated`・`pnpm update --interactive` が lockfile に記録された overrides を適用してから最新版を調べるようになった。v12.12.0 で、v12 の `pnpm update`・`pnpm why` が再び `--depth Infinity` を受け付けるようになった。v12.13.0 で、pnpm v12 に npm にならった `pnpm token`（トークンの一覧・作成・取り消し）と `pnpm profile`（プロフィールの表示・更新と 2FA の有効化・無効化）が実装された。`pnpm login` は Web ログインで `npm-notice` ヘッダー（確認コードなど）を表示する（v12.14.0）。読み取りだけのコマンドやエラーで終わるコマンドは `package.json` を作らず、stderr が閉じたパイプでも異常終了しない。2026-10-19 の回では、`pnpm pkg fix` が `repository` を正規化し、`pnpm prune` が `trustLockfile` に従うようになった（未リリース）。未リリースの修正として、`pnpm prune` が余分な直接依存を消してワークスペースの選択に従い、v11 の `pnpm sbom` がプロジェクトごとの lockfile から SBOM を作る。2026-10-26 の回では（v12、未リリース）、`pnpm help --all`・`-a` を受け付け、`pnpm add` が小文字の短縮形 `-p`・`-d`・`-o`・`-e` を受け付けるようになった。2026-10-28 の回では、v12 の `pnpm add -T` が `--save-types` と `--tilde` のどちらかあいまいなのでエラーになり、出力が端末の高さを超えたときに画面全体を書き直し続けなくなった（`pnpm run --stream` の出力が 1 行 1 回に）。
 
 ## 主な API・オプション
 
@@ -39,6 +39,8 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-28 — 出力が端末の高さを超えたら、画面の行を書き直し続けない（[#17392](https://github.com/pnpm/pnpm/pull/17392)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
+- 2026-10-28 — `pnpm add -T` をあいまいとして拒否（v12）（[#17333](https://github.com/pnpm/pnpm/pull/17333)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
 - 2026-10-26 — `pnpm add` が小文字の短縮形 `-p`・`-d`・`-o`・`-e` を受け付ける（[#17270](https://github.com/pnpm/pnpm/pull/17270)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-26|変更]]
 - 2026-10-26 — `pnpm help --all`・`-a` を受け付ける（[#17262](https://github.com/pnpm/pnpm/pull/17262)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-26|変更]]
 - 2026-10-23 — `pnpm dedupe` がメタデータを取り直す（[#17215](https://github.com/pnpm/pnpm/pull/17215)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-23|変更]]
@@ -81,6 +83,7 @@ tags:
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-10-28|2026-10-28 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-26|2026-10-26 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-23|2026-10-23 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.15.0|v12.15.0]]

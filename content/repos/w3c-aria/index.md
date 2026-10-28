@@ -1,6 +1,6 @@
 ---
 title: w3c/aria
-updated: 2026-10-23
+updated: 2026-10-28
 tags:
   - repo/w3c-aria
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- HTML-AAM で image map を `ATK_ROLE_IMAGE_MAP` にマッピング（[#2945](https://github.com/w3c/aria/pull/2945)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - HTML-AAM の `abbr` 要素の `title` のマッピングから、当てはまらない記述を削除（[#2927](https://github.com/w3c/aria/pull/2927)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - 翻訳対象になる属性についての i18n の考慮事項を追加（[#2862](https://github.com/w3c/aria/pull/2862)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - ARIA Notify の導入文と i18n の例を追加（[#2869](https://github.com/w3c/aria/pull/2869)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
@@ -31,4 +32,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-aria/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-aria/changes/2026-10-23|2026-10-23]]、[[repos/w3c-aria/changes/2026-10-16|2026-10-16]]、[[repos/w3c-aria/changes/2026-10-14|2026-10-14]]、[[repos/w3c-aria/changes/2026-10-12|2026-10-12]]、[[repos/w3c-aria/changes/2026-10-09|2026-10-09]]
+- 最近の変更: [[repos/w3c-aria/changes/2026-10-28|2026-10-28]]、[[repos/w3c-aria/changes/2026-10-23|2026-10-23]]、[[repos/w3c-aria/changes/2026-10-16|2026-10-16]]、[[repos/w3c-aria/changes/2026-10-14|2026-10-14]]、[[repos/w3c-aria/changes/2026-10-12|2026-10-12]]

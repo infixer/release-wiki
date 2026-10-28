@@ -71,3 +71,4 @@ tags:
 - [[repos/oxc-project-oxc/releases/oxlint_v1.89.0|oxlint_v1.89.0]]
 - [[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/oxc-project-oxc/changes/2026-10-23|2026-10-23 の変更]]
+- [[repos/oxc-project-oxc/releases/oxlint_v1.90.0|oxlint_v1.90.0]]

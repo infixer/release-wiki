@@ -1,9 +1,17 @@
 ---
 title: openai/codex 取り込み履歴
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/openai-codex
 ---
+
+## 2026-10-28
+
+- 期間: 2026-10-23T18:51:09Z 〜 2026-10-28T00:33:26Z
+- PR 188 件（詳しく 20 件 / 1 行 168 件）、Release 7 件（安定版 1 件: rust-v0.165.0。プレリリース 6 件: rust-v0.165.0-alpha.3・alpha.1.1・alpha.1.2、rust-v0.166.0-alpha.1〜alpha.3）
+- 更新したページ: [[repos/openai-codex/changes/2026-10-28|changes]]、[[repos/openai-codex/releases/rust-v0.165.0|rust-v0.165.0]]、[[repos/openai-codex/topics/Guardian|Guardian]]、[[repos/openai-codex/topics/TUI|TUI]]、[[repos/openai-codex/topics/インストール|インストール]]、[[repos/openai-codex/topics/サンドボックス|サンドボックス]]、[[repos/openai-codex/topics/シェル・コマンド実行|シェル・コマンド実行]]、[[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]、[[repos/openai-codex/topics/フィードバック・診断|フィードバック・診断]]、[[repos/openai-codex/topics/プラグイン|プラグイン]]、[[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]、[[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]]、[[repos/openai-codex/topics/管理要件|管理要件]]、[[repos/openai-codex/topics/認証|認証]]
+- 備考: PR 数が `maxPrs`（30）を超えたため、`brief: true` の 158 件はタイトルから領域ごとにまとめて「その他」に記載した。本文のある 30 件のうち、V8 の Bazel のビルド・ツールチェーン・内部の整理・トレース・テストの 10 件も「その他」に 1 行で記載。この回の PR はすべて未リリース
+- エラー: なし
 
 ## 2026-10-26
 

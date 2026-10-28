@@ -1,6 +1,6 @@
 ---
 title: Anthropic News
-updated: 2026-10-23
+updated: 2026-10-28
 tags:
   - blog/anthropic
 ---
@@ -9,6 +9,8 @@ tags:
 
 ## 記事
 
+- 2026-10-27 — [[blogs/anthropic/posts/2026-10-27-expanding-partnership-gsa|GSA との提携を拡大、あらゆるレベルの政府に Claude を提供]] — Claude Enterprise・Claude for Government・Claude API を全製品で 40% 割引、州・地方政府も対象（推定 10 億ドルの節約）
+- 2026-10-26 — [[blogs/anthropic/posts/2026-10-26-s1-sec|Anthropic が新規株式公開に向けて SEC に S-1 を提出]] — Class A 普通株式を Nasdaq Global Select Market にシンボル「ANT」で上場予定（株数・価格帯は未定）
 - 2026-10-22 — [[blogs/anthropic/posts/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation|Agent Skills を Agentic AI Foundation に寄贈]] — 名前・ロゴ・GitHub organization・`agentskills.io` を Linux Foundation 傘下の AAIF に寄贈（70 以上のプラットフォームが採用）
 - 2026-10-22 — [[blogs/anthropic/posts/2026-10-22-open-call-guest-investigators-life-sciences|生命科学のゲスト研究者を公募]] — 大学・非営利・政府機関の研究グループが 8〜12 週間 Anthropic の研究者と Claude で共同研究（無償、成果は公開）
 - 2026-10-21 — [[blogs/anthropic/posts/2026-10-21-christopher-stubbs-joins-long-term-benefit-trust|物理学者 Christopher Stubbs が Long-Term Benefit Trust に就任]] — 宇宙の加速膨張の発見に関わった元ハーバード大 Dean of Science が Trust 初の物理学者に
@@ -31,6 +33,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-10-28 — 記事 2 件。エラー: なし
 - 2026-10-23 — 記事 4 件（うち「Features」は本文がサイトのナビゲーションだけのカテゴリーページのため掲載せず）。エラー: なし
 - 2026-10-21 — 記事 1 件（カテゴリ一覧ページ 6 件（Partnerships・Product・Announcements・Security・Safeguards・Policy）は記事ではないため除外）。エラー: なし
 - 2026-10-19 — 記事 1 件。エラー: なし

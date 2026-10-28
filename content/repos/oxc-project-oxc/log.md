@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-28
+
+- 期間: 2026-10-25T22:36:05Z 〜 2026-10-28T00:33:26Z
+- PR 33 件（詳しく 21 件 / 1 行 12 件、うち brief 3 件）、Release 3 件（安定版 3 件: crates_v0.156.0、oxfmt_v0.75.0、oxlint_v1.90.0）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-28|changes]]（新規）、[[repos/oxc-project-oxc/releases/crates_v0.156.0|crates_v0.156.0]]（新規）、[[repos/oxc-project-oxc/releases/oxfmt_v0.75.0|oxfmt_v0.75.0]]（新規）、[[repos/oxc-project-oxc/releases/oxlint_v1.90.0|oxlint_v1.90.0]]（新規）、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/Markdownフォーマッタ|Markdownフォーマッタ]]、[[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/TypeScriptトランスフォーマー|TypeScriptトランスフォーマー]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]、[[repos/oxc-project-oxc/topics/設定ファイル|設定ファイル]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/ランタイムヘルパー|ランタイムヘルパー]]、[[repos/oxc-project-oxc/topics/oxc_str|oxc_str]]（関連リンクのみ）、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 4 件、oxc-guard[bot] 2 件）
 
 ## 2026-10-26
 

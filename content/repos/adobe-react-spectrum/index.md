@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -15,6 +15,7 @@ tags:
 
 ## 直近の注目変更
 
+- `ColorField` が `Form` の `validationBehavior` を引き継ぐように（[#10863](https://github.com/adobe/react-spectrum/pull/10863)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
 - macOS で Enter を押すと Select が開き直る問題を修正（`usePress`）（[#10820](https://github.com/adobe/react-spectrum/pull/10820)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]
 - Chat のスクロールアンカーを改善（モバイルでの位置飛び、`ResponseStatus` の展開時のスクロール）（[#10600](https://github.com/adobe/react-spectrum/pull/10600)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
 - SideNavPanel で移動先の無いトップレベルの項目が隠れ・展開されない問題を修正（[#10778](https://github.com/adobe/react-spectrum/pull/10778)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/SideNav|SideNav]]
@@ -24,7 +25,6 @@ tags:
 - `Sheet` が開くときに画面外で待たされる時間をなくす（[#10815](https://github.com/adobe/react-spectrum/pull/10815)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]
 - Select のタイプアヘッドで同じ文字の繰り返しが正しく動くように（[#10006](https://github.com/adobe/react-spectrum/pull/10006)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - `hasChildItems` の TreeItem が子の行なしでも展開できるように（[#10799](https://github.com/adobe/react-spectrum/pull/10799)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
-- テスト環境ではスタイルマクロのクラス名にバージョンの接尾辞を付けない（[#10736](https://github.com/adobe/react-spectrum/pull/10736)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
 
 ## トピック
 
@@ -49,4 +49,4 @@ tags:
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
 - リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-26|2026-10-26]]、[[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23]]、[[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21]]、[[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]、[[repos/adobe-react-spectrum/changes/2026-10-16|2026-10-16]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-10-28|2026-10-28]]、[[repos/adobe-react-spectrum/changes/2026-10-26|2026-10-26]]、[[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23]]、[[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21]]、[[repos/adobe-react-spectrum/changes/2026-10-19|2026-10-19]]

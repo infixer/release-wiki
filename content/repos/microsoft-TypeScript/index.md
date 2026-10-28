@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,18 +15,16 @@ tags:
 
 ## 直近の注目変更
 
+- 交差型のプロパティ名の数え上げを普通の map と slice で（mui-docs で 5.83% 高速化）（[#64876](https://github.com/microsoft/TypeScript/pull/64876)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- reverse mapped type の解決で public 以外のメンバーを飛ばす（TS2352 のリグレッション修正）（[#64594](https://github.com/microsoft/TypeScript/pull/64594)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- import-equals の出力で、マージされた名前空間への参照を修飾（[#64976](https://github.com/microsoft/TypeScript/pull/64976)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- JSX の閉じタグの後のコメントに似た記号でのフォーマッタのクラッシュを修正（[#64644](https://github.com/microsoft/TypeScript/pull/64644)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
+- シンボルテーブルのエントリを `*ast.Symbol` だけに（[#64979](https://github.com/microsoft/TypeScript/pull/64979)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- オートインポートの計算後に、未保存の export が候補に出ない問題を修正（[#64960](https://github.com/microsoft/TypeScript/pull/64960)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
+- 関数型の束縛パターンの暗黙の any エラーをチェック時に報告（[#64856](https://github.com/microsoft/TypeScript/pull/64856)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- printer のバッファの事前確保をファイル全体の出力時だけに（[#64972](https://github.com/microsoft/TypeScript/pull/64972)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- import 属性の無い import で、モジュールでないことのエラーを残す（[#64884](https://github.com/microsoft/TypeScript/pull/64884)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - mapped type のシグネチャを調べるためにメンバーを解決しない（mui-docs で 8.10% 高速化）（[#64873](https://github.com/microsoft/TypeScript/pull/64873)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- クラス・インターフェースの型のメンバーを遅延して解決（[#64915](https://github.com/microsoft/TypeScript/pull/64915)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- ファイル監視の `Created` イベントでもキャッシュ済みのファイルを読み直す（アトミックな保存で診断が古いまま残る問題）（[#64909](https://github.com/microsoft/TypeScript/pull/64909)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
-- 変更のない `tsc -b` でルートファイルを繰り返し走査しないように（[#64898](https://github.com/microsoft/TypeScript/pull/64898)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
-- プロパティのホバーにインデックスシグネチャの詳細を戻す（[#64586](https://github.com/microsoft/TypeScript/pull/64586)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
-- LSP サーバーがワークスペースフォルダ外の node_modules のコンテンツマッパーを読み込まないように（[#64837](https://github.com/microsoft/TypeScript/pull/64837)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/コンテンツマッパー|コンテンツマッパー]]
-- API: package.json の `"imports"` を削除（CDN から読み込むための前提）（[#64879](https://github.com/microsoft/TypeScript/pull/64879)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- API: クライアントの性能改善（アロケーション 57% 減）（[#64823](https://github.com/microsoft/TypeScript/pull/64823)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- `prop?: undefined` の合成プロパティのキャッシュをシンボルごとにし、宣言出力を `--checkers` に依存しないように（[#64728](https://github.com/microsoft/TypeScript/pull/64728)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- API: `pathsBasePath` が正しく渡されるように（[#64843](https://github.com/microsoft/TypeScript/pull/64843)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- API: 環境変数 `TS_API_TIMING_DIR` でタイミング情報を収集・出力（[#64846](https://github.com/microsoft/TypeScript/pull/64846)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
-- グローバルなファイルの削除後に、インクリメンタルの診断が古いまま残る問題を修正（[#64845](https://github.com/microsoft/TypeScript/pull/64845)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
 
 ## トピック
 
@@ -40,4 +38,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-26|2026-10-26]]、[[repos/microsoft-TypeScript/changes/2026-10-23|2026-10-23]]、[[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]、[[repos/microsoft-TypeScript/changes/2026-10-16|2026-10-16]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-28|2026-10-28]]、[[repos/microsoft-TypeScript/changes/2026-10-26|2026-10-26]]、[[repos/microsoft-TypeScript/changes/2026-10-23|2026-10-23]]、[[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]

@@ -1,6 +1,6 @@
 ---
 title: pnpm/pnpm
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/pnpm-pnpm
 ---
@@ -9,23 +9,23 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v12.15.0](https://github.com/pnpm/pnpm/releases/tag/v12.15.0)（2026-10-21）→ [[repos/pnpm-pnpm/releases/v12.15.0|まとめ]]
-- 安定版（v11 系）: [v11.28.8](https://github.com/pnpm/pnpm/releases/tag/v11.28.8)（2026-10-23）→ [[repos/pnpm-pnpm/releases/v11.28.8|まとめ]]
+- 安定版: [v12.16.1](https://github.com/pnpm/pnpm/releases/tag/v12.16.1)（2026-10-28）→ [[repos/pnpm-pnpm/releases/v12.16.1|まとめ]]（前の [[repos/pnpm-pnpm/releases/v12.16.0|v12.16.0]] は 2026-10-27）
+- 安定版（v11 系）: [v11.28.9](https://github.com/pnpm/pnpm/releases/tag/v11.28.9)（2026-10-27）→ [[repos/pnpm-pnpm/releases/v11.28.9|まとめ]]
 - 安定版（v10 系）: [v10.34.9](https://github.com/pnpm/pnpm/releases/tag/v10.34.9)（2026-10-26）→ [[repos/pnpm-pnpm/releases/v10.34.9|まとめ]]
-- プレリリース: [pnpr@0.1.0-alpha.16](https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.16)（2026-10-21）
+- プレリリース: [pnpr@0.1.0-alpha.17](https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.17)（2026-10-27）
 
 ## 直近の注目変更
 
-- pnpr のメトリクスは `metrics.token` か `metrics.listen` を設定したときだけ配る（破壊的変更）（[#17305](https://github.com/pnpm/pnpm/pull/17305)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]
-- pnpr のストレージを読みやすいパス（`packages/@<scope>/<name>/`・`blobs/<version>.tgz`）とエコシステムごとの名前空間に（既存のストアは公開し直し）（[#17353](https://github.com/pnpm/pnpm/pull/17353), [#17355](https://github.com/pnpm/pnpm/pull/17355)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
-- pnpr の tarball の URL を `<name>@<version>`（パッチのリビジョンは `+r<revision>`）に、DELETE・`/-/user/{name}` の経路を簡素化、まとめての公開を `/-/pnpr/v0/publish` に一本化（[#17337](https://github.com/pnpm/pnpm/pull/17337), [#17340](https://github.com/pnpm/pnpm/pull/17340), [#17346](https://github.com/pnpm/pnpm/pull/17346), [#17351](https://github.com/pnpm/pnpm/pull/17351)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
-- `symlinkedLockfileTargetDirs` でシンボリックリンクの lockfile を指定したディレクトリの中なら書き込む（[#17233](https://github.com/pnpm/pnpm/pull/17233)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/設定|設定]]
-- `pnpm setup --no-modify-path` で PATH などを書き換えずにインストール（[#17317](https://github.com/pnpm/pnpm/pull/17317)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]
-- `autoDedupe` がオフなら、各プロジェクトの依存をそのプロジェクトの範囲で解決（[#17244](https://github.com/pnpm/pnpm/pull/17244)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
-- injected のワークスペースのパッケージで `workspace:` のパスと `catalog:` を正しく解決（[#17289](https://github.com/pnpm/pnpm/pull/17289), [#17297](https://github.com/pnpm/pnpm/pull/17297)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
-- v12 が `requiredScripts`・`tag`・`runtime`・`strictSsl`/`localAddress` の設定を v11 と同じく読む（[#17257](https://github.com/pnpm/pnpm/pull/17257), [#17260](https://github.com/pnpm/pnpm/pull/17260), [#17261](https://github.com/pnpm/pnpm/pull/17261), [#17255](https://github.com/pnpm/pnpm/pull/17255)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]
-- `pnpm store prune` がメタデータのキャッシュも消す（シンボリックリンクの差し替え対策つき）（[#17253](https://github.com/pnpm/pnpm/pull/17253), [#17272](https://github.com/pnpm/pnpm/pull/17272)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ストア|ストア]]
-- undici を 7.30.1 に更新（GHSA-xjj6-f33q-929c ほか）（[#17307](https://github.com/pnpm/pnpm/pull/17307)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]
+- 絞り込んだインストールで配置の設定が変わっていたら `node_modules` を作り直さずに失敗（v11 は `nodeLinker` が違えば `add`/`remove`/`update` も失敗）（[#17380](https://github.com/pnpm/pnpm/pull/17380), [#17364](https://github.com/pnpm/pnpm/pull/17364)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
+- 繰り返しのインストールの近道が `virtualStoreDirMaxLength`・`dangerouslyAllowAllBuilds`・`trustLockfile`・`globalVirtualStoreDir` の変更に応じる（[#17391](https://github.com/pnpm/pnpm/pull/17391)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]
+- `pnpm store prune` がプロジェクトで使っているパッケージ（コピー・clone・パッチ・ビルド）を消さない（[#17327](https://github.com/pnpm/pnpm/pull/17327), [#17379](https://github.com/pnpm/pnpm/pull/17379)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/ストア|ストア]]
+- pnpm 本体の bootstrap と Corepack のダウンロードがグローバルの `config.yaml`・環境変数の TLS・プロキシの設定を読む（[#17368](https://github.com/pnpm/pnpm/pull/17368), [#17378](https://github.com/pnpm/pnpm/pull/17378), [#17389](https://github.com/pnpm/pnpm/pull/17389), [#17363](https://github.com/pnpm/pnpm/pull/17363)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]
+- スコープを別のレジストリに向けたら、レジストリを持たない lockfile のキーを解決し直す（[#17373](https://github.com/pnpm/pnpm/pull/17373)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]
+- コンテナの cgroup の CPU の上限でワーカーの数と既定の `workspaceConcurrency` を決める（v11）（[#17385](https://github.com/pnpm/pnpm/pull/17385)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]
+- ワークスペースの `bin` の変更で古い `.bin` のシムを消し、lockfile を分けていても名前を変えたコマンドをリンクし直す（[#17371](https://github.com/pnpm/pnpm/pull/17371), [#17407](https://github.com/pnpm/pnpm/pull/17407)）📦 pnpr@0.1.0-alpha.17 / ⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
+- zstd の圧縮の依存を更新（脆弱性の修正）、ストアの索引の初期化の競合を修正（[#17388](https://github.com/pnpm/pnpm/pull/17388)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]
+- pnpr のストレージのレコードのキー・tombstone・upstream のキャッシュのキーを正規化（[#17357](https://github.com/pnpm/pnpm/pull/17357)）📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
+- パッケージのファイルの選び方を 1 つにまとめ npm-packlist と照らして検証、v11 はシンボリックリンクの `publishConfig.directory` を pack に含める（[#17415](https://github.com/pnpm/pnpm/pull/17415), [#17393](https://github.com/pnpm/pnpm/pull/17393)）⏳ 未リリース / 📦 pnpr@0.1.0-alpha.17 · トピック: [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
 
 ## トピック
 
@@ -47,9 +47,9 @@ tags:
 - [[repos/pnpm-pnpm/topics/プロジェクト移動|プロジェクト移動]] — 移動・コピーしたプロジェクトでの node_modules/bin シムの再利用
 - [[repos/pnpm-pnpm/topics/マルチエコシステム設定|マルチエコシステム設定]] — npm/Cargo/PyPI にまたがる設定スキーマの統合と Cargo 連携
 - [[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]] — グローバル Node シムのバージョン解決、エンジン/ランタイム・pnpm 本体の切り替え、配布バイナリと `self-update`・`pnpm setup --no-modify-path`・Docker イメージ・Windows の `pnpm.cmd`
-- [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]] — `--filter`・injected 依存・lockfile 非共有モード・frozen install のワークスペース固有の挙動
+- [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]] — `--filter`・injected 依存・lockfile 非共有モード・frozen install・絞り込んだインストールでの配置の変化のワークスペース固有の挙動
 
 ## 取り込み
 
 - [[repos/pnpm-pnpm/log|取り込み履歴]]
-- 最近の変更: [[repos/pnpm-pnpm/changes/2026-10-26|2026-10-26]]、[[repos/pnpm-pnpm/changes/2026-10-23|2026-10-23]]、[[repos/pnpm-pnpm/changes/2026-10-21|2026-10-21]]、[[repos/pnpm-pnpm/changes/2026-10-19|2026-10-19]]、[[repos/pnpm-pnpm/changes/2026-10-16|2026-10-16]]
+- 最近の変更: [[repos/pnpm-pnpm/changes/2026-10-28|2026-10-28]]、[[repos/pnpm-pnpm/changes/2026-10-26|2026-10-26]]、[[repos/pnpm-pnpm/changes/2026-10-23|2026-10-23]]、[[repos/pnpm-pnpm/changes/2026-10-21|2026-10-21]]、[[repos/pnpm-pnpm/changes/2026-10-19|2026-10-19]]

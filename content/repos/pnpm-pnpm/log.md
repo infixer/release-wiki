@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-10-28
+
+- 期間: 2026-10-25T22:42:23Z 〜 2026-10-28T00:33:26Z
+- PR 59 件（詳しく 30 件 / 1 行 29 件）、Release 4 件（安定版 3 件: v12.16.0, v11.28.9, v12.16.1。プレリリース pnpr@0.1.0-alpha.17）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-10-28|changes]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/releases/v12.16.0|v12.16.0]]（新規）、[[repos/pnpm-pnpm/releases/v12.16.1|v12.16.1]]（新規）、[[repos/pnpm-pnpm/releases/v11.28.9|v11.28.9]]（新規）、[[repos/pnpm-pnpm/releases/v12.15.0|v12.15.0]]・[[repos/pnpm-pnpm/releases/v11.28.8|v11.28.8]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 29 件（修正 11 件・リファクタ/性能改善 7 件を含む）は「その他」に 1 行で書いた。inbox の `latest.stable` は v12.15.0 のままだが、期間内に安定版 v12.16.0・v12.16.1 が公開されているので、最新の安定版は v12.16.1 とした。📦 収録の PR は inbox ではすべて「📦 pnpr@0.1.0-alpha.17」と表記されており、そのまま書いた（内容は v12.16.0・v11.28.9 のリリースノートにも載っている）。公開日は JST で書いた（v12.16.1 は 2026-10-27T15:28:26Z）。3 つのリリースノート本文はいずれも途中で切れている（要点の部分は取り込めた）
+- エラー: なし
 
 ## 2026-10-26
 

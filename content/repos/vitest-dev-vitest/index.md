@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-10-26
+updated: 2026-10-28
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -15,16 +15,16 @@ tags:
 
 ## 直近の注目変更
 
+- vm プールで hashbang（`#!`）で始まる CommonJS の依存を正しく処理（[#11731](https://github.com/vitest-dev/vitest/pull/11731)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
+- browser: 失敗したテストだけトレースを残す `traceView: 'failure-only'`（`traceView.enabled` は非推奨）（[#11612](https://github.com/vitest-dev/vitest/pull/11612)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
+- mocker: リンクしたパッケージ（ワークスペース）にもルートの `__mocks__` を使う（[#11739](https://github.com/vitest-dev/vitest/pull/11739)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
+- browser: `page.viewport()` が止まらないように（[#11738](https://github.com/vitest-dev/vitest/pull/11738)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/UI|UI]]
+- mocker: `spy: true`・automock で元のプロトタイプチェーンを変えない（[#11737](https://github.com/vitest-dev/vitest/pull/11737)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
+- プロジェクトがルートの設定の `watch` を引き継ぐ（`vitest run` で半分のワーカーになる問題）（[#11724](https://github.com/vitest-dev/vitest/pull/11724)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プロジェクト|プロジェクト]]
 - browser: 失敗時のスクリーンショット・トレースのタイムラインを試行ごとに保存・表示（`<test>-<repeat>-<retry>.png`）（[#11694](https://github.com/vitest-dev/vitest/pull/11694)、[#11695](https://github.com/vitest-dev/vitest/pull/11695)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
 - browser: CLI のフィルターに一致するファイルの無いプロジェクトはブラウザを事前起動しない（[#11706](https://github.com/vitest-dev/vitest/pull/11706)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
 - HTML レポーターが `--bail` で落ちる問題と、コードフレームのシンタックスハイライトが消える退行を修正（[#11693](https://github.com/vitest-dev/vitest/pull/11693)、[#11705](https://github.com/vitest-dev/vitest/pull/11705)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/レポーター|レポーター]]、[[repos/vitest-dev-vitest/topics/UI|UI]]
 - キャッシュしたサーバーのモジュールを UTF-8 で読み、スタックの整形で元のエラーを保つ（[#11709](https://github.com/vitest-dev/vitest/pull/11709)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
-- coverage: v8 プロバイダーで `coverage.ignoreNode` に対応（AST のノードでカバレッジから除外）（[#11688](https://github.com/vitest-dev/vitest/pull/11688)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
-- browser: 失敗時にターミナルへトレースのステップのタイムラインを表示（[#11594](https://github.com/vitest-dev/vitest/pull/11594)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
-- coverage: istanbul の計装を `magic-string` + `rolldown` にして 5〜10 倍高速化（[#11648](https://github.com/vitest-dev/vitest/pull/11648)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
-- 後から生じるモックファクトリーの循環を検出してタイムアウトを防ぐ（[#11642](https://github.com/vitest-dev/vitest/pull/11642)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
-- `expect`: 型付き配列の比較を高速化（2 MiB で約 1.5 s → 約 125 ms）（[#11658](https://github.com/vitest-dev/vitest/pull/11658)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
-- browser: import map でモジュールをモック（`browser.importMapMocks`。mock の多いスイートで約 2 倍速い例）（[#11534](https://github.com/vitest-dev/vitest/pull/11534)）📦 v5.1.0-beta.1 · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/モック|モック]]
 
 ## トピック
 
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-26|2026-10-26]]、[[repos/vitest-dev-vitest/changes/2026-10-23|2026-10-23]]、[[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21]]、[[repos/vitest-dev-vitest/changes/2026-10-19|2026-10-19]]、[[repos/vitest-dev-vitest/changes/2026-10-16|2026-10-16]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-28|2026-10-28]]、[[repos/vitest-dev-vitest/changes/2026-10-26|2026-10-26]]、[[repos/vitest-dev-vitest/changes/2026-10-23|2026-10-23]]、[[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21]]、[[repos/vitest-dev-vitest/changes/2026-10-19|2026-10-19]]

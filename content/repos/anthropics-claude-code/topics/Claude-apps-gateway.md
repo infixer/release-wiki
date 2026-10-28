@@ -1,6 +1,6 @@
 ---
 title: Claude apps gateway
-updated: 2026-10-23
+updated: 2026-10-28
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -17,6 +17,7 @@ managed settings の無いマシンでも、ユーザー設定の `forceLoginMet
 `allowedProviders` に `"gateway"` を返す gateway が、ユーザー設定でその gateway を指定したノート PC を締め出す問題と、managed settings が `forceLoginMethod: "gateway"` で `forceLoginGatewayUrl` を指定しないマシンで保存済みのサインインが無視される問題（2.1.295 での退行）は v2.1.296 で修正された。
 v2.1.299 で、gateway の背後の Claude Code セッションの attribution ブロックにフィールドが加わり、`code` ポリシーの `env` に `CLAUDE_CODE_ATTRIBUTION_HEADER=0` を設定すると Claude Desktop の Code タブでも attribution ブロックを外せるようになった。
 v2.1.307 で、gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` が無視される問題と、`OTEL_EXPORTER_OTLP_HEADERS` を設定すると gateway の背後の Claude Desktop セッションのテレメトリが拒否される問題が修正された。
+v2.1.312 で `oidc.user_id_claim` が加わり、`sub` 以外の id_token のクレーム（Microsoft Entra ID の `oid` など）で利用者を識別できるようになった。
 
 ## 主な API・オプション
 
@@ -26,9 +27,11 @@ v2.1.307 で、gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_M
 - `forceLoginMethod: "gateway"` / `forceLoginGatewayUrl` — `/login` で開く gateway
 - `managed.policies[]` の `code` — Claude Desktop の Code タブにも `cli` と同じ設定を適用
 - `code` ポリシーの `env` の `CLAUDE_CODE_ATTRIBUTION_HEADER=0` — attribution ブロックを外す
+- `oidc.user_id_claim` — 利用者の識別に使う id_token のクレーム（既定は `sub`。v2.1.312）
 
 ## 変更履歴
 
+- 2026-10-28 — `oidc.user_id_claim` を追加（Entra ID の `oid` などで利用者を識別）📦 v2.1.312 · [[repos/anthropics-claude-code/releases/v2.1.312|リリース]]
 - 2026-10-21 — gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` が無視される問題、`OTEL_EXPORTER_OTLP_HEADERS` 設定時に Claude Desktop セッションのテレメトリが拒否される問題を修正 📦 v2.1.307 · [[repos/anthropics-claude-code/releases/v2.1.307|リリース]]
 - 2026-10-14 — gateway の背後のセッションの attribution ブロックにフィールドを追加、`CLAUDE_CODE_ATTRIBUTION_HEADER=0` で Claude Desktop の Code タブでも外せるように 📦 v2.1.299 · [[repos/anthropics-claude-code/releases/v2.1.299|リリース]]
 - 2026-10-09 — `managed.policies[]` に `code` キーを追加。`allowedProviders` の `"gateway"` によるロックアウトと、保存済みの gateway サインインが無視される退行を修正 📦 v2.1.296 · [[repos/anthropics-claude-code/releases/v2.1.296|リリース]]
@@ -41,3 +44,4 @@ v2.1.307 で、gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_M
 - [[repos/anthropics-claude-code/releases/v2.1.296|v2.1.296]]
 - [[repos/anthropics-claude-code/releases/v2.1.299|v2.1.299]]
 - [[repos/anthropics-claude-code/releases/v2.1.307|v2.1.307]]
+- [[repos/anthropics-claude-code/releases/v2.1.312|v2.1.312]]

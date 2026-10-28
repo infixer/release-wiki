@@ -1,6 +1,6 @@
 ---
 title: whatwg/html
-updated: 2026-10-23
+updated: 2026-10-28
 tags:
   - repo/whatwg-html
 ---
@@ -53,4 +53,4 @@ tags:
 ## 取り込み
 
 - [[repos/whatwg-html/log|取り込み履歴]]
-- 最近の変更: [[repos/whatwg-html/changes/2026-10-23|2026-10-23]]、[[repos/whatwg-html/changes/2026-10-21|2026-10-21]]、[[repos/whatwg-html/changes/2026-10-19|2026-10-19]]、[[repos/whatwg-html/changes/2026-10-16|2026-10-16]]、[[repos/whatwg-html/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/whatwg-html/changes/2026-10-28|2026-10-28]]、[[repos/whatwg-html/changes/2026-10-23|2026-10-23]]、[[repos/whatwg-html/changes/2026-10-21|2026-10-21]]、[[repos/whatwg-html/changes/2026-10-19|2026-10-19]]、[[repos/whatwg-html/changes/2026-10-16|2026-10-16]]
