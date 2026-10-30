@@ -1,13 +1,18 @@
 ---
-title: Safari 27.2 Beta リリースノート
+title: Safari 27.2 リリースノート
 date: 2026-09-16
-updated: 2026-10-14
+updated: 2026-10-30
 tags:
   - blog/safari
   - post
 ---
 
-[元の記事](https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes) · 公開: 2026-09-16
+[元の記事](https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes) · 公開: 2026-09-16（Beta）· 正式版: 2026-10-26
+
+> [!info] 更新: 2026-10-30
+> Beta から正式版のリリースノートになった。前回から変わった点:
+> - タイトルから「Beta」が外れ、対象が iOS 27.2・iPadOS 27.2・visionOS 27.2・macOS 27.2（Beta ではなく正式版）と macOS 26・macOS Sequoia になった
+> - 新機能・修正・非推奨の項目は前回（2026-10-14 の更新）から変わっていない
 
 > [!info] 更新: 2026-10-14
 > リリースノートが更新された。前回から増えた・変わった点:
@@ -17,7 +22,7 @@ tags:
 
 ## 要約
 
-Safari 27.2 Beta は iOS 27.2・iPadOS 27.2・visionOS 27.2・macOS 27.2 の各 Beta 版、および macOS 26・macOS Sequoia 向け。新機能はフォームまわりが中心で、overflow alignment の `safe`/`unsafe` 拡張と、`<select>` の `::field-content` 疑似要素・`appearance: base-select` の調整が入った。`display: grid-lanes` の `flow-tolerance` プロパティは `fit-tolerance` に改称された（`flow-tolerance` は非推奨のエイリアスとして残る）。アクセシビリティ・メディア・WebGPU・WebRTC・Safari MCP など多くの領域で不具合が修正されている。
+Safari 27.2 は iOS 27.2・iPadOS 27.2・visionOS 27.2・macOS 27.2、および macOS 26・macOS Sequoia 向け（2026-09-16 に Beta、2026-10-26 に正式版）。新機能はフォームまわりが中心で、overflow alignment の `safe`/`unsafe` 拡張と、`<select>` の `::field-content` 疑似要素・`appearance: base-select` の調整が入った。`display: grid-lanes` の `flow-tolerance` プロパティは `fit-tolerance` に改称された（`flow-tolerance` は非推奨のエイリアスとして残る）。アクセシビリティ・メディア・WebGPU・WebRTC・Safari MCP など多くの領域で不具合が修正されている。
 
 ## 新機能・主な変更
 
@@ -48,5 +53,5 @@ Safari 27.2 Beta は iOS 27.2・iPadOS 27.2・visionOS 27.2・macOS 27.2 の各 
 
 ## 関連
 
-- 前の記事: [[blogs/safari/posts/2026-09-14-safari-27-release-notes|Safari 27 リリースノート]]
+- 前の記事: [[blogs/safari/posts/2026-10-23-safari-27_1-release-notes|Safari 27.1 リリースノート]]、[[blogs/safari/posts/2026-09-14-safari-27-release-notes|Safari 27 リリースノート]]
 - 関連: [[blogs/safari/posts/2026-03-24-safari-26_4-release-notes|Safari 26.4 リリースノート]]（`flow-tolerance` の追加元）

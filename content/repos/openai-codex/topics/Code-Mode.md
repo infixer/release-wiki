@@ -1,6 +1,6 @@
 ---
 title: Code Mode
-updated: 2026-10-19
+updated: 2026-10-30
 tags:
   - repo/openai-codex
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-コードを介してツールを呼び出す Code Mode の実行・レスポンス処理。この期間、`exec`・`wait` のレスポンスにオプトインのオーバーヘッド計測が追加され、ホスト処理とハンドラー処理の内訳を確認できるようになった。2026-10-07 の回では、Promise の決着順に結果を受け取る `as_settled`・`stream_settled` が追加され、既定で無効の `code_mode_tool_search` を有効にすると `tools.tool_search` で BM25 のランク付きのツール検索ができるようになった。gRPC のセッションの受け付けでは、一時的な失敗を最大 3 回再試行する。2026-10-09 の回では、ツールの説明を名前空間の説明より先に置く開発中の機能 `code_mode_tool_description_first` が追加され、ターンの中断やセルの終了で取り消された動的ツールの呼び出しも失敗のアイテムとして完了するようになった。2026-10-12 の回では、gRPC の Code Mode でセッションごとのルーティング（`x-code-mode-route`）を保持し、受け付けの再試行が最大 5 回になった。Serde の予約済みの JSON キーを拒否して再帰の上限の回避を防ぎ、出力のシリアライズ中も取り消しが保たれるようになった。2026-10-19 の回では、動的ツールの呼び出しが並列に実行できるようになり（`Promise.all`）、ランタイムの V8 が 152.2.0 に更新された。
+コードを介してツールを呼び出す Code Mode の実行・レスポンス処理。この期間、`exec`・`wait` のレスポンスにオプトインのオーバーヘッド計測が追加され、ホスト処理とハンドラー処理の内訳を確認できるようになった。2026-10-07 の回では、Promise の決着順に結果を受け取る `as_settled`・`stream_settled` が追加され、既定で無効の `code_mode_tool_search` を有効にすると `tools.tool_search` で BM25 のランク付きのツール検索ができるようになった。gRPC のセッションの受け付けでは、一時的な失敗を最大 3 回再試行する。2026-10-09 の回では、ツールの説明を名前空間の説明より先に置く開発中の機能 `code_mode_tool_description_first` が追加され、ターンの中断やセルの終了で取り消された動的ツールの呼び出しも失敗のアイテムとして完了するようになった。2026-10-12 の回では、gRPC の Code Mode でセッションごとのルーティング（`x-code-mode-route`）を保持し、受け付けの再試行が最大 5 回になった。Serde の予約済みの JSON キーを拒否して再帰の上限の回避を防ぎ、出力のシリアライズ中も取り消しが保たれるようになった。2026-10-19 の回では、動的ツールの呼び出しが並列に実行できるようになり（`Promise.all`）、ランタイムの V8 が 152.2.0 に更新された。2026-10-30 の回では、既定で無効の `code_mode_host_output_truncation` の機能フラグで、組み込みのセッションのプロバイダーにサーバー側の出力の切り詰めを求められるようになった（未リリース）。
 
 ## 主な API・オプション
 
@@ -22,6 +22,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-30 — `code_mode_host_output_truncation` の機能フラグ（[#58159](https://github.com/openai/codex/pull/58159)）⏳ 未リリース · [[repos/openai-codex/changes/2026-10-30|変更]]
 - 2026-10-19 — V8 を 152.2.0 に更新し `Array.sort` の安全性のチェックをバックポート（[#54519](https://github.com/openai/codex/pull/54519)）📦 rust-v0.164.0-alpha.3 · [[repos/openai-codex/changes/2026-10-19|変更]]
 - 2026-10-19 — 動的ツールの呼び出しを並列に実行（[#54654](https://github.com/openai/codex/pull/54654)）📦 rust-v0.164.0-alpha.3 · [[repos/openai-codex/changes/2026-10-19|変更]]
 - 2026-10-12 — 出力のシリアライズ中も取り消しを保つ（[#52685](https://github.com/openai/codex/pull/52685)）📦 rust-v0.163.0-alpha.5 · [[repos/openai-codex/changes/2026-10-12|変更]]
@@ -43,3 +44,4 @@ tags:
 - [[repos/openai-codex/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/openai-codex/changes/2026-10-12|2026-10-12 の変更]]
 - [[repos/openai-codex/releases/rust-v0.163.0|rust-v0.163.0]]
+- [[repos/openai-codex/changes/2026-10-30|2026-10-30 の変更]]

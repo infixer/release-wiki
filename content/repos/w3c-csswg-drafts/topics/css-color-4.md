@@ -1,6 +1,6 @@
 ---
 title: css-color-4
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/w3c-csswg-drafts
   - topic
@@ -10,6 +10,7 @@ tags:
 
 CSS の色（`lch()`・`oklch()` などの色空間と、その変換）を定義する仕様。仕様内の LCH・Oklch の変換コードから「H（色相）が missing なら a = b = 0 にする」処理が削除され、往復変換（round-tripping）を妨げないようになった。`<opacity-value>` のシリアライズの規則は、`opacity` プロパティだけでなくこの値を取るすべてのプロパティに適用される（#10426）。色域マッピング（gamut mapping）の 3 つのアルゴリズム（Binary Search with Local MINDE・EdgeSeeker・Ray Trace）すべてに疑似コードが揃い、EdgeSeeker は LUT を OkLCh の色相で索引し、虚の原色を持たない RGB 色空間で色域外の色だけをマッピングする形になった。
 2026-10-28 の取り込みで、powerless な色相の成分を missing に変えるときは「colorful」な成分を 0 にすると明確になり（#14531）、その処理だけを示す別のサンプル `powerlessToMissing.js` が加わった（既存の変換のサンプルは powerless や carry forward を実装していないため）。
+RGB → HSL のサンプルコード（`better-rgbToHsl.js`）は epsilon を使うようになった（#14531、未リリース）。
 
 ## 主な API・オプション
 
@@ -18,6 +19,7 @@ CSS の色（`lch()`・`oklch()` などの色空間と、その変換）を定�
 
 ## 変更履歴
 
+- 2026-10-29 — RGB → HSL のサンプルコードで epsilon を使う（#14531）（[`42d4d79`](https://github.com/w3c/csswg-drafts/commit/42d4d796584b070a7e68935eed58831e28bfe469)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-30|変更]]
 - 2026-10-27 — powerless な色相を missing に変えるとき「colorful」な成分を 0 にすると明確化（#14531）（[`1da0d9f`](https://github.com/w3c/csswg-drafts/commit/1da0d9fb61d62f53e893b58f85bd109f0c8b9321)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-28|変更]]
 - 2026-10-27 — powerless を missing にする処理のサンプル JavaScript を追加（[#14674](https://github.com/w3c/csswg-drafts/pull/14674)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-28|変更]]
 - 2026-10-20 — `Lab_to_XYZ` のサンプルコードを、内部で float を使う実装でも問題が起きないように更新（[#14636](https://github.com/w3c/csswg-drafts/pull/14636)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-21|変更]]

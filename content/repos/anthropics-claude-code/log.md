@@ -1,9 +1,16 @@
 ---
 title: anthropics/claude-code 取り込み履歴
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/anthropics-claude-code
 ---
+
+## 2026-10-30
+
+- 期間: 2026-10-27T20:03:06Z 〜 2026-10-30T01:07:35Z
+- PR 0 件、Release 1 件（安定版 1 件: v2.1.314）
+- 更新したページ: [[repos/anthropics-claude-code/changes/2026-10-30|changes]]（新規）、[[repos/anthropics-claude-code/releases/v2.1.314|v2.1.314]]（新規）、[[repos/anthropics-claude-code/topics/管理設定|管理設定]]、[[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]、[[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]、[[repos/anthropics-claude-code/index|index]]
+- エラー: なし
 
 ## 2026-10-28
 

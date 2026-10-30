@@ -1,6 +1,6 @@
 ---
 title: pnpr
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -43,6 +43,7 @@ pnpm リポジトリで開発されているレジストリサーバー pnpr（`
 
 ## 変更履歴
 
+- 2026-10-30 — `tarballs: tar` のホスト型レジストリでは zstd の tar（`.tar.zst`）だけを保存し、クライアントに合わせて配信（[#17437](https://github.com/pnpm/pnpm/pull/17437)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-30|変更]]
 - 2026-10-28 — ストレージのレコードのキー・tombstone・upstream のキャッシュのキー・ドットディレクトリの名前を正規化（[#17357](https://github.com/pnpm/pnpm/pull/17357)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
 - 2026-10-28 — 1 つの URL に向けた複数のレジストリの接頭辞を要求の `aliases` で送る（[#17339](https://github.com/pnpm/pnpm/pull/17339)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
 - 2026-10-28 — libsql の接続を 1 回だけ閉じる（Windows の CI のクラッシュ）（[#17366](https://github.com/pnpm/pnpm/pull/17366)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]

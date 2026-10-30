@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-10-30
+
+- 期間: 2026-10-27T19:13:53Z 〜 2026-10-30T01:07:35Z
+- PR 57 件（詳しく 11 件 / 1 行 46 件、うち brief 27 件）、Release 0 件
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-10-30|changes]]（新規）、[[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/JSプラグイン|JSプラグイン]]、[[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]、[[repos/oxc-project-oxc/topics/カバレッジ・テスト基盤|カバレッジ・テスト基盤]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: oxc-guard[bot] 1 件）
 
 ## 2026-10-28
 

@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -15,20 +15,20 @@ tags:
 
 ## 直近の注目変更
 
+- browser: `browser.traceView` の既定を `'failure-only'` に（失敗したテストは設定なしでトレースとタイムラインを残す）（[#11766](https://github.com/vitest-dev/vitest/pull/11766)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
+- カバレッジのプロバイダーが fs モジュールキャッシュにデータを保存できる（[#11747](https://github.com/vitest-dev/vitest/pull/11747)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]、[[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
+- fs モジュールキャッシュのキーに deps optimizer を含め、`vi.mock` が効かない問題を修正（[#11775](https://github.com/vitest-dev/vitest/pull/11775)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]、[[repos/vitest-dev-vitest/topics/モック|モック]]
+- 同時に起動したプロセスがキャッシュを消しても `ENOTEMPTY` で失敗しない（[#11697](https://github.com/vitest-dev/vitest/pull/11697)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
+- vm プール: teardown 後も Node のグローバルを残し、フェイクタイマーをファイルごとに戻す（[#11681](https://github.com/vitest-dev/vitest/pull/11681)、[#11779](https://github.com/vitest-dev/vitest/pull/11779)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
+- リトライしたテストのエラーの見出しに試行（`1st retry` など）を表示（[#11696](https://github.com/vitest-dev/vitest/pull/11696)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
+- `expect.poll` の `message` をすべてのエラーに付ける（[#11756](https://github.com/vitest-dev/vitest/pull/11756)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/アサーション|アサーション]]
 - vm プールで hashbang（`#!`）で始まる CommonJS の依存を正しく処理（[#11731](https://github.com/vitest-dev/vitest/pull/11731)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
 - browser: 失敗したテストだけトレースを残す `traceView: 'failure-only'`（`traceView.enabled` は非推奨）（[#11612](https://github.com/vitest-dev/vitest/pull/11612)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
 - mocker: リンクしたパッケージ（ワークスペース）にもルートの `__mocks__` を使う（[#11739](https://github.com/vitest-dev/vitest/pull/11739)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
-- browser: `page.viewport()` が止まらないように（[#11738](https://github.com/vitest-dev/vitest/pull/11738)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/UI|UI]]
-- mocker: `spy: true`・automock で元のプロトタイプチェーンを変えない（[#11737](https://github.com/vitest-dev/vitest/pull/11737)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
-- プロジェクトがルートの設定の `watch` を引き継ぐ（`vitest run` で半分のワーカーになる問題）（[#11724](https://github.com/vitest-dev/vitest/pull/11724)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プロジェクト|プロジェクト]]
-- browser: 失敗時のスクリーンショット・トレースのタイムラインを試行ごとに保存・表示（`<test>-<repeat>-<retry>.png`）（[#11694](https://github.com/vitest-dev/vitest/pull/11694)、[#11695](https://github.com/vitest-dev/vitest/pull/11695)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]、[[repos/vitest-dev-vitest/topics/レポーター|レポーター]]
-- browser: CLI のフィルターに一致するファイルの無いプロジェクトはブラウザを事前起動しない（[#11706](https://github.com/vitest-dev/vitest/pull/11706)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]]
-- HTML レポーターが `--bail` で落ちる問題と、コードフレームのシンタックスハイライトが消える退行を修正（[#11693](https://github.com/vitest-dev/vitest/pull/11693)、[#11705](https://github.com/vitest-dev/vitest/pull/11705)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/レポーター|レポーター]]、[[repos/vitest-dev-vitest/topics/UI|UI]]
-- キャッシュしたサーバーのモジュールを UTF-8 で読み、スタックの整形で元のエラーを保つ（[#11709](https://github.com/vitest-dev/vitest/pull/11709)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 
 ## トピック
 
-- [[repos/vitest-dev-vitest/topics/UI|UI]] — Vitest UI のレイアウト・テーマ（`test.ui.theme`）・トレースビューアー・エクスプローラーの絞り込み・HTML レポートのモジュールグラフ
+- [[repos/vitest-dev-vitest/topics/UI|UI]] — Vitest UI のレイアウト・テーマ（`test.ui.theme`）・トレースビューアー（トレースのあるテストだけ開く）・エクスプローラーの絞り込み・HTML レポートのモジュールグラフ
 - [[repos/vitest-dev-vitest/topics/アサーション|アサーション]] — `expect` の matcher 実装と等価性（chai 形式・`toMatchScreenshot`・`pretty-format` を含む）
 - [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]] — V8・istanbul のカバレッジ（ブラウザモードでのメモリリーク対策・`autoAttachSubprocess` の一時ディレクトリ）と `allowExternal` によるルート外のファイルの扱い
 - [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]] — モジュール変換結果のキャッシュ（`fsModuleCache`、デフォルトで有効）、results キャッシュ（`VitestCache`）、`CACHEDIR.TAG` と一時ディレクトリ
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-28|2026-10-28]]、[[repos/vitest-dev-vitest/changes/2026-10-26|2026-10-26]]、[[repos/vitest-dev-vitest/changes/2026-10-23|2026-10-23]]、[[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21]]、[[repos/vitest-dev-vitest/changes/2026-10-19|2026-10-19]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-10-30|2026-10-30]]、[[repos/vitest-dev-vitest/changes/2026-10-28|2026-10-28]]、[[repos/vitest-dev-vitest/changes/2026-10-26|2026-10-26]]、[[repos/vitest-dev-vitest/changes/2026-10-23|2026-10-23]]、[[repos/vitest-dev-vitest/changes/2026-10-21|2026-10-21]]

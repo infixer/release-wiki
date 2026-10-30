@@ -1,6 +1,6 @@
 ---
 title: w3c/csswg-drafts
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/w3c-csswg-drafts
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- 2026-10-29 — RGB → HSL のサンプルコードで epsilon を使う（#14531）（[`42d4d79`](https://github.com/w3c/csswg-drafts/commit/42d4d796584b070a7e68935eed58831e28bfe469)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-color-4|css-color-4]]
 - 2026-10-27 — `matchContainer()` と `ContainerQueryList` の API を追加（#6205）（[#13551](https://github.com/w3c/csswg-drafts/pull/13551)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-conditional-5|css-conditional-5]]
 - 2026-10-27 — `calc-size()` と `interpolate-size` を `css-values-5` から `css-sizing-4` へ移動（#14502）（[`ee30871`](https://github.com/w3c/csswg-drafts/commit/ee30871a66d312e3ea0e1025f383cdca9cebd64a)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-sizing-4|css-sizing-4]]
 - 2026-10-27 — カウンタースタイル `nko-ordinal` を追加、`-informal` 接尾辞を削除し古い名前を別名に（[`674d876`](https://github.com/w3c/csswg-drafts/commit/674d876257873dddad2648315e32b2e5bcc789ac)、[`10ae270`](https://github.com/w3c/csswg-drafts/commit/10ae270718401a8daf9dc02def5a8e065744d2ad)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-content-3|css-content-3]]
@@ -23,7 +24,6 @@ tags:
 - 2026-10-22 — アプリケーションの文脈でも `display-mode: browser` が一致するように（[#14624](https://github.com/w3c/csswg-drafts/pull/14624)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]]
 - 2026-10-22 — カーニングが `palt` に依存することを規範的に記述（[`a1dd397`](https://github.com/w3c/csswg-drafts/commit/a1dd3973e461e13cfe2d56a3513948882e595034)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]]
 - 2026-10-22 — `css-font-loading-3` の IDL の破損を修正（[`79059f5`](https://github.com/w3c/csswg-drafts/commit/79059f56c6c50a836689ea418f932b1b704140e9)、[`dba3578`](https://github.com/w3c/csswg-drafts/commit/dba3578b7ac1bbd53bea5541b0574ff77c071281)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-font-loading-3|css-font-loading-3]]
-- 2026-10-21 — `flow-start`・`flow-end` を `flex-start`・`flex-end` の別名として定義（[#14539](https://github.com/w3c/csswg-drafts/pull/14539)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-align-3|css-align-3]]、[[repos/w3c-csswg-drafts/topics/css-grid-3|css-grid-3]]
 
 ## トピック
 
@@ -63,4 +63,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-csswg-drafts/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-10-28|2026-10-28]]、[[repos/w3c-csswg-drafts/changes/2026-10-26|2026-10-26]]、[[repos/w3c-csswg-drafts/changes/2026-10-23|2026-10-23]]、[[repos/w3c-csswg-drafts/changes/2026-10-21|2026-10-21]]、[[repos/w3c-csswg-drafts/changes/2026-10-19|2026-10-19]]
+- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-10-30|2026-10-30]]、[[repos/w3c-csswg-drafts/changes/2026-10-28|2026-10-28]]、[[repos/w3c-csswg-drafts/changes/2026-10-26|2026-10-26]]、[[repos/w3c-csswg-drafts/changes/2026-10-23|2026-10-23]]、[[repos/w3c-csswg-drafts/changes/2026-10-21|2026-10-21]]

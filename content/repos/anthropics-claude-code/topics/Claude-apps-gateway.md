@@ -1,6 +1,6 @@
 ---
 title: Claude apps gateway
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -18,6 +18,7 @@ managed settings の無いマシンでも、ユーザー設定の `forceLoginMet
 v2.1.299 で、gateway の背後の Claude Code セッションの attribution ブロックにフィールドが加わり、`code` ポリシーの `env` に `CLAUDE_CODE_ATTRIBUTION_HEADER=0` を設定すると Claude Desktop の Code タブでも attribution ブロックを外せるようになった。
 v2.1.307 で、gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` が無視される問題と、`OTEL_EXPORTER_OTLP_HEADERS` を設定すると gateway の背後の Claude Desktop セッションのテレメトリが拒否される問題が修正された。
 v2.1.312 で `oidc.user_id_claim` が加わり、`sub` 以外の id_token のクレーム（Microsoft Entra ID の `oid` など）で利用者を識別できるようになった。
+v2.1.314 で upstream に任意の `groups` 一覧が加わり、一覧の IdP グループの開発者だけをその upstream に送れるようになった（failover でも同じ）。Bedrock の upstream には `guardrail_trace` が加わり、どの Bedrock guardrail のフィルターが反応したかを一致したテキスト抜きでログに残せる。tool search の `tool_reference` ブロックを受け付けない gateway の背後では、tool search 無しで 1 回送り直すようになった。
 
 ## 主な API・オプション
 
@@ -28,9 +29,12 @@ v2.1.312 で `oidc.user_id_claim` が加わり、`sub` 以外の id_token のク
 - `managed.policies[]` の `code` — Claude Desktop の Code タブにも `cli` と同じ設定を適用
 - `code` ポリシーの `env` の `CLAUDE_CODE_ATTRIBUTION_HEADER=0` — attribution ブロックを外す
 - `oidc.user_id_claim` — 利用者の識別に使う id_token のクレーム（既定は `sub`。v2.1.312）
+- upstream の `groups` — その upstream に送る開発者の IdP グループ（v2.1.314）
+- Bedrock upstream の `guardrail_trace` — 反応した Bedrock guardrail のフィルターをログに残す（v2.1.314）
 
 ## 変更履歴
 
+- 2026-10-30 — upstream に `groups`、Bedrock upstream に `guardrail_trace` を追加。`tool_reference` を受け付けない gateway の背後で拒否が続く問題を修正 📦 v2.1.314 · [[repos/anthropics-claude-code/releases/v2.1.314|リリース]]
 - 2026-10-28 — `oidc.user_id_claim` を追加（Entra ID の `oid` などで利用者を識別）📦 v2.1.312 · [[repos/anthropics-claude-code/releases/v2.1.312|リリース]]
 - 2026-10-21 — gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` が無視される問題、`OTEL_EXPORTER_OTLP_HEADERS` 設定時に Claude Desktop セッションのテレメトリが拒否される問題を修正 📦 v2.1.307 · [[repos/anthropics-claude-code/releases/v2.1.307|リリース]]
 - 2026-10-14 — gateway の背後のセッションの attribution ブロックにフィールドを追加、`CLAUDE_CODE_ATTRIBUTION_HEADER=0` で Claude Desktop の Code タブでも外せるように 📦 v2.1.299 · [[repos/anthropics-claude-code/releases/v2.1.299|リリース]]
@@ -45,3 +49,4 @@ v2.1.312 で `oidc.user_id_claim` が加わり、`sub` 以外の id_token のク
 - [[repos/anthropics-claude-code/releases/v2.1.299|v2.1.299]]
 - [[repos/anthropics-claude-code/releases/v2.1.307|v2.1.307]]
 - [[repos/anthropics-claude-code/releases/v2.1.312|v2.1.312]]
+- [[repos/anthropics-claude-code/releases/v2.1.314|v2.1.314]]

@@ -1,6 +1,6 @@
 ---
 title: oxc-project/oxc
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/oxc-project-oxc
 ---
@@ -16,16 +16,16 @@ tags:
 
 ## 直近の注目変更
 
+- React Compiler: 未マージの修正 11 件をまとめて取り込み、28 件の issue を解決（[#28195](https://github.com/oxc-project/oxc/pull/28195)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]
+- パーサー: 重複した import 属性のキーに専用のエラー、かっこで囲んだ `#x in obj` を許可、TS の ESTree の `Program` の範囲にコメントを含める（[#28262](https://github.com/oxc-project/oxc/pull/28262)、[#28284](https://github.com/oxc-project/oxc/pull/28284)、[#28326](https://github.com/oxc-project/oxc/pull/28326)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
+- 数値の文字列化を `zmij_ecma` に置き換えて高速化（[#28282](https://github.com/oxc-project/oxc/pull/28282)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
+- oxlint: GitLab 形式のフィンガープリントを診断ごとに一意に（[#28307](https://github.com/oxc-project/oxc/pull/28307)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]
+- JS プラグイン: AST ノードを `Object.create` で生成して高速化（[#27816](https://github.com/oxc-project/oxc/pull/27816)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/JSプラグイン|JSプラグイン]]
+- `import/no-cycle` の割り当て削減、`unicorn/no-await-expression-member` の高速化（[#27478](https://github.com/oxc-project/oxc/pull/27478)、[#28348](https://github.com/oxc-project/oxc/pull/28348)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
 - React Compiler: 依存が守れない手動の `useMemo` / `useCallback` は推論した依存で置き換えず、そのコンポーネント・フックをコンパイルしない（網羅性の検証を既定で有効に）（[#28101](https://github.com/oxc-project/oxc/pull/28101)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]
 - React Compiler: 非 null アサーション越しのオプショナルチェーンを保ち、短絡後のキャッシュで `TypeError` が隠れないように、JSX のアウトライン化でハイフンを含む props の束縛名を修正（[#28144](https://github.com/oxc-project/oxc/pull/28144)、[#28165](https://github.com/oxc-project/oxc/pull/28165)、[#28111](https://github.com/oxc-project/oxc/pull/28111)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]
 - Oxfmt: `(a ?? b)?.#x`・型アサーションの中のジェネリックな関数型のかっこを保ち、`this.b`・`x.#b`・`(a + b)[c]` を `foo.b`・`(a + b).c` と同じに扱う（[#28188](https://github.com/oxc-project/oxc/pull/28188)、[#28173](https://github.com/oxc-project/oxc/pull/28173)、[#28193](https://github.com/oxc-project/oxc/pull/28193)、[#28200](https://github.com/oxc-project/oxc/pull/28200)、[#28199](https://github.com/oxc-project/oxc/pull/28199)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
 - oxfmt: `OXC_LOG=debug` でファイル読み込みの時間を出す（[#28204](https://github.com/oxc-project/oxc/pull/28204)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
-- Oxfmt: 閉じの HTML コメント・`in` / `instanceof` のクラスメンバーの `;`・JSX のスプレッドの子のコメント・配列の fill レイアウトの修正（[#28064](https://github.com/oxc-project/oxc/pull/28064)、[#28166](https://github.com/oxc-project/oxc/pull/28166)、[#28103](https://github.com/oxc-project/oxc/pull/28103)、[#28170](https://github.com/oxc-project/oxc/pull/28170)、[#28169](https://github.com/oxc-project/oxc/pull/28169)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
-- Minifier: 短縮形の代入先のデフォルト値、負の数・有限でない数のキーの角かっこを保つ（[#28183](https://github.com/oxc-project/oxc/pull/28183)、[#27855](https://github.com/oxc-project/oxc/pull/27855)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
-- inject: 素の参照が残っていれば素の inject を残す（[#26965](https://github.com/oxc-project/oxc/pull/26965)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/TypeScriptトランスフォーマー|TypeScriptトランスフォーマー]]
-- semantic: 巻き上げる `var` とブロック内の型の束縛を分ける（[#27936](https://github.com/oxc-project/oxc/pull/27936)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
-- 型認識 lint: `typescript/no-unsafe-enum-assignment` を追加、`typescript/await-thenable` に `allowMixedPromiseArrays`、`oxlint-tsgolint` は `>=7.0.2005` が必要に（[#28117](https://github.com/oxc-project/oxc/pull/28117)、[#28116](https://github.com/oxc-project/oxc/pull/28116)、[#28118](https://github.com/oxc-project/oxc/pull/28118)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]
-- `oxlint` パッケージから設定の型 `Oxlintrc` をエクスポート（[#28132](https://github.com/oxc-project/oxc/pull/28132)）📦 oxlint_v1.90.0 · トピック: [[repos/oxc-project-oxc/topics/設定ファイル|設定ファイル]]
 
 ## トピック
 
@@ -57,4 +57,4 @@ tags:
 ## 取り込み
 
 - [[repos/oxc-project-oxc/log|取り込み履歴]]
-- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-28|2026-10-28]]、[[repos/oxc-project-oxc/changes/2026-10-26|2026-10-26]]、[[repos/oxc-project-oxc/changes/2026-10-23|2026-10-23]]、[[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21]]、[[repos/oxc-project-oxc/changes/2026-10-19|2026-10-19]]
+- 最近の変更: [[repos/oxc-project-oxc/changes/2026-10-30|2026-10-30]]、[[repos/oxc-project-oxc/changes/2026-10-28|2026-10-28]]、[[repos/oxc-project-oxc/changes/2026-10-26|2026-10-26]]、[[repos/oxc-project-oxc/changes/2026-10-23|2026-10-23]]、[[repos/oxc-project-oxc/changes/2026-10-21|2026-10-21]]

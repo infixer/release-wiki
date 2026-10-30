@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -39,6 +39,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-30 — `pnpm outdated`/`pnpm update` がランタイム・パッケージマネージャー・Cargo・Python の依存を扱う（[#17449](https://github.com/pnpm/pnpm/pull/17449)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-30|変更]]
 - 2026-10-28 — 出力が端末の高さを超えたら、画面の行を書き直し続けない（[#17392](https://github.com/pnpm/pnpm/pull/17392)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
 - 2026-10-28 — `pnpm add -T` をあいまいとして拒否（v12）（[#17333](https://github.com/pnpm/pnpm/pull/17333)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
 - 2026-10-26 — `pnpm add` が小文字の短縮形 `-p`・`-d`・`-o`・`-e` を受け付ける（[#17270](https://github.com/pnpm/pnpm/pull/17270)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-26|変更]]

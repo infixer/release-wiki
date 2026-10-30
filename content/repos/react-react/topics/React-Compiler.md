@@ -1,6 +1,6 @@
 ---
 title: React Compiler
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/react-react
   - topic
@@ -12,9 +12,11 @@ React Compiler は JSX とフックの使用パターンを解析し、自動で
 実験的な Rust の Babel アダプターは、診断の下線の位置を UTF-16 のコードユニットで数え、非 ASCII 文字を含む行でも Babel と同じ位置に出す（未リリース）。
 `ResizeObserver` / `MutationObserver` のコールバックでの ref アクセスも許可され、`useMemo` した設定を `PanResponder.create` に渡す場合のように既に freeze された値でも、宣言された `Freeze` 効果を ref の検証が参照できるようになった（未リリース）。
 ref の検証では、`react-native` の `PanResponder.create` に実際のコードでもシグネチャが付き、`PerformanceObserver` / `ReportingObserver` のコールバックでの ref アクセスも許可された。定数伝播とコード生成では `0` と `-0` を区別して保つようになった（いずれも未リリース）。
+Rust 版のコンパイラでは、`한글Ref` のようにマルチバイト文字で始まる `*Ref` の名前で `is_ref_like_name` が panic しないように直された（TS 版と同じく ref らしい名前とは見なさない。未リリース）。
 
 ## 変更履歴
 
+- 2026-10-28 — Rust 版: 非 ASCII の名前で `is_ref_like_name` が panic する問題を修正（[#38025](https://github.com/react/react/pull/38025)）⏳ 未リリース · [[repos/react-react/changes/2026-10-30|変更]]
 - 2026-10-26 — 定数伝播とコード生成で `-0` を保つ（[#37995](https://github.com/react/react/pull/37995)）⏳ 未リリース · [[repos/react-react/changes/2026-10-28|変更]]
 - 2026-10-26 — `PerformanceObserver` / `ReportingObserver` のコールバックでの ref アクセスを許可（[#37996](https://github.com/react/react/pull/37996)）⏳ 未リリース · [[repos/react-react/changes/2026-10-28|変更]]
 - 2026-10-26 — react-native の `PanResponder.create` に型を付け、`react-hooks/refs` の誤検知を修正（[#37970](https://github.com/react/react/pull/37970)）⏳ 未リリース · [[repos/react-react/changes/2026-10-28|変更]]

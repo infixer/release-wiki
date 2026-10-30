@@ -70,4 +70,4 @@ Safari 27 は iOS 27・iPadOS 27・visionOS 27・macOS 27、および macOS 26�
 ## 関連
 
 - 前の記事: [[blogs/safari/posts/2026-07-27-safari-26_6-release-notes|Safari 26.6 リリースノート]]
-- 後の記事: [[blogs/safari/posts/2026-09-16-safari-27_2-release-notes|Safari 27.2 Beta リリースノート]]
+- 後の記事: [[blogs/safari/posts/2026-10-23-safari-27_1-release-notes|Safari 27.1 リリースノート]]、[[blogs/safari/posts/2026-09-16-safari-27_2-release-notes|Safari 27.2 リリースノート]]

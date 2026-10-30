@@ -60,4 +60,4 @@ Safari 26.4 は iOS 26.4・iPadOS 26.4・visionOS 26.4・macOS 26.4、および 
 
 ## 関連
 
-- 後の記事: [[blogs/safari/posts/2026-09-16-safari-27_2-release-notes|Safari 27.2 Beta リリースノート]]（この記事で追加された `flow-tolerance` は `fit-tolerance` に改称された）
+- 後の記事: [[blogs/safari/posts/2026-09-16-safari-27_2-release-notes|Safari 27.2 リリースノート]]（この記事で追加された `flow-tolerance` は `fit-tolerance` に改称された）

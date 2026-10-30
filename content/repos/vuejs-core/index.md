@@ -1,6 +1,6 @@
 ---
 title: vuejs/core
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/vuejs-core
 ---
@@ -14,6 +14,8 @@ tags:
 
 ## 直近の注目変更
 
+- `<dialog>` の `closedby` 属性の型を追加（[#16064](https://github.com/vuejs/core/pull/16064)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]]
+- 静的な内容の文字列化で真偽値のバインディングの意味を保つ（[#16055](https://github.com/vuejs/core/pull/16055)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]
 - `disablepictureinpicture`・`disableremoteplayback` を真偽値の属性として扱う（[#15952](https://github.com/vuejs/core/pull/15952)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]]
 - SSR: 非同期 setup のエラーを呼び出し元に伝える（[#15857](https://github.com/vuejs/core/pull/15857)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - Transition: コメントで包まれたコンポーネントのルートの切り替え（`out-in` / `in-out`・KeepAlive）を修正（[#15853](https://github.com/vuejs/core/pull/15853)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/トランジション|トランジション]]
@@ -22,8 +24,6 @@ tags:
 - `Map` / `Set` の `shallowReactive()` / `shallowReadonly()` で `isShallow()` が `true` を返すように（[#15793](https://github.com/vuejs/core/pull/15793)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]]
 - 本番ビルドでも `v-show` の子に Transition の `persisted` を注入（#4845 の再発を修正）（[#15783](https://github.com/vuejs/core/pull/15783)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]、[[repos/vuejs-core/topics/トランジション|トランジション]]
 - sync / immediate のウォッチャーのコールバックで外側の effect に依存を追跡させない（[#15782](https://github.com/vuejs/core/pull/15782)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]]
-- `hydrateOnVisible()` で `display: contents` のルートの子を監視（[#15773](https://github.com/vuejs/core/pull/15773)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
-- ルートの `mount()` は自分が積んだジョブだけを flush（他のアプリのウォッチャーを同期実行しない）（[#15757](https://github.com/vuejs/core/pull/15757)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
 
 ## トピック
 
@@ -40,4 +40,4 @@ tags:
 ## 取り込み
 
 - [[repos/vuejs-core/log|取り込み履歴]]
-- 最近の変更: [[repos/vuejs-core/changes/2026-10-28|2026-10-28]]、[[repos/vuejs-core/changes/2026-10-26|2026-10-26]]、[[repos/vuejs-core/changes/2026-10-23|2026-10-23]]、[[repos/vuejs-core/changes/2026-10-21|2026-10-21]]、[[repos/vuejs-core/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/vuejs-core/changes/2026-10-30|2026-10-30]]、[[repos/vuejs-core/changes/2026-10-28|2026-10-28]]、[[repos/vuejs-core/changes/2026-10-26|2026-10-26]]、[[repos/vuejs-core/changes/2026-10-23|2026-10-23]]、[[repos/vuejs-core/changes/2026-10-21|2026-10-21]]

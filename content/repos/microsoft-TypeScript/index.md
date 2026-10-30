@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,16 +15,16 @@ tags:
 
 ## 直近の注目変更
 
+- `tsc` の wasip1（Wasm）ビルドを追加し、ブラウザでも API が使える（実験的）（[#64174](https://github.com/microsoft/TypeScript/pull/64174)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]、[[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]]
+- API に `createFileSystemFromSnapshot(oldSnapshot, extraFSLayer)` を追加（[#64679](https://github.com/microsoft/TypeScript/pull/64679)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
+- 文の位置のクラス宣言（`if (cond) class C {}`）を TS1156 に（[#65005](https://github.com/microsoft/TypeScript/pull/65005)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- es2026 の `JSON.parse` の reviver を省略可能に戻す（[#65012](https://github.com/microsoft/TypeScript/pull/65012)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
+- シグネチャヘルプが無限ループで止まる問題を修正（[#65006](https://github.com/microsoft/TypeScript/pull/65006)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
+- コンパイラに既定の PGO プロファイルを追加（[#64986](https://github.com/microsoft/TypeScript/pull/64986)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]]
 - 交差型のプロパティ名の数え上げを普通の map と slice で（mui-docs で 5.83% 高速化）（[#64876](https://github.com/microsoft/TypeScript/pull/64876)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - reverse mapped type の解決で public 以外のメンバーを飛ばす（TS2352 のリグレッション修正）（[#64594](https://github.com/microsoft/TypeScript/pull/64594)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - import-equals の出力で、マージされた名前空間への参照を修飾（[#64976](https://github.com/microsoft/TypeScript/pull/64976)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - JSX の閉じタグの後のコメントに似た記号でのフォーマッタのクラッシュを修正（[#64644](https://github.com/microsoft/TypeScript/pull/64644)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
-- シンボルテーブルのエントリを `*ast.Symbol` だけに（[#64979](https://github.com/microsoft/TypeScript/pull/64979)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- オートインポートの計算後に、未保存の export が候補に出ない問題を修正（[#64960](https://github.com/microsoft/TypeScript/pull/64960)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
-- 関数型の束縛パターンの暗黙の any エラーをチェック時に報告（[#64856](https://github.com/microsoft/TypeScript/pull/64856)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- printer のバッファの事前確保をファイル全体の出力時だけに（[#64972](https://github.com/microsoft/TypeScript/pull/64972)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- import 属性の無い import で、モジュールでないことのエラーを残す（[#64884](https://github.com/microsoft/TypeScript/pull/64884)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- mapped type のシグネチャを調べるためにメンバーを解決しない（mui-docs で 8.10% 高速化）（[#64873](https://github.com/microsoft/TypeScript/pull/64873)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 
 ## トピック
 
@@ -38,4 +38,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-28|2026-10-28]]、[[repos/microsoft-TypeScript/changes/2026-10-26|2026-10-26]]、[[repos/microsoft-TypeScript/changes/2026-10-23|2026-10-23]]、[[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]、[[repos/microsoft-TypeScript/changes/2026-10-19|2026-10-19]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-10-30|2026-10-30]]、[[repos/microsoft-TypeScript/changes/2026-10-28|2026-10-28]]、[[repos/microsoft-TypeScript/changes/2026-10-26|2026-10-26]]、[[repos/microsoft-TypeScript/changes/2026-10-23|2026-10-23]]、[[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21]]

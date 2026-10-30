@@ -1,6 +1,6 @@
 ---
 title: Anthropic News
-updated: 2026-10-28
+updated: 2026-10-30
 tags:
   - blog/anthropic
 ---
@@ -9,6 +9,7 @@ tags:
 
 ## 記事
 
+- 2026-10-28 — [[blogs/anthropic/posts/2026-10-28-ai-for-science-expands-foundations-research-institutions|AI for Science を科学財団・研究機関に拡大]] — Sloan・Simons・NSF などの財団、STScI・Sanger・Crick などの研究機関、FlyWire・gnomAD などのプロジェクト計 20 件に Claude のクレジットを提供
 - 2026-10-27 — [[blogs/anthropic/posts/2026-10-27-expanding-partnership-gsa|GSA との提携を拡大、あらゆるレベルの政府に Claude を提供]] — Claude Enterprise・Claude for Government・Claude API を全製品で 40% 割引、州・地方政府も対象（推定 10 億ドルの節約）
 - 2026-10-26 — [[blogs/anthropic/posts/2026-10-26-s1-sec|Anthropic が新規株式公開に向けて SEC に S-1 を提出]] — Class A 普通株式を Nasdaq Global Select Market にシンボル「ANT」で上場予定（株数・価格帯は未定）
 - 2026-10-22 — [[blogs/anthropic/posts/2026-10-22-donating-agent-skills-to-the-agentic-ai-foundation|Agent Skills を Agentic AI Foundation に寄贈]] — 名前・ロゴ・GitHub organization・`agentskills.io` を Linux Foundation 傘下の AAIF に寄贈（70 以上のプラットフォームが採用）
@@ -33,6 +34,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-10-30 — 記事 1 件。エラー: なし
 - 2026-10-28 — 記事 2 件。エラー: なし
 - 2026-10-23 — 記事 4 件（うち「Features」は本文がサイトのナビゲーションだけのカテゴリーページのため掲載せず）。エラー: なし
 - 2026-10-21 — 記事 1 件（カテゴリ一覧ページ 6 件（Partnerships・Product・Announcements・Security・Safeguards・Policy）は記事ではないため除外）。エラー: なし
