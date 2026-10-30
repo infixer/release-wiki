@@ -2,43 +2,43 @@
   "repos": {
     "react/react": {
       "fullName": "react/react",
-      "lastMergedAt": "2026-10-27T15:01:43Z",
+      "lastMergedAt": "2026-10-29T15:58:40Z",
       "lastReleaseAt": "2026-10-14T17:06:15Z"
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-27T23:37:41Z",
-      "lastReleaseAt": "2026-10-27T23:46:43Z"
+      "lastMergedAt": "2026-10-30T00:19:07Z",
+      "lastReleaseAt": "2026-10-29T23:44:27Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
-      "lastMergedAt": "2026-10-26T00:33:12Z",
+      "lastMergedAt": "2026-10-29T08:13:13Z",
       "lastReleaseAt": "2026-10-23T07:59:39Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-10-28T00:10:55Z",
+      "lastMergedAt": "2026-10-29T23:11:42Z",
       "lastReleaseAt": "2026-10-27T01:02:52Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-10-27T23:47:21Z",
+      "lastMergedAt": "2026-10-28T17:00:38Z",
       "lastReleaseAt": "2026-10-09T03:06:51Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-28T00:01:14Z",
+      "lastMergedAt": "2026-10-29T23:55:07Z",
       "lastReleaseAt": "2026-10-20T17:38:20Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-10-27T19:13:53Z",
+      "lastMergedAt": "2026-10-30T00:05:53Z",
       "lastReleaseAt": "2026-10-27T05:51:29Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
       "lastMergedAt": "2026-10-27T20:03:06Z",
-      "lastReleaseAt": "2026-10-27T20:24:20Z"
+      "lastReleaseAt": "2026-10-30T01:06:26Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
@@ -52,12 +52,12 @@
     },
     "w3c/wcag": {
       "fullName": "w3c/wcag",
-      "lastMergedAt": "2026-10-19T07:16:08Z",
+      "lastMergedAt": "2026-10-29T21:32:03Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "openui/open-ui": {
       "fullName": "openui/open-ui",
-      "lastMergedAt": "2026-10-23T11:49:54Z",
+      "lastMergedAt": "2026-10-28T11:01:58Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/ecma262": {
@@ -67,18 +67,18 @@
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-10-28T00:31:29Z",
+      "lastMergedAt": "2026-10-30T00:21:37Z",
       "lastReleaseAt": "2026-10-27T15:28:26Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-10-26T16:09:28Z",
+      "lastMergedAt": "2026-10-29T09:03:05Z",
       "lastReleaseAt": "2026-10-19T16:42:33Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-10-27T09:08:37Z",
-      "lastCommitAt": "2026-10-27T17:01:28Z",
+      "lastMergedAt": "2026-10-29T08:53:45Z",
+      "lastCommitAt": "2026-10-29T11:12:36Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
@@ -89,8 +89,8 @@
     },
     "openai/codex": {
       "fullName": "openai/codex",
-      "lastReleaseAt": "2026-10-27T20:09:38Z",
-      "lastMergedAt": "2026-10-27T23:53:49Z"
+      "lastReleaseAt": "2026-10-29T19:47:53Z",
+      "lastMergedAt": "2026-10-30T00:45:45Z"
     }
   },
   "blogs": {
@@ -894,7 +894,8 @@
     },
     "safari": {
       "seen": [
-        "https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes#rev=Released October 13, 2026 — 27.2 beta (20625.2.8)",
+        "https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes#rev=Released October 26, 2026 — 27.2 (20625.2.8)",
+        "https://developer.apple.com/documentation/safari-release-notes/safari-27_1-release-notes#rev=Released October 23, 2026 — 27.1 (20625.1.29)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-27-release-notes#rev=Released September 14, 2026 — 27.0 (20625.1.29)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-26_6-release-notes#rev=Released July 27, 2026 — 26.6 (20624.4.5)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-26_5-release-notes#rev=Released May 11, 2026 — 26.5 (20624.2.5)",
@@ -936,11 +937,13 @@
         "https://developer.apple.com/documentation/safari-release-notes/safari-13-release-notes#rev=Released September 19, 2019 — Version 13 (15608.2.11)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-12_1-release-notes#rev=Released March 25, 2019 — Version 12.1 (14607.1.40)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-12-release-notes#rev=Released September 17, 2018 — Version 12 (14606.1.36)",
+        "https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes#rev=Released October 13, 2026 — 27.2 beta (20625.2.8)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes#rev=Released September 16, 2026 — 27.2 beta (20625.2.4)"
       ]
     },
     "anthropic": {
       "seen": [
+        "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
         "https://www.anthropic.com/news/expanding-partnership-gsa",
         "https://www.anthropic.com/news/partnerships",
         "https://www.anthropic.com/news/s1-sec",

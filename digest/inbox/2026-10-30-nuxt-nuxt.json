@@ -1,0 +1,157 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-10-30T01:07:35Z",
+  "range": {
+    "from": "2026-10-28T00:10:55Z",
+    "to": "2026-10-30T01:07:35Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.3",
+      "publishedAt": "2026-10-27T01:02:52Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.3"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36769,
+      "title": "docs: link the Nuxt DevTools docs on nuxt.com",
+      "url": "https://github.com/nuxt/nuxt/pull/36769",
+      "author": "atinux",
+      "mergedAt": "2026-10-28T20:30:09Z",
+      "labels": [
+        "📚 documentation",
+        "4.x",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 5
+    },
+    {
+      "number": 36772,
+      "title": "docs: revise README structure and headings",
+      "url": "https://github.com/nuxt/nuxt/pull/36772",
+      "author": "atinux",
+      "mergedAt": "2026-10-29T00:54:48Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 36773,
+      "title": "perf(nuxt): memoise lazy route component imports on the server",
+      "url": "https://github.com/nuxt/nuxt/pull/36773",
+      "author": "danielroe",
+      "mergedAt": "2026-10-29T15:16:29Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nanother one from doing some profiling of nuxt render times.\n\nbecause we create a new router for every request on the server, vue-router's cache of resolved lazy route components never gets reused, and every request pays the overhead of a dynamic import.\n\nthis PR wraps lazy page components in the generated `#build/routes` with a small `memoizeRouteComponent` helper on the server in production builds, so every router reuses the same promise.\n\n| app | main | branch | delta |\n| - | - | - | - |\n| single-SFC page | 352µs | 336µs | -4.5% |\n\nthe savings grow by the number of components imported, so nested pages should show more improvement.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36773?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36773?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/pages/module.ts (+2 -0)",
+        "packages/nuxt/src/pages/runtime/utils.ts (+13 -0)",
+        "packages/nuxt/src/pages/utils.ts (+7 -1)",
+        "packages/nuxt/test/normalize-routes.test.ts (+2 -1)",
+        "packages/nuxt/test/pages.test.ts (+56 -2)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36766,
+      "title": "docs: clarify template dependency regeneration",
+      "url": "https://github.com/nuxt/nuxt/pull/36766",
+      "author": "onmax",
+      "mergedAt": "2026-10-29T18:24:43Z",
+      "labels": [
+        "📚 documentation",
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 36774,
+      "title": "fix(vite): use a single type checker",
+      "url": "https://github.com/nuxt/nuxt/pull/36774",
+      "author": "danielroe",
+      "mergedAt": "2026-10-29T18:39:50Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves #36738\n\n### 📚 Description\n\nsince the environment api refactor (#33445) we've been creating a separate `vite-plugin-checker` instance for the `client` and `ssr` environments.\n\nthe ssr worker was also never terminated, so with `typescript.typeCheck: true` each soft reload leaked one checker worker along with its program and file watchers. that part is now fixed upstream in https://github.com/fi3ework/vite-plugin-checker/pull/833.\n\nthis PR registers a single checker applied to the client environment, which is what we did before the refactor.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36774?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/vite/src/plugins/vite-plugin-checker.ts (+4 -5)",
+        "packages/vite/test/vite-plugin-checker.test.ts (+53 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36671,
+      "title": "feat(nitro)!: migrate to nitro 3 rc",
+      "url": "https://github.com/nuxt/nuxt/pull/36671",
+      "author": "danielroe",
+      "mergedAt": "2026-10-29T23:02:14Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nresolves https://github.com/nuxt/nuxt/issues/36688\n\n### 📚 Description\n\nthis migrates us to the new Nitro RC - well, the current nightly pending the release which is ... very soon! 😁\n\nit relies on the [new unrouting release](https://github.com/unjs/unrouting) which has support for [rou3](https://github.com/h3js/rou3) v1, and was a helpful testbed for finding some issues in nitro which @pi0 very kindly merged in 🎉\n\n### 🚧 TODO\n- [x] https://github.com/h3js/srvx/pull/339\n- [x] https://github.com/h3js/srvx/pull/337\n\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36671?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36671?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-dark.svg\"></picture></a></p>",
+      "files": [
+        "knip.json (+1 -1)",
+        "packages/kit/src/compatibility.ts (+1 -1)",
+        "packages/kit/src/diagnostics/pages.ts (+5 -0)",
+        "packages/nitro-server/package.json (+2 -1)",
+        "packages/nitro-server/src/augments.ts (+3 -3)",
+        "packages/nitro-server/src/imports.ts (+2 -2)",
+        "packages/nitro-server/src/index.ts (+46 -30)",
+        "packages/nitro-server/src/legacy.ts (+2 -2)",
+        "packages/nitro-server/src/runtime/compat/nitro-v2.ts (+1 -1)",
+        "packages/nitro-server/src/runtime/handlers/error.ts (+3 -2)"
+      ],
+      "filesTotal": 46
+    },
+    {
+      "number": 36387,
+      "title": "fix(vite): pass dev listener to nitro for websocket upgrades",
+      "url": "https://github.com/nuxt/nuxt/pull/36387",
+      "author": "benjamincanac",
+      "mergedAt": "2026-10-29T23:11:42Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nNeeds https://github.com/nitrojs/nitro/pull/4647\n\n### 📚 Description\n\nWith Nitro mounted as a Vite environment, WebSockets don't work in `nuxt dev`. Vite runs in middleware mode, so Nitro has no `httpServer` to listen for upgrades on, and the `nuxt.server` we expose has no `upgrade` for the CLI to forward to, unlike the legacy `createDevServer(nitro)`.\n\nToday an app with `nitro.features.websocket` can't even boot, because Nitro calls `server.httpServer.on(\"upgrade\")` on `null`. That part is nitrojs/nitro#4647. With it fixed the dev server starts, but every upgrade is dropped.\n\nThis adds `upgrade` to `nuxt.server` and hands the request to the Nitro environment's dev server, the same call Nitro makes from its own listener outside middleware mode.\n\n`nuxt.server` is assigned once early with only `upgrade`, because the CLI checks `\"upgrade\" in nuxt.server` right after `ready()`, before `vite:serverCreated` has run. I'm not sure that's the shape you want. The alternative is for the CLI to look `upgrade` up when a request comes in, happy to move it there instead.\n\nTested by applying both changes to the installed `5.0.0-29833065` and Nitro `3.0.260903-beta` in an app running a WebSocket game loop: `nuxt dev` boots and the socket protocol tests connect and run.",
+      "files": [
+        "packages/vite-server/src/dev.ts (+0 -2)",
+        "packages/vite/src/plugins/dev-server.ts (+16 -0)",
+        "packages/vite/src/vite.ts (+2 -1)",
+        "test/fixtures/nitro-vite-environment/nuxt.config.ts (+3 -0)",
+        "test/fixtures/nitro-vite-environment/server/api/ws.ts (+7 -0)",
+        "test/nitro-vite-environment.test.ts (+36 -2)"
+      ],
+      "filesTotal": 6
+    }
+  ],
+  "errors": []
+}

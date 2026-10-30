@@ -1,0 +1,345 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-10-30T01:07:35Z",
+  "range": {
+    "from": "2026-10-26T16:09:28Z",
+    "to": "2026-10-30T01:07:35Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.0.5",
+      "publishedAt": "2026-10-15T14:22:50Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.5"
+    },
+    "prerelease": {
+      "tag": "v5.1.0-beta.1",
+      "publishedAt": "2026-10-19T16:42:33Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0-beta.1"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 11769,
+      "title": "docs(browser): explain `--ui`, `browser.ui`, and `browser.headless` in the Browser Mode guide",
+      "url": "https://github.com/vitest-dev/vitest/pull/11769",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T06:13:51Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 11766,
+      "title": "feat(browser): enable failure-only trace view by default",
+      "url": "https://github.com/vitest-dev/vitest/pull/11766",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T06:15:18Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "- supersedes #11678\n- follow-up to #11594\n- follow-up to #11612\n\nThis PR makes `browser.traceView` default to `'failure-only'`, so every failed browser test records a trace and prints its step timeline in the failure output (#11594).\n\nWe thought of surfacing an HTML reporter suggestion in the terminal next to the timeline (https://github.com/vitest-dev/vitest/pull/11678#issuecomment-6360608481), but left it in the docs only for now. The HTML reporter has its own cost, and for users who only want the terminal timeline without the HTML reporter, there would be no way to opt out of that suggestion. We may revisit the suggestion strategy later if it's considered important.\n\nTODO\n- [x] docs",
+      "files": [
+        "packages/vitest/src/node/cli/cli-config.ts (+4 -3)",
+        "packages/vitest/src/node/config/resolveConfig.ts (+8 -5)",
+        "packages/vitest/src/node/types/browser.ts (+2 -2)",
+        "docs/config/browser/traceview.md (+11 -21)",
+        "docs/guide/browser/trace-view.md (+9 -9)",
+        "docs/guide/cli-generated.md (+2 -2)",
+        "test/browser/specs/trace-timeline.test.ts (+0 -1)",
+        "test/e2e/test/config/browser-configs.test.ts (+27 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 11756,
+      "title": "fix: prefix expect.poll message to all errors",
+      "url": "https://github.com/vitest-dev/vitest/pull/11756",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T06:29:09Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- related https://github.com/vitest-dev/vitest/pull/11754\n\nCurrently `expect.poll` adds its `message` to the error only when the matcher fails on the last attempt. When the callback throws on the last attempt, or doesn't resolve before the timeout, the error has no message. So the same flaky poll can fail with or without its label, depending on timing.\n\nThis PR adds the message to every error the poll fails with. Errors whose message can't be changed, such as `DOMException`, are thrown without it. It also documents the option, which was only in the type signature.\n\n---\n\nFor example, this poll labels its failure with `queue drained`:\n\n```ts\nawait expect.poll(() => queue.count(), { message: 'queue drained' }).toBe(0)\n```\n\nThe table shows the error this poll fails with, before and after this PR, depending on how its last attempt ended:\n\n| last attempt | before | after |\n| --- | --- | --- |\n| matcher `toBe` failed | `queue drained: expected 3 to be 0 // Object.is equality` | same |\n| callback `queue.count` threw | `connect ECONNREFUSED` | `queue drained: connect ECONNREFUSED` |\n| callback `queue.count` didn't resolve | `expect.poll() function didn't resolve in time.` | `queue drained: expect.poll() function didn't resolve in time.` |",
+      "files": [
+        "packages/vitest/src/integrations/chai/poll.ts (+13 -4)",
+        "docs/api/expect.md (+7 -0)",
+        "test/unit/test/expect-poll.test.ts (+33 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11697,
+      "title": "fix(cache): handle concurrent cache clearing",
+      "url": "https://github.com/vitest-dev/vitest/pull/11697",
+      "author": "7rulnik",
+      "mergedAt": "2026-10-28T06:51:46Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "When several Vitest processes start at the same time with an outdated fs module cache (for example, CI shards sharing one workspace after a lockfile change), each of them removes the cache directory. The first one to finish recreates it and writes `_metadata.json`, and the rest fail on startup:\n\n```\nStartup Error\nError: ENOTEMPTY: directory not empty, rmdir '.../fs-module-cache'\n```\n\n`rm({ recursive: true })` ends with an `rmdir` that is not retried, so anything written into the directory in the meantime aborts the run.\n\nThis change renames the directory to a temporary sibling before removing it. Only one process can rename it; the others get `ENOENT` and continue. If the rename fails for another reason, it falls back to removing the directory in place, as before.\n\nThe new test starts 4 CLI processes against an outdated cache with 1000 entries. Without the change it failed every run locally with `ENOTEMPTY`; with it, it passes.",
+      "files": [
+        "packages/vitest/src/node/cache/fsModuleCache.ts (+19 -3)",
+        "test/e2e/test/fs-module-cache-resiliency.test.ts (+42 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11767,
+      "title": "docs(browser): rework trace view guide and config",
+      "url": "https://github.com/vitest-dev/vitest/pull/11767",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T07:23:18Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 11760,
+      "title": "perf: cache setup/mock resolves in reused workers",
+      "url": "https://github.com/vitest-dev/vitest/pull/11760",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T07:34:45Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- split from https://github.com/vitest-dev/vitest/pull/11752 (the resolve half)\n- benchmark app https://github.com/vitest-dev/benchmarks/pull/2\n\nPreviously, a reused worker (`isolate: false`) asked the main process to resolve the same ids for every test file, because the setup files and their `vi.mock` calls are re-evaluated before each file. Each of these round trips waits behind the other workers' calls on the main thread. This is a narrow case. Ordinary imports never take this path, because the server resolves them while transforming a module and a worker doesn't fetch a module it has already evaluated. Only entry files and mocks ask the worker's resolver, and only the setup files and their mocks repeat the same request across test files.\n\nThis PR caches resolutions per worker, keyed by environment, importer and id. Workers don't outlive a run, since even a watch rerun starts fresh ones, so the cache needs no invalidation.\n\nOn the `setup-mocks` benchmark (800 test files and 6 setup files that each `vi.mock` a service, `isolate: false`, warm, median of 10 runs), this PR alone:\n\n| pool | fsModuleCache | maxWorkers | main | this PR | Δ |\n|---|---|---|---:|---:|---:|\n| forks | false | 11 (default) | 5.44s | 4.87s | −10% |\n| threads | true | 11 (default) | 2.73s | 2.45s | −10% |\n| forks | false | 3 (25%) | 5.74s | 5.13s | −11% |\n| forks | false | 1 | 5.61s | 4.96s | −11% |\n\nOn existing apps without mocking setup files (warm, `isolate: false`, median of 5 runs, 20 for enterprise\n…(truncated)",
+      "files": [
+        "packages/vitest/src/runtime/moduleRunner/startVitestModuleRunner.ts (+23 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 11664,
+      "title": "test(ui): disable virtualization in e2e by default",
+      "url": "https://github.com/vitest-dev/vitest/pull/11664",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T07:38:54Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 13
+    },
+    {
+      "number": 11641,
+      "title": "fix: support api.port 0",
+      "url": "https://github.com/vitest-dev/vitest/pull/11641",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T07:39:25Z",
+      "labels": [
+        "cr-tracked"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- related to https://github.com/vitest-dev/vitest/issues/9035\n- follow-up to https://github.com/vitest-dev/vitest/pull/11640\n\n`api.port: 0` is conventionally expected to let the OS pick an available port, but Vitest treated `0` as unset and fell back to the default port (`23315` in browser mode, `51204` otherwise). This PR fixes it.\n\nSide note: Vite itself only handles `port: 0` since 8.2.1 (https://github.com/vitejs/vite/pull/23158), so this change relies on that fix.\n\nThe new e2e test doesn't test the new behavior exactly because the behavior depends on the Vite version. Various cases are checked manually, and the setup and results are in this note: https://gist.github.com/hi-ogawa/7db0da909aee7b614e7e3ff4d11ba9a9",
+      "files": [
+        "packages/vitest/src/node/config/resolveConfig.ts (+2 -2)",
+        "packages/vitest/src/node/logger.ts (+10 -16)",
+        "packages/vitest/src/node/plugins/browserLoader.ts (+1 -1)",
+        "docs/config/api.md (+2 -0)",
+        "test/browser/specs/server-url.test.ts (+14 -1)",
+        "test/e2e/test/override.test.ts (+9 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 11696,
+      "title": "fix: show attempts in test error logs of retried tests",
+      "url": "https://github.com/vitest-dev/vitest/pull/11696",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T07:40:40Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- closes https://github.com/vitest-dev/vitest/issues/11454\n- stacked on https://github.com/vitest-dev/vitest/pull/11694\n\nCurrently, the failure summary prints one `FAIL` header per occurrence of an error, so retried tests and repeated `expect.soft` errors show identical header lines with no explanation. This PR prints one header per test instead, with a label:\n\n- `initial run`, `1st retry`, `2nd repeat`, or `1st retry of 1st repeat` names each attempt that produced the error, shown when the test ran more than once\n- `N times` counts an error repeated within one attempt\n\n### Retry\n\n```js\ntest('always fails', { retry: 2 }, () => {\n  expect(1).toBe(2)\n})\n```\n\n🔴 Before:\n\n```\n FAIL  basic.test.js > always fails\n FAIL  basic.test.js > always fails\n FAIL  basic.test.js > always fails\nAssertionError: expected 1 to be 2 // Object.is equality\n```\n\n🟢 After:\n\n```\n FAIL  basic.test.js > always fails (initial run, 1st retry, 2nd retry)\nAssertionError: expected 1 to be 2 // Object.is equality\n```\n\n### Soft\n\n```js\ntest('soft', () => {\n  for (let i = 0; i < 2; i++) {\n    expect.soft(1).toBe(2)\n  }\n})\n```\n\n🔴 Before:\n\n```\n FAIL  basic.test.js > soft\n FAIL  basic.test.js > soft\nAssertionError: expected 1 to be 2 // Object.is equality\n```\n\n🟢 After:\n\n```\n FAIL  basic.test.js > soft (2 times)\nAssertionError: expected 1 to be 2 // Object.is equality\n```\n\n---\n\n## Examples\n\n### Retry errors at the same location\n\n### Retry errors at the different locations",
+      "files": [
+        "packages/vitest/src/node/reporters/base.ts (+31 -5)",
+        "test/browser/specs/failure-screenshot.test.ts (+6 -8)",
+        "test/e2e/test/retry.test.ts (+115 -0)",
+        "test/e2e/test/scoped-fixtures.test.ts (+1 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11744,
+      "title": "fix(ui): fix quirks mode in trace view replay",
+      "url": "https://github.com/vitest-dev/vitest/pull/11744",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-28T07:41:04Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- closes https://github.com/vitest-dev/vitest/issues/11710\n- follow-up to https://github.com/vitest-dev/vitest/pull/10981\n- triage note: https://gist.github.com/hi-ogawa/eb22555aecd5fcd526c68234c3616178#file-triage-md\n\nhttps://github.com/vitest-dev/vitest/pull/10981 introduced an extra `document.close()` to work around an infinite browser tab spinner indicator, but it turns out to switch the document into HTML quirks mode, which in turn breaks uppercase CSS class names.\n\nThis PR takes a different approach to fix the same spinner issue without switching into HTML quirks mode, by waiting for the main document `load` event before starting to rebuild the rrdom iframe.\n\nThe following table compares how the trace view handles the replayed document before #10981, on main, and in this PR:\n\n| | `document.close` | waits for `load` | spinner on reload with a selected step | `.fooX` style after interaction |\n| --- | --- | --- | --- | --- |\n| before #10981 | no | no | ❌ spins forever | ✅ kept |\n| main | yes | no | ✅ finishes | ❌ lost |\n| __this PR__ | no | yes | ✅ finishes | ✅ kept |\n\nThe root cause is in rrweb, which leaves the rebuilt document open and only works without closing it. This reproduces with plain rrweb 2.2.0 (see the triage note), so it's worth reporting upstream separately.",
+      "files": [
+        "packages/ui/client/components/trace/TraceView.vue (+17 -8)",
+        "test/ui/fixtures/trace/basic.test.ts (+4 -1)",
+        "test/ui/test/trace.spec.ts (+2 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11676,
+      "title": "fix(coverage): v8 to ignore Vite's generated CJS namespace import helper",
+      "url": "https://github.com/vitest-dev/vitest/pull/11676",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-28T07:56:41Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes https://github.com/vitest-dev/vitest/issues/11675\n\nSimilar fix as in https://github.com/vitest-dev/vitest/pull/8718",
+      "files": [
+        "packages/coverage-v8/src/provider.ts (+13 -0)",
+        "test/coverage-test/fixtures/src/cjs-dependency-namespace.ts (+5 -0)",
+        "test/coverage-test/fixtures/src/cjs-dependency.ts (+0 -1)",
+        "test/coverage-test/fixtures/src/cjs-lib.shim.d.ts (+3 -0)",
+        "test/coverage-test/fixtures/test/cjs-dependency-namespace.test.ts (+6 -0)",
+        "test/coverage-test/test/cjs-dependency.test.ts (+24 -0)",
+        "test/coverage-test/test/on-failure.test.ts (+1 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 11681,
+      "title": "fix(vm): keep node globals after teardown (fix #11380)",
+      "url": "https://github.com/vitest-dev/vitest/pull/11681",
+      "author": "francesco-agnoletto",
+      "mergedAt": "2026-10-28T11:01:59Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11380\n\nImplements what we agreed on with @shairez in the issue: after the teardown strip, `process`, `global`, `setImmediate` and `clearImmediate`. This way work that a test file didn't await doesn't crash with `process is not defined` anymore.\n\nI added the test Shai suggested, it fails on main and passes on this branch.\n\nWhat this doesn't fix:\n- late work that uses `expect`, `vi.*`, `import()` or `console` after teardown, those belong to the test file\n- the fake timers retention from #11679\n\nMemory numbers are in the issue.",
+      "files": [
+        "packages/vitest/src/runtime/workers/vm.ts (+10 -8)",
+        "test/e2e/test/vm-threads.test.ts (+54 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11765,
+      "title": "fix(ui): let coverage report follow UI color scheme",
+      "url": "https://github.com/vitest-dev/vitest/pull/11765",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-29T02:40:32Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Currently UI only sets `color-scheme` when dark mode is enabled. Now we'll set it for light mode too. This allows `@vitest/istanbuljs` html reporter to infer parent window's theme selection. Related to https://github.com/vitest-dev/istanbuljs/pull/36.\n\nIf there's no parent window or it doesn't have `color-scheme` set, the html reporter will default to OS setting. So this is needed to override that.\n\n[vitest-ui-themed-coverage.webm](https://github.com/user-attachments/assets/1f377bfe-8088-4014-88ee-6c531055e97b)",
+      "files": [
+        "packages/ui/client/components/Coverage.vue (+1 -1)",
+        "packages/ui/client/styles/main.css (+5 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11761,
+      "title": "perf: don't refetch warm modules in reused runners",
+      "url": "https://github.com/vitest-dev/vitest/pull/11761",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-29T06:24:51Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- split from https://github.com/vitest-dev/vitest/pull/11752 (the warm-modules half)\n- benchmark app https://github.com/vitest-dev/benchmarks/pull/2\n\nPreviously, a reused module runner (`isolate: false`) fetched a new warm-modules snapshot for every run request, which with several workers means every test file. Each snapshot walks the file's whole import graph on the main process and sends it over IPC. In a reused runner, though, most of that graph is already evaluated, and those imports never look at the snapshot. A snapshot only helps with modules that are new to this runner and that another worker has already transformed, and that help shrinks as the runner accumulates modules, while the walk still covers the whole graph.\n\nThis PR fetches the snapshot once per module runner and keeps it. In a multi-worker `isolate: false` run, that effectively turns warm modules off. Each runner's one snapshot is taken at its first file, when the server has transformed almost nothing yet.\n\n### What changes\n\n| setup | main | this PR |\n|---|---|---|\n| `isolate: true`, vm pools | one snapshot per file, each for a new runner | same |\n| `maxWorkers: 1` | one snapshot for the single request | same |\n| `isolate: false`, several workers | one snapshot per file | one per runner, at its first file |\n\nWith `isolate: false` and several workers, main sends a snapshot of the file's import graph for many test files, but a worker has already evaluated most of it. Averages per test file, over all 800 test \n…(truncated)",
+      "files": [
+        "packages/vitest/src/runtime/moduleRunner/startVitestModuleRunner.ts (+15 -21)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 11771,
+      "title": "fix(browser): skip trace entries after their attempt ended",
+      "url": "https://github.com/vitest-dev/vitest/pull/11771",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-29T08:49:35Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- follow-up to https://github.com/vitest-dev/vitest/pull/11766\n\nPreviously, with trace view enabled, a browser action or `expect.element` that settled after its test attempt ended crashed inside Vitest.\n\n```ts\ntest('unawaited', () => {\n  page.getByRole('button').click().then(() => {})\n})\n```\n\n```js\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n⎯⎯⎯⎯ Unhandled Rejection ⎯⎯⎯⎯⎯\nTypeError: Cannot read properties of undefined (reading 'startTime')\nThis error originated in \"basic.test.ts\" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.\nThe last test to run before this error was \"wait\". This means either:\n- the error was thrown while Vitest was running this test, or\n- the error was thrown after the test completed, and this was the most recent test at that point.\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n```\n\nThis PR drops the trace entry when its attempt has already ended.",
+      "files": [
+        "packages/browser/src/client/tester/trace.ts (+5 -1)",
+        "test/browser/specs/trace.test.ts (+37 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11779,
+      "title": "fix(vm): reset fake timers after each test file (fix #11679)",
+      "url": "https://github.com/vitest-dev/vitest/pull/11779",
+      "author": "francesco-agnoletto",
+      "mergedAt": "2026-10-29T08:56:06Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11679\n\nFollow up of #11380 as @shairez suggested there. Fake timers left on by a test file were never turned off, and in vm pools they also replace `hrtime` on the worker's `process`, which every file shares. That kept the context of every such file alive. This turns fake timers off after each file, next to the existing mocks reset.\n\nI added a test that runs the existing leak probe fixture with a setup file that leaves fake timers on, it fails on main (5 of 5 contexts not released) and passes on this branch.\n\nThis only changes the vm pools runner. Can do the same in the other pools if you think it's needed.",
+      "files": [
+        "packages/vitest/src/runtime/runVmTests.ts (+2 -0)",
+        "test/e2e/fixtures/leak-probe/fake-timers.config.js (+7 -0)",
+        "test/e2e/fixtures/leak-probe/leave-fake-timers-on.js (+3 -0)",
+        "test/e2e/test/vm-threads.test.ts (+19 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11775,
+      "title": "fix(cache): key module cache on the deps optimizer",
+      "url": "https://github.com/vitest-dev/vitest/pull/11775",
+      "author": "MO2k4",
+      "mergedAt": "2026-10-29T08:56:59Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### Description\n\nWritten by an AI agent (Claude) on behalf of @MO2k4, who has reviewed it.\n\n`fsModuleCache` keys a transform on its id, source and environment config, but the cached code imports optimized deps by path and version (`<cacheDir>/deps_ssr/<dep>.js?v=<browserHash>`). When the optimizer metadata changes while the source and config file don't (an `include` computed at load time, for example), or when another project with its own `cacheDir` filled the cache (#11773), the cached code imports a different copy of the dependency than the one `vi.mock` registers. Mocks are silently not applied, and the same dependency loads twice.\n\nThe key now also includes the environment's `cacheDir` and `browserHash` when it has a deps optimizer. `browserHash` is read on each call because the optimizer can re-run after `environmentHash` is memoized. Environments without an optimizer keep their keys.\n\nBoth new tests fail on main: one changes `deps.optimizer.ssr.include` between runs, the other is the two-project reproduction from #11773. The reproduction in #11774 fails on 5.0.5 and passes with `--no-fsModuleCache`.\n\nResolves #11773\nResolves #11774\n\n### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:\n\n- [x] It's really useful if your PR references an issue where it is discussed ahead of time. If the feature is substantial or introduces breaking changes without a discussion, PR might be closed.\n- [x] Ideally, include a test that fails \n…(truncated)",
+      "files": [
+        "packages/vitest/src/node/cache/fsModuleCache.ts (+8 -1)",
+        "test/e2e/test/fs-module-cache-optimizer.test.ts (+96 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11770,
+      "title": "fix(ui): open trace view only for tests with a trace",
+      "url": "https://github.com/vitest-dev/vitest/pull/11770",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-29T08:57:32Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- follow-up to https://github.com/vitest-dev/vitest/pull/11766\n- related https://github.com/vitest-dev/vitest/pull/11057\n\nPreviously, Vitest UI opened the trace view UI for any test selected in a file when `traceView` is enabled. However, with `traceView.mode: 'failure-only'` being the default, selecting any passing test with no artifacts ended up opening an empty pane with \"No trace found\". The editor also reserved an empty trace marker column for the same case.\n\nThis PR fixes it by triggering trace view UI features based on whether the test has trace artifacts instead of the global `traceView` config.",
+      "files": [
+        "packages/ui/client/components/views/ViewEditor.vue (+8 -6)",
+        "packages/ui/client/composables/trace-view.ts (+9 -4)",
+        "test/ui/test/trace-failure-only.spec.ts (+2 -2)",
+        "test/ui/test/trace.spec.ts (+5 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11759,
+      "title": "refactor: remove stale worker-side invalidates handling",
+      "url": "https://github.com/vitest-dev/vitest/pull/11759",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-29T08:58:03Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- related to https://github.com/vitest-dev/vitest/pull/11752\n- findings https://gist.github.com/hi-ogawa/edb99430c4feac79e6af964bb8ce4441\n\nNoticed a stale logic while trying to understand why `ctx.invalidates` check in https://github.com/vitest-dev/vitest/pull/11752 matters.\n\nThe worker invalidates the files in `ctx.invalidates` before running a test file. This is a leftover from when workers could survive the previous watch run and needed to drop stale modules. Since the v4 pool rewrite no worker outlives a run in watch reruns nor any programmatic test runs, so there is nothing stale to drop. The rest of the worker runtime already assumes this, for example, an already-evaluated module is answered from the worker's cache without asking the server (#9075).\n\nThis PR removes that worker-side handling. The one behavior change is in watch reruns with `isolate: false` and multiple workers where a reused worker received the same list with every test file, so it evaluated the changed modules again before each file.\n\nFor example, the e2e shows that rerun after editing a module that 6 test files import, `isolate: false`, `maxWorkers: 2` (same for `forks` and `threads`):\n\n| | evaluations of the changed module |\n|---|---:|\n| before | 6 (one per test file) |\n| after | 2 (one per worker) |",
+      "files": [
+        "packages/vitest/src/node/pool.ts (+1 -0)",
+        "packages/vitest/src/runtime/workers/base.ts (+0 -8)",
+        "test/e2e/test/watch/rerun-non-isolated.test.ts (+39 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11747,
+      "title": "feat: allow coverage providers to store data in fs module cache",
+      "url": "https://github.com/vitest-dev/vitest/pull/11747",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-10-29T09:03:05Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "- Enables https://github.com/vitest-dev/vitest/pull/11686\n- Related to https://github.com/vitest-dev/istanbuljs/pull/33\n\nAllow coverage providers to return data that `fsModuleCache` will store **right next to** the cached module info. In https://github.com/vitest-dev/istanbuljs/pull/33 case, we want to avoid inlining instrumentation input source maps (_how transformed code at instrumentation phase remaps back to original sources, used during coverage remapping_) into the runtime code. This allows us to reduce code that's transferred to workers ~25%.\n\nCoverage providers can define way to pass serializable data that `fsModuleCache` stores. When cache reads that file, it will call providers to instruct them about cache hit.",
+      "files": [
+        "packages/vitest/src/node/cache/fsModuleCache.ts (+53 -9)",
+        "packages/vitest/src/node/environments/transformService.ts (+9 -1)",
+        "packages/vitest/src/node/types/coverage.ts (+22 -1)",
+        "test/coverage-test/fixtures/custom-provider.ts (+14 -0)",
+        "test/coverage-test/test/custom-provider.custom.test.ts (+38 -2)"
+      ],
+      "filesTotal": 5
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 1
+    }
+  }
+}
