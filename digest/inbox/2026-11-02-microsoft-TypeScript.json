@@ -1,0 +1,360 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-11-02T00:51:11Z",
+  "range": {
+    "from": "2026-10-29T23:55:07Z",
+    "to": "2026-11-02T00:51:11Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": {
+      "tag": "v7.1-beta",
+      "publishedAt": "2026-10-20T17:38:20Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.1-beta"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64907,
+      "title": "Add extra tests for various uncovered parts of the code",
+      "url": "https://github.com/microsoft/TypeScript/pull/64907",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T13:55:11Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Found these in a long session; none of this was being tested before.\n\nIt could be that some of this behavior is \"not good\", but we have no tests for them now.",
+      "files": [
+        "tsc/testdata/baselines/reference/compiler/ambientConstInitializerNonEnumReference.errors.txt (+30 -0)",
+        "tsc/testdata/baselines/reference/compiler/ambientConstInitializerNonEnumReference.symbols (+60 -0)",
+        "tsc/testdata/baselines/reference/compiler/ambientConstInitializerNonEnumReference.types (+64 -0)",
+        "tsc/testdata/baselines/reference/compiler/awaitOperandContextualTypeUnwrapsAwaited.errors.txt (+24 -0)",
+        "tsc/testdata/baselines/reference/compiler/awaitOperandContextualTypeUnwrapsAwaited.symbols (+34 -0)",
+        "tsc/testdata/baselines/reference/compiler/awaitOperandContextualTypeUnwrapsAwaited.types (+28 -0)",
+        "tsc/testdata/baselines/reference/compiler/bigintZeroIsDefinitelyFalsy.symbols (+14 -0)",
+        "tsc/testdata/baselines/reference/compiler/bigintZeroIsDefinitelyFalsy.types (+18 -0)",
+        "tsc/testdata/baselines/reference/compiler/classExtendsNullValuedIdentifier(strict=false).errors.txt (+19 -0)",
+        "tsc/testdata/baselines/reference/compiler/classExtendsNullValuedIdentifier(strict=false).js (+27 -0)"
+      ],
+      "filesTotal": 67
+    },
+    {
+      "number": 65031,
+      "title": "Size new arena chunks from the previous chunk's capacity",
+      "url": "https://github.com/microsoft/TypeScript/pull/65031",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T14:51:16Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Arena.NewSlice computed the next chunk size from len(a.data), but it grows whenever the request does not fit in the remaining space, which usually happens before the current chunk is full. Doubling the used length rather than the chunk capacity could make the next chunk the same size as, or smaller than, the one being replaced. Arenas that mostly serve slices then kept allocating small chunks and never reached the intended steady-state size.\n\nBase the growth on cap(a.data) so each chunk doubles the previous one up to the size ceiling. Arena.New only grows when len == cap, so it already behaved correctly; it now uses cap as well for consistency.\n\nThanks @teamchong for finding this!",
+      "files": [
+        "tsc/internal/core/arena.go (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64789,
+      "title": "Share complete union and intersection property cache entries",
+      "url": "https://github.com/microsoft/TypeScript/pull/64789",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T15:06:55Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Complete non-augmented property results are also valid for augmented lookups, but were copied into both caches. MUI keeps 2.7M duplicate entries this way.\n\n- Shares complete entries between the two lookup modes without merging genuinely different results.\n- MUI measurements showed **8.15% less retained heap**, **9.22% less GC scanning**, and **4.45% fewer allocated bytes**; the production CLI ran **2.60% fewer instructions**.\n- VS Code savings were much smaller.",
+      "files": [
+        "tsc/internal/checker/checker.go (+16 -13)",
+        "tsc/internal/checker/types.go (+1 -1)",
+        "tsc/internal/checker/types_test.go (+80 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 64871,
+      "title": "Speed up short-lived checker caches",
+      "url": "https://github.com/microsoft/TypeScript/pull/64871",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T15:27:22Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Every instantiation under an active mapper built and hashed a 128-bit key before probing the mapper's cache, even when the mapper had just been pushed and its cache was necessarily empty. Most keys carry no alias, so the type ID alone identifies the entry.\n\nActive mapper caches and inference visited sets are also cleared far more often than they are filled. Clearing a Go map costs time proportional to its capacity, which stays at its high-water mark, so each pop of an active mapper and each reuse of an inference state paid for the largest cache seen so far. Both now use a small table keyed by the same 128-bit keys that clears in constant time by bumping a generation counter instead of touching every slot.\n\nThe measurements below are for the key hashing change alone; the per-commit measurements for the constant-time clears are in their commit messages.\n\nMeasured with --checkers 4 (n=8):\n\n```\n                      │ before.txt │            after.txt             │\n                      │   sec/op   │   sec/op    vs base              │\n    Tsc/bluesky         2.756 ± 3%   2.742 ± 3%       ~ (p=0.366 n=8)\n    Tsc/sentry          11.20 ± 3%   11.19 ± 4%       ~ (p=0.742 n=8)\n    Tsc/t3code-server   10.84 ± 3%   10.72 ± 2%  -1.10% (p=0.038 n=8)\n    geomean             6.942        6.902       -0.58%\n\n                      │  before.txt  │             after.txt              │\n                      │    rss-B     │    rss-B      vs base              │\n    Tsc/bluesky         1.190Gi ±\n…(truncated)",
+      "files": [
+        "tsc/internal/checker/checker.go (+27 -19)",
+        "tsc/internal/checker/clearablemap.go (+87 -0)",
+        "tsc/internal/checker/inference.go (+9 -9)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 65024,
+      "title": "Add lint rule requiring SAFETY comments on unsafe operations",
+      "url": "https://github.com/microsoft/TypeScript/pull/65024",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T16:01:44Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "We don't have much unsafe (well, besides the AST stuff), but I think it'd be worth forcing ourselves to write out invariants rust-style.",
+      "files": [
+        "Herebyfile.mjs (+2 -1)",
+        "tools/customlint/plugin.go (+1 -0)",
+        "tools/customlint/testdata/protectedfield/record/record.go (+1 -0)",
+        "tools/customlint/testdata/protectedfield/record/record.go.golden (+1 -0)",
+        "tools/customlint/testdata/unsafesafety/dotimport.go (+14 -0)",
+        "tools/customlint/testdata/unsafesafety/dotimport.go.golden (+21 -0)",
+        "tools/customlint/testdata/unsafesafety/unsafesafety.go (+178 -0)",
+        "tools/customlint/testdata/unsafesafety/unsafesafety.go.golden (+231 -0)",
+        "tools/customlint/unsafesafety.go (+237 -0)",
+        "tools/scripts/tsc/generate-go-ast.ts (+13 -0)"
+      ],
+      "filesTotal": 25
+    },
+    {
+      "number": 65027,
+      "title": "Report overflow when ReadDirectoryChangesW returns zero bytes",
+      "url": "https://github.com/microsoft/TypeScript/pull/65027",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T16:01:44Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "When its buffer overflows, ReadDirectoryChangesW still succeeds but discards every pending event and reports zero bytes. Treating that as a full buffer walked a single zeroed record that was then ignored, so the changes were silently lost instead of surfacing ErrOverflow and prompting a rescan.\n\nDocs: https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-readdirectorychangesw#:~:text=If%20the%20buffer%20overflows%2C%20ReadDirectoryChangesW%20will%20still%20return%20true%2C%20but%20the%20entire%20contents%20of%20the%20buffer%20are%20discarded%20and%20the%20lpBytesReturned%20parameter%20will%20be%C2%A0zero%2C%20which%20indicates%20that%20your%20buffer%20was%20too%20small%20to%20hold%20all%20of%20the%20changes%20that%20occurred.\n\n> If the buffer overflows, ReadDirectoryChangesW will still return true, but the entire contents of the buffer are discarded and the lpBytesReturned parameter will be zero, which indicates that your buffer was too small to hold all of the changes that occurred.",
+      "files": [
+        "tsc/internal/fswatch/windows.go (+8 -3)",
+        "tsc/internal/fswatch/windows_test.go (+20 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 65045,
+      "title": "Reject non-access targets early when matching access references",
+      "url": "https://github.com/microsoft/TypeScript/pull/65045",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T19:29:04Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Just some logic moving to avoid work.\n\nThanks @teamchong!",
+      "files": [
+        "tsc/internal/checker/flow.go (+5 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64868,
+      "title": "Compare names before symbols when matching flow references",
+      "url": "https://github.com/microsoft/TypeScript/pull/64868",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T19:36:10Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Narrowing a reference walks back through every assignment and variable declaration on its flow path, and asks whether each one assigns the reference. For a declaration target that meant loading the declaration's symbol and looking up its late-bound and merged symbols, which is mostly cache misses on unrelated symbols. In long functions this dominated flow analysis.\n\nA declaration's symbol is named by its identifier, so a reference with a different name can never match it. Comparing names first skips the symbol work for nearly every unrelated declaration.\n\n`--checkers 4`, `n=8`, default GC settings:\n\n```\n                  │  before    │              after               │\n                  │   sec/op   │   sec/op    vs base              │\nTsc/bluesky         2.767 ± 1%   2.752 ± 2%       ~ (p=0.314 n=8)\nTsc/sentry          10.78 ± 2%   10.76 ± 2%       ~ (p=0.701 n=8)\nTsc/t3code-server   13.50 ± 4%   12.57 ± 1%  -6.85% (p=0.000 n=8)\ngeomean             7.384        7.194       -2.58%\n\n                  │   before     │               after                │\n                  │    rss-B     │    rss-B      vs base              │\nTsc/bluesky         1.183Gi ± 2%   1.181Gi ± 3%       ~ (p=0.878 n=8)\nTsc/sentry          3.549Gi ± 6%   3.481Gi ± 5%       ~ (p=0.721 n=8)\nTsc/t3code-server   2.880Gi ± 2%   2.849Gi ± 2%       ~ (p=0.279 n=8)\ngeomean             2.296Gi        2.271Gi       -1.06%\n\n                  │   before     │               after                │\n                  │\n…(truncated)",
+      "files": [
+        "tsc/internal/checker/flow.go (+13 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64869,
+      "title": "Store merged symbols in a paged symbol link store",
+      "url": "https://github.com/microsoft/TypeScript/pull/64869",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T19:37:04Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "getMergedSymbol runs on nearly every symbol access, and almost every call misses because few symbols are merge sources. Each miss still paid for a pointer-keyed map hash and probe.\n\nIndexing by dense symbol ID makes the common miss a range check and a page load.\n\n--checkers 4, n=8, default GC settings:\n\n```\n                  │  before    │              after               │\n                  │   sec/op   │   sec/op    vs base              │\nTsc/bluesky         2.799 ± 2%   2.767 ± 1%       ~ (p=0.266 n=8)\nTsc/sentry          10.86 ± 2%   10.78 ± 2%       ~ (p=0.314 n=8)\nTsc/t3code-server   13.89 ± 6%   13.50 ± 4%  -2.85% (p=0.050 n=8)\ngeomean             7.502        7.384       -1.58%\n\n                  │   before     │               after                │\n                  │    rss-B     │    rss-B      vs base              │\nTsc/bluesky         1.203Gi ± 2%   1.183Gi ± 2%       ~ (p=0.291 n=8)\nTsc/sentry          3.535Gi ± 6%   3.549Gi ± 6%       ~ (p=1.000 n=8)\nTsc/t3code-server   2.877Gi ± 3%   2.880Gi ± 2%       ~ (p=0.721 n=8)\ngeomean             2.304Gi        2.296Gi       -0.37%\n\n                  │   before     │               after                │\n                  │    heap-B    │    heap-B     vs base              │\nTsc/bluesky         934.8Mi ± 0%   934.5Mi ± 0%  -0.04% (p=0.038 n=8)\nTsc/sentry          2.603Gi ± 0%   2.608Gi ± 0%  +0.16% (p=0.000 n=8)\nTsc/t3code-server   2.312Gi ± 0%   2.301Gi ± 0%  -0.45% (p=0.000 n=8)\ngeomean             1.765Gi        1.76\n…(truncated)",
+      "files": [
+        "tsc/internal/checker/checker.go (+4 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64410,
+      "title": "Align inlay hints with trailing tuple arguments",
+      "url": "https://github.com/microsoft/TypeScript/pull/64410",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T20:17:55Z",
+      "labels": [
+        "Author: Team",
+        "For Backlog Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "It was easier to just write what I meant on #64363 than to describe it better.\n\nFixes #59979\nCloses #64363",
+      "files": [
+        "tsc/internal/checker/exports.go (+4 -0)",
+        "tsc/internal/ls/inlay_hints.go (+76 -29)",
+        "tsc/internal/ls/signaturehelp.go (+9 -13)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsInteractiveRestParameters2.baseline (+0 -32)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsOptionalParameterAfterTupleSpread.baseline (+32 -0)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsOptionalTrailingAfterTupleSpread.baseline (+2 -0)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsOptionalTrailingTupleAfterSpread.baseline (+160 -0)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsRestParameters2.baseline (+0 -32)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsSingleRestWithSpreadAndSuffix.baseline (+64 -0)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsTupleRestTrailing.baseline (+512 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 64992,
+      "title": "Speedup keywords lookup with a perfect hash table in GetIdentifierToken",
+      "url": "https://github.com/microsoft/TypeScript/pull/64992",
+      "author": "Andarist",
+      "mergedAt": "2026-10-30T21:13:19Z",
+      "labels": [
+        "Domain: Performance",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Given this list is static a dedicated perfect hash table performs better than the general-purpose Go map. On my machine it makes parsing about 3% faster",
+      "files": [
+        "tsc/internal/scanner/scanner.go (+47 -5)",
+        "tsc/internal/scanner/scanner_test.go (+18 -0)",
+        "tsc/internal/scanner/utilities.go (+1 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 65055,
+      "title": "fix(65053): cover protected optional property completion",
+      "url": "https://github.com/microsoft/TypeScript/pull/65055",
+      "author": "a-tarasyuk",
+      "mergedAt": "2026-10-30T21:47:26Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #65053",
+      "files": [
+        "tsc/internal/fourslash/tests/completionsOverridingProperties1_test.go (+8 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 65060,
+      "title": "Parenthesize new-expression callees when needed",
+      "url": "https://github.com/microsoft/TypeScript/pull/65060",
+      "author": "RyanCavanaugh",
+      "mergedAt": "2026-10-30T22:09:23Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64981",
+      "files": [
+        "tsc/internal/printer/printer.go (+3 -2)",
+        "tsc/internal/printer/utilities.go (+24 -0)",
+        "tsc/testdata/baselines/reference/compiler/newExpressionCalleeParentheses.js (+60 -0)",
+        "tsc/testdata/baselines/reference/compiler/newExpressionCalleeParentheses.symbols (+111 -0)",
+        "tsc/testdata/baselines/reference/compiler/newExpressionCalleeParentheses.types (+250 -0)",
+        "tsc/testdata/baselines/reference/compiler/newExpressionCalleeParenthesesDownlevel.js (+73 -0)",
+        "tsc/testdata/baselines/reference/compiler/newExpressionCalleeParenthesesDownlevel.symbols (+67 -0)",
+        "tsc/testdata/baselines/reference/compiler/newExpressionCalleeParenthesesDownlevel.types (+74 -0)",
+        "tsc/testdata/tests/cases/compiler/newExpressionCalleeParentheses.ts (+32 -0)",
+        "tsc/testdata/tests/cases/compiler/newExpressionCalleeParenthesesDownlevel.ts (+26 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 64922,
+      "title": "Emit the files of each checker in a deterministic order",
+      "url": "https://github.com/microsoft/TypeScript/pull/64922",
+      "author": "Andarist",
+      "mergedAt": "2026-10-30T22:34:33Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "I found this extra source of non-determinism when working on https://github.com/microsoft/TypeScript/pull/64916",
+      "files": [
+        "tsc/internal/compiler/checkerpool.go (+12 -0)",
+        "tsc/internal/compiler/emitter.go (+22 -3)",
+        "tsc/internal/compiler/program.go (+54 -23)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDeclarationEmitSharedCheckerOrder.js (+173 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDeclarationEmitSharedCheckerOrder.symbols (+74 -0)",
+        "tsc/testdata/baselines/reference/compiler/noFlakyDeclarationEmitSharedCheckerOrder.types (+85 -0)",
+        "tsc/testdata/baselines/reference/tsc/generateTrace/generateTrace-creates-index-signature-sibling-types-in-a-stable-order.js (+3 -1)",
+        "tsc/testdata/baselines/reference/tsc/generateTrace/generateTrace-creates-static-index-signature-sibling-types-in-a-stable-order.js (+3 -1)",
+        "tsc/testdata/baselines/reference/tsc/generateTrace/generateTrace-creates-types-in-a-stable-order.js (+3 -1)",
+        "tsc/testdata/tests/cases/compiler/noFlakyDeclarationEmitSharedCheckerOrder.ts (+37 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 65067,
+      "title": "Avoid allocating a bool for cached computed names",
+      "url": "https://github.com/microsoft/TypeScript/pull/65067",
+      "author": "jakebailey",
+      "mergedAt": "2026-10-30T22:41:35Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "I found this during some unrelated work. There's no reason to allocate a bool here and use a pointer when a tristate suffices.",
+      "files": [
+        "tsc/internal/checker/checker.go (+3 -3)",
+        "tsc/internal/checker/types.go (+2 -2)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "typescript-automation[bot]": 1
+    }
+  }
+}

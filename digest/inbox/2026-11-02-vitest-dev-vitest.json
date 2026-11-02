@@ -1,0 +1,213 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-11-02T00:51:11Z",
+  "range": {
+    "from": "2026-10-29T09:03:05Z",
+    "to": "2026-11-02T00:51:11Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.0.5",
+      "publishedAt": "2026-10-15T14:22:50Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.0.5"
+    },
+    "prerelease": {
+      "tag": "v5.1.0-beta.1",
+      "publishedAt": "2026-10-19T16:42:33Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0-beta.1"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 11794,
+      "title": "perf(browser): disable WebSocketServer's allowSynchronousEvents",
+      "url": "https://github.com/vitest-dev/vitest/pull/11794",
+      "author": "nstepien",
+      "mergedAt": "2026-10-30T05:38:56Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11715\n\nWhat the `allowSynchronousEvents` setting does in ws:\nlib/receiver.js#L605-L614\nlib/receiver.js#L632-L642\n\n- With `allowSynchronousEvents: true` (default):\n  - the server emits the message event\n  - and immediately resumes the synchronous [parsing loop](lib/receiver.js#L172-L200) of that websocket connection\n    - for as long as a client floods its connection, the server never yields to the main thread as it cannot clear its buffered input quickly enough\n    - this delays handling messages from other clients, which leads to test failures such as user actions timing out.\n- With `allowSynchronousEvents: false`:\n  - the server stops the [parsing loop](lib/receiver.js#L172-L200) of that websocket conection\n  - it yields to the main thread by scheduling the message emit via `setImmediate`\n    - [`setImmediate`](https://nodejs.org/docs/latest/api/timers.html#setimmediatecallback-args) callbacks are queued, and rpc message order is preserved 👍\n    - previously scheduled tasks, like another `setImmediate` from a different client, can now run\n      this allows the main thread to handle all its clients without being blocked on any one of them\n    - when the callback is called, it emits the message event and resumes the parsing loop\n\nFrom my testing of a typical scenario, test behavior and performance are both identical.\nIn a scenario where a client floods its connection, other clients do not suffer from timeout issues.\nSince there isn't much contention in typical test ru\n…(truncated)",
+      "files": [
+        "packages/browser/src/node/rpc.ts (+8 -1)",
+        "packages/vitest/src/api/setup.ts (+8 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11796,
+      "title": "test: poll for async wheel event in timers test",
+      "url": "https://github.com/vitest-dev/vitest/pull/11796",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-30T06:40:51Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11795,
+      "title": "fix(runner): don't drop throttled task updates",
+      "url": "https://github.com/vitest-dev/vitest/pull/11795",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-30T06:41:19Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "When the throttle timer fired, `Date.now() - last` could be exactly `100` (timers and `Date.now` use different clocks), so the check failed and no new timer was scheduled because `pendingCall` still pointed to the fired one. The pending update then stayed unsent until the next task update.\n\nThis caused `signal.test.ts > cancelling test run aborts the signal after a concurrent test finished` to flake: the `passes` result, which triggers the cancel, only arrived after `aborted` had timed out.",
+      "files": [
+        "packages/vitest/src/runtime/runner/run.ts (+4 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 11781,
+      "title": "fix(cache): do not fail when the cache dir is unwritable",
+      "url": "https://github.com/vitest-dev/vitest/pull/11781",
+      "author": "ezefernandezyf",
+      "mergedAt": "2026-10-30T06:51:38Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11777\n\n### Problem\n\n`fsModuleCache` is enabled by default since 5.0.4. If its directory cannot be created (e.g. a read-only filesystem, or a project owned by another user), `generateCachePath` throws during `mkdir`. This surfaces as a module error on the first cached module, failing all importing test files instead of falling back to running without the cache.\n\n### Solution\n\n- Resolves the cache root before anything else. If creation fails, the cache is disabled for that config: no module content is read, no hash is computed and nothing is written. It warns once per project (mentioning `fsModuleCache: false`) and returns `null` from `generateCachePath`, reusing the existing bailout path for uncacheable modules like `import.meta.glob`.\n- Aligns `mkdir` with the rest of the cache implementation, which already treats disk I/O as best-effort (reads guarded by `existsSync`, writes caught at the call site, metadata and `CACHEDIR.TAG` wrapped in try/catch).\n\n### Tests\n\nAdded a test pointing `fsModuleCachePath` below a regular file to trigger directory creation failure without needing special OS permissions. Without this fix, the run fails while loading the first module, before any test executes.",
+      "files": [
+        "packages/vitest/src/node/cache/fsModuleCache.ts (+31 -11)",
+        "packages/vitest/src/node/environments/transformService.ts (+1 -1)",
+        "test/e2e/fixtures/caching/unwritable-cache/div.test.js (+5 -0)",
+        "test/e2e/fixtures/caching/unwritable-cache/not-a-directory (+4 -0)",
+        "test/e2e/fixtures/caching/unwritable-cache/sum.test.js (+5 -0)",
+        "test/e2e/test/caching.test.ts (+26 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 11786,
+      "title": "devops: upload test results to the dashboard",
+      "url": "https://github.com/vitest-dev/vitest/pull/11786",
+      "author": "aslushnikov",
+      "mergedAt": "2026-10-30T07:21:16Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This starts uploading test results to the https://flakiness.io/vitest/vitest\n\nNote: while preparing this integration, we've published a 2 new versions of\n`@flakiness/vitest` with improvements. Their release notes:\n- https://github.com/flakiness/vitest/releases/tag/v1.11.0\n- https://github.com/flakiness/vitest/releases/tag/v1.12.0",
+      "files": [
+        ".gitignore (+1 -0)",
+        "knip.jsonc (+7 -1)",
+        "packages/ui/package.json (+1 -0)",
+        "packages/ui/vitest.config.ts (+4 -0)",
+        "pnpm-lock.yaml (+24 -0)",
+        "pnpm-workspace.yaml (+2 -26)",
+        ".github/workflows/ci.yml (+17 -0)",
+        "test/browser/package.json (+1 -0)",
+        "test/browser/vitest.config.unit.mts (+7 -1)",
+        "test/coverage-test/package.json (+1 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 11799,
+      "title": "test: ignore slow tests in summary reporter test",
+      "url": "https://github.com/vitest-dev/vitest/pull/11799",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-30T08:31:11Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11798,
+      "title": "fix(browser): focus the iframe before clicking in playwright",
+      "url": "https://github.com/vitest-dev/vitest/pull/11798",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-30T08:32:10Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "On Windows, Firefox sometimes doesn't focus the clicked element when the click also has to move focus into the tester iframe, so the first `userEvent.click` on an input is lost. This caused `runner.test.ts > user-event` (`clipboard.test.ts`) to flake on Windows.\n\nFocus the iframe before `click`/`dblClick`/`tripleClick`, same as `keyboard` already does. Verified in #11797: `runner.test.ts -t user-event` failed 21/25 times on `windows-latest` without the fix, 0/25 with it.",
+      "files": [
+        "packages/browser-playwright/src/commands/click.ts (+4 -1)",
+        "packages/browser-playwright/src/commands/keyboard.ts (+2 -12)",
+        "packages/browser-playwright/src/commands/utils.ts (+13 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11801,
+      "title": "test: give prepare duration test more margin",
+      "url": "https://github.com/vitest-dev/vitest/pull/11801",
+      "author": "sheremet-va",
+      "mergedAt": "2026-10-30T08:41:39Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11792,
+      "title": "fix(expect): keep soft .resolves/.rejects error location",
+      "url": "https://github.com/vitest-dev/vitest/pull/11792",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-10-30T09:09:33Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- closes https://github.com/vitest-dev/vitest/issues/11791\n\nWe handle the \"soft\" mechanism in two places: `wrapAssertion` (for all assertions) and `recordAsyncExpect` (used by `resolves/rejects/toMatchFileSnapshot`). Previously, when `expect.soft(...).resolves.toXxx()` failed, only the soft mechanism of `wrapAssertion` kicked in, but that error handling path skipped the stack fix-up necessary for the `resolves/rejects` proxy technique, and thus it caused the test error stack to become empty.\n\nThis PR fixes it by skipping the `wrapAssertion` side \"soft\" handling, since `recordAsyncExpect` handles it after the proper `resolves/rejects` stack fix-up.\n\n---\n\nFor example,\n\n```ts\ntest('example', async () => {\n  await expect.soft(Promise.resolve(1)).resolves.toEqual(2)\n})\n```\n\n- 🔴 Before:\n\n```text\n FAIL  example.test.ts > example\nAssertionError: expected 1 to deeply equal 2\n\n- Expected\n+ Received\n\n- 2\n+ 1\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n```\n\n- 🟢 After:\n\n```text\n FAIL  example.test.ts > example\nAssertionError: expected 1 to deeply equal 2\n\n- Expected\n+ Received\n\n- 2\n+ 1\n\n ❯ example.test.ts:4:40\n      2|\n      3| test('example', async () => {\n      4|   await expect.soft(Promise.resolve(1)).resolves.toEqual(2)\n       |                                        ^\n      5| })\n      6|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n```",
+      "files": [
+        "packages/expect/src/utils.ts (+3 -1)",
+        "packages/vitest/src/integrations/snapshot/chai.ts (+3 -1)",
+        "test/e2e/test/expect-soft.test.ts (+59 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11802,
+      "title": "fix(browser): fail the run when a tester cannot connect",
+      "url": "https://github.com/vitest-dev/vitest/pull/11802",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-01T09:10:26Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "When a tester iframe's WebSocket never opens, `waitForConnection()` rejects after 60s outside the `try`/`finally`, so the tester never answers the orchestrator after acknowledging the event. The orchestrator then waits forever and the whole run hangs (seen on Windows CI, where it only showed up as an unhandled \"Cannot connect to the server in 60 seconds\").\n\nThe tester now passes the connection error back to the orchestrator, which rejects `createTesters` and fails the run with `Failed to run the test <file>`.",
+      "files": [
+        "packages/browser/src/client/orchestrator.ts (+5 -1)",
+        "packages/browser/src/client/tester/tester.ts (+13 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11806,
+      "title": "chore(deps): dedupe pnpm dependencies",
+      "url": "https://github.com/vitest-dev/vitest/pull/11806",
+      "author": "nstepien",
+      "mergedAt": "2026-11-01T09:11:24Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 11686,
+      "title": "perf(coverage): istanbul to not store input source maps in coverage data",
+      "url": "https://github.com/vitest-dev/vitest/pull/11686",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-11-01T16:45:03Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "- Stacks on https://github.com/vitest-dev/vitest/pull/11747\n- Requires release of https://github.com/vitest-dev/istanbuljs/pull/33\n\nDrops the input source map from inline coverage data, so that we don't unnecessarily send that to the workers. Instead we'll store everything in the main thread in `provider.ts`. When `fsModuleCache` is enabled and populated, there's another file that holds the source map.\n\nBenchmark: `enterprise-monolith` from vitest-benchmarks (1280 modules, 150 test files), `@vitest/coverage-istanbul`, median of 5 runs. `main` (`c8558f1`) vs this PR.\n\n| | `main` | This PR | Change |\n|---|---:|---:|---:|\n| Transformed code | 9.3 MB | 6.9 MB | −26% |\n| Transformed code, incl. inline source map comment | 12.5 MB | 10.0 MB | −20% |\n| Average per module | 7.4 KB | 5.5 KB | −1.9 KB |\n\n| Pool | Cache | Wall time | `generateCoverage` | Coverage files written | Max RSS |\n|---|---|---:|---:|---:|---:|\n| threads, `isolate: false` | cold | 12.93s → 12.36s (−4%) | 5.74s → 5.16s (−10%) | 703 MB → 447 MB (−36%) | 1377 MB → 1259 MB (−9%) |\n| threads, `isolate: false` | warm | 10.33s → 9.87s (−4%) | 5.49s → 4.73s (−14%) | 661 MB → 411 MB (−38%) | 1073 MB → 984 MB (−8%) |\n| forks, `isolate: true` | cold | 18.16s → 17.72s (−2%) | 2.82s → 2.48s (−12%) | 335 MB → 216 MB (−36%) | 679 MB → 572 MB (−16%) |\n| forks, `isolate: true` | warm | 15.71s → 14.73s (−6%) | 2.88s → 2.53s (−12%) | 335 MB → 216 MB (−36%) | 530 MB → 515 MB (−3%) |",
+      "files": [
+        "packages/coverage-istanbul/package.json (+2 -2)",
+        "packages/coverage-istanbul/src/provider.ts (+67 -11)",
+        "pnpm-lock.yaml (+32 -32)",
+        "pnpm-workspace.yaml (+6 -6)",
+        "test/coverage-test/test/on-failure.test.ts (+8 -2)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 11803,
+      "title": "docs(coverage): html reporter theme",
+      "url": "https://github.com/vitest-dev/vitest/pull/11803",
+      "author": "AriPerkkio",
+      "mergedAt": "2026-11-01T22:40:57Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 5
+    }
+  ],
+  "errors": []
+}

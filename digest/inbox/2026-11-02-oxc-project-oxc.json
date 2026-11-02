@@ -1,0 +1,714 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-11-02T00:51:11Z",
+  "range": {
+    "from": "2026-10-30T00:05:53Z",
+    "to": "2026-11-02T00:51:11Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.90.0",
+      "publishedAt": "2026-10-27T05:51:29Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.90.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {"number":28432,"title":"perf(parser): fast-path leaf expressions before delimiters","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28435,"title":"perf(parser): use a stack buffer for float separators","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28438,"title":"fix(parser): parse sloppy let expressions and labels","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28439,"title":"fix(parser): reject optional class members in JavaScript","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28441,"title":"perf(parser): skip duplicate lookup for singleton import attributes","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28442,"title":"fix(parser): preserve default import names in reexports","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28444,"title":"fix(semantic): stop let-binding scans at arrow functions","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28448,"title":"fix(regular_expression): reject incomplete Unicode atom escapes","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28450,"title":"perf(regular_expression): avoid rescanning unique capture names","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28451,"title":"refactor(regular_expression): simplify modifier overlap checks","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28452,"title":"fix(span): count Unicode characters when filtering typo suggestions","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28467,"title":"fix(benchmark): exclude stats collection from semantic timing","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28468,"title":"ci(windows): run compiler steps sequentially","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":28466,"title":"docs(formatter_css,formatter_yaml): point parser citations at AGENTS.md","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":28490,"title":"fix(lexer): update misc conformance snapshot","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28272,
+      "title": "feat(formatter_htmlish): Implement HTML-ish formatter `Html` variant",
+      "url": "https://github.com/oxc-project/oxc/pull/28272",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-30T07:01:00Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of #28263",
+      "files": [
+        ".gitattributes (+4 -0)",
+        "Cargo.lock (+33 -6)",
+        "Cargo.toml (+1 -0)",
+        "crates/oxc_formatter_htmlish/Cargo.toml (+39 -0)",
+        "crates/oxc_formatter_htmlish/build.rs (+15 -0)",
+        "crates/oxc_formatter_htmlish/examples/htmlish_formatter.rs (+61 -0)",
+        "crates/oxc_formatter_htmlish/src/context.rs (+33 -0)",
+        "crates/oxc_formatter_htmlish/src/format.rs (+228 -0)",
+        "crates/oxc_formatter_htmlish/src/lib.rs (+16 -0)",
+        "crates/oxc_formatter_htmlish/src/options.rs (+82 -0)"
+      ],
+      "filesTotal": 123
+    },
+    {
+      "number": 28273,
+      "title": "feat(oxfmt)!: format `parser:html` files by `oxc_formatter_htmlish`",
+      "url": "https://github.com/oxc-project/oxc/pull/28273",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-30T07:29:14Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #28263\n\n- Before this PR: `.html` and also html-in-{js,md,etc} are formatted by Prettier.\n  - Because of that, we had to run JS, which became an overhead.\n- After this PR: All of them are formatted natively by `oxc_formatter_htmlish`.\n  - No overhead.\n\nAt the same time, since we are fixing Prettier bugs and inconsistent behavior, please refer to DIVERGENCES.md for the differences.",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "Cargo.toml (+1 -0)",
+        "apps/oxfmt/Cargo.toml (+1 -0)",
+        "apps/oxfmt/conformance/download-fixtures.js (+18 -0)",
+        "apps/oxfmt/conformance/run.ts (+24 -0)",
+        "apps/oxfmt/src-js/bindings.d.ts (+4 -4)",
+        "apps/oxfmt/src-js/cli-worker.ts (+1 -6)",
+        "apps/oxfmt/src-js/cli.ts (+0 -2)",
+        "apps/oxfmt/src-js/cli/worker-proxy.ts (+0 -14)",
+        "apps/oxfmt/src-js/index.ts (+1 -8)"
+      ],
+      "filesTotal": 86
+    },
+    {"number":28378,"title":"refactor(formatter_htmlish): simplify attribute, sibling and sensitivity printing","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28522,"title":"test(formatter_htmlish): rename `nul` fixture directory for Windows","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":28379,"title":"fix(oxfmt): format HTML in a `<script>` body as an embedded part","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28380,"title":"fix(formatter): quote keys added in an HTML event handler with single quotes","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28381,"title":"fix(formatter): keep source parens around html-in-js placeholders past comments","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28382,"title":"fix(formatter_htmlish): keep SVG text under `xml:space=\"preserve\"` as written","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28383,"title":"refactor(formatter_htmlish): split tree/build modules","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28384,"title":"docs(oxfmt,formatter_htmlish,formatter): clean up behavior comments","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28388,
+      "title": "feat(formatter_htmlish): format end tags of omitted `html`, `head` and `body`",
+      "url": "https://github.com/oxc-project/oxc/pull/28388",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-30T08:50:15Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Some HTML tags can be written with ommiting it's opening tag.",
+      "files": [
+        "crates/oxc_formatter_htmlish/src/tree/build/mod.rs (+4 -2)",
+        "crates/oxc_formatter_htmlish/src/tree/build/sensitivity.rs (+5 -1)",
+        "crates/oxc_formatter_htmlish/src/tree/mod.rs (+1 -1)",
+        "crates/oxc_formatter_htmlish/tests/fixtures/html/omitted-element-end-tags.html (+1 -0)",
+        "crates/oxc_formatter_htmlish/tests/fixtures/html/omitted-element-end-tags.html.snap (+26 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28389,
+      "title": "feat(oxfmt): support html-in-js templates closing a dynamic tag name",
+      "url": "https://github.com/oxc-project/oxc/pull/28389",
+      "author": "leaysgur",
+      "mergedAt": "2026-10-30T08:56:35Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Since HTML formatter supports `htm`'s `<//>` (special closing tag), we should also support other cases like:\n\n```js\nhtml`\n  <${For} each=${() => items}>\n    <li class=\"item\">${() => content}</li>\n    <li class=\"item\">more items</li>\n  </${For}>\n`;\n```",
+      "files": [
+        "crates/oxc_formatter_htmlish/src/format.rs (+15 -8)",
+        "apps/oxfmt/DIVERGENCES.md (+25 -0)",
+        "apps/oxfmt/conformance/fixtures/edge-cases/html-in-js/dynamic-tag-name.js (+2 -0)",
+        "apps/oxfmt/conformance/snapshots/conformance.snap.md (+8 -4)",
+        "apps/oxfmt/conformance/snapshots/diffs/html-in-js/edge-cases__html-in-js__dynamic-tag-name.js.md (+110 -0)",
+        "apps/oxfmt/conformance/snapshots/diffs/html-in-js/edge-cases__html-in-js__placeholder-case-in-child.js.md (+4 -4)",
+        "apps/oxfmt/conformance/snapshots/diffs/html-in-js/externals__webawesome__button__button.ts.md (+20 -1)"
+      ],
+      "filesTotal": 7
+    },
+    {"number":28465,"title":"docs(formatter_htmlish): note `class` and `srcset` are formatted with `embeddedLanguageFormatting: off`","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":28491,"title":"perf(parser): disambiguate single-identifier arrow heads","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28529,"title":"test(oxfmt): unified prettier conformance","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28470,
+      "title": "feat(track_memory_allocs): add allocation tracking for linter rules",
+      "url": "https://github.com/oxc-project/oxc/pull/28470",
+      "author": "camchenry",
+      "mergedAt": "2026-10-30T16:26:39Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "As an alternative to https://github.com/oxc-project/oxc/pull/27477, this requires minimal changes in the linter in order to add allocation tracking for individual rules. We run each rule individually and then compare the diff in heap size before and after as well as the number of system and arena allocations.\n\nAdditionally, this runs as a local-only opt-in feature so that we don't check this in CI automatically, since linter allocations are likely quite noisy.",
+      "files": [
+        ".gitignore (+1 -0)",
+        "Cargo.lock (+2 -0)",
+        "crates/oxc_linter/Cargo.toml (+1 -1)",
+        "crates/oxc_linter/src/context/host.rs (+28 -0)",
+        "tasks/track_memory_allocations/Cargo.toml (+3 -0)",
+        "tasks/track_memory_allocations/src/lib.rs (+8 -0)",
+        "tasks/track_memory_allocations/src/linter.rs (+73 -0)",
+        "tasks/track_memory_allocations/README.md (+29 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {"number":28544,"title":"fix(ecmascript): avoid numeric `+` folding when an operand may be a string","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28546,"title":"fix(linter/typescript/no-non-null-asserted-nullish-coalescing): move to suspicious category","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28545,"title":"fix(linter/unicorn/no-useless-error-capture-stack-trace): move to suspicious category","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28547,"title":"fix(linter/unicorn/no-invalid-fetch-options): avoid treating unknown methods as GET","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28549,"title":"fix(linter/unicorn/prefer-global-this): align typeof and worker API handling","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28548,"title":"fix(linter/eslint/no-control-regex): detect raw control characters","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28551,"title":"refactor(minifier/property-mangler): use `HashMap::entry` for adding mangling candidate","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28555,"title":"refactor(linter/eslint/no-shadow): reuse binding identifier traversal","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28660,"title":"refactor(lexer): use an enum for the statement register","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28661,"title":"refactor(lexer): use enums for type regions and angle lists","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28662,"title":"refactor(lexer): replace frame state with typed fields","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28610,"title":"fix(lexer): prevent excessive inlining of generic code in `cpu_versions` macro","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28611,"title":"refactor(lexer): `#[inline(never)]` on cold functions","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28612,"title":"refactor(lexer): `#[inline(never)]` on disambiguate level 3 entry points","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28613,
+      "title": "refactor(lexer): compile `carve` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28613",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T21:53:21Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `carve`, `carve_js` and `carve_jsx`, and pass `cpu` to `carve` from `lex_raw_impl`. `carve_js` and `carve_jsx` don't use `cpu` yet.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+3 -0)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+3 -0)",
+        "crates/oxc_lexer/src/pipeline/carve/mod.rs (+8 -3)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":28614,"title":"refactor(lexer): pass `cpu` to `carve`'s string, template and slash helpers","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28615,
+      "title": "refactor(lexer): compile comment lexing separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28615",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T21:55:46Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\n`lex_line_comment`, `lex_block_comment`, `html_open_comment_at` and `html_close_comment_at` take `cpu`. They're `#[inline(always)]`, so they stay that way. Apply `cpu_versions!` to the other functions in `carve/comments.rs` that they call, keeping their inline attributes. None of these functions use `cpu` for SIMD yet.\n\nThe cold `lex_html_open_comment` and `lex_html_close_comment` are compiled only once, so they pass `BASELINE`. `BASELINE` is now used outside tests, so remove the `expect(unused_imports)` on its re-exports.\n\nThis changes codegen slightly. `classify` now has 2 copies, so `str::trim_matches` (from `.trim()` in `is_property_key_annotation`) is no longer inlined into it. `html_close_at_line_start` differs slightly on all platforms. On aarch64, `carve` and `carve_jsx` lay out the code that pushes comments a little differently. No other functions are affected, apart from register allocation in the generic copy of `carve` on x86_64.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/comments.rs (+101 -43)",
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+18 -12)",
+        "crates/oxc_lexer/src/pipeline/cpu/mod.rs (+0 -3)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28616,
+      "title": "refactor(lexer): compile JSX angle bracket disambiguation separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28616",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T21:56:20Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `jsx_over_type_params` and `ts_angle_verdict`, keeping their `#[inline]` attributes. `carve_jsx` passes `cpu` to `jsx_over_type_params`, which passes it on to `ts_angle_verdict`. `ts_angle_verdict` doesn't use `cpu` yet.\n\nThis changes codegen on x86_64 only. `jsx_over_type_params` is inlined into `carve_jsx` again, as it was before step B1. No change on aarch64.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+12 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28617,
+      "title": "refactor(lexer): compile JSX name and trivia helpers separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28617",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T21:57:42Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\n`jsx_skip_trivia_fast` takes `cpu`. It's `#[inline(always)]`, so it stays that way. Apply `cpu_versions!` to the other functions in `carve/jsx/names.rs` which `carve_jsx` and `ts_angle_verdict` call, apart from the `#[inline(always)]` `is_jsx_name_byte`, which calls nothing that needs a CPU type. They keep their inline attributes. `is_jsx_name_byte_at`, `jsx_skip_trivia` and `jsx_name_end` don't use `cpu` yet.\n\nThis changes codegen slightly. On x86_64, `jsx_names_equal_fast` is inlined into `carve_jsx` again, as it was before step B1. On aarch64, `carve_jsx` makes 12 calls to `classify` instead of 16, and is about 200 instructions shorter. `jsx_name_next` changes trivially on all platforms.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+5 -5)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+7 -7)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/names.rs (+49 -17)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28618,
+      "title": "refactor(lexer): compile `find_line_terminator` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28618",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T21:58:31Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `find_line_terminator`, keeping its `#[inline]` attribute. It doesn't use `cpu` yet. `carve_js`, `carve_jsx` and `jsx_skip_trivia` pass it `cpu`. The cold `lex_html_open_comment` and `lex_html_close_comment` are compiled only once, so they pass `BASELINE`.\n\nNo change to codegen.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/comments.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+8 -2)",
+        "crates/oxc_lexer/src/pipeline/carve/js.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/names.rs (+2 -2)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28619,
+      "title": "refactor(lexer): compile `Lanes` string methods separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28619",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T21:59:41Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `Lanes::push_string`, `push_template`, `push_string_raw` and `push_regex_flags`, keeping their `#[inline]` attributes. They don't use `cpu` yet. `lex_string`, `lex_template_segment`, `lex_regex` and `carve_jsx` pass them `cpu`. A test passes `BASELINE`.\n\nThis changes codegen. On aarch64, `push_string` and `push_template` are no longer inlined into `carve` and `carve_jsx`. Instead, `cook` is inlined into them, so the number of calls per string or template is unchanged. On x86_64, register allocation changes in `carve` and `carve_jsx`.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+6 -6)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/lanes.rs (+15 -6)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28620,
+      "title": "refactor(lexer): compile `Lanes` atom and number methods separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28620",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:00:12Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `Lanes::push_atom` and `push_number`, keeping their `#[inline]` attributes. They don't use `cpu` yet.\n\n`compress`'s `emit_value` takes `cpu`. It's `#[inline(always)]`, so it stays that way. `lanes_post_avx2` passes it its `Avx2`. `lanes_post_generic` now needs a CPU type too, so it takes `cpu` and gets `cpu_versions!`. `lanes_post` passes it the CPU type from its `Neon` and `Generic` arms.\n\nThis changes inlining in `compress`. On x86_64, `push_number` is now inlined into `compress`, and `parse_number` is no longer inlined into `push_number`. `push_atom` is no longer inlined into `compress`. On aarch64, `push_atom` is no longer inlined into `compress`. Instead, `cook` is inlined into `push_atom`.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/compress/avx2/mod.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/compress/common.rs (+5 -4)",
+        "crates/oxc_lexer/src/pipeline/compress/generic.rs (+12 -2)",
+        "crates/oxc_lexer/src/pipeline/compress/mod.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/lanes.rs (+4 -2)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28621,
+      "title": "refactor(lexer): compile `Lanes` cooking separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28621",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:01:13Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `Lanes::cook`, `cook_short_dispatch`, `cook_decode`, `push_cp` and `emit_oct`, keeping their inline attributes. `push_cp` and `emit_oct` don't use `cpu` yet. `push_string`, `push_template` and `push_atom` pass `cpu` to `cook`. Tests pass `BASELINE`.\n\nReplace the 2 cfg'd versions of `cook_short` with an `#[inline(always)]` dispatcher which uses `cpu_select!`. `cook_short_avx2` gets `#[target_feature]` and takes `cpu: Avx2`, which it passes to `cook_decode`. It no longer needs `unsafe` blocks around the intrinsics which don't access memory. `cook_short_generic` gets `cpu_versions!`, because it passes `cpu` to `cook_decode`.\n\nThis changes inlining on x86_64, as step B7 did on aarch64. `cook` is now inlined into `push_string`, `push_template` and `push_atom`, which are no longer inlined into `carve` and `carve_jsx`. So the number of calls per string or template is unchanged. On aarch64, `cook_decode::<false, true>` is 52 instructions longer, with the same calls.\n\nOn x86_64, the AVX2 versions of `push_string`, `push_template` and `push_atom` now use `cook_short_avx2`. In builds with AVX2 flags, their generic versions use `cook_short_generic`, as intended for step D5.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/lanes.rs (+69 -40)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 28622,
+      "title": "refactor(lexer): compile number parsing separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28622",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:02:27Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `parse_number`, `radix_digit` and `validate_number`, keeping their inline attributes. `parse_number` and `radix_digit` don't use `cpu` yet. `Lanes::push_number` passes `cpu` to `parse_number` and `validate_number`.\n\nThis changes inlining on x86_64, undoing step B8's change to `push_number`. `parse_number` is inlined into `push_number` again, and `push_number` is no longer inlined into `compress`, as before step B8. `push_number` is now the same as before step B1. On aarch64, branches in `push_number` change slightly.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/lanes.rs (+10 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 28623,
+      "title": "refactor(lexer): compile scalar scanners separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28623",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:03:18Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `scan_quoted`, `scan_regex`, `scan_tmpl_text`, `scan_ident_esc`, `scan_number` and `scan_fraction_exponent`, keeping their `#[inline]` attributes. Only `scan_number` uses `cpu` so far, to pass it to `scan_fraction_exponent`.\n\n`lex_string`, `lex_template_segment`, `lex_regex` and `coalesce`'s `glue_number` pass `cpu` to them. `misc_pre_impl` takes `cpu` from `misc_pre`, to pass to `scan_ident_esc`. It's `#[inline(always)]`, so it stays that way.\n\nThis changes codegen. On x86_64, `scan_number` and `scan_fraction_exponent` are now inlined into `coalesce`, as they already were on aarch64. Before, each was called from both copies of `coalesce`. Register allocation and branch layout change slightly in `carve`, `carve_jsx` and `scan_regex`, on all platforms.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/misc/pre.rs (+5 -4)",
+        "crates/oxc_lexer/src/pipeline/scan/common.rs (+32 -7)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":28624,"title":"refactor(lexer): `#[inline(always)]` on `unicode_ws_len_at_unchecked`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28625,
+      "title": "refactor(lexer): compile operator position check separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28625",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:05:11Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `not_operator_position`, `ends_decl` and `paren_close_is_regex`. `lex_slash` and `carve_jsx` pass `cpu` to `not_operator_position`, which passes it on to the other two. `ends_decl` and `paren_close_is_regex` don't use `cpu` yet.\n\nNo change to codegen, apart from the new AVX2 versions in builds without AVX2 flags.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/common.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+1 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/mod.rs (+21 -8)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28626,
+      "title": "refactor(lexer): compile `jsx_over_generic` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28626",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:06:07Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `jsx_over_generic`, keeping its `#[inline(never)]` attribute. `jsx_over_type_params` passes it `cpu`. It doesn't use `cpu` yet.\n\nNo change to codegen, apart from the new AVX2 version in builds without AVX2 flags.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/tsx.rs (+12 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28627,
+      "title": "refactor(lexer): compile `>` run splitting separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28627",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:07:03Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `gt_run_split`, `run_shortcut`, `list_in_any_context`, `type_reference_head` and `return_type_colon`, keeping their inline attributes. `coalesce` and `glue_number` pass `cpu` to `gt_run_split`, which passes it down the chain. `return_type_colon` doesn't use `cpu` yet.\n\nNo change to codegen, apart from the new AVX2 versions in builds without AVX2 flags.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/runs.rs (+27 -13)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28628,
+      "title": "refactor(lexer): compile `DisambiguateState` methods separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28628",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T22:08:03Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `DisambiguateState::begin` and `restart`. `lex_raw_impl` passes `cpu` to `begin`, and `coalesce` passes it to `restart`. Neither uses `cpu` yet.\n\nThis changes inlining on x86_64. `begin` was called out of line from both copies of `lex_raw_impl`. Now each copy inlines its own `begin`, including the small `Walks::restart`, and calls `Brackets::begin` out of line instead. This is setup code which runs once per lex. No change on aarch64.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/mod.rs (+6 -2)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":28664,"title":"ci(lexer): remove `oxc_lexer` benchmark","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28629,
+      "title": "refactor(lexer): compile type argument checks separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28629",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T23:49:16Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `gt_follower`, `type_list_legal`, `keyword_type`, `type_args_at` and `list_is_type_args`, keeping their inline attributes. `list_in_any_context` passes `cpu` to `type_args_at`. `gt_follower` and `keyword_type` don't use `cpu` yet.\n\nLevel 3 is compiled only once, so its two callers, `Walk::less_than` and `Walk::type_word`, use `BASELINE`.\n\nThis changes inlining on x86_64. The AVX2 version of `type_args_at` now has only one caller, so it's inlined into the AVX2 version of `gt_run_split`, which grows from about 950 instructions to about 3,000. Its generic version is still called out of line, from Level 3 and from the generic version of `gt_run_split`. On aarch64, register allocation changes in `type_args_at`.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/mod.rs (+2 -0)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/types.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/words.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/runs.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/type_list.rs (+15 -9)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28630,
+      "title": "refactor(lexer): compile forward bracket scans separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28630",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T23:50:31Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `lt_run_split`, `arrow_after_params`, `skip_trivia_fwd`, `list_closer`, `group_closer`, `past_raw`, `resolve_lists`, `kill`, `resolve_groups`, `skip_raw_literal`, `past_raw_string` and `raw_template_end` in `type_context/bytes.rs`, keeping their inline attributes. `skip_trivia_nl` takes `cpu`. It's `#[inline(always)]`, so it stays that way. `kill`, `past_raw_string` and `skip_trivia_nl` don't use `cpu` yet.\n\n`coalesce`, `jsx_over_generic`, `gt_follower`, `type_list_legal` and `type_args_at` pass `cpu` to them. Level 3 is compiled only once, so `Walk::step_op` uses `BASELINE` for `lt_run_split`.\n\nThis changes codegen slightly. Register allocation changes in the cold `raw_template_end` on all platforms, and operand order in `skip_raw_literal` on aarch64.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/coalesce/mod.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/punct.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/bytes.rs (+70 -39)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/tsx.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/type_list.rs (+8 -8)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 28631,
+      "title": "refactor(lexer): compile `Tokens` methods separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28631",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T23:51:46Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `Tokens::base_kind`, `word_kw`, `ident_kw`, `next_start`, `next_sig`, `peek`, `prev_sig`, `prev_token`, `property_name`, `member_dot`, `numeric_dot`, `run_len`, `line_break_between`, `ident_is` and `match_delim_back`, keeping their inline attributes. Their callers in Levels 1 and 2 pass their `cpu`. `ends_decl`, `paren_close_is_regex` and `return_type_colon` now use theirs.\n\nLevel 3 is compiled only once, so the Level 3 functions which call these methods use `BASELINE`. So do `Tokens::template_head` and `Prev::is_member_dot`, which only Level 3 calls.\n\nThis changes inlining. `Tokens::ident_kw` and `Tokens::ident_is` are now called out of line from `prev_token`, `gt_run_split`, `type_args_at` and Level 3. In Level 3, `Walk::step` no longer inlines `Tokens::next_start`, `Walk::asi`, `Walk::end_region_for` or `Walk::continues_after_type_break`, so it shrinks from about 1,950 instructions to about 1,140. `not_operator_position` is unchanged on aarch64, and changes slightly on x86_64.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+51 -30)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/anchor.rs (+36 -22)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/jsx.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/punct.rs (+7 -3)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/scan.rs (+11 -7)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/step.rs (+24 -13)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/types.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/walker.rs (+3 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/context/words.rs (+24 -16)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/operator/mod.rs (+20 -18)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 28632,
+      "title": "refactor(lexer): compile backward token walking separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28632",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T23:52:50Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to the free `prev_sig`, `Brackets::begin`, `Brackets::word`, `bracket_word`, `match_delim_back`, `delim_memo_opener`, `delim_slot` and `ident_is` in `common/walk.rs`, keeping their inline attributes. `Tokens::prev_sig`, `Tokens::ident_is`, `Tokens::match_delim_back`, `DisambiguateState::begin` and `carve_jsx` pass them `cpu`. `prev_sig`, `Brackets::begin`, `bracket_word`, `delim_slot` and `ident_is` don't use `cpu` yet.\n\nThis changes inlining on x86_64 only. `Brackets::begin` is inlined into each copy of `lex_raw_impl` again, which step C4 had undone. `Tokens::match_delim_back` is called out of line again, with `match_delim_back` inlined into it, as before step C7. No change on aarch64.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/carve/jsx/mod.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+6 -6)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/walk.rs (+30 -15)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/mod.rs (+2 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 28633,
+      "title": "refactor(lexer): compile `Closers` methods separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28633",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T23:54:12Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `Resolved::closer`, `Closers::clear`, `Closers::get`, `Closers::set` and `Closers::set_args`, keeping their inline attributes. Their callers pass `cpu`. `DisambiguateState::restart` and `kill` now use theirs. None of these methods use `cpu` yet.\n\nThis changes inlining on x86_64. Each copy of `resolve_lists` and `resolve_groups` now inlines `Closers::set`, which was called out of line. They call the standard library's `HashMap::insert` out of line instead. These are cold paths, which run only for forward scans past their byte cap. On aarch64, `arrow_after_params` and `list_closer` change trivially.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/closers.rs (+12 -5)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/mod.rs (+3 -3)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/bytes.rs (+10 -10)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/type_list.rs (+2 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 28634,
+      "title": "refactor(lexer): compile `kw_match_at` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28634",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T23:55:25Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `kw_match_at`, keeping its `#[inline]` attribute. It doesn't use `cpu` yet. `Tokens::word_kw`, `gt_follower` and `type_list_legal` pass it `cpu`. Tests pass `BASELINE`.\n\nNo change to codegen, apart from the new AVX2 version in builds without AVX2 flags.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/type_list.rs (+3 -2)",
+        "crates/oxc_lexer/src/pipeline/keywords.rs (+21 -10)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28635,
+      "title": "refactor(lexer): compile byte scans in `bytes.rs` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28635",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-01T23:56:40Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `unicode_ws_len_at`, `line_terminator_after`, `line_break_in` and `block_comment_end`, keeping their inline attributes. `line_break_in` passes `cpu` to `line_terminator_after`. The others don't use `cpu` yet. Their callers pass `cpu`, and `Tokens::line_break_between`, `ident_is` and `skip_trivia_nl` now use theirs.\n\nThis changes inlining slightly. `line_terminator_after` is now inlined into `line_break_in`, which is called out of line instead. No other changes, apart from the new AVX2 versions in builds without AVX2 flags.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/bytes.rs (+11 -5)",
+        "crates/oxc_lexer/src/pipeline/carve/jsx/angle_brackets.rs (+1 -1)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/tokens.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/common/walk.rs (+2 -2)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/bytes.rs (+11 -11)",
+        "crates/oxc_lexer/src/pipeline/disambiguate/type_context/type_list.rs (+2 -2)"
+      ],
+      "filesTotal": 6
+    },
+    {"number":28636,"title":"refactor(lexer): pick `find` and `bracket_bits` versions with `cpu_select!`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28637,"title":"refactor(lexer): pick comment scanner versions with `cpu_select!`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28638,"title":"refactor(lexer): pick `text_matches` versions with `cpu_select!`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28639,"title":"refactor(lexer): pick `span_has_bs` versions with `cpu_select!`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28640,"title":"refactor(lexer): pick `jsx_glue_hyphens` versions with `cpu_select!`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28641,"title":"refactor(lexer): `chunk.rs` AVX2 wrappers take `Avx2`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28642,"title":"refactor(lexer): `#[inline(always)]` on `token_view`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28643,
+      "title": "refactor(lexer): compile `Lanes::clear` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28643",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-02T00:07:36Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `Lanes::clear`. It doesn't use `cpu` yet. Its only caller `lex_raw_impl` passes `cpu`.\n\nCodegen: no change in any build. `Lanes::clear` was already inlined into `lex_raw_impl`, and still is.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/lanes.rs (+2 -1)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28644,
+      "title": "refactor(lexer): compile `write_sentinels` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28644",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-02T00:08:43Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `write_sentinels`. It doesn't use `cpu` yet. Its callers `lex_raw_impl` and `compress` pass `cpu`.\n\nCodegen: no change in any build. `write_sentinels` was already inlined into both callers, and still is.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/compress/mod.rs (+3 -2)",
+        "crates/oxc_lexer/src/pipeline/mod.rs (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 28645,
+      "title": "refactor(lexer): compile `utf8_seq_check` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28645",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-02T00:09:54Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `utf8_seq_check`, keeping its `#[inline]`. It doesn't use `cpu` yet. Its only caller `misc_pre_impl` passes `cpu`.\n\nCodegen: no change in any build. `utf8_seq_check` was already inlined into each copy of `misc_pre`, and still is.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/misc/pre.rs (+3 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 28646,
+      "title": "refactor(lexer): compile `Lexer::ensure` separately for each CPU feature set",
+      "url": "https://github.com/oxc-project/oxc/pull/28646",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-02T00:11:09Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of effort to move to runtime CPU feature detection.\n\nApply `cpu_versions!` to `Lexer::ensure`. It doesn't use `cpu` yet. `lex_raw_impl` passes `cpu`. `Lexer::lex` also calls it, outside the runtime switch, so it uses `BASELINE`, which adds no runtime dispatch.\n\nCodegen: aarch64 is unchanged, with `ensure` out of line as before. On x86_64, the AVX2 copy of `ensure` has only one caller, so it's now inlined into the AVX2 copy of `lex_raw_impl`, which grows by about 410 instructions. It runs once per lex. `Lexer::lex` and the generic copy of `lex_raw_impl` call the generic copy out of line, as before. The generic code's instruction count is unchanged.",
+      "files": [
+        "crates/oxc_lexer/src/pipeline/mod.rs (+7 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":28647,"title":"refactor(lexer): compile `get_pair_luts` separately for each CPU feature set","hint":"feature","release":"⏳ 未リリース","brief":true},
+    {"number":28648,"title":"refactor(lexer): `#[inline(always)]` on `Walks::run_rules`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28649,"title":"refactor(lexer): `#[inline(always)]` on `Tokens::ident_is` and `Tokens::ident_kw`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28650,"title":"refactor(lexer): `#[inline(always)]` on `line_break_in`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28651,"title":"refactor(lexer): `#[inline(always)]` on `Lanes` string, template and atom methods","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28652,"title":"refactor(lexer): `#[inline(always)]` on `Tokens::next_start`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28653,"title":"refactor(lexer): `#[inline(always)]` on small `Walk` methods called from `Walk::step`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28654,"title":"refactor(lexer): `#[inline(always)]` on `Tokens::base_kind`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28655,"title":"refactor(lexer): remove dead code","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28656,"title":"refactor(lexer): do not export `token` module","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28657,"title":"refactor(lexer): make methods that create `TokenKind` and `StringSpan` private","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28658,"title":"refactor(lexer): move `cpu` module out of `pipeline`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28659,"title":"refactor(lexer): reorder imports and exports","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28665,"title":"feat(lexer): support lifetime parameters in `cpu_versions` macro","hint":"feature","release":"⏳ 未リリース","brief":true},
+    {"number":28666,"title":"feat(lexer): support generic parameters in `cpu_versions` macro","hint":"feature","release":"⏳ 未リリース","brief":true},
+    {"number":28667,"title":"feat(lexer): support `#[inline(always)]` functions in `cpu_versions` macro","hint":"feature","release":"⏳ 未リリース","brief":true},
+    {"number":28668,"title":"feat(lexer): add `cpu_version` macro","hint":"feature","release":"⏳ 未リリース","brief":true},
+    {"number":28669,"title":"refactor(lexer): mark AVX2 and Neon versions with `cpu_version`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28670,"title":"refactor(lexer): mark `get_pair_luts` with `cpu_version(Avx2)`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28671,"title":"refactor(lexer): mark generic versions with `cpu_version(Generic)`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28672,"title":"refactor(lexer): mark compile-twice functions with `cpu_versions`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28673,"title":"refactor(lexer): mark `unicode_ws_len` with `cpu_versions`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28674,"title":"refactor(lexer): mark compile-twice functions in `token.rs` with `cpu_versions`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28675,"title":"refactor(lexer): mark `is_trivia_byte` with `cpu_versions`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28676,"title":"docs(lexer): document entry points to code compiled only once","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":28677,"title":"refactor(lexer): use consts for classify LUT masks","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28678,"title":"docs(lexer): fix stale comments","hint":"other","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 3
+    }
+  }
+}

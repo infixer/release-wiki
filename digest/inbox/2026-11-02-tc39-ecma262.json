@@ -1,0 +1,173 @@
+{
+  "kind": "repo",
+  "repo": "tc39/ecma262",
+  "branch": "main",
+  "collectedAt": "2026-11-02T00:51:11Z",
+  "range": {
+    "from": "2026-10-23T06:11:27Z",
+    "to": "2026-11-02T00:51:11Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "es2026-errata",
+      "publishedAt": "2026-07-28T00:12:15Z",
+      "url": "https://github.com/tc39/ecma262/releases/tag/es2026-errata"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 4005,
+      "title": "Editorial: Use ! in a few more places",
+      "url": "https://github.com/tc39/ecma262/pull/4005",
+      "author": "linusg",
+      "mergedAt": "2026-10-30T16:24:11Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "See commit messages.",
+      "files": [
+        "spec.html (+18 -36)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 2975,
+      "title": "Editorial: Improve the explanation of split methods",
+      "url": "https://github.com/tc39/ecma262/pull/2975",
+      "author": "gibson042",
+      "mergedAt": "2026-10-30T17:29:54Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "* Move note content describing special cases into the introductory \\<p>.\n* Rename _limit_ to _substringLimit_ to indicate that it does not apply to the count of splits (as in some other languages).\n* Eliminate horizontal scrolling in a code sample.",
+      "files": [
+        "spec.html (+19 -27)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3817,
+      "title": "Editorial: remove incorrect note about [[NoTear]]",
+      "url": "https://github.com/tc39/ecma262/pull/3817",
+      "author": "michaelficarra",
+      "mergedAt": "2026-10-30T18:49:21Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "A Shared Data Block event's `[[NoTear]]` field is typically (but not always) determined by `IsNoTearConfiguration`. This operation returns false for `Uint8ClampedArray`s and *sometimes* for `BigInt64Array`/`BigUint64Array`, depending on order. So this note is just disconnected from reality and should be removed.",
+      "files": [
+        "spec.html (+0 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3917,
+      "title": "Editorial: Introduce term \"non-zero finite Number\"",
+      "url": "https://github.com/tc39/ecma262/pull/3917",
+      "author": "gibson042",
+      "mergedAt": "2026-10-30T19:53:06Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Extends #3911 per https://github.com/tc39/ecma262/pull/3911#discussion_r3598220175",
+      "files": [
+        "spec.html (+16 -23)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3956,
+      "title": "Editorial: Clarify parsing",
+      "url": "https://github.com/tc39/ecma262/pull/3956",
+      "author": "gibson042",
+      "mergedAt": "2026-10-30T21:06:13Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "In preparation for #3933, this PR splits a new Parsing section from The Syntactic Grammar and references both from ParseText.\n\nIt also performs some related cleanup, including consistent phrasing, a new Grammar Notation example, generalization of The Numeric String Grammar into Runtime Grammars, and generalization of \\<ABBREV> to all non-syntactic grammars.",
+      "files": [
+        "spec.html (+32 -22)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3969,
+      "title": "Normative: add Iterator.prototype.includes",
+      "url": "https://github.com/tc39/ecma262/pull/3969",
+      "author": "michaelficarra",
+      "mergedAt": "2026-10-30T21:31:24Z",
+      "labels": [
+        "normative change",
+        "has test262 tests",
+        "proposal",
+        "has stage 4",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is the Stage 4 PR for https://github.com/tc39/proposal-iterator-includes.",
+      "files": [
+        "spec.html (+32 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3972,
+      "title": "Normative: make DataView.prototype.{byteLength,byteOffset} not throw when backed by detached buffer",
+      "url": "https://github.com/tc39/ecma262/pull/3972",
+      "author": "bakkot",
+      "mergedAt": "2026-10-31T19:41:23Z",
+      "labels": [
+        "normative change",
+        "has consensus",
+        "has test262 tests",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes https://github.com/tc39/ecma262/issues/2635. This makes these getters on DataViews behave like the corresponding getters on TypedArrays.\n\nNote that these getters will still throw when `.call`'d on incompatible receivers; this is just about what happens when a real DataView's `.byteLength` or `.byteOffset` is invoked after the buffer backing said view has been detached or [become out of bounds](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/resize).\n\nThis came up in the context of Web IDL, which has badly needed to rationalize its TypedArray handling for a long time; @MattiasBuelens has been working on that in https://github.com/whatwg/webidl/pull/1529 but encountered this inconsistency, which was surprising and also complicates that side of things (since webIDL normally treats DataViews and TypedArrays very similarly).",
+      "files": [
+        "spec.html (+3 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 3980,
+      "title": "Layering: Narrow [[ArrayBufferDetachKey]] to ECMAScript language value",
+      "url": "https://github.com/tc39/ecma262/pull/3980",
+      "author": "linusg",
+      "mergedAt": "2026-11-01T16:44:14Z",
+      "labels": [
+        "editorial change",
+        "layering",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "As suggested by @gibson042 in https://github.com/tc39/ecma262/pull/3976#discussion_r4049247770. The slot itself is currently not explicitly typed (that will be done in the aforementioned PR), so the type is only implied by the `DetachArrayBuffer` AO parameter.\n\nWeb specs that make use of this slot:\n\n- https://webassembly.github.io/spec/js-api/#create-a-fixed-length-memory-buffer\n\n  > Set buffer.[[ArrayBufferDetachKey]] to \"WebAssembly.Memory\".\n\n- https://www.w3.org/TR/webgpu/#dom-gpubuffer-getmappedrange\n\n  > Set view.[[ArrayBufferDetachKey]] to \"WebGPUBufferMapping\".\n\n- https://streams.spec.whatwg.org/#can-transfer-array-buffer\n\n  > If SameValue(O.[[ArrayBufferDetachKey]], undefined) is false, return false.\n\n- https://webidl.spec.whatwg.org/#buffersource-transferable\n\n  > If jsArrayBuffer.[[ArrayBufferDetachKey]] is not undefined, then return false.\n\nInspecting several implementations confirm that ES language value is sufficiently broad to match real world usage, which is sometimes limited to the presence of a boolean flag rather than full value identity:\n\n| Engine | Source | Type |\n| - | - | - |\n| Boa | core/engine/src/builtins/array_buffer/mod.rs#L210-L211 | `JsValue` |\n| JavaScriptCore | Source/JavaScriptCore/runtime/ArrayBuffer.cpp#L517-L523 | N/A |\n| Kiesel | https://codeberg.org/kiesel-js/kiesel/src/commit/25fea73ae80d942c12df6a9b90e5fea8e4088986/src/builtins/array_buffer.zig#L1073-L1074 | `Value` |\n| LibJS | Userland/Libraries/LibJS/Runtime/ArrayBuffer.h#L145 | `Value\n…(truncated)",
+      "files": [
+        "spec.html (+9 -5)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

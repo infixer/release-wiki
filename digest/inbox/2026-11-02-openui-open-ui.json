@@ -1,0 +1,29 @@
+{
+  "kind": "repo",
+  "repo": "openui/open-ui",
+  "branch": "main",
+  "collectedAt": "2026-11-02T00:51:11Z",
+  "range": {
+    "from": "2026-10-28T11:01:58Z",
+    "to": "2026-11-02T00:51:11Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 1537,
+      "title": "Address feedback on filterable select explainer",
+      "url": "https://github.com/openui/open-ui/pull/1537",
+      "author": "josepharhar",
+      "mergedAt": "2026-10-30T10:59:20Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

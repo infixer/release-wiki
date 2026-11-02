@@ -1,0 +1,625 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-11-02T00:51:11Z",
+  "range": {
+    "from": "2026-10-30T00:21:37Z",
+    "to": "2026-11-02T00:51:11Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.16.1",
+      "publishedAt": "2026-10-27T15:28:26Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.16.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v12.17.0",
+      "name": "pnpm 12.17",
+      "publishedAt": "2026-10-30T14:24:43Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.17.0",
+      "prerelease": false,
+      "body": "pnpm 12.17.0 adds `pnpm peers check --global`, dependency-group selectors and wildcards in `overrides`, and runtime, package manager, Cargo, and Python updates in `pnpm outdated` and `pnpm update`. It also fixes files that other users could not read in Docker images, and repeat installs that missed changes to local dependencies.\n\n### Minor Changes\n\n- `pnpm peers check` now accepts `--global` (`-g`) to check globally installed packages. After a global install or update, the peer dependency warning now suggests `pnpm peers check -g` [#17504](https://github.com/pnpm/pnpm/issues/17504).\n\n- `pnpm outdated` and `pnpm update` now inspect and update package manager and runtime versions in `devEngines.packageManager`, `packageManager`, `devEngines.runtime`, `engines.runtime`, and `runtime:` dependencies. With `cargo.enabled` or `python.enabled`, `pnpm outdated` and `pnpm update` also inspect and update Cargo dependencies in `Cargo.toml` and `Cargo.lock` and Python dependencies in `pyproject.toml` and `pylock.toml`.\n\n- `overrides` selectors now support `:prod`, `:optional`, and `:peer` pseudo-selectors that target a single dependency group. They also support `*` wildcard patterns on parent and target package names. An override with a non-range value, such as `npm:` or `file:`, no longer adds a peer dependency to `dependencies`. Removing an optional dependency with `\"-\"` now also removes the duplicate entry from `dependencies` [#5391](https://github.com/pnpm/pnpm/issues/5391).\n\n### Patch Changes\n\n#### Installing packages\n\n- Files that pnpm creates in a project now get the permissions the umask gives any new file, such as `0644`. Before, several of them were readable only by the user who ran pnpm, which broke Docker images that run as a different user [#17435](https://github.com/orgs/pnpm/discussions/17435).\n\n  The fix applies to:\n\n  - `node_modules/.pnpm-workspace-state-v1.json`. A different user running `pnpm run` reinstalled the dependencies because it could not read this file.\n  - `pnpm-workspace.yaml`\n  - the files written by `pnpm deploy`\n  - patch files from `pnpm patch-commit`\n  - the lockfile restored by `pnpm dedupe --check`\n  - the Cargo and Python files that pnpm writes\n\n  When pnpm edits an existing file, the file keeps its permissions.\n\n- `pnpm install` no longer writes broken dependency links when the project's `node_modules` is a symlink to another directory, such as another project's `node_modules`. The install reported success, but the links it wrote did not resolve [#17448](https://github.com/pnpm/pnpm/issues/17448).\n\n- Commands installed with `pnpm add --global` now find the dependencies that pnpm hoists for their package. A package that loads a dependency it does not declare, such as a native addon's platform-specific package, failed with \"Cannot find module\". Reinstall such a package with `pnpm add --global` to update its existing command [#17503](https://github.com/pnpm/pnpm/issues/17503).\n\n- When pnpm switches to the version a project\n…(truncated)"
+    },
+    {
+      "tag": "v11.28.10",
+      "name": "pnpm 11.28.10",
+      "publishedAt": "2026-10-30T21:18:23Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v11.28.10",
+      "prerelease": false,
+      "body": "pnpm 11.28.10 stops `pnpm store prune` from deleting other stores when `cacheDir` points to their parent directory. It also fixes globally installed commands that load hoisted dependencies, and repeat installs that missed changes to local dependencies.\n\n### Patch Changes\n\n#### Installing packages\n\n* `pnpm store prune` preserves other stores and global package data when `cacheDir` points to their parent directory.\n\n* Commands installed with `pnpm add --global` now find the dependencies that pnpm hoists for their package. A package that loads a dependency it does not declare, such as a native addon's platform-specific package, failed with \"Cannot find module\". Reinstall such a package with `pnpm add --global` to update its existing command [#17503](https://github.com/pnpm/pnpm/issues/17503).\n\n* `pnpm prune --prod` no longer fails with `ERR_PNPM_EXDEV` when `node_modules` was copied from an earlier Docker build stage [#17424](https://github.com/pnpm/pnpm/issues/17424).\n\n* `pnpm install` now retries a Node.js runtime zip download when the connection drops partway through. A download that still fails names its URL. Before, a single dropped connection ended the install with `terminated` [#17411](https://github.com/pnpm/pnpm/issues/17411).\n\n* With the global virtual store, a change to a dependency of one package in a dependency cycle now gives every package in that cycle a new directory. Before, the other packages kept their directories and still linked the old copy of the changed package, so the project could load two copies of it [#17466](https://github.com/pnpm/pnpm/issues/17466).\n\n  Packages in a dependency cycle, and packages that depend on one, move to new global virtual store directories once after this update. Those that run a build miss the side-effects cache once.\n\n* `pnpm install` and `pnpm rebuild` now refresh privately hoisted `.bin` shims in `node_modules/.pnpm/node_modules/.bin` after a dependency build replaces a script target with a native executable [#17402](https://github.com/pnpm/pnpm/issues/17402).\n\n* The Node.js `latest` selector now chooses the newest stable release [#17490](https://github.com/pnpm/pnpm/issues/17490).\n\n* The standalone `@pnpm/exe` builds now embed Node.js 26.13.0.\n\n#### Repeat installs and lockfiles\n\n* `pnpm install` now resolves a local directory again after its `package.json` changes when an override or a package extension adds it to the dependencies of a registry package. `pnpm install --frozen-lockfile` fails on a lockfile that still records the old dependencies of such a directory [#17486](https://github.com/pnpm/pnpm/issues/17486).\n\n* With `injectWorkspacePackages` and per-project lockfiles, `pnpm install` now updates a project's lockfile when a local tarball that an injected workspace project depends on is replaced. The project's lockfile kept the old version and integrity before.\n\n* `pnpm install` now detects a change to a local tarball or directory that only a pnpmfile `readPackage` hook depends on. A rep\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 17467,
+      "title": "fix(lockfile): preserve __proto__ workspace importers when merging",
+      "url": "https://github.com/pnpm/pnpm/pull/17467",
+      "author": "niangaoxiao",
+      "mergedAt": "2026-10-30T01:19:34Z",
+      "labels": [
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nMerging a branch lockfile with a workspace directory named `__proto__` silently drops that importer from the written lockfile, even when the CLI exits successfully. Preserve it as an own property and cover the merger, lockfile reader, and bundled CLI.\n\nRelated to pnpm/tasks#59 (workspace importer item only; this does not close the whole task). The affected path is in the TypeScript CLI. The Rust implementation stores importers in a HashMap and is not affected by this object setter behavior.\n\nLocal validation on Windows:\n\n- `pnpm run compile-only` passed in both the isolated baseline and candidate.\n- Merger package: 13 tests passed.\n- Lockfile filesystem package: 130 tests and 1 snapshot passed; 13 existing platform-specific tests are skipped on Windows.\n- `pnpm --filter pnpm test test/install/gitBranchLockfile.ts --runInBand` failed on the baseline at the own-property assertion and passed on the candidate. Both runs used freshly built bundles and the full registry setup with locally built `pnpr` and `pnpr-prepare`.\n- `pnpm run lint` passed with 0 errors. Existing disabled-test warnings remain unchanged.\n\n## Squash Commit Body\n\n```text\nConstruct the merged importer map with Object.fromEntries so a workspace\ndirectory named __proto__ remains an own property. Plain assignment invokes\nthe inherited prototype setter and silently drops that importer on write.\n\nCover either input, both inputs, branch-lockfile reads, and the bundled CLI.\nRelated to pnpm/tasks#59 (importer\n…(truncated)",
+      "files": [
+        "pnpm11/lockfile/merger/src/index.ts (+5 -6)",
+        ".changeset/fast-pigs-worry.md (+6 -0)",
+        "pnpm11/lockfile/fs/test/read.test.ts (+19 -0)",
+        "pnpm11/lockfile/merger/test/index.ts (+18 -0)",
+        "pnpm11/pnpm/test/install/gitBranchLockfile.ts (+29 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 17484,
+      "title": "docs(recursive): say that --no-bail skips the dependents of a failed task",
+      "url": "https://github.com/pnpm/pnpm/pull/17484",
+      "author": "Aquaticat",
+      "mergedAt": "2026-10-30T01:22:48Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 17502,
+      "title": "perf(deps-restorer): stat a store file once for the hardlink mode check",
+      "url": "https://github.com/pnpm/pnpm/pull/17502",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T09:35:52Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#17500.\n\nThe umask check from pnpm/pnpm#3807 (`source_has_desired_mode`) stats the store file before every hardlink, in both `hardlink_file` and the `Auto` hardlink tier. A store file shared by many packages was stat'ed once per link: about 67k extra `statx` calls and 13-15% more system CPU on the reporter's offline install.\n\n`source_has_desired_mode` now remembers a linkable answer per source path for the rest of the process, so each store file is stat'ed once. Only linkable answers are cached. A mismatched entry is copied, and the copy costs far more than the stat.\n\nTrade-off: a store file whose mode changes after its first link in the same process (for example a bin's exec bit set through a hardlink) is still hardlinked afterwards. That is what every release before 12.8.0 did for every file. In a long-lived `@pnpm/napi` embedder the set grows with the number of distinct store files linked, like the per-install `VerifiedFilesCache`.\n\nv11 is not affected: the regression is in the Rust hardlink path only.\n\nNot measured locally with strace on the vitest fixture. The new unit test proves the second link skips the mode check, and fails with the cache disabled.\n\n## Squash Commit Body\n\n```text\nThe umask check added for pnpm/pnpm#3807 stat'ed the store file before\nevery hardlink, so a file shared by many packages was stat'ed once per\nlink. A linkable answer is now remembered per source path for the\nprocess. Only linkable answers are cached: a mismatched \n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/deps-restorer/Cargo.toml (+1 -0)",
+        "pnpm/crates/deps-restorer/src/link_file/target_mode.rs (+31 -11)",
+        ".changeset/hardlink-mode-check-once.md (+5 -0)",
+        "pnpm/crates/deps-restorer/src/link_file/tests/installation.rs (+24 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 17499,
+      "title": "fix(deps-restorer): keep a project's own nested copy as its direct dependency",
+      "url": "https://github.com/pnpm/pnpm/pull/17499",
+      "author": "arthur-fontaine",
+      "mergedAt": "2026-10-30T09:38:12Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#17498.\n\nUnder `nodeLinker: hoisted`, when two workspace projects each hold a nested copy of the same snapshot, every repeat install imports one of them again. `importer_direct_deps` set a project's direct dependency to the first location of the snapshot anywhere in the tree, so the second project's direct dependency pointed at the first project's copy. Linking the direct dependencies then moved the second project's own copy to `.ignored_<name>` and put a symlink in its place. The next install's `package_present_at` rejects that symlink, imports the copy again, and the direct links replace it again.\n\nThis PR makes a project's direct dependency the copy the hoister placed in that project's own `node_modules`, when that copy holds the resolved snapshot. Otherwise the snapshot's first recorded location wins, as before. Package-id matches (own copy, then first location) come last, for a peer variant the hoister collapsed.\n\n### Build scripts run in every copy\n\nThe hoisted linker ran a snapshot's lifecycle scripts only in its first recorded copy. The other projects' copies used to be symlinks to that copy, so they got its build output. Once each project keeps its own copy, they were left unbuilt: `run_pre_and_postinstall_scripts_in_a_workspace_with_hoisted_linker` failed on this PR's first push. `build_one_snapshot` now runs the scripts in every distinct copy, the first one first. Patches already reached every copy, and only the first copy seeds the side\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/build_modules/build_one_snapshot.rs (+16 -108)",
+        "pnpm/crates/deps-restorer/src/build_modules/build_one_snapshot/lifecycle_scripts.rs (+156 -0)",
+        "pnpm/crates/deps-restorer/src/hoisted_dep_graph/walk.rs (+54 -8)",
+        ".changeset/own-nested-copy-direct-dep.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/hoisted_node_linker/repeat_install.rs (+61 -0)",
+        "pnpm/crates/deps-restorer/src/hoisted_dep_graph/tests/workspace.rs (+44 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 17506,
+      "title": "chore: update dependencies, Node.js, pnpm, and GitHub Actions",
+      "url": "https://github.com/pnpm/pnpm/pull/17506",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T09:39:28Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 14
+    },
+    {
+      "number": 17479,
+      "title": "fix(cli): honor directory flags in dlx and create",
+      "url": "https://github.com/pnpm/pnpm/pull/17479",
+      "author": "BayLee4",
+      "mergedAt": "2026-10-30T10:17:05Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThe [CLI docs](https://pnpm.io/pnpm-cli#-c-path---dir-path) define `-C/--dir` as \"Run as if pnpm was started in `<path>` instead of the current working directory.\" `dlx`, `pnx`, and `create` instead ran the executed command in the original process cwd, in both pnpm v12 and pnpm v11. The documented [`-w/--workspace-root`](https://pnpm.io/pnpm-cli#-w---workspace-root) selection was ignored the same way.\n\nBoth CLIs now run the command in the directory selected by `--dir` or `--workspace-root`. Without either flag, it still runs in the invocation directory. A pnpm flag counts when it comes before the executed command's name, before `dlx` or between `dlx` and the package. Flags after the name go to the executed command.\n\n- pnpm v12: `dlx` and `create` dispatch with the existing CLI-directory anchor (`cli_dir`) and spawn there.\n- pnpm v11: the dlx handler spawns in `cliOptions.dir` when set, as single-project `exec` does. `create` delegates to the same handler.\n\n## Squash Commit Body\n\n```text\n`-C/--dir` is documented as \"run as if pnpm was started in <path>\", but\ndlx, pnx, and create spawned the executed command in the process cwd in\nboth CLIs, ignoring `--dir` and `--workspace-root`.\n\npnpm v12: dispatch dlx and create with the CLI-directory anchor\n(`cli_dir`), which is the `--dir`/`-w` directory when one was given on the\ncommand line and the invocation directory otherwise. SpawnEnv borrows\nthat path for the spawn cwd.\n\npnpm v11: the dlx handler spawns in `cliOptions.di\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/dispatch_install.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/dlx.rs (+7 -11)",
+        "pnpm11/exec/commands/src/dlx.ts (+9 -5)",
+        ".changeset/dlx-working-directory.md (+7 -0)",
+        "pnpm/crates/cli/tests/suite/dlx.rs (+86 -0)",
+        "pnpm11/exec/commands/test/create.ts (+12 -0)",
+        "pnpm11/pnpm/test/dlx.ts (+19 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 17441,
+      "title": "fix(catalog): reuse a catalog entry set to the requested dist-tag",
+      "url": "https://github.com/pnpm/pnpm/pull/17441",
+      "author": "kairosci",
+      "mergedAt": "2026-10-30T11:10:01Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/tasks#225.\n\nIf a catalog entry is set to a dist-tag, `pnpm add` now saves the dependency as `catalog:` and leaves the entry as written, in both CLIs.\n\n```yaml\ncatalogMode: prefer\ncatalog:\n  foo: beta\n```\n\n| command | | before | after |\n|---|---|---|---|\n| `pnpm add foo@beta` | v12 | `^1.2.3` direct (strict: mismatch error) | `catalog:`, entry `beta` |\n| `pnpm add foo@beta` | v11 | `catalog:`, entry rewritten to `1.2.3` | `catalog:`, entry `beta` |\n| `pnpm add foo` | v11 | `catalog:`, entry rewritten to `1.2.3` | `catalog:`, entry `beta` |\n| `pnpm add foo@latest` (entry `latest`) | v11 | entry rewritten to `^1.2.3` | entry `latest` |\n\nThe entry already says which tag to follow, so pinning it to today's version would stop it from following the tag.\n\n**v12:** `decide_catalog_entry` reuses an entry that equals the dist-tag typed in the selector. Only an explicit tag that the registry resolved matches. A versionless re-add does not match an entry set to the configured default tag. A tag that `linkWorkspacePackages` resolves to a local package keeps its `workspace:` specifier.\n\n**v11:** the rewrite came from the explicit-dist-tag pin added in pnpm/pnpm#13478 for `pnpm update foo@beta` on an entry set to a version. After the resolver swaps the catalog entry in as the wanted specifier, `getCatalogUpdatesOfProject` cannot tell a tag read from the catalog from one the user typed. It now skips the update when the wanted specifier is the entry itself and is a dist\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/add/registry.rs (+12 -0)",
+        "pnpm/crates/package-manager/src/add/specifier.rs (+21 -14)",
+        "pnpm/crates/package-manager/src/catalog_mode.rs (+14 -0)",
+        "pnpm/crates/package-manager/src/catalog_mode/tests.rs (+27 -1)",
+        "pnpm/crates/package-manager/src/update/catalogs.rs (+6 -2)",
+        "pnpm11/installing/deps-resolver/src/index.ts (+40 -14)",
+        ".changeset/bright-lobsters-repeat.md (+5 -0)",
+        ".changeset/quiet-tags-stay.md (+6 -0)",
+        "pnpm/crates/cli/tests/suite/add/workspace.rs (+13 -0)",
+        "pnpm/crates/cli/tests/suite/catalog.rs (+56 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 17399,
+      "title": "fix(config): honor publishBranch and doctor timeout",
+      "url": "https://github.com/pnpm/pnpm/pull/17399",
+      "author": "kairosci",
+      "mergedAt": "2026-10-30T11:11:29Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\nFixes the `publishBranch` and `pnpm doctor` timeout gaps in [pnpm/tasks#191](https://github.com/pnpm/tasks/issues/191).\n\n## Squash Commit Body\n\n```text\nRead publishBranch from pnpm-workspace.yaml and PNPM_CONFIG_PUBLISH_BRANCH,\nwith --publish-branch taking precedence, and give the pnpm doctor registry\nping a fixed 15 s timeout instead of fetchTimeout, matching pnpm v11.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves these items.\n- [x] Bug fixes are implemented in every affected version.\n- [x] Added changesets for the published behavior changes.\n- [x] Added or updated tests.\n- [x] Updated the documentation.\n\n---\nWritten by an agent (Codex, GPT-6).\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/17399?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v3.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v3.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1795641297&installation_model_id=426870&pr_number=17399&ref=codesmith_pr_footer&repository=pnpm%2Fpnpm&return_to=https%3A%2F%2Fgithub.com%2Fpnpm%2Fpnpm%2Fpull%2F17399&signature=6b157f0bae23bf42f25cf0242f5173db964ab36a6035ec1f31b34ee455d9933d\"><picture><source media=\"(prefers-color-sche\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/doctor.rs (+7 -1)",
+        "pnpm/crates/cli/src/cli_args/doctor/tests.rs (+26 -3)",
+        "pnpm/crates/cli/src/cli_args/publish.rs (+6 -1)",
+        "pnpm/crates/cli/src/cli_args/publish/arguments.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/publish/tests.rs (+8 -1)",
+        "pnpm/crates/config/src/env_overlay.rs (+1 -0)",
+        "pnpm/crates/config/src/env_overlay/tests.rs (+12 -0)",
+        "pnpm/crates/config/src/settings.rs (+4 -0)",
+        "pnpm/crates/config/src/workspace_yaml/apply.rs (+1 -0)",
+        "pnpm/crates/config/src/workspace_yaml/reset.rs (+1 -1)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 17508,
+      "title": "feat(peers): support global checks",
+      "url": "https://github.com/pnpm/pnpm/pull/17508",
+      "author": "lvqq",
+      "mergedAt": "2026-10-30T12:31:39Z",
+      "labels": [
+        "product: pacquet"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses #17504\n\n## Squash Commit Body\n\n```text\nAdd `--global` (`-g`) to `pnpm peers check`.\n\nThe global check scans the active install groups in the global packages\ndirectory and checks each group against its own lockfile (the current\nlockfile under node_modules/.pnpm when present, else pnpm-lock.yaml, or\nonly the latter with --lockfile-only). Issues are keyed by the group's\nsorted aliases. A group whose alias key is already taken gets its link\nname appended so no group's results are dropped.\n\nLike a global install, the check uses the global config, ignores the\ncaller's workspace, and clears catalogs and the workspace dir for each\ngroup while keeping the global peerDependencyRules.\n\nAfter a global add or update, the reporter's peer-issues warning now\nsuggests `pnpm peers check -g`. The pre-command global check delegates\nto CliCommand::is_global instead of repeating its list.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it becomes a release note.\n- [x] Added or updated tests.\n- [x] Updated the documentation if needed.\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/17508?autoLogin=true&ref=codesmith_pr_footer\"><picture><source \n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/cli_command/commands.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/dispatch.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/dispatch_query.rs (+4 -2)",
+        "pnpm/crates/cli/src/cli_args/peers.rs (+96 -33)",
+        "pnpm/crates/cli/src/cli_args/pre_command/input.rs (+4 -20)",
+        "pnpm/crates/cli/src/cli_args/tests.rs (+2 -1)",
+        "pnpm/crates/default-reporter/src/lib.rs (+7 -0)",
+        "pnpm/crates/default-reporter/src/state/notices.rs (+5 -1)",
+        "pnpm/crates/default-reporter/src/state/options.rs (+9 -1)",
+        ".changeset/global-peers-check.md (+5 -0)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 17509,
+      "title": "fix(global): put the group's hoisted modules on NODE_PATH in global bin shims",
+      "url": "https://github.com/pnpm/pnpm/pull/17509",
+      "author": "kairosci",
+      "mergedAt": "2026-10-30T12:34:10Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nGlobal bin shims now put the install group's hidden hoisted modules directory on `NODE_PATH`. This fixes pnpm v12 and pnpm v11.\n\nCloses pnpm/pnpm#17503.\n\nSince pnpm/pnpm#17326 (12.16.0), global groups install into the global virtual store. A package's real path is under `{storeDir}/links`, so Node cannot walk up from it to the group's `node_modules/.pnpm/node_modules`. In the report, `node-addon-native-custom-loader` requires `node-addon-require-builtin-linux-x64-gnu`. That platform package is an optional dependency of a different package, so the require only works through hoisting. On 12.15.0 the group kept a local `.pnpm` virtual store, which the walk-up reaches. pnpm v11 installs global groups the same way and has the same gap.\n\nVerified with `pnpm add -g @deepseek-ai/dsh` followed by `dsh web`:\n\n| Build | Result |\n| --- | --- |\n| 12.15.0 | starts |\n| 12.16.1 | `No usable native binding found for node-addon-require-builtin-linux-x64-gnu` |\n| current v11 bundle | same failure |\n| this branch (v12) | starts |\n\n## Squash Commit Body\n\n```text\nGlobal groups install into the global virtual store, so a package's\nreal path is under {storeDir}/links and Node cannot walk up from it to\nthe group's hidden hoisted modules dir. A package that requires a\ndependency it does not declare then fails. The reported case is\n`node-addon-native-custom-loader` requiring its parent's platform\npackage. It worked in 12.15.0, where global groups kept a local virtual\nstore, and broke when p\n…(truncated)",
+      "files": [
+        "pnpm-lock.yaml (+3 -0)",
+        "pnpm/crates/cli/src/cli_args/global/groups.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/global/install.rs (+8 -2)",
+        "pnpm/crates/cli/src/cli_args/global/shims.rs (+22 -5)",
+        "pnpm/crates/deps-restorer/src/link_bins.rs (+3 -1)",
+        "pnpm/crates/deps-restorer/src/link_bins/direct.rs (+0 -40)",
+        "pnpm/crates/deps-restorer/src/link_bins/shim_options.rs (+49 -0)",
+        "pnpm11/bins/cmd-shim/src/index.ts (+32 -8)",
+        "pnpm11/bins/linker/src/getExtraNodePaths.ts (+18 -0)",
+        "pnpm11/bins/linker/src/index.ts (+1 -0)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 17514,
+      "title": "chore(release): 11.28.10, pacquet 12.17.0",
+      "url": "https://github.com/pnpm/pnpm/pull/17514",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T12:39:50Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 215
+    },
+    {
+      "number": 17520,
+      "title": "fix(agent-skills): link each skill under its own name",
+      "url": "https://github.com/pnpm/pnpm/pull/17520",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T21:32:37Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\npnpm linked each agent skill of a dependency as `pnpm-<package>-<skill>`, such as `pnpm-@acme+kit-auth`. The [Agent Skills specification](https://agentskills.io/specification) requires a skill's directory to match the `name` in its `SKILL.md`, and allows only `a-z`, `0-9` and `-`. Cursor and VS Code show the directory name and Cursor warns about the mismatch. Copilot CLI shows the frontmatter `name`. skills-npm, which inspired this feature, moved to bare names in its v2 for the same reason (antfu/skills-npm#45).\n\nThis PR links each skill under its directory name. Related to https://github.com/orgs/pnpm/discussions/17455.\n\nAgent skills exist only in pnpm v12, so there is no v11 counterpart.\n\nThe RFC is updated to match in pnpm/rfcs#52.\n\n## Squash Commit Body\n\n```text\nThe Agent Skills specification requires a skill's directory to be named\nafter the `name` in its SKILL.md. Links named `pnpm-<package>-<skill>`\nbroke that rule, so agents disagreed on a skill's name and Cursor warned.\n\n- Each approved skill is linked as `<agent dir>/<skill>`, the name of its\n  directory in the package. Two approved packages shipping a skill of the\n  same name fail the install with ERR_PNPM_AGENT_SKILL_NAME_COLLISION,\n  which now suggests denying one of them.\n- Pruning no longer recognizes pnpm's links by a `pnpm-` prefix. A\n  recorded entry is removed only if it is a relative path without `..`\n  and a link whose target is a `skills/<name>` directory under a\n  `node_modules`. Links from \n…(truncated)",
+      "files": [
+        "Cargo.lock (+6 -0)",
+        "Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/setup/path_extender/posix.rs (+10 -51)",
+        "pnpm/crates/cli/src/cli_args/setup/path_extender/posix/tests.rs (+25 -31)",
+        "pnpm/crates/package-manager/Cargo.toml (+1 -0)",
+        "pnpm/crates/package-manager/src/agent_skills.rs (+34 -57)",
+        "pnpm/crates/package-manager/src/agent_skills/discovery.rs (+8 -26)",
+        "pnpm/crates/package-manager/src/agent_skills/discovery/tests.rs (+0 -1)",
+        "pnpm/crates/package-manager/src/agent_skills/gitignore.rs (+140 -0)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 17518,
+      "title": "fix(runtime): prefer stable Node.js versions when resolving a range",
+      "url": "https://github.com/pnpm/pnpm/pull/17518",
+      "author": "lazerg",
+      "mergedAt": "2026-10-30T21:55:20Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#17516. A Node.js range such as `>=26.13` in `devEngines.runtime` resolved to `27.0.0-alpha.0.0.0`, because the resolver matches ranges with prereleases included and the alpha is the highest version in the release index. Both CLIs had the bug. pnpm/pnpm#17492 fixed the same thing for `latest`, this does it for ranges.\n\nThe resolver now picks the highest stable version that satisfies the range and only falls back to a prerelease when no stable version matches. So `>=27` still gets the alpha today, and ranges on the `rc` channel (`rc/10`) still resolve to rc builds.\n\n## Squash Commit Body\n\n```text\nNode.js version ranges are matched with prereleases included, so the\nrc and nightly channels, where every entry is a prerelease, can satisfy\na plain range like `10`. On the release channel this made `>=26.13`\npick 27.0.0-alpha.0.0.0 over 26.13.0.\n\nResolving a range now prefers the highest stable version that satisfies\nit and only falls back to the highest prerelease when no stable version\ndoes. Listing versions (`pnpm env list --remote <range>`) is unchanged.\n\nCloses pnpm/pnpm#17516\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs\n  already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes\n  are implemented in every affected version.\n- [x] Added a changeset (`pnpm changeset`) if this PR changes any published\n  package. Keep it short and written for pnpm users — it bec\n…(truncated)",
+      "files": [
+        "pnpm/crates/engine-runtime-node-resolver/src/resolve_node_version.rs (+13 -2)",
+        "pnpm/crates/engine-runtime-node-resolver/src/resolve_node_version/tests.rs (+29 -0)",
+        "pnpm11/engine/runtime/node-resolver/src/resolveNodeVersion.ts (+7 -1)",
+        ".changeset/node-runtime-range-prefers-stable.md (+7 -0)",
+        "pnpm11/engine/runtime/node-resolver/test/resolveNodeVersion.test.ts (+12 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 17519,
+      "title": "fix(cli): update Cargo dependencies declared as multi-line inline tables",
+      "url": "https://github.com/pnpm/pnpm/pull/17519",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T22:10:58Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThe scheduled dependency update workflow failed on pnpm 12.17.0 ([run](https://github.com/pnpm/pnpm/actions/runs/41074141328/job/124125700977)):\n\n```\n× cannot update crate axum: its Cargo.toml dependency declaration is not a\n│ string or single-line inline table\n```\n\nThe root `Cargo.toml` declares `axum` as an inline table whose `features` array continues on later lines. The Cargo manifest editor only read the value on the key's line, so it rejected the declaration and aborted the whole `pnpm update`.\n\nBug only in v12: v11 does not update Cargo dependencies.\n\nVerified:\n- The new unit test fails with the CI error without the fix.\n- The built binary runs `pnpm update --latest crate:axum` on this repo's `Cargo.toml` and changes only the version string (`0.8.7` → `0.8.9`). `cargo metadata` still parses the file.\n\n## Squash Commit Body\n\n```text\n`pnpm update` located a Cargo dependency's value on its key's line only,\nso an inline table whose `features` array continues on later lines was\nrejected as \"not a string or single-line inline table\". The root\nCargo.toml declares axum that way, which broke the scheduled dependency\nupdate workflow.\n\nThe value now extends to the inline table's matching closing brace,\nskipping strings and comments, and the `version` lookup inside the\ntable skips comments too. Only the version string is rewritten, so the\nrest of the declaration keeps its formatting.\n```\n\n## Checklist\n\n- [x] Bug fixes are implemented in every affected version.\n- [x] Ad\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cargo_manifest.rs (+100 -17)",
+        "pnpm/crates/cli/src/cargo_manifest/tests.rs (+24 -0)",
+        ".changeset/cargo-update-multiline-inline-table.md (+5 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 17524,
+      "title": "fix(store): keep bundled dependencies when restoring from the side-effects cache",
+      "url": "https://github.com/pnpm/pnpm/pull/17524",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T22:11:19Z",
+      "labels": [
+        "product: pnpm@11",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith the side-effects cache on, a package that has `bundledDependencies` and a build script lost its bundled `node_modules` on a warm-store install. The side-effects diff listed every bundled file as deleted, because the scan after the build skips the package's top-level `node_modules`.\n\n- `calculateDiff` (`pnpm11/worker`) no longer records files under `node_modules/` as deleted.\n- `applySideEffectsDiffWithMaps` (`pnpm11/store/create-cafs-store`) keeps base files under `node_modules/` even when an entry lists them as deleted. Stores already holding a bad entry restore correctly, with no cache purge needed.\n- New registry fixture `@pnpm.e2e/pkg-with-bundled-dependencies-and-postinstall` for the install-level test.\n\nOnly pnpm v11 is affected. v12 re-imports the overlay over the pristine files with the modules dir kept, as the issue notes.\n\nTests run locally (Windows): `worker/test/addFilesFromDir.test.ts` and `installing/deps-installer/test/install/sideEffects.ts` pass. The new install test fails without the fix (the bundled files show up in `deleted`). I couldn't run `pnpm lint:prose` because Vale isn't installed locally.\n\nCloses pnpm/pnpm#17523\n\n## Squash Commit Body\n\n```text\nAfter a build, the package directory is scanned without its top-level\nnode_modules, so calculateDiff recorded every file of the package's\nbundled dependencies as deleted. A warm-store install then restored the\npackage without its bundled dependencies.\n\ncalculateDiff no longer lists files unde\n…(truncated)",
+      "files": [
+        "pnpm11/store/create-cafs-store/src/index.ts (+8 -2)",
+        "pnpm11/worker/src/addToStore.ts (+11 -10)",
+        "pnpr/.fixtures/packages/@pnpm.e2e/pkg-with-bundled-dependencies-and-postinstall/1.0.0/package.json (+14 -0)",
+        "pnpr/.fixtures/packages/@pnpm.e2e/pkg-with-bundled-dependencies-and-postinstall/1.0.0/pnpm-workspace.yaml (+2 -0)",
+        "pnpr/.fixtures/packages/@pnpm.e2e/pkg-with-bundled-dependencies-and-postinstall/1.0.0/postinstall.js (+9 -0)",
+        ".changeset/bundled-deps-side-effects-cache.md (+7 -0)",
+        "pnpm11/installing/deps-installer/test/install/sideEffects.ts (+46 -0)",
+        "pnpm11/worker/test/addFilesFromDir.test.ts (+20 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 17525,
+      "title": "fix(cli): skip Cargo updates to versions missing an enabled feature",
+      "url": "https://github.com/pnpm/pnpm/pull/17525",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T22:27:56Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm update --latest` rewrote a crate's version requirement to the newest release but left the features the workspace enables on it. When that release dropped one of them, Cargo could not resolve the declaration, and the whole update failed. On this repository the scheduled update workflow hits this for four crates:\n\n| Crate | New version | Missing feature |\n| --- | --- | --- |\n| `sha2` | 0.11.1 | `asm` |\n| `sqlx` | 0.9.0 | `runtime-tokio-rustls` |\n| `dashmap` | 6.2.1 | `nightly` |\n| `hyper-0-14` (`hyper`) | 1.12.0 | `runtime` |\n\nBefore staging an edit, `pnpm update` now reads the target version's features from the sparse index. It compares them with every feature the workspace enables on the dependency.\n\n- A crate reached by updating everything, or through a pattern, keeps its locked version, and a warning names the missing features.\n- A crate named on the command line (`pnpm update --latest sha2`, `crate:sha2`) fails with an error instead.\n\nBug only in v12: v11 does not update Cargo dependencies.\n\nVerified:\n- The new `update::cargo_features` tests fail with the check disabled.\n- A binary built from this branch plus pnpm/pnpm#17519 ran the workflow's exact command (`pnpm update --recursive --latest --include-github-actions --changeset` after removing the lockfile) on a copy of this repository. The run succeeded and skipped the four crates above with warnings.\n\nNot fixed here: the updated workspace still fails `cargo check`, because renamed aliases such as `tower\n…(truncated)",
+      "files": [
+        "pnpm/crates/cargo-resolver/src/features.rs (+34 -3)",
+        "pnpm/crates/cargo-resolver/src/lib.rs (+1 -1)",
+        "pnpm/crates/cargo-resolver/src/registry.rs (+24 -0)",
+        "pnpm/crates/cargo-resolver/src/tests.rs (+1 -0)",
+        "pnpm/crates/cli/src/cargo_deps.rs (+24 -1)",
+        "pnpm/crates/cli/src/cargo_deps/sparse_registry.rs (+16 -17)",
+        "pnpm/crates/cli/src/cli_args/ecosystem_deps.rs (+3 -0)",
+        "pnpm/crates/cli/src/cli_args/ecosystem_deps/cargo.rs (+52 -65)",
+        "pnpm/crates/cli/src/cli_args/ecosystem_deps/cargo_manifest_ops.rs (+0 -40)",
+        "pnpm/crates/cli/src/cli_args/ecosystem_deps/cargo_selection.rs (+106 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 17515,
+      "title": "fix(cmd-shim): quote paths in POSIX shims",
+      "url": "https://github.com/pnpm/pnpm/pull/17515",
+      "author": "kairosci",
+      "mergedAt": "2026-10-30T23:10:50Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nBoth CLIs put the target path and `NODE_PATH` entries into POSIX shell shims inside double quotes, with no escaping. A directory name containing `$(...)` or a backtick then ran a command when the bin started. A name containing `$` or `\"` gave a wrong path. This PR single-quotes every interpolated path in the pnpm 11 and pnpm 12 shim generators. It also teaches the readers that decide whether an existing shim is current to parse both the new form and the legacy double-quoted form.\n\nCloses pnpm/tasks#241.\n\n## Squash Commit Body\n\n```text\nShell shims wrote paths into double quotes without escaping `$`, backticks,\n`\"` or `\\`. Both generators now single-quote each interpolated path:\n\n- target: `\"$basedir_abs\"/'<relative>'` (also `$basedir` and `$basedir_win`),\n  or `'<absolute>'`.\n- NODE_PATH: `export NODE_PATH='<entries>'` and\n  `export NODE_PATH='<entries>':\"$NODE_PATH\"`. In pnpm 12, a relocatable\n  entry becomes `\"$basedir_abs\"/'<relative>'`. Adjacent literal entries share\n  one quoted word, so a shim without relocatable entries is byte-identical\n  across the two CLIs. Both CLIs compare such shims byte for byte.\n\nReaders:\n\n- pnpm 11 `readShNodePath` and `readShRelativeTarget` parse the new\n  single-quoted words and still accept the legacy double-quoted form.\n- pnpm 12 `is_relocatable_shim` validates both the new NODE_PATH form and the\n  legacy one, and requires every entry to resolve inside the root.\n- pnpm 12 `is_sh_shim_basedir_anchor_current` reads the anchored ta\n…(truncated)",
+      "files": [
+        "pnpm/crates/cmd-shim/src/shim.rs (+6 -3)",
+        "pnpm/crates/cmd-shim/src/shim/relocatable.rs (+92 -36)",
+        "pnpm/crates/cmd-shim/src/shim/sh.rs (+65 -41)",
+        "pnpm/crates/cmd-shim/src/shim/sh_anchored_target.rs (+193 -0)",
+        "pnpm/crates/cmd-shim/src/shim/tests.rs (+8 -8)",
+        "pnpm/crates/deps-restorer/src/link_bins/tests.rs (+1 -1)",
+        "pnpm11/bins/cmd-shim/src/generateShShim.ts (+7 -5)",
+        "pnpm11/bins/cmd-shim/src/index.ts (+26 -5)",
+        "pnpm11/bins/linker/src/linkBin.ts (+2 -1)",
+        ".changeset/safe-shim-paths.md (+7 -0)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 17528,
+      "title": "fix(deps-restorer): build a shared global virtual store slot again when nothing is cached",
+      "url": "https://github.com/pnpm/pnpm/pull/17528",
+      "author": "zkochan",
+      "mergedAt": "2026-10-30T23:58:53Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#17526.\n\nWith `enableGlobalVirtualStore`, pnpm 12 skipped a dependency's build scripts in a project whose global virtual store slot another project had already built. When the build writes only outside its own package (a git hook installer writing into `INIT_CWD`), the side-effects cache row is empty, so nothing is restored either, and the second project never gets the effect. pnpm 11 runs the script again there.\n\nThe skip is `built_by_an_earlier_install` in `slot_to_build.rs`, added by pnpm/pnpm#16286. That PR described it as matching v11, but v11 derives `isBuilt` only from the side-effects cache row (`getFlatMap` in `store/create-cafs-store`). `safeToSkip` changes how files are imported into the shared slot, not `isBuilt`. The only other v11 skip is in `importIntoSlot`: a slot that carried `.pnpm-needs-build`, then lost it while this install waited for the slot lock. v12 keeps that wait in `slot_to_build` as before.\n\nThis PR removes the slot-level skip. A slot whose build left output in the package still skips through the side-effects `is_built` gate, as in v11.\n\n## Notes for reviewers\n\n- **The cost.** With `sideEffectsCache: false`, or for a build that changes nothing inside its package, every install into a fresh `node_modules` now runs the build again. pnpm 11 does the same. pnpm/tasks#242 plans to make skipping these the intended behavior in the next major version, with `sideEffectsCache.exclude` as the opt-out.\n- **The replaced test.** `gvs\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/build_modules/build_one_snapshot/slot_to_build.rs (+3 -44)",
+        ".changeset/gvs-rebuild-shared-slot.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/global_virtual_store/builds.rs (+33 -41)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 17535,
+      "title": "fix(link): refuse an invalid package name instead of writing it to package.json",
+      "url": "https://github.com/pnpm/pnpm/pull/17535",
+      "author": "samanyudas",
+      "mergedAt": "2026-10-31T16:35:19Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to pnpm/pnpm#17475.\n\n`pnpm link <dir>` could write a dependency name that pnpm itself rejects. Once that happens, every later install in the project fails until someone edits `package.json` and `pnpm-workspace.yaml` by hand.\n\n- In pnpm v11, `pnpm link .` in a project without a `name` field links it under the name `\".\"`. The fallback is `path.basename` of the raw argument. This writes `\".\": \"link:\"` to `package.json` and `.: 'link:'` to the `pnpm-workspace.yaml` overrides. That is the same `\".\"` key reported in pnpm/pnpm#17475.\n- In both CLIs, a target whose `name` field is not a valid package name gets written the same way. The templates in the reporter's repository are named `\"mcp-use server\"`, for example.\n\n`pnpm add` already rejects such a name before it writes anything. `pnpm link` now does the same. Both CLIs check the name with the rule `pnpm add` uses and fail with `ERR_PNPM_INVALID_DEPENDENCY_NAME` before they change either file.\n\n`pnpm link` with several paths could also drop overrides in pnpm v11. Each path wrote `pnpm-workspace.yaml` on its own and at the same time, so a write that read the file early and finished last lost the others' entries. With four paths, 11.13.1 lost two overrides in 2 of 6 runs. v11 now writes every override in one update, as v12 already does. After the fix, 10 of 10 runs kept all four.\n\nThe reporter has not confirmed how the `\".\"` key got into their workspace. This PR fixes one reproduced way pnpm writes that key, so it\n…(truncated)",
+      "files": [
+        "pnpm-lock.yaml (+3 -0)",
+        "pnpm/crates/cli/src/cli_args/link.rs (+11 -0)",
+        "pnpm11/installing/commands/package.json (+1 -0)",
+        "pnpm11/installing/commands/src/link.ts (+33 -14)",
+        "pnpm11/installing/commands/tsconfig.json (+3 -0)",
+        ".changeset/link-keeps-every-override.md (+6 -0)",
+        ".changeset/link-refuses-invalid-name.md (+7 -0)",
+        "pnpm/crates/cli/tests/suite/link.rs (+43 -0)",
+        "pnpm11/installing/commands/test/link.ts (+46 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 17534,
+      "title": "fix(runtime): stop the node shim from looping on a global pnpmfile",
+      "url": "https://github.com/pnpm/pnpm/pull/17534",
+      "author": "samanyudas",
+      "mergedAt": "2026-10-31T16:36:39Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nIn a project that pins a Node.js version pnpm has not downloaded yet, `node -v` and `pnpm install` hang when a `globalPnpmfile` is configured. Each one fails after 30 seconds with `pnpmfile hook ... timed out` and leaves orphaned `node` workers running. Closes pnpm/pnpm#17530.\n\nThe `node` shim installs the pinned runtime with `hardened_install_config`. That config already turns off scripts, overrides, `packageExtensions`, catalogs, and patches, but it still loaded the global pnpmfile. The hook worker starts as bare `node`, and on `PATH` that is the same unprovisioned shim. So every level re-entered provisioning, waited on the slot lock, installed privately, and spawned another worker.\n\nThe fix sets `ignore_pnpmfile` in `hardened_install_config`. Shared and private runtime installs both go through it. Project installs still run the global pnpmfile, on the pinned Node.\n\nThis takes over pnpm/pnpm#17531 by @lazerg, who wrote the fix, the test, and the changeset. Their commit is imported unchanged with its authorship. On top of it, this PR adds an integration test, lists pnpmfile hooks in the function's doc comment, and names pnpm as the actor in the changeset. Thanks to `aron-intframe` for the source trace on the issue.\n\npnpm v11 is not affected. It has no global shims and loads pnpmfiles in-process.\n\nKnown limit, not changed here: when `pnpm install` itself spawns the hook worker, the hook's 30 s timer also counts the shim's runtime download. A slow download then fai\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/shim_dispatch/runtime_env.rs (+7 -6)",
+        "pnpm/crates/cli/src/shim_dispatch/tests.rs (+13 -0)",
+        ".changeset/runtime-shim-ignores-global-pnpmfile.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/global_shims.rs (+30 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 17536,
+      "title": "chore(deps): patch minimatch and glob with the fixes for the 2026-10-30 advisories",
+      "url": "https://github.com/pnpm/pnpm/pull/17536",
+      "author": "samanyudas",
+      "mergedAt": "2026-10-31T22:16:57Z",
+      "labels": [
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 6
+    },
+    {
+      "number": 17545,
+      "title": "fix(install): link the runtime after a --no-runtime install",
+      "url": "https://github.com/pnpm/pnpm/pull/17545",
+      "author": "lazerg",
+      "mergedAt": "2026-11-01T20:53:19Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to pnpm/pnpm#17542. The repeat-install fast path did not record the `runtime` setting, so after `pnpm install --no-runtime` a plain `pnpm install` reported \"Already up to date\" and never linked the runtime. The workspace state now records `runtime` while it is off, and the install gate treats a change as drift, so `skip_runtimes` moves from `Unseen` to `Recorded` in the settings classification.\n\nThe run gate ignores the new key, like it ignores `dev`/`optional`/`production`. Otherwise `pnpm run` after `pnpm install --no-runtime` would install again and link the runtime, which is the opposite of what the flag is for. When a passing run check refreshes the state, it keeps the recorded `runtime` the same way it keeps the dependency groups, so a later plain install still sees the change.\n\npnpm v11 had the same gap: `runtime` was not in `WORKSPACE_STATE_SETTING_KEYS`. It is now recorded there, an unset value reads as `true`, and `pnpm run`/`pnpm exec` ignore it. v11 already carries ignored settings forward when the run gate rewrites the state. Both CLIs write the same `runtime` key.\n\nThis is a partial fix. `pnpm install --no-runtime` on a project that already has the runtime linked now runs a full install, but that install still leaves `node_modules/.bin/node` in place, the same as `--no-runtime --frozen-lockfile` does today. Only `--force` removes it.\n\nTests: `fresh_install_with_no_runtime_resolves_but_does_not_fetch_the_runtime` now expects the follow-up inst\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/workspace_state/write.rs (+3 -2)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/deps_status.rs (+3 -1)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/settings/install_policy.rs (+4 -2)",
+        "pnpm/crates/workspace-state/src/lib.rs (+3 -0)",
+        "pnpm11/exec/commands/src/runDepsStatusCheck.ts (+3 -2)",
+        "pnpm11/workspace/state/src/types.ts (+3 -1)",
+        "pnpm11/workspace/state/src/validation.ts (+1 -0)",
+        ".changeset/17542-install-after-no-runtime.md (+8 -0)",
+        "pnpm/crates/cli/tests/suite/install_runtimes/no_runtime.rs (+41 -4)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests/settings_classification.rs (+1 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 17544,
+      "title": "perf: reuse the store verifier's mode reading for hardlinks and gate benchmark syscall counts",
+      "url": "https://github.com/pnpm/pnpm/pull/17544",
+      "author": "jclaveau",
+      "mergedAt": "2026-11-01T21:00:50Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#17543.\n\npnpm/pnpm#17502 stopped re-statting a store file shared by several packages, but every store file is still stat'ed once before its first hardlink. The store verifier (`check_pkg_files_integrity`) read that same inode's mode a moment earlier in the same install. On the vitest fixture, 12.17.0 makes about 100k `statx` calls per offline install, against 54k in 12.7.0.\n\nThis PR has two parts. They can be split into two PRs if you prefer:\n\n1. **The fix.** The verifier records the mode it reads in a process-wide map keyed by store path (`pnpm_fs::file_mode`), and `source_has_desired_mode` stats only on a miss. A store file that fails verification has its entry marked stale, because its re-fetch may land a new inode with another mode. A verifier read only fills a path the map does not know yet, so a read that predates another thread's failure cannot bring the old mode back. Only the importer's own `stat` refills a stale entry. The map replaces pnpm/pnpm#17502's `DashSet` of linkable paths. `store_inode_mode_is_linkable` is unchanged, so the pnpm/pnpm#3807 semantics are unchanged.\n2. **A syscall-count check in the integrated benchmark.** Wall time did not catch the 12.8.0 regression: each extra warm-cache `statx` costs about a microsecond, so the extra calls stayed inside the 5% noise allowance. The benchmark now runs each install twice more under `strace --summary-only` and fails when HEAD makes more file syscalls than main by more than max(2%, 5\n…(truncated)",
+      "files": [
+        "Cargo.lock (+0 -1)",
+        "pnpm/crates/deps-restorer/Cargo.toml (+0 -1)",
+        "pnpm/crates/deps-restorer/src/link_file/target_mode.rs (+20 -18)",
+        "pnpm/crates/fs/src/file_mode.rs (+5 -0)",
+        "pnpm/crates/fs/src/file_mode/observed_store_modes.rs (+53 -0)",
+        "pnpm/crates/fs/src/file_mode/tests.rs (+20 -0)",
+        "pnpm/crates/store-dir/src/check_pkg_files_integrity.rs (+35 -9)",
+        "pnpm/crates/store-dir/src/check_pkg_files_integrity/tests.rs (+91 -0)",
+        "pnpm/tasks/integrated-benchmark/src/cli_args.rs (+7 -0)",
+        "pnpm/tasks/integrated-benchmark/src/main.rs (+5 -0)"
+      ],
+      "filesTotal": 18
+    },
+    {
+      "number": 17529,
+      "title": "ci(rust): keep crash dumps of Windows test processes that abort",
+      "url": "https://github.com/pnpm/pnpm/pull/17529",
+      "author": "zkochan",
+      "mergedAt": "2026-11-01T23:56:13Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 17548,
+      "title": "fix(install): remove a linked runtime on a --no-runtime install",
+      "url": "https://github.com/pnpm/pnpm/pull/17548",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T00:04:24Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nCloses pnpm/pnpm#17542. pnpm/pnpm#17545 fixed one direction of the issue: a plain install after `--no-runtime` now links the runtime. This PR fixes the other: `pnpm install --no-runtime` on a project whose runtime an earlier install linked now removes `node_modules/node` and its bin.\n\nThree gates kept the runtime linked:\n\n1. **The early up-to-date check** (`finished_via_install_fast_path`) runs before the install pipeline applies `--no-runtime` to the config. It compared the workspace state against `runtime` still on and reported \"Already up to date\". The flag is now applied to the fast-path config too, through the same `record_no_runtime_flag`.\n2. **The frozen-tree up-to-date check** compared the current lockfile with the full wanted lockfile. Under `skip_runtimes`, `materialized_shape_matches` now leaves the direct runtimes out of the wanted shape, the way the install does when it writes the current lockfile. A tree that still holds the runtime no longer matches. A repeated `--no-runtime` install now matches and settles on this check, where before it re-materialized every time.\n3. **The stale-link prune** (`PruneStaleModules`) treated every direct dependency of the wanted lockfile as wanted. That included one the install skips, so the old `node_modules/node` link survived even `--no-runtime --force`. The prune now unlinks a direct dependency that resolves to a skipped snapshot, matching what the link pass creates. This applies to every kind of skip. For example,\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/dispatch.rs (+3 -0)",
+        "pnpm/crates/cli/src/cli_args/pipelines.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/pipelines/configuration.rs (+1 -1)",
+        "pnpm/crates/deps-restorer/src/linking.rs (+4 -46)",
+        "pnpm/crates/deps-restorer/src/linking/prune.rs (+54 -0)",
+        "pnpm/crates/deps-restorer/src/prune_stale_modules.rs (+31 -4)",
+        "pnpm/crates/package-manager/src/install/prepare_modules_state/up_to_date.rs (+2 -6)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/current_lockfile.rs (+13 -5)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/relocation.rs (+1 -6)",
+        ".changeset/17542-no-runtime-removes-linked-runtime.md (+5 -0)"
+      ],
+      "filesTotal": 12
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "dependabot[bot]": 3
+    }
+  }
+}
