@@ -1,6 +1,6 @@
 ---
 title: react/react
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/react-react
 ---
@@ -15,20 +15,20 @@ tags:
 
 ## 直近の注目変更
 
+- Reconciler: 削除された hidden の Activity でサスペンドしていたデータが解決するとクラッシュする問題を修正（[#37965](https://github.com/react/react/pull/37965)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
+- Reconciler: 新しいレンダーに取り消されたスロットルされたリトライを ping し、境界がフォールバックのまま残る問題を修正（[#38061](https://github.com/react/react/pull/38061)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
+- Fizz: 再開時に外部ランタイムの設定を保ち、完了した Suspense の中身が隠れたままになる問題を修正（[#38059](https://github.com/react/react/pull/38059)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
+- Fizz: 外部ランタイムのスクリプトに `crossOrigin` を渡す（[#38071](https://github.com/react/react/pull/38071)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
+- FB 向け Flight バンドラーで未対応の Server Reference のデコードを無効化（[#36865](https://github.com/react/react/pull/36865)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
+- DevTools facade: BigInt の正規化と、Resource でない hoistable の検出を修正（[#38068](https://github.com/react/react/pull/38068)、[#38067](https://github.com/react/react/pull/38067)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
+- DevTools: 対応する引数の無い書式指定子をそのまま残す（[#38069](https://github.com/react/react/pull/38069)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
+- React Compiler: AST を作り直すときに元のソースのオフセットと宣言子の範囲を保つ（[#36921](https://github.com/react/react/pull/36921)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 - View Transitions: Chrome 153 のエラーメッセージに合わせて抑えるエラーの分類を更新（[#38034](https://github.com/react/react/pull/38034)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-DOM|React DOM]]
 - React Compiler（Rust 版）: 非 ASCII の `*Ref` 名での panic を修正（[#38025](https://github.com/react/react/pull/38025)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- React Native: イベントの対象が null でも `dispatchNativeEvent` を呼ぶ（アンマウント後にタップが失われる問題）（[#38007](https://github.com/react/react/pull/38007)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Native-レンダラー|React Native レンダラー]]
-- DOM: `onTransitionRun` / `onTransitionStart` / `onTransitionCancel` で `SyntheticTransitionEvent` を使う（[#37985](https://github.com/react/react/pull/37985)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-DOM|React DOM]]
-- コンパイラ: 定数伝播とコード生成で `-0` を保つ（[#37995](https://github.com/react/react/pull/37995)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- コンパイラ: `PerformanceObserver` / `ReportingObserver` のコールバックでの ref アクセスを許可（[#37996](https://github.com/react/react/pull/37996)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- コンパイラ: react-native の `PanResponder.create` に型を付け、`react-hooks/refs` の誤検知を修正（[#37970](https://github.com/react/react/pull/37970)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- コンパイラ: 既に freeze された値でも `Freeze` 効果を ref の検証に残す（`PanResponder.create` の誤検知を修正）（[#37975](https://github.com/react/react/pull/37975)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- コンパイラ: `ResizeObserver` / `MutationObserver` のコールバックでの ref アクセスを許可（[#37895](https://github.com/react/react/pull/37895)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- Rust 版コンパイラ: 非 ASCII 文字を含む行の診断の下線位置を修正（[#37898](https://github.com/react/react/pull/37898)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 
 ## トピック
 
-- [[repos/react-react/topics/DevTools|DevTools]] — React DevTools のブラウザ拡張機能
+- [[repos/react-react/topics/DevTools|DevTools]] — React DevTools のブラウザ拡張機能・バックエンド・facade
 - [[repos/react-react/topics/React-Compiler|React Compiler]] — 自動メモ化コンパイラ（Babel / Rust 実装）
 - [[repos/react-react/topics/React-DOM|React DOM]] — `react-dom` の合成イベントなどブラウザ向けの処理
 - [[repos/react-react/topics/React-Native-レンダラー|React Native レンダラー]] — Fabric レンダラーのイベント処理
@@ -39,4 +39,4 @@ tags:
 ## 取り込み
 
 - [[repos/react-react/log|取り込み履歴]]
-- 最近の変更: [[repos/react-react/changes/2026-10-30|2026-10-30]]、[[repos/react-react/changes/2026-10-28|2026-10-28]]、[[repos/react-react/changes/2026-10-26|2026-10-26]]、[[repos/react-react/changes/2026-10-23|2026-10-23]]、[[repos/react-react/changes/2026-10-21|2026-10-21]]
+- 最近の変更: [[repos/react-react/changes/2026-11-02|2026-11-02]]、[[repos/react-react/changes/2026-10-30|2026-10-30]]、[[repos/react-react/changes/2026-10-28|2026-10-28]]、[[repos/react-react/changes/2026-10-26|2026-10-26]]、[[repos/react-react/changes/2026-10-23|2026-10-23]]

@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-11-02
+
+- 期間: 2026-10-30T00:21:37Z 〜 2026-11-02T00:51:11Z
+- PR 25 件（詳しく 20 件 / 1 行 5 件）、Release 2 件（安定版 2 件: v12.17.0, v11.28.10）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-11-02|changes]]（新規）、[[repos/pnpm-pnpm/releases/v12.17.0|v12.17.0]]（新規）、[[repos/pnpm-pnpm/releases/v11.28.10|v11.28.10]]（新規）、[[repos/pnpm-pnpm/releases/v12.16.1|v12.16.1]]・[[repos/pnpm-pnpm/releases/v11.28.9|v11.28.9]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/エージェントスキル|エージェントスキル]]、[[repos/pnpm-pnpm/topics/マルチエコシステム設定|マルチエコシステム設定]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/index|index]]
+- 備考: inbox の `latest.stable` は v12.16.1（2026-10-27T15:28:26Z）のままだが、期間内に安定版 v12.17.0（2026-10-30T14:24:43Z）と v11.28.10（2026-10-30T21:18:23Z）が公開されているので、最新の安定版は v12.17.0 とした。公開日は JST で書いた（v11.28.10 は JST で 2026-10-31）。PR は inbox ではすべて ⏳ 未リリースと表記されており、そのまま書いた（#17508・#17509 の内容はリリースノートにも載っている）。性能改善の `hint: unknown` 2 件（#17502・#17544）は変更・修正にまとめた。2 つのリリースノート本文はいずれも途中で切れている（要点の部分は取り込めた）。bot の PR 3 件（dependabot）は collect で除外済み
+- エラー: なし
 
 ## 2026-10-30
 

@@ -1,9 +1,16 @@
 ---
 title: vuejs/core 取り込み履歴
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/vuejs-core
 ---
+
+## 2026-11-02
+
+- 期間: 2026-10-29T08:13:13Z 〜 2026-11-02T00:51:11Z
+- PR 1 件（詳しく 0 件 / 1 行 1 件）、Release 1 件（プレリリース 1 件: v3.6.0-rc.14）
+- 更新したページ: [[repos/vuejs-core/changes/2026-11-02|changes]]（新規）、[[repos/vuejs-core/index|index]]
+- エラー: なし
 
 ## 2026-10-30
 

@@ -1,6 +1,6 @@
 ---
 title: Reconciler
-updated: 2026-10-21
+updated: 2026-11-02
 tags:
   - repo/react-react
   - topic
@@ -10,6 +10,7 @@ tags:
 
 `packages/react-reconciler` のレンダー・コミット処理（ワークループ、レーン、エラー回復、Suspense）まわりの変更。エラーが起きたときに保留中のレーンを同期的にリトライしてデータ競合による一時的なエラーからの回復を試みる「エラー回復」の仕組みがあり、リトライが完了しなかった場合の扱いが修正されている。Fragment Refs のインスタンスハンドルとテキストノードの扱いは完全にロールアウトされ、フィーチャーフラグ（`enableFragmentRefsInstanceHandles`・`enableFragmentRefsTextNodes`）が削除されて有効時の挙動に一本化された。並列トランジション（`enableParallelTransitions`）はすべての環境で有効になり、フラグは削除された。DEV で `use()` に渡された thenable に非同期の debug info（`_debugInfo`）を付ける処理は、拡張不可の thenable ではスキップされる。
 `useId` は、ツリー位置の ID が 30 ビットを超える大きなツリーでも一意になる（オーバーフロー部分の先頭の 0 を保持。未リリース）。
+スロットルされたリトライのコミットが新しいレンダーに取り消された場合、`prepareFreshStack` がそのレーンを ping し、境界がフォールバックのまま残らないようになった。hidden の Activity（Offscreen ファイバー）が削除された後にサスペンドしていたデータが解決しても、リトライ処理がクラッシュしなくなった（いずれも未リリース）。
 
 ## 主な API・オプション
 
@@ -20,6 +21,8 @@ tags:
 
 ## 変更履歴
 
+- 2026-10-31 — 削除された hidden の Activity でサスペンドしていたデータが解決するとクラッシュする問題を修正（`_retryCache` の `TypeError`）（[#37965](https://github.com/react/react/pull/37965)）⏳ 未リリース · [[repos/react-react/changes/2026-11-02|変更]]
+- 2026-10-31 — 新しいレンダーがタイムアウトを取り消したとき、スロットルされたリトライのレーンを ping する（#38029 を修正、#38030 を置き換え）（[#38061](https://github.com/react/react/pull/38061)）⏳ 未リリース · [[repos/react-react/changes/2026-11-02|変更]]
 - 2026-10-20 — 大きなツリー（位置 ID が 30 ビット超）でも `useId` の値が一意になるよう、オーバーフロー部分を 0 埋め（クライアント・Fizz とも）（[#37916](https://github.com/react/react/pull/37916)）⏳ 未リリース · [[repos/react-react/changes/2026-10-21|変更]]
 - 2026-10-14 — 拡張不可の thenable を `use()` に渡すと DEV でクラッシュする問題を修正（[#37796](https://github.com/react/react/pull/37796)）⏳ 未リリース · [[repos/react-react/changes/2026-10-14|変更]]
 - 2026-10-09 — フィーチャーフラグ `enableParallelTransitions` を削除し、有効時の挙動に一本化（[#37771](https://github.com/react/react/pull/37771)）⏳ 未リリース · [[repos/react-react/changes/2026-10-09|変更]]
@@ -33,3 +36,4 @@ tags:
 - [[repos/react-react/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/react-react/changes/2026-10-05|2026-10-05 の変更]]
 - [[repos/react-react/changes/2026-10-21|2026-10-21 の変更]]
+- [[repos/react-react/changes/2026-11-02|2026-11-02 の変更]]

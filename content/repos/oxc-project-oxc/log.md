@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-11-02
+
+- 期間: 2026-10-30T00:05:53Z 〜 2026-11-02T00:51:11Z
+- PR 107 件（詳しく 30 件 / 1 行 77 件、うち brief 77 件）、Release 0 件
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-11-02|changes]]（新規）、[[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]（新規）、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]、[[repos/oxc-project-oxc/topics/カバレッジ・テスト基盤|カバレッジ・テスト基盤]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 3 件）
 
 ## 2026-10-30
 

@@ -1,6 +1,6 @@
 ---
 title: css-color-4
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/w3c-csswg-drafts
   - topic
@@ -19,6 +19,7 @@ RGB → HSL のサンプルコード（`better-rgbToHsl.js`）は epsilon を使
 
 ## 変更履歴
 
+- 2026-11-01 — レイトレーシングのアルゴリズムを調整し、`oklch` の黒に近い領域で純粋な赤になるエッジケースを修正。アンカーのクランプを追加（[#14698](https://github.com/w3c/csswg-drafts/pull/14698)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-11-02|変更]]
 - 2026-10-29 — RGB → HSL のサンプルコードで epsilon を使う（#14531）（[`42d4d79`](https://github.com/w3c/csswg-drafts/commit/42d4d796584b070a7e68935eed58831e28bfe469)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-30|変更]]
 - 2026-10-27 — powerless な色相を missing に変えるとき「colorful」な成分を 0 にすると明確化（#14531）（[`1da0d9f`](https://github.com/w3c/csswg-drafts/commit/1da0d9fb61d62f53e893b58f85bd109f0c8b9321)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-28|変更]]
 - 2026-10-27 — powerless を missing にする処理のサンプル JavaScript を追加（[#14674](https://github.com/w3c/csswg-drafts/pull/14674)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-28|変更]]
@@ -36,3 +37,4 @@ RGB → HSL のサンプルコード（`better-rgbToHsl.js`）は epsilon を使
 - [[repos/w3c-csswg-drafts/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/w3c-csswg-drafts/changes/2026-10-28|2026-10-28 の変更]]
 - [[repos/w3c-csswg-drafts/topics/css-color-hdr-1|css-color-hdr-1]]
+- [[repos/w3c-csswg-drafts/changes/2026-11-02|2026-11-02 の変更]]

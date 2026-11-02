@@ -1,6 +1,6 @@
 ---
 title: nuxt/nuxt
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/nuxt-nuxt
 ---
@@ -14,6 +14,8 @@ tags:
 
 ## 直近の注目変更
 
+- SSR のプリフェッチのヒントをハイドレーション後に遅らせる（LCP 1153ms → 1071ms の例）（[#36794](https://github.com/nuxt/nuxt/pull/36794)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/プリフェッチ・ナビゲーション|プリフェッチ・ナビゲーション]]
+- `nuxt:render-list` で AST を作らずに import を読む（サーバーのフック時間が約半分に）（[#36787](https://github.com/nuxt/nuxt/pull/36787)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 - Nitro 3 RC へ移行（破壊的変更）（[#36671](https://github.com/nuxt/nuxt/pull/36671)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/サーバー互換性|サーバー互換性]]
 - `nuxt dev` で Nitro の WebSocket のアップグレードが動くように（[#36387](https://github.com/nuxt/nuxt/pull/36387)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 - `typescript.typeCheck` の型チェッカーのワーカーのリークを修正（[#36774](https://github.com/nuxt/nuxt/pull/36774)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
@@ -22,8 +24,6 @@ tags:
 - ビルド時のテンプレート診断 `experimental.templateDiagnostics`（一致しない `<NuxtLink to>` などを警告、デフォルト有効）（[#36754](https://github.com/nuxt/nuxt/pull/36754)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/コンポーネント・テンプレート|コンポーネント・テンプレート]]
 - 初期チャンクに V8 のコンパイルヒントを出力する実験的機能（ハイドレーション 477ms → 311ms の例）（[#36758](https://github.com/nuxt/nuxt/pull/36758)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 - NuxtLink の SSR を高速化（不要な `router.resolve` を省き、SSR のバッファへ直接描画）（[#36759](https://github.com/nuxt/nuxt/pull/36759)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/サーバーレンダリング|サーバーレンダリング]]
-- `onNuxtReady` に `timeout` と `signal` オプション（[#36743](https://github.com/nuxt/nuxt/pull/36743)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/アプリコンテキスト・ランタイム|アプリコンテキスト・ランタイム]]
-- kit: `tsBuildInfoFile` を `buildDir` に保存し、インクリメンタルな型チェックを可能に（[#36746](https://github.com/nuxt/nuxt/pull/36746)）⏳ 未リリース · トピック: [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]
 
 ## トピック
 
@@ -38,11 +38,11 @@ tags:
 - [[repos/nuxt-nuxt/topics/設定・スキーマ|設定・スキーマ]] — `nuxt.config` のオプション（`prerender`・`nitro.*` の非推奨・無視するディレクトリ・`sourcemap` の `'nosource'`）と kit の設定・互換性 API
 - [[repos/nuxt-nuxt/topics/データ取得|データ取得]] — `useFetch`・`useAsyncData` とアドオン機能、自動生成キー
 - [[repos/nuxt-nuxt/topics/トレーシング|トレーシング]] — フック・バンドラー・ミドルウェア・リクエスト（`nuxt.request`）の tracing channel
-- [[repos/nuxt-nuxt/topics/プリフェッチ・ナビゲーション|プリフェッチ・ナビゲーション]] — クライアント側のプリフェッチ/プリロードスケジューラー、`<NuxtLink>` のプリフェッチのフック
+- [[repos/nuxt-nuxt/topics/プリフェッチ・ナビゲーション|プリフェッチ・ナビゲーション]] — クライアント側のプリフェッチ/プリロードスケジューラー、`<NuxtLink>` のプリフェッチのフック、SSR のプリフェッチのヒントの遅延
 - [[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]] — Vite/Nitro/webpack のモジュール解決・外部化、レイヤー、型生成・tsconfig、vite-server・Nitro の開発サーバー、ビルドキャッシュ・tree-shake・ビルドの高速化、V8 のコンパイルヒント、dev の CSS
 - [[repos/nuxt-nuxt/topics/ルーティング・レイアウト|ルーティング・レイアウト]] — クライアント側ルーター（リンクの解決・スクロール）、レイアウト遷移・`setPageLayout`、ルートルール（カバー判定・メソッド付きのキー・`sensitive`）、`navigateTo`・`definePageMeta`
 
 ## 取り込み
 
 - [[repos/nuxt-nuxt/log|取り込み履歴]]
-- 最近の変更: [[repos/nuxt-nuxt/changes/2026-10-30|2026-10-30]]、[[repos/nuxt-nuxt/changes/2026-10-28|2026-10-28]]、[[repos/nuxt-nuxt/changes/2026-10-26|2026-10-26]]、[[repos/nuxt-nuxt/changes/2026-10-23|2026-10-23]]、[[repos/nuxt-nuxt/changes/2026-10-21|2026-10-21]]
+- 最近の変更: [[repos/nuxt-nuxt/changes/2026-11-02|2026-11-02]]、[[repos/nuxt-nuxt/changes/2026-10-30|2026-10-30]]、[[repos/nuxt-nuxt/changes/2026-10-28|2026-10-28]]、[[repos/nuxt-nuxt/changes/2026-10-26|2026-10-26]]、[[repos/nuxt-nuxt/changes/2026-10-23|2026-10-23]]

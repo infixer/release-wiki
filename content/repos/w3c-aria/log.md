@@ -1,9 +1,16 @@
 ---
 title: w3c/aria 取り込み履歴
-updated: 2026-10-28
+updated: 2026-11-02
 tags:
   - repo/w3c-aria
 ---
+
+## 2026-11-02
+
+- 期間: 2026-10-26T14:49:37Z 〜 2026-11-02T00:51:11Z
+- PR 2 件（詳しく 2 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/w3c-aria/changes/2026-11-02|changes]]（新規）、[[repos/w3c-aria/topics/Core-AAM|Core-AAM]]（新規）、[[repos/w3c-aria/index|index]]
+- エラー: なし
 
 ## 2026-10-28
 

@@ -1,9 +1,16 @@
 ---
 title: nuxt/nuxt 取り込み履歴
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/nuxt-nuxt
 ---
+
+## 2026-11-02
+
+- 期間: 2026-10-29T23:11:42Z 〜 2026-11-02T00:51:11Z
+- PR 3 件（詳しく 2 件 / 1 行 1 件）、Release 0 件
+- 更新したページ: [[repos/nuxt-nuxt/changes/2026-11-02|changes]]（新規）、[[repos/nuxt-nuxt/topics/プリフェッチ・ナビゲーション|プリフェッチ・ナビゲーション]]、[[repos/nuxt-nuxt/topics/モジュール解決・ビルド|モジュール解決・ビルド]]、[[repos/nuxt-nuxt/index|index]]
+- エラー: なし
 
 ## 2026-10-30
 

@@ -1,6 +1,6 @@
 ---
 title: w3c/aria
-updated: 2026-10-28
+updated: 2026-11-02
 tags:
   - repo/w3c-aria
 ---
@@ -14,6 +14,8 @@ tags:
 
 ## 直近の注目変更
 
+- Core-AAM に「Computed Accessibility Properties」の節を追加（[#2800](https://github.com/w3c/aria/pull/2800)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/Core-AAM|Core-AAM]]
+- Core-AAM の `computedrole` を 2 語の「computed role」に（[#2955](https://github.com/w3c/aria/pull/2955)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/Core-AAM|Core-AAM]]
 - HTML-AAM で image map を `ATK_ROLE_IMAGE_MAP` にマッピング（[#2945](https://github.com/w3c/aria/pull/2945)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - HTML-AAM の `abbr` 要素の `title` のマッピングから、当てはまらない記述を削除（[#2927](https://github.com/w3c/aria/pull/2927)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 - 翻訳対象になる属性についての i18n の考慮事項を追加（[#2862](https://github.com/w3c/aria/pull/2862)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
@@ -22,14 +24,14 @@ tags:
 - 各仕様の ReSpec 設定にあるリポジトリ名・ED URL を修正（[#2909](https://github.com/w3c/aria/pull/2909)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/ビルド・ReSpec設定|ビルド・ReSpec設定]]
 - Core AAM のビルドをトリガー（診断用）（[#2908](https://github.com/w3c/aria/pull/2908)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/ビルド・ReSpec設定|ビルド・ReSpec設定]]
 - cSpell で見つかった各仕様書のタイポを修正（[#2865](https://github.com/w3c/aria/pull/2865)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
-- target をリンクテキストとして使うための alias を追加（[#2900](https://github.com/w3c/aria/pull/2900)）⏳ 未リリース · トピック: [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]]
 
 ## トピック
 
+- [[repos/w3c-aria/topics/Core-AAM|Core-AAM]] — Core Accessibility API Mappings（計算されたアクセシビリティプロパティの節、computed role の定義）
 - [[repos/w3c-aria/topics/仕様文の編集・表記修正|仕様文の編集・表記修正]] — タイポ修正や定義の alias 追加、説明文・例の追加などの編集修正
 - [[repos/w3c-aria/topics/ビルド・ReSpec設定|ビルド・ReSpec設定]] — ReSpec 設定やビルドプロセスまわりの調整
 
 ## 取り込み
 
 - [[repos/w3c-aria/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-aria/changes/2026-10-28|2026-10-28]]、[[repos/w3c-aria/changes/2026-10-23|2026-10-23]]、[[repos/w3c-aria/changes/2026-10-16|2026-10-16]]、[[repos/w3c-aria/changes/2026-10-14|2026-10-14]]、[[repos/w3c-aria/changes/2026-10-12|2026-10-12]]
+- 最近の変更: [[repos/w3c-aria/changes/2026-11-02|2026-11-02]]、[[repos/w3c-aria/changes/2026-10-28|2026-10-28]]、[[repos/w3c-aria/changes/2026-10-23|2026-10-23]]、[[repos/w3c-aria/changes/2026-10-16|2026-10-16]]、[[repos/w3c-aria/changes/2026-10-14|2026-10-14]]

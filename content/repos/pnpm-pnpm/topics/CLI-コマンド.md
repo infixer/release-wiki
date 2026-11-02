@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -12,6 +12,8 @@ tags:
 
 ## 主な API・オプション
 
+- `pnpm peers check --global`（`-g`）— グローバルのインストールグループごとに peer 依存を調べる（v12.17.0）
+- `pnpm dlx`/`pnx`/`create` の `--dir`・`--workspace-root` — 指定したディレクトリでコマンドを実行（main、未リリース）
 - `pnpm cache prune` [`--dry-run`] — 読めなくなった古いレジストリメタデータキャッシュを削除
 - `package.yaml` の書き込み — `add`/`update`/`remove`/`pkg`/`link`/`set-script`/`version` から更新可能（コメント・キー順を保持）
 - `pnpm add --tilde` — `--save-prefix=~` の別名
@@ -39,6 +41,8 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-02 — `pnpm peers check --global`（`-g`）でグローバルのパッケージの peer 依存を調べる（[#17508](https://github.com/pnpm/pnpm/pull/17508)） ⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-02|変更]]
+- 2026-11-02 — `dlx`・`pnx`・`create` が `--dir`・`--workspace-root` に従う、`pnpm link` が不正なパッケージ名を `ERR_PNPM_INVALID_DEPENDENCY_NAME` で拒否（[#17479](https://github.com/pnpm/pnpm/pull/17479), [#17535](https://github.com/pnpm/pnpm/pull/17535)） ⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-02|変更]]
 - 2026-10-30 — `pnpm outdated`/`pnpm update` がランタイム・パッケージマネージャー・Cargo・Python の依存を扱う（[#17449](https://github.com/pnpm/pnpm/pull/17449)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-30|変更]]
 - 2026-10-28 — 出力が端末の高さを超えたら、画面の行を書き直し続けない（[#17392](https://github.com/pnpm/pnpm/pull/17392)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
 - 2026-10-28 — `pnpm add -T` をあいまいとして拒否（v12）（[#17333](https://github.com/pnpm/pnpm/pull/17333)）📦 pnpr@0.1.0-alpha.17 · [[repos/pnpm-pnpm/changes/2026-10-28|変更]]
@@ -84,6 +88,8 @@ tags:
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-11-02|2026-11-02 の変更]]
+- [[repos/pnpm-pnpm/releases/v12.17.0|v12.17.0]]
 - [[repos/pnpm-pnpm/changes/2026-10-28|2026-10-28 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-26|2026-10-26 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-23|2026-10-23 の変更]]

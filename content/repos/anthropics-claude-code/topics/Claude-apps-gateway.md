@@ -1,6 +1,6 @@
 ---
 title: Claude apps gateway
-updated: 2026-10-30
+updated: 2026-11-02
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -19,6 +19,7 @@ v2.1.299 で、gateway の背後の Claude Code セッションの attribution �
 v2.1.307 で、gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` が無視される問題と、`OTEL_EXPORTER_OTLP_HEADERS` を設定すると gateway の背後の Claude Desktop セッションのテレメトリが拒否される問題が修正された。
 v2.1.312 で `oidc.user_id_claim` が加わり、`sub` 以外の id_token のクレーム（Microsoft Entra ID の `oid` など）で利用者を識別できるようになった。
 v2.1.314 で upstream に任意の `groups` 一覧が加わり、一覧の IdP グループの開発者だけをその upstream に送れるようになった（failover でも同じ）。Bedrock の upstream には `guardrail_trace` が加わり、どの Bedrock guardrail のフィルターが反応したかを一致したテキスト抜きでログに残せる。tool search の `tool_reference` ブロックを受け付けない gateway の背後では、tool search 無しで 1 回送り直すようになった。
+v2.1.316 で、グループのメンバーで共有する月間予算（`pooled_budget`）、一致したポリシーをすべて重ねて適用する `managed.policy_mode: layered`、Bedrock guardrail の prompt attacks フィルター用に入力タグでプロンプトを囲む `guardrail.input_tagging` が加わった。リクエストで指定されたすべてのモデルを `availableModels`・`deniedModels`・`models` で確認するようになり、ブロックされたモデルは該当フィールドを示す 400 になる。
 
 ## 主な API・オプション
 
@@ -31,9 +32,13 @@ v2.1.314 で upstream に任意の `groups` 一覧が加わり、一覧の IdP �
 - `oidc.user_id_claim` — 利用者の識別に使う id_token のクレーム（既定は `sub`。v2.1.312）
 - upstream の `groups` — その upstream に送る開発者の IdP グループ（v2.1.314）
 - Bedrock upstream の `guardrail_trace` — 反応した Bedrock guardrail のフィルターをログに残す（v2.1.314）
+- spend limits の管理 API の `pooled_budget` — グループで共有する月間予算（各メンバーの上限に加えて適用。v2.1.316）
+- `managed.policy_mode: layered` — 一致したポリシーをすべて重ねて適用（v2.1.316）
+- Bedrock upstream の `guardrail.input_tagging` — 入力タグでプロンプトを囲む（`all_messages_and_system` でシステムプロンプトも。v2.1.316）
 
 ## 変更履歴
 
+- 2026-10-31 — `pooled_budget`・`managed.policy_mode: layered`・`guardrail.input_tagging` を追加。リクエストのすべてのモデルを `availableModels`・`deniedModels`・`models` で確認するよう修正 📦 v2.1.316 · [[repos/anthropics-claude-code/releases/v2.1.316|リリース]]
 - 2026-10-30 — upstream に `groups`、Bedrock upstream に `guardrail_trace` を追加。`tool_reference` を受け付けない gateway の背後で拒否が続く問題を修正 📦 v2.1.314 · [[repos/anthropics-claude-code/releases/v2.1.314|リリース]]
 - 2026-10-28 — `oidc.user_id_claim` を追加（Entra ID の `oid` などで利用者を識別）📦 v2.1.312 · [[repos/anthropics-claude-code/releases/v2.1.312|リリース]]
 - 2026-10-21 — gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` が無視される問題、`OTEL_EXPORTER_OTLP_HEADERS` 設定時に Claude Desktop セッションのテレメトリが拒否される問題を修正 📦 v2.1.307 · [[repos/anthropics-claude-code/releases/v2.1.307|リリース]]
@@ -50,3 +55,4 @@ v2.1.314 で upstream に任意の `groups` 一覧が加わり、一覧の IdP �
 - [[repos/anthropics-claude-code/releases/v2.1.307|v2.1.307]]
 - [[repos/anthropics-claude-code/releases/v2.1.312|v2.1.312]]
 - [[repos/anthropics-claude-code/releases/v2.1.314|v2.1.314]]
+- [[repos/anthropics-claude-code/releases/v2.1.316|v2.1.316]]
