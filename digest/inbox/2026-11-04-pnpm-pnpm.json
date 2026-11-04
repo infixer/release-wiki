@@ -1,0 +1,874 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-11-04T01:28:26Z",
+  "range": {
+    "from": "2026-11-02T00:04:24Z",
+    "to": "2026-11-04T01:28:26Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.16.1",
+      "publishedAt": "2026-10-27T15:28:26Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.16.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 17550,
+      "title": "fix(link): resolve a relative path from the current directory",
+      "url": "https://github.com/pnpm/pnpm/pull/17550",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T06:17:12Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nRelated to pnpm/pnpm#17475.\n\npnpm v12 resolved a relative `pnpm link <dir>` against the directory of the nearest `package.json`, not the directory the command runs in. In a folder without a `package.json`, such as a workspace's `packages` folder, `pnpm link .` therefore linked the workspace root into itself. It wrote `\"<root-name>\": \"link:\"` to the root `package.json` and `<root-name>: link:.` to the overrides. pnpm v11 resolves the path against the current directory. v12 now does the same.\n\nContext from #17475: the reporter's error reproduces exactly with pnpm 11.13.1 on the reporter's repository (mcp-use at 8d8034e, Windows, under a Hebrew-named profile path):\n\n1. Run `pnpm link .` in `libraries/typescript/packages`, which has no `package.json`. 11.13.1 writes `\".\": \"link:packages\"` to the root `package.json` and `.: link:packages` to the overrides, then fails with `ERR_PNPM_INVALID_SELECTOR`.\n2. Remove only the override. `pnpm build:mcp-use` then prints the reporter's output verbatim: `✓ Lockfile passes supply-chain policies (verified …)`, then `[ERR_PNPM_INVALID_DEPENDENCY_NAME] The current package contains a dependency with an invalid name: \".\"`.\n\nOn main, v11 (#17535) refuses step 1 without changing either file. v12 resolved `.` against the root, so it never produced `\".\"`, but it linked the wrong project. This PR fixes that.\n\nVerified by hand with a v12 binary built from main, in the reporter's repository. `pnpm link .` in `packages` wrote the self-link bef\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/dispatch_install/maintenance.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/link.rs (+7 -3)",
+        ".changeset/link-relative-path-from-cwd.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/link.rs (+83 -0)",
+        "pnpm/docs/cli/link.md (+1 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":17549,"title":"refactor(store): carry the store file mode in the CAS paths map","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17561,
+      "title": "fix: ignore the version of a lone project in the dependency-status check",
+      "url": "https://github.com/pnpm/pnpm/pull/17561",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T10:07:58Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nBumping only the `version` of a single-project repository made `verifyDepsBeforeRun` report \"The workspace structure has changed since last install\" and spawn an install before the script. In pnpm v12 the install fast path re-resolved too.\n\nThe dependency-status check compares each recorded project's name and version with its manifest. A project's version decides only how *other* workspace projects' dependencies resolve to it, so the version is now compared only when the workspace has more than one project, or when `linkWorkspacePackages` is `deep` (a transitive dependency may then resolve to the lone project). The name, the project set, and every other check stay as they were. Multi-project workspaces keep the strict comparison: a dependent's `workspace:^1` or a linked range can stop matching after a bump.\n\nFixed in both stacks:\n\n- v12: `project_structure_matches` in `pnpm/crates/package-manager/src/optimistic_repeat_install/settle.rs` (shared by the run gate, the install fast path, and the relocation check). It now takes the config to read `linkWorkspacePackages`.\n- v11: `findWorkspaceStructureIssue` in `pnpm11/deps/status`. v11 reaches this check only when a `pnpm-workspace.yaml` exists, as in the issue's repro.\n\nCloses pnpm/pnpm#17560\n\n### Verification\n\n- The issue's repro on a fixed v12 debug build: the `warn` run prints no warning, the default run starts no install.\n- New Rust unit tests: a lone project's bump passes both the install fast path and the run ga\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/optimistic_repeat_install.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/deps_status.rs (+6 -2)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/freshness.rs (+1 -1)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/relocation.rs (+4 -2)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/relocation/tests.rs (+2 -1)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/settle.rs (+11 -2)",
+        "pnpm11/deps/status/src/findWorkspaceStructureIssue.ts (+5 -1)",
+        ".changeset/lone-project-version-bump.md (+7 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests/workspace.rs (+84 -0)",
+        "pnpm11/deps/status/test/findWorkspaceStructureIssue.test.ts (+59 -0)"
+      ],
+      "filesTotal": 11
+    },
+    {"number":17568,"title":"chore(cargo): bump zip from 8.6.0 to 9.2.2","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17551,
+      "title": "feat(pnpr): keep hosted package metadata in SQLite",
+      "url": "https://github.com/pnpm/pnpm/pull/17551",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T13:30:30Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements steps 1–3 of the [SQL metadata storage RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-sql-metadata-storage.md) and the parts of its step 4 conformance suite that apply to an embedded backend. Part of pnpm/tasks#244. This is the base of a stack: atomic workspace publication builds on it.\n\nOpt-in with:\n\n```yaml\nmetadata:\n  backend: sqlite   # `documents` (default) keeps today's behavior\n  # path: defaults to <storage>/.metadata/metadata.sqlite\n```\n\n### What it covers\n\n- **Step 1: metadata split from artifact storage.** `pnpr_storage::metadata::PackageMetadata` is the domain interface: read a package view, commit a package document under compare-and-set, change a tag, remove a package, list packages. `Storage` routes every document operation through it, so handlers, the publish journal, search, export, verify and migration all reach metadata through one interface. Archives, records and tombstones stay in the `HostedBackend`. The existing behavior is the `documents` backend.\n- **Step 2: embedded SQLite backend.** Tables follow the RFC sketch (`versions`, `accepted_manifests`, `tags`, `tag_history`, `annotations`, `readmes`, plus `packages` and `catalogs`). Every key column is `NOT NULL`. An npm packument is stored as rows. A version's manifest and README are insert-only: a write that changes them fails with `409 version_already_published`. Deprecations, tags and package fields change without touching them. The identity of every removed version (\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpr/crates/config/src/config_file.rs (+3 -0)",
+        "pnpr/crates/config/src/lib.rs (+3 -1)",
+        "pnpr/crates/config/src/loading.rs (+8 -6)",
+        "pnpr/crates/config/src/storage_config.rs (+67 -1)",
+        "pnpr/crates/pnpr-fixtures/src/presets.rs (+12 -6)",
+        "pnpr/crates/pnpr/src/export.rs (+2 -6)",
+        "pnpr/crates/pnpr/src/migrate_storage.rs (+21 -3)",
+        "pnpr/crates/pnpr/src/oci_maintenance.rs (+2 -6)",
+        "pnpr/crates/pnpr/src/oci_maintenance/tests.rs (+5 -5)"
+      ],
+      "filesTotal": 64
+    },
+    {"number":17569,"title":"ci(rust): clear the inherited error mode so Windows test aborts leave dumps","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17567,"title":"test(cli): check the repeat-install gates against edits that change no dependency","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17566,
+      "title": "fix(link): add the link: dependency to the current project in v11",
+      "url": "https://github.com/pnpm/pnpm/pull/17566",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T13:42:47Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nIn a workspace, v11 `pnpm link <dir>` added the `link:` dependency to the workspace root's `package.json` instead of the project where the command ran. The link was then created only in the root's `node_modules`. This contradicts the docs (\"a link to `bar` will be created in `foo/node_modules/bar`\") and v12, which adds the dependency to the current project. Found while investigating pnpm/pnpm#17475.\n\nRunning `pnpm link ../../../bar` from `packages/foo`, where `foo` doesn't depend on `bar` yet:\n\n| | Root `package.json` | `packages/foo/package.json` | Override | Link created in |\n|---|---|---|---|---|\n| v11 before | `\"bar\": \"link:../bar\"` | unchanged | `bar: link:../bar` | root `node_modules` only |\n| v11 after / v12 | unchanged | `\"bar\": \"link:../../../bar\"` | `bar: link:../bar` | `foo/node_modules` only |\n\nRunning from a folder inside the workspace that has no `package.json`, such as `packages/`, still falls back to the root project, as in v12. I checked both cases end to end with the rebuilt bundle.\n\n## Squash Commit Body\n\n```text\nIn a workspace, v11 `pnpm link <dir>` added the `link:` dependency to the\nworkspace root's package.json instead of the project where the command\nran. That is a leftover from pnpm/pnpm#8653, which moved the write to the\nroot manifest because the overrides lived in its `pnpm.overrides` field.\nWhen pnpm/pnpm#9365 moved overrides to pnpm-workspace.yaml, the dependency\nkept going to the root. The docs and v12 add it to the current project.\n\n\n…(truncated)",
+      "files": [
+        "pnpm11/installing/commands/src/link.ts (+32 -11)",
+        ".changeset/link-dependency-in-current-project.md (+6 -0)",
+        "pnpm11/docs/cli/link.md (+2 -0)",
+        "pnpm11/installing/commands/test/link.ts (+63 -31)"
+      ],
+      "filesTotal": 4
+    },
+    {"number":17562,"title":"refactor(store): share files maps across snapshots and record modes in place","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":17570,"title":"refactor(store): return one value for a file written to the store","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17553,
+      "title": "feat(pnpr): commit SQLite publications atomically and idempotently",
+      "url": "https://github.com/pnpm/pnpm/pull/17553",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T15:42:44Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements a subset of the [atomic workspace publication RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-atomic-workspace-publication.md) on top of the SQLite metadata store. Part of pnpm/tasks#244. Builds on the SQLite metadata store from pnpm/pnpm#17551, now on main.\n\nEverything here applies when `metadata: { backend: sqlite }` is set. The documents backend keeps the journaled path unchanged.\n\n### What it covers\n\n- **One SQL commit path for publishing.** `commit_publishes` and the single and batch publish handlers commit every staged document of a request in one `BEGIN IMMEDIATE` transaction. That transaction advances the org's catalog generation once (RFC Implementation step 2, for publishing). Archives are promoted before the transaction. A slot another writer holds with different bytes fails the whole request with `409` before any metadata commits, so the \"partial release on a lost race\" outcome of the journal is gone for SQLite. A request whose packages span orgs is refused. Staged-publish approval and the Cargo, PyPI and OCI publish paths go through the same commit.\n- **Readers see a whole batch or none of it.** Every read of package metadata runs in its own read transaction (from the base PR), so a reader sees the commit entirely or not at all.\n- **Idempotent outcomes, including keyless clients.** The outcome (catalog, generation, publication) commits in the same transaction as the release in `publication_outcomes`, keyed by `(catalog, principal\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/batch.rs (+88 -31)",
+        "pnpr/crates/pnpr/src/server/cargo/publication.rs (+5 -0)",
+        "pnpr/crates/pnpr/src/server/oci/publication.rs (+5 -0)",
+        "pnpr/crates/pnpr/src/server/publications.rs (+163 -0)",
+        "pnpr/crates/pnpr/src/server/publishing.rs (+31 -19)",
+        "pnpr/crates/pnpr/src/server/publishing/atomic.rs (+412 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/tests.rs (+42 -0)",
+        "pnpr/crates/pnpr/src/server/pypi/publication.rs (+5 -0)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+3 -1)"
+      ],
+      "filesTotal": 30
+    },
+    {"number":17459,"title":"docs: articulate the advantage cloning affords","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17554,
+      "title": "feat(transparency-log): add C2SP checkpoint, tile, and proof primitives",
+      "url": "https://github.com/pnpm/pnpm/pull/17554",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T17:20:58Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPart of pnpm/tasks#244. First of two stacked PRs with the release-record trust primitives from the [release records RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-release-records.md) (the \"Transparency log\" section).\n\nThis adds `pnpm-transparency-log`, a standalone crate for pnpr and pnpm. It has the C2SP formats the RFC uses (the ones Go's checksum database uses):\n\n- **Keys** ([signed-note](https://c2sp.org/signed-note)): verifier keys written `<name>+<key hash>+<key>` (lowercase key hash; names follow tlog-cosignature: at most 255 bytes, no spaces, `+`, or control characters), `NoteSigner` for log signatures, and `Cosigner` for Ed25519 checkpoint cosignatures (`cosignature/v1`, [tlog-cosignature](https://c2sp.org/tlog-cosignature)).\n- **Checkpoints** ([tlog-checkpoint](https://c2sp.org/tlog-checkpoint)): `sign_checkpoint`, `add_signatures`, and `CheckpointPolicy::verify`. Verification needs the log key threshold and the witness quorum, each counted over distinct keys in the policy set (a repeated signature line counts once), with log keys of signed-note type `0x01` and witness keys of type `0x04`. A key set cannot list one public key under two names, and a witness cannot reuse a log key, since an Ed25519 cosignature does not commit to the cosigner name. It ignores unknown signers and rejects a bad signature from a named key. A policy with no witnesses (a private registry) is allowed.\n- **Tiles** ([tlog-tiles](https://c2sp.org/tlog-tiles)): `TilePath`\n…(truncated)",
+      "files": [
+        "Cargo.lock (+43 -0)",
+        "Cargo.toml (+8 -0)",
+        "pnpm/crates/transparency-log/Cargo.toml (+27 -0)",
+        "pnpm/crates/transparency-log/src/bundle.rs (+55 -0)",
+        "pnpm/crates/transparency-log/src/bundle/tests.rs (+27 -0)",
+        "pnpm/crates/transparency-log/src/checkpoint.rs (+139 -0)",
+        "pnpm/crates/transparency-log/src/checkpoint/policy.rs (+259 -0)",
+        "pnpm/crates/transparency-log/src/checkpoint/tests.rs (+259 -0)",
+        "pnpm/crates/transparency-log/src/integrate.rs (+166 -0)",
+        "pnpm/crates/transparency-log/src/integrate/tests.rs (+216 -0)"
+      ],
+      "filesTotal": 21
+    },
+    {
+      "number": 17556,
+      "title": "feat: pnpr's own package document with release records (split packuments)",
+      "url": "https://github.com/pnpm/pnpm/pull/17556",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T18:54:11Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements steps 1–4 of [split packuments](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-split-packuments.md), with the revision fields of [integrity-addressed patch revisions](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-integrity-addressed-patch-revisions.md) moved into pnpr's own format.\n\nPart of pnpm/tasks#244. First PR of the \"package formats\" stack: this one (base `main`), then platform variants (pnpm/pnpm#17559, base: this branch). It supersedes the split-packument and revision parts of the proof of concept in pnpm/pnpm#17522, which stays open.\n\n**pnpr**\n\n- Answers `Accept: application/vnd.pnpr.install-v2+json` with its own document (`Vary: Accept`): per-version entries with `deprecated`, `trust`, `revision` (including `0`), and `time` inside the publish-time window, plus `integrity`, `fileCount`, `unpackedSize`, `requiresBuild`, `bins`, and `manifest` for complete entries.\n- Above the split threshold (64 KiB by default, measured on pnpr's document with every manifest inline, which is built once and written again only when it is split), only the likely picks keep their manifest: every dist-tag target and the highest release of each major (of each minor below 1.0). The split is decided from the document on every read and recorded nowhere, so a document can go back below the threshold, e.g. when a publish after a long gap advances `timesSince` and drops the publish times outside the window.\n- The document is coarsened against the package's la\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/cache.rs (+20 -6)",
+        "pnpm/crates/cli/src/cli_args/cache/release_records.rs (+41 -0)",
+        "pnpm/crates/cli/src/cli_args/dispatch/context.rs (+3 -1)",
+        "pnpm/crates/cli/src/config_deps/network.rs (+1 -0)",
+        "pnpm/crates/deps-restorer/src/install_package_from_registry/tests.rs (+1 -0)",
+        "pnpm/crates/env-installer/src/tests.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/resolver_setup.rs (+2 -0)",
+        "pnpm/crates/package-manager/src/patch/tests.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/resolution_policy.rs (+6 -0)",
+        "pnpm/crates/registry/src/install_v2.rs (+150 -0)"
+      ],
+      "filesTotal": 90
+    },
+    {
+      "number": 17557,
+      "title": "feat(pnpr): store and serve release notes with SQLite metadata",
+      "url": "https://github.com/pnpm/pnpm/pull/17557",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T19:52:51Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements the pnpr side of the [release notes RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-release-notes.md): Implementation step 1 and most of step 2, for npm routes. Part of pnpm/tasks#244. Builds on the SQLite metadata store (pnpm/pnpm#17551) and atomic publication (pnpm/pnpm#17553), both now on main.\n\nEverything here applies when `metadata: { backend: sqlite }` is set. Without it, a publish that carries notes is refused with `400`.\n\n### What it covers\n\n- **Storage (step 1).** Two new tables. `notes` is keyed by catalog and subject: a package version (ecosystem, name, version) or a publication id. It stores the text (`NULL` once deleted), modification time, principal, and the digest of the text the subject was published with. `note_history` is insert-only and keeps every change with the text it replaced, so an edit or deletion can be restored. A note is never created ahead of its subject: an unknown version or publication answers `404`.\n- **Content rules.** At most 64 KiB of UTF-8, no control characters other than LF and TAB, no CR, and no bidirectional overrides (U+202A–U+202E, U+2066–U+2069). Checked when the body is parsed and again in the transaction.\n- **Notes with the publication (step 2).** A single npm publish document's top-level `notes` is its version's note. A batch body's top-level `notes` is the publication note, next to the top-level `name` (A2 now reads the name from there, as this RFC writes it). An npm, Cargo or PyPI entry's `not\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server.rs (+2 -1)",
+        "pnpr/crates/pnpr/src/server/batch.rs (+44 -6)",
+        "pnpr/crates/pnpr/src/server/notes.rs (+179 -0)",
+        "pnpr/crates/pnpr/src/server/notes/listing.rs (+272 -0)",
+        "pnpr/crates/pnpr/src/server/notes/listing/tests.rs (+40 -0)",
+        "pnpr/crates/pnpr/src/server/notes/responses.rs (+155 -0)",
+        "pnpr/crates/pnpr/src/server/publications.rs (+183 -2)",
+        "pnpr/crates/pnpr/src/server/publishing.rs (+59 -18)",
+        "pnpr/crates/pnpr/src/server/publishing/atomic.rs (+10 -8)",
+        "pnpr/crates/pnpr/src/server/publishing/notes.rs (+122 -0)"
+      ],
+      "filesTotal": 29
+    },
+    {
+      "number": 17472,
+      "title": "fix(config): anchor default store to workspace",
+      "url": "https://github.com/pnpm/pnpm/pull/17472",
+      "author": "BayLee4",
+      "mergedAt": "2026-11-02T20:38:11Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Use the workspace root, rather than the invocation directory, when probing the default store location. With home-store access restricted, running `pnpm add` from a member otherwise selects a different store from a root install and fails with `ERR_PNPM_UNEXPECTED_STORE`.\n\nMatches the workspace-root anchor in pnpm 11. Explicit store settings are unchanged.\n\nRegression test fails before the fix and passes after it, with either shared-lockfile setting. Verified: 932 config tests, scoped Clippy, and an offline root install followed by a member `add` with restricted filesystem probes.\n\nWritten by an agent (omp, OpenAI; model identifier unavailable).\n\n---\n<a href=\"https://app.blacksmith.sh/pnpm/codesmith/pnpm/pr/17472?autoLogin=true&ref=codesmith_pr_footer\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-dark-v3.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/view-with-codesmith-light-v3.svg\"></picture></a> <a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1795867190&installation_model_id=426870&pr_number=17472&ref=codesmith_pr_footer&repository=pnpm%2Fpnpm&return_to=https%3A%2F%2Fgithub.com%2Fpnpm%2Fpnpm%2Fpull%2F17472&signature=1681b5d9fc8f7a4b7cd6ad878aaeec7d84d51bf8e129850a1b2ccdcd24152fec\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/autofix-with-co\n…(truncated)",
+      "files": [
+        "pnpm/crates/config/src/layout.rs (+1 -1)",
+        ".changeset/workspace-default-store.md (+7 -0)",
+        "pnpm/crates/config/src/tests/place_skipped_store_dir.rs (+20 -0)",
+        "pnpm/docs/settings/store.md (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 17572,
+      "title": "fix(deploy): keep project links whose target is missing in the source",
+      "url": "https://github.com/pnpm/pnpm/pull/17572",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T20:41:43Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm deploy` dropped (v12) or failed with ENOENT on (v11) a project symlink whose target is missing in the source, such as a Next.js `.next/node_modules` alias in a build restored without its `node_modules`. Under deploy's `Internal` symlink policy such a link is now kept as a directory link with its original text, so it resolves to the dependency deploy installs in the output.\n\nCloses pnpm/pnpm#17571\n\n## Squash Commit Body\n\n```text\n`pnpm deploy` copies the project with the `Internal` symlink policy, which\nkeeps a directory link whose target is left out of the copy. A link whose\ntarget is missing in the source, such as a Next.js alias into a\n`node_modules` that a restored build artifact no longer has, did not count\nas a directory link. pnpm v12 dropped it silently, and pnpm v11 fell\nthrough to copying the link as a file and failed with ENOENT.\n\nUnder `Internal`, a link whose target is missing is now recreated as a\ndirectory link with its original text. The deploy then installs the target,\nso the link resolves inside the output. A directory link is used because\non Windows a junction is the only link a process without the symlink\nprivilege can create, and the usual missing target is a package directory.\nLinks that escape the package root are still refused.\n\nThe v11 importer now also omits a dangling link under the `imported`\npolicy, matching v12, where it used to fail copying it.\n\nThe deploy e2e tests in both stacks run the existing link scenario a second\ntime afte\n…(truncated)",
+      "files": [
+        "pnpm/crates/fs/src/internal_symlink.rs (+7 -4)",
+        "pnpm11/fs/indexed-pkg-importer/src/copyInternalSymlink.ts (+8 -6)",
+        ".changeset/17571-deploy-dangling-links-v11.md (+6 -0)",
+        ".changeset/17571-deploy-dangling-links.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/deploy/target.rs (+43 -25)",
+        "pnpm/crates/deps-restorer/src/import_indexed_dir/tests/links.rs (+6 -0)",
+        "pnpm/docs/cli/deploy.md (+1 -1)",
+        "pnpm11/docs/cli/deploy.md (+1 -1)",
+        "pnpm11/fs/indexed-pkg-importer/test/importIndexedDir.test.ts (+18 -0)",
+        "pnpm11/releasing/commands/test/deploy/deploy.test.ts (+13 -8)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 17430,
+      "title": "feat(hooks): support native custom fetchers",
+      "url": "https://github.com/pnpm/pnpm/pull/17430",
+      "author": "kairosci",
+      "mergedAt": "2026-11-02T20:42:39Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds the native Git, Git-hosted tarball, and binary fetchers to the `fetchers` argument of pnpmfile custom fetchers in pnpm v12, covering [pnpm/tasks#191](https://github.com/pnpm/tasks/issues/191).\n\nA result from one of these fetchers must be returned unchanged, like the existing `localTarball`, `remoteTarball`, and `directory` results. The Git callback rejects with `ERR_PNPM_TARBALL_INTEGRITY` when the lockfile pins an archive integrity, as the directory callback does, and the binary callback rejects an archive whose integrity does not match the locked one.\n\n## Squash Commit Body\n\n```text\nCustom pnpmfile fetchers can now call fetchers.gitHostedTarball,\nfetchers.git, and fetchers.binary. Each callback runs pacquet's own\nfetcher and records the files it produced; a hook may return only a\nfiles map that one of these callbacks verified, matched path for path.\nThe verified package keeps the manifest, requiresBuild, and bins the\nnative fetch read, and the custom-fetcher session caches it for the\nmaterialization pass.\n\nCallbacks whose source carries no archive digest (git, directory)\nreject when the lockfile pins one, and the binary callback rejects an\narchive whose integrity does not match the locked one, so a hook cannot\nswap a locked package's content. Like the tarball callbacks, they\nreject ignoreFilePattern and appendManifest.\n\nThe git callbacks index their prepared files under the key the install\npass derives from the package id, never under a key from the hook's\n\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/custom_fetcher.rs (+100 -174)",
+        "pnpm/crates/deps-restorer/src/custom_fetcher/callbacks.rs (+139 -21)",
+        "pnpm/crates/deps-restorer/src/custom_fetcher/callbacks/native.rs (+207 -0)",
+        "pnpm/crates/deps-restorer/src/custom_fetcher/metadata.rs (+9 -1)",
+        "pnpm/crates/deps-restorer/src/custom_fetcher/outcomes.rs (+195 -0)",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/verification.rs (+4 -1)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot.rs (+5 -0)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/fetch.rs (+13 -6)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/fetch/sources.rs (+103 -40)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/runtime.rs (+14 -74)"
+      ],
+      "filesTotal": 17
+    },
+    {"number":17547,"title":"fix(ci): run v11 tests for registry changes","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17555,
+      "title": "feat(release-record): add record identity, DSSE statements, and TUF log policy",
+      "url": "https://github.com/pnpm/pnpm/pull/17555",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T21:32:51Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPart of pnpm/tasks#244. Second of two PRs with the release-record trust primitives from the [release records RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-release-records.md). It builds on `pnpm-transparency-log` from pnpm/pnpm#17554, which has merged; this PR now targets `main`.\n\nThis adds `pnpm-release-record`, which depends on `pnpm-transparency-log` and builds for `wasm32-wasip1`:\n\n- **Record bytes** (\"Bytes, not canonical JSON\"): `StoredRecord::parse` reads the core fields (`schema`, `purl`, `revision`, `interpretation`, plus `repository`/`tag` for OCI) from the exact stored bytes. `RecordDigest` is the SHA-512 of those bytes, written `sha512-<base64>`. `parse_expecting` rejects any bytes other than the ones a lockfile or log entry names. Rules: an OCI tag record must carry `purl`, which is `null` for a tombstone and otherwise the image PURL of the record's own repository and tag. Known profiles must use their PURL type and carry a `revision` exactly when the profile has revisions (npm and OCI do, Cargo and Python do not); log entries follow the same rule. Unknown profiles parse, so the client decides whether it supports them.\n- **PURLs**: `Purl::npm`, `cargo`, `pypi_file` (with the `file_name` qualifier and pypi name normalization), and `oci_tag` (`pkg:oci/app@sha256:<digest>?tag=1.0`: the last repository segment as the name, the manifest digest as the version, and only the `tag` qualifier, no `repository_url`). They follow the purl spec's build\n…(truncated)",
+      "files": [
+        ".typos.toml (+2 -0)",
+        "Cargo.lock (+17 -0)",
+        "Cargo.toml (+1 -0)",
+        "pnpm/crates/release-record/Cargo.toml (+30 -0)",
+        "pnpm/crates/release-record/src/digest.rs (+84 -0)",
+        "pnpm/crates/release-record/src/digest/tests.rs (+36 -0)",
+        "pnpm/crates/release-record/src/dsse.rs (+142 -0)",
+        "pnpm/crates/release-record/src/dsse/tests.rs (+99 -0)",
+        "pnpm/crates/release-record/src/identity.rs (+198 -0)",
+        "pnpm/crates/release-record/src/identity/log_entry.rs (+217 -0)"
+      ],
+      "filesTotal": 35
+    },
+    {
+      "number": 17552,
+      "title": "feat(pnpr): verify published manifests against their archives",
+      "url": "https://github.com/pnpm/pnpm/pull/17552",
+      "author": "zkochan",
+      "mergedAt": "2026-11-02T22:10:12Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements [Publish-time manifest verification for pnpr](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-publish-manifest-verification.md) (pnpm/rfcs#47, including the pnpm/rfcs#60 amendment that narrows the `node-gyp rebuild` exception).\n\nPart of pnpm/tasks#244.\n\nA hosted publish now compares each version's submitted metadata with the `package.json` inside its archive. A disagreement is rejected, and the version is served as the archive states it.\n\n- **Profile (`pnpm-package-manifest`).** `InstallManifest::derive` and `compare` implement `npm-install-manifest/1`. The install-critical fields are `name`, `version`, the dependency maps, `peerDependenciesMeta`, `bundleDependencies`, `os`/`cpu`/`libc`, `engines`, `bin` with `directories.bin` expanded, the lifecycle scripts including the implicit `node-gyp rebuild`, `hasInstallScript`, and `hasShrinkwrap`. The normalizations come from the RFC's survey. Shared JSON fixtures under `pnpm/crates/package-manifest/fixtures/npm-install-manifest-1/` define the behavior, so the pnpm v12 install-time check can reuse both the code and the fixtures.\n- **Archive reading (`pnpm-tarball`).** `read_publication_archive` returns the exact manifest bytes an installer would select, the manifest and shrinkwrap digests, the root `binding.gyp` flag, and the file list. It refuses unsafe paths on any entry, links and directories included, two entries that extract to the manifest (also differing only in case), a manifest that is a link, d\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manifest/src/install_manifest.rs (+148 -0)",
+        "pnpm/crates/package-manifest/src/install_manifest/bin_field.rs (+65 -0)",
+        "pnpm/crates/package-manifest/src/install_manifest/comparison.rs (+119 -0)",
+        "pnpm/crates/package-manifest/src/install_manifest/fields.rs (+206 -0)",
+        "pnpm/crates/package-manifest/src/install_manifest/tests.rs (+127 -0)",
+        "pnpm/crates/package-manifest/src/lib.rs (+5 -0)",
+        "pnpm/crates/tarball/src/extract.rs (+5 -0)",
+        "pnpm/crates/tarball/src/extract/publication.rs (+286 -0)",
+        "pnpm/crates/tarball/src/extract/publication/tests.rs (+208 -0)",
+        "pnpm/crates/tarball/src/lib.rs (+4 -2)"
+      ],
+      "filesTotal": 70
+    },
+    {"number":17576,"title":"fix(agent-skills): allow installs without target directories","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17577,"title":"refactor(pnpr): put SQL metadata behind a database adapter","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17559,
+      "title": "feat: platform variants of a package version",
+      "url": "https://github.com/pnpm/pnpm/pull/17559",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T02:49:19Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements the shared tag crate, pnpr's side, and pnpm's resolution, lockfile, and install parts of [platform variants](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md).\n\nPart of pnpm/tasks#244. Second PR of the \"package formats\" stack, after pnpm/pnpm#17556 (split packuments, merged): variants are described only in pnpr's own package document, which that PR added. Based on `main`. It supersedes the platform-variants part of the proof of concept in pnpm/pnpm#17522, which stays open.\n\n**`pnpm-platform-variants` crate** (shared by pnpr and pnpm)\n\n- Platform tags: `os`, `cpu`, musl, glibc floor (`manylinux_2_28`), macOS/Windows floors, `napi<N>`, `node<N>`/`electron<N>`, `wasm32`; only the canonical form parses, and a tag round-trips.\n- A variant's tag: its platforms' tags sorted by bytes and joined with `+`.\n- Selection by the merged ranking rule (native above `wasm32`, constraint count with implicit glibc normalized, glibc then OS floor, exact ABI above N-API above none, highest N-API), comparing each variant by its best matching platform; ties are an error.\n- Link vs fetch predicates: an unknown host floor or ABI is not met when linking and is met when fetching for another platform. Host floors are probed (glibc, macOS, Node.js N-API and ABI) only when a variant has such a field.\n- Test vectors in the crate's tests, including the RFC's A/B example in both array orders.\n\n**pnpr**\n\n- A publish references each variant by its `.tgz` integrit\n…(truncated)",
+      "files": [
+        "Cargo.lock (+17 -0)",
+        "Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_request.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/store/in_use_files.rs (+4 -4)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/cache_keys.rs (+32 -12)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/snapshot_plan/tests.rs (+2 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/warm.rs (+21 -2)",
+        "pnpm/crates/deps-restorer/src/current_lockfile.rs (+10 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/variant_snapshots.rs (+111 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/variant_snapshots/tests.rs (+108 -0)"
+      ],
+      "filesTotal": 99
+    },
+    {
+      "number": 17578,
+      "title": "feat(pnpr): configure metadata by URL, with SQLite by default",
+      "url": "https://github.com/pnpm/pnpm/pull/17578",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T03:03:01Z",
+      "labels": [
+        "product: pnpm@11",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nSecond of the SQL metadata adapter stack (pnpm/tasks#244, design in pnpm/rfcs#66). Builds on pnpm/pnpm#17577, now merged.\n\n- The `metadata` block names its database by URL: `url: sqlite:<path>`, with a relative path resolved against the config file's directory. The `backend` and `path` keys are gone (pnpr is pre-1.0).\n- A filesystem hosted store uses SQLite by default, at `<storage>/.metadata/metadata.sqlite`.\n- The documents backend stays only where nothing else serves yet: an `s3:` hosted store without a metadata URL, and stores that test harnesses seed with `document.json` files. Those choose it explicitly with `backend: documents`, which `pnpr/.fixtures/config.yaml` now sets, as does the second, current-version mock that the pnpm v11 test setup configures inline. The registry mock, the TypeScript test helpers (`addDistTag` edits `document.json`), and the integrated benchmark's peer-heavy fixture all write documents on disk. Main already accepts `backend: documents`, so the benchmark's main-revision mock keeps working with the harness's config. Removing documents is a later step.\n- `sqlite:` with an `s3:` block, an unknown scheme, and an empty path are refused at config load. `libsql:` arrives with its adapter later in the stack.\n- `pnpr/docs/storage.md`, `configuration.md` and `backup-and-restore.md` describe the new default. The backup guide now covers the SQLite database: what an export leaves out, a live copy through SQLite's backup API, and restoring a dat\n…(truncated)",
+      "files": [
+        "pnpm11/__utils__/jest-config/with-registry/globalSetup.js (+2 -1)",
+        "pnpr/.fixtures/config.yaml (+3 -0)",
+        "pnpr/crates/config/src/storage_config.rs (+47 -25)",
+        "pnpr/crates/pnpr/src/server/publishing/notes.rs (+3 -2)",
+        ".changeset/sqlite-metadata-by-default.md (+5 -0)",
+        ".changeset/sqlite-package-metadata.md (+1 -1)",
+        "pnpr/crates/config/src/tests/storage.rs (+27 -12)",
+        "pnpr/crates/pnpr/tests/auth_publish.rs (+2 -0)",
+        "pnpr/crates/pnpr/tests/tooling.rs (+3 -1)",
+        "pnpr/docs/backup-and-restore.md (+22 -9)"
+      ],
+      "filesTotal": 12
+    },
+    {"number":17580,"title":"refactor(pnpr): move libSQL connection code into pnpr-libsql","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17583,
+      "title": "feat(pnpr): keep metadata in libSQL, read through an embedded replica",
+      "url": "https://github.com/pnpm/pnpm/pull/17583",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T05:49:44Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFourth of the SQL metadata adapter stack (pnpm/tasks#244, design in pnpm/rfcs#66 \"Shared deployments\"). Builds on pnpm/pnpm#17577, pnpm/pnpm#17578 and pnpm/pnpm#17580, now merged.\n\nAdds the libSQL metadata adapter, so several pnpr instances share one metadata database such as Turso. The schema and queries are the same as for SQLite.\n\n```yaml\ns3:\n  bucket: my-pnpr-packages      # archives stay in object storage\nmetadata:\n  url: libsql://my-db.turso.io  # or http(s):// for a self-hosted sqld\n  authToken: ${TURSO_AUTH_TOKEN}\n  replicaPath: ./metadata-replica.db\n  syncInterval: 10s\n```\n\n**Where each read goes.** The shared layer decides freshness, and the adapter decides the source:\n\n| Read | Freshness | libSQL source |\n| --- | --- | --- |\n| read-for-update (CAS), recorded outcome of a retried publish, catalog generation | `Current` | primary |\n| authorization (`is_package_owner`, which now reads for update) | `Current` | primary |\n| package views, listings, publications, notes, tag history | `Bounded` | replica, if its last sync is within `syncInterval` and no write of this process came after it; else sync, else primary |\n| a client's minimum generation (`Storage::read_hosted_package_view_at_least`) | `AtLeast(g)` | replica once it reaches `g` (synced on demand), else primary |\n\nA replica read runs in one `BEGIN READONLY` transaction, which keeps it on the replica; a plain `BEGIN` on a replica connection goes to the primary. Every write of this process marks the repl\n…(truncated)",
+      "files": [
+        "Cargo.lock (+3 -0)",
+        "pnpr/crates/config/src/backend_config.rs (+9 -13)",
+        "pnpr/crates/config/src/config_file.rs (+5 -5)",
+        "pnpr/crates/config/src/secrets.rs (+1 -1)",
+        "pnpr/crates/config/src/storage_config.rs (+116 -28)",
+        "pnpr/crates/error/src/lib.rs (+5 -4)",
+        "pnpr/crates/libsql/Cargo.toml (+3 -1)",
+        "pnpr/crates/libsql/src/lib.rs (+1 -1)",
+        "pnpr/crates/libsql/src/pool.rs (+50 -28)",
+        "pnpr/crates/libsql/src/testing.rs (+138 -21)"
+      ],
+      "filesTotal": 31
+    },
+    {
+      "number": 17558,
+      "title": "feat: send and show pnpr release notes",
+      "url": "https://github.com/pnpm/pnpm/pull/17558",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T06:15:55Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements the pnpm side of the release-notes RFC ([pnpm/rfcs `pnpr/text/0000-release-notes.md`](pnpr/text/0000-release-notes.md), implementation steps 4 to 6, including the amendments of pnpm/rfcs#63) in the Rust CLI, plus the release-notes amendment to `registry` changelog storage in [`text/0006-monorepo-versioning.md`](https://github.com/pnpm/rfcs/blob/main/text/0006-monorepo-versioning.md).\n\nPart of pnpm/tasks#244.\n\nThe pnpr side (notes storage and routes) is a separate PR. This one targets the routes and publish-body fields as the RFC specifies them and is tested against mocked registry responses, so it does not depend on the server landing first. Notes are only sent to, and only read for upgrades from, registries declared `serverType: pnpr`.\n\n**Publishing (step 4)**\n\n- `pnpm publish --release-notes <file>` (a file only; a path that names no file fails), `--no-release-notes`, `--publication-name <name>`.\n- A package's version note is, in order: the notes `pnpm version -r` composed from change intents (registry storage), `--release-notes` (single package), or the version's section of `CHANGELOG.md` without its version heading (changesets `## 1.4.0` and Keep a Changelog `## [1.4.0] - date`, fenced headings ignored, CRLF normalized). A prebuilt tarball uses the `CHANGELOG.md` it packs.\n- For packages whose notes `pnpm version -r` composed, `pnpm publish --release-notes` fails with `ERR_PNPM_RELEASE_NOTES_FROM_VERSIONING`: the summary belongs to `pnpm version -r`\n…(truncated)",
+      "files": [
+        "Cargo.lock (+17 -0)",
+        "Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/Cargo.toml (+1 -0)",
+        "pnpm/crates/cli/src/checkbox_prompt.rs (+61 -9)",
+        "pnpm/crates/cli/src/checkbox_prompt/tests.rs (+34 -0)",
+        "pnpm/crates/cli/src/checkbox_prompt/wasm/tests.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/approve_builds/wasm.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/changelog.rs (+136 -14)",
+        "pnpm/crates/cli/src/cli_args/outdated.rs (+37 -9)"
+      ],
+      "filesTotal": 78
+    },
+    {"number":17585,"title":"test(pnpr): run the SQL metadata conformance tests against every adapter","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17589,"title":"fix(self-update): repair broken cached pnpm engines","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17590,"title":"fix(bins): normalize parent segments in targets","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17588,"title":"fix(cmd-shim): tolerate concurrent executable symlinks","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17599,"title":"fix(deps-resolver): keep peer variants consistent within projects","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17527,"title":"fix(cli): keep pinned Cargo lines when updating to the latest versions","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17598,"title":"perf(pnpr): read a hosted release record from its version's rows","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17533,
+      "title": "feat(agent-skills): selective skill approval, category discovery, and fallback linking",
+      "url": "https://github.com/pnpm/pnpm/pull/17533",
+      "author": "kiyors",
+      "mergedAt": "2026-11-03T09:33:19Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "> **Note**: The overall code in this pull request was written by AI and heavily reviewed, iterated on, and thoroughly tested end-to-end by a person in live workspaces and via automated test suites.\n\n## Summary\n\nEnhances the pnpm v12 agent skills system with three major capabilities:\n\n1. **Selective Skill Approval (`permissions.<pkg>.skills: [...]`)**:\n   - When an approved package ships more than one skill, `pnpm approve` presents an interactive checklist allowing users to approve specific skills or all of them.\n   - Approvals are recorded as a list in `pnpm-workspace.yaml`:\n     ```yaml\n     permissions:\n       drizzle-kit:\n         skills: [guide, migrate]\n     ```\n   - Skills omitted from the list are not linked and are not offered again. `skills: true` remains the shorthand to approve all skills across current and future versions.\n\n2. **Recursive Category Discovery**:\n   - Searches up to 3 directory levels beneath `skills/` (e.g. `skills/engineering/implement/SKILL.md`), allowing packages to organize their skills into categories.\n   - Fixed an ancestor check in pruning so category-nested skills are properly unlinked when permissions are revoked.\n\n3. **Bare-Name Linking with Collision & Occupancy Fallback**:\n   - Skills are linked under their own name as required by the Agent Skills specification.\n   - When two approved packages ship a skill with the same name, or when a bare name is already occupied by a non-pnpm file or directory, pnpm automatically falls back to `pnpm-<\n…(truncated)",
+      "files": [
+        "Cargo.toml (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/approve_builds.rs (+69 -18)",
+        "pnpm/crates/cli/src/cli_args/approve_builds/tests.rs (+70 -0)",
+        "pnpm/crates/cli/src/cli_args/permissions.rs (+192 -186)",
+        "pnpm/crates/cli/src/cli_args/permissions/decisions.rs (+213 -0)",
+        "pnpm/crates/cli/src/cli_args/permissions/render.rs (+108 -0)",
+        "pnpm/crates/cli/src/cli_args/permissions/tests.rs (+292 -19)",
+        "pnpm/crates/config/src/lib.rs (+4 -4)",
+        "pnpm/crates/config/src/settings.rs (+3 -2)",
+        "pnpm/crates/config/src/version_policy.rs (+24 -12)"
+      ],
+      "filesTotal": 60
+    },
+    {"number":17595,"title":"fix(lockfile): accept a prerelease resolved from a * specifier","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17538,"title":"fix(update): repair Cargo dependency updates","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17601,
+      "title": "feat(pnpr): accept each hosted version with its release record",
+      "url": "https://github.com/pnpm/pnpm/pull/17601",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T10:26:15Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nSecond PR of the release-records stack; it sits on #17598. It implements the record format and step 1's \"store the exact bytes\" from the [release records RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-release-records.md). It also covers the first bullet of item 15 in pnpm/tasks#244: a record served by split packuments now carries the accepted manifest's profile and input digests.\n\nWith SQL metadata, a published npm version is accepted with its release record:\n\n- **Building the record.** pnpr builds the record when it verifies the archives (`publishing/release_records.rs`), from the verified manifest and the facts derived from the archives. The record is what `<name>/<version>+r0` already served, with the core fields in front:\n  - `schema`, `purl`, `revision`;\n  - `interpretation`, the profile the manifest was accepted under;\n  - `inputs`: the `.tgz` as published, plus `package.json` and `npm-shrinkwrap.json` by digest and by their path in the archive.\n\n  Each platform variant in `variants` gets its own `inputs`. `PublicationArchive` now records the entry paths of the root `package.json` and `npm-shrinkwrap.json`.\n- **Storing it.** The record travels to the commit beside its document (`BatchDocument::records`). It's inserted in the same transaction as the version, into a new insert-only `release_records` table. Before storing it, the store parses it with `pnpm-release-record` and checks that it names this version, revision 0, and the profile the manifes\n…(truncated)",
+      "files": [
+        "Cargo.lock (+2 -0)",
+        "pnpm/crates/tarball/src/extract/publication.rs (+16 -6)",
+        "pnpm/crates/tarball/src/extract/publication/tests.rs (+3 -0)",
+        "pnpr/crates/pnpr/Cargo.toml (+1 -0)",
+        "pnpr/crates/pnpr/src/server/documents.rs (+2 -2)",
+        "pnpr/crates/pnpr/src/server/package_reads/version_documents.rs (+51 -1)",
+        "pnpr/crates/pnpr/src/server/publishing.rs (+2 -1)",
+        "pnpr/crates/pnpr/src/server/publishing/atomic.rs (+2 -1)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments.rs (+33 -9)",
+        "pnpr/crates/pnpr/src/server/publishing/release_records.rs (+147 -0)"
+      ],
+      "filesTotal": 29
+    },
+    {"number":17597,"title":"docs(contributing): state the minimum cargo-dylint version","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17609,"title":"test(executor): fix flaky reaped-child cancellation test","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17405,"title":"fix(add): fall back to workspace ranges and overrides before the default tag","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17494,"title":"docs(doctor): say the v12 install-method check reports pnpm","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17190,"title":"perf: reduce registry version selection allocations","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":17579,"title":"fix(deps-status): compare a workspace project's version only when something can resolve to it","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17606,"title":"perf(pnpr): send a SQL metadata write to a libSQL primary in two round trips","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":17612,"title":"test(executor): assert on the probe that saw the reaped child gone","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17581,"title":"fix(lockfile): keep plain keys for packages of the default registry","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17614,"title":"fix(deps-resolver): verify nested peer provider identity","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17613,"title":"fix(update): do nothing at depth 0 when every direct dependency is ignored","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17605,"title":"fix(cli): keep the Cargo requirement operator over savePrefix","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17615,"title":"refactor: check crate layers and move settings types to their owning crates","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17608,
+      "title": "feat(pnpr): stage release archives by integrity before the commit",
+      "url": "https://github.com/pnpm/pnpm/pull/17608",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T12:32:01Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFirst PR of the \"archive upload by integrity\" stack, the upload half of [atomic workspace publication](pnpr/text/0000-atomic-workspace-publication.md#prepare-and-commit) (\"Archives are uploaded one at a time, addressed by their integrity, before the commit request\"). Part of pnpm/tasks#244. Based on `main`.\n\n- `PUT /-/pnpr/v0/artifacts/blob?integrity=<sha512-…>` **without an owner** stages one release archive for the calling account. `HEAD` on the same URL says whether it is staged, with its size. Both are also mounted under `/npm/`, beside `/npm/-/pnpr/v0/publish`, which is where `pnpm publish --batch` addresses them.\n- The bytes are checked against the integrity and the `Content-Length` before anything is stored (`400 EINTEGRITY` otherwise). Uploading stored bytes again answers `200`, stores nothing, and renews the archive.\n- Archives live in a reserved `.staged-archives/<principal digest>/` namespace of the hosted store (filesystem or bucket), beside the packages, through the existing record API. No route serves them.\n- An upload first writes an incomplete record that reserves its size, checks the principal's limits after reserving (so parallel uploads see each other), then stores the bytes and marks the record complete. Only a complete archive answers `HEAD` or can be claimed. A failed upload gives its reservation back; one that stopped stops counting after an hour.\n- At most four uploads are received at once across the server, each buffered whole; others wait\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/lifecycle.rs (+26 -0)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+8 -3)",
+        "pnpr/crates/pnpr/src/server/routing/protocol_routes.rs (+18 -11)",
+        "pnpr/crates/pnpr/src/server/staged_archives.rs (+384 -0)",
+        "pnpr/crates/pnpr/src/server/staged_archives/tests.rs (+47 -0)",
+        "pnpr/crates/pnpr/src/server/state.rs (+11 -0)",
+        "pnpr/crates/storage/src/lib.rs (+7 -0)",
+        "pnpr/crates/storage/src/staged_archives.rs (+463 -0)",
+        "pnpr/crates/storage/src/staged_archives/tests.rs (+402 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {"number":17616,"title":"test(pnpr): keep the mock libSQL primary from checkpointing frames away","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17618,
+      "title": "feat(crate-layers): ratchet module cycles inside each crate",
+      "url": "https://github.com/pnpm/pnpm/pull/17618",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T13:35:50Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPart of pnpm/tasks#253. The crate layer check from pnpm/pnpm#17615 sees only the graph between crates. Most code sits in a few large crates whose top-level modules form one cycle, so this adds a module graph per crate and holds each crate's largest cycle to a baseline.\n\n- `just crate-layers modules` lists the crates with a cycle among their top-level modules. `--crate <name>` prints one cycle and the references inside it, and `--baseline` prints a `module_cycles` table.\n- `just crate-layers check`, which CI already runs, now also fails when a crate's largest cycle differs from its `module_cycles` entry in `crate-layers.toml`. A cycle that grows fails, and so does one that shrinks until its entry is lowered, so the entries only go down.\n\nThe baseline records today's state. The largest cycles:\n\n| Crate | Top-level modules | Largest cycle | Its share of the code |\n|---|---|---|---|\n| `pnpm-deps-restorer` | 51 | 25 | 70% |\n| `pnpm-package-manager` | 52 | 12 | 66% |\n| `pnpm-python-installer` | 21 | 11 | 75% |\n| `pnpm-cli` | 34 | 10 | 96% |\n| `pnpm-config` | 35 | 10 | 64% |\n| `pnpm-resolving-deps-resolver` | 14 | 9 | 93% |\n\nThe `pnpm-package-manager` cycle is the `install` ↔ `optimistic_repeat_install` split that pnpm/tasks#254 plans to remove.\n\n### How it reads modules\n\nIt tokenizes each crate's sources without compiling them and needs no new dependency. Comments and string and char literals are skipped. It follows the non-test `mod` declarations from `lib.rs` or `main\n…(truncated)",
+      "files": [
+        "crate-layers.toml (+43 -0)",
+        "pnpm/tasks/crate-layers/src/cfg.rs (+83 -0)",
+        "pnpm/tasks/crate-layers/src/cycles.rs (+157 -0)",
+        "pnpm/tasks/crate-layers/src/graph.rs (+5 -1)",
+        "pnpm/tasks/crate-layers/src/layers.rs (+22 -1)",
+        "pnpm/tasks/crate-layers/src/lexer.rs (+208 -0)",
+        "pnpm/tasks/crate-layers/src/main.rs (+61 -3)",
+        "pnpm/tasks/crate-layers/src/modules.rs (+312 -0)",
+        "pnpm/tasks/crate-layers/src/report.rs (+91 -0)",
+        "pnpm/tasks/crate-layers/src/tests.rs (+2 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {"number":17315,"title":"fix(config): read linkWorkspacePackages and four other settings from the environment","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17602,
+      "title": "feat(pnpr): log hosted release records in C2SP tiled logs",
+      "url": "https://github.com/pnpm/pnpm/pull/17602",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T13:44:02Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThird PR of the release-records stack; it builds on #17601, now merged. It implements the rest of step 1 of the [release records RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-release-records.md#transparency-log): sequence each record's log entry in the acceptance transaction, and integrate the sequenced entries into a C2SP tiled log whose tiles and checkpoints live in blob storage.\n\n- **Sequencing.** A record's entry (`pnpr-log-entry/1`: identity, revision, profile, digest, built by `pnpm-release-record`) is appended to a new insert-only `log_entries` table. This happens in the same transaction that accepts the version, at the log's next index, and the record row keeps that index. A version can't be accepted without its entry, and an entry can't be logged without its version. Removing a version keeps its entry, because a log only grows.\n- **Integration.** `Storage::integrate_log` reads the entries the latest checkpoint doesn't cover yet. It writes the hash tiles and entry bundles they add, using `pnpm-transparency-log`'s `integrate`, then signs and writes a checkpoint of the larger tree. Tiles and checkpoints go in the hosted store's `.transparency-log` namespace, beside the archives, so a bucket can serve them.\n  - Every tile path is written once: a partial tile is republished under its new width, and a stored tile must match the bytes integration computes.\n  - The checkpoint is replaced by compare-and-set, and only with a larger tree.\n  - Integrator\n…(truncated)",
+      "files": [
+        "Cargo.lock (+4 -0)",
+        "pnpm/crates/transparency-log/src/keys/signer.rs (+6 -0)",
+        "pnpm/crates/transparency-log/src/keys/tests.rs (+19 -0)",
+        "pnpr/crates/config/Cargo.toml (+1 -0)",
+        "pnpr/crates/config/src/config_file.rs (+5 -1)",
+        "pnpr/crates/config/src/lib.rs (+6 -0)",
+        "pnpr/crates/config/src/loading.rs (+1 -0)",
+        "pnpr/crates/config/src/release_records.rs (+55 -0)",
+        "pnpr/crates/config/src/secrets.rs (+14 -0)",
+        "pnpr/crates/pnpr-fixtures/src/presets.rs (+1 -0)"
+      ],
+      "filesTotal": 29
+    },
+    {"number":17463,"title":"fix(lockfile): accept the lockfile excludeLinksFromLockfile wrote for a plain range","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17603,
+      "title": "feat(pnpr): serve release record logs and record evidence",
+      "url": "https://github.com/pnpm/pnpm/pull/17603",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T14:04:06Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFourth PR of the release-records stack; it sits on #17602. It serves what the [release records RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-release-records.md#client-protocol) asks a registry to serve for its log, with the RFC's disclosure rules.\n\n- **`<base>/-/log/checkpoint`, `<base>/-/log/tile/<L>/<N>[.p/<W>]`, `<base>/-/log/tile/entries/<N>[.p/<W>]`.** A registry address serves the log of the one hosted organization it reaches; a registry that reaches none or several serves none.\n  - Anyone who may read some package of the organization gets the checkpoint and hash tiles.\n  - Entry bundles name every logged package, so only a caller who may read every package of the organization (by `all_access_admit`, or a registry admin) gets them. Anyone else gets the same 404 for every bundle, whatever it holds.\n  - Tiles are cached forever and the checkpoint is `no-cache`. Everything is `private, no-store` when some package is closed to anonymous callers, or when reached through a named registry, as every `/~<name>/` response is.\n- **`<base>/<name>/<version>+r<revision>/evidence`** (scoped names in both spellings). It's authorized and OSV-filtered as the record is. It returns `{ record, inclusion: { checkpoint, index, proof }, statements, sigstore }`.\n  - `proof` is the C2SP inclusion proof against the latest checkpoint, as base64 hashes.\n  - `sigstore` holds the provenance bundle published with the version.\n  - If the entry isn't integrated yet, the read ask\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/log_routes.rs (+334 -0)",
+        "pnpr/crates/pnpr/src/server/pnpr_protocol.rs (+25 -1)",
+        "pnpr/crates/pnpr/src/server/release_record_logs.rs (+2 -1)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+20 -8)",
+        "pnpr/crates/pnpr/src/server/routing/note_handlers.rs (+48 -2)",
+        ".changeset/pnpr-release-record-log-routes.md (+5 -0)",
+        "pnpr/crates/pnpr/tests/server.rs (+3 -0)",
+        "pnpr/crates/pnpr/tests/server/behavior.rs (+3 -1)",
+        "pnpr/crates/pnpr/tests/server/release_record_logs.rs (+263 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {"number":17541,"title":"fix(store): remove aliases of pruned packages","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17610,
+      "title": "feat(pnpr): publish npm archives staged by integrity",
+      "url": "https://github.com/pnpm/pnpm/pull/17610",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T14:54:34Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nSecond PR of the \"archive upload by integrity\" stack, after pnpm/pnpm#17608 (merged): the commit half of [atomic workspace publication](pnpr/text/0000-atomic-workspace-publication.md#prepare-and-commit) (\"The commit body references archives by integrity and carries no archive bytes\"). Part of pnpm/tasks#244. Based on `main`.\n\n- An attachment of an npm publish document can carry `\"integrity\": \"<sha512-…>\"` in place of `\"data\"`, naming an archive the publisher staged with #17608's endpoint. This works for `PUT /<name>` and for each npm entry of `PUT /-/pnpr/v0/publish`.\n- pnpr reads the staged archive while it stages the publish, writes it into the package's blob slot, and verifies it against the version's `dist` (or a variant's declared integrity) through the same verifier as an inline archive. Manifest verification, tar derivation and platform variants are unchanged.\n- **Atomicity:** the claim happens before any slot is reserved and before the SQL commit. An archive the publishing account has not staged, or one that expired, fails the whole request with `400` naming the attachment, and nothing of a batch is published.\n- **Idempotency:** the whole-request digest already covers the body, which now carries the integrities instead of the bytes. A retry is matched against the recorded outcome before anything is staged, so it replays even after its staged archives expired (tested by deleting them between the commit and the retry).\n- **Variants:** a version and its varia\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server/batch.rs (+28 -5)",
+        "pnpr/crates/pnpr/src/server/publishing.rs (+25 -12)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments.rs (+60 -10)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments/slot_writes.rs (+36 -28)",
+        "pnpr/crates/pnpr/src/server/publishing/manifest.rs (+2 -1)",
+        "pnpr/crates/pnpr/src/server/publishing/tests.rs (+9 -3)",
+        "pnpr/crates/pnpr/src/server/publishing/variants.rs (+4 -4)",
+        "pnpr/crates/pnpr/src/server/staged.rs (+17 -1)",
+        "pnpr/crates/pnpr/src/server/staged_archives.rs (+108 -0)",
+        "pnpr/crates/pnpr/src/server/staged_archives/tests.rs (+39 -1)"
+      ],
+      "filesTotal": 20
+    },
+    {
+      "number": 17604,
+      "title": "feat(pnpr): sign acceptance statements in release record evidence",
+      "url": "https://github.com/pnpm/pnpm/pull/17604",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T14:55:23Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nFifth PR of the release-records stack; it sits on #17603. It implements the acceptance half of the [release records RFC's statements](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-release-records.md#statements-in-toto-in-dsse) (implementation step 2).\n\n- **Configuration.** `releaseRecords.statementSigningKey` takes a signed-note private key, with env substitution enforced as for other secrets. Each DSSE signature's `keyid` is the key's `<name>+<key hash>`, as the RFC asks.\n- **The statement.** With the key set, a record's evidence (`<name>/<version>+r<revision>/evidence`) lists the registry's acceptance statement. It's an in-toto Statement about the record, by its digest and PURL, with predicate type `https://pnpm.io/pnpr/acceptance/v1` and `{ \"interpretation\": <profile> }`. It's built and signed by `pnpm-release-record` (`Statement::about`, `Statement::sign`).\n- **Signed on read.** The statement is signed each time the evidence is read, from the record the metadata store accepted, so nothing new is stored.\n  - Ed25519 is deterministic, so one key always signs the same envelope.\n  - A key rotation re-signs every statement without a migration.\n  - After a compromise, every statement is regenerated from the authoritative SQL record, never from an envelope the old key signed. That's what the RFC asks for.\n\n### Deferred, and decisions for the user\n\n1. **Publication statements are not signed here.** Their predicate needs evidence pnpr doesn't record yet: the pr\n…(truncated)",
+      "files": [
+        "pnpr/crates/config/src/release_records.rs (+22 -5)",
+        "pnpr/crates/config/src/secrets.rs (+6 -7)",
+        "pnpr/crates/pnpr/src/server/log_routes.rs (+56 -10)",
+        ".changeset/pnpr-acceptance-statements.md (+5 -0)",
+        "pnpr/crates/config/src/tests/server_options.rs (+10 -0)",
+        "pnpr/crates/pnpr/tests/server/release_record_logs.rs (+22 -2)",
+        "pnpr/docs/configuration.md (+2 -0)",
+        "pnpr/docs/endpoints.md (+7 -3)"
+      ],
+      "filesTotal": 8
+    },
+    {"number":17540,"title":"fix(store): preserve global virtual store packages for custom modulesDir","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17622,"title":"fix(install): rewrite the bin shims after extendNodePath changes","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17624,"title":"chore: move the unrs-resolver patch to 1.13.0","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17620,"title":"fix(pnpr): refuse a mismatched SQL metadata schema before creating tables","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17625,
+      "title": "feat(install): record project manifest stats for the repeat-install check",
+      "url": "https://github.com/pnpm/pnpm/pull/17625",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T18:30:21Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPhase 1 of pnpm/tasks#256: the repeat-install fast path should decide \"Already up to date\" without reading any `package.json` whose stat is unchanged. Today it reads and parses every project manifest on every run.\n\nThis PR only records what a later check needs. Nothing reads it yet, so behavior does not change.\n\n- The workspace state's `validation` gains `manifestFiles`: for each project it proves installed, the manifest's file name and stat (mtime, ctime, size). It also records the facts the fast path reads from that manifest even when the digest matches:\n  - whether it declares dependencies;\n  - whether it declares required peers;\n  - its `workspace:` and `link:` specifiers by dependency field.\n- A write stats each vouched manifest before probing the filesystem clock, then re-reads the file. It records the stat only when the file still digests to the manifest the write proved. An edit before the stat changes the digest, so nothing is recorded. An edit after it leaves a stat the next check will not match. A manifest whose stat and digest are unchanged and trusted keeps its previous record without being read. A filtered write carries the records of the projects it leaves out, the same way it carries their digests, but only a record whose stat was trusted when it was recorded.\n- Under `SOURCE_DATE_EPOCH` nothing is recorded or carried, because a stat cannot be zeroed.\n\npnpm v11 reads `validation.files` by key and ignores unknown `validation` fields, so the new fiel\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/validation.rs (+18 -113)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/validation/file_stat.rs (+129 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/validation/manifest_files.rs (+143 -0)",
+        "pnpm/crates/workspace-state/src/lib.rs (+33 -0)",
+        "pnpm/crates/cli/tests/suite/pnpm_compatibility.rs (+2 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests/validation.rs (+161 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {"number":17626,"title":"fix: relink a catalog entry that excludeLinksFromLockfile left out","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17611,
+      "title": "feat(publish): stage archives on pnpr before a batch commit",
+      "url": "https://github.com/pnpm/pnpm/pull/17611",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T18:35:05Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThird and last PR of the \"archive upload by integrity\" stack: the client side for the server endpoints of pnpm/pnpm#17608 and pnpm/pnpm#17610, both merged. Part of pnpm/tasks#244.\n\n`pnpm publish -r --batch` to a registry declared `serverType: pnpr`:\n\n1. sends `HEAD <registry>/-/pnpr/v0/artifacts/blob?integrity=<sha512-…>` for each package's archive, and skips the ones the registry holds staged;\n2. uploads the rest with `PUT` on the same URL, two at a time, which is how many uploads pnpr takes from one account at once;\n3. sends the batch, with each attachment carrying `integrity` in place of `data`.\n\nA staging failure (`ERR_PNPM_BATCH_PUBLISH_STAGING_FAILED`) happens before that registry's commit, so nothing is published to it and a rerun uploads only what is still missing. A batch of more than 256 packages, more than one pnpr commit may reference, keeps today's inline batch, as does every other registry. Single-package publishes are unchanged. Archives are borrowed from the packed packages and copied only while they upload, and a refused upload's answer is cut at 4 KiB.\n\n`PublishPackedPkgOptions` gains `pnpr_registries`, filled from the same `serverType: pnpr` declarations the release notes use. The existing release-notes batch tests against a `serverType: pnpr` mock now answer the staging lookups.\n\n### Not done here\n\n- **Publishing platform variants from pnpm.** The server accepts a version and its variants through a batch of staged archives (#17610 tests it), bu\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/publish/options.rs (+2 -0)",
+        "pnpm/crates/publish/src/batch_publish.rs (+88 -19)",
+        "pnpm/crates/publish/src/batch_publish/tests.rs (+54 -0)",
+        "pnpm/crates/publish/src/lib.rs (+2 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg.rs (+5 -1)",
+        "pnpm/crates/publish/src/publish_packed_pkg/tests.rs (+2 -0)",
+        "pnpm/crates/publish/src/staged_archives.rs (+169 -0)",
+        "pnpm/crates/publish/src/staged_archives/tests.rs (+144 -0)",
+        ".changeset/batch-publish-stages-archives.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/publish_recursive.rs (+122 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {"number":17634,"title":"fix(run): restore github actions log groups","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17636,"title":"test(install): wait past the manifest ctimes before recording their stats","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17632,"title":"fix(pnpr): compile and lint all auth backend tests","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17409,
+      "title": "feat(store): let store add warm the store from downloaded tarballs",
+      "url": "https://github.com/pnpm/pnpm/pull/17409",
+      "author": "andersk",
+      "mergedAt": "2026-11-03T19:55:09Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`pnpm store add` now accepts package tarballs downloaded some other way, and prepares the store so `pnpm install --offline --frozen-lockfile` can install the registry packages they contain:\n\n```sh\npnpm store add ./tarballs/*.tgz\npnpm install --offline --frozen-lockfile\n```\n\nThis is what sandboxed builders such as flatpak-builder and Nix need. They download every source ahead of time with a hash they verify, then build without network access. Today, flatpak-builder-tools reimplements pnpm's store format in Python to fill the store (`populate_pnpm_store.py`, which writes `index.db` rows and msgpackr records itself). It breaks whenever that format changes.\n\nResolves the request in pnpm/pnpm#2978 (since converted to discussion pnpm/pnpm#15938). It supersedes pnpm/pnpm#15844, which was closed without merging. That PR keyed rows by sha512 only, so lockfile entries pinned by sha1 or by the tar hash weren't served, and it ingested each tarball a second time to do it.\n\nHow it works:\n\n- The tarball is ingested once, under its `file:` key as before.\n- Store-index aliases (the mechanism added in pnpm/pnpm#17092) make that row reachable under `<hash>\\t<name>@<version>`, which is the key a registry install looks up. Aliases are added for three hashes:\n  - the tarball's sha512;\n  - its sha1, which is what lockfiles record for packages published before npm added sha512;\n  - the hash of the tar it holds, for `lockfile.integrityTarget: tar`.\n- `name@version` comes from the manifest\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/store.rs (+2 -1)",
+        "pnpm/crates/cli/src/cli_args/store/add.rs (+62 -29)",
+        "pnpm/crates/cli/src/cli_args/store/add/downloaded_tarball.rs (+159 -0)",
+        "pnpm/crates/cli/src/cli_args/store/add/downloaded_tarball/tests.rs (+52 -0)",
+        "pnpm/crates/store-dir/src/store_index/aliases.rs (+37 -2)",
+        "pnpm/crates/store-dir/src/store_index/aliases/tests.rs (+105 -0)",
+        "pnpm/crates/store-dir/src/store_index/files.rs (+16 -5)",
+        "pnpm/crates/store-dir/src/store_index/queries.rs (+42 -18)",
+        "pnpr/crates/pnpr-fixtures/src/lib.rs (+7 -0)",
+        ".changeset/cat-index-exact-name-case.md (+5 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {"number":17619,"title":"test: cover native git fetcher store index keys","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17623,"title":"test(install): cover extendNodePath env changes in a v11 repeat install","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17639,"title":"test(store): a store-added tarball spoofing a package is not installed","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17630,"title":"fix(cli): keep the lockfile untouched in dedupe --check","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17621,"title":"fix(cli): keep the Python requirement operator over savePrefix","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17546,"title":"ci: delete expired approval-held runs instead of cancelling them","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17635,"title":"fix(store): verify global virtual store packages","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17640,"title":"fix(store): refuse store add when frozenStore is enabled","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17637,
+      "title": "feat(install): decide a repeat install from the recorded manifests",
+      "url": "https://github.com/pnpm/pnpm/pull/17637",
+      "author": "zkochan",
+      "mergedAt": "2026-11-03T23:16:18Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPhase 2 of pnpm/tasks#256. A repeat `pnpm install` in an up-to-date workspace no longer reads the `package.json` of each project whose file did not change since the last install.\n\n**Listing projects without reading them.** `find_workspace_projects` already walked the package patterns and grouped manifest paths by directory before parsing. That walk is now `find_workspace_project_manifests`, and discovery reads on top of it. For a `<dir>/*` pattern the walk lists every manifest basename without checking which exist, so a listed directory need not hold a project.\n\n**What a record keeps.** A trace of the check found that phase 1's derived facts (pnpm/pnpm#17625) did not cover everything the check reads on every run. It also stats every dependency alias for dangling links, classifies every spec for local file dependencies, and reads `bin`. Each `validation.manifestFiles` record now keeps the values the check reads:\n\n- `name`, `version`, and `bin`;\n- the prod, dev, and optional dependency maps;\n- the peer dependencies, with any URL specifier replaced by `*`;\n- each peer's `optional` flag from `peerDependenciesMeta`;\n- `directories.bin` and `publishConfig.directory`.\n\nNo other value enters the state. The phase 1 format never shipped in a release.\n\n**The shortcut.** Before discovery, the CLI fast path lists the project directories and stats each one's first existing manifest. It then needs every project to have a record whose stat still matches and is trusted. When that \n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/lifecycle.rs (+16 -4)",
+        "pnpm/crates/package-manager/src/install/workspace_state.rs (+48 -48)",
+        "pnpm/crates/package-manager/src/install/workspace_state/from_files.rs (+47 -0)",
+        "pnpm/crates/package-manager/src/install/workspace_state/stand_ins.rs (+96 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install.rs (+8 -7)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/freshness.rs (+43 -47)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/freshness/missing_lockfile.rs (+48 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/freshness/stand_in_writes.rs (+13 -0)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/manifest_agreement.rs (+7 -5)",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/manifest_source.rs (+37 -6)"
+      ],
+      "filesTotal": 22
+    },
+    {"number":17638,"title":"test(pnpr): move test registries off documents metadata","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17645,"title":"test(install): install git subdirectories from a local repo","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17644,"title":"fix(pnpr): retry the schema check when the metadata database is busy","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17646,"title":"test(install): install a subdirectory of a hosted git repo","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17647,
+      "title": "feat(run): decide the verify-deps gate from the recorded manifests",
+      "url": "https://github.com/pnpm/pnpm/pull/17647",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T00:25:27Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nPhase 3 of pnpm/tasks#256. With `verifyDepsBeforeRun` set, `pnpm run` and `pnpm exec` in an up-to-date workspace no longer read the `package.json` of each project whose file did not change since the last install.\n\npnpm/pnpm#17637 gave the install fast path a first attempt on manifests rebuilt from the workspace state's records. The verify-deps gate still parsed every project manifest on each gated command. It now makes the same attempt when one lockfile covers the workspace and the state holds manifest records:\n\n1. It lists the project directories without reading them.\n2. It rebuilds a stand-in for each manifest whose recorded stat still holds and is trusted.\n3. It runs the gate's own check on the stand-ins.\n\nOnly an up-to-date verdict from the stand-ins stands. Any other verdict, or a project without a usable record, sends the gate to the check on the manifest files. That check reads the projects already listed, so whatever the gate reports as outdated comes from the files. The check on stand-ins never writes, as in pnpm/pnpm#17637.\n\nDedicated per-project lockfiles keep the file-based gate. There the gate reads only its own project's manifest, plus the workspace projects only when it links their commands.\n\nThe listing and stand-in building move into one function that both the install fast path and the gate use.\n\nMeasured on release builds of pnpm/pnpm#17637's last commit and this branch, 150 runs of `pnpm run noop` in a 300-project workspace under `verifyDepsBefo\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/workspace_state/discovery.rs (+100 -15)",
+        "pnpm/crates/package-manager/src/install/workspace_state/stand_ins.rs (+65 -33)",
+        ".changeset/run-gate-skips-unchanged-manifests.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/repeat_install_records.rs (+113 -2)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": []
+}

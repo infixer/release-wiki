@@ -7,42 +7,42 @@
     },
     "vercel/next.js": {
       "fullName": "vercel/next.js",
-      "lastMergedAt": "2026-10-31T11:06:45Z",
-      "lastReleaseAt": "2026-10-31T23:42:35Z"
+      "lastMergedAt": "2026-11-04T00:58:26Z",
+      "lastReleaseAt": "2026-11-03T23:44:31Z"
     },
     "vuejs/core": {
       "fullName": "vuejs/core",
-      "lastMergedAt": "2026-11-02T00:21:28Z",
+      "lastMergedAt": "2026-11-04T00:29:06Z",
       "lastReleaseAt": "2026-10-30T08:01:40Z"
     },
     "nuxt/nuxt": {
       "fullName": "nuxt/nuxt",
-      "lastMergedAt": "2026-11-01T03:05:35Z",
-      "lastReleaseAt": "2026-10-27T01:02:52Z"
+      "lastMergedAt": "2026-11-02T19:07:50Z",
+      "lastReleaseAt": "2026-11-02T20:39:24Z"
     },
     "adobe/react-spectrum": {
       "fullName": "adobe/react-spectrum",
-      "lastMergedAt": "2026-10-28T17:00:38Z",
+      "lastMergedAt": "2026-11-03T01:56:38Z",
       "lastReleaseAt": "2026-10-09T03:06:51Z"
     },
     "microsoft/TypeScript": {
       "fullName": "microsoft/TypeScript",
-      "lastMergedAt": "2026-10-30T22:41:35Z",
+      "lastMergedAt": "2026-11-04T00:03:13Z",
       "lastReleaseAt": "2026-10-20T17:38:20Z"
     },
     "oxc-project/oxc": {
       "fullName": "oxc-project/oxc",
-      "lastMergedAt": "2026-11-02T00:45:38Z",
-      "lastReleaseAt": "2026-10-27T05:51:29Z"
+      "lastMergedAt": "2026-11-04T01:22:08Z",
+      "lastReleaseAt": "2026-11-03T14:02:06Z"
     },
     "anthropics/claude-code": {
       "fullName": "anthropics/claude-code",
-      "lastMergedAt": "2026-10-27T20:03:06Z",
-      "lastReleaseAt": "2026-10-31T01:01:35Z"
+      "lastMergedAt": "2026-11-02T19:19:54Z",
+      "lastReleaseAt": "2026-11-04T00:01:03Z"
     },
     "whatwg/html": {
       "fullName": "whatwg/html",
-      "lastMergedAt": "2026-10-30T06:15:45Z",
+      "lastMergedAt": "2026-11-03T14:54:05Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "w3c/aria": {
@@ -52,33 +52,33 @@
     },
     "w3c/wcag": {
       "fullName": "w3c/wcag",
-      "lastMergedAt": "2026-10-29T21:32:03Z",
+      "lastMergedAt": "2026-11-02T12:04:42Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "openui/open-ui": {
       "fullName": "openui/open-ui",
-      "lastMergedAt": "2026-10-30T10:59:20Z",
+      "lastMergedAt": "2026-11-03T01:05:21Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/ecma262": {
       "fullName": "tc39/ecma262",
-      "lastMergedAt": "2026-11-01T16:44:14Z",
+      "lastMergedAt": "2026-11-03T16:28:50Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "pnpm/pnpm": {
       "fullName": "pnpm/pnpm",
-      "lastMergedAt": "2026-11-02T00:04:24Z",
+      "lastMergedAt": "2026-11-04T00:25:27Z",
       "lastReleaseAt": "2026-10-30T21:18:23Z"
     },
     "vitest-dev/vitest": {
       "fullName": "vitest-dev/vitest",
-      "lastMergedAt": "2026-11-01T22:40:57Z",
-      "lastReleaseAt": "2026-10-19T16:42:33Z"
+      "lastMergedAt": "2026-11-03T11:18:44Z",
+      "lastReleaseAt": "2026-11-02T16:03:20Z"
     },
     "w3c/csswg-drafts": {
       "fullName": "w3c/csswg-drafts",
-      "lastMergedAt": "2026-11-02T00:18:39Z",
-      "lastCommitAt": "2026-11-02T00:18:38Z",
+      "lastMergedAt": "2026-11-03T13:52:38Z",
+      "lastCommitAt": "2026-11-03T23:22:25Z",
       "lastReleaseAt": "2026-09-24T08:51:34Z"
     },
     "tc39/proposals": {
@@ -90,7 +90,7 @@
     "openai/codex": {
       "fullName": "openai/codex",
       "lastReleaseAt": "2026-10-29T19:47:53Z",
-      "lastMergedAt": "2026-11-01T23:27:20Z"
+      "lastMergedAt": "2026-11-04T01:24:54Z"
     }
   },
   "blogs": {
@@ -108,6 +108,7 @@
     },
     "firefox": {
       "seen": [
+        "https://www.firefox.com/firefox/159.0.1/releasenotes/",
         "https://www.firefox.com/firefox/159.0/releasenotes/",
         "https://www.firefox.com/firefox/158.0.1/releasenotes/",
         "https://www.firefox.com/firefox/158.0/releasenotes/",
@@ -894,6 +895,7 @@
     },
     "safari": {
       "seen": [
+        "https://developer.apple.com/documentation/safari-release-notes/safari-27_3-release-notes#rev=Released November 3, 2026 — 27.3 beta (20626.1.12)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-27_2-release-notes#rev=Released October 26, 2026 — 27.2 (20625.2.8)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-27_1-release-notes#rev=Released October 23, 2026 — 27.1 (20625.1.29)",
         "https://developer.apple.com/documentation/safari-release-notes/safari-27-release-notes#rev=Released September 14, 2026 — 27.0 (20625.1.29)",

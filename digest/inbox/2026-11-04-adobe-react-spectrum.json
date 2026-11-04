@@ -1,0 +1,153 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-11-04T01:28:26Z",
+  "range": {
+    "from": "2026-10-28T17:00:38Z",
+    "to": "2026-11-04T01:28:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10889,
+      "title": "fix(optimize-locales-plugin): type Turbopack loader locales as a mutable array",
+      "url": "https://github.com/adobe/react-spectrum/pull/10889",
+      "author": "costajohnt",
+      "mergedAt": "2026-11-02T16:20:10Z",
+      "labels": [
+        "no testing"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10880\n\n`optimizeLocales.turbopack()` declares each loader's options as `{locales: readonly string[]}`. Next's `TurbopackLoaderOptions` is `Record<string, JSONValue>`, and `JSONValue[]` is a mutable array, so spreading the returned `rules` into a typed `NextConfig` fails with TS2322 even though the rule works at runtime. This changes the declared loader option to `string[]`, which is the change suggested in the issue. The `Options` input type stays `readonly string[]`, so callers can still pass `as const` arrays. Only the shape handed to Next changes.\n\nI checked it against `next@16.4.2` and TypeScript 6.0.3 (`strict`) with a `next.config.ts` covering a single config, a conditioned list, a readonly `as const` locales array, and a `path`/`content` RegExp condition. With the current declaration all four report TS2322 (`The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'JSONValue[]'`). With this change `tsc --noEmit` passes.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR an\n…(truncated)",
+      "files": [
+        "packages/dev/optimize-locales-plugin/LocalesPlugin.d.ts (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 10893,
+      "title": "chore: update github issue/pr template and contributing guide",
+      "url": "https://github.com/adobe/react-spectrum/pull/10893",
+      "author": "yihuiliao",
+      "mergedAt": "2026-11-02T19:38:20Z",
+      "labels": [
+        "rsp-core"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 10857,
+      "title": "feat: add focus events to Table rows",
+      "url": "https://github.com/adobe/react-spectrum/pull/10857",
+      "author": "dagemawinegash",
+      "mergedAt": "2026-11-03T00:14:42Z",
+      "labels": [
+        "ready for review",
+        "RAC",
+        "Table"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Adds `onFocus`, `onBlur`, and `onFocusChange` to Table `Row`, allowing applications to update previews or other UI when a row gains or loses focus.\n\nUses the existing `useFocus` hook, matching `GridListItem`. Callbacks report focus on the row itself; focus inside a cell or button remains separate. Includes regression tests and a Storybook example.\n\nPart of https://github.com/adobe/react-spectrum/issues/6460 (Table Row only).\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [x] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR and can explain why it's there.\n\n## 📝 Test Instructions:\n\n1. Run `yarn start` and open **React Aria Components -> Table -> Row Focus Events**.\n2. Tab into the table and use Up/Down arrows. Verify the Actions panel reports focus, blur, and focus-change callbacks. Move into a cell with Right Arrow: the row reports blur, and moving between descendants does not fire additional row-focus callbacks.\n3. Run `yarn test packages/react-aria-components/test/Table.test.js --runInBand`.\n\nValidation: lint passes; all 74 SSR tests pass using a local server-re\n…(truncated)",
+      "files": [
+        "packages/react-aria-components/src/Table.tsx (+5 -0)",
+        "packages/react-aria-components/stories/Table.stories.tsx (+33 -0)",
+        "packages/react-aria-components/test/Table.test.js (+110 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10819,
+      "title": "fix: measure TabPanels after nested content renders and stop size variable inheritance",
+      "url": "https://github.com/adobe/react-spectrum/pull/10819",
+      "author": "jsabutis",
+      "mergedAt": "2026-11-03T00:51:23Z",
+      "labels": [
+        "Tabs",
+        "ready for review",
+        "RAC"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10292\n\nTabPanels measures its new size in the same commit that mounts the new panel. A nested Tabs has not rendered its TabList and TabPanel yet at that point, so the outer panel animates to the wrong height and snaps when it resets to auto. Also, `--tab-panel-height` and `--tab-panel-width` are only set on the outer TabPanels during the animation, so a nested TabPanels inherits the outer pixel value.\n\nThe fix measures and starts the transition in a `requestAnimationFrame` scheduled from the layout effect (still before paint, after the nested collection has flushed), and makes every TabPanels define both variables inline as `auto`. #10293 only changed the inheritance, which is why it had no visible effect.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [x] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [x] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [x] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [AGENTS.md](https://github.com/adobe/re\n…(truncated)",
+      "files": [
+        "packages/react-aria-components/src/Tabs.tsx (+47 -29)",
+        "packages/react-aria-components/stories/Tabs.stories.tsx (+51 -1)",
+        "packages/react-aria-components/test/Tabs.browser.test.tsx (+62 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10710,
+      "title": "feat: support description text in tree items",
+      "url": "https://github.com/adobe/react-spectrum/pull/10710",
+      "author": "minwookshin",
+      "mergedAt": "2026-11-03T00:52:10Z",
+      "labels": [
+        "small review",
+        "ready for review",
+        "RAC",
+        "Tree"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10665\n\nTree items need a description slot that follows the existing GridList accessibility behavior. `Text slot=\"description\"` now uses the inherited `aria-labelledby` relationship, so the row name includes its description. This removes the Tree-specific override and adds the slot, story, documentation, and static naming regressions. The shared GridList hook is unchanged.\n\nImplemented with OpenAI Codex.\n\n## ✅ Pull Request Checklist:\n\n- [x] Included link to corresponding React Spectrum GitHub Issue.\n- [x] Added/updated unit tests and storybook for this change.\n- [x] Filled out test instructions.\n- [x] Updated documentation.\n- [x] Looked at the Accessibility Practices for this feature — treegrid naming and descriptions.\n- [x] I understand every change in this PR and can explain why it's there.\n- [x] If AI-assisted, I followed the AI contribution guidance and pointed my assistant at AGENTS.md.\n\n## 📝 Test Instructions:\n\nOpen **React Aria Components → Tree → With Descriptions**. The parent row should be named “Projects Shared project files”; expanding it reveals “Report Last updated today”. Check keyboard selection, expansion/collapse and pointer activation. Regressions cover combined row names, explicit item labels, and rows without a description.\n\nOctober 21 validation after narrowing the scope: full unit tests pass (8,441 tests, 16 skipped), SSR tests pass (74), and browser tests pass (423, 63 skipped). The 215 Tree/GridList tests also pass on React 18.3.1 with strict \n…(truncated)",
+      "files": [
+        "packages/react-aria-components/src/Tree.tsx (+2 -3)",
+        "packages/react-aria-components/stories/Tree.stories.tsx (+30 -0)",
+        "packages/dev/s2-docs/pages/react-aria/Tree.mdx (+3 -1)",
+        "packages/react-aria-components/test/Tree.test.tsx (+41 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 10631,
+      "title": "fix keyboard interaction when combobox and popover have different shadow roots",
+      "url": "https://github.com/adobe/react-spectrum/pull/10631",
+      "author": "chirokas",
+      "mergedAt": "2026-11-03T00:57:28Z",
+      "labels": [
+        "small review",
+        "ready for review"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes\n\nWhen ComboBoxInput and Popover are rendered in separate shadow DOM trees,\nopening the popover via keyboard fails because the relatedTarget of the\nvirtualBlur event gets retargeted to the nearest shadow-including ancestor,\ncausing the popover to close unexpectedly.\n\nThis fix ensures keyboard interaction works correctly even when the components\ndon't share the same shadow root.\n\nhttps://github.com/user-attachments/assets/dabce3da-2708-44a6-bac4-1f1635318bc3\n\n## ✅ Pull Request Checklist:\n\n- [ ] Included link to corresponding [React Spectrum GitHub Issue](https://github.com/adobe/react-spectrum/issues).\n- [ ] Added/updated unit tests and storybook for this change (for new code or code which already has tests).\n- [ ] Filled out test instructions.\n- [ ] Updated documentation (if it already exists for this component).\n- [ ] Looked at the Accessibility Practices for this feature - [Aria Practices](https://www.w3.org/WAI/ARIA/apg/)\n- [ ] I understand every change in this PR and can explain why it's there.\n- [ ] If AI-assisted, I followed our [AI contribution guidance](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md#ai-assisted-contributions) and pointed my assistant at [CLAUDE.md](https://github.com/adobe/react-spectrum/blob/main/CLAUDE.md).\n\n## 📝 Test Instructions:\n\n## 🧢 Your Project:",
+      "files": [
+        "packages/react-aria/src/combobox/useComboBox.ts (+5 -2)",
+        "packages/react-aria/src/focus/virtualFocus.ts (+25 -4)",
+        "packages/react-aria-components/test/ComboBox.browser.test.tsx (+73 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 10869,
+      "title": "fix(ComboBox): don't commit value on blur when isReadOnly",
+      "url": "https://github.com/adobe/react-spectrum/pull/10869",
+      "author": "mangeshraut712",
+      "mergedAt": "2026-11-03T01:56:38Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\nA read-only ComboBox still ran `commitValue()` on blur. When both `value` and `inputValue` are controlled and the selected item is not in the collection (e.g. async items not loaded yet), that path fires change events and apps that derive input text from the selection can clear a field the user never changed.\n\nSkip the blur commit when `isReadOnly` is set.\n\nCloses #10846\n\n## Test plan\n- [x] RAC ComboBox: controlled `isReadOnly` with a value missing from the collection does not fire `onChange` / `onSelectionChange` on blur",
+      "files": [
+        "packages/react-stately/src/combobox/useComboBoxState.ts (+1 -1)",
+        "packages/react-aria-components/test/ComboBox.test.js (+20 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}

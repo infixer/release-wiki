@@ -1,0 +1,54 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-11-04T01:28:26Z",
+  "range": {
+    "from": "2026-10-30T06:15:45Z",
+    "to": "2026-11-04T01:28:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 13163,
+      "title": "Handle null node navigables in the has focus steps",
+      "url": "https://github.com/whatwg/html/pull/13163",
+      "author": "domenic",
+      "mergedAt": "2026-11-03T14:25:42Z",
+      "labels": [
+        "topic: focus"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Return false from the has focus steps before accessing the top-level traversable when the target document's node navigable is null. This covers documents created by document.implementation.createHTMLDocument() and matches existing browser behavior.\n\n- [x] At least two implementers are interested (and none opposed): matches existing Chromium, Gecko, and WebKit behavior.\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at: existing coverage in [document-level-apis.html](https://github.com/web-platform-tests/wpt/blob/master/html/interaction/focus/document-level-focus-apis/document-level-apis.html), specifically the subtest \"The hasFocus() method must return false if the Document has no browsing context\". It checks a document created with `document.implementation.createHTMLDocument()`. All four subtests pass in Chromium 156.0.8078.4, Firefox 157.0, and Playwright WebKit 26.5.\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed: not needed; Chromium, Gecko, and WebKit already return false in this case.\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs: N/A\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A, this fixes the specification algorithm to match existing behavior.\n- [x] The top of this comment includes a [clear c\n…(truncated)",
+      "files": [
+        "source (+2 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13182,
+      "title": "Keep insertion steps running for parser-inserted controls",
+      "url": "https://github.com/whatwg/html/pull/13182",
+      "author": "domenic",
+      "mergedAt": "2026-11-03T14:54:05Z",
+      "labels": [
+        "topic: forms",
+        "topic: link"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The parser inserted flag suppresses form-owner resetting, not the rest of the insertion steps. Guard the reset instead of returning from the whole algorithm, so later steps such as internal resource link processing are still reached.\n\n- [x] At least two implementers are interested (and none opposed):\n   * WebKit and Chromium implement this correctly already. Gecko doesn't implement rel=expect so doesn't have the potential bug.\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * This is, apparently, technically testable, so Codex wrote some tests. https://github.com/web-platform-tests/wpt/pull/64642 I am not sure they're worth keeping though, since this is kind of an obvious spec bug and the tests are somewhat involved. Feel free to close them.\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: N/A\n   * Gecko: N/A\n   * WebKit: N/A\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): N/A\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): N/A\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs: N/A\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A\n- [x] The top of this \n…(truncated)",
+      "files": [
+        "source (+2 -6)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,50 @@
+{
+  "kind": "repo",
+  "repo": "anthropics/claude-code",
+  "branch": "main",
+  "collectedAt": "2026-11-04T01:28:26Z",
+  "range": {
+    "from": "2026-10-27T20:03:06Z",
+    "to": "2026-11-04T01:28:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v2.1.318",
+      "publishedAt": "2026-11-04T00:01:03Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v2.1.317",
+      "name": "v2.1.317",
+      "publishedAt": "2026-11-03T01:25:46Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.317",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added a warning to `/schedule` when a new cloud scheduled task gets connectors you did not ask for, with how to remove them\n- Added a check that asks before a web or shell tool call sends your account email address to the network\n- Added `onFailure: \"block\"` for Agent SDK hook callbacks, so a callback that fails blocks the action instead of letting it run\n- Added a notice in Claude Desktop's Code tab when your organization's remote managed settings haven't loaded for the session, and another once they do\n- Added a notice when auto mode's check has no answer for a subagent's tool call, which used to leave nothing in the main view\n- Added `anthropic.plan`, `anthropic.seat_type`, `anthropic.provider` and `anthropic.custom_base_url` to OTel metrics, events and spans\n- Added a cost report to the Claude apps gateway admin API, `GET /v1/organizations/analytics/cost`, for reading past spend over a date range in total, per developer, per day or per IdP group\n- Added a daily record of each developer's IdP groups on Claude apps gateways with `admin:` set, kept for `admin.identity_retention_days`, which the cost report groups by\n- Added `CLAUDE_CODE_DISABLE_NESTED_SESSION_ID`: set it to `1` on a self-hosted runner to have `claude -p` run inside a session use that session's ID and transcript, as in earlier versions\n- Fixed project and local MCP servers disconnecting after the first turn in some Claude desktop sessions\n- Fixed auto mode failing every turn when an LLM gateway set as the base URL answers 403 or 422 to its server-side safety check (a 403 with an apiKeyHelper is unchanged)\n- Fixed `claude auth status` exiting before a slow token refresh was saved, which could sign you out on the next run\n- Fixed a project's `effortLevel` setting being ignored by sessions that an app starts ahead of time and then opens in the project, such as new sessions in the desktop app's Code tab\n- Fixed `claude --from-pr` reporting \"No conversations found\" in projects with many sessions when the linked session was older than the first page\n- Fixed the second of two simultaneous permission prompts showing no file path or command on claude.ai and the mobile apps\n- Fixed Remote Control and SDK hosts offering \"don't ask again\" on a mod's tool calls\n- Fixed session titles being lost in cloud and SDK sessions when a new message or Stop arrived while the title was generating\n- Fixed self-paced `/loop` wakeups sometimes not being scheduled when Claude left a field out of its request\n- Fixed auto mode in cloud sessions stopping for approval when the Artifact tool uploaded, wrote to a database or saved a file through the outputs folder\n- Fixed skills synced from claude.ai being lost or downloaded again every ten minutes when they can't be written to disk\n- Fixed `/schedule` leaving a cloud scheduled task's next run time and link out of its results after creating or updating it\n- Fixed screen readers speaking a running subagent's elapsed time and token count on ever\n…(truncated)"
+    },
+    {
+      "tag": "v2.1.318",
+      "name": "v2.1.318",
+      "publishedAt": "2026-11-04T00:01:03Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added a record of your answer when Claude Code asks to turn on the mods it writes in a session\n- Added `assume_role` on `mantle` upstreams of the Claude apps gateway, for a role in another AWS account and for per-developer AWS cost attribution\n- Added an `effort` option to a mod's `$.model.fork`, so a quick side job can run at `low` whatever effort the session uses; the result reports the effort sent\n- Added the date a stored claude.ai sign-in ends to `claude auth status` (`loginExpiresAt`) and to `claude -p` JSON results (`credential_expires_at`)\n- Added a one-line stderr warning to `claude -p` text output, starting 10 days before a stored claude.ai sign-in ends\n- Fixed `--continue` sometimes losing the earlier conversation after a malformed tool call's retries ran out (regression in 2.1.314)\n- Fixed macOS sessions with many running Bash commands stalling while memory grew\n- Fixed permission prompts being answered by keys typed just after sending a message, or before a slow prompt appeared\n- Fixed `/logout`, `claude auth logout` and `claude mcp remove` reporting success, and changes to trust, consent or MCP settings being dropped with no word, when the config file could not be updated on a shared network home directory\n- Fixed jobs exiting with `Not logged in` when another terminal or host signs in again to the same account and organization on the same home\n- Fixed `claude mcp add` and `remove` writing the config without its lock: they now wait for it or exit 1, though another job's save can still replace a saved server\n- Fixed `claude plugin` commands exiting before a slow token refresh was saved, which could sign you out on the next run\n- Fixed `claude plugin validate` passing a custom-named marketplace file that `claude plugin marketplace add` rejects\n- Fixed stdio MCP servers that exit on the version probe being re-probed on every start; a server that dies in under 3s for its own reason is also pinned to the legacy handshake for 7 days\n- Fixed sessions being refused at startup by an `allowedProviders` list that another login on the same machine had stored\n- Fixed idle compaction replacing a conversation with a reply that was not a summary\n- Fixed the \"Now using usage credits\" notice reappearing about every 30 seconds while a background subagent is running\n- Fixed custom slash commands that fail, or that only Claude can invoke, printing nothing in `claude -p` and SDK sessions\n- Fixed `claude -p` and Agent SDK sessions reporting success when an API error cut off a reply while a mod hooked `turn.step`\n- Fixed a message sent right after a model change still running after Stop in headless sessions: Stop now cancels or stops it as it would a queued message\n- Fixed a deleted session transcript being re-created with its last prompt when an idle non-interactive session exited\n- Fixed `claude remote-control` hosts, the background daemon and self-hosted runners failing to start new sessions (`spawn ENOENT`) after an update or versi\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 106583,
+      "title": "Move issue triage and dedupe workflows to Claude Sonnet 5.5",
+      "url": "https://github.com/anthropics/claude-code/pull/106583",
+      "author": "bpasero-ant",
+      "mergedAt": "2026-11-02T19:19:54Z",
+      "hint": "other",
+      "release": "📦 v2.1.318",
+      "filesTotal": 4
+    }
+  ],
+  "errors": []
+}

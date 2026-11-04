@@ -1,0 +1,945 @@
+{
+  "kind": "repo",
+  "repo": "vercel/next.js",
+  "branch": "canary",
+  "collectedAt": "2026-11-04T01:28:26Z",
+  "range": {
+    "from": "2026-10-31T11:06:45Z",
+    "to": "2026-11-04T01:28:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v16.4.5",
+      "publishedAt": "2026-11-03T18:38:39Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.5"
+    },
+    "prerelease": {
+      "tag": "v16.5.0-canary.40",
+      "publishedAt": "2026-11-03T23:44:31Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.40"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v16.4.4",
+      "name": "v16.4.4",
+      "publishedAt": "2026-11-02T16:41:08Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.4",
+      "prerelease": false,
+      "body": "> [!NOTE]\n> This release is backporting bug fixes. It does **not** include all pending features/changes on canary. The [announced security released for November](https://nextjs.org/blog/upcoming-nextjs-security-release-november-2026) will be published tomorrow.\n\n### Core Changes\n\n- [lts-active] test: disable the `reads fallback params after a client navigation` deployment test (#100668)\n- [lts-active] Reload on missed Turbopack startup CSS updates (#100619)\n- [lts-active] Revert \"Optimize strict module factory chunks (#98421)\" (#100866)\n- [lts-active] Emit the Turbopack shared-runtime bootstrap in the PPR resume so it gets the CSP nonce (#100907)\n- [lts-active] [ci] Pin deploy test deployments to Node.js 22.x (#100886)\n- [lts-active] fix(analyze): use route summaries as the analyzer route index (#100974)\n- [lts-active] Use fast-jwt instead of jsonwebtoken (#100885)\n\n### Credits\n\nHuge thanks to @icyJoseph, @mischnic, @wbinnssmith, @lukesandberg, and @eps1lon for helping!"
+    },
+    {
+      "tag": "v16.5.0-canary.37",
+      "name": "v16.5.0-canary.37",
+      "publishedAt": "2026-11-02T23:49:32Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.37",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.38",
+      "name": "v16.5.0-canary.38",
+      "publishedAt": "2026-11-03T09:09:22Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.38",
+      "prerelease": true
+    },
+    {
+      "tag": "v15.5.29",
+      "name": "v15.5.29",
+      "publishedAt": "2026-11-03T18:38:27Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v15.5.29",
+      "prerelease": false,
+      "body": "This release contains security fixes for the following advisories:\n\n## Moderate\n\n- [Cross-client response injection and disclosure in self-hosted Next.js applications forwarding fetched responses](https://github.com/vercel/next.js/security/advisories/GHSA-pc58-hwjq-p385)\n- [SVG rejection bypass in Next.js image optimization](https://github.com/vercel/next.js/security/advisories/GHSA-7qx7-33qx-rqx2)\n- [HttpOnly cookie exposure through internal response header on Next.js Edge runtime routes](https://github.com/vercel/next.js/security/advisories/GHSA-f3mh-rxg3-f5g2)"
+    },
+    {
+      "tag": "v16.4.5",
+      "name": "v16.4.5",
+      "publishedAt": "2026-11-03T18:38:39Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.4.5",
+      "prerelease": false,
+      "body": "This release contains security fixes for the following advisories:\n\n## Moderate\n\n- [Cross-tenant sensitive information disclosure in Next.js 'use cache' when called through unstable_cache](https://github.com/vercel/next.js/security/advisories/GHSA-mfr8-8qww-v76h)\n- [Cache leak across root param values in nested 'use cache' functions (follow-up)](https://github.com/vercel/next.js/security/advisories/GHSA-vc7v-qv4w-wrv8)\n- [Cache poisoning of shared fallback shells in Cache Components via request-supplied placeholder route params](https://github.com/vercel/next.js/security/advisories/GHSA-vvgp-ww4w-46vf)\n- [Cross-user cache disclosure and poisoning in Next.js use cache with binary arguments](https://github.com/vercel/next.js/security/advisories/GHSA-rhh4-g77r-r9qj)\n- [Cross-client response injection and disclosure in self-hosted Next.js applications forwarding fetched responses](https://github.com/vercel/next.js/security/advisories/GHSA-pc58-hwjq-p385)\n- [SVG rejection bypass in Next.js image optimization](https://github.com/vercel/next.js/security/advisories/GHSA-7qx7-33qx-rqx2)\n- [HttpOnly cookie exposure through internal response header on Next.js Edge runtime routes](https://github.com/vercel/next.js/security/advisories/GHSA-f3mh-rxg3-f5g2)"
+    },
+    {
+      "tag": "v16.5.0-canary.39",
+      "name": "v16.5.0-canary.39",
+      "publishedAt": "2026-11-03T19:43:27Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.39",
+      "prerelease": true
+    },
+    {
+      "tag": "v16.5.0-canary.40",
+      "name": "v16.5.0-canary.40",
+      "publishedAt": "2026-11-03T23:44:31Z",
+      "url": "https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.40",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 98760,
+      "title": "turbopack: experimental minify-before-chunking feature",
+      "url": "https://github.com/vercel/next.js/pull/98760",
+      "author": "andrewimm",
+      "mergedAt": "2026-11-02T03:30:38Z",
+      "labels": [
+        "type: next",
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "feature",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "Minification happens on a per-chunk basis. With enough chunks, we get good parallelization, but a large chunk can create a single large span that wastes unused cores.\nThis flag makes minification more granular, applying it to each module and caching the result. The goal is to make each minification step smaller, so that they can be evenly distributed across parallel workers. Theoretically this may also reduce the work done on a re-build, since the minification transform will only be applied to changed modules.\n\nThe flag is configured behind an `experimental` config flag, and only applies to builds (because we don't minify in dev!).\n\nAn ideal outcome is equal-or-faster builds, with almost no change to byte size. I don't expect much change to byte size, becuase the shape of our chunks doesn't lend itself to cross-module optimizations, but it's entirely possible we regress this a bit. That hypothesis will need to be tested against our benchmark suite of real Next apps.\n\n---\n\n## How it works\n\n`experimental.turbopackMinifyBeforeChunking` sets `minify_before_chunking` on the browser and Node.js chunking contexts (Next.js client, server and edge). The chunk content then picks one of three modes (`ChunkMinification`): no minification, whole-chunk (today's behavior), or per-item.\n\n**Per-item minification** (`minify_chunk_item` in `turbopack-ecmascript/src/minify.rs`):\n- Each module factory is minified on its own, in a cached task keyed by that factory, so a rebuild only re-minifies ch\n…(truncated)",
+      "files": [
+        "crates/next-api/src/project.rs (+3 -0)",
+        "crates/next-core/src/next_client/context.rs (+3 -0)",
+        "crates/next-core/src/next_config.rs (+12 -0)",
+        "crates/next-core/src/next_edge/context.rs (+7 -2)",
+        "crates/next-core/src/next_server/context.rs (+7 -2)",
+        "packages/next/src/server/config-schema.ts (+1 -0)",
+        "packages/next/src/server/config-shared.ts (+7 -0)",
+        "turbopack/crates/turbo-tasks-fs/src/rope.rs (+265 -15)",
+        "turbopack/crates/turbopack-browser/src/chunking_context.rs (+17 -1)",
+        "turbopack/crates/turbopack-browser/src/ecmascript/content.rs (+19 -18)"
+      ],
+      "filesTotal": 390
+    },
+    {
+      "number": 100884,
+      "title": "turbo-tasks: add batched keyed reads via KeyedReadRef",
+      "url": "https://github.com/vercel/next.js/pull/100884",
+      "author": "sokra",
+      "mergedAt": "2026-11-02T08:17:18Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nAdds `vc.keyed_reader().await?`, which returns a `KeyedReadRef<T>` for `cell = \"keyed\"` values, and uses it for NFT generation (`crates/next-api/src/nft.rs`, `crates/next-api/src/nft_json.rs`).\n\n### Why\n\n`vc.get(key).await?` and `vc.contains_key(key).await?` register a fine-grained dependency per read. Every read is a separate future that takes backend locks to register its dependency. That gets expensive when one task reads many keys from the same map, as the NFT tasks do.\n\n### How\n\n- **API:** `keyed_reader()` returns a `ReadKeyedReaderVcFuture<T>` resolving to `Result<KeyedReadRef<T>>`. It reads the cell once. The `KeyedReadRef` only allows synchronous `get(key)` and `contains_key(key)` calls. It records the hashes of the accessed keys (the same hash `vc.get` uses), not the keys themselves.\n- **Dependency while alive:** calling `keyed_reader()` allocates a dedicated `CellKey::Keyed(id)` dependency for the current task execution before the future is created. `id` is unique within that execution. For invalidation it behaves like a full-cell dependency, but as a separate entry it can be removed without affecting normal full reads of the same cell or other `KeyedReadRef`s. A call outside a task execution is a normal full-dependency read.\n- **Dropped within the same execution:** one batched backend call replaces the `Keyed(id)` dependency with `CellKey::Hash(h)` dependencies for the accessed keys. Like `vc.get`, the reader is then only invalidated when one of those k\n…(truncated)",
+      "files": [
+        "crates/next-api/src/nft.rs (+14 -11)",
+        "crates/next-api/src/nft_json.rs (+4 -10)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/mod.rs (+157 -16)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/cleanup_old_edges.rs (+14 -12)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/mod.rs (+1 -1)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/update_cell.rs (+189 -29)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/storage_schema.rs (+20 -13)",
+        "turbopack/crates/turbo-tasks/src/backend.rs (+25 -0)",
+        "turbopack/crates/turbo-tasks/src/lib.rs (+13 -12)",
+        "turbopack/crates/turbo-tasks/src/manager.rs (+178 -9)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 100922,
+      "title": "test: fail e2e tests on Rust panics",
+      "url": "https://github.com/vercel/next.js/pull/100922",
+      "author": "sokra",
+      "mergedAt": "2026-11-02T09:24:33Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 3
+    },
+    {
+      "number": 101034,
+      "title": "perf: use keyed invalidation for get_chunk_groups_for_module",
+      "url": "https://github.com/vercel/next.js/pull/101034",
+      "author": "mischnic",
+      "mergedAt": "2026-11-02T12:43:06Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "The fewer the merrier",
+      "files": [
+        "turbopack/crates/turbopack-core/src/module_graph/chunk_group_info.rs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 101035,
+      "title": "Consistently use headersToExcludeInCacheKey",
+      "url": "https://github.com/vercel/next.js/pull/101035",
+      "author": "mischnic",
+      "mergedAt": "2026-11-02T13:18:54Z",
+      "labels": [
+        "type: next",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "We had separate exclusion lists for the fetch deduping and the fetch data cache",
+      "files": [
+        "packages/next/src/lib/constants.ts (+6 -0)",
+        "packages/next/src/server/lib/dedupe-fetch.ts (+2 -5)",
+        "packages/next/src/server/lib/incremental-cache/index.ts (+4 -4)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 101031,
+      "title": "docs: correct io() prefetch behavior vs connection()",
+      "url": "https://github.com/vercel/next.js/pull/101031",
+      "author": "icyJoseph",
+      "mergedAt": "2026-11-02T14:18:20Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 5
+    },
+    {
+      "number": 101037,
+      "title": "Fix revalidation for caches with short stale times",
+      "url": "https://github.com/vercel/next.js/pull/101037",
+      "author": "unstubbable",
+      "mergedAt": "2026-11-02T14:55:15Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "PR #94678 excluded caches with `stale < 30` from static prerenders, but their values remained in the serialized Resume Data Cache (RDC). Requests reused these values without consulting the cache handler, so tag and timed revalidation could not refresh them.\n\nThe serializer now omits these entries, following the fix proposed by @ahmedgabrrr in PR #101004. The regression tests cover tag revalidation before and after path revalidation, plus repeated timed revalidation.\n\nWe're using a branch in `vercel/next.js` so the new tests can run in deploy CI, which is unavailable for fork PRs.\n\nFixes #100982\nCloses #101004",
+      "files": [
+        "packages/next/src/server/resume-data-cache/cache-store.ts (+6 -2)",
+        "packages/next/src/server/app-render/postponed-state.test.ts (+2 -2)",
+        "packages/next/src/server/resume-data-cache/resume-data-cache.test.ts (+26 -8)",
+        "test/e2e/app-dir/resume-data-cache/app/handler-handoff/data.ts (+4 -4)",
+        "test/e2e/app-dir/resume-data-cache/resume-data-cache.test.ts (+12 -7)",
+        "test/e2e/app-dir/use-cache-short-stale/app/layout.tsx (+9 -0)",
+        "test/e2e/app-dir/use-cache-short-stale/app/revalidate/route.ts (+18 -0)",
+        "test/e2e/app-dir/use-cache-short-stale/app/short-stale/[scenario]/page.tsx (+32 -0)",
+        "test/e2e/app-dir/use-cache-short-stale/next.config.ts (+8 -0)",
+        "test/e2e/app-dir/use-cache-short-stale/use-cache-short-stale.test.ts (+64 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {
+      "number": 97570,
+      "title": "[no-unsafe-inline] Add an experimental flag for React's external browser runtime",
+      "url": "https://github.com/vercel/next.js/pull/97570",
+      "author": "eps1lon",
+      "mergedAt": "2026-11-02T16:49:51Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "Turbopack",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "React's Fizz streams its instruction set as inline `<script>` tags, which forces a Content-Security-Policy to allow `unsafe-inline` unless a per-response nonce is used, and a per-response nonce is incompatible with static generation. This change adds `experimental.externalBrowserRuntime`, which switches Fizz to React's `unstable_server-external-runtime` so the instructions are emitted as `<template data-rci>` elements and applied in the browser by a standalone runtime script instead. Since React only ships that runtime on its experimental channel, enabling the flag opts the `app` directory into `react@experimental` alongside `taint`, `blockingSSR`, `transitionIndicator`, and `gestureTransition`.\n\nThe visible consequence is one additional static asset under `/_next/static/chunks` and one additional `<script>` tag in the document head. Next.js adds neither of them: React emits the tag itself once `unstable_externalRuntimeSrc` is set, marked `async` and carrying the nonce and integrity. In exchange React stops injecting its inline form-replaying runtime, since the external runtime covers it.\n\nThis is App Router only; the Pages Router still inlines React's instructions. It is also one step in a larger effort to let applications drop `unsafe-inline` entirely. The Flight payload and `bootstrapScriptContent` are still emitted as inline scripts, and moving them onto the same mechanism will be gated behind this same feature flag.",
+      "files": [
+        "crates/next-api/src/app.rs (+34 -0)",
+        "crates/next-api/src/pages.rs (+2 -0)",
+        "crates/next-core/src/next_config.rs (+11 -1)",
+        "crates/next-core/src/next_manifests/mod.rs (+23 -0)",
+        "packages/next/src/build/templates/app-page-runtime.ts (+2 -0)",
+        "packages/next/src/build/templates/edge-ssr-app.ts (+2 -0)",
+        "packages/next/src/build/webpack-config.ts (+25 -0)",
+        "packages/next/src/build/webpack/plugins/build-manifest-plugin.ts (+10 -0)",
+        "packages/next/src/cli/internal/static-routes-info.ts (+8 -3)",
+        "packages/next/src/compiled/react-dom-experimental/unstable_server-external-runtime.js (+504 -0)"
+      ],
+      "filesTotal": 29
+    },
+    {
+      "number": 100986,
+      "title": "docs: add turbo_tasks consistency guidance for agents",
+      "url": "https://github.com/vercel/next.js/pull/100986",
+      "author": "mischnic",
+      "mergedAt": "2026-11-02T16:53:39Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 1
+    },
+    {
+      "number": 100827,
+      "title": "[refactor] Remove obsolete RDC and PPR feature guards",
+      "url": "https://github.com/vercel/next.js/pull/100827",
+      "author": "unstubbable",
+      "mergedAt": "2026-11-02T17:23:23Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team"
+      ],
+      "hint": "feature",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "PR #84870 made RDC for Navigations part of Cache Components. PR #96827 made Cache Components the internal PPR signal, so `isRoutePPREnabled` already implies `cacheComponents`.\n\nThis removes the redundant `supportsRDCForNavigations` check and the fallback branch for PPR without Cache Components. The existing guards now use `isRoutePPREnabled` directly, and their comments describe the current behavior.",
+      "files": [
+        "packages/next/src/build/templates/app-page-runtime.ts (+13 -24)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 95062,
+      "title": "Handle registries not serving JSON when checking the version",
+      "url": "https://github.com/vercel/next.js/pull/95062",
+      "author": "vctqs1",
+      "mergedAt": "2026-11-02T18:09:23Z",
+      "labels": [
+        "type: next"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "Fixes #95061\n- Update to get registry via `getRegistry`\n- Moving step to `res.json` inside try/catch to ignore fetch errors + `.json` if response is not `JSON`",
+      "files": [
+        "packages/next/src/cli/next-info.ts (+1 -1)",
+        "packages/next/src/lib/download-swc.ts (+1 -1)",
+        "packages/next/src/lib/helpers/get-registry.ts (+16 -14)",
+        "packages/next/src/lib/patch-incorrect-lockfile.ts (+1 -1)",
+        "packages/next/src/server/dev/hot-reloader-shared-utils.ts (+14 -6)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 101051,
+      "title": "Don't count features behind a new experimental flag as public API",
+      "url": "https://github.com/vercel/next.js/pull/101051",
+      "author": "acdlite",
+      "mergedAt": "2026-11-02T19:55:04Z",
+      "labels": [
+        "created-by: Next.js team"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 3
+    },
+    {
+      "number": 101053,
+      "title": "Revert 'Turbopack: ignore fully dynamic alternatives when tracing file paths (#100651)'",
+      "url": "https://github.com/vercel/next.js/pull/101053",
+      "author": "mischnic",
+      "mergedAt": "2026-11-02T20:24:53Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "This caused some files not to be traced anymore\n\nReverts https://github.com/vercel/next.js/pull/100651\n\nProper solution: https://github.com/vercel/next.js/pull/101052",
+      "files": [
+        "turbopack/crates/turbopack-core/src/resolve/pattern.rs (+0 -62)",
+        "turbopack/crates/turbopack-ecmascript/src/references/mod.rs (+65 -95)",
+        "test/production/standalone-mode/tracing-static-files/app/page.js (+0 -10)",
+        "test/production/standalone-mode/tracing-static-files/app/read-alternatives.js (+0 -32)",
+        "test/production/standalone-mode/tracing-static-files/data/static-from-app-default-param.txt (+0 -1)",
+        "test/production/standalone-mode/tracing-static-files/data/static-from-app-nullish.txt (+0 -1)",
+        "test/production/standalone-mode/tracing-static-files/data/static-from-ext-cwd.txt (+0 -1)",
+        "test/production/standalone-mode/tracing-static-files/data/static-from-ext-default-param.txt (+0 -1)",
+        "test/production/standalone-mode/tracing-static-files/data/static-from-ext-nullish.txt (+0 -1)",
+        "test/production/standalone-mode/tracing-static-files/data/static-from-ext-rel-join.txt (+0 -1)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 101050,
+      "title": "Add router.experimental_prepare()",
+      "url": "https://github.com/vercel/next.js/pull/101050",
+      "author": "acdlite",
+      "mergedAt": "2026-11-02T20:34:45Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "Adds `experimental_prepare(href)` to the router returned by `useRouter()`. It starts a navigation that goes through all the same steps as a regular one, including the dynamic request, but doesn't update the router. The response writes into the same local cache used by back/forward navigations.\n\nThe returned handle has `push()` and `replace()`. Committing performs a regular navigation, except it can read bfcache entries written since the prepare began, regardless of stale time. If the prepared request is still in flight, the commit reuses it instead of starting a new one.\n\nThe intended use is to prepare on pointerdown and commit on click, which starts the dynamic request earlier. We may build this into Link eventually; the low-level API lets people try it out first.\n\nSemantics:\n\n- If you don't commit, nothing else happens. The data stays in the bfcache, so a history traversal to an overlapping segment may observe it. This is intentional. The contract of the API is that you are OK with the navigation showing data that's as stale as when the preparation began.\n- Prepared data doesn't expire. Committing much later still reuses it; the caller is responsible for not holding on to a handle too long.\n- A refresh or server action between prepare and commit invalidates the prepared data, the same way it invalidates the bfcache.\n- A handle can only be committed once. Later calls are a no-op, with a dev-only warning.\n- A regular navigation to the same route doesn't reuse prepared data; o\n…(truncated)",
+      "files": [
+        "packages/next/src/build/define-env.ts (+2 -0)",
+        "packages/next/src/client/components/app-router-instance.ts (+9 -2)",
+        "packages/next/src/client/components/app-router-state.ts (+117 -24)",
+        "packages/next/src/client/components/concurrent-router-queue.ts (+8 -1)",
+        "packages/next/src/client/components/navigation.ts (+1 -0)",
+        "packages/next/src/client/components/navigator.ts (+1 -0)",
+        "packages/next/src/client/components/render-tree.ts (+130 -29)",
+        "packages/next/src/client/components/router-reducer/fetch-server-response.ts (+4 -1)",
+        "packages/next/src/client/components/router-reducer/reducers/navigate-reducer.ts (+7 -3)",
+        "packages/next/src/client/components/router-reducer/reducers/refresh-reducer.ts (+3 -1)"
+      ],
+      "filesTotal": 31
+    },
+    {
+      "number": 101055,
+      "title": "docs: improve turbo_tasks consistency guidance for agents",
+      "url": "https://github.com/vercel/next.js/pull/101055",
+      "author": "mischnic",
+      "mergedAt": "2026-11-02T21:03:25Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 1
+    },
+    {
+      "number": 98867,
+      "title": "fix(turbopack): invalidate lazy compilation state across sessions",
+      "url": "https://github.com/vercel/next.js/pull/98867",
+      "author": "fireairforce",
+      "mergedAt": "2026-11-02T21:28:04Z",
+      "labels": [
+        "Turbopack"
+      ],
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "### What?\n\nFix lazy compilation state invalidation after restoring the Turbopack filesystem cache.\n\nRelated: https://github.com/utooland/utoo/issues/3367\n\n### Why?\n\n`LazyCompilationState` is not serialized and is recreated in each session. However, tasks that previously read it can restore cached results without subscribing to the new state's invalidation list.\n\nAs a result, activating a lazy import after a restart can succeed while cached readers still report it as inactive.\n\n### How?\n\nMark `lazy_compilation_state` as `session_dependent` so dependent tasks recompute and subscribe to the recreated state.\n\nAdd a Rust regression test covering three sessions sharing the same persistent cache, including:\n- Activating an import whose inactive state was previously cached.\n- Reactivating an import in a subsequent session.\n- Reading before activation and activating before reading.\n\n### Verification\n\n- The regression test fails before the fix and passes afterward.\n- All 9 existing lazy dynamic import browser tests pass.\n- `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings --no-deps` pass.",
+      "files": [
+        "turbopack/crates/turbopack-ecmascript/src/async_chunk/proxy.rs (+3 -1)",
+        "crates/next-api/tests/lazy_compilation.rs (+85 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 101061,
+      "title": "Pin Tailwind to 4.3.3 in create-next-app",
+      "url": "https://github.com/vercel/next.js/pull/101061",
+      "author": "jamiboym",
+      "mergedAt": "2026-11-03T00:10:38Z",
+      "labels": [
+        "create-next-app",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nNew `create-next-app` projects that use Tailwind currently fail to build on Node.js versions that can't `require()` ES modules: before 20.19, and 22.0–22.11. That range includes Next.js's minimum supported version, 20.9.0:\n\n```\n./app/globals.css\nError: require() of ES Module …/node_modules/magic-string/dist/index.mjs not supported.\n    at …/node_modules/@tailwindcss/node/dist/index.js\n    at …/node_modules/@tailwindcss/turbopack/dist/index.js\n```\n\n`@tailwindcss/node@4.3.4`, published 2026-11-02 at 21:36 UTC, moved from `magic-string@^0.30.21` to `magic-string@^1.1.0`. magic-string 1.x is ESM-only, but Tailwind's CommonJS build still `require()`s it. The template's `^4` ranges pick up the new version. Since then, every Tailwind create-next-app test in the Node 20.9.0 jobs has failed on canary and on the PR runs checked: turbopack production, turbopack dev and cache components dev. That includes the run that blamed f699e1093d.\n\nThis temporarily pins `tailwindcss` and the Tailwind bundler plugin (`@tailwindcss/turbopack` or `@tailwindcss/postcss`) to `4.3.3`. That version's `@tailwindcss/node` still depends on `magic-string@^0.30.21`. Restore `^4` once Tailwind ships a fix.\n\n## Verification\n\n- Reproduced the failure locally: on Node 20.20.2 with `--no-experimental-require-module`, `require()` of a package shaped like `magic-string@1.4.5` throws the same `ERR_REQUIRE_ESM`.\n- Not run locally: the create-next-app tests, because the sandbox can't reach the npm registry. \n…(truncated)",
+      "files": [
+        "packages/create-next-app/templates/index.ts (+5 -2)",
+        "test/production/create-next-app/prompts.test.ts (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 101040,
+      "title": "Fix layout client chunk leakage across async server imports",
+      "url": "https://github.com/vercel/next.js/pull/101040",
+      "author": "mischnic",
+      "mergedAt": "2026-11-03T00:41:32Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nWhen a layout reaches a shared client reference through a server-side `import()`, the reference can belong to different chunk groups than its owner. Falling back to every group containing that reference could then pull unrelated page code into the layout’s initial client chunks.\n\nSelect groups by direct owner membership or transitive async-import ancestry, with cycle detection. Only fall back when owner information is absent; error when a known owner cannot be matched.\n\nFixes #100893.\n\n## Verification\n\nAdded async/nested/cyclic regression coverage. Existing layout chunk-sharing and CSS-order tests pass in production and development with rebuilt native bindings.",
+      "files": [
+        "crates/next-core/src/next_app/app_client_references_chunks.rs (+47 -59)",
+        "turbopack/crates/turbopack-core/src/module_graph/chunk_group_info.rs (+38 -0)",
+        "test/production/app-dir/layout-client-async-chunks/app/counter.tsx (+12 -0)",
+        "test/production/app-dir/layout-client-async-chunks/app/dashboard/[id]/chart.tsx (+13 -0)",
+        "test/production/app-dir/layout-client-async-chunks/app/dashboard/[id]/loading.tsx (+3 -0)",
+        "test/production/app-dir/layout-client-async-chunks/app/dashboard/[id]/page.tsx (+8 -0)",
+        "test/production/app-dir/layout-client-async-chunks/app/layout.tsx (+11 -0)",
+        "test/production/app-dir/layout-client-async-chunks/app/page.tsx (+5 -0)",
+        "test/production/app-dir/layout-client-async-chunks/layout-client-async-chunks.test.ts (+120 -0)",
+        "test/production/app-dir/layout-client-async-chunks/lib/analytics.ts (+5 -0)"
+      ],
+      "filesTotal": 24
+    },
+    {
+      "number": 100973,
+      "title": "Turbopack: use simd-utf16-len for source position column counting",
+      "url": "https://github.com/vercel/next.js/pull/100973",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T01:02:17Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nFollow-up to #100919. `SourcePos::update` now counts the UTF-16 length of the final line segment with the SIMD kernels of [`simd-utf16-len`](https://github.com/SyMind/simd-utf16-len), so that counting is fast even on long lines such as minified code.\n\nIt uses `utf16_len_bytes`, the safe byte-slice API added in `simd-utf16-len` 0.4.0 (https://github.com/SyMind/simd-utf16-len/pull/22). `SourcePos::update` passes rope bytes directly, with no `unsafe` conversion to `&str`. The result is exact for valid UTF-8. For other bytes the call is still safe, but the count is unspecified.\n\nLine-terminator handling and the complete-text chunk contract from #100919 are unchanged. The `SourcePos` tests continue to cover column semantics.\n\n## Verification\n\n- `cargo test -p turbopack-core --lib`\n- `cargo fmt -p turbopack-core --check`\n- `cargo clippy -p turbopack-core --tests`",
+      "files": [
+        "Cargo.lock (+7 -0)",
+        "Cargo.toml (+1 -0)",
+        "turbopack/crates/turbopack-core/Cargo.toml (+1 -0)",
+        "turbopack/crates/turbopack-core/src/source_pos.rs (+4 -34)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 101008,
+      "title": "turbo-tasks: add cancelable cell reads via Vc::lazy_reader()",
+      "url": "https://github.com/vercel/next.js/pull/101008",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T01:04:44Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "### What?\n\nAdds `vc.lazy_reader().await?`, which returns a `LazyReadRef<T>` for any value type: a cell read that can be canceled. The value is only accessible through an explicit `LazyReadRef::get()`.\n\n- While the ref is alive, the task depends on the whole cell, so invalidations during the execution are not lost.\n- If the ref is dropped without `get()` ever being called, the read is canceled: the task no longer depends on the cell through it.\n- If `get()` was called, the read behaves like a normal `.await`.\n\nBuilt on the per-execution provisional dependency machinery from #100884 (`keyed_reader()`), whose `CellKey::Keyed(id)` this PR renames to `CellKey::Provisional(id)`.\n\n### Why?\n\nSome tasks need a cell's value only in rare cases, and only find out in synchronous code. One example is the server actions hash salt (encryption key) in #100950. Today that needs an optimistic \"run without it, bail, re-run with it\" strategy. With `lazy_reader()`, the task can read the cell up front, pass the ref into synchronous code, and depend on it only when it is actually used.\n\n### How?\n\n- **API:** `Vc::lazy_reader()` returns a named `ReadLazyReaderVcFuture<T>`, mirroring `Vc::keyed_reader()` / `ReadKeyedReaderVcFuture<T>`.\n  - Both futures share one `CancelableDependencyRead`, extracted from the `keyed_reader()` future.\n  - On creation it allocates a per-execution `CellKey::Provisional(id)` dependency (a temporary hold on the whole cell) and registers it as alive.\n  - On success it hands t\n…(truncated)",
+      "files": [
+        "turbopack/crates/turbo-tasks-backend/src/backend/mod.rs (+45 -37)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/cleanup_old_edges.rs (+2 -2)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/operation/update_cell.rs (+53 -45)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/storage_schema.rs (+7 -6)",
+        "turbopack/crates/turbo-tasks/src/backend.rs (+13 -11)",
+        "turbopack/crates/turbo-tasks/src/lib.rs (+7 -6)",
+        "turbopack/crates/turbo-tasks/src/manager.rs (+97 -77)",
+        "turbopack/crates/turbo-tasks/src/vc/keyed_read_ref.rs (+5 -5)",
+        "turbopack/crates/turbo-tasks/src/vc/lazy_read_ref.rs (+107 -0)",
+        "turbopack/crates/turbo-tasks/src/vc/mod.rs (+22 -3)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 100950,
+      "title": "Turbopack: avoid invalidating per-module analysis when the encryption key changes",
+      "url": "https://github.com/vercel/next.js/pull/100950",
+      "author": "sokra",
+      "mergedAt": "2026-11-03T04:02:23Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "### What?\n\nChanging the server actions encryption key between two warm Turbopack builds no longer re-runs per-module analysis (parsing, export analysis, reference resolution).\n\nUses `lazy_reader()` from #101008.\n\n### Why?\n\nThe key changes in three situations:\n\n- `encryption-utils-server.ts` rotates it during builds, after 14 days.\n- Users set a different `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` per build.\n- On lts, it changed on every build in Docker (fixed on canary by #100790).\n\nA key change invalidated almost the whole build graph, for two reasons:\n\n1. `Project` stored `encryption_key` and `build_id` as plain fields, so every task reading `Project` was invalidated when either changed.\n2. The server actions transform runs on every JS module and read the key (the salt for server reference IDs) for **all** of them. So every module parse depended on the key, even though only modules containing `\"use server\"` / `\"use cache\"` generate IDs.\n\n### How?\n\n- **Isolate the values.** `encryption_key` and `build_id` now live in their own cells on `Project`, following the `preview_props` pattern from #100425. The `Project` value stays equal when only these values change. Only the tasks that actually read them are invalidated: `edge_env`, and the server actions transform for modules that generate IDs.\n- **Read the salt lazily.**\n  - `Config::hash_salt` is now a small `HashSalt` type in `next-custom-transforms`. It holds either a value or a lazy getter, and the transform only reads it when it g\n…(truncated)",
+      "files": [
+        "crates/next-api/src/project.rs (+12 -7)",
+        "crates/next-core/src/next_shared/transforms/server_actions.rs (+5 -2)",
+        "crates/next-custom-transforms/src/transforms/server_actions.rs (+59 -2)",
+        "crates/next-custom-transforms/tests/server_actions_hash_salt.rs (+68 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 101077,
+      "title": "Fix blocking revalidation for `fetch` and `unstable_cache`",
+      "url": "https://github.com/vercel/next.js/pull/101077",
+      "author": "unstubbable",
+      "mergedAt": "2026-11-03T08:03:47Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "> [!TIP]\n> This PR is best reviewed with whitespace changes hidden.\n\nWith Cache Components enabled, a page that uses cached `fetch` calls or `unstable_cache` can return a 500 during on-demand revalidation, including blocking regeneration after `expire`. Both wrappers skip the incremental cache lookup, so the final prerender cannot reuse the data computed by the prospective pass. It repeats asynchronous work and fails with `NEXT_STATIC_GEN_BAILOUT`.\n\nThe incremental cache now reads the Resume Data Cache (RDC) during on-demand revalidation before it bypasses persisted entries. Both `unstable_cache` and cached `fetch` calls use this path, so the final prerender can reuse the prospective pass's result.\n\nThis extends the fix proposed in PR #100895 to cached fetches and preserves the forced-refresh behavior introduced in PR #48516. The incremental cache continues to apply its tag invalidation checks before it returns an entry.\n\nFixes #99866\nCloses #100895",
+      "files": [
+        "packages/next/src/server/lib/incremental-cache/index.ts (+10 -1)",
+        "packages/next/src/server/lib/patch-fetch.ts (+8 -10)",
+        "packages/next/src/server/web/spec-extension/unstable-cache.ts (+24 -29)",
+        "test/production/app-dir/data-cache-revalidation/app/expire.tsx (+7 -0)",
+        "test/production/app-dir/data-cache-revalidation/app/fetch/[method]/page.tsx (+25 -0)",
+        "test/production/app-dir/data-cache-revalidation/app/layout.tsx (+9 -0)",
+        "test/production/app-dir/data-cache-revalidation/app/unstable-cache/page.tsx (+25 -0)",
+        "test/production/app-dir/data-cache-revalidation/data-cache-revalidation.test.ts (+53 -0)",
+        "test/production/app-dir/data-cache-revalidation/incremental-cache-handler.js (+23 -0)",
+        "test/production/app-dir/data-cache-revalidation/next.config.ts (+8 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 99980,
+      "title": "[experiment] [turbopack-cli] compile .go files",
+      "url": "https://github.com/vercel/next.js/pull/99980",
+      "author": "timneutkens",
+      "mergedAt": "2026-11-03T10:08:02Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nAdd experimental Go file compilation to Turbopack and its CLI. Go owns package discovery, compilation, and linking; Turbopack tracks the reported sources, modules, embedded assets, assembly, and headers, then emits an executable through the normal output pipeline.\n\nThe reusable compiler APIs support generated-source overlays, persistent executable caching, tracked source selection, cached top-level declaration analysis, and host/target sessions. Analysis and compilation share source identity and publication validity checks. Session ownership handles lazy toolchain probing, cancellation, and shared module-cache watcher leases.\n\nThe CLI supports explicit same-directory Go files, mixed Go and JavaScript entries, build/watch/dev, and offline dependencies prepared in the module cache. With `--persistent-caching`, Go-only and mixed builds restore compiler output across CLI processes while JavaScript tasks retain their independent persistent identity. Watchers and cancellation belong to the current process, including after a warm restore. Framework consumers can generate their own entrypoints without implementing Go parsing or compiler lifecycle. Application routing, runtime execution, output naming, and manifests remain consumer-owned. The route-handler integration is in #100130.\n\n## Verification\n\n- Rust clippy passed for `turbopack-go`, `next-api`, and `next-napi-bindings` with warnings denied.\n\n- Go compiler: unit tests and ten live tests passed, including source edit\n…(truncated)",
+      "files": [
+        ".config/nextest.toml (+9 -0)",
+        "Cargo.lock (+24 -0)",
+        "Cargo.toml (+3 -0)",
+        "turbopack/crates/turbo-tasks-fs/Cargo.toml (+4 -0)",
+        "turbopack/crates/turbo-tasks-fs/src/content.rs (+6 -0)",
+        "turbopack/crates/turbo-tasks-fs/src/disk.rs (+111 -13)",
+        "turbopack/crates/turbopack-cli/Cargo.toml (+2 -0)",
+        "turbopack/crates/turbopack-cli/benches/small_apps.rs (+28 -19)",
+        "turbopack/crates/turbopack-cli/src/arguments.rs (+27 -0)",
+        "turbopack/crates/turbopack-cli/src/build/mod.rs (+164 -50)"
+      ],
+      "filesTotal": 48
+    },
+    {
+      "number": 101081,
+      "title": "create-next-app: remove unused webpack bundler option",
+      "url": "https://github.com/vercel/next.js/pull/101081",
+      "author": "icyJoseph",
+      "mergedAt": "2026-11-03T10:53:51Z",
+      "labels": [
+        "create-next-app"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nFollow-up to #89706, which removed the `--turbopack` and `--webpack` flags from create-next-app. Nothing can select `Bundler.Webpack` anymore, so this removes it from the enum along with the `--webpack` suffix it added to the generated `dev` and `build` scripts.\n\nNo change to generated projects.\n\n## Verification\n\n- `tsc --noEmit -p packages/create-next-app/tsconfig.json`",
+      "files": [
+        "packages/create-next-app/templates/index.ts (+2 -3)",
+        "packages/create-next-app/templates/types.ts (+0 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 101085,
+      "title": "docs: fix import.meta.glob base docs",
+      "url": "https://github.com/vercel/next.js/pull/101085",
+      "author": "icyJoseph",
+      "mergedAt": "2026-11-03T12:27:06Z",
+      "labels": [
+        "Documentation"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 1
+    },
+    {
+      "number": 101088,
+      "title": "[test] Fix flaky resume data cache tests",
+      "url": "https://github.com/vercel/next.js/pull/101088",
+      "author": "unstubbable",
+      "mergedAt": "2026-11-03T12:45:00Z",
+      "labels": [
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 8
+    },
+    {
+      "number": 101095,
+      "title": "Turbopack: cleanup ReferencedAssetIdent",
+      "url": "https://github.com/vercel/next.js/pull/101095",
+      "author": "mischnic",
+      "mergedAt": "2026-11-03T16:56:14Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "Store `namespace_ident` inside `ImportSource`. That means that `namespace_ident` and `import_source` can never get out of sync (point to different modules)",
+      "files": [
+        "turbopack/crates/turbopack-ecmascript/src/references/esm/base.rs (+71 -48)",
+        "turbopack/crates/turbopack-ecmascript/src/references/esm/export.rs (+11 -5)",
+        "turbopack/crates/turbopack-ecmascript/src/side_effect_optimization/reference.rs (+3 -2)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 100881,
+      "title": "Add segment config parity regression tests",
+      "url": "https://github.com/vercel/next.js/pull/100881",
+      "author": "mischnic",
+      "mergedAt": "2026-11-03T16:58:04Z",
+      "labels": [
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 35
+    },
+    {
+      "number": 101065,
+      "title": "Turbopack: keep CSS Modules when a loader rule's `as` adds an existing extension",
+      "url": "https://github.com/vercel/next.js/pull/101065",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T17:14:39Z",
+      "labels": [
+        "Documentation",
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nA Turbopack loader rule like the one `create-next-app` generates for Tailwind CSS:\n\n```js\nturbopack: {\n  rules: {\n    '*.css': { loaders: ['@tailwindcss/turbopack'], as: '*.css' },\n  },\n},\n```\n\nbroke CSS Modules without any warning. Every `*.module.css` import came back as `{}`, and the module's selectors were emitted unscoped as global CSS. This happens with a pass-through loader too, and still happens on current canary.\n\n**Why:** `as` replaces `*` with the full file path, so the loader output for `page.module.css` was renamed to `page.module.css.css`. That name no longer ends in `.module.css`, so the CSS Module's inner and analyze references were reprocessed as global CSS, which exports no classes.\n\n**Fix:** when a loader's `as` pattern is a single leading `*` followed by a suffix the file name already ends with (e.g. `*.css` on `foo.css` / `foo.module.css`), Turbopack now keeps the original file name. Such a rule then behaves exactly like one without `as`, which already worked. The check lives in `WebpackLoadersProcessedAsset::ident`, so it covers both `turbopack.rules` and the `turbopackAs` import attribute. `AssetIdent::rename_as` and renames that change the extension (`*.svg` → `*.js`, `*.module.scss` → `*.module.css`, …) are unchanged.\n\nFixes #100548\nFinding: https://next-maintainer-agent.vercel.tools/agent-feedback/5921\n\n### Places that state or depend on this behavior\n\n- `docs/01-app/03-api-reference/05-config/01-next-config-js/turbopack.mdx`: added a not\n…(truncated)",
+      "files": [
+        "turbopack/crates/turbopack-node/src/transforms/webpack.rs (+22 -12)",
+        "docs/01-app/03-api-reference/05-config/01-next-config-js/turbopack.mdx (+2 -1)",
+        "test/e2e/app-dir/turbopack-rules-css-module-rename-as/app/global.css (+3 -0)",
+        "test/e2e/app-dir/turbopack-rules-css-module-rename-as/app/layout.tsx (+10 -0)",
+        "test/e2e/app-dir/turbopack-rules-css-module-rename-as/app/page.module.css (+3 -0)",
+        "test/e2e/app-dir/turbopack-rules-css-module-rename-as/app/page.tsx (+15 -0)",
+        "test/e2e/app-dir/turbopack-rules-css-module-rename-as/next.config.js (+17 -0)",
+        "test/e2e/app-dir/turbopack-rules-css-module-rename-as/passthrough-loader.js (+5 -0)",
+        "test/e2e/app-dir/turbopack-rules-css-module-rename-as/turbopack-rules-css-module-rename-as.test.ts (+32 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 101103,
+      "title": "Fix outer 'use cache' entries reused across root param values",
+      "url": "https://github.com/vercel/next.js/pull/101103",
+      "author": "eps1lon",
+      "mergedAt": "2026-11-03T19:06:52Z",
+      "labels": [
+        "type: next",
+        "created-by: Next.js team",
+        "tests"
+      ],
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "https://github.com/vercel/next-js-mirror/pull/230",
+      "files": [
+        "packages/next/src/server/app-render/work-unit-async-storage.external.ts (+5 -0)",
+        "packages/next/src/server/use-cache/use-cache-wrapper.ts (+49 -3)",
+        "test/e2e/app-dir/app-root-params-getters/fixtures/use-cache-dedup/app/[countryCode]/[lang]/flight-tail-joined/page.tsx (+41 -0)",
+        "test/e2e/app-dir/app-root-params-getters/fixtures/use-cache-dedup/app/[countryCode]/[lang]/flight-tail/page.tsx (+30 -0)",
+        "test/e2e/app-dir/app-root-params-getters/use-cache.test.ts (+20 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 100130,
+      "title": "[experiment] support App Router route.go handlers",
+      "url": "https://github.com/vercel/next.js/pull/100130",
+      "author": "timneutkens",
+      "mergedAt": "2026-11-03T19:13:50Z",
+      "labels": [
+        "type: next",
+        "Documentation",
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## Summary\n\nAdd experimental App Router `route.go` handlers on top of #99980. With `experimental.goRoutes: true` and Turbopack, a Go `package main` declares `func GET(w http.ResponseWriter, r *http.Request)`, `POST`, and other HTTP methods. Generated dispatch supplies automatic HEAD/OPTIONS behavior and lets Go validate handler signatures.\n\nGo source discovery, declaration analysis, compilation, persistent caching, target construction, and compiler lifecycle live in `turbopack-go` in #99980. This PR supplies Next.js route conventions, generated HTTP entrypoints, native endpoint metadata, and runtime integration. NAPI uses the endpoint's external-input validity interface instead of inspecting Go filesystems.\n\nDevelopment and self-hosted `next start` keep routing, rewrites, and `proxy.ts` in Node.js. Supervised private Go workers preserve streaming, headers, cookies, parameters, cancellation, and recovery after edits or process failures. Production retries transient worker startup failures.\n\nDeployment adapters receive existing `APP_ROUTE` output fields with `runtime: 'go'` and an executable `filePath`. Their `goTarget` option selects the executable target; copied PORT-based servers run without Next.js or the Go toolchain. Adapter routing metadata and parameter handling remain part of the Next.js integration. Hosted deploy-test limitations are documented in the fixture README.\n\nUnrelated image-scrolling assertions are separated into #101009.\n\n## Verification\n\n- Rust clippy pass\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "crates/next-api/Cargo.toml (+2 -1)",
+        "crates/next-api/src/app.rs (+332 -10)",
+        "crates/next-api/src/lib.rs (+1 -0)",
+        "crates/next-api/src/next_server_nft.rs (+26 -5)",
+        "crates/next-api/src/operation.rs (+11 -1)",
+        "crates/next-api/src/project.rs (+36 -1)",
+        "crates/next-api/src/route.rs (+28 -1)",
+        "crates/next-api/src/shutdown.rs (+137 -0)",
+        "crates/next-api/src/templates/go_route_adapter_main.go (+24 -0)"
+      ],
+      "filesTotal": 90
+    },
+    {
+      "number": 101056,
+      "title": "eval: clarify React transitions and prefetch shell grading",
+      "url": "https://github.com/vercel/next.js/pull/101056",
+      "author": "aurorascharff",
+      "mergedAt": "2026-11-03T20:14:12Z",
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "Clarify two task requirements found while reviewing the [16.4.4 measurement](https://github.com/vercel/next-evals-oss/pull/178).\n\n- `043`: explicitly require React ViewTransition and React transition types, with a shorter behavior criterion. Exclude the hidden grader from the app’s build.\n- `049`: distinguish the App Shell from the complete prerendered output, which can contain later-stage content.\n\n## Grader checks\n\nNext.js 16.4.4, Sol high judge, no new coding-agent attempts.\n\n| Case | Checks passed | Expected |\n| --- | ---: | --- |\n| Saved `043` browser-only solution | 0/1 | Reject: React component and transition types are missing |\n| React reference with a persistent layout wrapper | 1/1 + build | Accept |\n| Saved `049` solution, revised grader | 5/5 | Accept: related items are outside the App Shell |\n| Same `049` app with its prefetch stage removed | 2/5 | Reject |\n\nThe old `049` grader also passed 5/5 on replay, despite the original 4/5 result. This exposes judge variation; it does not establish that the wording change alone makes grading reliable. Original model scores remain unchanged.\n\nEval typecheck, lint and formatting pass. The reference production build passes. Initial controls caught a remounting wrapper, an invalid React type map, and the grader import leaking into the app build.",
+      "files": [
+        "evals/evals/agent-043-view-transitions/EVAL.ts (+10 -118)",
+        "evals/evals/agent-043-view-transitions/tsconfig.json (+1 -1)",
+        "evals/evals/agent-049-prefetch-stage/EVAL.ts (+3 -1)",
+        "evals/evals/agent-043-view-transitions/PROMPT.md (+1 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 99678,
+      "title": "perf(build): use nft's cached readlink when collecting build traces",
+      "url": "https://github.com/vercel/next.js/pull/99678",
+      "author": "shootaroo",
+      "mergedAt": "2026-11-03T20:16:44Z",
+      "labels": [
+        "type: next"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "### What?\n\nUse nft's built-in cached `readlink` in `collect-build-traces.ts`.\n\n### Why?\n\n- Since #56817, a custom `readlink` is passed to `nodeFileTrace`. Unlike nft's built-in one, it isn't cached, so every call goes to the filesystem.\n- nft's `realpath` walks up all parent directories again for every path it resolves, so with pnpm's deep `node_modules/.pnpm/...` layout these calls pile up.\n  - In our app, `readlink` was called about 479k times for only about 9,100 distinct paths.\n- nft's built-in `readlink` also [returns `null` for the same error codes (`EINVAL` / `ENOENT` / `UNKNOWN`)](https://github.com/vercel/nft/blob/1.10.2/src/fs.ts#L72-L84), so removing it doesn't change behavior. `readFile` and `stat` are kept because they handle errors differently from the built-in ones.\n\n### How?\n\nRemoved the `readlink` option.\n\nMeasured on our project (pnpm, Next 16.3, webpack build, `output: 'standalone'`):\n\n- Running only `nodeFileTrace` with the same inputs: 17.3–18.1s → 12.1–12.9s, with an identical list of traced files\n- \"Collecting build traces\" on CI (GitHub Actions, 2 vCPU): 42–57s → 26s\n- `.nft.json` files and the standalone output are identical before and after the change\n\nFixes #100869",
+      "files": [
+        "packages/next/src/build/collect-build-traces.ts (+0 -15)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 100290,
+      "title": "turbo-tasks-backend: fix lost idle wakeup in the snapshot loop",
+      "url": "https://github.com/vercel/next.js/pull/100290",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T20:35:12Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "fix",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "### What?\n\nFixes a race in the dev mode background snapshot loop that could sometimes get idle and busy periods confused. When that happens, idle snapshots are suppressed until the 300 s / 120 s fallback timers.\n\n### Why?\n\nThe snapshot loop reacted to `idle_start_event` / `idle_end_event`, which use `Event::notify`. That only wakes listeners that are registered before notification. The loop re-created each listener after handling it, and treated the event kind as a statement about the current state:\n\n1. turbo-tasks goes idle: idle-start notified (listener S1 ready)\n2. goes busy: idle-end notified (listener E1 ready)\n3. goes idle again: idle-start notified, but S1 was already notified, so this one reaches nobody\n4. the loop handles S1 (arms the idle timer), then E1 (`idle_time = far_future()`)\n\nturbo-tasks is now idle, but nothing re-arms the timer until the next transition. The mirror image (a stale idle-start handled while busy) arms the timer for a busy system. `active_time` drifts the same way.\n\n### How?\n\nThe backend's `ActivityMonitor` (`backend/activity.rs`) publishes its activity through a `tokio::sync::watch` channel holding `BackendActivity::{Idle { since }, Busy, Stopping}`. Replacing the `Event`s. A watch receiver always sees the latest published value, so no change can be lost; changes can only be coalesced. Because an idle value carries the time its idle period began, a coalesced idle → busy → idle still shows up as a new value.",
+      "files": [
+        "turbopack/crates/turbo-tasks-backend/src/backend/activity.rs (+369 -0)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/mod.rs (+80 -98)",
+        "turbopack/crates/turbo-tasks-backend/src/utils/stopwatch.rs (+17 -33)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 101122,
+      "title": "test(codemod): fix flaky agents-md e2e cascade on slow GitHub clones",
+      "url": "https://github.com/vercel/next.js/pull/101122",
+      "author": "kassens",
+      "mergedAt": "2026-11-03T21:52:57Z",
+      "labels": [
+        "type: next"
+      ],
+      "hint": "other",
+      "release": "📦 v16.5.0-canary.40",
+      "filesTotal": 1
+    },
+    {
+      "number": 100658,
+      "title": "Add instrumentationInject for adapter-supplied instrumentation",
+      "url": "https://github.com/vercel/next.js/pull/100658",
+      "author": "kakadiadarpan",
+      "mergedAt": "2026-11-03T21:58:21Z",
+      "labels": [
+        "type: next",
+        "Turbopack",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "### What?\n\nAdds an `instrumentationInject?: string[]` config option. Next.js compiles one module that runs every entry's `register` and `onRequestError`, then the project's own `instrumentation.{ts,js}` if it has one. This works like `instrumentationClientInject` does for the client.\n\n```ts\n// set by a deployment adapter in modifyConfig, or a config wrapper like withSentry\nconfig.instrumentationInject ??= []\nconfig.instrumentationInject.push('./path/to/instrumentation.js')\n```\n\n```text\ninstrumentation slot\n  → each instrumentationInject entry, in array order\n  → then the project's instrumentation file, if there is one\n```\n\n### Why?\n\nHosting platforms want to give every app default instrumentation, such as OpenTelemetry tracing. Today that means asking users to add an `instrumentation.ts` and a dependency to their project. This hook lets an adapter or a config wrapper supply the module at build time instead. The user's files, `package.json` and lockfile stay untouched, and Next.js installs nothing.\n\n### How?\n\n- Anyone can set the field: a deployment adapter in `modifyConfig`, or a config wrapper such as `withSentry`. Whoever sets it decides whether to inject when the project already has its own instrumentation file.\n- Both bundlers generate the same CommonJS module: it requires every entry from the project root, then the project's instrumentation file, and passes them to `combineInstrumentation` (`next/dist/lib/combine-instrumentation`).\n- webpack compiles a stub entry through\n…(truncated)",
+      "files": [
+        "crates/next-api/src/project.rs (+62 -8)",
+        "crates/next-core/src/next_config.rs (+8 -0)",
+        "packages/next/src/build/create-compiler-aliases.ts (+21 -4)",
+        "packages/next/src/build/index.ts (+21 -2)",
+        "packages/next/src/build/next-dir-paths.ts (+11 -0)",
+        "packages/next/src/build/swc/index.ts (+11 -0)",
+        "packages/next/src/build/webpack-config.ts (+28 -0)",
+        "packages/next/src/build/webpack/loaders/instrumentation-inject-stub.js (+5 -0)",
+        "packages/next/src/build/webpack/loaders/next-instrumentation-inject-loader.ts (+27 -0)",
+        "packages/next/src/lib/combine-instrumentation.ts (+94 -0)"
+      ],
+      "filesTotal": 37
+    },
+    {
+      "number": 101071,
+      "title": "server actions: read cache kinds lazily",
+      "url": "https://github.com/vercel/next.js/pull/101071",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T22:18:30Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "📦 v16.5.0-canary.40",
+      "body": "## What?\n\nThe server actions transform now reads the known custom cache kinds lazily, the same way it already reads the hash salt (#100950). Editing the cache handler config no longer invalidates every module's analysis: only modules that use `\"use cache: <kind>\"` with a custom kind depend on it.\n\n## Why?\n\nTurbopack read the cache kinds unconditionally for every JS module it parsed, but the transform only needs them to validate `\"use cache: <kind>\"`. A plain `\"use cache\"` returns before that check, and most modules have no directives at all. Every module therefore depended on a value it almost never uses, and the whole set was cloned for every module.\n\n## How?\n\n- **Generic lazy config value.** `HashSalt` from #100950 becomes `LazyValue<T>`, shared by `hash_salt` and `cache_kinds`. It's an enum: a plain value, or a provider implementing the one-method `LazyGet<T>` trait (`fn get(&self) -> &T`), both behind an `Arc` so cloning the config stays cheap. The transform only calls `get()` at the point of use, and borrows the value instead of copying it. It deserializes from the plain value, so the webpack options (`hashSalt`, `cacheKinds`) are unchanged. `Debug` never prints the contents, because the salt can be the encryption key. `next-custom-transforms` doesn't depend on `turbo-tasks` (it's also built for webpack and wasm), which is why the provider is a trait rather than a `LazyReadRef` variant.\n- **Turbopack.** `NextServerActions` reads both cells with `Vc::lazy_reader()` (#1010\n…(truncated)",
+      "files": [
+        "crates/next-core/src/next_shared/transforms/server_actions.rs (+23 -6)",
+        "crates/next-custom-transforms/src/transforms/server_actions.rs (+44 -38)",
+        "crates/next-custom-transforms/tests/errors.rs (+6 -6)",
+        "crates/next-custom-transforms/tests/fixture.rs (+9 -8)",
+        "crates/next-custom-transforms/tests/server_actions_hash_salt.rs (+0 -68)",
+        "crates/next-custom-transforms/tests/server_actions_lazy_config.rs (+132 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 101072,
+      "title": "Turbopack: only read conditionally needed values where they are used",
+      "url": "https://github.com/vercel/next.js/pull/101072",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T23:18:07Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## What?\n\nTwo tasks now await values they need only in one branch inside that branch, so they no longer depend on those values otherwise. Output doesn't change.\n\n- **Client reference manifest** (`next-core`, `build_manifest`): the asset suffix (e.g. `?dpl=<id>`) is read only when the deployment id is *not* appended at runtime. When it is appended at runtime, a new deployment id no longer re-runs `build_manifest` for every App endpoint. That task walks all client references and chunks.\n- **Resolve result processing** (`turbopack`, `process_resolve_result`): `import_externals` from the module options context is read only when an `External` result is replaced. Other resolve results no longer read the options context for it.\n\n## Why?\n\nFound by scanning for reads that happen unconditionally but are only used conditionally. Each one gave the task a dependency it usually doesn't use, so unrelated changes re-ran it. These two need no `lazy_reader()`: the decision is made in async code, so the await can simply move into the branch.\n\n## Verification\n\n- `cargo test -p turbopack`\n- `cargo clippy --all-targets -D warnings` for `turbopack`, `next-core`\n- No new tests: the changes only move awaits, and existing tests and CI cover the behavior.",
+      "files": [
+        "crates/next-core/src/next_manifests/client_reference_manifest.rs (+7 -2)",
+        "turbopack/crates/turbopack/src/lib.rs (+6 -5)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 100279,
+      "title": "turbo-tasks-backend: keep recorded GC roots until their TTL expires",
+      "url": "https://github.com/vercel/next.js/pull/100279",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T23:18:29Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nWith Turbopack GC enabled, a task recorded in the persisted GC roots map now stays protected from collection until its TTL expires. Before, a recorded root was dropped from the map as soon as it became resident again. This also fixes pinned roots falling out of the roots map after their `Meta` was evicted.\n\n### Why?\n\nAt refresh time, `gc_roots_refresh_and_age_out` dropped every *resident* root from the persisted roots map, assuming the pass's root scan would judge it. But the judgement would ~always judge them as dead.  A task becomes a root because it had only transient pins from a prior session, if we read it back to 'refresh' then it doens't have those transient pins and will always be collected.  On a warm `next dev` start, startup invalidation propagates through the aggregation graph and restores almost every prior root before anything requests it. So every root that hadn't been re-pinned yet was collected in the first GC pass, along with its whole exclusive subtree. The 3-day TTL never applied, and the next session had to recompute and re-persist everything.\n\nOn `bench/nested-deps-app-router-many-pages` with GC enabled:\n- a warm session that idled before its first request collected about 4.3M tasks;\n- the next session then ran as slowly as a cold one.\n\nA related bug: the root scan can't see a task whose `Meta` has been evicted, so the refresh also dropped roots that were still pinned.\n\n### How?\n\n**Once a root, always a root, until it ages out.**\n\nIn theory a \n…(truncated)",
+      "files": [
+        "turbopack/crates/turbo-tasks-backend/src/backend/gc.rs (+44 -42)",
+        "turbopack/crates/turbo-tasks-backend/src/backend/mod.rs (+22 -6)",
+        "turbopack/crates/turbo-tasks-backend/tests/gc_collection.rs (+21 -9)",
+        "turbopack/crates/turbo-tasks-backend/tests/gc_cross_session.rs (+191 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 99968,
+      "title": "turbopack-node: linear IPC frame parsing with eager UTF-8 decoding",
+      "url": "https://github.com/vercel/next.js/pull/99968",
+      "author": "lukesandberg",
+      "mergedAt": "2026-11-03T23:18:45Z",
+      "labels": [
+        "Turbopack",
+        "created-by: Turbopack team",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### What?\n\nThe Turbopack Node.js child-process IPC receiver now frames length-prefixed packets in linear time and decodes each payload to a UTF-8 string as it reads it. The logic lives in a side-effect-free `PacketReader` class with unit tests.\n\n### Why?\n\nThe old receiver concatenated its entire buffered input on every socket `data` event. A large packet that arrived in many chunks was copied repeatedly, which is quadratic.\n\nQueued packets also held onto received Buffer views. Decoding each payload as soon as it is complete means the queue holds independent strings, and payload chunks never have to be assembled into an intermediate Buffer.  Plus string concatenation is generally quite fast.\n\nThe wire protocol, transport and child lifecycle are unchanged.",
+      "files": [
+        "turbopack/crates/turbopack-node/js/src/child_process/index.ts (+5 -73)",
+        "turbopack/crates/turbopack-node/js/src/child_process/packet-reader.ts (+186 -0)",
+        "test/unit/turbopack-node-packet-reader.test.ts (+217 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 99942,
+      "title": "Keep loaded config from sharing objects with defaults and callers",
+      "url": "https://github.com/vercel/next.js/pull/99942",
+      "author": "jamiboym",
+      "mergedAt": "2026-11-04T00:58:26Z",
+      "labels": [
+        "type: next",
+        "tests"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`loadConfig` normalizes nested config objects in place (for example `images.localPatterns`, `images.path` with `basePath`, `experimental.staleTimes`). Some of those objects were not owned by the config being built:\n\n- When a project's config omits `images` or `experimental.staleTimes`, the merged config used the module-level defaults (`imageConfigDefault`, `defaultConfig.experimental.staleTimes`) by reference. Normalization wrote into them, so a second config loaded in the same process inherited the first one's values. Because both configs shared the same `images` object, loading the second app also rewrote the first app's already-loaded config: with `basePath: '/docs'` then `'/blog'`, the first config's `images.path` became `/blog/docs/_next/image`.\n- `next({ conf })` (the `customConfig` path) only shallow-copied the caller's object, so nested writes such as `localPatterns.push(...)` and the `staleTimes` normalization landed in the caller's objects.\n- `finalizeConfig` wrote into whatever object an adapter's `modifyConfig` returned, which the adapter may still hold.\n- A `next.config` function received the shared `defaultConfig`, which is only shallow-frozen, so writes to nested defaults leaked into later loads.\n\nThis change makes every object `loadConfig` writes to its own:\n\n- merge from a `cloneObject` copy of `defaultConfig`,\n- `cloneObject` the custom config and the `modifyConfig` result before normalizing them,\n- pass a config function `Object.freeze(cloneObje\n…(truncated)",
+      "files": [
+        "packages/next/src/server/config-shared.ts (+6 -1)",
+        "packages/next/src/server/config.ts (+21 -60)",
+        "packages/next/src/server/lib/clone-object.ts (+60 -0)",
+        "test/unit/isolated/config.test.ts (+36 -0)"
+      ],
+      "filesTotal": 4
+    }
+  ],
+  "errors": []
+}

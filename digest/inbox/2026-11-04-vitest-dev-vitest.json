@@ -1,0 +1,249 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-11-04T01:28:26Z",
+  "range": {
+    "from": "2026-11-01T22:40:57Z",
+    "to": "2026-11-04T01:28:26Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.1.0",
+      "publishedAt": "2026-11-02T16:03:20Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v5.1.0",
+      "name": "v5.1.0",
+      "publishedAt": "2026-11-02T16:03:20Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0",
+      "prerelease": false,
+      "body": "### &nbsp;&nbsp;&nbsp;🚀 Features\n\n- Add `--last-failed` to run only failed tests &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11558 [<samp>(82f63)</samp>](https://github.com/vitest-dev/vitest/commit/82f634220)\n- Support `Temporal.Instant` and `Temporal.ZonedDateTime` in `vi.setSystemTime()` &nbsp;-&nbsp; by @Prajwal2246, **Prajwal2246**, **Claude Opus 5.5 (1M context)**, @hi-ogawa and **Codex (GPT-6)** in https://github.com/vitest-dev/vitest/issues/11321 [<samp>(f150f)</samp>](https://github.com/vitest-dev/vitest/commit/f150f5108)\n- Introduce `--since-last-run` flag &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11516 [<samp>(08bd9)</samp>](https://github.com/vitest-dev/vitest/commit/08bd93b7e)\n- Expose per-retry/repeat attempt result &nbsp;-&nbsp; by @hi-ogawa, **Codex (GPT-6)** and **Claude Opus 5.5 (1M context)** in https://github.com/vitest-dev/vitest/issues/11232 [<samp>(21be4)</samp>](https://github.com/vitest-dev/vitest/commit/21be412ed)\n- Support fake timers for `node:timers` and `node:timers/promise` &nbsp;-&nbsp; by @hi-ogawa, **OpenCode** and **Codex (GPT-6)** in https://github.com/vitest-dev/vitest/issues/10899 [<samp>(fbe97)</samp>](https://github.com/vitest-dev/vitest/commit/fbe973cae)\n- Allow coverage providers to store data in fs module cache &nbsp;-&nbsp; by @AriPerkkio in https://github.com/vitest-dev/vitest/issues/11747 [<samp>(54a2b)</samp>](https://github.com/vitest-dev/vitest/commit/54a2bdb81)\n- Interactively review failed snapshots &nbsp;-&nbsp; by @macarie and @hi-ogawa in https://github.com/vitest-dev/vitest/issues/11325 [<samp>(54e5b)</samp>](https://github.com/vitest-dev/vitest/commit/54e5b8a8a)\n- **browser**:\n  - Mock modules through an import map &nbsp;-&nbsp; by @sheremet-va in https://github.com/vitest-dev/vitest/issues/11534 [<samp>(707f8)</samp>](https://github.com/vitest-dev/vitest/commit/707f8adf4)\n  - Drop experimental label from trace view &nbsp;-&nbsp; by @hi-ogawa and **Claude Opus 5.5 (1M context)** in https://github.com/vitest-dev/vitest/issues/11518 [<samp>(44c3c)</samp>](https://github.com/vitest-dev/vitest/commit/44c3c2fcf)\n  - Introduce experimental `pointer` API &nbsp;-&nbsp; by @macarie in https://github.com/vitest-dev/vitest/issues/10780 [<samp>(5dc09)</samp>](https://github.com/vitest-dev/vitest/commit/5dc09f0ea)\n  - Capture aria snapshot in trace view &nbsp;-&nbsp; by @hi-ogawa and **Claude Opus 5.5 (1M context)** in https://github.com/vitest-dev/vitest/issues/11492 [<samp>(0cc39)</samp>](https://github.com/vitest-dev/vitest/commit/0cc39fb90)\n  - Show trace steps timeline on terminal on test failure &nbsp;-&nbsp; by @hi-ogawa and **Claude Opus 5.5 (1M context)** in https://github.com/vitest-dev/vitest/issues/11594 [<samp>(973dc)</samp>](https://github.com/vitest-dev/vitest/commit/973dc84be)\n  - Add failure-only trace view mode &nbsp;-&nbsp; by @hi-ogawa and **Claude Opus 5.5 (1M context)** in https://github.com/vitest-dev/vitest/issues\n…(truncated)"
+    }
+  ],
+  "prs": [
+    {
+      "number": 11325,
+      "title": "feat: interactively review failed snapshots",
+      "url": "https://github.com/vitest-dev/vitest/pull/11325",
+      "author": "macarie",
+      "mergedAt": "2026-11-02T06:38:12Z",
+      "hint": "feature",
+      "release": "📦 v5.1.0",
+      "body": "### Description\n\nResolves #2229\nCloses #9297\n\nUX largely inspired by [Insta's `review` command](https://insta.rs/docs/cli/#review).\n\nDemo on a project with different types of snapshots:\n\n[interactive-review.webm](https://github.com/user-attachments/assets/065d01ac-6a28-45c5-8dbe-3ccce32b5f5c)\n\nPossible follow-ups:\n\n- [ ] Handle snapshot removal/obsolete snapshots\n- [ ] Flag to run snapshots as soft assertions (?)\n\n### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:\n- [ ] It's really useful if your PR references an issue where it is discussed ahead of time. If the feature is substantial or introduces breaking changes without a discussion, PR might be closed.\n- [ ] Ideally, include a test that fails without this PR but passes with it.\n- [ ] Please, don't make changes to `pnpm-lock.yaml` unless you introduce a new test example.\n- [ ] Please check [Allow edits by maintainers](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork) to make review process faster. Note that this option is not available for repositories that are owned by Github organizations.\n\n### Tests\n- [ ] Run the tests with `pnpm test:ci`.\n\n### Documentation\n- [ ] If you introduce new functionality, document it. You can run documentation with `pnpm run docs` command.\n\n### Changesets\n- [ ] Changes in changelog are generated from PR name. Please, make sure that it \n…(truncated)",
+      "files": [
+        ".gitattributes (+1 -0)",
+        "packages/browser/src/client/tester/runner.ts (+4 -2)",
+        "packages/snapshot/src/client.ts (+92 -3)",
+        "packages/snapshot/src/index.ts (+4 -1)",
+        "packages/snapshot/src/port/rawSnapshot.ts (+0 -1)",
+        "packages/snapshot/src/update.ts (+79 -0)",
+        "packages/utils/src/types.ts (+5 -0)",
+        "packages/vitest/src/integrations/chai/poll.ts (+1 -7)",
+        "packages/vitest/src/integrations/snapshot/chai.ts (+37 -7)",
+        "packages/vitest/src/integrations/vi.ts (+1 -7)"
+      ],
+      "filesTotal": 33
+    },
+    {
+      "number": 11816,
+      "title": "fix: preserve rootDir in project paths",
+      "url": "https://github.com/vitest-dev/vitest/pull/11816",
+      "author": "btea",
+      "mergedAt": "2026-11-02T06:43:35Z",
+      "hint": "fix",
+      "release": "📦 v5.1.0",
+      "body": "Use a replacement callback so `$&`, `$'`, and `` $` `` in the root directory are treated literally when resolving project definitions. Add an end-to-end regression test for these replacement patterns.",
+      "files": [
+        "packages/vitest/src/node/projects/resolveProjects.ts (+1 -1)",
+        "test/e2e/test/projects.test.ts (+16 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11813,
+      "title": "fix(browser): treat edge as chromium in toHaveStyle",
+      "url": "https://github.com/vitest-dev/vitest/pull/11813",
+      "author": "aliamanatali",
+      "mergedAt": "2026-11-02T06:44:00Z",
+      "hint": "fix",
+      "release": "📦 v5.1.0",
+      "body": "Edge is Chromium-based, so like Chrome it only computes styles for elements in the page's own document. It was missing from both checks and got the detached document, which left the expected styles empty.\n\nFixes #11668",
+      "files": [
+        "packages/browser/src/client/tester/expect/toHaveStyle.ts (+3 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 11753,
+      "title": "feat(experimental): add trace timeline for node",
+      "url": "https://github.com/vitest-dev/vitest/pull/11753",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-11-02T06:56:14Z",
+      "hint": "feature",
+      "release": "📦 v5.1.0",
+      "body": "- closes https://github.com/vitest-dev/vitest/issues/11701\n- follow-up to https://github.com/vitest-dev/vitest/issues/11592\n\nThis PR adds `experimental.traceTimeline`, which records `expect.poll`, `vi.waitFor`, and `vi.waitUntil` steps in Node tests and prints the same timeline as browser mode (#11594) when a test fails. For example:\n\n```\n FAIL  profile.test.js > loads profile\nAssertionError: expected 3 to be 10 // Object.is equality\n...\n\nTrace:\n  step                   start  duration  location\n  vi.waitFor()            +0ms     101ms  profile.test.js:3:12\n  expect.poll().toBe()  +305ms     501ms  profile.test.js:5:52\n```\n\nSome implementation details:\n\n- Only failed attempts keep their steps, like the failure-only mode proposed in #10310, so the option adds almost no overhead to passing tests.\n- Locations resolve like error stacks, so a step inside a helper file points at the helper, and a step inside `vi.defineHelper` points at the line that called the helper.\n- The option has no effect in browser mode, which records its own steps with `browser.traceView`.\n- `vi.waitFor` and `vi.waitUntil` are attributed to the test from `getCurrentTest()`, and are skipped while several tests run concurrently by checking `getRunningTests().size > 1` to avoid false trace attribution.",
+      "files": [
+        "packages/vitest/src/integrations/chai/poll.ts (+42 -2)",
+        "packages/vitest/src/integrations/wait.ts (+7 -2)",
+        "packages/vitest/src/node/cli/cli-config.ts (+4 -0)",
+        "packages/vitest/src/node/config/serializeConfig.ts (+2 -0)",
+        "packages/vitest/src/node/reporters/renderers/trace-timeline.ts (+9 -4)",
+        "packages/vitest/src/node/test-run.ts (+35 -15)",
+        "packages/vitest/src/node/types/config.ts (+9 -0)",
+        "packages/vitest/src/runtime/config.ts (+1 -0)",
+        "packages/vitest/src/runtime/runners/test.ts (+11 -1)",
+        "packages/vitest/src/runtime/trace-timeline.ts (+87 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 11822,
+      "title": "chore: eliminate lint error",
+      "url": "https://github.com/vitest-dev/vitest/pull/11822",
+      "author": "btea",
+      "mergedAt": "2026-11-02T07:51:12Z",
+      "hint": "other",
+      "release": "📦 v5.1.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 11826,
+      "title": "docs(browser): update trace view demo screenshots",
+      "url": "https://github.com/vitest-dev/vitest/pull/11826",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-11-02T08:14:55Z",
+      "hint": "other",
+      "release": "📦 v5.1.0",
+      "filesTotal": 5
+    },
+    {
+      "number": 11790,
+      "title": "refactor(snapshot): unify review update with `SnapshotState` update",
+      "url": "https://github.com/vitest-dev/vitest/pull/11790",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-11-02T08:45:14Z",
+      "hint": "unknown",
+      "release": "📦 v5.1.0",
+      "body": "- follow-up to https://github.com/vitest-dev/vitest/pull/11325\n\nPreviously, the interactive review in #11325 rebuilt each update from the serialized test error (trimmed `actual`, `meta`, `stacks[0]`), even though `SnapshotState` already knew what the update should be for `--update`. The divergence can cause minor differences in how `--update` and review mode apply updates.\n\nThis PR makes `SnapshotState` return the update it would write under `--update`, so that the snapshot review can reuse it.",
+      "files": [
+        "packages/snapshot/src/client.ts (+15 -83)",
+        "packages/snapshot/src/port/state.ts (+38 -0)",
+        "packages/vitest/src/integrations/snapshot/chai.ts (+7 -34)",
+        "packages/vitest/src/node/snapshot-review.ts (+24 -85)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11828,
+      "title": "chore(deps): update vite to 8.3.5",
+      "url": "https://github.com/vitest-dev/vitest/pull/11828",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-02T09:53:52Z",
+      "hint": "other",
+      "release": "📦 v5.1.0",
+      "filesTotal": 64
+    },
+    {
+      "number": 11825,
+      "title": "refactor: share trace types and utils",
+      "url": "https://github.com/vitest-dev/vitest/pull/11825",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-11-02T10:17:05Z",
+      "hint": "unknown",
+      "release": "📦 v5.1.0",
+      "body": "- follow-up to https://github.com/vitest-dev/vitest/pull/11594\n- follow-up to https://github.com/vitest-dev/vitest/pull/11753\n\nThe trace types lived in the browser package, and the logic that merges trace entries lived in the UI. The terminal timeline (#11594) copied both into `vitest`'s reporter, and the node trace timeline (#11753) copied the types again into the runtime.\n\nThis PR finally unifies the utilities into `@vitest/utils/trace`, which is consumed by `ui`, `browser`, and `vitest`. This resolves the TODOs these PRs left about sharing the types.\n\n| | Before | After |\n|---|---|---|\n| Trace data types (`BrowserTraceData`, `BrowserTraceEntry`, `BrowserTraceSnapshot`, `BrowserTraceEntryStatus`) | `packages/browser/src/client/tester/trace.ts`, imported by the UI through a relative path, and copied in `vitest`'s reporter and runtime | `@vitest/utils/trace` |\n| `BrowserTraceEntryKind` | `packages/vitest/src/public/browser.ts` | `@vitest/utils/trace`, still exported from `vitest/browser` |\n| Merging trace artifacts by attempt and pairing range start/end entries | `packages/ui/client/composables/trace-view.ts`, copied in `vitest`'s reporter | `groupTraceAttempts` in `@vitest/utils/trace` |",
+      "files": [
+        "packages/browser/src/client/tester/context.ts (+1 -1)",
+        "packages/browser/src/client/tester/expect-element.ts (+1 -1)",
+        "packages/browser/src/client/tester/tester-utils.ts (+1 -1)",
+        "packages/browser/src/client/tester/trace.ts (+4 -57)",
+        "packages/browser/src/node/commands/trace.ts (+1 -1)",
+        "packages/ui/client/components/trace/TraceView.vue (+2 -5)",
+        "packages/ui/client/composables/trace-view.ts (+11 -82)",
+        "packages/utils/package.json (+5 -0)",
+        "packages/utils/rollup.config.js (+1 -0)",
+        "packages/utils/src/trace.ts (+136 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 11834,
+      "title": "fix(vm): keep assignable accessor globals writable in node environment",
+      "url": "https://github.com/vitest-dev/vitest/pull/11834",
+      "author": "MO2k4",
+      "mergedAt": "2026-11-02T12:39:18Z",
+      "hint": "fix",
+      "release": "📦 v5.1.0",
+      "body": "### Description\n\nWritten by an AI agent (Claude) on behalf of @MO2k4, who has reviewed it.\n\nThe `node` environment's `setupVM()` installs missing host globals as lazy accessors. On first read the getter swaps itself for a data property and copies `writable` from the host descriptor. For an accessor that is `undefined`, so the global becomes read-only even when the host accessor has a setter. On Node 25+ `localStorage` and `sessionStorage` are such accessors, and reading one before assigning it throws `TypeError: Cannot redefine property` under `vmThreads` and `vmForks`.\n\nA host accessor with a setter now stays writable. This also covers `performance`, so its special case is removed. Getter-only accessors such as `navigator` and `crypto` stay read-only.\n\nThe new test reads and then assigns `performance`, `localStorage` and `sessionStorage` in both vm pools. It fails on main under Node 26 with the error above.\n\nResolves #11833\n\n### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:\n\n- [x] It's really useful if your PR references an issue where it is discussed ahead of time. If the feature is substantial or introduces breaking changes without a discussion, PR might be closed.\n- [x] Ideally, include a test that fails without this PR but passes with it.\n- [x] Please, don't make changes to `pnpm-lock.yaml` unless you introduce a new test example.\n- [x] Please check [Allow edits by maintainers](https://docs.github.com/en/pull-request\n…(truncated)",
+      "files": [
+        "packages/vitest/src/integrations/env/node.ts (+2 -4)",
+        "test/e2e/test/vm-threads.test.ts (+28 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 11824,
+      "title": "docs: update sponsors",
+      "url": "https://github.com/vitest-dev/vitest/pull/11824",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-02T13:28:24Z",
+      "hint": "other",
+      "release": "📦 v5.1.0",
+      "filesTotal": 1
+    },
+    {
+      "number": 11821,
+      "title": "docs: vitest 5.1 blog post",
+      "url": "https://github.com/vitest-dev/vitest/pull/11821",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-02T15:32:56Z",
+      "hint": "other",
+      "release": "📦 v5.1.0",
+      "filesTotal": 6
+    },
+    {
+      "number": 11840,
+      "title": "feat(typecheck): add env var to hide experimental warning",
+      "url": "https://github.com/vitest-dev/vitest/pull/11840",
+      "author": "aliamanatali",
+      "mergedAt": "2026-11-03T11:18:06Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Setting VITEST_DISABLE_EXPERIMENTAL_LOG skips the \"Testing types with tsc and vue-tsc is an experimental feature\" warning that is printed when typecheck is enabled.\n\nCloses #9823",
+      "files": [
+        "packages/vitest/src/node/config/resolveConfig.ts (+5 -1)",
+        "docs/config/typecheck.md (+8 -0)",
+        "test/typescript/test/runner.test.ts (+21 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11829,
+      "title": "fix: rerun on file changes after a config restart (fix #11772)",
+      "url": "https://github.com/vitest-dev/vitest/pull/11829",
+      "author": "magurotuna",
+      "mergedAt": "2026-11-03T11:18:44Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11772\n\n### Problem\n\nIn watch mode, if I save `vitest.config.ts`, Vitest runs all tests once. After that, Vitest never runs tests again, even when I save a test file or a source file.\n\n### Cause\n\nWhen a file changes, the watcher first adds the affected test files to `changedTests`. Then it schedules a rerun. The rerun runs those files and clears `changedTests`. If a file is already in `changedTests`, `handleFileChanged` ignores the change, because a rerun is already scheduled.\n\nA config change does two things at once. First, the watcher adds every test file to `changedTests` and schedules a rerun. Second, Vitest restarts, and the restart cancels that scheduled rerun. So nothing clears `changedTests`, and the set still has every test file after the restart.\n\nAs a result, `handleFileChanged` ignores every later change. It expects a rerun that will never come.\n\n### Fix\n\nWhen the restart cancels the scheduled rerun, it now also clears `changedTests` and `invalidates`.\n\n### Test\n\nThe new test saves the config file and waits for the restart. Then it saves a source file and waits for the rerun. Without the fix, the test times out on the last wait.",
+      "files": [
+        "packages/vitest/src/node/core.ts (+5 -0)",
+        "test/e2e/test/watch/file-watching.test.ts (+31 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 1,
+      "vitest-release-bot[bot]": 1
+    }
+  }
+}
