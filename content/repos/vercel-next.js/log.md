@@ -1,9 +1,16 @@
 ---
 title: vercel/next.js 取り込み履歴
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/vercel-next.js
 ---
+
+## 2026-11-04
+
+- 期間: 2026-10-31T11:06:45Z 〜 2026-11-04T01:28:26Z
+- PR 41 件（詳しく 22 件 / 1 行 19 件）、Release 7 件（安定版 3 件: v16.4.4・v15.5.29・v16.4.5、v16.5.0-canary.37〜.40）
+- 更新したページ: [[repos/vercel-next.js/changes/2026-11-04|changes]]（新規）、[[repos/vercel-next.js/releases/v16.4.4|v16.4.4]]（新規）、[[repos/vercel-next.js/releases/v16.4.5|v16.4.5]]（新規）、[[repos/vercel-next.js/releases/v15.5.29|v15.5.29]]（新規）、[[repos/vercel-next.js/releases/v16.4.3|v16.4.3]]、[[repos/vercel-next.js/releases/v15.5.28|v15.5.28]]、[[repos/vercel-next.js/topics/next-config|next.config]]（新規）、[[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]、[[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]、[[repos/vercel-next.js/topics/ルーティング|ルーティング]]、[[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]、[[repos/vercel-next.js/topics/OpenTelemetry|OpenTelemetry]]、[[repos/vercel-next.js/topics/create-next-app|create-next-app]]、[[repos/vercel-next.js/topics/画像最適化|画像最適化]]、[[repos/vercel-next.js/index|index]]
+- エラー: なし
 
 ## 2026-11-02
 

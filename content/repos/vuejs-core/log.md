@@ -1,9 +1,16 @@
 ---
 title: vuejs/core 取り込み履歴
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/vuejs-core
 ---
+
+## 2026-11-04
+
+- 期間: 2026-11-02T00:21:28Z 〜 2026-11-04T01:28:26Z
+- PR 15 件（詳しく 15 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/vuejs-core/changes/2026-11-04|changes]]（新規）、[[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]、[[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]、[[repos/vuejs-core/topics/レンダラー|レンダラー]]、[[repos/vuejs-core/topics/コンパイラ|コンパイラ]]、[[repos/vuejs-core/index|index]]
+- エラー: なし
 
 ## 2026-11-02
 

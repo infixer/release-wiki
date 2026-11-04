@@ -1,6 +1,6 @@
 ---
 title: Claude apps gateway
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -20,6 +20,8 @@ v2.1.307 で、gateway のセッションで `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_M
 v2.1.312 で `oidc.user_id_claim` が加わり、`sub` 以外の id_token のクレーム（Microsoft Entra ID の `oid` など）で利用者を識別できるようになった。
 v2.1.314 で upstream に任意の `groups` 一覧が加わり、一覧の IdP グループの開発者だけをその upstream に送れるようになった（failover でも同じ）。Bedrock の upstream には `guardrail_trace` が加わり、どの Bedrock guardrail のフィルターが反応したかを一致したテキスト抜きでログに残せる。tool search の `tool_reference` ブロックを受け付けない gateway の背後では、tool search 無しで 1 回送り直すようになった。
 v2.1.316 で、グループのメンバーで共有する月間予算（`pooled_budget`）、一致したポリシーをすべて重ねて適用する `managed.policy_mode: layered`、Bedrock guardrail の prompt attacks フィルター用に入力タグでプロンプトを囲む `guardrail.input_tagging` が加わった。リクエストで指定されたすべてのモデルを `availableModels`・`deniedModels`・`models` で確認するようになり、ブロックされたモデルは該当フィールドを示す 400 になる。
+v2.1.317 で、管理 API にコストレポート `GET /v1/organizations/analytics/cost`（期間内の過去の支出を合計・開発者ごと・日ごと・IdP グループごとに取得）が加わった。`admin:` を設定した gateway は各開発者の IdP グループを毎日記録し、`admin.identity_retention_days` の間保持する（コストレポートのグループ分けに使う）。
+v2.1.318 で、`mantle` upstream に `assume_role` が加わり、別の AWS アカウントのロールを使ったり、開発者ごとに AWS のコストを割り当てたりできる。
 
 ## 主な API・オプション
 
@@ -35,9 +37,14 @@ v2.1.316 で、グループのメンバーで共有する月間予算（`pooled_
 - spend limits の管理 API の `pooled_budget` — グループで共有する月間予算（各メンバーの上限に加えて適用。v2.1.316）
 - `managed.policy_mode: layered` — 一致したポリシーをすべて重ねて適用（v2.1.316）
 - Bedrock upstream の `guardrail.input_tagging` — 入力タグでプロンプトを囲む（`all_messages_and_system` でシステムプロンプトも。v2.1.316）
+- 管理 API の `GET /v1/organizations/analytics/cost` — 過去の支出のコストレポート（合計・開発者・日・IdP グループごと。v2.1.317）
+- `admin.identity_retention_days` — 開発者の IdP グループの日次記録の保持期間（v2.1.317）
+- `mantle` upstream の `assume_role` — 別の AWS アカウントのロール・開発者ごとの AWS のコスト割り当て（v2.1.318）
 
 ## 変更履歴
 
+- 2026-11-04 — `mantle` upstream に `assume_role` を追加 📦 v2.1.318 · [[repos/anthropics-claude-code/releases/v2.1.318|リリース]]
+- 2026-11-03 — 管理 API にコストレポート `GET /v1/organizations/analytics/cost`、IdP グループの日次記録（`admin.identity_retention_days`）を追加。base URL の LLM gateway が安全チェックに 403・422 を返すと auto mode が毎ターン失敗する問題を修正 📦 v2.1.317 · [[repos/anthropics-claude-code/releases/v2.1.317|リリース]]
 - 2026-10-31 — `pooled_budget`・`managed.policy_mode: layered`・`guardrail.input_tagging` を追加。リクエストのすべてのモデルを `availableModels`・`deniedModels`・`models` で確認するよう修正 📦 v2.1.316 · [[repos/anthropics-claude-code/releases/v2.1.316|リリース]]
 - 2026-10-30 — upstream に `groups`、Bedrock upstream に `guardrail_trace` を追加。`tool_reference` を受け付けない gateway の背後で拒否が続く問題を修正 📦 v2.1.314 · [[repos/anthropics-claude-code/releases/v2.1.314|リリース]]
 - 2026-10-28 — `oidc.user_id_claim` を追加（Entra ID の `oid` などで利用者を識別）📦 v2.1.312 · [[repos/anthropics-claude-code/releases/v2.1.312|リリース]]
@@ -56,3 +63,5 @@ v2.1.316 で、グループのメンバーで共有する月間予算（`pooled_
 - [[repos/anthropics-claude-code/releases/v2.1.312|v2.1.312]]
 - [[repos/anthropics-claude-code/releases/v2.1.314|v2.1.314]]
 - [[repos/anthropics-claude-code/releases/v2.1.316|v2.1.316]]
+- [[repos/anthropics-claude-code/releases/v2.1.317|v2.1.317]]
+- [[repos/anthropics-claude-code/releases/v2.1.318|v2.1.318]]

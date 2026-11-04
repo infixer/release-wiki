@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-11-04
+
+- 期間: 2026-11-02T00:04:24Z 〜 2026-11-04T01:28:26Z
+- PR 87 件（詳しく 30 件 / 1 行 57 件）、Release 0 件
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-11-04|changes]]（新規）、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/エージェントスキル|エージェントスキル]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 57 件（修正 29 件・リファクタ/性能改善 9 件を含む）は「その他」に 1 行で書いた。`hint: feature` の #17618（クレートのモジュールの循環を抑える開発用ツール）は「その他」に入れた。期間内の PR はすべて ⏳ 未リリース。inbox の `latest.stable` は v12.16.1 のままだが、前回までに取り込んだ v12.17.0 を最新の安定版のままとした
+- エラー: なし
 
 ## 2026-11-02
 

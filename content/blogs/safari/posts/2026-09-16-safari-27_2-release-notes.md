@@ -55,3 +55,4 @@ Safari 27.2 は iOS 27.2・iPadOS 27.2・visionOS 27.2・macOS 27.2、および 
 
 - 前の記事: [[blogs/safari/posts/2026-10-23-safari-27_1-release-notes|Safari 27.1 リリースノート]]、[[blogs/safari/posts/2026-09-14-safari-27-release-notes|Safari 27 リリースノート]]
 - 関連: [[blogs/safari/posts/2026-03-24-safari-26_4-release-notes|Safari 26.4 リリースノート]]（`flow-tolerance` の追加元）
+- 次の記事: [[blogs/safari/posts/2026-11-03-safari-27_3-release-notes|Safari 27.3 Beta リリースノート]]

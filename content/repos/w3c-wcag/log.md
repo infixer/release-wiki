@@ -1,9 +1,16 @@
 ---
 title: w3c/wcag 取り込み履歴
-updated: 2026-10-21
+updated: 2026-11-04
 tags:
   - repo/w3c-wcag
 ---
+
+## 2026-11-04
+
+- 期間: 2026-10-29T21:32:03Z 〜 2026-11-04T01:28:26Z
+- PR 8 件（詳しく 8 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/w3c-wcag/changes/2026-11-04|changes]]（新規）、[[repos/w3c-wcag/topics/失敗例|失敗例]]（新規）、[[repos/w3c-wcag/topics/名前・役割・値|名前・役割・値]]（新規）、[[repos/w3c-wcag/topics/アクセシブルな認証|アクセシブルな認証]]（新規）、[[repos/w3c-wcag/topics/エラーの特定|エラーの特定]]（新規）、[[repos/w3c-wcag/topics/ターゲットのサイズ|ターゲットのサイズ]]（新規）、[[repos/w3c-wcag/topics/HTMLの達成方法|HTMLの達成方法]]（新規）、[[repos/w3c-wcag/topics/ラベルまたは説明|ラベルまたは説明]]、[[repos/w3c-wcag/topics/ARIAの達成方法|ARIAの達成方法]]、[[repos/w3c-wcag/index|index]]
+- エラー: なし
 
 ## 2026-10-21
 

@@ -1,6 +1,6 @@
 ---
 title: vuejs/core
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/vuejs-core
 ---
@@ -14,16 +14,16 @@ tags:
 
 ## 直近の注目変更
 
-- `<dialog>` の `closedby` 属性の型を追加（[#16064](https://github.com/vuejs/core/pull/16064)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]]
-- 静的な内容の文字列化で真偽値のバインディングの意味を保つ（[#16055](https://github.com/vuejs/core/pull/16055)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]
-- `disablepictureinpicture`・`disableremoteplayback` を真偽値の属性として扱う（[#15952](https://github.com/vuejs/core/pull/15952)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]]
-- SSR: 非同期 setup のエラーを呼び出し元に伝える（[#15857](https://github.com/vuejs/core/pull/15857)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
-- Transition: コメントで包まれたコンポーネントのルートの切り替え（`out-in` / `in-out`・KeepAlive）を修正（[#15853](https://github.com/vuejs/core/pull/15853)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/トランジション|トランジション]]
-- TransitionGroup: 入れ子のグループの移動アニメーションを修正（[#15848](https://github.com/vuejs/core/pull/15848)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/トランジション|トランジション]]
-- Teleport: `to` を変えたときの `targetStart` と子の順序を修正（[#15818](https://github.com/vuejs/core/pull/15818)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
-- `Map` / `Set` の `shallowReactive()` / `shallowReadonly()` で `isShallow()` が `true` を返すように（[#15793](https://github.com/vuejs/core/pull/15793)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]]
-- 本番ビルドでも `v-show` の子に Transition の `persisted` を注入（#4845 の再発を修正）（[#15783](https://github.com/vuejs/core/pull/15783)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]、[[repos/vuejs-core/topics/トランジション|トランジション]]
-- sync / immediate のウォッチャーのコールバックで外側の effect に依存を追跡させない（[#15782](https://github.com/vuejs/core/pull/15782)）📦 v3.5.44 · トピック: [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]]
+- KeepAlive: 解決した Suspense の子をすぐにキャッシュ（戻ったときに setup を再実行しない）（[#16119](https://github.com/vuejs/core/pull/16119)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- Suspense: アンマウントした境界の `out-in` の `afterLeave` を飛ばす（[#16115](https://github.com/vuejs/core/pull/16115)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- 非同期 setup が reject したコンポーネントは何も描画しない（[#16111](https://github.com/vuejs/core/pull/16111)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]、[[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
+- Suspense: 保持された内容の中の入れ子の境界の更新をパッチ（[#16109](https://github.com/vuejs/core/pull/16109)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- SSR: 静的な `style` 属性をコンパイル時に描画（作者の計測で -95〜98%）（[#16010](https://github.com/vuejs/core/pull/16010)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]、[[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
+- 停止したエラー境界を非同期のエラーで飛ばす（[#16061](https://github.com/vuejs/core/pull/16061)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
+- HMR: 保留中の非同期ルートが解決した後にリロードをやり直す（[#16060](https://github.com/vuejs/core/pull/16060)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
+- ハイドレーション: ホストのノードを置き換えるときだけコンポーネントの `el` を更新（[#16001](https://github.com/vuejs/core/pull/16001)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
+- Suspense: 境界のアンマウント後に fallback をマウントしない（[#15939](https://github.com/vuejs/core/pull/15939)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- Suspense: suspensible な子の境界をアンマウントしたら親への依存を返す（親が fallback のまま戻らない問題）（[#15870](https://github.com/vuejs/core/pull/15870)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
 
 ## トピック
 
@@ -40,4 +40,4 @@ tags:
 ## 取り込み
 
 - [[repos/vuejs-core/log|取り込み履歴]]
-- 最近の変更: [[repos/vuejs-core/changes/2026-11-02|2026-11-02]]、[[repos/vuejs-core/changes/2026-10-30|2026-10-30]]、[[repos/vuejs-core/changes/2026-10-28|2026-10-28]]、[[repos/vuejs-core/changes/2026-10-26|2026-10-26]]、[[repos/vuejs-core/changes/2026-10-23|2026-10-23]]
+- 最近の変更: [[repos/vuejs-core/changes/2026-11-04|2026-11-04]]、[[repos/vuejs-core/changes/2026-11-02|2026-11-02]]、[[repos/vuejs-core/changes/2026-10-30|2026-10-30]]、[[repos/vuejs-core/changes/2026-10-28|2026-10-28]]、[[repos/vuejs-core/changes/2026-10-26|2026-10-26]]

@@ -1,9 +1,16 @@
 ---
 title: adobe/react-spectrum 取り込み履歴
-updated: 2026-10-30
+updated: 2026-11-04
 tags:
   - repo/adobe-react-spectrum
 ---
+
+## 2026-11-04
+
+- 期間: 2026-10-28T17:00:38Z 〜 2026-11-04T01:28:26Z
+- PR 7 件（詳しく 6 件 / 1 行 1 件）、Release 0 件
+- 更新したページ: [[repos/adobe-react-spectrum/changes/2026-11-04|changes]]（新規）、[[repos/adobe-react-spectrum/topics/Collections|Collections]]、[[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]、[[repos/adobe-react-spectrum/topics/Tabs|Tabs]]（新規）、[[repos/adobe-react-spectrum/topics/ロケール最適化|ロケール最適化]]、[[repos/adobe-react-spectrum/index|index]]
+- エラー: なし
 
 ## 2026-10-30
 

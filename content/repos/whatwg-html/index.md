@@ -1,6 +1,6 @@
 ---
 title: whatwg/html
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/whatwg-html
 ---
@@ -14,6 +14,8 @@ tags:
 
 ## 直近の注目変更
 
+- パーサーが挿入したフォームコントロールでも挿入手順の残り（内部リソースのリンクの処理など）を実行するように（[#13182](https://github.com/whatwg/html/pull/13182)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/フォーム|フォーム]]
+- node navigable が null の文書（`createHTMLDocument()` など）で「has focus steps」が false を返すように（[#13163](https://github.com/whatwg/html/pull/13163)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/フォーカス|フォーカス]]
 - CORP のチェックを HTTP(S) のナビゲーションのレスポンスだけで行うように（COEP の下で about:blank・data:・blob: をブロックしない）（[#13087](https://github.com/whatwg/html/pull/13087)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/COOP-COEP|COOP-COEP]]
 - ポップアップとトップレベルの data: 文書のセキュアコンテキスト判定を作成元に合わせる（[#13103](https://github.com/whatwg/html/pull/13103)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/セキュアコンテキスト|セキュアコンテキスト]]
 - Fragment のスクリプティングモードで `force async` を false にしない（[#13080](https://github.com/whatwg/html/pull/13080)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/script要素|script要素]]
@@ -22,8 +24,6 @@ tags:
 - シリアライズと転送を同じ agent cluster に制限できるように（`[SameAgentCluster]`、`VideoFrame` などの向け）（[#13055](https://github.com/whatwg/html/pull/13055)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/シリアライズと転送|シリアライズと転送]]
 - 位置を指定して HTML を挿入する `appendHTML()`・`prependHTML()`・`beforeHTML()`・`afterHTML()`・`replaceWithHTML()`（と `*Unsafe()` 版）を追加（[#12753](https://github.com/whatwg/html/pull/12753)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
 - パースしながらサニタイズするように（独立した「sanitize」アルゴリズムを廃止）（[#12756](https://github.com/whatwg/html/pull/12756)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/サニタイザー|サニタイザー]]
-- 文字列を渡したタイマーの CSP チェックを同期的に（ブロック時は `0` を返す）（[#13023](https://github.com/whatwg/html/pull/13023)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/タイマー|タイマー]]
-- 取り除かれたメディアの `source` 候補に `error` を発火しないように（[#13043](https://github.com/whatwg/html/pull/13043)）⏳ 未リリース · トピック: [[repos/whatwg-html/topics/メディア要素|メディア要素]]
 
 ## トピック
 
@@ -44,7 +44,8 @@ tags:
 - [[repos/whatwg-html/topics/セキュアコンテキスト|セキュアコンテキスト]] — 文書がセキュアコンテキストかどうかの判定（ポップアップ・data: 文書）
 - [[repos/whatwg-html/topics/タイマー|タイマー]] — `setTimeout()`・`setInterval()` の初期化手順（文字列の Trusted Types・CSP チェック）
 - [[repos/whatwg-html/topics/廃止された機能|廃止された機能]] — 仕様の廃止された機能（obsolete）の節（`input` の `hspace`・`vspace` など）
-- [[repos/whatwg-html/topics/フォーカス|フォーカス]] — フォーカス移動時の `focus` イベント発火
+- [[repos/whatwg-html/topics/フォーカス|フォーカス]] — フォーカス移動時の `focus` イベント発火と「has focus steps」
+- [[repos/whatwg-html/topics/フォーム|フォーム]] — フォームコントロールの挿入手順とフォームオーナーのリセット
 - [[repos/whatwg-html/topics/フレームとナビゲーブル|フレームとナビゲーブル]] — frame/iframe の子ナビゲーブル作成とナビゲート時の initialInsertion
 - [[repos/whatwg-html/topics/ベースURL|ベースURL]] — Document のベース URL（`baseURI`、複製時の base URL override）
 - [[repos/whatwg-html/topics/メディア要素|メディア要素]] — メディア要素の `loading` 属性とリソース選択（`source` 候補の扱い）
@@ -53,4 +54,4 @@ tags:
 ## 取り込み
 
 - [[repos/whatwg-html/log|取り込み履歴]]
-- 最近の変更: [[repos/whatwg-html/changes/2026-11-02|2026-11-02]]、[[repos/whatwg-html/changes/2026-10-28|2026-10-28]]、[[repos/whatwg-html/changes/2026-10-23|2026-10-23]]、[[repos/whatwg-html/changes/2026-10-21|2026-10-21]]、[[repos/whatwg-html/changes/2026-10-19|2026-10-19]]
+- 最近の変更: [[repos/whatwg-html/changes/2026-11-04|2026-11-04]]、[[repos/whatwg-html/changes/2026-11-02|2026-11-02]]、[[repos/whatwg-html/changes/2026-10-28|2026-10-28]]、[[repos/whatwg-html/changes/2026-10-23|2026-10-23]]、[[repos/whatwg-html/changes/2026-10-21|2026-10-21]]

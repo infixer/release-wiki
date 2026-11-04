@@ -1,6 +1,6 @@
 ---
 title: mod API
-updated: 2026-10-26
+updated: 2026-11-04
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -18,6 +18,7 @@ v2.1.299〜v2.1.301 で UI 部品が増えた: `Text` の `size`・`weight`・`m
 managed settings でインストールした mod は `$.prompt.media`（添付の画像・文書のバイト列）と `$.session.identity()` を使える。
 v2.1.310 で `Image` が tmux（`allow-passthrough`・`focus-events` 有効）や kitty・Ghostty・iTerm2 3.5+ の全画面描画でも描画されるようになった（以前は `alt` テキストだけ）。
 v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアログかホストのコールバックだけが承認でき、尋ねる相手がいなければ拒否）が、イベントに `e.isReadOnly` が加わった。
+v2.1.318 で `$.model.fork` に `effort` オプションが加わり、セッションの effort に関係なく別の処理を `low` などで動かせる（結果には送った effort が入る）。セッション中に Claude Code が書いた mod を有効にするかの回答も記録される。
 
 ## 主な API・オプション
 
@@ -31,9 +32,11 @@ v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアロ�
 - `prompt.change` / `agent.spawn` / `skill.prompt` / `session.append`（`queue`）— mod のフック
 - `$.prompt.media` / `$.session.identity()` — managed settings でインストールした mod 向け
 - `tool.check` の `decider: "person"` / `e.isReadOnly` — 人だけが承認できる ask と、読み取り専用の呼び出しの判定（v2.1.304）
+- `$.model.fork({ effort })` — 別の処理を指定した effort で動かす（結果に送った effort が入る。v2.1.318）
 
 ## 変更履歴
 
+- 2026-11-04 — `$.model.fork` に `effort` オプション、セッションで書いた mod を有効にするかの回答の記録を追加 📦 v2.1.318 · [[repos/anthropics-claude-code/releases/v2.1.318|リリース]]
 - 2026-10-24 — `Image` を tmux（`allow-passthrough`・`focus-events` 有効）、kitty・Ghostty・iTerm2 3.5+ の全画面描画で描画できるように 📦 v2.1.310 · [[repos/anthropics-claude-code/releases/v2.1.310|リリース]]
 - 2026-10-19 — `tool.check` の回答に `decider: "person"`、イベントに `e.isReadOnly` を追加。先に動くプラグインが mod のフックを飛ばすと transcript に行を出すように。mod の再読み込み失敗で残る版のツール・コマンドが消える問題、同じラベルで `key` の無いボタンのクリックが失われる問題を修正 📦 v2.1.304 · [[repos/anthropics-claude-code/releases/v2.1.304|リリース]]
 - 2026-10-15 — `Input` に `rows`（複数行のテキスト欄）を追加 📦 v2.1.301 · [[repos/anthropics-claude-code/releases/v2.1.301|リリース]]
@@ -55,3 +58,4 @@ v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアロ�
 - [[repos/anthropics-claude-code/topics/エージェントビュー|エージェントビュー]]
 - [[repos/anthropics-claude-code/releases/v2.1.304|v2.1.304]]
 - [[repos/anthropics-claude-code/releases/v2.1.310|v2.1.310]]
+- [[repos/anthropics-claude-code/releases/v2.1.318|v2.1.318]]

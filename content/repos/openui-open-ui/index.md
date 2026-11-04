@@ -1,6 +1,6 @@
 ---
 title: openui/open-ui
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/openui-open-ui
 ---
@@ -40,4 +40,4 @@ W3C Open UI Community Group のリポジトリ。フォーム部品やポップ�
 ## 取り込み
 
 - [[repos/openui-open-ui/log|取り込み履歴]]
-- 最近の変更: [[repos/openui-open-ui/changes/2026-11-02|2026-11-02]]、[[repos/openui-open-ui/changes/2026-10-30|2026-10-30]]、[[repos/openui-open-ui/changes/2026-10-26|2026-10-26]]、[[repos/openui-open-ui/changes/2026-10-23|2026-10-23]]、[[repos/openui-open-ui/changes/2026-10-19|2026-10-19]]
+- 最近の変更: [[repos/openui-open-ui/changes/2026-11-04|2026-11-04]]、[[repos/openui-open-ui/changes/2026-11-02|2026-11-02]]、[[repos/openui-open-ui/changes/2026-10-30|2026-10-30]]、[[repos/openui-open-ui/changes/2026-10-26|2026-10-26]]、[[repos/openui-open-ui/changes/2026-10-23|2026-10-23]]

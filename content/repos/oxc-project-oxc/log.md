@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-11-04
+
+- 期間: 2026-11-02T00:45:38Z 〜 2026-11-04T01:28:26Z
+- PR 61 件（詳しく 21 件 / 1 行 40 件、うち brief 31 件）、Release 3 件（安定版 3 件: crates_v0.157.0、oxfmt_v0.76.0、oxlint_v1.91.0）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-11-04|changes]]（新規）、[[repos/oxc-project-oxc/releases/crates_v0.157.0|crates_v0.157.0]]（新規）、[[repos/oxc-project-oxc/releases/oxfmt_v0.76.0|oxfmt_v0.76.0]]（新規）、[[repos/oxc-project-oxc/releases/oxlint_v1.91.0|oxlint_v1.91.0]]（新規）、[[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]、[[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/ES2022クラス変換|ES2022クラス変換]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]、[[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]、[[repos/oxc-project-oxc/topics/カバレッジ・テスト基盤|カバレッジ・テスト基盤]]（関連リンクのみ）、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 4 件、oxc-guard[bot] 2 件）
 
 ## 2026-11-02
 

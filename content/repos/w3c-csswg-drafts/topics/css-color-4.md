@@ -1,6 +1,6 @@
 ---
 title: css-color-4
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/w3c-csswg-drafts
   - topic
@@ -11,6 +11,7 @@ tags:
 CSS の色（`lch()`・`oklch()` などの色空間と、その変換）を定義する仕様。仕様内の LCH・Oklch の変換コードから「H（色相）が missing なら a = b = 0 にする」処理が削除され、往復変換（round-tripping）を妨げないようになった。`<opacity-value>` のシリアライズの規則は、`opacity` プロパティだけでなくこの値を取るすべてのプロパティに適用される（#10426）。色域マッピング（gamut mapping）の 3 つのアルゴリズム（Binary Search with Local MINDE・EdgeSeeker・Ray Trace）すべてに疑似コードが揃い、EdgeSeeker は LUT を OkLCh の色相で索引し、虚の原色を持たない RGB 色空間で色域外の色だけをマッピングする形になった。
 2026-10-28 の取り込みで、powerless な色相の成分を missing に変えるときは「colorful」な成分を 0 にすると明確になり（#14531）、その処理だけを示す別のサンプル `powerlessToMissing.js` が加わった（既存の変換のサンプルは powerless や carry forward を実装していないため）。
 RGB → HSL のサンプルコード（`better-rgbToHsl.js`）は epsilon を使うようになった（#14531、未リリース）。
+2026-11-04 の取り込みで、補間によって色域外の色が生じうること（極座標の色空間では、始点と終点が色域内でも途中が色域外になりうること）を示す説明と図が加わった（未リリース）。
 
 ## 主な API・オプション
 
@@ -19,6 +20,7 @@ RGB → HSL のサンプルコード（`better-rgbToHsl.js`）は epsilon を使
 
 ## 変更履歴
 
+- 2026-11-02 — 補間で色域外の色が生じうることを示す説明と図（`interpolate-out-of-gamut.svg`）を追加（[`a26d67b`](https://github.com/w3c/csswg-drafts/commit/a26d67b414724bf8c1d8b27d1834aa9dd8be9aad) ほか 2 件）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-11-04|変更]]
 - 2026-11-01 — レイトレーシングのアルゴリズムを調整し、`oklch` の黒に近い領域で純粋な赤になるエッジケースを修正。アンカーのクランプを追加（[#14698](https://github.com/w3c/csswg-drafts/pull/14698)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-11-02|変更]]
 - 2026-10-29 — RGB → HSL のサンプルコードで epsilon を使う（#14531）（[`42d4d79`](https://github.com/w3c/csswg-drafts/commit/42d4d796584b070a7e68935eed58831e28bfe469)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-30|変更]]
 - 2026-10-27 — powerless な色相を missing に変えるとき「colorful」な成分を 0 にすると明確化（#14531）（[`1da0d9f`](https://github.com/w3c/csswg-drafts/commit/1da0d9fb61d62f53e893b58f85bd109f0c8b9321)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-28|変更]]
@@ -38,3 +40,5 @@ RGB → HSL のサンプルコード（`better-rgbToHsl.js`）は epsilon を使
 - [[repos/w3c-csswg-drafts/changes/2026-10-28|2026-10-28 の変更]]
 - [[repos/w3c-csswg-drafts/topics/css-color-hdr-1|css-color-hdr-1]]
 - [[repos/w3c-csswg-drafts/changes/2026-11-02|2026-11-02 の変更]]
+- [[repos/w3c-csswg-drafts/changes/2026-11-04|2026-11-04 の変更]]
+- [[repos/w3c-csswg-drafts/topics/css-images-4|css-images-4]]

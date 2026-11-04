@@ -1,6 +1,6 @@
 ---
 title: oxc-project/oxc
-updated: 2026-11-02
+updated: 2026-11-04
 tags:
   - repo/oxc-project-oxc
 ---
@@ -9,29 +9,29 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [oxlint_v1.90.0](https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.90.0)（2026-10-27）→ [[repos/oxc-project-oxc/releases/oxlint_v1.90.0|まとめ]]
+- 安定版: [oxlint_v1.91.0](https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.91.0)（2026-11-03）→ [[repos/oxc-project-oxc/releases/oxlint_v1.91.0|まとめ]]
 - プレリリース: なし
 
-同日に公開された他の安定版: [[repos/oxc-project-oxc/releases/crates_v0.156.0|crates_v0.156.0]]、[[repos/oxc-project-oxc/releases/oxfmt_v0.75.0|oxfmt_v0.75.0]]（いずれも 2026-10-27）
+ほかの最新の安定版: [[repos/oxc-project-oxc/releases/oxfmt_v0.76.0|oxfmt_v0.76.0]]（2026-11-03）、[[repos/oxc-project-oxc/releases/crates_v0.157.0|crates_v0.157.0]]（2026-11-02）
 
 ## 直近の注目変更
 
-- Oxfmt: `.html` と html-in-js などの埋め込み HTML を Prettier ではなく新しいクレート `oxc_formatter_htmlish` でネイティブに整形（破壊的変更）（[#28272](https://github.com/oxc-project/oxc/pull/28272)、[#28273](https://github.com/oxc-project/oxc/pull/28273)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]
-- HTML フォーマッタ: 開始タグを省略した `html`・`head`・`body` の終了タグ、`</${For}>` のような動的なタグ名の閉じタグに対応（[#28388](https://github.com/oxc-project/oxc/pull/28388)、[#28389](https://github.com/oxc-project/oxc/pull/28389)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]
-- レキサー: 実行時の CPU 機能検出に向けて、`carve`・`Lanes`・`disambiguate` などの関数を CPU 機能セットごとにコンパイル（[#28613](https://github.com/oxc-project/oxc/pull/28613) など 25 件）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]
-- linter ルールごとのメモリ割り当ての計測を追加（ローカル専用）（[#28470](https://github.com/oxc-project/oxc/pull/28470)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/カバレッジ・テスト基盤|カバレッジ・テスト基盤]]
-- React Compiler: 未マージの修正 11 件をまとめて取り込み、28 件の issue を解決（[#28195](https://github.com/oxc-project/oxc/pull/28195)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]
-- パーサー: 重複した import 属性のキーに専用のエラー、かっこで囲んだ `#x in obj` を許可、TS の ESTree の `Program` の範囲にコメントを含める（[#28262](https://github.com/oxc-project/oxc/pull/28262)、[#28284](https://github.com/oxc-project/oxc/pull/28284)、[#28326](https://github.com/oxc-project/oxc/pull/28326)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
-- 数値の文字列化を `zmij_ecma` に置き換えて高速化（[#28282](https://github.com/oxc-project/oxc/pull/28282)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
-- oxlint: GitLab 形式のフィンガープリントを診断ごとに一意に（[#28307](https://github.com/oxc-project/oxc/pull/28307)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]
-- JS プラグイン: AST ノードを `Object.create` で生成して高速化（[#27816](https://github.com/oxc-project/oxc/pull/27816)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/JSプラグイン|JSプラグイン]]
-- `import/no-cycle` の割り当て削減、`unicorn/no-await-expression-member` の高速化（[#27478](https://github.com/oxc-project/oxc/pull/27478)、[#28348](https://github.com/oxc-project/oxc/pull/28348)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
+- lexer: `cpu`・`simd` 以外の `#[cfg(target_arch)]` を外し、AVX2・Neon・汎用のすべてのコードを全プラットフォームでコンパイル（[#28772](https://github.com/oxc-project/oxc/pull/28772)）、アラインされた `VecData128` / `VecData256` を導入（[#28766](https://github.com/oxc-project/oxc/pull/28766)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]
+- oxlint: `--init` が既存の設定ファイルを上書きせずエラーで終了（[#28754](https://github.com/oxc-project/oxc/pull/28754)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]
+- lint ルールの修正: `no-misleading-character-class`・`unicorn/no-zero-fractions`・`prefer-spread`・`no-fallthrough`（[#28733](https://github.com/oxc-project/oxc/pull/28733)、[#28752](https://github.com/oxc-project/oxc/pull/28752)、[#28753](https://github.com/oxc-project/oxc/pull/28753)、[#28755](https://github.com/oxc-project/oxc/pull/28755)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]
+- パーサー: `st\u0061tic` などエスケープされた文脈キーワードを名前として扱う（[#28748](https://github.com/oxc-project/oxc/pull/28748)）、semantic: ブロックの型の束縛を巻き上げる `var` と分ける（[#28601](https://github.com/oxc-project/oxc/pull/28601)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/パーサー|パーサー]]
+- transformer: プライベートアクセサーへの `+=`・`??=`・`++` の値を保つ（[#28716](https://github.com/oxc-project/oxc/pull/28716)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/ES2022クラス変換|ES2022クラス変換]]
+- Minifier: 配列の `concat` の連鎖の誤った統合を修正（[#28261](https://github.com/oxc-project/oxc/pull/28261)）、codegen: ソースマップで識別子の名前を保つ（[#26051](https://github.com/oxc-project/oxc/pull/26051)）⏳ 未リリース · トピック: [[repos/oxc-project-oxc/topics/Minifier|Minifier]]
+- lexer: SIMD のベクター型 `Vec256` / `Vec128` を導入し、CPU 機能のマクロを proc macro（`oxc_lexer_macros`）に（[#28679](https://github.com/oxc-project/oxc/pull/28679)、[#28681](https://github.com/oxc-project/oxc/pull/28681)）📦 oxlint_v1.91.0 · トピック: [[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]
+- Oxfmt: XHTML に対応（[#28703](https://github.com/oxc-project/oxc/pull/28703)）、アローの条件式の本体のかっこを保つ（[#28710](https://github.com/oxc-project/oxc/pull/28710)）📦 oxlint_v1.91.0 · トピック: [[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]
+- Oxfmt: `.html` と埋め込み HTML を `oxc_formatter_htmlish` でネイティブに整形（破壊的変更）（[#28273](https://github.com/oxc-project/oxc/pull/28273)、[#28272](https://github.com/oxc-project/oxc/pull/28272)）📦 oxfmt_v0.76.0 · トピック: [[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]
+- linter ルールごとのメモリ割り当ての計測を追加（ローカル専用）（[#28470](https://github.com/oxc-project/oxc/pull/28470)）📦 oxlint_v1.91.0 · トピック: [[repos/oxc-project-oxc/topics/カバレッジ・テスト基盤|カバレッジ・テスト基盤]]
 
 ## トピック
 
 - [[repos/oxc-project-oxc/topics/ES2022クラス変換|ES2022クラス変換]] — `oxc_transformer` の ES2022 クラス機能（静的ブロックなど）の下位変換
 - [[repos/oxc-project-oxc/topics/Explicit-Resource-Management|Explicit-Resource-Management]] — `using` / `await using` 宣言の下位変換（`oxc_transformer`）
-- [[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]] — `oxc_formatter_htmlish` クレート（Oxfmt の HTML・埋め込み HTML の整形に使用、未リリース）
+- [[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]] — `oxc_formatter_htmlish` クレート（oxfmt_v0.76.0 から Oxfmt の HTML・埋め込み HTML の整形に使用）
 - [[repos/oxc-project-oxc/topics/Isolated-Declarations|Isolated-Declarations]] — `oxc_isolated_declarations` による `.d.ts` 生成
 - [[repos/oxc-project-oxc/topics/JSプラグイン|JSプラグイン]] — oxlint の JS プラグインの実行基盤（CFG ウォーカー・ルール計測）
 - [[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]] — vitest/unicorn/import/react 等、個別 lint ルールの不具合修正・オプション追加
@@ -58,4 +58,4 @@ tags:
 ## 取り込み
 
 - [[repos/oxc-project-oxc/log|取り込み履歴]]
-- 最近の変更: [[repos/oxc-project-oxc/changes/2026-11-02|2026-11-02]]、[[repos/oxc-project-oxc/changes/2026-10-30|2026-10-30]]、[[repos/oxc-project-oxc/changes/2026-10-28|2026-10-28]]、[[repos/oxc-project-oxc/changes/2026-10-26|2026-10-26]]、[[repos/oxc-project-oxc/changes/2026-10-23|2026-10-23]]
+- 最近の変更: [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04]]、[[repos/oxc-project-oxc/changes/2026-11-02|2026-11-02]]、[[repos/oxc-project-oxc/changes/2026-10-30|2026-10-30]]、[[repos/oxc-project-oxc/changes/2026-10-28|2026-10-28]]、[[repos/oxc-project-oxc/changes/2026-10-26|2026-10-26]]
