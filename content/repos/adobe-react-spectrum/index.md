@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -15,30 +15,32 @@ tags:
 
 ## 直近の注目変更
 
+- PreviewTrigger: 閉じているときは Escape を止めない（親のダイアログが閉じない問題）（[#10921](https://github.com/adobe/react-spectrum/pull/10921)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
+- 単独の `Popover` の `aria-label` をトリガーのラベルより優先（[#10789](https://github.com/adobe/react-spectrum/pull/10789)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]
+- キーボードの Space / Enter でクリックが 2 回発火する問題を修正（`usePress`）（[#10840](https://github.com/adobe/react-spectrum/pull/10840)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]
+- NumberField: 区切り文字だけの入力で数字の体系を変えない（[#10876](https://github.com/adobe/react-spectrum/pull/10876)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/NumberField|NumberField]]
+- S2 Breadcrumbs: フォントの読み込み後も収まる項目を折りたたまない（[#10828](https://github.com/adobe/react-spectrum/pull/10828)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Breadcrumbs|Breadcrumbs]]
+- S2 DatePicker: `Form` の中でもポップアップの時刻欄がつぶれないように（[#10915](https://github.com/adobe/react-spectrum/pull/10915)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/DateField|DateField]]、[[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
+- ComboBox: Popover を閉じる Escape では既定動作を止める（Safari のフルスクリーン）（[#10883](https://github.com/adobe/react-spectrum/pull/10883)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - ComboBox: `isReadOnly` のときは blur で値を確定しない（[#10869](https://github.com/adobe/react-spectrum/pull/10869)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]
 - ComboBox: 入力欄と Popover が別の shadow root にあってもキーボードで開けるように（[#10631](https://github.com/adobe/react-spectrum/pull/10631)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]
 - Tree の項目に説明テキスト（`Text slot="description"`）（[#10710](https://github.com/adobe/react-spectrum/pull/10710)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
-- TabPanels: 入れ子の Tabs で高さのアニメーションが跳ねる問題を修正（[#10819](https://github.com/adobe/react-spectrum/pull/10819)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Tabs|Tabs]]
-- Table の `Row` に `onFocus`・`onBlur`・`onFocusChange` を追加（[#10857](https://github.com/adobe/react-spectrum/pull/10857)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
-- optimize-locales-plugin: Turbopack の loader の `locales` の型を直し、`NextConfig` での TS2322 を解消（[#10889](https://github.com/adobe/react-spectrum/pull/10889)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ロケール最適化|ロケール最適化]]
-- S2: `page.css` の型宣言を戻す（`noUncheckedSideEffectImports` での TS2882 の修正）（[#10874](https://github.com/adobe/react-spectrum/pull/10874)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]]
-- `ColorField` が `Form` の `validationBehavior` を引き継ぐように（[#10863](https://github.com/adobe/react-spectrum/pull/10863)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
-- macOS で Enter を押すと Select が開き直る問題を修正（`usePress`）（[#10820](https://github.com/adobe/react-spectrum/pull/10820)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]
-- Chat のスクロールアンカーを改善（モバイルでの位置飛び、`ResponseStatus` の展開時のスクロール）（[#10600](https://github.com/adobe/react-spectrum/pull/10600)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]]
 
 ## トピック
 
 - [[repos/adobe-react-spectrum/topics/AI-コンポーネント|AI-コンポーネント]] — `@react-spectrum/ai` の PromptField・Chat/Thread・AttachmentList・AttachmentGrid・AttachmentBadge など
+- [[repos/adobe-react-spectrum/topics/Breadcrumbs|Breadcrumbs]] — S2 の Breadcrumbs（項目のあふれと折りたたみ）
 - [[repos/adobe-react-spectrum/topics/Collections|Collections]] — コレクションのキー管理（`Document`/`BaseCollection`）とキーボード・フォーカス、Tree の展開・説明テキスト、`GridListItem` と Table の `Row` のフォーカスイベント
-- [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]] — 非同期アイテム読み込み時の開閉制御、VoiceOver での読み上げ、shadow DOM・`isReadOnly` での挙動
+- [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]] — 非同期アイテム読み込み時の開閉制御、VoiceOver での読み上げ、shadow DOM・`isReadOnly` での挙動、Escape の既定動作
 - [[repos/adobe-react-spectrum/topics/DateField|DateField]] — 日付入力（`useDateSegment`・`DateField`）
 - [[repos/adobe-react-spectrum/topics/Menu|Menu]] — S2 の Menu（セパレーター表示・仮想化）
+- [[repos/adobe-react-spectrum/topics/NumberField|NumberField]] — 数値入力の `NumberField` と `@internationalized/number` の `NumberParser`（数字の体系）
 - [[repos/adobe-react-spectrum/topics/SideNav|SideNav]] — S2 の SideNav と SideNavPanel（旧 SidePanel）内での折りたたみ
 - [[repos/adobe-react-spectrum/topics/Tabs|Tabs]] — RAC の Tabs（TabPanels のサイズのアニメーションと入れ子の Tabs）
 - [[repos/adobe-react-spectrum/topics/Toast|Toast]] — S2 の Toast（展開したリストとボタンの間隔）
 - [[repos/adobe-react-spectrum/topics/TokenField|TokenField]] — トークン入力欄（`useTokenField`）のキャレット位置・スクロール・選択の `onChange`
-- [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]] — react-aria のインタラクション用フック（`useHover` のタッチ・マウス併用時のホバー状態、`usePress` の macOS での Enter）
-- [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]] — Modal・Popover・Sheet の配置とスクリーンキーボードへの対応
+- [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]] — react-aria のインタラクション用フック（`useHover` のタッチ・マウス併用時のホバー状態、`usePress` の macOS での Enter・キーボードでの二重クリック）
+- [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]] — Modal・Popover・Sheet の配置とスクリーンキーボードへの対応、Popover のラベル、`PreviewTrigger` の Escape
 - [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]] — `useKeyboard`（コレクション・DatePicker・Toolbar のキーボード処理）とパッケージ import 時のグローバルイベント
 - [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]] — S2 の `style` マクロ（ESM ビルド）とテーマで使えるプロパティ、`page.css` の型宣言
 - [[repos/adobe-react-spectrum/topics/ドラッグアンドドロップ|ドラッグアンドドロップ]] — `useDrag`・`useDescription` と仮想化リスト（`ListLayout`）でのドロップ位置
@@ -50,4 +52,4 @@ tags:
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
 - リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-11-04|2026-11-04]]、[[repos/adobe-react-spectrum/changes/2026-10-30|2026-10-30]]、[[repos/adobe-react-spectrum/changes/2026-10-28|2026-10-28]]、[[repos/adobe-react-spectrum/changes/2026-10-26|2026-10-26]]、[[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-11-06|2026-11-06]]、[[repos/adobe-react-spectrum/changes/2026-11-04|2026-11-04]]、[[repos/adobe-react-spectrum/changes/2026-10-30|2026-10-30]]、[[repos/adobe-react-spectrum/changes/2026-10-28|2026-10-28]]、[[repos/adobe-react-spectrum/changes/2026-10-26|2026-10-26]]

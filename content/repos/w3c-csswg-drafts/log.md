@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-11-06
+
+- 期間: 2026-11-03T13:52:38Z 〜 2026-11-06T01:37:07Z（直接のコミット: 2026-11-03T23:22:25Z 〜）
+- PR 3 件、直接のコミット 8 件（詳しく 5 件 / 1 行 6 件。WPT の editorial のコミット 2 件は 1 行にまとめた）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-11-06|changes]]（新規）、[[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]]、[[repos/w3c-csswg-drafts/topics/cssom-view-1|cssom-view-1]]、[[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]]、[[repos/w3c-csswg-drafts/topics/css-mixins-1|css-mixins-1]]、[[repos/w3c-csswg-drafts/index|index]]
+- エラー: なし
 
 ## 2026-11-04
 

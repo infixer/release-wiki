@@ -1,6 +1,6 @@
 ---
 title: anthropics/claude-code
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/anthropics-claude-code
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- ビルトインの `privacy` mod のソースを `mods/privacy` に公開（挙動の変更なし。`$.session.identity` の型を追加）（[#107768](https://github.com/anthropics/claude-code/pull/107768)）⏳ 未リリース · トピック: [[repos/anthropics-claude-code/topics/mod-API|mod API]]
 - mod の `$.model.fork` に `effort`、Claude apps gateway の `mantle` upstream に `assume_role`、`claude auth status` にサインインの期限（`loginExpiresAt`）。`--continue` で会話が失われる 2.1.314 の退行などを修正（[v2.1.318](https://github.com/anthropics/claude-code/releases/tag/v2.1.318)）📦 v2.1.318 · [[repos/anthropics-claude-code/releases/v2.1.318|まとめ]]
 - アイドル時の compaction が要約ではない返答で会話を置き換える問題を修正（[v2.1.318](https://github.com/anthropics/claude-code/releases/tag/v2.1.318)）📦 v2.1.318 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
 - Claude apps gateway の管理 API にコストレポート `GET /v1/organizations/analytics/cost` と IdP グループの日次記録（[v2.1.317](https://github.com/anthropics/claude-code/releases/tag/v2.1.317)）📦 v2.1.317 · トピック: [[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]
@@ -23,7 +24,6 @@ tags:
 - 終了時にシェルコマンドが残る問題、`claude auth login` が gateway 必須の環境で拒否される問題、PowerShell フックの終了コード 2 などを修正（[v2.1.316](https://github.com/anthropics/claude-code/releases/tag/v2.1.316)）📦 v2.1.316 · トピック: [[repos/anthropics-claude-code/topics/管理設定|管理設定]]
 - `permissions.blockWritesOutsideWorkingDirectories` を追加（どの権限モードでも作業ディレクトリの外への書き込みを拒否）。effort の上限で「Invalid effort level」が続く問題などを修正（[v2.1.314](https://github.com/anthropics/claude-code/releases/tag/v2.1.314)）📦 v2.1.314 · トピック: [[repos/anthropics-claude-code/topics/管理設定|管理設定]]
 - Claude apps gateway の upstream に `groups`（IdP グループで振り分け）、Bedrock upstream に `guardrail_trace`（[v2.1.314](https://github.com/anthropics/claude-code/releases/tag/v2.1.314)）📦 v2.1.314 · トピック: [[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]
-- VS Code・Claude Desktop の Code タブにアイドル時の compaction、Bedrock の画像が多いセッションの「400 Input is too long.」を修正（[v2.1.314](https://github.com/anthropics/claude-code/releases/tag/v2.1.314)）📦 v2.1.314 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
 
 ## トピック
 
@@ -42,4 +42,4 @@ tags:
 ## 取り込み
 
 - [[repos/anthropics-claude-code/log|取り込み履歴]]
-- 最近の変更: [[repos/anthropics-claude-code/changes/2026-11-04|2026-11-04]]、[[repos/anthropics-claude-code/changes/2026-11-02|2026-11-02]]、[[repos/anthropics-claude-code/changes/2026-10-30|2026-10-30]]、[[repos/anthropics-claude-code/changes/2026-10-28|2026-10-28]]、[[repos/anthropics-claude-code/changes/2026-10-26|2026-10-26]]
+- 最近の変更: [[repos/anthropics-claude-code/changes/2026-11-06|2026-11-06]]、[[repos/anthropics-claude-code/changes/2026-11-04|2026-11-04]]、[[repos/anthropics-claude-code/changes/2026-11-02|2026-11-02]]、[[repos/anthropics-claude-code/changes/2026-10-30|2026-10-30]]、[[repos/anthropics-claude-code/changes/2026-10-28|2026-10-28]]

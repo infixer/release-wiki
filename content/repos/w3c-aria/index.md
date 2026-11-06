@@ -1,6 +1,6 @@
 ---
 title: w3c/aria
-updated: 2026-11-02
+updated: 2026-11-06
 tags:
   - repo/w3c-aria
 ---
@@ -34,4 +34,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-aria/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-aria/changes/2026-11-02|2026-11-02]]、[[repos/w3c-aria/changes/2026-10-28|2026-10-28]]、[[repos/w3c-aria/changes/2026-10-23|2026-10-23]]、[[repos/w3c-aria/changes/2026-10-16|2026-10-16]]、[[repos/w3c-aria/changes/2026-10-14|2026-10-14]]
+- 最近の変更: [[repos/w3c-aria/changes/2026-11-06|2026-11-06]]、[[repos/w3c-aria/changes/2026-11-02|2026-11-02]]、[[repos/w3c-aria/changes/2026-10-28|2026-10-28]]、[[repos/w3c-aria/changes/2026-10-23|2026-10-23]]、[[repos/w3c-aria/changes/2026-10-16|2026-10-16]]

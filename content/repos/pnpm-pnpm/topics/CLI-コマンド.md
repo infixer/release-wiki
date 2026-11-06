@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。v12.9.1 では再帰的な `pnpm update --interactive` の `Workspace` 列が 30 桁に収まり（超えた分は `+N more`）、未リリースの修正で `pnpm runtime --help` が `set <name> [<version>]` を示すようになった。未リリースの修正として、v11 の `pnpm dlx --package=<pkg>` がコマンドなしなら `ERR_PNPM_DLX_MISSING_COMMAND` で失敗し、対話的な `pnpm audit --fix` の Patched 列が `saveExact`・`savePrefix` に従うようになった。未リリースの変更として、v12 の `pnpm whoami` が `--registry` を受け付け、`pnpm outdated`・`pnpm update --interactive` が lockfile に記録された overrides を適用してから最新版を調べるようになった。v12.12.0 で、v12 の `pnpm update`・`pnpm why` が再び `--depth Infinity` を受け付けるようになった。v12.13.0 で、pnpm v12 に npm にならった `pnpm token`（トークンの一覧・作成・取り消し）と `pnpm profile`（プロフィールの表示・更新と 2FA の有効化・無効化）が実装された。`pnpm login` は Web ログインで `npm-notice` ヘッダー（確認コードなど）を表示する（v12.14.0）。読み取りだけのコマンドやエラーで終わるコマンドは `package.json` を作らず、stderr が閉じたパイプでも異常終了しない。2026-10-19 の回では、`pnpm pkg fix` が `repository` を正規化し、`pnpm prune` が `trustLockfile` に従うようになった（未リリース）。未リリースの修正として、`pnpm prune` が余分な直接依存を消してワークスペースの選択に従い、v11 の `pnpm sbom` がプロジェクトごとの lockfile から SBOM を作る。2026-10-26 の回では（v12、未リリース）、`pnpm help --all`・`-a` を受け付け、`pnpm add` が小文字の短縮形 `-p`・`-d`・`-o`・`-e` を受け付けるようになった。2026-10-28 の回では、v12 の `pnpm add -T` が `--save-types` と `--tilde` のどちらかあいまいなのでエラーになり、出力が端末の高さを超えたときに画面全体を書き直し続けなくなった（`pnpm run --stream` の出力が 1 行 1 回に）。2026-11-04 の回では、`pnpm link <dir>` が v11・v12 でそろった（未リリース）。v12 は相対パスを実行したディレクトリから解決し、v11 は `link:` 依存をルートではなく実行したプロジェクトに追加する。
+個別の CLI コマンド・オプションの追加や改善をまとめたトピック。`cache prune`、`package.yaml` への書き込み対応、`--tilde`、`--no-progress`、`--save-types`、`--publish-wait-timeout`、`package.json` の `workspaces` フィールドからの `pnpm-workspace.yaml` 自動生成、macOS の Time Machine 除外設定などに続き、`pnpm install --allow-build`、`pnpm init --bare`、`package.json` の空行保持が加わった。修正面では、ワークスペースのパッケージ内での `pnpm list` が現在のプロジェクトに限定される（v10 の挙動）ようになり、`pnpm peers check` がプロジェクトごとに見出しを付けて表示し、`pnpm setup` の「Text file busy」エラーが直った。v12.8.1 で `pnpm update -g --latest` がグローバルパッケージを保存済みの範囲を超えて更新するようになった。未リリースの修正として、`pnpm update --global` による旧グローバルインストールの移行で、`PNPM_HOME` に残ったハードリンクの実行ファイルも削除するようになった。v12.9.1 では再帰的な `pnpm update --interactive` の `Workspace` 列が 30 桁に収まり（超えた分は `+N more`）、未リリースの修正で `pnpm runtime --help` が `set <name> [<version>]` を示すようになった。未リリースの修正として、v11 の `pnpm dlx --package=<pkg>` がコマンドなしなら `ERR_PNPM_DLX_MISSING_COMMAND` で失敗し、対話的な `pnpm audit --fix` の Patched 列が `saveExact`・`savePrefix` に従うようになった。未リリースの変更として、v12 の `pnpm whoami` が `--registry` を受け付け、`pnpm outdated`・`pnpm update --interactive` が lockfile に記録された overrides を適用してから最新版を調べるようになった。v12.12.0 で、v12 の `pnpm update`・`pnpm why` が再び `--depth Infinity` を受け付けるようになった。v12.13.0 で、pnpm v12 に npm にならった `pnpm token`（トークンの一覧・作成・取り消し）と `pnpm profile`（プロフィールの表示・更新と 2FA の有効化・無効化）が実装された。`pnpm login` は Web ログインで `npm-notice` ヘッダー（確認コードなど）を表示する（v12.14.0）。読み取りだけのコマンドやエラーで終わるコマンドは `package.json` を作らず、stderr が閉じたパイプでも異常終了しない。2026-10-19 の回では、`pnpm pkg fix` が `repository` を正規化し、`pnpm prune` が `trustLockfile` に従うようになった（未リリース）。未リリースの修正として、`pnpm prune` が余分な直接依存を消してワークスペースの選択に従い、v11 の `pnpm sbom` がプロジェクトごとの lockfile から SBOM を作る。2026-10-26 の回では（v12、未リリース）、`pnpm help --all`・`-a` を受け付け、`pnpm add` が小文字の短縮形 `-p`・`-d`・`-o`・`-e` を受け付けるようになった。2026-10-28 の回では、v12 の `pnpm add -T` が `--save-types` と `--tilde` のどちらかあいまいなのでエラーになり、出力が端末の高さを超えたときに画面全体を書き直し続けなくなった（`pnpm run --stream` の出力が 1 行 1 回に）。2026-11-04 の回では、`pnpm link <dir>` が v11・v12 でそろった（未リリース）。v12 は相対パスを実行したディレクトリから解決し、v11 は `link:` 依存をルートではなく実行したプロジェクトに追加する。2026-11-06 の回では、`pnpm peers check` が `autoInstallPeers: false` と `dedupePeerDependents: true` のとき宣言されていない必須の peer の提供元を助言するようになり（JSON では `undeclared`、v12.18.0）、`npm fund` と同じように動く `pnpm fund` が v12 に加わった（未リリース）。
 
 ## 主な API・オプション
 
@@ -38,9 +38,14 @@ tags:
 - `pnpm profile get [<key>...]` / `set <key> <value>` / `enable-2fa [auth-only|auth-and-writes]` / `disable-2fa` — `-/npm/v1/user` のプロフィールを管理。OTP は `--otp` で渡す（v12.13.0）
 - `pnpm login` の `npm-notice` — Web ログインの応答ヘッダーを制御文字を除いて表示（v12.14.0）
 - `pnpm add -p`/`-d`/`-o`/`-e` — `--save-prod`/`--save-dev`/`--save-optional`/`--save-exact` の短縮形（v12、未リリース）
+- `pnpm peers check` の `undeclared` — 宣言されていない必須の peer の提供元の助言（終了コードは変わらない）（v12.18.0）
+- `pnpm fund`・`--json`・`pnpm fund <pkg>`・`--which <n>`・`-r`/`--filter`、`ERR_PNPM_NO_FUNDING`（v12、未リリース）
 
 ## 変更履歴
 
+- 2026-11-06 — `pnpm fund` を追加（[#17755](https://github.com/pnpm/pnpm/pull/17755)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-06|変更]]
+- 2026-11-06 — `pnpm peers check` が宣言されていない必須の peer の提供元を知らせる（[#17677](https://github.com/pnpm/pnpm/pull/17677)）📦 v12.18.0 · [[repos/pnpm-pnpm/changes/2026-11-06|変更]]
+- 2026-11-06 — `pnpm docs` がブラウザーを開けないときの URL を共通の方法で伏せる（[#16767](https://github.com/pnpm/pnpm/pull/16767)）📦 v12.18.0 · [[repos/pnpm-pnpm/changes/2026-11-06|変更]]
 - 2026-11-04 — v12 の `pnpm link <dir>` の相対パスを現在のディレクトリから解決、v11 の `pnpm link` が現在のプロジェクトに `link:` 依存を追加（[#17550](https://github.com/pnpm/pnpm/pull/17550), [#17566](https://github.com/pnpm/pnpm/pull/17566)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-04|変更]]
 - 2026-11-02 — `pnpm peers check --global`（`-g`）でグローバルのパッケージの peer 依存を調べる（[#17508](https://github.com/pnpm/pnpm/pull/17508)） ⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-02|変更]]
 - 2026-11-02 — `dlx`・`pnx`・`create` が `--dir`・`--workspace-root` に従う、`pnpm link` が不正なパッケージ名を `ERR_PNPM_INVALID_DEPENDENCY_NAME` で拒否（[#17479](https://github.com/pnpm/pnpm/pull/17479), [#17535](https://github.com/pnpm/pnpm/pull/17535)） ⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-02|変更]]
@@ -89,6 +94,8 @@ tags:
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-11-06|2026-11-06 の変更]]
+- [[repos/pnpm-pnpm/releases/v12.18.0|v12.18.0]]
 - [[repos/pnpm-pnpm/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-11-02|2026-11-02 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.17.0|v12.17.0]]

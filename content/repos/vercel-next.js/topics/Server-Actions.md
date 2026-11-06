@@ -1,6 +1,6 @@
 ---
 title: Server Actions
-updated: 2026-10-30
+updated: 2026-11-06
 tags:
   - repo/vercel-next.js
   - topic
@@ -8,10 +8,11 @@ tags:
 
 ## 概要
 
-App Router の Server Actions（サーバー上で実行される関数をクライアントから呼び出す仕組み）の実装。別のルートが持つアクションを呼んだときは、そのルートへリクエストを転送する処理がある。PPR ページへ遷移した後に遷移元ルートのアクションを呼ぶと、Vercel 上でこの転送がハングする不具合が修正された。安定版 v16.4.1 / v15.5.28 では、Server Actions を使う App Router でのサービス拒否（High）のセキュリティ修正が公開された。`generateStaticParams` の中から Server Action を呼ぶと `__next_require__ is not a function` になる問題も修正された（v16.5.0-canary.24）。Cache Components のページへの MPA のフォーム送信では、プリレンダーの RDC を保ったまま完全な HTML ドキュメントを描画するようになり、Docker 環境でも RSC / Server Actions の暗号化キーが `.next/cache` に永続化されるようになった（いずれも v16.5.0-canary.29）。`export const foo = function bar(){}` の形のアクションが関数式の名前で登録されて `ReferenceError` になる問題が修正され、サーバー参照の変換の出力は `/*#__PURE__*/` 付きの 1 つの式にまとめられた（いずれも v16.5.0-canary.32）。
+App Router の Server Actions（サーバー上で実行される関数をクライアントから呼び出す仕組み）の実装。別のルートが持つアクションを呼んだときは、そのルートへリクエストを転送する処理がある。PPR ページへ遷移した後に遷移元ルートのアクションを呼ぶと、Vercel 上でこの転送がハングする不具合が修正された。安定版 v16.4.1 / v15.5.28 では、Server Actions を使う App Router でのサービス拒否（High）のセキュリティ修正が公開された。`generateStaticParams` の中から Server Action を呼ぶと `__next_require__ is not a function` になる問題も修正された（v16.5.0-canary.24）。Cache Components のページへの MPA のフォーム送信では、プリレンダーの RDC を保ったまま完全な HTML ドキュメントを描画するようになり、Docker 環境でも RSC / Server Actions の暗号化キーが `.next/cache` に永続化されるようになった（いずれも v16.5.0-canary.29）。`export const foo = function bar(){}` の形のアクションが関数式の名前で登録されて `ReferenceError` になる問題が修正され、サーバー参照の変換の出力は `/*#__PURE__*/` 付きの 1 つの式にまとめられた（いずれも v16.5.0-canary.32）。`package.json` が `"type": "commonjs"` のアプリで Server Action を追加するとビルドが失敗する問題は、仮想モジュールを `.mjs` にして修正された（v16.5.0-canary.42）。
 
 ## 変更履歴
 
+- 2026-11-04 — `"type": "commonjs"` のときに Server Actions のエントリでビルドが失敗する問題を修正（[#101164](https://github.com/vercel/next.js/pull/101164)）📦 v16.5.0-canary.42 · [[repos/vercel-next.js/changes/2026-11-06|変更]]
 - 2026-10-29 — サーバー参照の変換の出力を `/*#__PURE__*/` 付きの 1 つの式に（[#100637](https://github.com/vercel/next.js/pull/100637)）📦 v16.5.0-canary.32 · [[repos/vercel-next.js/changes/2026-10-30|変更]]
 - 2026-10-28 — `export const foo = function bar(){}` の Server Actions の変換を修正（[#100830](https://github.com/vercel/next.js/pull/100830)）📦 v16.5.0-canary.32 · [[repos/vercel-next.js/changes/2026-10-30|変更]]
 - 2026-10-27 — Docker 環境でも暗号化キーなどのストレージキャッシュを永続化（[#100790](https://github.com/vercel/next.js/pull/100790)）📦 v16.5.0-canary.29 · [[repos/vercel-next.js/changes/2026-10-28|変更]]
@@ -29,3 +30,4 @@ App Router の Server Actions（サーバー上で実行される関数をクラ
 - [[repos/vercel-next.js/changes/2026-10-23|2026-10-23 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-26|2026-10-26 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-28|2026-10-28 の変更]]
+- [[repos/vercel-next.js/changes/2026-11-06|2026-11-06 の変更]]

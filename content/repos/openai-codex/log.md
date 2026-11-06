@@ -1,9 +1,17 @@
 ---
 title: openai/codex 取り込み履歴
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/openai-codex
 ---
+
+## 2026-11-06
+
+- 期間: 2026-11-04T01:24:54Z 〜 2026-11-06T01:37:07Z
+- PR 109 件（詳しく 17 件 / 1 行 92 件）、Release 0 件（取得に失敗）
+- 更新したページ: [[repos/openai-codex/changes/2026-11-06|changes]]、[[repos/openai-codex/topics/TUI|TUI]]、[[repos/openai-codex/topics/Guardian|Guardian]]、[[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]、[[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]、[[repos/openai-codex/topics/デーモン|デーモン]]、[[repos/openai-codex/topics/リアルタイム音声|リアルタイム音声]]、[[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]]、[[repos/openai-codex/topics/プロジェクトの指示|プロジェクトの指示]]（新規）、[[repos/openai-codex/index|index]]
+- 備考: PR 数が `maxPrs`（30）を超えたため、`brief: true` の 79 件はタイトルから領域ごとにまとめて「その他」に記載した。本文のある 30 件のうち、内部の ID の型・生成器の整理、クレートの切り出し、依存関係・ビルド・テストの修正の 13 件も「その他」に 1 行で記載。この回の PR はすべて未リリース。Release を取得できなかったため（`latest` は null）、index.md の最新リリースは前回のまま
+- エラー: `Release を取得できませんでした: HTTP 504 https://api.github.com/repos/openai/codex/releases?per_page=100&page=1: {"message": "We couldn't respond to your request in time. Sorry about that. Please try resubmitting your request and contact us if the problem persists."}`
 
 ## 2026-11-04
 

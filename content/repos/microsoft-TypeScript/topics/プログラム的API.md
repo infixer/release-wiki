@@ -1,6 +1,6 @@
 ---
 title: プログラム的API
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/microsoft-TypeScript
   - topic
@@ -12,6 +12,7 @@ tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScr
 2026-10-19 のクライアントの性能改善でアロケーションが大きく減り、2026-10-20 には CDN から直接読み込むための前提として package.json の `"imports"` が削除された（enum は `enums` ディレクトリに生成）。
 実験的な `wasip1/wasm` ビルドの `tsc.wasm` が加わり、リアクターとして IPC ベースの JS API に渡せば、ブラウザでも同期・非同期の API が使える（無保証）。`createFileSystemFromSnapshot(oldSnapshot, extraFSLayer)` で、古いスナップショットの合成のファイルシステムを新しいスナップショットの上に rebase できる。`getImmediateAliasedSymbol` は TS 6 の API の挙動に戻った（いずれも未リリース）。
 AST の型のプロパティの省略可能・必須が実態に合わせて直され（`ExportAssignment.type` などが省略可能に）、API の文字列テーブルの不正なオフセットはエラーとして拒否される。`closeProjects` で閉じても、`openFiles` で開いたファイルの configured project は残る（いずれも未リリース）。
+Checker の API には `getAmbientModules()`・`getStringLiteralType()` など不足していたメソッドが加わり（`getAugmentedPropertiesOfType` は削除）、`parseConfigFileTextToJson` も使えるようになった（未リリース）。
 
 ## 主な API・オプション
 
@@ -29,9 +30,13 @@ AST の型のプロパティの省略可能・必須が実態に合わせて直�
 - `api.getSymbol(decl)` / トップレベルの `getSymbol(decl)`（`typescript/async` など）— Declaration からマージ前のバインダー Symbol を取得
 - パスの型 — `RootedPath`（絶対・スラッシュ正規化済み・末尾 `/` なし）/ `RootedFilePath` / `RootedDirectoryPath` / `PathKey`（旧 `Path`）
 - `[Symbol.asyncDispose]()` — 非同期 API のオブジェクトの破棄（Promise を返す。`await using` で使う）
+- Checker の `isImplementationOfOverload`・`getAmbientModules`・`getPropertySymbolOfDestructuringAssignment`・`getNullableType`・`getStringLiteralType` / `getNumberLiteralType` / `getBigIntLiteralType`・`getFalseType` / `getTrueType`・`getJsxIntrinsicTagNamesAt`・`getPrivateIdentifierPropertyOfType` — 追加（[#65037](https://github.com/microsoft/TypeScript/pull/65037)）。`getAugmentedPropertiesOfType` は削除（`Type.getApparentProperties()` を使う）
+- `parseConfigFileTextToJson` — API（非同期・同期）から利用可能に（[#65328](https://github.com/microsoft/TypeScript/pull/65328)）
 
 ## 変更履歴
 
+- 2026-11-06 — API に `parseConfigFileTextToJson` を追加（[#65328](https://github.com/microsoft/TypeScript/pull/65328)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-06|変更]]
+- 2026-11-06 — Checker の API に不足していたメソッドを追加、`getAugmentedPropertiesOfType` を削除（[#65037](https://github.com/microsoft/TypeScript/pull/65037)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-06|変更]]
 - 2026-11-04 — API で開いたファイルの configured project を `closeProjects` で閉じない（[#65160](https://github.com/microsoft/TypeScript/pull/65160)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-04|変更]]
 - 2026-11-04 — API の文字列テーブルの不正なオフセットを拒否する（[#65285](https://github.com/microsoft/TypeScript/pull/65285)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-04|変更]]
 - 2026-11-04 — AST のプロパティの省略可能・必須を修正（`ExportAssignment.type` などが省略可能に）（[#65063](https://github.com/microsoft/TypeScript/pull/65063)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-04|変更]]
@@ -82,3 +87,4 @@ AST の型のプロパティの省略可能・必須が実態に合わせて直�
 - リポジトリ: [[repos/microsoft-TypeScript/index|microsoft/TypeScript]]
 - [[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/microsoft-TypeScript/changes/2026-11-04|2026-11-04 の変更]]
+- [[repos/microsoft-TypeScript/changes/2026-11-06|2026-11-06 の変更]]

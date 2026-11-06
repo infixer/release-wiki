@@ -1,9 +1,16 @@
 ---
 title: whatwg/html 取り込み履歴
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/whatwg-html
 ---
+
+## 2026-11-06
+
+- 期間: 2026-11-03T14:54:05Z 〜 2026-11-06T01:37:07Z
+- PR 6 件（詳しく 3 件 / 1 行 3 件）、Release 0 件
+- 更新したページ: [[repos/whatwg-html/changes/2026-11-06|changes]]（新規）、[[repos/whatwg-html/topics/サニタイザー|サニタイザー]]、[[repos/whatwg-html/topics/画像|画像]]、[[repos/whatwg-html/topics/廃止された機能|廃止された機能]]、[[repos/whatwg-html/index|index]]
+- エラー: なし
 
 ## 2026-11-04
 

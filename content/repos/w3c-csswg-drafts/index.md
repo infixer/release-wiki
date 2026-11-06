@@ -1,6 +1,6 @@
 ---
 title: w3c/csswg-drafts
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/w3c-csswg-drafts
 ---
@@ -14,16 +14,16 @@ tags:
 
 ## 直近の注目変更
 
+- 2026-11-05 — 「determine the device pixel ratio」に `Document` の引数を追加（HTML の画像の候補の選択から使う）（[#14724](https://github.com/w3c/csswg-drafts/pull/14724)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/cssom-view-1|cssom-view-1]]
+- 2026-11-04 — メディア特性 `prefers-bold-text`（`no-preference` / `bold`）を追加（#14477）（[#14725](https://github.com/w3c/csswg-drafts/pull/14725)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]]
+- 2026-11-04 — 横書き・縦書きのカーニングのアルゴリズムを明示（#6723）（[`0a718ce`](https://github.com/w3c/csswg-drafts/commit/0a718ceea22e91739dc309b8a2548ee4804110cf)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]]
+- 2026-11-04 — 空の引数を許して取り除き、最後の末尾カンマを JS と同じ扱いに（#14370）（[`909869d`](https://github.com/w3c/csswg-drafts/commit/909869d6b501d19e4bf632e458848f3c81af425f)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-mixins-1|css-mixins-1]]
 - 2026-11-03 — `@private` の中に `@property` を置けるように（#14442）（[`5df2d97`](https://github.com/w3c/csswg-drafts/commit/5df2d97275eb118fb96be4f8444a5bddd509e2ab)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-mixins-1|css-mixins-1]]
 - 2026-11-03 — `param()` の名前と値の間を `:` に（#14275）、`color` / `accent-color` を `env()` として渡す（#14447）（[`636a76a`](https://github.com/w3c/csswg-drafts/commit/636a76a25e992170038bbdcc032cc8f24519e991)、[`f6a994b`](https://github.com/w3c/csswg-drafts/commit/f6a994be84d4df01b0c9cb77225ca11f1b131dde)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-link-params-1|css-link-params-1]]、[[repos/w3c-csswg-drafts/topics/css-env-1|css-env-1]]
 - 2026-11-02 — グラデーションの色域外の色を CSS の色域マッピングにかけることを必須に（#14545）（[`12ab907`](https://github.com/w3c/csswg-drafts/commit/12ab9071206ce8c70860808cec8a7af1f4ee0297)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-images-4|css-images-4]]
 - 2026-11-02 — named feature の綴りを `gamut mapping` から `gamut-mapping` に（#14545）（[`f9abe9e`](https://github.com/w3c/csswg-drafts/commit/f9abe9e14e72e6fc3f3a0253817670520bf61278)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-conditional-5|css-conditional-5]]
 - 2026-11-02 — フォントの feature value のシリアライズを定義（#14658）（[#14677](https://github.com/w3c/csswg-drafts/pull/14677)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]]
 - 2026-11-01 — css-color-4 のレイトレーシングのアルゴリズムをエッジケースに対応（黒に近い領域で純粋な赤になる問題）（[#14698](https://github.com/w3c/csswg-drafts/pull/14698)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-color-4|css-color-4]]
-- 2026-10-29 — RGB → HSL のサンプルコードで epsilon を使う（#14531）（[`42d4d79`](https://github.com/w3c/csswg-drafts/commit/42d4d796584b070a7e68935eed58831e28bfe469)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-color-4|css-color-4]]
-- 2026-10-27 — `matchContainer()` と `ContainerQueryList` の API を追加（#6205）（[#13551](https://github.com/w3c/csswg-drafts/pull/13551)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-conditional-5|css-conditional-5]]
-- 2026-10-27 — `calc-size()` と `interpolate-size` を `css-values-5` から `css-sizing-4` へ移動（#14502）（[`ee30871`](https://github.com/w3c/csswg-drafts/commit/ee30871a66d312e3ea0e1025f383cdca9cebd64a)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-sizing-4|css-sizing-4]]
-- 2026-10-27 — カウンタースタイル `nko-ordinal` を追加、`-informal` 接尾辞を削除し古い名前を別名に（[`674d876`](https://github.com/w3c/csswg-drafts/commit/674d876257873dddad2648315e32b2e5bcc789ac)、[`10ae270`](https://github.com/w3c/csswg-drafts/commit/10ae270718401a8daf9dc02def5a8e065744d2ad)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-content-3|css-content-3]]
 
 ## トピック
 
@@ -55,9 +55,9 @@ tags:
 - [[repos/w3c-csswg-drafts/topics/css-syntax-3|css-syntax-3]] — CSS のトークン化・パース（`style` 属性のパースなど）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-text-4|css-text-4]] — テキスト処理（`text-spacing`・`text-spacing-trim`）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/cssom-1|cssom-1]] — CSSOM（シリアライズ「serialize an identifier」など）の仕様
-- [[repos/w3c-csswg-drafts/topics/cssom-view-1|cssom-view-1]] — CSSOM View（スクロールの Promise と `ScrollResult` など）の仕様
+- [[repos/w3c-csswg-drafts/topics/cssom-view-1|cssom-view-1]] — CSSOM View（スクロールの Promise と `ScrollResult`、device pixel ratio の決定など）の仕様
 - [[repos/w3c-csswg-drafts/topics/filter-effects-1|filter-effects-1]] — CSS フィルターを定義する仕様
-- [[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]] — メディアクエリとメディア特性（`display-mode: application` など）を定義する仕様
+- [[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]] — メディアクエリとメディア特性（`display-mode: application`・`prefers-bold-text` など）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/scroll-animations-1|scroll-animations-1]] — スクロール駆動アニメーション（`ViewTimelineOptions` など）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/selectors-5|selectors-5]] — セレクター（クラス接頭辞セレクターなど）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/web-animations-1|web-animations-1]] — Web Animations の基盤となる仕様
@@ -65,4 +65,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-csswg-drafts/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-11-04|2026-11-04]]、[[repos/w3c-csswg-drafts/changes/2026-11-02|2026-11-02]]、[[repos/w3c-csswg-drafts/changes/2026-10-30|2026-10-30]]、[[repos/w3c-csswg-drafts/changes/2026-10-28|2026-10-28]]、[[repos/w3c-csswg-drafts/changes/2026-10-26|2026-10-26]]
+- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-11-06|2026-11-06]]、[[repos/w3c-csswg-drafts/changes/2026-11-04|2026-11-04]]、[[repos/w3c-csswg-drafts/changes/2026-11-02|2026-11-02]]、[[repos/w3c-csswg-drafts/changes/2026-10-30|2026-10-30]]、[[repos/w3c-csswg-drafts/changes/2026-10-28|2026-10-28]]

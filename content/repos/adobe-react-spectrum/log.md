@@ -1,9 +1,16 @@
 ---
 title: adobe/react-spectrum 取り込み履歴
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/adobe-react-spectrum
 ---
+
+## 2026-11-06
+
+- 期間: 2026-11-03T01:56:38Z 〜 2026-11-06T01:37:07Z
+- PR 12 件（詳しく 7 件 / 1 行 5 件）、Release 0 件
+- 更新したページ: [[repos/adobe-react-spectrum/changes/2026-11-06|changes]]（新規）、[[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]、[[repos/adobe-react-spectrum/topics/DateField|DateField]]、[[repos/adobe-react-spectrum/topics/フォーム|フォーム]]、[[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]、[[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]、[[repos/adobe-react-spectrum/topics/Breadcrumbs|Breadcrumbs]]（新規）、[[repos/adobe-react-spectrum/topics/NumberField|NumberField]]（新規）、[[repos/adobe-react-spectrum/index|index]]
+- エラー: なし
 
 ## 2026-11-04
 

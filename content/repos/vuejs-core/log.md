@@ -1,9 +1,16 @@
 ---
 title: vuejs/core 取り込み履歴
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/vuejs-core
 ---
+
+## 2026-11-06
+
+- 期間: 2026-11-04T00:29:06Z 〜 2026-11-06T01:37:07Z
+- PR 15 件（詳しく 14 件 / 1 行 1 件）、Release 1 件（安定版 1 件: v3.5.45）。bot の PR 10 件（renovate 7 件・dependabot 3 件）は除外
+- 更新したページ: [[repos/vuejs-core/changes/2026-11-06|changes]]（新規）、[[repos/vuejs-core/releases/v3.5.45|v3.5.45]]（新規）、[[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]、[[repos/vuejs-core/topics/トランジション|トランジション]]、[[repos/vuejs-core/topics/レンダラー|レンダラー]]、[[repos/vuejs-core/topics/コンパイラ|コンパイラ]]、[[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]]、[[repos/vuejs-core/index|index]]
+- エラー: なし
 
 ## 2026-11-04
 

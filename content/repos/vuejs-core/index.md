@@ -1,6 +1,6 @@
 ---
 title: vuejs/core
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/vuejs-core
 ---
@@ -9,21 +9,21 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v3.5.44](https://github.com/vuejs/core/releases/tag/v3.5.44)（2026-10-13）→ [[repos/vuejs-core/releases/v3.5.44|まとめ]]
-- プレリリース: [v3.6.0-rc.14](https://github.com/vuejs/core/releases/tag/v3.6.0-rc.14)（2026-10-30）
+- 安定版: [v3.5.45](https://github.com/vuejs/core/releases/tag/v3.5.45)（2026-11-05）→ [[repos/vuejs-core/releases/v3.5.45|まとめ]]
+- プレリリース: なし（v3.5.45 より新しいものは無い）
 
 ## 直近の注目変更
 
-- KeepAlive: 解決した Suspense の子をすぐにキャッシュ（戻ったときに setup を再実行しない）（[#16119](https://github.com/vuejs/core/pull/16119)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
-- Suspense: アンマウントした境界の `out-in` の `afterLeave` を飛ばす（[#16115](https://github.com/vuejs/core/pull/16115)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
-- 非同期 setup が reject したコンポーネントは何も描画しない（[#16111](https://github.com/vuejs/core/pull/16111)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]、[[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
-- Suspense: 保持された内容の中の入れ子の境界の更新をパッチ（[#16109](https://github.com/vuejs/core/pull/16109)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
-- SSR: 静的な `style` 属性をコンパイル時に描画（作者の計測で -95〜98%）（[#16010](https://github.com/vuejs/core/pull/16010)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]、[[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
-- 停止したエラー境界を非同期のエラーで飛ばす（[#16061](https://github.com/vuejs/core/pull/16061)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
-- HMR: 保留中の非同期ルートが解決した後にリロードをやり直す（[#16060](https://github.com/vuejs/core/pull/16060)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
-- ハイドレーション: ホストのノードを置き換えるときだけコンポーネントの `el` を更新（[#16001](https://github.com/vuejs/core/pull/16001)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
-- Suspense: 境界のアンマウント後に fallback をマウントしない（[#15939](https://github.com/vuejs/core/pull/15939)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
-- Suspense: suspensible な子の境界をアンマウントしたら親への依存を返す（親が fallback のまま戻らない問題）（[#15870](https://github.com/vuejs/core/pull/15870)）⏳ 未リリース · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- Suspense: 境界をアンマウントしたら保留中の分岐のアンマウントフックを捨てる（[#16132](https://github.com/vuejs/core/pull/16132)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- Suspense: 保留中にルートを再び切り替えても `timeout` を数え続ける（[#16143](https://github.com/vuejs/core/pull/16143)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- 性能: SFC の型解決で tsconfig の `include` を列挙しない（作者の例で 1.9 秒 → 94ms）（[#15899](https://github.com/vuejs/core/pull/15899)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]
+- reactivity: 停止したスコープでも `onScopeDispose` を実行（[#16108](https://github.com/vuejs/core/pull/16108)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]]
+- compiler-sfc: props の分割代入で `catch` / `switch` のスコープを尊重（[#16101](https://github.com/vuejs/core/pull/16101)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/コンパイラ|コンパイラ]]
+- 性能: setup コンテキストの `attrs` をそのまま渡す場合のコピーを高速化（作者の計測で SSR -45%）（[#16129](https://github.com/vuejs/core/pull/16129)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
+- トランジション: key 付きの Suspense 境界をまたいでモードを切り替える（[#16124](https://github.com/vuejs/core/pull/16124)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/トランジション|トランジション]]、[[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- Suspense: 保留中の分岐に入れ子になったトランジションを表示時に enter させる（[#16121](https://github.com/vuejs/core/pull/16121)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/トランジション|トランジション]]、[[repos/vuejs-core/topics/組み込みコンポーネント|組み込みコンポーネント]]
+- ディレクティブの `mounted` フックを最新のバインディングで呼ぶ（`v-model` の値の反映）（[#16120](https://github.com/vuejs/core/pull/16120)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
+- 性能: 内部の初期化処理を pure に（未使用ならバンドラーが除去）（[#16012](https://github.com/vuejs/core/pull/16012)）📦 v3.5.45 · トピック: [[repos/vuejs-core/topics/レンダラー|レンダラー]]
 
 ## トピック
 
@@ -31,7 +31,7 @@ tags:
 - [[repos/vuejs-core/topics/カスタム要素|カスタム要素]] — Vue のコンポーネントから作るカスタム要素（非同期の定義とマウントのタイミング）
 - [[repos/vuejs-core/topics/コンパイラ|コンパイラ]] — テンプレート・SFC のコンパイラ（`defineModel()` のエラー、`v-html`・`v-memo`・Transition の変換）
 - [[repos/vuejs-core/topics/トランジション|トランジション]] — `<Transition>`・`<TransitionGroup>` と `v-show`
-- [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]] — `watch`（`once`・sync）・`shallowReactive` のコレクション・配列のイテレーター
+- [[repos/vuejs-core/topics/リアクティビティ|リアクティビティ]] — `watch`（`once`・sync）・`shallowReactive` のコレクション・配列のイテレーター・`onScopeDispose`
 - [[repos/vuejs-core/topics/レンダラー|レンダラー]] — runtime-core のレンダラー・スケジューラー・props の更新判定・`renderList`
 - [[repos/vuejs-core/topics/互換ビルド|互換ビルド]] — Vue 2 からの移行用の compat ビルド（`_setupProxy`）
 - [[repos/vuejs-core/topics/属性とスタイル|属性とスタイル]] — runtime-dom の属性（`playsinline`・`disablepictureinpicture` など真偽値の属性）とスタイルのパッチ
@@ -40,4 +40,4 @@ tags:
 ## 取り込み
 
 - [[repos/vuejs-core/log|取り込み履歴]]
-- 最近の変更: [[repos/vuejs-core/changes/2026-11-04|2026-11-04]]、[[repos/vuejs-core/changes/2026-11-02|2026-11-02]]、[[repos/vuejs-core/changes/2026-10-30|2026-10-30]]、[[repos/vuejs-core/changes/2026-10-28|2026-10-28]]、[[repos/vuejs-core/changes/2026-10-26|2026-10-26]]
+- 最近の変更: [[repos/vuejs-core/changes/2026-11-06|2026-11-06]]、[[repos/vuejs-core/changes/2026-11-04|2026-11-04]]、[[repos/vuejs-core/changes/2026-11-02|2026-11-02]]、[[repos/vuejs-core/changes/2026-10-30|2026-10-30]]、[[repos/vuejs-core/changes/2026-10-28|2026-10-28]]

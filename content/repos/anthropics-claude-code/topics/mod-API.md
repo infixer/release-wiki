@@ -1,6 +1,6 @@
 ---
 title: mod API
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -36,6 +36,7 @@ v2.1.318 で `$.model.fork` に `effort` オプションが加わり、セッシ
 
 ## 変更履歴
 
+- 2026-11-06 — ビルトインの `privacy` mod のソースを `mods/privacy` に公開（挙動の変更なし）、`mods/types/claude-code.d.ts` に `$.session.identity` の型を追加（[#107768](https://github.com/anthropics/claude-code/pull/107768)）⏳ 未リリース · [[repos/anthropics-claude-code/changes/2026-11-06|変更]]
 - 2026-11-04 — `$.model.fork` に `effort` オプション、セッションで書いた mod を有効にするかの回答の記録を追加 📦 v2.1.318 · [[repos/anthropics-claude-code/releases/v2.1.318|リリース]]
 - 2026-10-24 — `Image` を tmux（`allow-passthrough`・`focus-events` 有効）、kitty・Ghostty・iTerm2 3.5+ の全画面描画で描画できるように 📦 v2.1.310 · [[repos/anthropics-claude-code/releases/v2.1.310|リリース]]
 - 2026-10-19 — `tool.check` の回答に `decider: "person"`、イベントに `e.isReadOnly` を追加。先に動くプラグインが mod のフックを飛ばすと transcript に行を出すように。mod の再読み込み失敗で残る版のツール・コマンドが消える問題、同じラベルで `key` の無いボタンのクリックが失われる問題を修正 📦 v2.1.304 · [[repos/anthropics-claude-code/releases/v2.1.304|リリース]]
@@ -59,3 +60,4 @@ v2.1.318 で `$.model.fork` に `effort` オプションが加わり、セッシ
 - [[repos/anthropics-claude-code/releases/v2.1.304|v2.1.304]]
 - [[repos/anthropics-claude-code/releases/v2.1.310|v2.1.310]]
 - [[repos/anthropics-claude-code/releases/v2.1.318|v2.1.318]]
+- [[repos/anthropics-claude-code/changes/2026-11-06|2026-11-06 の変更]]

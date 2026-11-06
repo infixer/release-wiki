@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-11-04
+updated: 2026-11-06
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-11-06
+
+- 期間: 2026-11-04T00:25:27Z 〜 2026-11-06T01:37:07Z
+- PR 81 件（詳しく 30 件 / 1 行 51 件）、Release 3 件（安定版 2 件: v12.18.0, v11.28.11。プレリリース 1 件: pnpr@0.1.0-alpha.18）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-11-06|changes]]（新規）、[[repos/pnpm-pnpm/releases/v12.18.0|v12.18.0]]（新規）、[[repos/pnpm-pnpm/releases/v11.28.11|v11.28.11]]（新規）、[[repos/pnpm-pnpm/releases/v12.17.0|v12.17.0]]・[[repos/pnpm-pnpm/releases/v11.28.10|v11.28.10]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 51 件（修正 31 件・リファクタ/性能改善 5 件を含む）は「その他」に 1 行で書いた。`hint: feature` の #17743・#17748（開発用ツール `crate-layers`）は「その他」に入れた。PR 43 件は 📦 v12.18.0、38 件は ⏳ 未リリース。公開日は JST で書いた（v12.18.0・v11.28.11 とも 2026-11-05）。2 つのリリースノート本文はいずれも途中で切れている（要点の部分は取り込めた）。v12.18.0 には 2026-11-04 の回の変更（エージェントスキル・`pnpm store add`・繰り返しのインストール）も載っているが、その回の changes の収録状況は inbox の表記（⏳ 未リリース）のままにした
+- エラー: なし
 
 ## 2026-11-04
 
