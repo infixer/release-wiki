@@ -1,0 +1,902 @@
+{
+  "kind": "repo",
+  "repo": "pnpm/pnpm",
+  "branch": "main",
+  "collectedAt": "2026-11-06T01:37:07Z",
+  "range": {
+    "from": "2026-11-04T00:25:27Z",
+    "to": "2026-11-06T01:37:07Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "v12.18.0",
+      "publishedAt": "2026-11-05T00:56:45Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.18.0"
+    },
+    "prerelease": {
+      "tag": "pnpr@0.1.0-alpha.18",
+      "publishedAt": "2026-11-05T01:03:59Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.18"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "v12.18.0",
+      "name": "pnpm 12.18",
+      "publishedAt": "2026-11-05T00:56:45Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v12.18.0",
+      "prerelease": false,
+      "body": "pnpm 12.18.0 packs, publishes, and installs packages with platform variants on pnpr registries. It also adds per-skill approval of agent skills and `pnpm store add` for offline installs from downloaded tarballs. Repeat installs and `verifyDepsBeforeRun` no longer read the `package.json` of unchanged workspace projects. The release fixes several peer dependency resolution bugs too.\n\n### Minor Changes\n\n#### Agent skills\n\n- pnpm now names the link to a dependency's agent skill after the skill alone. A skill that the `@acme/kit` package ships in `skills/auth/` is linked as `.claude/skills/auth`, not `.claude/skills/pnpm-@acme+kit-auth`. The next install replaces links with the old names. pnpm lists the linked skills in a `# pnpm` block of each agent skill directory's `.gitignore` [#17455](https://github.com/pnpm/pnpm/discussions/17455).\n\n  When two approved packages ship a skill of the same name, or the name is already taken in an agent skill directory, pnpm links the skill as `pnpm-<package>-<skill>`. Before, the install failed.\n\n- `pnpm approve` now asks which agent skills to link when a package ships more than one. pnpm records the chosen skills as a list, such as `permissions.<pkg>.skills: [guide, migrate]`, and does not offer the other skills for approval again. The first time a project approves a skill, `pnpm approve` also asks which agent directories to link skills into, and records the answer under `skills.dirs`.\n\n- pnpm links agent skills nested in category directories, such as `skills/engineering/implement/SKILL.md`, up to three levels below `skills/`. Before, it linked only the skills directly under `skills/`.\n\n#### Platform variants\n\nThese features need a registry declared with `serverType: pnpr`.\n\n- `pnpm pack` packs one archive per entry of `publishConfig.variants`, each platform variant as `<name>-<version>~<tag>.tgz`. `pnpm pack --variant <target>` packs only the archive whose entry lists that target. `pnpm pack --json` prints the `integrity` and `size` of every archive it writes.\n\n- `pnpm publish` publishes a package's `publishConfig.variants`. pnpm uploads every archive before the publish request that references them. Publishing variants to any other registry is refused unless `--no-variants` is given, which publishes only the archive that targets `any`.\n\n- `pnpm publish --upload-variant <target>` uploads the archive of one `publishConfig.variants` entry to the registry's staging area and prints `<target>=<integrity>`. `pnpm publish --variant-integrity <target>=<integrity>` then publishes the version from archives that other jobs uploaded. With `--recursive`, each value names its package as `<name>~<target>=<integrity>`.\n\n- `pnpm publish -r --batch` now uploads each package archive on its own request and skips archives the registry already holds, so the batch request no longer grows with the archives it publishes. A batch of more than 256 packages still carries every archive inline. Packages with `publishConfig.variants` can be publ\n…(truncated)"
+    },
+    {
+      "tag": "v11.28.11",
+      "name": "pnpm 11.28.11",
+      "publishedAt": "2026-11-05T01:00:27Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/v11.28.11",
+      "prerelease": false,
+      "body": "pnpm 11.28.11 fixes frozen installs with `excludeLinksFromLockfile`, `pnpm link` in workspaces, `pnpm deploy` with dangling symlinks, and `verifyDepsBeforeRun` starting needless installs.\n\n### Patch Changes\n\n#### Installing packages\n\n* `pnpm deploy` now keeps a symlink in the project whose target is missing from the source, such as a link into a `node_modules` directory that was removed after the build. Deploy used to fail with `ENOENT` on such a link [#17571](https://github.com/pnpm/pnpm/issues/17571).\n\n* A package with `bundledDependencies` and a build script now keeps its bundled dependencies when it is restored from the side-effects cache [#17523](https://github.com/pnpm/pnpm/issues/17523).\n\n* `pnpm install` now links the runtime that an earlier `pnpm install --no-runtime` skipped [#17542](https://github.com/pnpm/pnpm/issues/17542).\n\n* Commands of a package whose `bin` paths contain excess parent directory segments, such as `../dist/cli.js`, are no longer missing. Such paths now resolve inside the package [#17586](https://github.com/pnpm/pnpm/issues/17586).\n\n* Generated POSIX shell shims now quote their paths, so shell special characters in a path stay literal.\n\n* A repeat `pnpm install` now rewrites the bin shims after `extendNodePath` changes. Before, it reported \"Already up to date\" and the shims kept the `NODE_PATH` of the previous setting.\n\n#### Lockfile and resolution\n\n* `pnpm install --frozen-lockfile` now accepts the lockfile it wrote with `excludeLinksFromLockfile` and `linkWorkspacePackages` on, when a project depends on a workspace package through a plain version range or a `catalog:` entry. It used to fail with `ERR_PNPM_OUTDATED_LOCKFILE`.\n\n* `pnpm install --frozen-lockfile`, `pnpm approve-builds`, and `pnpm rebuild` now accept a lockfile that resolves a `*` dependency to a prerelease `latest` version. pnpm wrote such a lockfile and then reported it as outdated [#17594](https://github.com/pnpm/pnpm/issues/17594).\n\n* Packages from the default registry keep plain lockfile keys, even when a prefix such as `npmjs` points at the registry set as `registry`. A dependency written with such a prefix shares the plain entry of the same package. The next install rewrites keys that earlier versions qualified this way [#17575](https://github.com/pnpm/pnpm/issues/17575).\n\n* Relative local paths in root `overrides` now resolve from the workspace root when each project has its own lockfile [#17691](https://github.com/pnpm/pnpm/issues/17691).\n\n  Installing a local directory dependency no longer fails when another project's install is writing a lockfile in that directory.\n\n* Peer deduplication no longer gives a project different copies of a dependency across direct and transitive paths when an optional peer has no provider [#17666](https://github.com/pnpm/pnpm/issues/17666).\n\n* A Node.js version range such as `>=26.13`, for example in `devEngines.runtime`, now resolves to the newest stable release that satisfies it. pnpm picks a prerelease only whe\n…(truncated)"
+    },
+    {
+      "tag": "pnpr@0.1.0-alpha.18",
+      "name": "pnpr 0.1.0-alpha.18",
+      "publishedAt": "2026-11-05T01:03:59Z",
+      "url": "https://github.com/pnpm/pnpm/releases/tag/pnpr%400.1.0-alpha.18",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 17641,
+      "title": "feat(pnpr)!: remove the documents metadata backend",
+      "url": "https://github.com/pnpm/pnpm/pull/17641",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T01:40:22Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nSecond of two PRs. It removes pnpr's `documents` metadata backend, so SQL metadata is the only one: SQLite in the storage directory by default, or the database `metadata.url` names (`sqlite:` or libSQL). It follows #17638, which moved the tests, fixtures, mocks, and helpers off documents.\n\n- **Config**: `MetadataBackend::Documents` is gone. A config that still sets `metadata.backend` (any value) is refused, and the error points at `metadata.url`. An `s3:` hosted store that hosts packages and has no `metadata.url` used to fall back to documents in the bucket. It is now refused, with a pointer at a libSQL URL. A tier that hosts no packages, such as an artifact-only one, still needs no metadata URL.\n- **Storage**: the documents implementation is gone. `PackageMetadata` now has a single implementation, so it becomes a struct (the former `SqlView`). The documents-only defaults go with it: the `read_version` that rendered the whole view, `read_release_record` that held nothing, and `read_view_at_least` that ignored the generation. `Storage::new` takes the metadata backend and `with_metadata` is gone. `sql_metadata()` always returns the database, and `PackageView.generation` is always set. The SQLite and libSQL adapter trait stays. `HostedBackend::list_package_names` goes, because only documents listed packages from files.\n- **Publish journal**: only the documents backend committed through it, so it goes too. That covers `pnpr_storage::journal`, `merge_journaled_packumen\n…(truncated)",
+      "files": [
+        "crate-layers.toml (+1 -1)",
+        "pnpm/tasks/registry-mock/src/pnpr_command.rs (+9 -4)",
+        "pnpr/crates/config/src/loading.rs (+21 -2)",
+        "pnpr/crates/config/src/registry_graph/namespace.rs (+3 -3)",
+        "pnpr/crates/config/src/storage_config.rs (+31 -29)",
+        "pnpr/crates/oci/src/document.rs (+18 -29)",
+        "pnpr/crates/oci/src/tests.rs (+16 -31)",
+        "pnpr/crates/pipeline-runs/src/tests.rs (+7 -2)",
+        "pnpr/crates/pnpr-fixtures/src/metadata.rs (+8 -5)",
+        "pnpr/crates/pnpr/src/cli_commands.rs (+1 -1)"
+      ],
+      "filesTotal": 93
+    },
+    {"number":17653,"title":"test(install): count the manifest opens of an up-to-date install and run","hint":"other","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 16767,
+      "title": "fix(cli): redact url using redact_url_for_display in docs command error fallback",
+      "url": "https://github.com/pnpm/pnpm/pull/16767",
+      "author": "grzdev",
+      "mergedAt": "2026-11-04T01:42:58Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nUse the shared URL redactor for the fallback printed when `pnpm docs` cannot open a browser. The fallback removes credentials, query parameters, fragments, and terminal control characters.\n\nKeep the existing homepage selection logic unchanged. A regression test captures the failing-browser output and checks that secrets are absent.\n\n## Squash Commit Body\n\n```text\nUse redact_url_for_display in the docs command's browser-error fallback.\nThe previous local redaction removed credentials but retained query parameters\nand fragments. Verify the actual fallback output in a child test process.\n```\n\n## Validation\n\n- Added an output-level regression assertion for the failing-browser path.\n- Windows Application Control blocks local Rust build scripts and the custom formatter. Rust validation runs in GitHub CI.\n\n## Checklist\n\n- [x] The fix targets the affected v12 command.\n- [x] Added a changeset for the affected release package.\n- [x] Added or updated tests.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * When the browser cannot open a documentation link, the displayed URL now omits credentials, query parameters, and fragments, including when the URL cannot be parsed successfully.",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/docs.rs (+2 -9)",
+        ".changeset/cli-docs-redact-url.md (+5 -0)",
+        "pnpm/crates/cli/src/cli_args/docs/tests.rs (+39 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":17650,"title":"test(install): trust the recorded stats before dating a manifest ahead","hint":"other","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 17649,
+      "title": "feat(pnpr): let workload credentials stage archives and commit batches",
+      "url": "https://github.com/pnpm/pnpm/pull/17649",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T01:54:35Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nPart of the stack that implements publishing platform variants ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md), Implementation step 6). Independent of pnpm/pnpm#17648; based on `main`.\n\nIn the RFC's CI flow, each matrix job uploads its archive to the staging endpoint and a release job commits them all, every job holding the same trusted-publishing (OIDC workload) binding. Until now workload credentials could only send a single-package `PUT` to a configured package. They now may also:\n\n- `PUT` and `HEAD` `/-/pnpr/v0/artifacts/blob` (staging is per principal);\n- `PUT` `/-/pnpr/v0/publish` (the batch commit).\n\nThe authentication middleware cannot see a batch's entries, so it records a `WorkloadScope` in the request extensions. The batch handler then refuses an entry from another ecosystem, for another package, or one that resolves to another registry than the workload's (`403`).\n\nA workload addresses its named registry (`/npm/~<registry>/`), and pnpm resolves the staging and batch endpoints relative to the registry URL. Both routes were mounted only at the server root and `/npm/`, so they are now also mounted under `/npm/~<registry>/`. A batch sent there publishes its npm entries through that registry, as a single-package `PUT` to that address does. Staged archives stay per principal, whichever address they went through.\n\nTests: `pnpm test:rust` over every `pnpr-*` crate plus `pnpm-registry-mock` and `pnpm-platform\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server/authentication.rs (+28 -15)",
+        "pnpr/crates/pnpr/src/server/batch.rs (+76 -17)",
+        "pnpr/crates/pnpr/src/server/oidc.rs (+88 -1)",
+        "pnpr/crates/pnpr/src/server/oidc/tests.rs (+127 -4)",
+        "pnpr/crates/pnpr/src/server/routing.rs (+14 -6)",
+        "pnpr/crates/pnpr/src/server/routing/protocol_routes.rs (+13 -1)",
+        ".changeset/pnpr-workload-staging.md (+5 -0)",
+        "pnpr/docs/ecosystems.md (+8 -2)",
+        "pnpr/docs/oidc.md (+15 -4)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 17648,
+      "title": "feat(pnpr): find variants from their tag-named attachments",
+      "url": "https://github.com/pnpm/pnpm/pull/17648",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T02:02:15Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nFirst PR of the stack that implements publishing platform variants, as specified in [the platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md) (Implementation step 6, pnpr side). Related to pnpm/rfcs#69.\n\nA variant is now named by its tag itself, `+` included, and found from its attachment `<basename>-<version>~<tag>.tgz` alone:\n\n- The request no longer carries `versions[<version>].pnprVariants` (pnpm/rfcs#70). A variant attachment declares its `.tgz` `integrity` beside `data`, or alone for a staged archive. pnpr rejects a `~<tag>` attachment that has no integrity, or that names a version the request does not describe.\n\n- pnpr derives the tag from the archive's `variant` field and rejects the version when it differs from the tag that names the archive.\n- A tag is at most 128 bytes (`MAX_VARIANT_TAG_BYTES` in `pnpm-platform-variants`, also enforced by the shared route check). pnpr refuses a longer one before it reads any archive.\n- The free-form label is gone: the stored variant no longer keeps a `label`, and its blob name and route both derive from the tag. pnpr is pre-1.0, so stored variants with a label are not migrated.\n\nThe rest of the stack: workload credentials for staging and batch commits, versions without a primary archive, provenance subjects and variant `purl`s, then pnpm's publisher side.\n\nTests: `pnpm test:rust` over every `pnpr-*` crate plus `pnpm-registry-mock` and `pnpm-platform-variants` (1990 passed). \n…(truncated)",
+      "files": [
+        "pnpm/crates/platform-variants/src/lib.rs (+1 -1)",
+        "pnpm/crates/platform-variants/src/tag.rs (+8 -2)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments.rs (+15 -88)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments/preparation.rs (+107 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/release_records.rs (+2 -4)",
+        "pnpr/crates/pnpr/src/server/publishing/tests.rs (+2 -1)",
+        "pnpr/crates/pnpr/src/server/publishing/variants.rs (+57 -84)",
+        "pnpr/crates/pnpr/src/server/publishing/variants/declarations.rs (+42 -41)",
+        "pnpr/crates/pnpr/src/server/publishing/variants/verification.rs (+11 -11)",
+        "pnpr/crates/pnpr/src/server/variant_tarballs.rs (+6 -7)"
+      ],
+      "filesTotal": 16
+    },
+    {"number":17664,"title":"test(run): settle records before gate check","hint":"other","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 17651,
+      "title": "feat(pnpr): check that provenance names every archive of a version",
+      "url": "https://github.com/pnpm/pnpm/pull/17651",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T06:11:03Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nPart of the stack that implements publishing platform variants ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md), Implementation step 6). Follows pnpm/pnpm#17648 (variants named by their tag-named attachments, merged).\n\n**Provenance names every archive.** The RFC requires a version's provenance statement to name every archive the version publishes, so no archive enters the version outside it. pnpr reads the in-toto statement from the DSSE envelope of a version's `.sigstore` bundle (JSON or base64 JSON). It rejects the version (`400`) unless the statement has a subject for:\n\n- the primary `.tgz`, named by the version's PURL, such as `pkg:npm/%40acme/fast@1.0.0`;\n- each variant's `.tgz`, named by the same PURL with a `variant` qualifier, such as `pkg:npm/%40acme/fast@1.0.0?variant=linux-x64%2Blinux-x64-musl` (`+` is always `%2B`);\n\neach with the `.tgz` SHA-512 npm provenance uses. The bundle must carry an in-toto statement (v1, or the v0.1 older npm provenance uses) in an `application/vnd.in-toto+json` DSSE payload. The payload may be standard or URL-safe base64, padded or not, as DSSE allows, and an unnamed subject is skipped. An archive is named only by a digest known to be its own: the bytes are verified against whichever SHA-512 their integrity carries, so an archive whose integrity carries more than one SHA-512 cannot be named and is refused. A subject's name and version compare by their canonical spelling, sin\n…(truncated)",
+      "files": [
+        "pnpm/crates/release-record/src/dsse.rs (+7 -3)",
+        "pnpm/crates/release-record/src/purl.rs (+41 -6)",
+        "pnpm/crates/release-record/src/purl/tests.rs (+31 -0)",
+        "pnpr/crates/pnpr/src/server/publishing.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments.rs (+28 -14)",
+        "pnpr/crates/pnpr/src/server/publishing/provenance.rs (+188 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/provenance/tests.rs (+106 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/release_records.rs (+45 -12)",
+        "pnpr/crates/pnpr/src/server/publishing/variants.rs (+9 -1)",
+        ".changeset/pnpr-provenance-names-every-archive.md (+5 -0)"
+      ],
+      "filesTotal": 13
+    },
+    {"number":17663,"title":"refactor(pnpr): derive the temp-suffix bound from the suffix format","hint":"unknown","release":"📦 v12.18.0","brief":true},
+    {"number":17656,"title":"refactor(lockfile): list the any archive among a package's variants","hint":"unknown","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 17667,
+      "title": "fix(deps-restorer): drop the registry name from the global virtual store slot version",
+      "url": "https://github.com/pnpm/pnpm/pull/17667",
+      "author": "lazerg",
+      "mergedAt": "2026-11-04T07:08:59Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nFixes pnpm/pnpm#17665. With the global virtual store on, the slot version segment came straight from the lockfile key, so a named-registry package like `is-number@work:7.0.0` got a `<store>/links/@/is-number/work:7.0.0/<hash>` slot. Windows rejects the `:` with os error 123. The segment now uses the bare semver of a registry-qualified version, the same `7.0.0` v11 gets from `dp.parse`. The registry stays in the graph hash through the package id, so slots from different registries still don't collide.\n\nv11 is not affected, so this only changes v12. Tested with `gvs_version_segment_strips_the_registry_name` and `named_registry_slots_share_the_version_dir_but_not_the_hash`, which fail without the change. The second checks that `work:7.0.0` and `gh:7.0.0` share the `is-number/7.0.0` directory but get distinct slot hashes. I also installed `is-number: work:7.0.0` (a `prefix: work` registry) with GVS on macOS: 12.16.1 creates `is-number/work:7.0.0`, this branch creates `is-number/7.0.0`, and a `--frozen-lockfile` re-install works. I did not run it on Windows.\n\n## Squash Commit Body\n\n```text\nThe global virtual store slot path took its version segment from the\nsnapshot key when packages: records no version, so a package from a\nnamed registry kept the registry name in it (is-number/npmjs:7.0.0/<hash>).\nWindows does not allow ':' in a path segment, so the install failed with\nERR_PNPM_PACKAGE_MANAGER_INSPECT_VIRTUAL_STORE_SLOT.\n\nUse the bare version of a registry-qualified k\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/virtual_store_layout.rs (+6 -2)",
+        ".changeset/17665-gvs-named-registry-slot.md (+5 -0)",
+        "pnpm/crates/deps-restorer/src/virtual_store_layout/tests/slot_identity.rs (+39 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 17662,
+      "title": "feat(install): decide an install with a pnpmfile from the recorded manifests",
+      "url": "https://github.com/pnpm/pnpm/pull/17662",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T07:09:15Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nPart of pnpm/tasks#256. `pnpm install` in an up-to-date workspace with a pnpmfile or `configDependencies` no longer reads the `package.json` of each project whose file did not change since the last install.\n\nThe CLI's pre-runtime fast path, which pnpm/pnpm#17637 taught to decide from the workspace state's manifest records, declines while a pnpmfile or a declared config dependency could still change the configuration. It runs before the config dependencies are installed and the `updateConfig` hooks run. Such workspaces therefore went through the whole install pipeline: config setup, then discovery that parses every project manifest, then `Install::run`'s own up-to-date check.\n\nNow the install pipeline tries the fast path again right after the config setup, before discovery:\n\n- **When:** it runs only when one of those config-time gates applied, since otherwise the pre-runtime attempt already ran with the same inputs. The other gates still apply.\n- **Not for hoisted pnpmfiles:** it declines a hoisted install with a pnpmfile. The install turns its own shortcut off there when the pnpmfile declares custom fetchers (`check_custom_fetcher_reuse`), and telling needs the hooks loaded.\n- **Not for malformed declarations:** it leaves a manifest that fails `validate_dependency_types` to the install, which refuses its shortcut for one.\n- **Workspace package patterns:** the fast path's discovery now honors `--workspace-packages`, as the install's own does. The pre-runtime path s\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/install.rs (+8 -4)",
+        "pnpm/crates/cli/src/cli_args/install/fast_path.rs (+131 -20)",
+        "pnpm/crates/cli/src/cli_args/pipelines/install.rs (+3 -0)",
+        "pnpm/crates/package-manager/src/install.rs (+1 -0)",
+        "pnpm/crates/package-manager/src/install/lifecycle.rs (+30 -0)",
+        "pnpm/crates/package-manager/src/install/workspace_state.rs (+30 -5)",
+        "pnpm/crates/package-manager/src/install/workspace_state/discovery.rs (+2 -3)",
+        "pnpm/crates/package-manager/src/install/workspace_state/from_files.rs (+5 -4)",
+        "pnpm/crates/package-manager/src/install/workspace_state/stand_ins.rs (+10 -4)",
+        ".changeset/pnpmfile-install-skips-unchanged-manifests.md (+5 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 17654,
+      "title": "feat(pnpr): publish a version with variants and no any archive",
+      "url": "https://github.com/pnpm/pnpm/pull/17654",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T07:14:03Z",
+      "labels": [
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nPart of the stack that implements publishing platform variants ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md) with pnpm/rfcs#70, Implementation step 6). Follows pnpm/pnpm#17651 (merged).\n\n**A version with variants and no `any` archive.** A publisher whose declaration has no entry targeting `any` sends the version with no `dist` and no plain attachment, only `~<tag>` variant attachments. pnpr now accepts that:\n\n- The submitted manifest is normalized as an archive's is, and it and every variant must name the URL's package and the version key. The derived version has no build metadata, so a key with the `+r<N>` reserved for revisions is refused. Variants published with an `any` archive are held to the same identity.\n- The variants are checked against the submitted manifest: name, version and peers.\n- A provenance statement may accompany the version; npm's documents keep its attestations on the generated archive's `dist`.\n- pnpr generates the minimal archive that npm's documents point to as `dist.tarball`. Its `package.json` has the version's name and version and the union of the variants' `os`, `cpu` and Linux `libc`; a Linux platform without a `libc` counts as glibc, and a `wasm32` variant leaves all three out. It is packed deterministically: fixed tar headers, gzip mtime 0, sorted values.\n- It is written through the publish's own slot path, so a `tarballs: tar` registry stores its tar.\n- It is not one of the ver\n…(truncated)",
+      "files": [
+        "pnpr/crates/pnpr/src/server/package_mutation.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/publishing.rs (+1 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments.rs (+22 -61)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments/preparation.rs (+3 -1)",
+        "pnpr/crates/pnpr/src/server/publishing/attachments/verified_documents.rs (+145 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/generated_archive.rs (+130 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/generated_archive/tests.rs (+39 -0)",
+        "pnpr/crates/pnpr/src/server/publishing/manifest.rs (+41 -15)",
+        "pnpr/crates/pnpr/src/server/publishing/provenance.rs (+4 -4)",
+        "pnpr/crates/pnpr/src/server/publishing/release_records.rs (+8 -4)"
+      ],
+      "filesTotal": 18
+    },
+    {"number":17655,"title":"test: report where a pinned-pnpm e2e test stalls","hint":"other","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 17657,
+      "title": "feat(pack): pack the archives publishConfig.variants declares",
+      "url": "https://github.com/pnpm/pnpm/pull/17657",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T07:27:24Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nThe pnpm side of publishing platform variants, part 1 of 3 ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md#publishing-with-pnpm) with pnpm/rfcs#70, Implementation step 5). Follows pnpm/pnpm#17648 (merged), for the shared 128-byte tag limit.\n\n**`publishConfig.variants`** is an array with one entry per archive:\n\n```json\n\"publishConfig\": {\n  \"variants\": [\n    { \"targets\": [\"any\"], \"files\": [\"lib/**\"] },\n    {\n      \"targets\": [\"linux-x64\", \"linux-x64-musl\"],\n      \"files\": [\"native/linux-x64/example-cli\"],\n      \"manifest\": { \"bin\": { \"example-cli\": \"native/linux-x64/example-cli\" } }\n    }\n  ]\n}\n```\n\nA platform variant's tag is its targets sorted by bytes and joined with `+` (`linux-x64+linux-x64-musl`). The `any` entry is the version's archive for every other host. A declaration without one publishes a version with no `any` archive.\n\n**Checks before anything is packed** (`VariantDeclaration::read`):\n\n- Each target is `any` or a canonical platform tag. When a close spelling exists, the error gives it: `linux-x64-gnu` → `linux-x64`, `linux-x64-napi8-musl` → `linux-x64-musl-napi8`. `canonical_spelling` lives in `pnpm-platform-variants`, shared with pnpr.\n- No target appears twice, within an entry or across entries, and `any` stands alone. Targets are canonical tags, so this also rules out ties: two variants can only tie on a host through two platforms of equal rank that one host matches, and those are the same platfor\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/pack.rs (+34 -9)",
+        "pnpm/crates/fs-packlist/src/lib.rs (+5 -4)",
+        "pnpm/crates/pack/Cargo.toml (+1 -0)",
+        "pnpm/crates/pack/src/lib.rs (+76 -15)",
+        "pnpm/crates/pack/src/output.rs (+2 -0)",
+        "pnpm/crates/pack/src/tests.rs (+1 -0)",
+        "pnpm/crates/pack/src/variants.rs (+462 -0)",
+        "pnpm/crates/pack/src/variants/export.rs (+60 -0)",
+        "pnpm/crates/pack/src/variants/packing.rs (+394 -0)"
+      ],
+      "filesTotal": 21
+    },
+    {
+      "number": 17669,
+      "title": "fix(deps-resolver): settle child variants before peer deduplication",
+      "url": "https://github.com/pnpm/pnpm/pull/17669",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T07:47:49Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nFix peer deduplication splitting a project's direct dependency from the same dependency reached through another package when an optional peer is absent. Apply the fix to both CLI implementations.\n\nCloses pnpm/pnpm#17666.\n\n## Squash Commit Body\n\n```text\nRequire matching child variants before collapsing peer dependents. Recursive\ncompatibility could independently choose incompatible targets for a child\nand its parent, giving one project two instances of the same dependency.\n\nRetain all surviving variants for subsequent rounds, stop when no variant\ncollapses, and compose replacement maps so importer references reach the\nfinal survivor. Use an iterative loop for the rounds. When a cycle prevents child-first\nprogress, collapse one recursively compatible pair per independent cyclic\ncomponent and resume those rounds. Defer parents of changed components.\nProcess dependency components before their parents when selecting that pair.\nReuse the peer walker's iterative component pass and the graph sequencer's\ncomponent helper. Index incoming edges so each round rewrites references to collapsed paths\nwithout scanning unrelated nodes.\n\nAdd synthetic regression coverage in both implementations. Declare serde's\nrc feature in resolver-base, whose serialized manifest contains Arc<Value>,\nso scoped resolver builds do not depend on workspace feature unification.\n\nCloses pnpm/pnpm#17666.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already li\n…(truncated)",
+      "files": [
+        "pnpm-lock.yaml (+3 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents.rs (+94 -39)",
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents/cycles.rs (+131 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents/tests.rs (+89 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/lib.rs (+1 -0)",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_peers/finalize/peer_scc.rs (+1 -92)",
+        "pnpm/crates/resolving-deps-resolver/src/strongly_connected_components.rs (+106 -0)",
+        "pnpm/crates/resolving-resolver-base/Cargo.toml (+1 -1)",
+        "pnpm11/deps/graph-sequencer/src/index.ts (+3 -2)",
+        "pnpm11/installing/deps-resolver/package.json (+1 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {
+      "number": 17658,
+      "title": "feat(publish): publish a version with its platform variants",
+      "url": "https://github.com/pnpm/pnpm/pull/17658",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T08:24:18Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nThe pnpm side of publishing platform variants, part 2 ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md#sending-a-version-with-variants) with pnpm/rfcs#70). Follows the pack PR, pnpm/pnpm#17657 (merged).\n\n**Single-machine `pnpm publish`.** For a package that declares `publishConfig.variants`, pnpm packs every archive and publishes them as one version to a registry declared with `serverType: pnpr`:\n\n- It stages every archive by its integrity before the document (`HEAD`, then `PUT` when missing), reusing the batch path's staging client.\n- It sends the usual `PUT <registry>/<name>` document. The document references the `any` archive as `<name>-<version>.tgz` and each platform variant as `<name>-<version>~<tag>.tgz`, each with `integrity` and `length` and no `data`.\n- A version without an `any` entry is sent with no `dist` and no plain attachment. pnpr generates the archive npm's documents point to (pnpm/pnpm#17654).\n- Publishing variants to any other registry is refused, also in a dry run: a version published without its variants cannot get them later. `pnpm publish --no-variants` publishes only the `any` archive instead.\n- `--dry-run` runs every check and sends nothing.\n- Provenance for a version with variants is refused before any archive is staged, in a dry run too, with a hint to pass `--no-provenance` (pnpm/pnpm#17660 lifts it).\n\n**Declaration warnings (RFC).** `pnpm pack` and `pnpm publish` warn, from the manife\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/pack.rs (+3 -2)",
+        "pnpm/crates/cli/src/cli_args/publish.rs (+21 -44)",
+        "pnpm/crates/cli/src/cli_args/publish/arguments.rs (+5 -0)",
+        "pnpm/crates/cli/src/cli_args/publish/packed.rs (+100 -0)",
+        "pnpm/crates/cli/src/cli_args/publish/tests.rs (+9 -2)",
+        "pnpm/crates/pack/src/lib.rs (+8 -3)",
+        "pnpm/crates/pack/src/tests.rs (+2 -0)",
+        "pnpm/crates/pack/src/variants.rs (+5 -2)",
+        "pnpm/crates/pack/src/variants/packing.rs (+19 -3)",
+        "pnpm/crates/pack/src/variants/warnings.rs (+53 -0)"
+      ],
+      "filesTotal": 23
+    },
+    {
+      "number": 17670,
+      "title": "fix(install): verify injected workspace type peers",
+      "url": "https://github.com/pnpm/pnpm/pull/17670",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T08:53:01Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nFrozen installs now verify injected workspace dependencies with the same manifest hook chain used during resolution when `addMissingPeerTypes` is enabled. This accepts the lockfile written by the preceding install and preserves `readPackage` changes to peers.\n\nCloses pnpm/pnpm#17668.\n\n## Squash Commit Body\n\n```text\nThe resolver adds optional type peers before running readPackage on an\ninjected workspace dependency. Freshness verification used the importer\nmanifest, which lacked those inferred peers.\n\nRetain the project manifests before importer hooks. The existing directory\nmanifest walk uses that source and the resolver's ordered hook chain when\naddMissingPeerTypes is enabled. Only reachable directory dependencies are\ntransformed. Importer manifests remain unchanged, since inferred peers on\nan importer would become install requirements.\n\nCover normal install followed by frozen install with shared and per-project\nlockfiles, including hooks that remove an inferred type peer or add a peer.\nIsolate the existing external-importer fixture from ancestor workspaces.\n\nCloses pnpm/pnpm#17668.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] New features are implemented only in the Rust pnpm v12 CLI. Bug fixes are implemented in every affected version.\n- [x] Added a changeset for the affected published package.\n- [x] Added or updated tests.\n- [x] Updated the documentation if needed. Existing docu\n…(truncated)",
+      "files": [
+        "pnpm/crates/package-manager/src/install/lockfile_freshness.rs (+14 -6)",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/directory_manifests.rs (+22 -9)",
+        "pnpm/crates/package-manager/src/install/run/wanted.rs (+6 -3)",
+        ".changeset/injected-workspace-peer-types.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/add_missing_peer_types.rs (+72 -0)",
+        "pnpm/crates/package-manager/src/install/tests/external_importers.rs (+1 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 17671,
+      "title": "feat(install): decide a workspace with a lockfile per project from the records",
+      "url": "https://github.com/pnpm/pnpm/pull/17671",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T08:58:56Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nPart of pnpm/tasks#256. `pnpm install` in an up-to-date workspace with `sharedWorkspaceLockfile: false` now finishes without running the install of each project, and without reading the `package.json` of projects whose files did not change.\n\nThe CLI fast path declined this mode outright (\"every workspace project has its own lockfile\"). Each project keeps its own lockfile and its own workspace state, so a workspace-level check could not speak for them. The install ran its per-project loop after discovery parsed every manifest. Each project's run then made its own up-to-date check.\n\nThe fast path now handles the mode itself (`install_already_up_to_date_per_project`):\n\n1. List the projects without reading them (`find_workspace_project_manifests`), honoring `--workspace-packages`.\n2. For each listed directory that holds a manifest:\n   - anchor the configuration to it (`anchor_dedicated_project`) and load its own state;\n   - rebuild its manifest from that state's record, as in pnpm/pnpm#17637, or take the manifest the command read for its own directory.\n3. Run each project's check as its run in the loop would. The project is the only importer, and the other projects are the ones whose commands it links (`dedicated_bin_projects`).\n4. Only once every project is up to date, register each one in the store, as each run does.\n\nAny project that cannot be decided sends the install to the loop as before. That covers a missing state, an unusable record, a failed check, or a malf\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/install.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/install/fast_path.rs (+7 -10)",
+        "pnpm/crates/package-manager/src/install.rs (+1 -1)",
+        "pnpm/crates/package-manager/src/install/workspace_state.rs (+9 -1)",
+        "pnpm/crates/package-manager/src/install/workspace_state/from_files.rs (+6 -1)",
+        "pnpm/crates/package-manager/src/install/workspace_state/per_project.rs (+196 -0)",
+        "pnpm/crates/package-manager/src/install/workspace_state/stand_ins.rs (+1 -0)",
+        ".changeset/project-lockfiles-install-skips-unchanged-manifests.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/repeat_install_records.rs (+199 -0)",
+        "pnpm/crates/cli/tests/suite/repeat_install_records/opens.rs (+17 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 17659,
+      "title": "feat(publish): upload variants from several machines and publish them by integrity",
+      "url": "https://github.com/pnpm/pnpm/pull/17659",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T10:01:06Z",
+      "labels": [
+        "product: pacquet"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nThe pnpm side of publishing platform variants, part 3 ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md#uploading-variants-from-several-machines) with pnpm/rfcs#70). Based on the publish PR (part 2, pnpm/pnpm#17658).\n\n**`pnpm publish --upload-variant <target>`** runs on the machine that built an archive, such as one job of a CI matrix:\n\n- It packs the archive of the `publishConfig.variants` entry the target names, as `pnpm pack --variant` would. Repeatable; `any` names the `any` archive.\n- It uploads it with `PUT /-/pnpr/v0/artifacts/blob?integrity=…`, always without asking `HEAD`, so a rerun renews the archive.\n- It prints `<target>=<integrity>` per archive and nothing else on stdout. With `--json` it prints the package's name and version, and each archive's tag, targets and integrity.\n- It publishes nothing, needs a registry declared `serverType: pnpr`, and refuses `--provenance`, since the committing job signs one statement for every archive.\n- With `--dry-run` it packs, checks and prints, and uploads nothing.\n\n**`pnpm publish --variant-integrity <target>=<integrity>`** runs in the release job:\n\n- Repeated once per entry, any one target naming it; `<name>~<target>=<integrity>` with `--recursive`. A value splits at its first `=`, its package at the last `~`.\n- It packs none of the package's archives, and derives the version's manifest from the declaration.\n- Before the commit, every entry, the `any` entry include\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/cli_command/commands.rs (+7 -1)",
+        "pnpm/crates/cli/src/cli_args/publish.rs (+44 -69)",
+        "pnpm/crates/cli/src/cli_args/publish/arguments.rs (+17 -0)",
+        "pnpm/crates/cli/src/cli_args/publish/given_archives.rs (+171 -0)",
+        "pnpm/crates/cli/src/cli_args/publish/given_archives/tests.rs (+116 -0)",
+        "pnpm/crates/cli/src/cli_args/publish/packed.rs (+95 -6)",
+        "pnpm/crates/cli/src/cli_args/publish/recursive.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/publish/tests.rs (+1 -1)",
+        "pnpm/crates/cli/src/cli_args/publish/variant_archives.rs (+259 -0)",
+        "pnpm/crates/pack/src/lib.rs (+3 -1)"
+      ],
+      "filesTotal": 25
+    },
+    {
+      "number": 17660,
+      "title": "feat(publish): sign one provenance statement for every archive of a version",
+      "url": "https://github.com/pnpm/pnpm/pull/17660",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T11:05:49Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nThe pnpm side of publishing platform variants, part 4 ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md#dry-runs-provenance-and-retries) with pnpm/rfcs#70). Based on the upload PR (pnpm/pnpm#17659).\n\nWith `--provenance`, a version with platform variants is published with one statement whose subjects are every archive it publishes, each with its `.tgz` SHA-512:\n\n- the `any` archive, by the version's PURL;\n- each platform variant, by the same PURL with a `variant` qualifier holding its tag, `+` written `%2B`, as pnpr's check (pnpm/pnpm#17651) and the release record expect.\n\nArchives other jobs uploaded are named by the integrity given with `--variant-integrity`. A version without an `any` archive names only its variants, since pnpr generates the archive npm's documents point to. `--upload-variant` still refuses `--provenance`.\n\n`generate_provenance_for` signs a statement over a list of subjects; `generate_provenance` keeps its one-archive form on top of it.\n\nThe branch carries `Purl::npm_variant` as its own commit, the same change as in pnpm/pnpm#17651. It drops out when the stack is rebased onto a `main` that has that PR.\n\n**Not in this PR (open items of the RFC's publisher side):**\n\n- `pnpm publish -r --batch` with variants, and with `--provenance` (one statement per version of the batch). Both are still refused with an error.\n- The retry check: when a rerun that signs provenance is told the version exists, compare\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/publish/options.rs (+9 -0)",
+        "pnpm/crates/publish/Cargo.toml (+1 -0)",
+        "pnpm/crates/publish/src/batch_publish.rs (+1 -1)",
+        "pnpm/crates/publish/src/lib.rs (+4 -1)",
+        "pnpm/crates/publish/src/provenance_gen.rs (+32 -5)",
+        "pnpm/crates/publish/src/publish_packed_pkg.rs (+32 -34)",
+        "pnpm/crates/publish/src/publish_packed_pkg/provenance.rs (+39 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg/tests.rs (+159 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg/variants.rs (+54 -14)"
+      ],
+      "filesTotal": 14
+    },
+    {
+      "number": 17642,
+      "title": "fix: upgrade serde-saphyr to 2.1.0",
+      "url": "https://github.com/pnpm/pnpm/pull/17642",
+      "author": "kairosci",
+      "mergedAt": "2026-11-04T11:29:28Z",
+      "labels": [
+        "product: pacquet",
+        "state: automerge",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "fix",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nUpgrade serde-saphyr to 2.1.0 and adapt YAML parsing to its fallible scanner and token API. Preserve lockfile output and handle comment-only workspace and configuration files. Closes pnpm/tasks#258.\n\n## Squash Commit Body\n\n```text\nUpgrade serde-saphyr to 2.1.0. Adapt scanner and token handling, and treat comment-only YAML as empty where callers use defaults. Preserve lockfile serialization. Closes pnpm/tasks#258.\n```\n\n## Checklist\n\n- [x] I checked the referenced issue and verified that none of the PRs already linked to it solves it.\n- [x] Added or updated tests.\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n  * Empty and comment-only YAML files now load as empty configuration, workspace manifests, and settings instead of failing.\n  * Explicit `null` values in supported configuration fields use their defaults. Invalid YAML and unknown configuration keys continue to be rejected.\n  * Empty or `null` YAML documents now load as empty versioning data and catalogs where applicable, and empty frontmatter is handled as an empty map.\n  * YAML document parsing and rendering handle empty documents and scanner errors more reliably.",
+      "files": [
+        "Cargo.lock (+4 -7)",
+        "Cargo.toml (+1 -1)",
+        "pnpm/crates/auth-commands/src/config_yaml.rs (+2 -2)",
+        "pnpm/crates/cli/src/cli_args/yarn_workspaces_field.rs (+5 -2)",
+        "pnpm/crates/config/src/workspace_yaml/global.rs (+1 -1)",
+        "pnpm/crates/config/src/workspace_yaml/parse_settings.rs (+9 -8)",
+        "pnpm/crates/lockfile/src/pkg_ver_peer/tests.rs (+11 -8)",
+        "pnpm/crates/versioning/src/intents.rs (+17 -11)",
+        "pnpm/crates/versioning/src/intents/tests.rs (+10 -0)",
+        "pnpm/crates/versioning/src/ledger.rs (+3 -1)"
+      ],
+      "filesTotal": 31
+    },
+    {"number":17672,"title":"perf(run): share one workspace discovery across a recursive verify-deps gate","hint":"unknown","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 17675,
+      "title": "feat(install): install a version published with platform variants only",
+      "url": "https://github.com/pnpm/pnpm/pull/17675",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T11:32:47Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\npnpm installs a version published with platform variants and no archive for every other host ([platform-variants RFC](https://github.com/pnpm/rfcs/blob/main/pnpr/text/0000-platform-variants.md#install)). pnpr accepts such versions since pnpm/pnpm#17654, but pnpm recorded the missing archive as the variant that targets `any`, which a host none of the variants fits then failed to fetch.\n\n- **Resolution.** pnpr's document gives such a version no top-level integrity. The resolver no longer adds that missing archive as the `any` variant, so the lockfile lists only the platform variants (`variations` with no `any: true` target).\n- **Installability.** A variants-only package none of whose variants fits the host is not installable on it. As an optional dependency it is skipped (`pnpm:skipped-optional-dependency`, `unsupported_platform`), as a package whose manifest excludes the platform would be, and its error lists the published `os`/`cpu`/`libc`. The fit is decided for the host, because the installer links the host's variant.\n- **Required dependency.** It fails with `ERR_PNPM_PACKAGE_MANAGER_NO_MATCHING_PLATFORM_VARIANT`, which lists the platforms the version is published for. The message no longer calls every such package \"a runtime dependency\".\n- The pending pnpr changeset no longer says pnpm cannot install such versions, and `registries.md` describes the behaviour.\n\n**Not here (follow-up):** the RFC's `supportedArchitectures` rules for variants:\n- fetch every variant\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot.rs (+7 -2)",
+        "pnpm/crates/deps-restorer/src/installability.rs (+6 -2)",
+        "pnpm/crates/deps-restorer/src/installability/patched.rs (+5 -2)",
+        "pnpm/crates/deps-restorer/src/installability/platform.rs (+8 -1)",
+        "pnpm/crates/deps-restorer/src/installability/tests.rs (+1 -0)",
+        "pnpm/crates/deps-restorer/src/installability/variants.rs (+105 -0)",
+        "pnpm/crates/package-is-installable/src/check_platform.rs (+4 -1)",
+        "pnpm/crates/resolving-npm-resolver/src/npm_resolver/platform_variants.rs (+21 -3)",
+        "pnpm/crates/resolving-npm-resolver/src/npm_resolver/platform_variants/tests.rs (+16 -0)",
+        ".changeset/pnpm-install-variants-only.md (+5 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {"number":17674,"title":"fix(pnpr): rebase a publish that loses a race to another replica","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17679,"title":"fix(resolver): resolve relative workspace peer paths","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17682,"title":"fix(cli): skip the store link probe when switching pnpm versions","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 17678,
+      "title": "feat(pack): print each archive's integrity and size in pack --json",
+      "url": "https://github.com/pnpm/pnpm/pull/17678",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T12:30:47Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\n`pnpm pack --json` now reports an `integrity` (SHA-512, SRI form) and a `size` in bytes for every archive it writes, including each platform variant's archive next to its `tag`. A publish from several machines can then reference an archive by its integrity without hashing it again ([platform variants RFC](https://github.com/pnpm/rfcs/pull/69)).\n\n- `write_tarball` hashes and counts the archive as it writes it, so the archive is not read back.\n- A dry run writes no archive, so it reports neither field.\n\n## Test plan\n\n- `pack::variants::pack_json_names_each_archive_by_integrity_and_size` packs an `any` archive and a `linux-x64` variant, checks each entry's integrity and size against the written file, and checks that a dry run reports neither field.\n- The pack and publish suites pass locally.\n\nWritten by an agent (Claude Code, claude-opus-5-5).\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n---\n<a href=\"https://backend.blacksmith.sh/track/enable-autofix?expires=1796381763&installation_model_id=426870&pr_number=17678&ref=codesmith_pr_footer&repository=pnpm%2Fpnpm&return_to=https%3A%2F%2Fgithub.com%2Fpnpm%2Fpnpm%2Fpull%2F17678&signature=25cdf599e2957b0352dbb5b0e0346d5747c1449b5559014a59d5f880d00f6748\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/autofix-with-codesmith-dark.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://pr-comments-assets.blacksmith.sh/codesmith/aut\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/pack/Cargo.toml (+1 -0)",
+        "pnpm/crates/pack/src/lib.rs (+61 -6)",
+        "pnpm/crates/pack/src/output.rs (+2 -0)",
+        "pnpm/crates/pack/src/tests.rs (+3 -0)",
+        "pnpm/crates/pack/src/variants/packing.rs (+3 -1)",
+        ".changeset/pnpm-pack-json-integrity.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/pack/variants.rs (+69 -2)",
+        "pnpm/docs/cli/pack.md (+1 -1)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 17677,
+      "title": "feat(peers): warn about undeclared required peer providers",
+      "url": "https://github.com/pnpm/pnpm/pull/17677",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T12:32:48Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nCloses pnpm/pnpm#17673.\n\n`pnpm peers check` now prints an advisory when a required peer is resolved without a provider declared by the project or its dependency ancestors, with `autoInstallPeers: false` and `dedupePeerDependents: true`. Enabled workspace-root providers, including aliases and links, are respected. Optional and incompatible peers do not produce this advisory.\n\nThe output distinguishes satisfied peers with declaration warnings from missing or incompatible peers. Advisories appear in an `undeclared` array in JSON output. They do not change exit codes, install-time diagnostics, `strictPeerDependencies`, or the resolved graph.\n\nThis new diagnostic targets pnpm v12 under the repository's feature policy. Both versions' documentation explains required-peer reuse and the two-setting opt-out. Shared integration fixtures exercise 48 settings/provider combinations across both CLIs, including root, sibling, and sibling-transitive providers. Additional coverage checks ancestor providers, optional peers, incompatible versions, linked and aliased providers, peer subtrees, JSON and text warnings, strict-mode installs, executable availability, frozen reinstalls, converging graph bounds, a thousand independent peer targets, and shared-project caching. The advisory describes project declarations even when a dependency carries its own fallback peer copy.\n\nThe advisory searches only the target package's ancestors and cuts paths at provider declarations. Unrelated depend\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/peers.rs (+82 -13)",
+        "pnpm/crates/deps-inspection-peers/src/lib.rs (+3 -0)",
+        "pnpm/crates/deps-inspection-peers/src/snapshot.rs (+4 -2)",
+        "pnpm/crates/deps-inspection-peers/src/tests.rs (+43 -0)",
+        "pnpm/crates/deps-inspection-peers/src/undeclared.rs (+354 -0)",
+        "pnpm/crates/deps-inspection-peers/src/undeclared/search.rs (+115 -0)",
+        "pnpm/crates/deps-inspection-peers/src/undeclared/tests.rs (+230 -0)",
+        ".changeset/required-peer-reuse-warning.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/peers/workspace_root.rs (+210 -0)",
+        "pnpm/docs/cli/peers.md (+5 -1)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 17683,
+      "title": "feat(publish): confirm a retried publish against the version's release record",
+      "url": "https://github.com/pnpm/pnpm/pull/17683",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T13:00:19Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nA rerun of `pnpm publish` that signs provenance again sends a new statement, so pnpr treats it as a new request and answers 409, already published. pnpm now confirms the published version against what the rerun would have published, as the [platform variants RFC](https://github.com/pnpm/rfcs/pull/70) specifies. It reports the version as published only when all of these hold:\n\n- the version's release record (`<name>/<version>+r0`) has the same set of variant tags, and names the same `.tgz` as the input of the `any` archive and of each variant;\n- when this run signs provenance, `/-/npm/v1/attestations/<name>@<version>` has a statement whose subjects are exactly the archives this run signs for (PURL and SHA-512);\n- the dist-tag the publish sets points at the version.\n\nA version without an `any` archive has no primary input in its record, so it is compared by its variants only. In every other case the publish fails with `ERR_PNPM_PUBLISHED_RELEASE_DIFFERS`, naming the archive, the missing statement, or the dist-tag. The check runs only for a non-staged publish that gets a 409 from a registry declared `serverType: pnpr`.\n\n## Test plan\n\n- `publish_packed_pkg::release_retry::tests` cover the comparison against a mocked pnpr:\n  - a matching release is confirmed;\n  - a version without `any` is compared by its variants;\n  - a different `any` archive, a different variant archive, and a different set of tags are each named;\n  - a signing run without a statement, or with one t\n…(truncated)",
+      "files": [
+        "pnpm/crates/publish/src/publish_packed_pkg.rs (+9 -7)",
+        "pnpm/crates/publish/src/publish_packed_pkg/release_retry.rs (+391 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg/release_retry/tests.rs (+205 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg/tests.rs (+83 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg/variants.rs (+1 -1)",
+        ".changeset/pnpm-publish-retry-release-record.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/pnpr_install.rs (+1 -0)",
+        "pnpm/crates/cli/tests/suite/pnpr_install/publish_retry.rs (+155 -0)",
+        "pnpm/docs/cli/publish.md (+8 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {"number":17686,"title":"refactor(package-manager): break the module cycle between install and the repeat-install fast path","hint":"unknown","release":"📦 v12.18.0","brief":true},
+    {"number":17694,"title":"test(cli): require every file a full install reads to be recorded or classified","hint":"other","release":"📦 v12.18.0","brief":true},
+    {"number":17698,"title":"fix(package-manager): stop verify-deps rejecting manifest edits beside a file: directory dependency","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17699,"title":"fix(catalogs): anchor root catalog local paths","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17693,"title":"fix(dedupe): ignore an integrity recomputed with another algorithm in dedupe --check","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17702,"title":"fix: hold verifyDepsBeforeRun to a local directory dependency's manifest, and generate the oracle's edit axes from the read set","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17703,"title":"fix(package-manager): resolve root override paths with per-project lockfiles","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17705,"title":"test(cli): observe the read set of a pnpm v11 full install too","hint":"other","release":"📦 v12.18.0","brief":true},
+    {
+      "number": 17680,
+      "title": "feat(publish): publish packages with platform variants in a batch",
+      "url": "https://github.com/pnpm/pnpm/pull/17680",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T22:38:36Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\n`pnpm -r publish --batch` now publishes packages that declare `publishConfig.variants` to a registry declared `serverType: pnpr`, instead of refusing them ([platform variants RFC](https://github.com/pnpm/rfcs/pull/69)). Before the commit, pnpm stages every package's archives, each version's variants included. The batch then references them by integrity, the same way a single publish of the version does.\n\n- Each document in a batch records how its archives travel. A single-archive package is unchanged: staged and referenced when its registry stages, inline otherwise. A version with variants, or with an `any` archive another job uploaded, always goes through staging.\n- An archive another job uploaded with `--upload-variant` is checked with `HEAD` before anything is uploaded, as in a single publish. The checks for every registry group run before any group publishes, so a missing archive publishes nothing.\n- A batch with variants that would reference more than 256 archives (the most one pnpr commit accepts) fails with `ERR_PNPM_BATCH_PUBLISH_TOO_MANY_ARCHIVES`. Single-archive batches still fall back to inline archives.\n- `BatchPublishError` moves to `batch_publish/error.rs` to keep `batch_publish.rs` under the size limit. The new variant code lives in `batch_publish/variants.rs`.\n\n## Test plan\n\n- `batch_publish::variants::tests` mock pnpr in two cases:\n  - a batch of a package with an `any` archive and a `linux-x64` variant, beside a plain package, stages all three ar\n…(truncated)",
+      "files": [
+        "pnpm/crates/publish/src/batch_publish.rs (+95 -150)",
+        "pnpm/crates/publish/src/batch_publish/error.rs (+113 -0)",
+        "pnpm/crates/publish/src/batch_publish/tests.rs (+21 -11)",
+        "pnpm/crates/publish/src/batch_publish/variants.rs (+109 -0)",
+        "pnpm/crates/publish/src/batch_publish/variants/tests.rs (+326 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg.rs (+4 -0)",
+        "pnpm/crates/publish/src/publish_packed_pkg/variants.rs (+13 -12)",
+        ".changeset/pnpm-batch-publish-variants.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/pnpr_install.rs (+2 -0)",
+        "pnpm/crates/cli/tests/suite/pnpr_install/batch_variants.rs (+125 -0)"
+      ],
+      "filesTotal": 14
+    },
+    {
+      "number": 17688,
+      "title": "feat(package-is-installable): read supportedArchitectures entries as platform tags",
+      "url": "https://github.com/pnpm/pnpm/pull/17688",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T22:38:56Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\n`supportedArchitectures` platform-list entries are now parsed by the platform-tag parser that package variants and pnpr share (`pnpm_platform_variants::Platform::parse_tag`), as the [platform variants RFC](pnpr/text/0000-platform-variants.md#install) specifies. An entry can now state:\n\n- the floors and ABI a platform has: `linux-x64-manylinux_2_28`, `darwin-arm64-macos_14_0`, `win32-x64-windows_10_0`, `linux-x64-napi8`, `linux-x64-node127`;\n- any Node.js OS and CPU: `freebsd-x64`, `linux-loong64`.\n\nThe tag parser is the one source of truth. The spellings pnpm read before tags are rewritten into the tag they name before it parses them:\n\n| Older spelling | Tag |\n| --- | --- |\n| `linux-amd64`, `linux-x86_64`, `riscv64gc` and other architecture names | `linux-x64`, `…-riscv64` |\n| `linux-x64-glibc`, `linux-x64-gnu` | `linux-x64` |\n| `linux-arm64-musllinux_1_1` | `linux-arm64-musl` (the baseline is kept for Python wheels) |\n| `x86_64-unknown-linux-musl`, `aarch64-apple-darwin`, `x86_64-manylinux_2_28` | `linux-x64-musl`, `darwin-arm64`, `linux-x64-manylinux_2_28` |\n| `current` | unchanged |\n\nA platform keeps the name it had: the display name, which the dlx cache key and the platforms `pylock.toml` records use, is unchanged for every older spelling.\n\n- `NamedPlatform` holds the parsed `Platform`. Beside it, it keeps the two facts the tag vocabulary can't carry and Python wheels need: the machine `Architecture` (Node calls both POWER endiannesses `ppc64`; wheels don't) a\n…(truncated)",
+      "files": [
+        "Cargo.lock (+1 -0)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/runtime.rs (+3 -5)",
+        "pnpm/crates/package-is-installable/Cargo.toml (+1 -0)",
+        "pnpm/crates/package-is-installable/src/check_platform.rs (+3 -7)",
+        "pnpm/crates/package-is-installable/src/infer_platform_from_package_name.rs (+4 -33)",
+        "pnpm/crates/package-is-installable/src/lib.rs (+1 -0)",
+        "pnpm/crates/package-is-installable/src/node_platform_names.rs (+45 -0)",
+        "pnpm/crates/package-is-installable/src/supported_architectures.rs (+2 -6)",
+        "pnpm/crates/package-is-installable/src/supported_architectures/platform.rs (+101 -183)",
+        "pnpm/crates/package-is-installable/src/supported_architectures/platform/aliases.rs (+128 -0)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 17684,
+      "title": "feat(deps-restorer): fetch the variants supportedArchitectures needs into the store",
+      "url": "https://github.com/pnpm/pnpm/pull/17684",
+      "author": "zkochan",
+      "mergedAt": "2026-11-04T22:53:41Z",
+      "labels": [
+        "product: pacquet"
+      ],
+      "hint": "feature",
+      "release": "📦 v12.18.0",
+      "body": "## Summary\n\nThis implements the fetch half of the [platform variants RFC](pnpr/text/0000-platform-variants.md#install)'s `supportedArchitectures` rules. With `supportedArchitectures` set, an install of a registry package with platform variants also fetches into the store, without linking them:\n\n- every platform variant that matches one of the listed platforms (`Purpose::Fetch`: for a platform other than the host, a floor or ABI it does not state counts as met);\n- the archive that targets `any`, for a listed platform where no variant can be linked under the linking rule (an unstated floor counts as not met).\n\n`current` stands for the host. The `os`/`cpu`/`libc` form stands for every combination of its values. A `manylinux_<major>_<minor>` baseline in a listed platform states its glibc floor. Without `supportedArchitectures`, only the linked archive is fetched, as before.\n\n- `VariationsResolution::fetched_for(platform)` in the lockfile crate gives the archives one platform keeps.\n- `install_package_by_snapshot/fetch/stored_variants.rs` expands `supportedArchitectures` into platforms. It fetches each archive they keep, except the linked one, through the same tarball path, so each lands in the CAS and the store index.\n- `variant_for_host` also returns the selected archive, and `archive_fetch` builds the fetch for any one archive.\n\nNot in this PR:\n\n- Linking the one listed platform's variant when `supportedArchitectures` names exactly one platform and omits `current`. The dependen\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/fetch.rs (+11 -5)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/fetch/stored_variants.rs (+131 -0)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/fetch/stored_variants/tests.rs (+193 -0)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/variant_fetch.rs (+15 -3)",
+        "pnpm/crates/lockfile/src/resolution.rs (+1 -1)",
+        "pnpm/crates/lockfile/src/resolution/variants.rs (+30 -1)",
+        ".changeset/pnpm-supported-architectures-variants.md (+5 -0)",
+        "pnpm/crates/cli/tests/suite/pnpr_install.rs (+1 -0)",
+        "pnpm/crates/cli/tests/suite/pnpr_install/supported_architectures_variants.rs (+144 -0)",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot/tests/variants.rs (+4 -4)"
+      ],
+      "filesTotal": 11
+    },
+    {"number":17701,"title":"fix(peers): resolve relative file peer paths","hint":"fix","release":"📦 v12.18.0","brief":true},
+    {"number":17708,"title":"chore(release): 11.28.11, pacquet 12.18.0, pnpr 0.1.0-alpha.18","hint":"other","release":"📦 v12.18.0","brief":true},
+    {"number":17710,"title":"docs: update feature comparison (npm supports patching)","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17706,"title":"fix: judge a workspace: range in the lockfile checks the way the resolver does","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17711,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17716,"title":"test(cli): give the injected package its own local dependencies in the freshness matrix","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17719,"title":"chore: update dependencies, Node.js, pnpm, and GitHub Actions","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17700,"title":"fix(workspace): reject null manifest roots","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17720,"title":"fix: read a local dependency path the way the resolver does in the lockfile checks","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17714,"title":"test: pin the npm the Rust tests spawn","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17725,"title":"fix(resolving-npm-resolver): revalidate a publishedBy mirror pick that misses a version","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17722,"title":"fix: share the remaining local-dependency rules between the resolver and the lockfile checks","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17707,
+      "title": "feat(deps-restorer): link the variant of the one platform supportedArchitectures lists",
+      "url": "https://github.com/pnpm/pnpm/pull/17707",
+      "author": "zkochan",
+      "mergedAt": "2026-11-05T11:55:48Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nImplements the link rule of the [platform variants RFC](pnpr/text/0000-platform-variants.md#install). When `supportedArchitectures` names exactly one platform and not `current`, a package with platform variants links that platform's variant, together with the dependencies that variant declares. The aim is preparing a `node_modules` for another machine. A list names one platform by one entry. The `{os, cpu, libc}` form names one when `os` and `cpu` each hold one value and no axis says `current`; an unset `libc` keeps that form's meaning, the host's C library. A floor or ABI the listed platform does not state is not met for linking, so `linux-x64` links the version's own archive where the only Linux variant needs glibc 2.28, and `linux-x64-manylinux_2_28` links that variant.\n\n### One choice, one selection path\n\n- `VariantPlatforms { runtime, linked }` is derived once from `supportedArchitectures`. It replaces the lone runtime selector that the fetch, cache-key and slot-hash paths already carried. `for_variations` picks `runtime` for a runtime's archives (unchanged behavior) and `linked` for a registry package's variants.\n- The selectors move out of `install_package_by_snapshot/runtime.rs` into a new leaf module, `platform_selection`. That module also holds the `named_platform` builder introduced with the fetch rule in pnpm/pnpm#17684. The dependency walk, the deps graph and the installability check read it without depending on the installer, which keeps the crate's \n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/install/pnpr_lockfile.rs (+2 -1)",
+        "pnpm/crates/deps-restorer/src/build_modules.rs (+2 -1)",
+        "pnpm/crates/deps-restorer/src/build_modules/tests.rs (+1 -0)",
+        "pnpm/crates/deps-restorer/src/build_options.rs (+4 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store.rs (+1 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/cache_keys.rs (+18 -13)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/linked_archives.rs (+158 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/linked_archives/tests.rs (+16 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/partition.rs (+6 -4)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/pipeline.rs (+28 -3)"
+      ],
+      "filesTotal": 83
+    },
+    {"number":17729,"title":"fix(cli): fail a plain install without a manifest","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17713,"title":"fix(install): let a frozen install skip empty workspace project dirs","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17730,"title":"perf(resolving-npm-resolver): look up the release-age cutoff only for a dated mirror hit","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":17737,"title":"fix(self-update): update the engines.pnpm range along with the project pin","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17743,
+      "title": "feat(crate-layers): ratchet direct dependencies and budget transitive ones",
+      "url": "https://github.com/pnpm/pnpm/pull/17743",
+      "author": "zkochan",
+      "mergedAt": "2026-11-05T16:26:34Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds the \"per-crate direct-dependency ratchet and a transitive-dependency budget for the model and service layers\" item of pnpm/tasks#253 to the `crate-layers` tool. The other open items of that task are not part of this PR.\n\n- `[direct_dependencies]` in `crate-layers.toml`: each crate's accepted number of direct workspace dependencies (normal and build). `crate-layers check` fails when a count grows or shrinks, the same ratchet rule as `module_cycles`.\n- `max_transitive_dependencies` on a layer: the most workspace crates a crate in that layer may reach through normal and build dependencies. Set to today's maxima, 18 for model (`pnpm-lockfile`) and 35 for service (`pnpm-resolving-deps-resolver`, `pnpm-resolving-git-resolver`).\n- `crate-layers dependencies [--crate <name> | --baseline]` lists the counts.\n\nExample failures:\n\n```text\npnpm-lockfile depends on 12 workspace crates, more than the 11 in crate-layers.toml; raise its direct_dependencies entry only when the new dependency belongs in this crate\npnpm-fs measures 2, below the 3 in its direct_dependencies entry; lower the entry in crate-layers.toml\npnpm-lockfile reaches 18 workspace crates through its dependencies, more than the 17 the model layer allows; `crate-layers dependencies --crate pnpm-lockfile` lists them\n```\n\nThe tool's own module-cycle check caught a `layers` ↔ `ratchet` cycle during this change, so `Problem` now lives in its own `problem` module.\n\nNo changeset: `pnpm-crate-layers` is an unpublished \n…(truncated)",
+      "files": [
+        "crate-layers.toml (+114 -1)",
+        "justfile (+3 -2)",
+        "pnpm/tasks/crate-layers/src/cycles.rs (+6 -29)",
+        "pnpm/tasks/crate-layers/src/dependencies.rs (+113 -0)",
+        "pnpm/tasks/crate-layers/src/layers.rs (+24 -49)",
+        "pnpm/tasks/crate-layers/src/main.rs (+72 -13)",
+        "pnpm/tasks/crate-layers/src/problem.rs (+105 -0)",
+        "pnpm/tasks/crate-layers/src/ratchet.rs (+46 -0)",
+        "pnpm/tasks/crate-layers/src/report.rs (+0 -12)",
+        "pnpm/tasks/crate-layers/src/tests.rs (+74 -2)"
+      ],
+      "filesTotal": 12
+    },
+    {"number":17746,"title":"docs(self-update): describe how a rejecting engines.pnpm range is rewritten","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":17738,"title":"fix(store-dir): preserve patched bundled dependencies in side effects cache","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17748,
+      "title": "feat(crate-layers): ratchet the dependencies a crate leaks through its public API",
+      "url": "https://github.com/pnpm/pnpm/pull/17748",
+      "author": "zkochan",
+      "mergedAt": "2026-11-05T19:27:44Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds the \"Leaky-API check\" item of pnpm/tasks#253 to the `crate-layers` tool. The other open items of that task are not part of this PR.\n\nA crate leaks a dependency when a public signature names one of the dependency's items and the crate does not re-export it with `pub use`. Every caller that uses the signature then has to depend on that crate as well.\n\n- `crate-layers leaks` lists each leak and how many crates depend on both sides. `--crate <name>` lists the leaked items and those crates. `--baseline` prints the table.\n- `crate-layers check` ratchets each crate's number of leaked dependencies through a new `[leaked_dependencies]` table, the same rule as `module_cycles` and `direct_dependencies`. The count ignores the shared dependents, so one crate's entry does not change when another crate adds a dependency.\n\nThe task's candidate shows up as expected, second in the report:\n\n```text\ncrate | leaks | shared dependents | items\npnpm-resolving-resolver-base | pnpm-lockfile | 21 | 3\npnpm-network | pnpm-http | 16 | 8\npnpm-lockfile | pnpm-package-manifest | 14 | 2\npnpm-store-dir | pnpm-fs | 13 | 3\npnpm-tarball | pnpm-network | 13 | 3\n```\n\nThere are 309 leaks across 74 crates. I spot-checked several by hand, including `pnpm-config` → `pnpm-tarball::TarLimits`, `pnpm-lockfile` → `pnpm-package-manifest`, and `pnpm-package-manager` → `pnpm-network::ThrottledClient`. Each one was a real leak.\n\nHow the public surface is read, and its limits (also in the README):\n\n- Reads the \n…(truncated)",
+      "files": [
+        "crate-layers.toml (+81 -0)",
+        "pnpm/tasks/crate-layers/src/cfg.rs (+56 -0)",
+        "pnpm/tasks/crate-layers/src/cycles.rs (+4 -2)",
+        "pnpm/tasks/crate-layers/src/extent.rs (+115 -0)",
+        "pnpm/tasks/crate-layers/src/layers.rs (+14 -7)",
+        "pnpm/tasks/crate-layers/src/leaks.rs (+167 -0)",
+        "pnpm/tasks/crate-layers/src/main.rs (+75 -36)",
+        "pnpm/tasks/crate-layers/src/modules.rs (+29 -57)",
+        "pnpm/tasks/crate-layers/src/problem.rs (+11 -0)",
+        "pnpm/tasks/crate-layers/src/report.rs (+9 -13)"
+      ],
+      "filesTotal": 14
+    },
+    {"number":17709,"title":"fix(publish): load the Sigstore signing config through TUF","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17704,"title":"fix(pnpr): reject invalid publish versions","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17735,
+      "title": "feat(deps-restorer): store other platforms' archives and their dependencies on every install",
+      "url": "https://github.com/pnpm/pnpm/pull/17735",
+      "author": "zkochan",
+      "mergedAt": "2026-11-05T21:37:51Z",
+      "labels": [
+        "product: pacquet",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nThis is the last part of `supportedArchitectures` for platform variants (pnpm/rfcs#69, \"Install\"). Every install, and `pnpm fetch`, now stores the archives the listed platforms keep together with the packages those archives depend on. Nothing extra is linked.\n\n- **One store-only pass.** It runs after the virtual store is materialized, warm or cold, so a platform added to `supportedArchitectures` is picked up by the next install, including one that reuses every slot. `pnpm fetch` runs the same frozen install pipeline, so it follows the same rule.\n- **The walk** (`current_lockfile::platform_archives`). For each listed platform, it starts at the installed projects. For a package with variants, it keeps every archive that platform fetches (`VariationsResolution::fetched_for`, the same selection the fetch rule uses). It then follows each kept archive's dependencies, from the variant's own `<name>@<version>/variants/<tag>` snapshot when there is one, and otherwise from the version's. So a package reachable only through an archive no listed platform keeps is never fetched. Archives and packages the install already links are skipped.\n- **The fetch** (`InstallPackageBySnapshot::store_archives`). It downloads the kept archives concurrently, bounded by the client's per-host limit, through the existing tarball path. An archive the store already holds is read from the store index, not downloaded again.\n- **No extra work otherwise.** Without `supportedArchitectures`, or when it\n…(truncated)",
+      "files": [
+        "pnpm/crates/deps-restorer/src/create_virtual_store/pipeline.rs (+1 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/pipeline/downloads.rs (+5 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/pipeline/platform_archives.rs (+127 -0)",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/tests.rs (+1 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile.rs (+2 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/platform_archives.rs (+299 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/platform_archives/tests.rs (+123 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/variant_snapshots.rs (+8 -0)",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/planning.rs (+4 -0)",
+        "pnpm/crates/deps-restorer/src/install_options.rs (+11 -0)"
+      ],
+      "filesTotal": 25
+    },
+    {"number":17744,"title":"fix(deploy): approve builds of workspace projects deployed as file: deps","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17757,"title":"fix(cmd-shim): run shim helpers from PATH in the macOS Nix sandbox","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17752,"title":"fix(publish): pin provenance signing to Rekor API v1","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17755,
+      "title": "feat: add pnpm fund",
+      "url": "https://github.com/pnpm/pnpm/pull/17755",
+      "author": "zkochan",
+      "mergedAt": "2026-11-05T22:13:52Z",
+      "labels": [
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nAdds `pnpm fund` to the v12 CLI, working like `npm fund`. This takes over pnpm/pnpm#15850, which was closed before it landed. The original commits are kept with their authorship. On top of them, this PR adapts the code to current `main` and covers the one open review finding. Closes pnpm/pnpm#7354.\n\n- `pnpm fund` prints npm's tree: packages grouped under the first funding URL that lists them.\n- `pnpm fund --json` prints the `npm fund --json` report.\n- `pnpm fund <pkg>` opens the funding URL of the newest installed version of `<pkg>`, or of the project at a path such as `.`. With several sources it lists them numbered, and `--which <n>` opens one. `ERR_PNPM_NO_FUNDING` when there is none.\n- `-r` / `--filter` report on each selected workspace project, including `sharedWorkspaceLockfile: false` workspaces. A recursive `--json` run prints an array of per-project reports.\n\nChanges since pnpm/pnpm#15850:\n\n- `apply_update_config` no longer takes a reporter.\n- Output goes through `pnpm_diagnostics::println!`, which clippy now requires so a closed stdout does not abort.\n- The open Copilot finding said a project with its own `funding` field renders with the URL as the tree root. That matches npm. Run against npm 12.2.2 with the same tree, `npm fund` prints:\n\n  ```text\n  https://example.com/root\n  │ └── root@1.0.0, c@3.0.0\n  └── https://example.com/a\n      └── a@1.0.0\n  ```\n\n  The behavior stays, and a unit test now pins this output.\n\nDeliberate differences from npm (unchang\n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args.rs (+2 -0)",
+        "pnpm/crates/cli/src/cli_args/cli_command.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/cli_command/commands.rs (+13 -9)",
+        "pnpm/crates/cli/src/cli_args/dispatch/routing.rs (+1 -0)",
+        "pnpm/crates/cli/src/cli_args/dispatch_query.rs (+11 -0)",
+        "pnpm/crates/cli/src/cli_args/fund.rs (+86 -0)",
+        "pnpm/crates/cli/src/cli_args/fund/funding.rs (+97 -0)",
+        "pnpm/crates/cli/src/cli_args/fund/human.rs (+123 -0)",
+        "pnpm/crates/cli/src/cli_args/fund/open.rs (+124 -0)",
+        "pnpm/crates/cli/src/cli_args/fund/projects.rs (+146 -0)"
+      ],
+      "filesTotal": 19
+    },
+    {"number":17749,"title":"fix: preserve mapped Windows drive paths","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17761,"title":"fix(resolver): let a no-cache mirror answer picks that ignore newer versions","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17760,"title":"fix(shim-dispatch): keep a shim from dispatching inside its own preparation","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17724,"title":"chore: add an embedded-engine size benchmark","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17726,
+      "title": "feat: resolve optional peers only from the project's own graph",
+      "url": "https://github.com/pnpm/pnpm/pull/17726",
+      "author": "zkochan",
+      "mergedAt": "2026-11-05T23:56:54Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nWith `autoInstallPeers: true`, a missing optional peer could be resolved from a version that only another workspace project depends on. The reproduction in https://github.com/orgs/pnpm/discussions/16666: `app` depends on `webpack`, `tooling` has `webpack-cli` in `devDependencies`, and `app`'s production graph picks up `webpack-cli → webpack-dev-server → selfsigned → node-forge`.\n\nThis PR has two parts:\n\n1. **Fix (v11 and v12):** with `dedupePeerDependents: false`, optional peers now come only from the project's own dependency graph (plus the workspace root with `resolvePeersFromWorkspaceRoot`). The optional-peer fill exists only to deduplicate, so it now respects the opt-out. The single-project case from pnpm/pnpm#12266 keeps working.\n2. **New setting (v12 only):** `projectScopedOptionalPeers: true` applies the same project-scoped rule while `dedupePeerDependents` stays on. Required peers are still reused across projects, and variants are still deduplicated, except that a variant never collapses into one that resolves an optional peer it lacks. Without that guard, the dedupe pass hands another project's optional peer back to the project (the `webpack`/`esbuild` example in the `dedupePeerDependents` docs). The plan is to make this the default in the next major and then remove the setting.\n\nThe lockfile's `settings` block records `projectScopedOptionalPeers: true` while the setting takes effect (it and `dedupePeerDependents` both on), like `addMissingPeerTypes`, so \n…(truncated)",
+      "files": [
+        "pnpm/crates/cli/src/cli_args/deploy/workspace_manifest.rs (+3 -0)",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_request.rs (+21 -2)",
+        "pnpm/crates/cli/src/cli_args/install/tests.rs (+17 -0)",
+        "pnpm/crates/config/src/env_overlay/resolution.rs (+6 -0)",
+        "pnpm/crates/config/src/layout.rs (+8 -0)",
+        "pnpm/crates/config/src/settings.rs (+8 -0)",
+        "pnpm/crates/config/src/workspace_yaml.rs (+2 -1)",
+        "pnpm/crates/config/src/workspace_yaml/settings.rs (+1 -0)",
+        "pnpm/crates/config/src/workspace_yaml/workspace_scope.rs (+1 -0)",
+        "pnpm/crates/deps-restorer/src/current_lockfile/tests.rs (+1 -0)"
+      ],
+      "filesTotal": 89
+    },
+    {"number":17764,"title":"fix(config): fail on an env placeholder in a repository-controlled registry URL","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17754,"title":"fix(run): do not report a lifecycle failure for a script Ctrl+C ended","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17759,"title":"fix(cli): warn for incompatible root engines","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17765,"title":"fix(self-update): accept an unclean TLS close in the signature check","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17756,"title":"fix(pnpr): let an upstream download run while it keeps receiving data","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":17767,"title":"test(cli): serve the running pnpm from the mock registry in pin tests","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 17717,
+      "title": "feat(pnpr): content-addressed hosted archives with fenced online gc",
+      "url": "https://github.com/pnpm/pnpm/pull/17717",
+      "author": "zkochan",
+      "mergedAt": "2026-11-06T00:30:35Z",
+      "labels": [
+        "product: pacquet",
+        "product: pnpm@11",
+        "product: pnpr",
+        "reviewed: coderabbit"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nOn libSQL, a publish refused at its commit left its archives in place (pnpm/pnpm#17674), and nothing could collect them while replicas keep publishing. Every archive was stored under its public filename, so a removal could race a later publish that reused that same key.\n\nThis PR stores hosted archives content-addressed and fences every removal in the metadata database, with no timing assumption.\n\n**Storage model** (SQL schema `0.2`):\n- An archive is stored under `<integrity>.<n>`: the identity of its bytes plus an incarnation number. Identical bytes are stored once per org and ecosystem, across versions, packages and image repositories.\n- `blobs` holds each integrity's current incarnation and its state: `live`, `reclaiming` or `gone`.\n- `artifact_blobs` maps every published file to the integrity it is stored as. It is written in the publish commit, and npm version removal deletes its rows in that same commit.\n- Reads resolve a package's file through the mapping, from the replica within its freshness bound. Tarball, variant, attestation, PyPI, Cargo and OCI URLs don't change.\n\n**Publish:**\n- The read a publish already makes before promotion also looks up its integrities.\n- A `live` incarnation is reused, and nothing is uploaded.\n- An absent or retired integrity is uploaded as the next incarnation. Two publishers that pick the same incarnation write identical bytes to the same key.\n- The commit names the incarnations it depends on. In its existing first batch it is \n…(truncated)",
+      "files": [
+        "Cargo.lock (+4 -0)",
+        "pnpm/tasks/integrated-benchmark/Cargo.toml (+3 -0)",
+        "pnpm/tasks/integrated-benchmark/src/main.rs (+4 -3)",
+        "pnpm/tasks/integrated-benchmark/src/work_env.rs (+3 -2)",
+        "pnpm/tasks/integrated-benchmark/src/work_env/fixtures.rs (+1 -81)",
+        "pnpm/tasks/integrated-benchmark/src/work_env/mock_home.rs (+30 -0)",
+        "pnpm/tasks/integrated-benchmark/src/work_env/peer_heavy.rs (+234 -0)",
+        "pnpm/tasks/integrated-benchmark/src/work_env/peer_heavy/tests.rs (+62 -0)",
+        "pnpm/tasks/integrated-benchmark/src/work_env/servers.rs (+23 -9)",
+        "pnpm/tasks/registry-mock/src/lib.rs (+2 -1)"
+      ],
+      "filesTotal": 136
+    }
+  ],
+  "errors": []
+}

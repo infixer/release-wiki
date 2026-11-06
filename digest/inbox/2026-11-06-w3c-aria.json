@@ -1,0 +1,75 @@
+{
+  "kind": "repo",
+  "repo": "w3c/aria",
+  "branch": "main",
+  "collectedAt": "2026-11-06T01:37:07Z",
+  "range": {
+    "from": "2026-11-01T11:56:50Z",
+    "to": "2026-11-06T01:37:07Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 2964,
+      "title": "Chore: Update accname change log",
+      "url": "https://github.com/w3c/aria/pull/2964",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-11-04T18:18:42Z",
+      "labels": [
+        "spec:accname"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 2967,
+      "title": "Editorial: blow -> below",
+      "url": "https://github.com/w3c/aria/pull/2967",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-11-05T18:04:20Z",
+      "labels": [
+        "editorial"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "🚀 **Netlify Preview**:\n🔄 **this PR updates the following specs**:\n- [ARIA preview](https://deploy-preview-2967--wai-aria.netlify.app/index.html) &mdash; [ARIA diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Faria%2F&doc2=https%3A%2F%2Fdeploy-preview-2967--wai-aria.netlify.app%2Findex.html)",
+      "files": [
+        "index.html (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 2957,
+      "title": "Chore: Fix accname reference",
+      "url": "https://github.com/w3c/aria/pull/2957",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-11-05T19:41:05Z",
+      "labels": [
+        "spec:core-aam"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 2968,
+      "title": "Chore: Fix prettier error",
+      "url": "https://github.com/w3c/aria/pull/2968",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-11-05T20:18:39Z",
+      "labels": [
+        "spec:core-aam"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

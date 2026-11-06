@@ -1,0 +1,282 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-11-06T01:37:07Z",
+  "range": {
+    "from": "2026-11-04T00:03:13Z",
+    "to": "2026-11-06T01:37:07Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": {
+      "tag": "v7.1-beta",
+      "publishedAt": "2026-10-20T17:38:20Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.1-beta"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 64046,
+      "title": "Flip files from CRLF to LF",
+      "url": "https://github.com/microsoft/TypeScript/pull/64046",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-04T16:49:30Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Historically, all files in the TS repo were CRLF, including our actual main code in `src`. This is extra annoying now-a-days where agents, tools, etc, tend to screw up CRLF, `git diff --check` hates it, etc. But changing that is hard.\n\nBut, now, we're in Go, and I made sure the repo always enforced LF for `.go` files, which means the only remaining CRLF source we have are the public API code (new) and then misc files like scripts, lib.d.ts.\n\nI think we can safely switch over.\n\nA follow up can add a `.git-blame-ignore` entry, which does appear to work in my testing.\n\nAfter this, the only files with CRLF are:\n\n- `tsc/testdata/**` - input test files, but definitely output test files as we default to CRLF\n- ~`tsc/internal/locale/lcl/**` - dead in #63987, though it's possible that the loc team will break this in the files they push to us; it won't matter too much. `.gitattributes` will probably be enough to keep this working.~",
+      "files": [
+        ".dprint.jsonc (+75 -71)",
+        ".editorconfig (+13 -0)",
+        ".gitattributes (+5 -2)",
+        ".gitignore (+142 -142)",
+        ".vscode/settings.template.json (+1 -1)",
+        ".vscode/tasks.json (+129 -129)",
+        "Herebyfile.mjs (+3578 -3524)",
+        "LICENSE.txt (+55 -55)",
+        "NOTICE.txt (+405 -405)",
+        "packages/typescript-wasip1-wasm/src/index.ts (+1 -1)"
+      ],
+      "filesTotal": 393
+    },
+    {
+      "number": 65320,
+      "title": "Add CRLF to LF conversion to .git-blame-ignore-revs",
+      "url": "https://github.com/microsoft/TypeScript/pull/65320",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-04T18:14:57Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "No, I didn't write every line in the codebase. Again.",
+      "files": [
+        ".git-blame-ignore-revs (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64989,
+      "title": "Check ASCII identifier bytes with a lookup table",
+      "url": "https://github.com/microsoft/TypeScript/pull/64989",
+      "author": "Andarist",
+      "mergedAt": "2026-11-04T18:44:13Z",
+      "labels": [
+        "Domain: Performance",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "`BenchmarkParse` on my Apple M1 Pro reports 1-3% gains on my machine for this. `checker.ts` with its longer identifiers gives better results than, for example, `dom.generated.d.ts`",
+      "files": [
+        "tsc/internal/scanner/scanner.go (+10 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 64193,
+      "title": "fix(tsoptions): don't mutate ParsedCommandLine errors when computing CommonSourceDirectory",
+      "url": "https://github.com/microsoft/TypeScript/pull/64193",
+      "author": "erantianantha",
+      "mergedAt": "2026-11-04T19:10:46Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #62436\n\n### Problem\n\nWhen `CommonSourceDirectory()` is evaluated on a `ParsedCommandLine` (such as when calculating relative root/out directories across project references during resolution checks), `outputpaths.GetCommonSourceDirectory` was invoked with `p.checkSourceFilesBelongToPath`.\n\nThis caused `ParsedCommandLine.Errors` to be mutated with configuration diagnostics, which in turn caused `tsc -b` / solution builds to report diagnostics on `tsconfig.json` without source file location context.\n\n### Solution\n\n- Pass `nil` for `checkSourceFilesBelongToPath` in `ParsedCommandLine.CommonSourceDirectory()`, matching the TypeScript compiler reference implementation (`getCommonSourceDirectoryOfConfig`).\n- Added unit test coverage verifying that calling `CommonSourceDirectory()` computes the directory without mutating `ParsedCommandLine.Errors`.\n\nDisclosure: this PR, including the review follow-up commit, was written with an AI coding assistant (Claude Code).",
+      "files": [
+        "tsc/internal/tsoptions/parsedcommandline.go (+1 -14)",
+        "tsc/internal/tsoptions/parsedcommandline_test.go (+34 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 64910,
+      "title": "Avoid unnecessary localization branch rebases",
+      "url": "https://github.com/microsoft/TypeScript/pull/64910",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-04T21:00:36Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Daily localization updates were rewriting the bot branch whenever main advanced, even when the localization files had not changed. This adds unrelated commits to force-pushes and creates unnecessary review churn.\n\nFix that by being a bit more clever.",
+      "files": [
+        "tools/pipelines/localization-update.yml (+16 -6)",
+        "tools/scripts/preserve-localization-base.mjs (+48 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 65099,
+      "title": "Report TS2516 for non-consecutive abstract method declarations",
+      "url": "https://github.com/microsoft/TypeScript/pull/65099",
+      "author": "Shadow0Bit",
+      "mergedAt": "2026-11-04T23:14:34Z",
+      "labels": [
+        "For Backlog Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #61783\n\n## Analysis\n\nThe issue occurs when there are two declarations of the same abstract method, separated by another method that has a body. Error TS2389 is reported for the separating method (even though it is valid):\n\n```ts\nabstract class Foo {\n    abstract func1(): void;\n    func2(): string { return 'hi'; }    // error TS2389: Function implementation name must be 'func1'.\n    abstract func1(): void;\n}\n```\n\n`reportImplementationExpectedError` assumes the next method with a body is a misnamed implementation, reports an error and returns. In this situation such a guess doesn't make sense, abstract methods can't have implementation in the same class and the existing error below is never reached.\n\n## Fix\n\nSkip the misnamed implementation check when the method declaration is abstract. This way the existing error is reachable. Error TS2516 'All declarations of an abstract method must be consecutive' is now reported on `func1`, matching the behavior when declarations are separated by a property.\n\nNon-abstract classes are unaffected by this change. The `func2` really might be a misspelled `func1`, so the TS2389 is still reported.\n\nThere is also a non-abstract example in the issue discussion but this could be a separate followup.\n\nTest: new compiler test `abstractMethodNonConsecutiveDeclarations.ts`, it covers the example, declarations separated by a method with a body, and declarations separated by a prop (as a comparison case). No existing baselines change.\n\n## AI disclos\n…(truncated)",
+      "files": [
+        "tsc/internal/checker/checker.go (+2 -1)",
+        "tsc/testdata/baselines/reference/compiler/abstractMethodNonConsecutiveDeclarations.errors.txt (+29 -0)",
+        "tsc/testdata/baselines/reference/compiler/abstractMethodNonConsecutiveDeclarations.js (+35 -0)",
+        "tsc/testdata/baselines/reference/compiler/abstractMethodNonConsecutiveDeclarations.symbols (+34 -0)",
+        "tsc/testdata/baselines/reference/compiler/abstractMethodNonConsecutiveDeclarations.types (+36 -0)",
+        "tsc/testdata/tests/cases/compiler/abstractMethodNonConsecutiveDeclarations.ts (+19 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 65037,
+      "title": "Adds missing methods from checker api ",
+      "url": "https://github.com/microsoft/TypeScript/pull/65037",
+      "author": "iisaduan",
+      "mergedAt": "2026-11-04T23:16:06Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Adds ~half the methods missing in Checker: https://github.com/microsoft/TypeScript/pull/64749/changes#diff-4776036ff539c2fa009621dc13a9f2c8fd15d50e9302e8a361614ab640659a2eR72\n•  `isImplementationOfOverload(node: Node): Promise<boolean>`\n•  `getAmbientModules(): Promise<readonly Symbol[]>` \n•  `getPropertySymbolOfDestructuringAssignment(location: Identifier): Promise<Symbol | undefined>`\n•  `getNullableType(type: Type, flags: TypeFlags): Promise<Type>`\n•  `getStringLiteralType(value: string): Promise<Type>`\n•  `getNumberLiteralType(value: number): Promise<Type>`\n•  `getBigIntLiteralType(value: bigint): Promise<Type>`\n•  `getFalseType(): Promise<Type>`\n•  `getTrueType(): Promise<Type>`\n•  `getJsxIntrinsicTagNamesAt(location: Node): Promise<readonly Symbol[]>`\n•  `getPrivateIdentifierPropertyOfType(type: Type, name: string, location: Node): Promise<Symbol | undefined>`\n\nRemoved:\n•  `getAugmentedPropertiesOfType(type: Type): Promise<readonly Symbol[]> ` (use `Type.getApparentProperties()`)",
+      "files": [
+        "packages/typescript/src/api/async/api.ts (+123 -0)",
+        "packages/typescript/src/api/proto.generated.ts (+86 -18)",
+        "packages/typescript/src/api/proto.ts (+1 -1)",
+        "packages/typescript/src/api/sync/api.ts (+316 -0)",
+        "tsc/internal/api/proto.go (+224 -146)",
+        "tsc/internal/api/session.go (+205 -6)",
+        "tsc/internal/checker/exports.go (+36 -0)",
+        "packages/typescript/test/async/api.test.ts (+377 -0)",
+        "packages/typescript/test/sync/api-generators.test.ts (+11 -0)",
+        "packages/typescript/test/sync/api.test.ts (+377 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 65328,
+      "title": "add parseConfigFileTextToJson",
+      "url": "https://github.com/microsoft/TypeScript/pull/65328",
+      "author": "iisaduan",
+      "mergedAt": "2026-11-05T19:26:41Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64634",
+      "files": [
+        "packages/typescript/src/api/async/api.ts (+5 -0)",
+        "packages/typescript/src/api/proto.generated.ts (+8 -0)",
+        "packages/typescript/src/api/sync/api.ts (+19 -0)",
+        "tsc/internal/api/proto.go (+7 -0)",
+        "tsc/internal/api/session.go (+17 -0)",
+        "packages/typescript/test/async/api.test.ts (+26 -0)",
+        "packages/typescript/test/sync/api-generators.test.ts (+1 -0)",
+        "packages/typescript/test/sync/api.test.ts (+26 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 65317,
+      "title": "Fix TS1450 diagnostic severity for invalid dynamic imports",
+      "url": "https://github.com/microsoft/TypeScript/pull/65317",
+      "author": "OKAN-SOFTWARE",
+      "mergedAt": "2026-11-05T20:42:01Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n- Change TS1450 from an informational message to an error when a dynamic `import()` call has an invalid number of arguments.\n- Regenerate the Go diagnostic definitions and update eight existing compiler regression baselines to reflect the correct severity.\n\nFixes #65309.\n\n## Validation\n\nThe following checks passed locally:\n\n- `npx.cmd hereby generate:diagnostics`\n- Targeted Go compiler regression tests\n- `go -C ./tsc test -count=1 ./...` — full Go test suite\n- `npx.cmd hereby tidy`\n- `npx.cmd hereby check:format`\n- `npx.cmd hereby lint` — zero issues\n- Git whitespace checks\n\n**Environment limitation:** I attempted `npx.cmd hereby validate --all`, but it could not complete because Windows Application Control blocked `tools/gotestsum.exe` (`spawn UNKNOWN`). I ran the full Go test suite directly, along with the checks listed above. I did not change or bypass the security policy.\n\n## AI Assistance Disclosure\n\nI used ChatGPT/Codex as a supporting tool for issue analysis, initial patch preparation, and troubleshooting guidance.\n\nI personally managed the development workflow, wrote and executed local PowerShell and Git commands, applied and reviewed the changes, regenerated diagnostic definitions, ran the regression tests and full Go test suite, verified formatting and lint results, and committed and pushed the changes through my GitHub account.\n\nI take responsibility for the submitted contribution, its correctness, and any follow-up work requested during code review.",
+      "files": [
+        "tsc/internal/diagnostics/diagnosticMessages.json (+1 -1)",
+        "tsc/internal/diagnostics/diagnostics_generated.go (+1 -1)",
+        "tsc/testdata/baselines/reference/conformance/importAssertion1(module=commonjs).errors.txt (+2 -2)",
+        "tsc/testdata/baselines/reference/conformance/importAssertion1(module=esnext).errors.txt (+4 -4)",
+        "tsc/testdata/baselines/reference/conformance/importAttributes1(module=commonjs).errors.txt (+2 -2)",
+        "tsc/testdata/baselines/reference/conformance/importAttributes1(module=esnext).errors.txt (+4 -4)",
+        "tsc/testdata/baselines/reference/conformance/importCallExpressionGrammarError.errors.txt (+2 -2)",
+        "tsc/testdata/baselines/reference/conformance/importSource11.errors.txt (+4 -4)",
+        "tsc/testdata/baselines/reference/conformance/importSource5.errors.txt (+4 -4)",
+        "tsc/testdata/baselines/reference/conformance/plainJSGrammarErrors.errors.txt (+4 -4)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 65344,
+      "title": "Fix workspace TypeScript version discovery",
+      "url": "https://github.com/microsoft/TypeScript/pull/65344",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-05T21:19:46Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64565\n\n- Shows the tsdk in the picker list\n- Also looks for `@typescript/native`, which is what our blog post suggested, but also `typescript`, which we somehow did not do.\n- Shows the user level tsdk setting.",
+      "files": [
+        "packages/vscode-typescript/src/session.ts (+9 -30)",
+        "packages/vscode-typescript/src/tsdkPackage.ts (+28 -0)",
+        "packages/vscode-typescript/src/util.ts (+20 -1)",
+        "packages/vscode-typescript/test/tsdkPackage.test.ts (+29 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 64877,
+      "title": "LSP perf optimizations",
+      "url": "https://github.com/microsoft/TypeScript/pull/64877",
+      "author": "andrewbranch",
+      "mergedAt": "2026-11-05T23:19:22Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "I let Copilot spin for a while on LSP performance, profiling the vscode repo. Several of these changes affect batch compilation too.\n\n## Baseline (vscode)\n\n| Bench | time/op | B/op | allocs/op |\n|---|---|---|---|\n| InitialLoad | 1.2–2.5 s | 3.04 GB (2595 MB retained) | – |\n| EditOpenFile | 13–22 ms | 14 MB | – |\n| EditImports | 115–146 ms | 277 MB | 3.26 M |\n| WatchChange | 6–8 ms | – | – |\n| CreateDeleteFile | 335–375 ms | 291 MB | 3.46 M |\n| TsconfigChange | ~339 ms | – | – |\n\nHeap of initial load: ~95% of retained memory is ASTs/symbols in the parse cache (core compiler).\nProject-package retained structures are small; the project package's leverage is mostly transient\nallocation and per-change latency.\n\n## Cumulative result (merge-base 3789ddb12af vs HEAD, vscode, interleaved runs, n=6)\n\n| Bench | time | B/op | allocs/op | retained |\n|---|---|---|---|---|\n| InitialLoad | ~ (1.29 → 1.15 s, noisy) | −3.7% | −15.6% | −2 MB (of 2.4 GB) |\n| EditOpenFile (fast clone) | ~ | −4.9% | −23.3% | −24% (14.0 → 10.7 MB) |\n| WatchChange (fast clone from disk) | ~ (3–4 ms, noisy) | −16.0% | −90.4% | – |\n| EditImports (program rebuild) | ~/−19%* | −37.6% | −41.8% | −17% |\n| CreateDeleteFile (file-name reload + rebuild) | **−43%** | −38.6% | −41.2% | −12% |\n| TsconfigChange (ParsedCommandLine + rebuild) | **−40%** | −38.9% | −41.4% | −12% |\n| AutoImportInitial | ~ | −3.1% | −0.5% | **−15.6%** (19.8 → 16.7 MB) |\n| AutoImportEdit | ~ | −4.8% | −44.1% | – |\n\n\\* EditImports: 165 → 97 ms in a dir\n…(truncated)",
+      "files": [
+        "tsc/internal/compiler/fileInclude.go (+14 -2)",
+        "tsc/internal/compiler/fileloader.go (+7 -25)",
+        "tsc/internal/compiler/filesparser.go (+27 -18)",
+        "tsc/internal/ls/autoimport/export.go (+17 -19)",
+        "tsc/internal/ls/autoimport/view.go (+1 -1)",
+        "tsc/internal/ls/lsutil/symbol_display.go (+1 -1)",
+        "tsc/internal/module/resolver.go (+7 -0)",
+        "tsc/internal/packagejson/cache.go (+32 -9)",
+        "tsc/internal/packagejson/cache_test.go (+155 -0)",
+        "tsc/internal/project/dirty/syncmap.go (+11 -0)"
+      ],
+      "filesTotal": 22
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "Copilot": 3,
+      "typescript-automation[bot]": 2
+    }
+  }
+}
