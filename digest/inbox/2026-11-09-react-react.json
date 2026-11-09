@@ -1,0 +1,63 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-11-09T00:59:28Z",
+  "range": {
+    "from": "2026-11-05T16:01:56Z",
+    "to": "2026-11-09T00:59:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.1",
+      "publishedAt": "2026-10-14T17:06:15Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 38128,
+      "title": "[Flight] Fix hooks in streamed Server Components",
+      "url": "https://github.com/react/react/pull/38128",
+      "author": "unstubbable",
+      "mergedAt": "2026-11-06T15:19:02Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Flight renders stream items and async iterator return values directly from promise callbacks. These paths can render Server Components after `performWork` restores the hook dispatcher, so supported hooks such as `useId` throw.\n\nPR #38108 and PR #38114 set up hook context around individual stream rendering paths. This change establishes context at the common rendering entry points, which also cover asynchronous error causes in development.\n\n`ReactFlightServer` and `ReactFlightHooks` already track the current request separately. Previously, `performWork` restored the server request but reset the hooks request to null. The shared helper restores the previous value in each module, along with the hook dispatcher. This preserves the enclosing render's hook context when an iterator thenable resolves synchronously.\n\nFixes #38105\nCloses #38108\nCloses #38114",
+      "files": [
+        "packages/react-server/src/ReactFlightHooks.js (+4 -6)",
+        "packages/react-server/src/ReactFlightServer.js (+31 -12)",
+        "packages/react-server-dom-webpack/src/__tests__/ReactFlightDOM-test.js (+198 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 38132,
+      "title": "Fix: Infinite loop caused by uDV + suspended hydration or retry",
+      "url": "https://github.com/react/react/pull/38132",
+      "author": "acdlite",
+      "mergedAt": "2026-11-06T19:43:47Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "When a render that carries no updates (hydration, or a Suspense retry) mounts useDeferredValue with an initial value and then suspends, React re-attempts the suspended work in a loop at scheduler speed until its data arrives. Next.js App Router pages hit this whenever hydration suspends, because the router passes an initial value to useDeferredValue.\n\n1. The render requests a deferred lane for the final value, then suspends. Because the render didn't commit, the only way the deferred task can redo the work is through entanglement: it's entangled with the suspended render's update lanes, so rendering it reprocesses those updates. Hydration and retry lanes aren't update lanes, so nothing gets entangled.\n2. The deferred task renders, finds no work, and commits an empty tree.\n3. Every commit clears the root's suspended lanes, so React attempts the suspended hydration or retry again. It suspends again, spawns another deferred lane, and so on.\n\nFor retries, this only happens when retries are throttled. Otherwise the retry commits the fallback, and the deferred lane spawned by that commit has real work to do. This is a separate loop from the one fixed in #37739.\n\nThe fix: when the suspended lanes include no update lanes, don't spawn the deferred lane. It had nothing to do anyway. The deferred value is requested again when the suspended work is retried, and the commit that finishes it spawns the deferred task as usual.\n\nThis doesn't affect useDeferredValue's ability to skip an initia\n…(truncated)",
+      "files": [
+        "packages/react-reconciler/src/ReactFiberLane.js (+10 -1)",
+        "packages/react-dom/src/__tests__/ReactDOMFizzDeferredValue-test.js (+93 -0)",
+        "packages/react-reconciler/src/__tests__/ReactDeferredValue-test.js (+62 -0)"
+      ],
+      "filesTotal": 3
+    }
+  ],
+  "errors": []
+}

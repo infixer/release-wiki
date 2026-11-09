@@ -1,0 +1,81 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-11-09T00:59:28Z",
+  "range": {
+    "from": "2026-11-05T13:56:40Z",
+    "to": "2026-11-09T00:59:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14637,
+      "title": "[css-gaps-1] Define gap segments",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14637",
+      "author": "jav099",
+      "mergedAt": "2026-11-06T16:17:41Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This PR defines `gap segments` which is a term that was already used in parts of the spec, just not officially defined. This is to clarify the behavior of the `rule-visibility` property.\n\nNote that `gap segments` != `gap decoration segments`.",
+      "files": [
+        "css-gaps-1/Overview.bs (+132 -81)",
+        "css-gaps-1/images/grid-gap-decoration-segments-joined.png (+0 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 14736,
+      "title": "[selectors-4] Fix links to deferred Selectors Level 5 features",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14736",
+      "author": "JinDX",
+      "mergedAt": "2026-11-07T21:08:16Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Point both changelog links to their sections in Selectors Level 5.",
+      "files": [
+        "selectors-4/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14735,
+      "title": "[‎css-image-animation-1] Fix the changelog link to PR 14388",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14735",
+      "author": "JinDX",
+      "mergedAt": "2026-11-07T21:09:32Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Use the full GitHub URL for PR 14388.",
+      "files": [
+        "css-image-animation-1/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-11-05T13:56:39Z",
+    "to": "2026-11-09T00:59:28Z"
+  },
+  "commits": [
+    {
+      "sha": "2da1cb1",
+      "url": "https://github.com/w3c/csswg-drafts/commit/2da1cb17a43306d3ef80d09d328883c71cdb54b2",
+      "author": "fantasai",
+      "committedAt": "2026-11-06T20:34:38Z",
+      "title": "[css-values-5] Update Changes list",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-values-5/Overview.bs (+56 -4)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

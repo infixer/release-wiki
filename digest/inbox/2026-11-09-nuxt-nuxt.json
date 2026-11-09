@@ -1,0 +1,579 @@
+{
+  "kind": "repo",
+  "repo": "nuxt/nuxt",
+  "branch": "main",
+  "collectedAt": "2026-11-09T00:59:28Z",
+  "range": {
+    "from": "2026-11-05T23:39:53Z",
+    "to": "2026-11-09T00:59:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v4.6.4",
+      "publishedAt": "2026-11-02T20:39:24Z",
+      "url": "https://github.com/nuxt/nuxt/releases/tag/v4.6.4"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 36873,
+      "title": "ci: send test results to Flakiness.io from fork PRs",
+      "url": "https://github.com/nuxt/nuxt/pull/36873",
+      "author": "aslushnikov",
+      "mergedAt": "2026-11-06T18:58:53Z",
+      "labels": [
+        "5.x"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 36878,
+      "title": "perf(nuxt): activate deferred prefetch hints in idle slices",
+      "url": "https://github.com/nuxt/nuxt/pull/36878",
+      "author": "danielroe",
+      "mergedAt": "2026-11-06T18:58:53Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nwhen testing the v4.7 nightly on the nuxt/ui docs (https://github.com/nuxt/ui/pull/7372 -  thank you @benjamincanac!), JS bootup dropped on every page but the home page went from 100 to 94 in Lighthouse (TBT 89ms → 272ms)\n\nthis was a regression from the deferred prefetch plugin from https://github.com/nuxt/nuxt/pull/36794, which activates every hint in a single idle callback. the nuxt/ui docs home page has 249 prefetch links - which we maybe need to look at separately? - but that made it one long task.\n\nthis PR activates them in slices that respect the idle deadline, scheduling another idle callback until they're all done.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36878?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36878?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/app/plugins/deferred-prefetch.client.ts (+27 -10)",
+        "test/bundle.test.ts (+1 -1)",
+        "test/nuxt/deferred-prefetch.test.ts (+37 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36879,
+      "title": "fix(vite-server): cloudflare vite plugin v2 support",
+      "url": "https://github.com/nuxt/nuxt/pull/36879",
+      "author": "edmundhung",
+      "mergedAt": "2026-11-07T00:42:36Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nn/a\n\n### 📚 Description\n\nHi 👋🏼  We are currently working on a v2 version of the cloudflare vite plugin. This includes a couple changes such as a new build output and programmatic config (`cloudflare.config.ts`) support.\n\nThis PR should help Nuxt users to use the Nuxt Vite server with the v2 plugin. The main changes are:\n\n- Ensure it picks up the server entry from the deploy target if it provides one\n- Ensure the client output follows the vite environment output directory in SSR if the deploy target updates it\n- Keep Nuxt from being pre-bundled in the ssr environment\n- Avoid the Nuxt's dev server from trying to render a request that failed inside workerd\n\nThis also includes a new fixture `vite-server-cloudflare-v2` to make sure the integration is working.\n\nI have used AI to implement the fix and reviewed the full changes myself.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36879?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36879?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        ".gitignore (+1 -0)",
+        "packages/vite-server/src/dev.ts (+13 -3)",
+        "packages/vite-server/src/index.ts (+14 -14)",
+        "packages/vite-server/src/ssr.ts (+10 -6)",
+        "pnpm-lock.yaml (+466 -0)",
+        "packages/vite-server/test/ssr.test.ts (+28 -0)",
+        "test/fixtures/vite-server-cloudflare-v2/app/app.vue (+6 -0)",
+        "test/fixtures/vite-server-cloudflare-v2/app/pages/about.vue (+5 -0)",
+        "test/fixtures/vite-server-cloudflare-v2/app/pages/boom.vue (+7 -0)",
+        "test/fixtures/vite-server-cloudflare-v2/app/pages/index.vue (+22 -0)"
+      ],
+      "filesTotal": 19
+    },
+    {
+      "number": 36883,
+      "title": "fix(vite-server): respond with a 500 to a dev request that throws",
+      "url": "https://github.com/nuxt/nuxt/pull/36883",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T00:42:36Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted in https://github.com/nuxt/nuxt/pull/36879: if anything throws while the vite server dev server handles a request, the whole dev process goes down and the CLI restarts it:\n\n```\nRestarting Nuxt in a new process...\n```\n\nthis is because `nuxt.server.handler` doesn't handle errors in vite middlewares, the render and `sendNodeResponse`. so this PR catches errors, logs them and responds with a 500, meaning the dev server can keep serving in this situation....\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36883?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36883?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/vite-server/src/dev.ts (+16 -3)",
+        "packages/vite-server/test/dev.test.ts (+85 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36884,
+      "title": "fix(kit): pass full runtime config to nitro in `updateRuntimeConfig`",
+      "url": "https://github.com/nuxt/nuxt/pull/36884",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T00:53:59Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 📚 Description\n\ncurrently we are overwriting existing nitro runtime config when calling `updateRuntimeConfig`. this should be resolved in https://github.com/nitrojs/nitro/pull/5045 and https://github.com/nitrojs/nitro/pull/5046, but this is a hotfix in the mean-time\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36884?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36884?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/kit/src/runtime-config.ts (+23 -1)",
+        "packages/kit/test/runtime-config.test.ts (+13 -3)",
+        "packages/nuxt/test/update-runtime-config.test.ts (+32 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36880,
+      "title": "fix(nuxt,nitro,vite): harden dev error report handling",
+      "url": "https://github.com/nuxt/nuxt/pull/36880",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T01:11:27Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis hardens a couple of edge cases in error messages, and prevents the my-bad error loader from loading content in files that aren't in vite's fs.allow.\n\nI don't require this as a security issue, as it would require:\n- an exposed dev server\n- an app that puts request text into an error\n- something that _rewrites_ that error's message after its stack is formatted\n- a target file with a module extension, outside `server.fs.allow`\n\nbut still, better safe than sorry.\n\nthere's also another situation where nuxt is running a dev server, but not started by nuxt/cli\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36880?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36880?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nitro-server/src/dev-request.ts (+13 -1)",
+        "packages/nitro-server/src/index.ts (+20 -2)",
+        "packages/nitro-server/src/runtime/handlers/error-channel.ts (+4 -4)",
+        "packages/nitro-server/src/runtime/utils/error-channel.ts (+6 -2)",
+        "packages/nuxt/src/runtime/server/dev-error/index.ts (+58 -2)",
+        "packages/nuxt/src/runtime/server/dev/peer.ts (+22 -0)",
+        "packages/vite-server/src/dev-errors.ts (+7 -1)",
+        "packages/vite-server/src/dev.ts (+3 -3)",
+        "packages/vite-server/src/runtime/dev-error.ts (+3 -0)",
+        "packages/vite/src/dev-errors.ts (+9 -3)"
+      ],
+      "filesTotal": 17
+    },
+    {
+      "number": 36885,
+      "title": "fix(nuxt): keep nitro route rules when merging inline route rules",
+      "url": "https://github.com/nuxt/nuxt/pull/36885",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T13:38:39Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\n`updateConfig` replaces the whole route-rules object - this prevents existing rules from being lost by merging them in instead.\n\nalso raised https://github.com/nitrojs/nitro/pull/5045 and https://github.com/nitrojs/nitro/pull/5046 to fix this upstream in nitro, but this hotfix should be good in the mean-time.\n\nalso linked is https://github.com/nuxt/nuxt/pull/36884 which does the same thing as a kit util\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36885?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36885?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/pages/module.ts (+23 -6)",
+        "packages/nuxt/test/inline-route-rules-fixture/nuxt.config.ts (+10 -0)",
+        "packages/nuxt/test/inline-route-rules-fixture/pages/cached.vue (+12 -0)",
+        "packages/nuxt/test/inline-route-rules-fixture/pages/index.vue (+11 -0)",
+        "packages/nuxt/test/inline-route-rules-fixture/pages/moved.vue (+11 -0)",
+        "packages/nuxt/test/inline-route-rules-fixture/pages/uncached.vue (+11 -0)",
+        "packages/nuxt/test/inline-route-rules.test.ts (+89 -0)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 36881,
+      "title": "fix(nuxt,vite): strip control characters from raw dev error output",
+      "url": "https://github.com/nuxt/nuxt/pull/36881",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T13:43:15Z",
+      "labels": [
+        "🐛 bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis is another hardening, in this case stripping control characters from error output in the console\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36881?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36881?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/runtime/server/dev-error/index.ts (+10 -1)",
+        "packages/vite/src/dev-errors.ts (+27 -6)",
+        "packages/nuxt/test/dev-error-reporter.test.ts (+15 -0)",
+        "packages/vite/test/dev-errors.test.ts (+50 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 36887,
+      "title": "fix(vite-server): detect a deploy target that sets the server input late",
+      "url": "https://github.com/nuxt/nuxt/pull/36887",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T13:44:23Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis builds on https://github.com/nuxt/nuxt/pull/36879\n\nwe now decide whether a deploy target owns the ssr environment from its final input, so a target that sets it from a late `configEnvironment` hook (as Universal Deploy's Netlify adapter does) is recognised too\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36887?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36887?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        ".gitignore (+1 -0)",
+        "packages/vite-server/src/ssr.ts (+12 -9)",
+        "pnpm-lock.yaml (+13 -0)",
+        "packages/vite-server/test/ssr.test.ts (+31 -4)",
+        "test/fixtures/vite-server-universal-deploy-netlify/app/app.vue (+6 -0)",
+        "test/fixtures/vite-server-universal-deploy-netlify/app/pages/about.vue (+5 -0)",
+        "test/fixtures/vite-server-universal-deploy-netlify/app/pages/index.vue (+17 -0)",
+        "test/fixtures/vite-server-universal-deploy-netlify/nuxt.config.ts (+28 -0)",
+        "test/fixtures/vite-server-universal-deploy-netlify/package.json (+18 -0)",
+        "test/fixtures/vite-server-universal-deploy-netlify/public/static.txt (+1 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 36164,
+      "title": "feat(schema): add `dev` option for `typescript.typeCheck`",
+      "url": "https://github.com/nuxt/nuxt/pull/36164",
+      "author": "sakaintp",
+      "mergedAt": "2026-11-07T16:01:29Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Resolves #36004\n\nAdds `'dev'` as a value for `typescript.typeCheck`, as the counterpart to the existing `'build'`:\n\n| value | `nuxt dev` | `nuxt build` |\n| --- | --- | --- |\n| `true` | yes | yes |\n| `'build'` | no | yes |\n| `'dev'` (new) | yes | no |\n| `false` | no | no |\n\nUse case (from the issue): run `nuxt typecheck` in CI separately from `nuxt build` (e.g. in an nx monorepo), while still getting type checking in the local dev server.\n\nImplementation notes:\n- The enable/disable decision now lives in one helper, `shouldEnableTypeCheck()`, exported from `@nuxt/schema`, instead of being repeated across the vite and webpack integrations.\n- `packages/vite` (type-check plugin + vite-plugin-checker) and `packages/webpack` (client + server TsCheckerPlugin) all use the helper.\n- Added unit tests for the helper covering every option value in dev/build/test contexts.\n- Docs updated (`docs/3.guide/1.concepts/8.typescript.md`, `docs/4.api/6.nuxt-config.md`).\n\nI'm aware `$development.typescript.typeCheck` already covers this, as Daniel noted on the issue — this makes it a first-class option symmetric with `'build'`.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36164?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/rsbuild/src/plugins/optional.ts (+1 -1)",
+        "packages/schema/src/types/schema.ts (+5 -3)",
+        "packages/vite/src/plugins/type-check.ts (+1 -1)",
+        "packages/vite/src/plugins/vite-plugin-checker.ts (+1 -1)",
+        "packages/webpack/src/configs/client.ts (+1 -1)",
+        "packages/webpack/src/configs/server.ts (+1 -1)",
+        "docs/3.guide/1.concepts/8.typescript.md (+2 -0)",
+        "docs/4.api/6.nuxt-config.md (+3 -3)",
+        "packages/vite/test/vite-plugin-checker.test.ts (+33 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 36888,
+      "title": "fix(vite-server): leave browser globals to a deploy target's runtime",
+      "url": "https://github.com/nuxt/nuxt/pull/36888",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T16:21:21Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nfollow-up to https://github.com/nuxt/nuxt/pull/36879\n\n### 📚 Description\n\nwith `@cloudflare/vite-plugin` v2, the worker is built in vite's ssr environment, so it picks up the defines Nuxt sets for its own server build. that means a bare `navigator` becomes undefined, even though this exists on cloudflare, node, and a handful of other runtimes\n\n```\n[request error] [GET] /runtime\n  ✖ TypeError (500): Cannot read properties of undefined (reading 'userAgent')\n    › 2 │ const runtime = import.meta.server ? navigator.userAgent : ''\n```\n\nand this is more general - it probably doesn't make sense for nuxt to be making assertions about the globals of another runtime more broadly.\n\nthe trade-off is that `typeof window` branches in the worker no longer tree-shake 🤷\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36888?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/vite-server/src/ssr.ts (+20 -11)",
+        "packages/vite-server/test/ssr.test.ts (+19 -6)",
+        "test/fixtures/vite-server-cloudflare-v2/app/pages/announcer.vue (+9 -0)",
+        "test/fixtures/vite-server-cloudflare-v2/app/pages/runtime.vue (+1 -2)",
+        "test/vite-server-cloudflare-v2.test.ts (+7 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36889,
+      "title": "fix(vite-server): report dev request failures as diagnostics",
+      "url": "https://github.com/nuxt/nuxt/pull/36889",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T16:21:21Z",
+      "labels": [
+        "🐛 bug",
+        "5.x"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nfollow-up to https://github.com/nuxt/nuxt/pull/36883\n\n### 📚 Description\n\nthis moves two dev-server failures in `@nuxt/vite-server` onto Nuxt's diagnostics.\n\nthe first is the error we started logging when handling a dev request throws.\n\nthe second is the 500 we respond with when the `ssr` environment isn't runnable. it now reports this, once per dev session:\n\n```\n WARN  [NUXT_B7037] The deploy target running the ssr environment failed or did not handle a request, so Nuxt responded with a 500.\n╰▶ fix: In development, Nuxt can only render through #server-entry inside the target. Fix the error the target logged, or have it pass the request to #server-entry.\n```\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36889?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36889?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/kit/src/diagnostics/bundler.ts (+10 -0)",
+        "packages/vite-server/src/dev.ts (+8 -4)",
+        "packages/vite-server/test/dev.test.ts (+25 -12)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36890,
+      "title": "perf(nuxt): reduce per-request server rendering overhead",
+      "url": "https://github.com/nuxt/nuxt/pull/36890",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T19:12:27Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis is a set of small server rendering improvements\n\n| route | main | branch | delta |\n| - | - | - | - |\n| 1000 rows, `useAsyncData` | 1573µs | 1472µs | -6.4% |\n| 1000 rows, `<NuxtLink>` | 2964µs | 2808µs | -5.3% |\n| 1000 rows, plain links | 2147µs | 2035µs | -5.2% |\n| small static page | 144µs | 129µs | -10.4% |\n| small dynamic page | 123µs | 117µs | -4.7% |\n\neach commit is independent, but in brief:\n\n- payload reducers bail out on primitives before calling `isRef`/`isReactive` (similar to https://github.com/sveltejs/devalue/pull/231)\n- `mayMatchCurrentRoute` counts segments before splitting the path\n- inline styles that have already been loaded are cached in prod\n- on the server, `<RouteProvider>` simply copies the route's values as only one route renders\n- `buildAssetsURL` caches joined urls on the server\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36890?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/app/components/route-match.ts (+11 -2)",
+        "packages/nuxt/src/app/components/route-provider.ts (+5 -0)",
+        "packages/nuxt/src/app/plugins/revive-payload.server.ts (+8 -6)",
+        "packages/nuxt/src/core/templates.ts (+15 -1)",
+        "packages/nuxt/src/runtime/server/renderer/inline-styles.ts (+18 -3)",
+        "packages/nuxt/test/renderer/inline-styles.test.ts (+47 -0)",
+        "packages/nuxt/test/templates.test.ts (+27 -1)",
+        "test/bundle.test.ts (+1 -1)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 36891,
+      "title": "perf(nuxt): resolve ssr nuxt link route lazily from a prototype getter",
+      "url": "https://github.com/nuxt/nuxt/pull/36891",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T19:12:27Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nspotted that creating the slot props for each server-rendered `<NuxtLink>` was surprisingly expensive\n\n| route | main | branch | delta |\n| - | - | - | - |\n| 1000 rows, `<NuxtLink>` | 2964µs | 2611µs | -11.9% |\n\nthis is because an object literal with an own `get route()` accessor can't be created cheaply by V8 (~200ns vs ~9ns for a class instance with a prototype getter).\n\nso this PR resolves `route` lazily from a prototype getter instead.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36891?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/walkthrough-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36891?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/app/components/nuxt-link.ts (+27 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 36892,
+      "title": "perf(nuxt): transcode large non-latin1 html chunks to utf-8 with icu",
+      "url": "https://github.com/nuxt/nuxt/pull/36892",
+      "author": "danielroe",
+      "mergedAt": "2026-11-07T19:12:27Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nfollow up to https://github.com/nuxt/nuxt/pull/36719\n\n### 📚 Description\n\nnoticed that a surprising amount of time on the table pages went into writing the rendered html to a buffer\n\n| route | main | branch | delta |\n| - | - | - | - |\n| 1000 rows, `<NuxtLink>` | 2964µs | 2670µs | -9.9% |\n| 1000 rows, plain links | 2147µs | 1878µs | -12.5% |\n\nV8 seems to be really slow (~40x on Node 24) at writing a string as UTF-8 once it contains a single character outside Latin1, and a `→` anywhere in a template is enough to make the whole rendered chunk a two-byte string.\n\nthis PR transcodes large chunks like that with `buffer.transcode` (ICU) instead, when it's available.\n\n**note** - this was a bug in node 24 that's fixed in node 26 but not planned to be backported, so I've updated this to use this fix conditionally",
+      "files": [
+        "packages/nuxt/src/runtime/server/renderer/encode.ts (+51 -2)",
+        "packages/nuxt/test/encode-document.test.ts (+42 -0)",
+        "test/bundle.test.ts (+2 -2)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 36896,
+      "title": "perf(nuxt): skip modulepreload for the entry script",
+      "url": "https://github.com/nuxt/nuxt/pull/36896",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T11:39:09Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthe server renderer emits a `<link rel=\"modulepreload\">` for the entry script, even though we're already loading it in a script tag, and the preload scanner discovers both at once.\n\ndropping the redundant link saves ~76 bytes per HTML document. 🤷\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36896?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36896?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/runtime/server/renderer/index.ts (+5 -1)",
+        "test/renderer/standalone.test.ts (+26 -5)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36903,
+      "title": "perf(nuxt): drop idle app manifest warm-up",
+      "url": "https://github.com/nuxt/nuxt/pull/36903",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T11:39:09Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nwe currently fetch the app manifest on every page load, about 1s after hydration, which can contend with other resources being download.\n\nthis removes the warm up, deferring it to be loaded when routes start to prefetch in the background.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36903?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/app/plugins/payload.client.ts (+2 -9)",
+        "test/vite-server-generate.test.ts (+22 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36899,
+      "title": "perf(nuxt): skip head dom renders while updates are paused",
+      "url": "https://github.com/nuxt/nuxt/pull/36899",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T11:39:10Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nunhead's client head schedules a debounced DOM render on every push. while nuxt has dom updates paused (boot/hydration and between page transitions), we don't render anything anyway, so this is wasted work.\n\nthis wraps `head.render` to skip scheduling the timer while updates are paused.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36899?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36899?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/head/runtime/install-client-head.ts (+9 -3)",
+        "test/nuxt/client-head.test.ts (+76 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 36900,
+      "title": "perf(nuxt): do not refetch css inlined into the response",
+      "url": "https://github.com/nuxt/nuxt/pull/36900",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T11:39:10Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nif we inline a page's CSS into the SSR response, the browser fetches the same file again during hydration.\n\nthis is because `__vitePreload` only skips a stylesheet when it finds a matching stylesheet link in the document, and we dropped that link after inlining it.\n\nso this PR emits a `disabled` link that prevents it being fetched but also prevents vite from prefetching it....\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36900?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36900?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/runtime/server/renderer/index.ts (+7 -0)",
+        "packages/nuxt/test/cache.test.ts (+1 -1)",
+        "test/basic.test.ts (+19 -1)",
+        "test/inline-styles.test.ts (+24 -11)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 36901,
+      "title": "perf(nuxt): preload matched page chunks for client-only responses",
+      "url": "https://github.com/nuxt/nuxt/pull/36901",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T11:39:10Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nfor client-only responses, the shell only preloads the entry, but we could also hint to the browser which page chunk is likely to be required.\n\nfor apps with some client-only pages, we add a second rou3 matcher (next to the early 404 one) that maps each page path to the source files of the route records it renders.\n\nthis should reduce the waterfall effect 🔥\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36901?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/kit/src/internal/renderer.ts (+2 -0)",
+        "packages/nitro-server/src/index.ts (+15 -7)",
+        "packages/nuxt/src/pages/module.ts (+25 -3)",
+        "packages/nuxt/src/pages/utils.ts (+48 -1)",
+        "packages/nuxt/src/runtime/server/renderer-config.ts (+2 -0)",
+        "packages/nuxt/src/runtime/server/renderer/early-404.ts (+13 -7)",
+        "packages/nuxt/src/runtime/server/renderer/index.ts (+17 -4)",
+        "packages/nuxt/test/early-404-patterns.test.ts (+82 -1)",
+        "test/fixtures/spa-only/app/pages/products/[id].vue (+8 -1)",
+        "test/spa-only.test.ts (+24 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 36898,
+      "title": "perf(nuxt): do not prefetch built-in error page chunks from the entry",
+      "url": "https://github.com/nuxt/nuxt/pull/36898",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T12:08:52Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthe default error page is rendered by a fallback component that lazy-loads the 404 and 500 error components, so their chunks end up in the entry's prefetch list on every page load.\n\nthis removes those built-in error page chunks from the entry's prefetch list, like we do for page chunks.\n\nthe one trade-off is that the extra request happens when an error is thrown.\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36898?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36898?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/core/nuxt.ts (+10 -0)",
+        "packages/vite/test/error-page-prefetch.test.ts (+76 -0)",
+        "test/fixtures/ssr-streaming/app.vue (+7 -0)",
+        "test/fixtures/ssr-streaming/components/PrefetchProbe.vue (+3 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 36902,
+      "title": "perf(nuxt): set page component names at build time",
+      "url": "https://github.com/nuxt/nuxt/pull/36902",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T12:08:52Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis sets page component `__name` values at build time which means we no longer need the `.then(m => Object.assign(m.default, { __name }))` wrapper for pages whose route name is statically known.\n\n| | `main` | this branch |\n| --- | --- | --- |\n| client entry (202 pages) | 205.2 kB | 193.2 kB |\n| client entry (gzip) | 67.0 kB | 65.9 kB |\n\ncc: @huang-julien\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36902?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36902?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/pages/module.ts (+4 -0)",
+        "packages/nuxt/src/pages/plugins/component-name.ts (+67 -0)",
+        "packages/nuxt/src/pages/utils.ts (+66 -2)",
+        "packages/nuxt/test/pages.test.ts (+192 -1)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 36897,
+      "title": "perf(nuxt): leave empty payload containers out of the inline payload",
+      "url": "https://github.com/nuxt/nuxt/pull/36897",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T12:49:13Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthe inline `__NUXT_DATA__` payload includes empty containers even when they hold nothing. empty ones can be left out, saving ~139B per page:\n\n```json\n[{\"serverRendered\":1,\"path\":2},true,\"/initial-load\"]\n```\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36897?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36897?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "packages/nuxt/src/runtime/server/renderer/payload.ts (+16 -1)",
+        "test/basic.test.ts (+5 -2)",
+        "test/bundle.test.ts (+1 -1)",
+        "test/renderer/standalone.test.ts (+30 -0)",
+        "test/vite-server-ssr.test.ts (+2 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 36904,
+      "title": "perf(nuxt): render nuxt links without a component instance",
+      "url": "https://github.com/nuxt/nuxt/pull/36904",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T16:21:38Z",
+      "labels": [
+        "⚡ performance",
+        "5.x"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\n### 📚 Description\n\nthis is yet another PR in a campaign to speed up `<NuxtLink>` - currently it's much slower than a plain `<a>` tag, understandably (because it's a component with an instance)\n\n... however, with this PR, in production client builds, a template NuxtLink whose `to` is an internal string can now compile to a call that creates the anchor block directly in the parent's render, with no instance at all.\n\nclicks and visibility prefetching go through shared per-app handlers that read the `href` from the element.\n\nand we bail out of this optimised mode when an attribute is passed that requires the instance\n\n<br>\n<p align=\"center\"><a href=\"https://prlens.dev/s/nuxt/nuxt/36904?utm_source=github&amp;utm_medium=pr_description#architecture&amp;s=1\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/read-pr-faster-outline-dark.svg\"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://prlens.dev/s/nuxt/nuxt/36904?utm_source=github&amp;utm_medium=pr_description#data-flow\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://prlens.dev/comment/cta/data-flow-outline-dark.svg\"></picture></a></p>",
+      "files": [
+        "package.json (+1 -0)",
+        "packages/nuxt/src/app/components/nuxt-link.ts (+181 -37)",
+        "packages/nuxt/src/app/components/route-match.ts (+5 -4)",
+        "packages/nuxt/src/components/module.ts (+2 -1)",
+        "packages/nuxt/src/components/plugins/nuxt-link-ssr.ts (+32 -0)",
+        "pnpm-lock.yaml (+3 -0)",
+        "packages/nuxt/test/nuxt-link-ssr-plugin.test.ts (+22 -1)",
+        "packages/nuxt/test/nuxt-link-ssr.test.ts (+2 -2)",
+        "test/basic.test.ts (+44 -29)",
+        "test/bundle.test.ts (+1 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 36905,
+      "title": "feat(nuxt,kit): validate and coerce runtime config with standard schema",
+      "url": "https://github.com/nuxt/nuxt/pull/36905",
+      "author": "danielroe",
+      "mergedAt": "2026-11-08T17:38:27Z",
+      "labels": [
+        "✨ enhancement",
+        "5.x"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "### 🔗 Linked issue\n\nupstream request: nitrojs/nitro#3522\n\nresolves #35920\nresolves #36846\nresolves #26253\nresolves https://github.com/nuxt/nuxt/issues/15366\nresolves #28551\n\n### 📚 Description\n\nnitro v3 no longer parses runtime config overrides with `destr`, which. means that numbers/booleans/etc. are all just strings.\n\nat the same time, there's long been a desire to have a hook (https://github.com/nuxt/nuxt/issues/15366) or something to define runtime config programmatically, and to add better typing than currently is supported with the type inference of the default value of runtime config.\n\nrather than bringing back `destr` (which had some unfortunate consequences, such as 'number-looking' strings being coerced to _numbers_), this PR treats each value in `runtimeConfig` as an inferred schema, where the value is the default and its type is the type an env override is converted to.\n\nfor when that isn't enough, any value can be a [Standard Schema](https://standardschema.dev) that also implements Standard JSON Schema, which sets the type and can carry a default:\n\n```ts\nexport default defineNuxtConfig({\n  runtimeConfig: {\n    apiSecret: z.string(), // required, must be set at runtime\n    port: 3000, // NUXT_PORT=abc fails\n    session: z.object({\n      secure: z.stringbool().default(true),\n      maxAge: z.number().int().optional(),\n    }),\n    public: {\n      mode: z.enum(['preview', 'production']).default('preview'),\n    },\n  },\n})\n```\n\n| default / schema | env value | result |\n…(truncated)",
+      "files": [
+        "knip.json (+2 -1)",
+        "package.json (+5 -1)",
+        "packages/kit/src/diagnostics/config.ts (+18 -0)",
+        "packages/kit/src/internal/index.ts (+2 -0)",
+        "packages/kit/src/internal/runtime-config.ts (+688 -0)",
+        "packages/kit/src/loader/config.ts (+21 -2)",
+        "packages/kit/src/runtime-config.ts (+38 -80)",
+        "packages/nitro-server/src/diagnostics.ts (+5 -0)",
+        "packages/nitro-server/src/index.ts (+5 -0)",
+        "packages/nitro-server/src/internal.d.ts (+7 -0)"
+      ],
+      "filesTotal": 49
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 1
+    }
+  }
+}

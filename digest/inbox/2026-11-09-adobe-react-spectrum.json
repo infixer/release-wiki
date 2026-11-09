@@ -1,0 +1,59 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-11-09T00:59:28Z",
+  "range": {
+    "from": "2026-11-05T23:37:06Z",
+    "to": "2026-11-09T00:59:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10929,
+      "title": "chore: upgrade to csf3",
+      "url": "https://github.com/adobe/react-spectrum/pull/10929",
+      "author": "snowystinger",
+      "mergedAt": "2026-11-06T22:44:02Z",
+      "labels": [
+        "ready for review",
+        "no testing"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 152
+    },
+    {
+      "number": 10860,
+      "title": "fix(react-aria-components): inherit CheckboxGroup validationBehavior (#10856)",
+      "url": "https://github.com/adobe/react-spectrum/pull/10860",
+      "author": "mangeshraut712",
+      "mergedAt": "2026-11-06T23:28:56Z",
+      "labels": [
+        "Checkbox",
+        "ready for review",
+        "RAC",
+        "no testing"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\nInside a `CheckboxGroup`, `useCheckboxAria` was defaulting `validationBehavior` to `'native'`. That overrode a group-level setting such as `validationBehavior=\"aria\"`, because `useCheckboxGroupItem` only inherits the group's value when the checkbox leaves `validationBehavior` undefined.\n\n## Fix\nWhen checkbox group state is present, leave `validationBehavior` undefined unless the checkbox (or form context) sets it explicitly, so the group setting is inherited.\n\n## Test plan\n- [x] Added regression: group `validationBehavior=\"aria\"` + `isRequired` → checkbox has no `required` attr and `form.checkValidity()` is true\n- [x] Existing CheckboxGroup validation tests still pass\n\nFixes #10856",
+      "files": [
+        "packages/react-aria-components/src/Checkbox.tsx (+2 -1)",
+        "packages/react-aria-components/test/Checkbox.test.js (+25 -0)",
+        "packages/react-aria-components/test/CheckboxGroup.test.js (+62 -0)"
+      ],
+      "filesTotal": 3
+    }
+  ],
+  "errors": []
+}

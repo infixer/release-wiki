@@ -1,0 +1,132 @@
+{
+  "kind": "repo",
+  "repo": "vitest-dev/vitest",
+  "branch": "main",
+  "collectedAt": "2026-11-09T00:59:28Z",
+  "range": {
+    "from": "2026-11-05T12:28:09Z",
+    "to": "2026-11-09T00:59:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v5.1.0",
+      "publishedAt": "2026-11-02T16:03:20Z",
+      "url": "https://github.com/vitest-dev/vitest/releases/tag/v5.1.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 11900,
+      "title": "fix: reset local expect state between retries for `expect.assertions/hasAssertions`",
+      "url": "https://github.com/vitest-dev/vitest/pull/11900",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-11-06T07:50:44Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- extracted from https://github.com/vitest-dev/vitest/pull/11892\n\nPreviously, the test's own `expect` (`({ expect }) => ...`) kept its assertion count across retries and repeats, so `expect.assertions(n)` failed on every attempt after the first:\n\n```ts\nlet attempt = 0\ntest('retry', { retry: 1 }, ({ expect }) => {\n  attempt++\n  expect.assertions(1)\n  expect(attempt).toBe(2)\n})\n// Error: expected number of assertions to be 1, but got 2\n```\n\nThis PR resets the local `expect` state before each attempt, as was already done for the global `expect`.",
+      "files": [
+        "packages/vitest/src/runtime/runner/types.ts (+4 -1)",
+        "packages/vitest/src/runtime/runners/test.ts (+11 -5)",
+        "test/e2e/test/retry.test.ts (+32 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11899,
+      "title": "docs: add ci matrix table to test readme",
+      "url": "https://github.com/vitest-dev/vitest/pull/11899",
+      "author": "hi-ogawa",
+      "mergedAt": "2026-11-06T07:51:04Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 2
+    },
+    {
+      "number": 11905,
+      "title": "docs(browser): clarify context reuse between test files",
+      "url": "https://github.com/vitest-dev/vitest/pull/11905",
+      "author": "magurotuna",
+      "mergedAt": "2026-11-06T10:34:10Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 3
+    },
+    {
+      "number": 11906,
+      "title": "docs(browser): drop stale serviceWorkers note",
+      "url": "https://github.com/vitest-dev/vitest/pull/11906",
+      "author": "magurotuna",
+      "mergedAt": "2026-11-06T12:57:12Z",
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 11867,
+      "title": "fix(mocker): keep re-exports of hoisted imports",
+      "url": "https://github.com/vitest-dev/vitest/pull/11867",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-06T16:05:55Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #11866\n\n`hoistMocks` replaces a static import with a dynamic import, so `export { a }` of an imported binding pointed to a binding that no longer exists. The value was `undefined` with the module runner, and browser mode failed with `SyntaxError: Export 'a' is not defined in module`. The transform now declares `const a = __vi_import_0__.a` after the hoisted import.\n\nThe re-export is a copy of the value, not a live binding. A static `export { a } from './a'` would keep the live binding, but it loads the module before the hoisted `vi.mock` runs.",
+      "files": [
+        "packages/mocker/src/node/hoistMocks.ts (+18 -1)",
+        "test/e2e/test/mocking.test.ts (+48 -0)",
+        "test/unit/test/injector-mock.test.ts (+46 -5)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11860,
+      "title": "fix(cache): watch cached files outside the root",
+      "url": "https://github.com/vitest-dev/vitest/pull/11860",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-06T16:07:47Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Vite adds a file outside the root to the watcher when it transforms the file. A cache hit skips the transform, so a warm `vitest --watch` did not rerun tests when that file changed.\n\nFixes #11584",
+      "files": [
+        "packages/vitest/src/node/cache/fsModuleCache.ts (+8 -0)",
+        "packages/vitest/src/node/environments/transformService.ts (+4 -0)",
+        "test/e2e/test/watch/file-watching.test.ts (+42 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 11859,
+      "title": "feat(cache): add fs module cache env variables",
+      "url": "https://github.com/vitest-dev/vitest/pull/11859",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-06T16:08:58Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Adds `VITEST_FS_MODULE_CACHE` and `VITEST_FS_MODULE_CACHE_PATH`. The config and the CLI take priority over them.\n\nFixes #11847",
+      "files": [
+        "packages/vitest/src/node/config/resolveConfig.ts (+9 -2)",
+        "docs/config/fsmodulecache.md (+6 -0)",
+        "docs/config/fsmodulecachepath.md (+2 -0)",
+        "test/e2e/test/caching.test.ts (+61 -2)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 11861,
+      "title": "fix(cache): treat a removed cache file as a miss",
+      "url": "https://github.com/vitest-dev/vitest/pull/11861",
+      "author": "sheremet-va",
+      "mergedAt": "2026-11-06T16:34:27Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "A cache file that another process removes between the check and the read is now a cache miss. Every cold run takes this path, so the existing tests cover it.\n\nThe worker can still fail if the file is removed after the server returns its path. Refs #11843",
+      "files": [
+        "packages/vitest/src/node/cache/fsModuleCache.ts (+21 -14)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

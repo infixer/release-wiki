@@ -1,0 +1,36 @@
+{
+  "kind": "repo",
+  "repo": "w3c/aria",
+  "branch": "main",
+  "collectedAt": "2026-11-09T00:59:28Z",
+  "range": {
+    "from": "2026-11-05T20:18:39Z",
+    "to": "2026-11-09T00:59:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 2972,
+      "title": "Editorial: Fix whatwg spec references",
+      "url": "https://github.com/w3c/aria/pull/2972",
+      "author": "daniel-montalvo",
+      "mergedAt": "2026-11-07T12:24:45Z",
+      "labels": [
+        "spec:aria"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "🚀 **Netlify Preview**:\n🔄 **this PR updates the following specs**:\n- [ARIA preview](https://deploy-preview-2972--wai-aria.netlify.app/index.html) &mdash; [ARIA diff](https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fw3c.github.io%2Faria%2F&doc2=https%3A%2F%2Fdeploy-preview-2972--wai-aria.netlify.app%2Findex.html)",
+      "files": [
+        "index.html (+5 -5)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}
