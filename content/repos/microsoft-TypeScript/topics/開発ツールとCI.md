@@ -1,6 +1,6 @@
 ---
 title: 開発ツールとCI
-updated: 2026-10-30
+updated: 2026-11-09
 tags:
   - repo/microsoft-TypeScript
   - topic
@@ -38,4 +38,4 @@ TypeScript 7（tsgo、Go へのネイティブ移植）の開発を支えるビ�
 ## 関連
 
 - リポジトリ: [[repos/microsoft-TypeScript/index|microsoft/TypeScript]]
-- リリース: [[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.1|vscode-typescript/v1.0.1]]
+- リリース: [[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.1|vscode-typescript/v1.0.1]]、[[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.2|vscode-typescript/v1.0.2]]

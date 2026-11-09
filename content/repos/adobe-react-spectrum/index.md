@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -15,6 +15,7 @@ tags:
 
 ## 直近の注目変更
 
+- CheckboxGroup の中の Checkbox がグループの `validationBehavior` を引き継ぐ（[#10860](https://github.com/adobe/react-spectrum/pull/10860)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
 - PreviewTrigger: 閉じているときは Escape を止めない（親のダイアログが閉じない問題）（[#10921](https://github.com/adobe/react-spectrum/pull/10921)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - 単独の `Popover` の `aria-label` をトリガーのラベルより優先（[#10789](https://github.com/adobe/react-spectrum/pull/10789)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]
 - キーボードの Space / Enter でクリックが 2 回発火する問題を修正（`usePress`）（[#10840](https://github.com/adobe/react-spectrum/pull/10840)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/インタラクション|インタラクション]]
@@ -24,7 +25,6 @@ tags:
 - ComboBox: Popover を閉じる Escape では既定動作を止める（Safari のフルスクリーン）（[#10883](https://github.com/adobe/react-spectrum/pull/10883)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - ComboBox: `isReadOnly` のときは blur で値を確定しない（[#10869](https://github.com/adobe/react-spectrum/pull/10869)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]
 - ComboBox: 入力欄と Popover が別の shadow root にあってもキーボードで開けるように（[#10631](https://github.com/adobe/react-spectrum/pull/10631)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]
-- Tree の項目に説明テキスト（`Text slot="description"`）（[#10710](https://github.com/adobe/react-spectrum/pull/10710)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Collections|Collections]]
 
 ## トピック
 
@@ -44,7 +44,7 @@ tags:
 - [[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]] — `useKeyboard`（コレクション・DatePicker・Toolbar のキーボード処理）とパッケージ import 時のグローバルイベント
 - [[repos/adobe-react-spectrum/topics/スタイルマクロ|スタイルマクロ]] — S2 の `style` マクロ（ESM ビルド）とテーマで使えるプロパティ、`page.css` の型宣言
 - [[repos/adobe-react-spectrum/topics/ドラッグアンドドロップ|ドラッグアンドドロップ]] — `useDrag`・`useDescription` と仮想化リスト（`ListLayout`）でのドロップ位置
-- [[repos/adobe-react-spectrum/topics/フォーム|フォーム]] — RAC の `Form`（入れ子）、Select・CheckboxGroup のフォームリセットと Select の props
+- [[repos/adobe-react-spectrum/topics/フォーム|フォーム]] — RAC の `Form`（入れ子）、Select・CheckboxGroup のフォームリセットと Select の props、`validationBehavior` の引き継ぎ
 - [[repos/adobe-react-spectrum/topics/ユーティリティ|ユーティリティ]] — react-aria の utils（`runAfterTransition`・`useDescription`）
 - [[repos/adobe-react-spectrum/topics/ロケール最適化|ロケール最適化]] — `@react-aria/optimize-locales-plugin`（Turbopack 対応と loader の型）
 
@@ -52,4 +52,4 @@ tags:
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
 - リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-11-06|2026-11-06]]、[[repos/adobe-react-spectrum/changes/2026-11-04|2026-11-04]]、[[repos/adobe-react-spectrum/changes/2026-10-30|2026-10-30]]、[[repos/adobe-react-spectrum/changes/2026-10-28|2026-10-28]]、[[repos/adobe-react-spectrum/changes/2026-10-26|2026-10-26]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-11-09|2026-11-09]]、[[repos/adobe-react-spectrum/changes/2026-11-06|2026-11-06]]、[[repos/adobe-react-spectrum/changes/2026-11-04|2026-11-04]]、[[repos/adobe-react-spectrum/changes/2026-10-30|2026-10-30]]、[[repos/adobe-react-spectrum/changes/2026-10-28|2026-10-28]]

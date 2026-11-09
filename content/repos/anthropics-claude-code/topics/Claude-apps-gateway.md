@@ -1,6 +1,6 @@
 ---
 title: Claude apps gateway
-updated: 2026-11-04
+updated: 2026-11-09
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -22,6 +22,7 @@ v2.1.314 で upstream に任意の `groups` 一覧が加わり、一覧の IdP �
 v2.1.316 で、グループのメンバーで共有する月間予算（`pooled_budget`）、一致したポリシーをすべて重ねて適用する `managed.policy_mode: layered`、Bedrock guardrail の prompt attacks フィルター用に入力タグでプロンプトを囲む `guardrail.input_tagging` が加わった。リクエストで指定されたすべてのモデルを `availableModels`・`deniedModels`・`models` で確認するようになり、ブロックされたモデルは該当フィールドを示す 400 になる。
 v2.1.317 で、管理 API にコストレポート `GET /v1/organizations/analytics/cost`（期間内の過去の支出を合計・開発者ごと・日ごと・IdP グループごとに取得）が加わった。`admin:` を設定した gateway は各開発者の IdP グループを毎日記録し、`admin.identity_retention_days` の間保持する（コストレポートのグループ分けに使う）。
 v2.1.318 で、`mantle` upstream に `assume_role` が加わり、別の AWS アカウントのロールを使ったり、開発者ごとに AWS のコストを割り当てたりできる。
+v2.1.319 で、複数のグループに属する開発者でどのグループ共有予算から先に払うかを決める `admin.pooled_conflict_rule`・`admin.pooled_priority_order`、gateway のブラウザ確認ページと Claude Code のサインイン画面に運用者のメッセージを出す `login_notice`、運用ログを JSON（`severity`・`time`・`message`）にする `CLAUDE_GATEWAY_LOG_FORMAT=json` が加わった。別のポリシーの `availableModels` があるポリシーが名前で挙げたカスタムモデル ID も許してしまう場合や、`desktopHome` の無いポリシーが `coworkTabEnabled: false`・`chatSessionRetentionDays` に頼っている場合（Claude Desktop の 11 月 10 日の変更に先立つもの）に起動時の警告を出す。支出上限の無い開発者の `/usage` に今日・今週・今月の支出が出る（gateway がこのバージョン以降のとき）。LLM gateway の背後の auto mode は、テレメトリや feature flag を切っているとサーバーで確認できない呼び出しを確認に回すか拒否するようになった（`CLAUDE_CODE_AUTO_MODE_SERVER` で切り替え）。
 
 ## 主な API・オプション
 
@@ -40,9 +41,14 @@ v2.1.318 で、`mantle` upstream に `assume_role` が加わり、別の AWS ア
 - 管理 API の `GET /v1/organizations/analytics/cost` — 過去の支出のコストレポート（合計・開発者・日・IdP グループごと。v2.1.317）
 - `admin.identity_retention_days` — 開発者の IdP グループの日次記録の保持期間（v2.1.317）
 - `mantle` upstream の `assume_role` — 別の AWS アカウントのロール・開発者ごとの AWS のコスト割り当て（v2.1.318）
+- `admin.pooled_conflict_rule` / `admin.pooled_priority_order` — 複数グループに属する開発者の共有予算の支払い順（v2.1.319）
+- `login_notice` — gateway の確認ページと Claude Code のサインイン画面に出すメッセージ（v2.1.319）
+- `CLAUDE_GATEWAY_LOG_FORMAT=json` — 運用ログを JSON で出力（v2.1.319）
+- `CLAUDE_CODE_AUTO_MODE_SERVER` — auto mode のサーバー側の確認（`0` でビルトインの分類器、`1` で `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` があっても有効。v2.1.319）
 
 ## 変更履歴
 
+- 2026-11-06 — `admin.pooled_conflict_rule`・`admin.pooled_priority_order`・`login_notice`・`CLAUDE_GATEWAY_LOG_FORMAT=json`・起動時の警告を追加。`/usage` に支出を表示。LLM gateway の背後の auto mode の扱いを変更（`CLAUDE_CODE_AUTO_MODE_SERVER`）📦 v2.1.319 · [[repos/anthropics-claude-code/releases/v2.1.319|リリース]]
 - 2026-11-04 — `mantle` upstream に `assume_role` を追加 📦 v2.1.318 · [[repos/anthropics-claude-code/releases/v2.1.318|リリース]]
 - 2026-11-03 — 管理 API にコストレポート `GET /v1/organizations/analytics/cost`、IdP グループの日次記録（`admin.identity_retention_days`）を追加。base URL の LLM gateway が安全チェックに 403・422 を返すと auto mode が毎ターン失敗する問題を修正 📦 v2.1.317 · [[repos/anthropics-claude-code/releases/v2.1.317|リリース]]
 - 2026-10-31 — `pooled_budget`・`managed.policy_mode: layered`・`guardrail.input_tagging` を追加。リクエストのすべてのモデルを `availableModels`・`deniedModels`・`models` で確認するよう修正 📦 v2.1.316 · [[repos/anthropics-claude-code/releases/v2.1.316|リリース]]
@@ -65,3 +71,4 @@ v2.1.318 で、`mantle` upstream に `assume_role` が加わり、別の AWS ア
 - [[repos/anthropics-claude-code/releases/v2.1.316|v2.1.316]]
 - [[repos/anthropics-claude-code/releases/v2.1.317|v2.1.317]]
 - [[repos/anthropics-claude-code/releases/v2.1.318|v2.1.318]]
+- [[repos/anthropics-claude-code/releases/v2.1.319|v2.1.319]]

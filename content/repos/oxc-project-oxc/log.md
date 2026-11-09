@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-11-09
+
+- 期間: 2026-11-05T17:18:03Z 〜 2026-11-09T00:59:28Z
+- PR 86 件（詳しく 30 件 / 1 行 56 件、うち brief 56 件）、Release 2 件（安定版 2 件: oxfmt_v0.77.0、oxlint_v1.92.0）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-11-09|changes]]（新規）、[[repos/oxc-project-oxc/releases/oxfmt_v0.77.0|oxfmt_v0.77.0]]（新規）、[[repos/oxc-project-oxc/releases/oxlint_v1.92.0|oxlint_v1.92.0]]（新規）、[[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/Vite+連携|Vite+連携]]、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]、[[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]（関連リンク・概要のみ）、[[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]（関連リンクのみ）、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 5 件、oxc-guard[bot] 1 件）
 
 ## 2026-11-06
 

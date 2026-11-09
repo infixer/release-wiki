@@ -1,6 +1,6 @@
 ---
 title: loaded リンカー
-updated: 2026-10-07
+updated: 2026-11-09
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-pnpm v12 の実験的なインストール方式 `nodeLinker: { type: loaded }`。互換性のある依存は `node_modules` に展開せず、自動で登録される Node.js のローダーを通じて、検証済みのコンテンツアドレス可能ストア（CAS）から直接読み込まれる。`nodeLinker.excluded` で選んだパッケージとその依存ツリーは、通常のグローバル仮想ストア（GVS）にインストールされる。v12.10.0 で実験的機能として公開された。Node.js 26.10.0 以上が必要で、モードを切り替えるときは既存の `node_modules` を削除する必要がある。v12.10.1 では生成ファイル（ストアのマニフェスト・ローダー・bin シム）が `node_modules` の中に置かれるようになり、独自の `node_modules` を同梱するパッケージの読み込み、`devEngines.runtime` で入れた Node.js の実行、プロセスの起動時間（13,000 ファイルのプロジェクトで 67 ms → 18 ms）が改善された。
+pnpm v12 の実験的なインストール方式 `nodeLinker: { type: loaded }`。互換性のある依存は `node_modules` に展開せず、自動で登録される Node.js のローダーを通じて、検証済みのコンテンツアドレス可能ストア（CAS）から直接読み込まれる。`nodeLinker.excluded` で選んだパッケージとその依存ツリーは、通常のグローバル仮想ストア（GVS）にインストールされる。v12.10.0 で実験的機能として公開された。Node.js 26.10.0 以上が必要で、モードを切り替えるときは既存の `node_modules` を削除する必要がある。v12.10.1 では生成ファイル（ストアのマニフェスト・ローダー・bin シム）が `node_modules` の中に置かれるようになり、独自の `node_modules` を同梱するパッケージの読み込み、`devEngines.runtime` で入れた Node.js の実行、プロセスの起動時間（13,000 ファイルのプロジェクトで 67 ms → 18 ms）が改善された。2026-11-09 の回では（未リリース）、副作用キャッシュの読み書きが有効なとき、承認済みのパッケージを一時ディレクトリでビルドして互換性のある結果をストアから読み込み、ストアに置いたまま使えるパッケージが増えた。ネイティブアドオン・キャッシュされたシンボリックリンク・パッチ・ランタイムの要件・ファイルシステムへのアクセスが検出されたパッケージとその依存は自動で実体化する（計算した import などは検出できないことがあり、その場合は除外する）。
 
 ## 主な API・オプション
 
@@ -20,12 +20,14 @@ pnpm v12 の実験的なインストール方式 `nodeLinker: { type: loaded }`�
 
 ## 変更履歴
 
+- 2026-11-09 — 承認済みでキャッシュに無いパッケージを一時ディレクトリでビルドしてストアから読み込み、ネイティブアドオン・パッチ・ファイルシステムへのアクセスなどが検出されたパッケージを自動で実体化（[#17318](https://github.com/pnpm/pnpm/pull/17318)） ⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-09|変更]]
 - 2026-10-07 — v12.10.1: 生成ファイルを `node_modules` に置く、同梱の `node_modules` を持つパッケージをストアから読み込む、`devEngines.runtime` の Node.js をスクリプトから実行できる、起動の高速化（リリースノートより。関連 PR: [#16644](https://github.com/pnpm/pnpm/pull/16644)、[#16643](https://github.com/pnpm/pnpm/pull/16643)、[#16651](https://github.com/pnpm/pnpm/pull/16651)、[#16661](https://github.com/pnpm/pnpm/pull/16661)、[#16673](https://github.com/pnpm/pnpm/pull/16673)、[#16602](https://github.com/pnpm/pnpm/pull/16602)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-07|変更]]
 - 2026-10-07 — 凍結ストアでのインストールと使われない GVS エントリの削除を修正（[#16600](https://github.com/pnpm/pnpm/pull/16600)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-07|変更]]
 - 2026-10-07 — 実験的な `loaded` リンカーを追加（[#16482](https://github.com/pnpm/pnpm/pull/16482)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-10-07|変更]]
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-11-09|2026-11-09 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.10.0|v12.10.0]]
 - [[repos/pnpm-pnpm/releases/v12.10.1|v12.10.1]]

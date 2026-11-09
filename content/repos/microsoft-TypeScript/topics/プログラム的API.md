@@ -1,6 +1,6 @@
 ---
 title: プログラム的API
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/microsoft-TypeScript
   - topic
@@ -13,6 +13,7 @@ tsgo（Go で書かれたネイティブの TypeScript コンパイラ、TypeScr
 実験的な `wasip1/wasm` ビルドの `tsc.wasm` が加わり、リアクターとして IPC ベースの JS API に渡せば、ブラウザでも同期・非同期の API が使える（無保証）。`createFileSystemFromSnapshot(oldSnapshot, extraFSLayer)` で、古いスナップショットの合成のファイルシステムを新しいスナップショットの上に rebase できる。`getImmediateAliasedSymbol` は TS 6 の API の挙動に戻った（いずれも未リリース）。
 AST の型のプロパティの省略可能・必須が実態に合わせて直され（`ExportAssignment.type` などが省略可能に）、API の文字列テーブルの不正なオフセットはエラーとして拒否される。`closeProjects` で閉じても、`openFiles` で開いたファイルの configured project は残る（いずれも未リリース）。
 Checker の API には `getAmbientModules()`・`getStringLiteralType()` など不足していたメソッドが加わり（`getAugmentedPropertiesOfType` は削除）、`parseConfigFileTextToJson` も使えるようになった（未リリース）。
+`Program` には `getProjectReferences()`・`getRootFileNames()`・`getStatistics()` が加わり、`getTypeChecker()`・`getOptionsDiagnostics()`・個別の数を返すメソッド（`getStatistics()` に統合）と、`Project` の重複メソッド（`containsFile`・`getFileNames` など）は削除された（未リリース）。
 
 ## 主な API・オプション
 
@@ -32,9 +33,11 @@ Checker の API には `getAmbientModules()`・`getStringLiteralType()` など�
 - `[Symbol.asyncDispose]()` — 非同期 API のオブジェクトの破棄（Promise を返す。`await using` で使う）
 - Checker の `isImplementationOfOverload`・`getAmbientModules`・`getPropertySymbolOfDestructuringAssignment`・`getNullableType`・`getStringLiteralType` / `getNumberLiteralType` / `getBigIntLiteralType`・`getFalseType` / `getTrueType`・`getJsxIntrinsicTagNamesAt`・`getPrivateIdentifierPropertyOfType` — 追加（[#65037](https://github.com/microsoft/TypeScript/pull/65037)）。`getAugmentedPropertiesOfType` は削除（`Type.getApparentProperties()` を使う）
 - `parseConfigFileTextToJson` — API（非同期・同期）から利用可能に（[#65328](https://github.com/microsoft/TypeScript/pull/65328)）
+- `Program` の `getProjectReferences()` / `getRootFileNames()` / `getStatistics()` — 追加（[#64988](https://github.com/microsoft/TypeScript/pull/64988)）。`getTypeChecker()`・`getOptionsDiagnostics()`・`getTypeCount` などの個別の数のメソッドは削除（`getStatistics()` を使う）。`Project` の `containsFile`・`getFileNames`・`getRootFiles`・`hasRoots`・`isRoot`・`hasConfigFile`・`getSourceFile` も削除
 
 ## 変更履歴
 
+- 2026-11-09 — `Program` に `getProjectReferences`・`getRootFileNames`・`getStatistics` を追加し、`Program`・`Project` の重複メソッドを削除（[#64988](https://github.com/microsoft/TypeScript/pull/64988)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-09|変更]]
 - 2026-11-06 — API に `parseConfigFileTextToJson` を追加（[#65328](https://github.com/microsoft/TypeScript/pull/65328)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-06|変更]]
 - 2026-11-06 — Checker の API に不足していたメソッドを追加、`getAugmentedPropertiesOfType` を削除（[#65037](https://github.com/microsoft/TypeScript/pull/65037)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-06|変更]]
 - 2026-11-04 — API で開いたファイルの configured project を `closeProjects` で閉じない（[#65160](https://github.com/microsoft/TypeScript/pull/65160)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-04|変更]]
@@ -87,4 +90,5 @@ Checker の API には `getAmbientModules()`・`getStringLiteralType()` など�
 - リポジトリ: [[repos/microsoft-TypeScript/index|microsoft/TypeScript]]
 - [[repos/microsoft-TypeScript/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/microsoft-TypeScript/changes/2026-11-04|2026-11-04 の変更]]
+- [[repos/microsoft-TypeScript/changes/2026-11-09|2026-11-09 の変更]]
 - [[repos/microsoft-TypeScript/changes/2026-11-06|2026-11-06 の変更]]

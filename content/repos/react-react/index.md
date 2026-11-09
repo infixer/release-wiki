@@ -1,6 +1,6 @@
 ---
 title: react/react
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/react-react
 ---
@@ -15,6 +15,8 @@ tags:
 
 ## 直近の注目変更
 
+- Reconciler: 初期値付きの `useDeferredValue` とサスペンドしたハイドレーション・リトライによる無限ループを修正（Next.js App Router で発生）（[#38132](https://github.com/react/react/pull/38132)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]、[[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
+- Flight: ストリームで描画される Server Components の中で `useId` などの hooks が throw する問題を修正（[#38128](https://github.com/react/react/pull/38128)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
 - Reconciler: 削除された hidden の Activity でサスペンドしていたデータが解決するとクラッシュする問題を修正（[#37965](https://github.com/react/react/pull/37965)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
 - Reconciler: 新しいレンダーに取り消されたスロットルされたリトライを ping し、境界がフォールバックのまま残る問題を修正（[#38061](https://github.com/react/react/pull/38061)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
 - Fizz: 再開時に外部ランタイムの設定を保ち、完了した Suspense の中身が隠れたままになる問題を修正（[#38059](https://github.com/react/react/pull/38059)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
@@ -23,8 +25,6 @@ tags:
 - DevTools facade: BigInt の正規化と、Resource でない hoistable の検出を修正（[#38068](https://github.com/react/react/pull/38068)、[#38067](https://github.com/react/react/pull/38067)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
 - DevTools: 対応する引数の無い書式指定子をそのまま残す（[#38069](https://github.com/react/react/pull/38069)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
 - React Compiler: AST を作り直すときに元のソースのオフセットと宣言子の範囲を保つ（[#36921](https://github.com/react/react/pull/36921)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
-- View Transitions: Chrome 153 のエラーメッセージに合わせて抑えるエラーの分類を更新（[#38034](https://github.com/react/react/pull/38034)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-DOM|React DOM]]
-- React Compiler（Rust 版）: 非 ASCII の `*Ref` 名での panic を修正（[#38025](https://github.com/react/react/pull/38025)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 
 ## トピック
 
@@ -39,4 +39,4 @@ tags:
 ## 取り込み
 
 - [[repos/react-react/log|取り込み履歴]]
-- 最近の変更: [[repos/react-react/changes/2026-11-06|2026-11-06]]、[[repos/react-react/changes/2026-11-02|2026-11-02]]、[[repos/react-react/changes/2026-10-30|2026-10-30]]、[[repos/react-react/changes/2026-10-28|2026-10-28]]、[[repos/react-react/changes/2026-10-26|2026-10-26]]
+- 最近の変更: [[repos/react-react/changes/2026-11-09|2026-11-09]]、[[repos/react-react/changes/2026-11-06|2026-11-06]]、[[repos/react-react/changes/2026-11-02|2026-11-02]]、[[repos/react-react/changes/2026-10-30|2026-10-30]]、[[repos/react-react/changes/2026-10-28|2026-10-28]]

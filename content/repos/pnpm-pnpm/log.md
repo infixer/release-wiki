@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-11-09
+
+- 期間: 2026-11-06T00:30:35Z 〜 2026-11-09T00:59:28Z
+- PR 96 件（詳しく 30 件 / 1 行 66 件）、Release 0 件
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-11-09|changes]]（新規）、[[repos/pnpm-pnpm/topics/loaded-リンカー|loaded リンカー]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/タスク実行・並行処理|タスク実行・並行処理]]、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 66 件（修正 46 件・リファクタ/性能改善 12 件を含む）は「その他」に 1 行で書いた。期間内の PR はすべて ⏳ 未リリース。`hint: feature` の 6 件（#17318・#17880・#17830・#17874・#17881・#17794）はすべて新機能として扱った
+- エラー: なし
 
 ## 2026-11-06
 

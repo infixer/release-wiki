@@ -1,6 +1,6 @@
 ---
 title: SSR・ハイドレーション
-updated: 2026-11-02
+updated: 2026-11-09
 tags:
   - repo/react-react
   - topic
@@ -11,6 +11,7 @@ tags:
 サーバーレンダラー Fizz（`packages/react-server/src/ReactFizzServer.js`）によるプリレンダー・再開（resume）と、クライアントでのハイドレーション（`react-dom-bindings` の部分ハイドレーション）まわりの変更。プリレンダーがリトライ中のタスクの実行中に中断された場合に postpone の範囲を試行の開始位置に戻す変更（#37710）と、その後の replay スロットの重なりの修正（#37850）は、replay の不変条件をまとめて見直すため 2026-10-14 に revert された（#37852）。そのため、中断がシェルの一部を描画した後のタスクに当たると再開時にそのマークアップが抜けることがある挙動（#37709）が戻っており、後続の修正待ち。dehydrate 状態の Activity を隠す処理は、Activity の終端マーカーで止まり、後続の兄弟要素を隠さなくなった。
 2026-10-19 に、同期的なプリレンダーの中断でもレンダー済みのシェルを残すようになり（中断後のノードは postpone された穴として記録）、`resumeAndPrerender` が出力済みの境界を再び postpone できるようになった。バックプレッシャー下で中断したプリレンダーの出力が途中で切れる問題も修正された（いずれも未リリース）。
 2026-10-31 に、空の HTML シェルでプリレンダーを再開したとき外部ランタイムを読み込まず完了した Suspense の中身が隠れたままになる問題が修正され（外部ランタイムの設定を resumable state に保存）、外部ランタイムのスクリプトにも `crossOrigin` が渡るようになった。dehydrate 状態の境界のハイドレーションを諦めた後にトランジションが止まる問題（#38029）も Reconciler 側の修正で直った（いずれも未リリース）。
+2026-11-06 に、ハイドレーションがサスペンドしたとき初期値付きの `useDeferredValue` で再試行がスケジューラーの速度でループする問題（Next.js の App Router で発生）が Reconciler 側で修正された（未リリース）。
 
 ## 主な API・オプション
 
@@ -20,6 +21,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-06 — ハイドレーションがサスペンドしたとき初期値付きの `useDeferredValue` で再試行がループする問題（Next.js App Router で発生）を Reconciler 側で修正（[#38132](https://github.com/react/react/pull/38132)）⏳ 未リリース · [[repos/react-react/changes/2026-11-09|変更]]
 - 2026-10-31 — 外部ランタイムのスクリプトに `crossOrigin` を渡す（[#38071](https://github.com/react/react/pull/38071)）⏳ 未リリース · [[repos/react-react/changes/2026-11-02|変更]]
 - 2026-10-31 — dehydrate 状態の境界のハイドレーションを諦めた後にトランジションが止まる問題（#38029）を、Reconciler 側のスロットルされたリトライの ping で修正（[#38061](https://github.com/react/react/pull/38061)）⏳ 未リリース · [[repos/react-react/changes/2026-11-02|変更]]
 - 2026-10-31 — 再開（resume）時に外部ランタイムの設定（URL・integrity）を保つ（[#38059](https://github.com/react/react/pull/38059)）⏳ 未リリース · [[repos/react-react/changes/2026-11-02|変更]]
@@ -38,3 +40,4 @@ tags:
 - [[repos/react-react/changes/2026-10-16|2026-10-16 の変更]]
 - [[repos/react-react/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/react-react/changes/2026-11-02|2026-11-02 の変更]]
+- [[repos/react-react/changes/2026-11-09|2026-11-09 の変更]]

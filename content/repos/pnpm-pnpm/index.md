@@ -1,6 +1,6 @@
 ---
 title: pnpm/pnpm
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/pnpm-pnpm
 ---
@@ -16,21 +16,21 @@ tags:
 
 ## 直近の注目変更
 
+- loaded リンカーが承認済みのパッケージを一時ディレクトリでビルドしてストアから読み込み、ファイルシステムへのアクセスなどを検出したパッケージを自動で実体化（[#17318](https://github.com/pnpm/pnpm/pull/17318)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/loaded-リンカー|loaded リンカー]]
+- `pnpm store add` がローカルの tarball を並行で取り込み、ディレクトリも受け付ける（[#17880](https://github.com/pnpm/pnpm/pull/17880)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ストア|ストア]]
+- pnpr: メタデータを PostgreSQL・MySQL に、`database.url` で認証と共通に選ぶ（`backend`・`metadata` は置き換え）、移行を `schema_migrations` に統一（[#17874](https://github.com/pnpm/pnpm/pull/17874), [#17881](https://github.com/pnpm/pnpm/pull/17881)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
+- NetBSD x64 のビルド済み CLI バイナリ（[#17830](https://github.com/pnpm/pnpm/pull/17830)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]
+- optional の peer の候補が持ち込む必須の peer も確かめ、補わなかった peer を `dedupePeerDependents` が戻さない（[#17770](https://github.com/pnpm/pnpm/pull/17770), [#17788](https://github.com/pnpm/pnpm/pull/17788), [#17787](https://github.com/pnpm/pnpm/pull/17787)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]
+- v12 がワークスペースの全プロジェクトの `engines`・プラットフォームを確認（[#17789](https://github.com/pnpm/pnpm/pull/17789)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
+- hoisted リンカーが依存を設定した `modulesDir` に入れる（[#17772](https://github.com/pnpm/pnpm/pull/17772)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
+- `pnpm deploy` が `publishConfig.directory` のワークスペースのパッケージと相対の `workspace:` のパスに対応（[#17771](https://github.com/pnpm/pnpm/pull/17771), [#17807](https://github.com/pnpm/pnpm/pull/17807)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
 - `pnpm fund` を追加（[#17755](https://github.com/pnpm/pnpm/pull/17755)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]
 - optional の peer をプロジェクト自身のグラフだけから解決、`projectScopedOptionalPeers` を追加（[#17726](https://github.com/pnpm/pnpm/pull/17726)）⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]
-- `supportedArchitectures` が求めるバリアントをストアに取得・リンク（[#17684](https://github.com/pnpm/pnpm/pull/17684), [#17707](https://github.com/pnpm/pnpm/pull/17707), [#17735](https://github.com/pnpm/pnpm/pull/17735)）📦 v12.18.0（#17684）／⏳ 未リリース · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]
-- バリアントだけで公開されたバージョンのインストールと、`supportedArchitectures` のプラットフォームの tag（[#17675](https://github.com/pnpm/pnpm/pull/17675), [#17688](https://github.com/pnpm/pnpm/pull/17688)）📦 v12.18.0 · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]
-- pnpr: documents のメタデータのバックエンドを削除（`metadata.backend` は拒否）（[#17641](https://github.com/pnpm/pnpm/pull/17641)）📦 v12.18.0 · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
-- pnpr: tag で名付けたバリアント、provenance の全アーカイブの確認、`any` の無いバージョン、workload の認証情報でのステージ（[#17648](https://github.com/pnpm/pnpm/pull/17648), [#17649](https://github.com/pnpm/pnpm/pull/17649), [#17651](https://github.com/pnpm/pnpm/pull/17651), [#17654](https://github.com/pnpm/pnpm/pull/17654)）📦 v12.18.0 · トピック: [[repos/pnpm-pnpm/topics/pnpr|pnpr]]
-- `pnpm publish` がバリアント付きで公開、`--upload-variant`・`--variant-integrity` で複数のマシンから、`-r --batch` にも対応（[#17658](https://github.com/pnpm/pnpm/pull/17658), [#17659](https://github.com/pnpm/pnpm/pull/17659), [#17680](https://github.com/pnpm/pnpm/pull/17680)）📦 v12.18.0 · トピック: [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
-- `pnpm pack` が `publishConfig.variants` のアーカイブを作り、`--json` で integrity と size を出す（[#17657](https://github.com/pnpm/pnpm/pull/17657), [#17678](https://github.com/pnpm/pnpm/pull/17678)）📦 v12.18.0 · トピック: [[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]
-- 繰り返しのインストールの近道が pnpmfile・`configDependencies` とプロジェクトごとの lockfile のワークスペースにも（[#17662](https://github.com/pnpm/pnpm/pull/17662), [#17671](https://github.com/pnpm/pnpm/pull/17671)）📦 v12.18.0 · トピック: [[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]
-- `pnpm peers check` が宣言されていない必須の peer の提供元を知らせる（[#17677](https://github.com/pnpm/pnpm/pull/17677)）📦 v12.18.0 · トピック: [[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]
 
 ## トピック
 
 - [[repos/pnpm-pnpm/topics/loaded-リンカー|loaded リンカー]] — 実験的な `nodeLinker: { type: loaded }`（ストアから直接読み込むインストール方式）
-- [[repos/pnpm-pnpm/topics/pnpr|pnpr]] — レジストリサーバー pnpr（upstream のキャッシュと integrity、メトリクスの公開範囲、`<name>@<version>` の tarball の URL、libsql/Turso の認証のバックエンド、管理 API・OIDC・SCIM・Web UI、運用機能、エコシステムごとの接頭辞・ホスト型ストアのレイアウト（読みやすいパス・エコシステムごとの名前空間）・所有者モデル、SQL のメタデータ（SQLite・libSQL）と原子的な公開、マニフェストの照合、リリースノート・split packuments・リリースレコードの透明性ログ、プラットフォームのバリアントの受け入れと provenance の確認）
+- [[repos/pnpm-pnpm/topics/pnpr|pnpr]] — レジストリサーバー pnpr（PostgreSQL・MySQL を含む SQL のデータベース、upstream のキャッシュと integrity、メトリクスの公開範囲、`<name>@<version>` の tarball の URL、libsql/Turso の認証のバックエンド、管理 API・OIDC・SCIM・Web UI、運用機能、エコシステムごとの接頭辞・ホスト型ストアのレイアウト（読みやすいパス・エコシステムごとの名前空間）・所有者モデル、SQL のメタデータ（SQLite・libSQL）と原子的な公開、マニフェストの照合、リリースノート・split packuments・リリースレコードの透明性ログ、プラットフォームのバリアントの受け入れと provenance の確認）
 - [[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]] — 個別の CLI コマンド・オプションの追加や改善（`pnpm token`・`pnpm profile`、`--depth Infinity`、`pnpm peers check --global` など）
 - [[repos/pnpm-pnpm/topics/Python-サポート|Python サポート]] — Python（PyPI）を一級のエコシステムとして扱うための実装（ビルドバックエンド・依存解決の高速化を含む）
 - [[repos/pnpm-pnpm/topics/Rust-ツールチェーン|Rust ツールチェーン]] — `rust-toolchain.toml` のツールチェーンのインストール、`cargo`/`rustc` のシム、`pnpm add rust`、`pnx --package=rust@<channel>`
@@ -52,4 +52,4 @@ tags:
 ## 取り込み
 
 - [[repos/pnpm-pnpm/log|取り込み履歴]]
-- 最近の変更: [[repos/pnpm-pnpm/changes/2026-11-06|2026-11-06]]、[[repos/pnpm-pnpm/changes/2026-11-04|2026-11-04]]、[[repos/pnpm-pnpm/changes/2026-11-02|2026-11-02]]、[[repos/pnpm-pnpm/changes/2026-10-30|2026-10-30]]、[[repos/pnpm-pnpm/changes/2026-10-28|2026-10-28]]
+- 最近の変更: [[repos/pnpm-pnpm/changes/2026-11-09|2026-11-09]]、[[repos/pnpm-pnpm/changes/2026-11-06|2026-11-06]]、[[repos/pnpm-pnpm/changes/2026-11-04|2026-11-04]]、[[repos/pnpm-pnpm/changes/2026-11-02|2026-11-02]]、[[repos/pnpm-pnpm/changes/2026-10-30|2026-10-30]]

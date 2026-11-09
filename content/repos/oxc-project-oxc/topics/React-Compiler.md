@@ -1,6 +1,6 @@
 ---
 title: React-Compiler
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -47,3 +47,4 @@ oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-trans
 - [[repos/oxc-project-oxc/changes/2026-10-30|2026-10-30 の変更]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.91.0|oxlint_v1.91.0]]
 - [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04 の変更]]
+- [[repos/oxc-project-oxc/releases/oxlint_v1.92.0|oxlint_v1.92.0]]

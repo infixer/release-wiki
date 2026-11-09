@@ -1,9 +1,16 @@
 ---
 title: react/react 取り込み履歴
-updated: 2026-11-06
+updated: 2026-11-09
 tags:
   - repo/react-react
 ---
+
+## 2026-11-09
+
+- 期間: 2026-11-05T16:01:56Z 〜 2026-11-09T00:59:28Z
+- PR 2 件（詳しく 2 件 / 1 行 0 件）、Release 0 件
+- 更新したページ: [[repos/react-react/changes/2026-11-09|changes]]（新規）、[[repos/react-react/topics/Server-Components|Server Components]]、[[repos/react-react/topics/Reconciler|Reconciler]]、[[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]、[[repos/react-react/index|index]]
+- エラー: なし
 
 ## 2026-11-06
 
