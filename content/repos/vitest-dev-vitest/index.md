@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -15,16 +15,16 @@ tags:
 
 ## 直近の注目変更
 
+- `testTimeout` を無効にしていても、切断された forks のワーカーを終了する（[#11924](https://github.com/vitest-dev/vitest/pull/11924)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
+- ソースマップを base64 のコメントではなく文字列でワーカーに送る（キャッシュのバージョンも更新）（[#11750](https://github.com/vitest-dev/vitest/pull/11750)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
+- `configureServer` の中でも fs モジュールキャッシュにヒットできるように（[#11927](https://github.com/vitest-dev/vitest/pull/11927)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
+- シードを使ったシャッフルの前にテストファイルを並べ替え、順序を再現可能に（同じシードでも以前と順序が変わる）（[#11926](https://github.com/vitest-dev/vitest/pull/11926)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
+- `import.meta.env` への代入ができるように（[#11841](https://github.com/vitest-dev/vitest/pull/11841)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
 - cache: 削除されたキャッシュファイルをキャッシュミスとして扱う（[#11861](https://github.com/vitest-dev/vitest/pull/11861)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - fs モジュールキャッシュの環境変数 `VITEST_FS_MODULE_CACHE` / `VITEST_FS_MODULE_CACHE_PATH` を追加（[#11859](https://github.com/vitest-dev/vitest/pull/11859)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - cache: ルート外のキャッシュ済みファイルも `--watch` で監視（[#11860](https://github.com/vitest-dev/vitest/pull/11860)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - mocker: ホイストした import の再 export を保つ（[#11867](https://github.com/vitest-dev/vitest/pull/11867)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
 - リトライ間でテストの `expect` の状態をリセット（`expect.assertions` / `hasAssertions`）（[#11900](https://github.com/vitest-dev/vitest/pull/11900)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
-- CLI の `--bail` を正しくパースする（[#11896](https://github.com/vitest-dev/vitest/pull/11896)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
-- coverage: v8 でサブプロセスのスクリプトのカバレッジを別に扱う（[#11890](https://github.com/vitest-dev/vitest/pull/11890)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
-- coverage: テストされていないファイルを正しいプロジェクトで変換する（[#11870](https://github.com/vitest-dev/vitest/pull/11870)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/カバレッジ|カバレッジ]]
-- fs モジュールキャッシュにマニフェストを追加（`server.debug.dump` / `load` は非推奨）（[#11858](https://github.com/vitest-dev/vitest/pull/11858)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
-- フィクスチャの teardown のエラーを 1 回だけ報告し、残りの teardown も実行（[#11857](https://github.com/vitest-dev/vitest/pull/11857)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
 
 ## トピック
 
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-11-09|2026-11-09]]、[[repos/vitest-dev-vitest/changes/2026-11-06|2026-11-06]]、[[repos/vitest-dev-vitest/changes/2026-11-04|2026-11-04]]、[[repos/vitest-dev-vitest/changes/2026-11-02|2026-11-02]]、[[repos/vitest-dev-vitest/changes/2026-10-30|2026-10-30]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-11-11|2026-11-11]]、[[repos/vitest-dev-vitest/changes/2026-11-09|2026-11-09]]、[[repos/vitest-dev-vitest/changes/2026-11-06|2026-11-06]]、[[repos/vitest-dev-vitest/changes/2026-11-04|2026-11-04]]、[[repos/vitest-dev-vitest/changes/2026-11-02|2026-11-02]]

@@ -1,6 +1,6 @@
 ---
 title: Oxfmt
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -12,6 +12,8 @@ Oxfmt（フォーマッタ本体 `oxc_formatter`）の Prettier 互換性の向�
 
 ## 変更履歴
 
+- 2026-11-11 — Astro の中の TypeScript を TSX として整形（[#29080](https://github.com/oxc-project/oxc/pull/29080)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — Less の `%` セレクターと `~` エスケープの出力（`oxc_formatter_css`）（[#29088](https://github.com/oxc-project/oxc/pull/29088)、[#29089](https://github.com/oxc-project/oxc/pull/29089)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
 - 2026-11-09 — JSDoc ですべての行終端子を改行として扱う（[#28902](https://github.com/oxc-project/oxc/pull/28902)、[#28909](https://github.com/oxc-project/oxc/pull/28909)、[#28910](https://github.com/oxc-project/oxc/pull/28910)）、Tailwind のテンプレートの CR・空の GraphQL / TOML 文書の扱い（[#28896](https://github.com/oxc-project/oxc/pull/28896)、[#28898](https://github.com/oxc-project/oxc/pull/28898)、[#28899](https://github.com/oxc-project/oxc/pull/28899)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-09|変更]]
 - 2026-11-09 — `.vue` ファイルを `oxc_formatter_htmlish` で整形（破壊的変更）（[#28848](https://github.com/oxc-project/oxc/pull/28848)） 📦 oxlint_v1.92.0 · [[repos/oxc-project-oxc/changes/2026-11-09|変更]]
 - 2026-11-06 — `sortTailwindcss` で空白を詰めた後の形でレイアウトを決め、入れ子の非 Tailwind 呼び出しのテンプレートを並べ替えない（[#28744](https://github.com/oxc-project/oxc/pull/28744)、[#28745](https://github.com/oxc-project/oxc/pull/28745)、[#28791](https://github.com/oxc-project/oxc/pull/28791)、[#28794](https://github.com/oxc-project/oxc/pull/28794)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-06|変更]]
@@ -111,3 +113,5 @@ Oxfmt（フォーマッタ本体 `oxc_formatter`）の Prettier 互換性の向�
 - [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/oxc-project-oxc/changes/2026-11-09|2026-11-09 の変更]]
 - [[repos/oxc-project-oxc/releases/oxfmt_v0.77.0|oxfmt_v0.77.0]]
+- [[repos/oxc-project-oxc/releases/oxfmt_v0.78.0|oxfmt_v0.78.0]]
+- [[repos/oxc-project-oxc/changes/2026-11-11|2026-11-11 の変更]]

@@ -1,6 +1,6 @@
 ---
 title: vercel/next.js
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/vercel-next.js
 ---
@@ -9,21 +9,21 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v16.4.5](https://github.com/vercel/next.js/releases/tag/v16.4.5)（2026-11-03、セキュリティ修正）→ [[repos/vercel-next.js/releases/v16.4.5|まとめ]]（前の安定版: [[repos/vercel-next.js/releases/v16.4.4|v16.4.4]]、v15 系: [[repos/vercel-next.js/releases/v15.5.29|v15.5.29]]）
-- プレリリース: [v16.5.0-canary.45](https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.45)（2026-11-08）
+- 安定版: [v16.4.6](https://github.com/vercel/next.js/releases/tag/v16.4.6)（2026-11-10、バックポートの修正）→ [[repos/vercel-next.js/releases/v16.4.6|まとめ]]（前の安定版: [[repos/vercel-next.js/releases/v16.4.5|v16.4.5]]、v15 系: [[repos/vercel-next.js/releases/v15.5.29|v15.5.29]]）
+- プレリリース: [v16.5.0-canary.47](https://github.com/vercel/next.js/releases/tag/v16.5.0-canary.47)（2026-11-11）
 
 ## 直近の注目変更
 
+- `next build --experimental-cpu-prof` が静的ワーカーの CPU プロファイルも書き出す（[#100614](https://github.com/vercel/next.js/pull/100614)）📦 v16.5.0-canary.47 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- 静的から partial に再生成されたルートで、デプロイ先の RSC の応答が空になる問題を修正（[#101454](https://github.com/vercel/next.js/pull/101454)）📦 v16.5.0-canary.47 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
+- バックグラウンドのプリレンダーが表の応答のステータスを変えないように（[#101295](https://github.com/vercel/next.js/pull/101295)）📦 v16.5.0-canary.47 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
+- ルートの予測で並列ルートの params を URL から解決（[#101477](https://github.com/vercel/next.js/pull/101477)）📦 v16.5.0-canary.47 · トピック: [[repos/vercel-next.js/topics/ルーティング|ルーティング]]
+- Turbopack: `CellKey` の小型化でタスクのストレージを削減、ID・ハッシュを固定長でエンコード（[#101393](https://github.com/vercel/next.js/pull/101393)、[#101419](https://github.com/vercel/next.js/pull/101419)）📦 v16.5.0-canary.47 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
+- `next/image` の歪みの警告を画像本来の縦横比で判定（[#101349](https://github.com/vercel/next.js/pull/101349)）📦 v16.5.0-canary.47 · トピック: [[repos/vercel-next.js/topics/画像最適化|画像最適化]]
 - Turbopack: `new URL()` で `turbopackIgnore` に対応（実行時に解決する URL を指定できる）（[#99965](https://github.com/vercel/next.js/pull/99965)）📦 v16.5.0-canary.45 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
 - Turbopack のメモリ削減（`AstPathTrie` の小型化で 701 MiB → 269 MiB、タスクのストレージの容量の解放）（[#101370](https://github.com/vercel/next.js/pull/101370)、[#101344](https://github.com/vercel/next.js/pull/101344)）📦 v16.5.0-canary.45 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
 - Cache Components で、プリレンダーした `Link` ヘッダーが再検証のたびに増える問題を修正（[#100960](https://github.com/vercel/next.js/pull/100960)）📦 v16.5.0-canary.45 · トピック: [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]
 - Turbopack: Pages Router でページの re-export の編集が HMR に反映されない問題を修正（[#101152](https://github.com/vercel/next.js/pull/101152)）📦 v16.5.0-canary.45 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- `eslint-config-next` の TypeScript の peer を `>=4.8.4 <6.1.0` に（TypeScript 7 は対象外）（[#101247](https://github.com/vercel/next.js/pull/101247)）📦 v16.5.0-canary.45 · トピック: [[repos/vercel-next.js/topics/ESLint|ESLint]]
-- `next build --analyze` でビルドと分析を 1 回で行う（[#99962](https://github.com/vercel/next.js/pull/99962)）⏳ 未リリース · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- セルフホストで Route Handler のレスポンスが圧縮されない問題を修正（[#101220](https://github.com/vercel/next.js/pull/101220)）📦 v16.5.0-canary.42 · トピック: [[repos/vercel-next.js/topics/ルーティング|ルーティング]]
-- Turbopack: `generateComponentChunks` 有効時に失敗したチャンクの読み込みを再試行できるように（[#101179](https://github.com/vercel/next.js/pull/101179)）📦 v16.5.0-canary.42 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- Turbopack: PURE 注釈付きの callee の IIFE（esbuild の `keepNames` の出力など）が本番ビルドで消える問題を修正（[#100477](https://github.com/vercel/next.js/pull/100477)）📦 v16.5.0-canary.42 · トピック: [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]
-- 画像最適化 API がローカル画像のリダイレクトをたどるように（[#98271](https://github.com/vercel/next.js/pull/98271)）📦 v16.5.0-canary.42 · トピック: [[repos/vercel-next.js/topics/画像最適化|画像最適化]]
 
 ## トピック
 
@@ -40,7 +40,7 @@ tags:
 - [[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]] — Cache Components・ISR・Partial Prerendering
 - [[repos/vercel-next.js/topics/テストモード|テストモード]] — 実験的なテストモード（同梱の `@mswjs/interceptors`・`experimental.testProxy`）
 - [[repos/vercel-next.js/topics/テレメトリ|テレメトリ]] — CLI の匿名テレメトリの送信処理
-- [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]] — Turbopack・webpack のビルド/開発サーバーと関連 CLI（`--custom-webpack` を含む）・チャンク化の設定・バンドルアナライザー・トレースツール・turbo-tasks の GC
+- [[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]] — Turbopack・webpack のビルド/開発サーバーと関連 CLI（`--custom-webpack` を含む）・チャンク化の設定・バンドルアナライザー・トレースツール・CPU プロファイル・turbo-tasks の GC とメモリ
 - [[repos/vercel-next.js/topics/リリース・CD|リリース・CD]] — リポジトリ自身のリリース・CI/CD パイプライン
 - [[repos/vercel-next.js/topics/ルーティング|ルーティング]] — App Router のルートマッチング・クライアント側のルート予測・`forbidden()` / `unauthorized()`・`proxy.ts` の読み込み・`global-not-found` からの遷移・`router.experimental_prepare()`・`route.go`（実験）
 - [[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]] — メタデータのレンダリング経路（ボット判定を含む）・開発オーバーレイ・experimental 版 React の選択・Instant Navigation のエラー案内・ターミナルのコードフレーム・Request Insights
@@ -48,4 +48,4 @@ tags:
 ## 取り込み
 
 - [[repos/vercel-next.js/log|取り込み履歴]]
-- 最近の変更: [[repos/vercel-next.js/changes/2026-11-09|2026-11-09]]、[[repos/vercel-next.js/changes/2026-11-06|2026-11-06]]、[[repos/vercel-next.js/changes/2026-11-04|2026-11-04]]、[[repos/vercel-next.js/changes/2026-11-02|2026-11-02]]、[[repos/vercel-next.js/changes/2026-10-30|2026-10-30]]
+- 最近の変更: [[repos/vercel-next.js/changes/2026-11-11|2026-11-11]]、[[repos/vercel-next.js/changes/2026-11-09|2026-11-09]]、[[repos/vercel-next.js/changes/2026-11-06|2026-11-06]]、[[repos/vercel-next.js/changes/2026-11-04|2026-11-04]]、[[repos/vercel-next.js/changes/2026-11-02|2026-11-02]]

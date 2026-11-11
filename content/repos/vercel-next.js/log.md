@@ -1,9 +1,17 @@
 ---
 title: vercel/next.js 取り込み履歴
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/vercel-next.js
 ---
+
+## 2026-11-11
+
+- 期間: 2026-11-08T19:52:09Z 〜 2026-11-11T01:17:33Z
+- PR 22 件（詳しく 15 件 / 1 行 7 件）、Release 3 件（安定版 1 件: v16.4.6、v16.5.0-canary.46〜.47）
+- 更新したページ: [[repos/vercel-next.js/changes/2026-11-11|changes]]（新規）、[[repos/vercel-next.js/releases/v16.4.6|v16.4.6]]（新規）、[[repos/vercel-next.js/releases/v16.4.5|v16.4.5]]（次の安定版へのリンクを追記）、[[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]、[[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]、[[repos/vercel-next.js/topics/ルーティング|ルーティング]]、[[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]、[[repos/vercel-next.js/topics/画像最適化|画像最適化]]、[[repos/vercel-next.js/topics/create-next-app|create-next-app]]、[[repos/vercel-next.js/index|index]]
+- 備考: `hint: fix` の #101470（evals のフィクスチャの AI SDK 7 への移行）は「その他」に入れた。PR 20 件は 📦 v16.5.0-canary.47（canary.46 の公開前にマージされたものも inbox の表記のまま）、2 件は ⏳ 未リリース。v16.4.6 の公開日は JST で書いた（2026-11-10）
+- エラー: なし
 
 ## 2026-11-09
 

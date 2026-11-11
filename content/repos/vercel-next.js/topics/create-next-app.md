@@ -1,6 +1,6 @@
 ---
 title: create-next-app
-updated: 2026-11-04
+updated: 2026-11-11
 tags:
   - repo/vercel-next.js
   - topic
@@ -18,6 +18,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-09 — テンプレートから作ったときも次の手順のコマンドを表示（[#99769](https://github.com/vercel/next.js/pull/99769)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
 - 2026-11-03 — Tailwind（`tailwindcss`・`@tailwindcss/turbopack` / `@tailwindcss/postcss`）を 4.3.3 に固定（[#101061](https://github.com/vercel/next.js/pull/101061)）📦 v16.5.0-canary.40 · [[repos/vercel-next.js/changes/2026-11-04|変更]]
 - 2026-10-29 — App Router の質問を削除し、常に App Router を使う（保存済みの `app` の設定は無視）（[#100850](https://github.com/vercel/next.js/pull/100850)）📦 v16.5.0-canary.32 · [[repos/vercel-next.js/changes/2026-10-30|変更]]
 
@@ -25,3 +26,5 @@ tags:
 
 - [[repos/vercel-next.js/topics/ルーティング|ルーティング]]
 - [[repos/vercel-next.js/changes/2026-11-04|2026-11-04 の変更]]
+- [[repos/vercel-next.js/changes/2026-11-11|2026-11-11 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.6|v16.4.6]]

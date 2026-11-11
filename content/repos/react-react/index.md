@@ -1,6 +1,6 @@
 ---
 title: react/react
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/react-react
 ---
@@ -15,6 +15,9 @@ tags:
 
 ## 直近の注目変更
 
+- DevTools: `react-devtools-fusebox` に Suspense タブの入口 `initializeSuspense` を追加（React Native DevTools 向け）（[#38167](https://github.com/react/react/pull/38167)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
+- DevTools: Hermes でスタックフレームのファイル名が空になり「View source」が開けない問題を修正（[#38168](https://github.com/react/react/pull/38168)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
+- React Native: 使われていない旧イベントディスパッチのパイプラインを削除（[#38172](https://github.com/react/react/pull/38172)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Native-レンダラー|React Native レンダラー]]
 - Reconciler: 初期値付きの `useDeferredValue` とサスペンドしたハイドレーション・リトライによる無限ループを修正（Next.js App Router で発生）（[#38132](https://github.com/react/react/pull/38132)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]、[[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - Flight: ストリームで描画される Server Components の中で `useId` などの hooks が throw する問題を修正（[#38128](https://github.com/react/react/pull/38128)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
 - Reconciler: 削除された hidden の Activity でサスペンドしていたデータが解決するとクラッシュする問題を修正（[#37965](https://github.com/react/react/pull/37965)）⏳ 未リリース · トピック: [[repos/react-react/topics/Reconciler|Reconciler]]
@@ -22,16 +25,13 @@ tags:
 - Fizz: 再開時に外部ランタイムの設定を保ち、完了した Suspense の中身が隠れたままになる問題を修正（[#38059](https://github.com/react/react/pull/38059)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - Fizz: 外部ランタイムのスクリプトに `crossOrigin` を渡す（[#38071](https://github.com/react/react/pull/38071)）⏳ 未リリース · トピック: [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]]
 - FB 向け Flight バンドラーで未対応の Server Reference のデコードを無効化（[#36865](https://github.com/react/react/pull/36865)）⏳ 未リリース · トピック: [[repos/react-react/topics/Server-Components|Server Components]]
-- DevTools facade: BigInt の正規化と、Resource でない hoistable の検出を修正（[#38068](https://github.com/react/react/pull/38068)、[#38067](https://github.com/react/react/pull/38067)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
-- DevTools: 対応する引数の無い書式指定子をそのまま残す（[#38069](https://github.com/react/react/pull/38069)）⏳ 未リリース · トピック: [[repos/react-react/topics/DevTools|DevTools]]
-- React Compiler: AST を作り直すときに元のソースのオフセットと宣言子の範囲を保つ（[#36921](https://github.com/react/react/pull/36921)）⏳ 未リリース · トピック: [[repos/react-react/topics/React-Compiler|React Compiler]]
 
 ## トピック
 
-- [[repos/react-react/topics/DevTools|DevTools]] — React DevTools のブラウザ拡張機能・バックエンド・facade
+- [[repos/react-react/topics/DevTools|DevTools]] — React DevTools のブラウザ拡張機能・バックエンド・facade・React Native DevTools 向けの fusebox
 - [[repos/react-react/topics/React-Compiler|React Compiler]] — 自動メモ化コンパイラ（Babel / Rust 実装）
 - [[repos/react-react/topics/React-DOM|React DOM]] — `react-dom` の合成イベントなどブラウザ向けの処理
-- [[repos/react-react/topics/React-Native-レンダラー|React Native レンダラー]] — Fabric レンダラーのイベント処理
+- [[repos/react-react/topics/React-Native-レンダラー|React Native レンダラー]] — Fabric レンダラーのイベント処理（旧イベントパイプラインは削除）
 - [[repos/react-react/topics/Reconciler|Reconciler]] — レンダー・コミット処理、レーン、エラー回復、Fragment Refs、フィーチャーフラグの整理
 - [[repos/react-react/topics/Server-Components|Server Components]] — Flight プロトコル、Server Reference、エラーの debug info
 - [[repos/react-react/topics/SSR-ハイドレーション|SSR・ハイドレーション]] — Fizz のプリレンダー・再開と、クライアントの部分ハイドレーション（Activity）
@@ -39,4 +39,4 @@ tags:
 ## 取り込み
 
 - [[repos/react-react/log|取り込み履歴]]
-- 最近の変更: [[repos/react-react/changes/2026-11-09|2026-11-09]]、[[repos/react-react/changes/2026-11-06|2026-11-06]]、[[repos/react-react/changes/2026-11-02|2026-11-02]]、[[repos/react-react/changes/2026-10-30|2026-10-30]]、[[repos/react-react/changes/2026-10-28|2026-10-28]]
+- 最近の変更: [[repos/react-react/changes/2026-11-11|2026-11-11]]、[[repos/react-react/changes/2026-11-09|2026-11-09]]、[[repos/react-react/changes/2026-11-06|2026-11-06]]、[[repos/react-react/changes/2026-11-02|2026-11-02]]、[[repos/react-react/changes/2026-10-30|2026-10-30]]

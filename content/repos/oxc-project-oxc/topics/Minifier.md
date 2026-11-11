@@ -1,6 +1,6 @@
 ---
 title: Minifier
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -12,6 +12,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-11 — 例外を投げうる `new ArrayBuffer(...)` と URI の呼び出しを残す（[#29012](https://github.com/oxc-project/oxc/pull/29012)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
 - 2026-11-09 — 非 10 進数の文字列から数値への変換の丸めと符号（[#29026](https://github.com/oxc-project/oxc/pull/29026)、[#29034](https://github.com/oxc-project/oxc/pull/29034)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-09|変更]]
 - 2026-11-06 — codegen: 無限大を `1e400` で出力（[#28812](https://github.com/oxc-project/oxc/pull/28812)）、生成位置ごとにマッピングを 1 つに（[#28844](https://github.com/oxc-project/oxc/pull/28844)）、空文字列の検索での `replaceAll` で UTF-16 の境界を保つ（[#28807](https://github.com/oxc-project/oxc/pull/28807)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-06|変更]]
 - 2026-11-04 — 配列の `concat` の連鎖で後の副作用より前の読みを保つ（[#28261](https://github.com/oxc-project/oxc/pull/28261)）、codegen が同じ位置のソースマップのマッピングで名前を保つ（[#26051](https://github.com/oxc-project/oxc/pull/26051)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-04|変更]]
@@ -82,3 +83,5 @@ tags:
 - [[repos/oxc-project-oxc/releases/crates_v0.157.0|crates_v0.157.0]]
 - [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/oxc-project-oxc/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/oxc-project-oxc/releases/crates_v0.158.0|crates_v0.158.0]]
+- [[repos/oxc-project-oxc/changes/2026-11-11|2026-11-11 の変更]]

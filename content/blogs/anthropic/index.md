@@ -1,6 +1,6 @@
 ---
 title: Anthropic News
-updated: 2026-10-30
+updated: 2026-11-11
 tags:
   - blog/anthropic
 ---
@@ -9,6 +9,7 @@ tags:
 
 ## 記事
 
+- 2026-11-10 — [[blogs/anthropic/posts/2026-11-10-roadshow-launch|Anthropic が新規株式公開に向けたロードショーを開始]] — Class A 普通株式 8 億 2,500 万株、想定価格 1 株 70〜78 ドル、Nasdaq に「ANT」で上場申請
 - 2026-10-28 — [[blogs/anthropic/posts/2026-10-28-ai-for-science-expands-foundations-research-institutions|AI for Science を科学財団・研究機関に拡大]] — Sloan・Simons・NSF などの財団、STScI・Sanger・Crick などの研究機関、FlyWire・gnomAD などのプロジェクト計 20 件に Claude のクレジットを提供
 - 2026-10-27 — [[blogs/anthropic/posts/2026-10-27-expanding-partnership-gsa|GSA との提携を拡大、あらゆるレベルの政府に Claude を提供]] — Claude Enterprise・Claude for Government・Claude API を全製品で 40% 割引、州・地方政府も対象（推定 10 億ドルの節約）
 - 2026-10-26 — [[blogs/anthropic/posts/2026-10-26-s1-sec|Anthropic が新規株式公開に向けて SEC に S-1 を提出]] — Class A 普通株式を Nasdaq Global Select Market にシンボル「ANT」で上場予定（株数・価格帯は未定）
@@ -34,6 +35,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-11-11 — 記事 1 件。エラー: なし
 - 2026-10-30 — 記事 1 件。エラー: なし
 - 2026-10-28 — 記事 2 件。エラー: なし
 - 2026-10-23 — 記事 4 件（うち「Features」は本文がサイトのナビゲーションだけのカテゴリーページのため掲載せず）。エラー: なし

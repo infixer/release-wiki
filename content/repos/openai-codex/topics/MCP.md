@@ -1,6 +1,6 @@
 ---
 title: MCP
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/openai-codex
   - topic
@@ -28,6 +28,8 @@ Codex から MCP（Model Context Protocol）サーバーに接続するクライ
 
 ## 変更履歴
 
+- 2026-11-11 — `thread/items/list` の `deferOutput.mcpToolCall`（実験的）で MCP のプレーンテキストの出力を後回しにし `thread/items/read` で取得（[#60390](https://github.com/openai/codex/pull/60390)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — まとめてのリソース一覧に待機中のサーバーの `deferredServers`（[#60423](https://github.com/openai/codex/pull/60423)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
 - 2026-11-09 — 共有の app-server に接続したときの MCP の起動の追跡を修正（[#60280](https://github.com/openai/codex/pull/60280)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-09|変更]]
 - 2026-11-04 — メッセージボードの単体の HTTP の MCP サーバーとプラグイン（[#58904](https://github.com/openai/codex/pull/58904)、[#58908](https://github.com/openai/codex/pull/58908)、[#58909](https://github.com/openai/codex/pull/58909)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-04|変更]]
 - 2026-11-02 — Apps のカタログの早期の発見の機能フラグ（`features.apps_early_resource_discovery`）（[#58352](https://github.com/openai/codex/pull/58352)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-02|変更]]
@@ -63,3 +65,4 @@ Codex から MCP（Model Context Protocol）サーバーに接続するクライ
 - [[repos/openai-codex/changes/2026-10-23|2026-10-23 の変更]]
 - [[repos/openai-codex/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/openai-codex/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/openai-codex/changes/2026-11-11|2026-11-11 の変更]]

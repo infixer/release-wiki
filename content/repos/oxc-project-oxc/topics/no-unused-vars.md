@@ -1,6 +1,6 @@
 ---
 title: no-unused-vars
-updated: 2026-09-30
+updated: 2026-11-11
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -18,6 +18,7 @@ ESLint 由来の `no-unused-vars` ルール（linter/eslint）まわりの判定
 
 ## 変更履歴
 
+- 2026-11-11 — 使われていない型パラメーターを削除する危険なサジェスチョン（インターフェース・クラス・`infer` は対象外）（[#28762](https://github.com/oxc-project/oxc/pull/28762)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
 - 2026-09-30 — `args: "none"` のとき `reportUsedIgnorePattern` で引数を報告しないよう修正（[#26925](https://github.com/oxc-project/oxc/pull/26925)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-09-30|変更]]
 - 2026-09-24 — 配列 rest バインディング内でも `destructuredArrayIgnorePattern` / `ignoreRestSiblings` が効くように修正（[#26923](https://github.com/oxc-project/oxc/pull/26923)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-09-24|変更]]
 - 2026-09-24 — コンストラクタ引数・算出プロパティアクセスなどでの更新式の消費を使用として認識するよう修正（[#26782](https://github.com/oxc-project/oxc/pull/26782)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-09-24|変更]]
@@ -31,3 +32,4 @@ ESLint 由来の `no-unused-vars` ルール（linter/eslint）まわりの判定
 - [[repos/oxc-project-oxc/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.86.0|oxlint_v1.86.0]]
 - [[repos/oxc-project-oxc/changes/2026-09-30|2026-09-30 の変更]]
+- [[repos/oxc-project-oxc/changes/2026-11-11|2026-11-11 の変更]]

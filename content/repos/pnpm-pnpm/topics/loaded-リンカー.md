@@ -1,6 +1,6 @@
 ---
 title: loaded リンカー
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -27,6 +27,7 @@ pnpm v12 の実験的なインストール方式 `nodeLinker: { type: loaded }`�
 
 ## 関連
 
+- [[repos/pnpm-pnpm/releases/v12.19.0|v12.19.0]]
 - [[repos/pnpm-pnpm/changes/2026-11-09|2026-11-09 の変更]]
 - [[repos/pnpm-pnpm/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.10.0|v12.10.0]]

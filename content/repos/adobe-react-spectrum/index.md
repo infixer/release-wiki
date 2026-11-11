@@ -1,6 +1,6 @@
 ---
 title: adobe/react-spectrum
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/adobe-react-spectrum
 ---
@@ -15,6 +15,7 @@ tags:
 
 ## 直近の注目変更
 
+- RAC: Separator の既定の `<hr>` に冗長な `role="separator"` を付けない（[#10946](https://github.com/adobe/react-spectrum/pull/10946)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/Separator|Separator]]
 - CheckboxGroup の中の Checkbox がグループの `validationBehavior` を引き継ぐ（[#10860](https://github.com/adobe/react-spectrum/pull/10860)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
 - PreviewTrigger: 閉じているときは Escape を止めない（親のダイアログが閉じない問題）（[#10921](https://github.com/adobe/react-spectrum/pull/10921)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - 単独の `Popover` の `aria-label` をトリガーのラベルより優先（[#10789](https://github.com/adobe/react-spectrum/pull/10789)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/オーバーレイ|オーバーレイ]]
@@ -24,7 +25,6 @@ tags:
 - S2 DatePicker: `Form` の中でもポップアップの時刻欄がつぶれないように（[#10915](https://github.com/adobe/react-spectrum/pull/10915)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/DateField|DateField]]、[[repos/adobe-react-spectrum/topics/フォーム|フォーム]]
 - ComboBox: Popover を閉じる Escape では既定動作を止める（Safari のフルスクリーン）（[#10883](https://github.com/adobe/react-spectrum/pull/10883)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]、[[repos/adobe-react-spectrum/topics/キーボード操作|キーボード操作]]
 - ComboBox: `isReadOnly` のときは blur で値を確定しない（[#10869](https://github.com/adobe/react-spectrum/pull/10869)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]
-- ComboBox: 入力欄と Popover が別の shadow root にあってもキーボードで開けるように（[#10631](https://github.com/adobe/react-spectrum/pull/10631)）⏳ 未リリース · トピック: [[repos/adobe-react-spectrum/topics/ComboBox|ComboBox]]
 
 ## トピック
 
@@ -35,6 +35,7 @@ tags:
 - [[repos/adobe-react-spectrum/topics/DateField|DateField]] — 日付入力（`useDateSegment`・`DateField`）
 - [[repos/adobe-react-spectrum/topics/Menu|Menu]] — S2 の Menu（セパレーター表示・仮想化）
 - [[repos/adobe-react-spectrum/topics/NumberField|NumberField]] — 数値入力の `NumberField` と `@internationalized/number` の `NumberParser`（数字の体系）
+- [[repos/adobe-react-spectrum/topics/Separator|Separator]] — RAC の `Separator`（`<hr>` の組み込みロールと `aria-orientation`）
 - [[repos/adobe-react-spectrum/topics/SideNav|SideNav]] — S2 の SideNav と SideNavPanel（旧 SidePanel）内での折りたたみ
 - [[repos/adobe-react-spectrum/topics/Tabs|Tabs]] — RAC の Tabs（TabPanels のサイズのアニメーションと入れ子の Tabs）
 - [[repos/adobe-react-spectrum/topics/Toast|Toast]] — S2 の Toast（展開したリストとボタンの間隔）
@@ -52,4 +53,4 @@ tags:
 
 - [[repos/adobe-react-spectrum/log|取り込み履歴]]
 - リリース: [[repos/adobe-react-spectrum/releases/react-aria-components@1.22.0|react-aria-components@1.22.0]]、[[repos/adobe-react-spectrum/releases/@react-spectrum-s2@1.8.0|@react-spectrum/s2@1.8.0]]
-- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-11-09|2026-11-09]]、[[repos/adobe-react-spectrum/changes/2026-11-06|2026-11-06]]、[[repos/adobe-react-spectrum/changes/2026-11-04|2026-11-04]]、[[repos/adobe-react-spectrum/changes/2026-10-30|2026-10-30]]、[[repos/adobe-react-spectrum/changes/2026-10-28|2026-10-28]]
+- 最近の変更: [[repos/adobe-react-spectrum/changes/2026-11-11|2026-11-11]]、[[repos/adobe-react-spectrum/changes/2026-11-09|2026-11-09]]、[[repos/adobe-react-spectrum/changes/2026-11-06|2026-11-06]]、[[repos/adobe-react-spectrum/changes/2026-11-04|2026-11-04]]、[[repos/adobe-react-spectrum/changes/2026-10-30|2026-10-30]]

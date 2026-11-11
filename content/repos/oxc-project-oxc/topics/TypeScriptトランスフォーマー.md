@@ -1,6 +1,6 @@
 ---
 title: TypeScriptトランスフォーマー
-updated: 2026-10-28
+updated: 2026-11-11
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -12,6 +12,8 @@ TypeScript の `enum` を変換するトランスフォーマーについて、�
 
 ## 変更履歴
 
+- 2026-11-11 — TypeScript でラップした代入先（`(value as number) ||= 1` など）の下位変換と計算メンバーのレシーバーの退避（[#29113](https://github.com/oxc-project/oxc/pull/29113)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — namespace のブロックをまたいで export した enum をマージ（[#28999](https://github.com/oxc-project/oxc/pull/28999)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
 - 2026-10-28 — inject: 素の参照が残っていれば素の inject を残す（#26928）（[#26965](https://github.com/oxc-project/oxc/pull/26965)） 📦 oxlint_v1.90.0 · [[repos/oxc-project-oxc/changes/2026-10-28|変更]]
 - 2026-10-12 — `ReplaceGlobalDefines` が非 null アサーション越しのオプショナルチェーンを保つ（[#27526](https://github.com/oxc-project/oxc/pull/27526)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-12|変更]]
 - 2026-10-12 — enum の初期化子で文字列への単項演算を評価しない（[#27447](https://github.com/oxc-project/oxc/pull/27447)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-12|変更]]
@@ -23,3 +25,5 @@ TypeScript の `enum` を変換するトランスフォーマーについて、�
 - [[repos/oxc-project-oxc/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/oxc-project-oxc/releases/crates_v0.156.0|crates_v0.156.0]]
 - [[repos/oxc-project-oxc/changes/2026-10-28|2026-10-28 の変更]]
+- [[repos/oxc-project-oxc/releases/crates_v0.158.0|crates_v0.158.0]]
+- [[repos/oxc-project-oxc/changes/2026-11-11|2026-11-11 の変更]]

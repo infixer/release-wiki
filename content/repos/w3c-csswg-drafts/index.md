@@ -1,6 +1,6 @@
 ---
 title: w3c/csswg-drafts
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/w3c-csswg-drafts
 ---
@@ -14,6 +14,7 @@ tags:
 
 ## 直近の注目変更
 
+- 2026-11-10 — grid lanes で、複数のトラックにまたがるアイテムの前後に segment endpoint を作り、グリッド軸の rule を伸ばせるように（[#14732](https://github.com/w3c/csswg-drafts/pull/14732)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-gaps-1|css-gaps-1]]
 - 2026-11-06 — 用語「gap segments」を定義し、`rule-visibility` の挙動を明確化（[#14637](https://github.com/w3c/csswg-drafts/pull/14637)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-gaps-1|css-gaps-1]]
 - 2026-11-05 — 「determine the device pixel ratio」に `Document` の引数を追加（HTML の画像の候補の選択から使う）（[#14724](https://github.com/w3c/csswg-drafts/pull/14724)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/cssom-view-1|cssom-view-1]]
 - 2026-11-04 — メディア特性 `prefers-bold-text`（`no-preference` / `bold`）を追加（#14477）（[#14725](https://github.com/w3c/csswg-drafts/pull/14725)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/mediaqueries-5|mediaqueries-5]]
@@ -23,7 +24,6 @@ tags:
 - 2026-11-03 — `param()` の名前と値の間を `:` に（#14275）、`color` / `accent-color` を `env()` として渡す（#14447）（[`636a76a`](https://github.com/w3c/csswg-drafts/commit/636a76a25e992170038bbdcc032cc8f24519e991)、[`f6a994b`](https://github.com/w3c/csswg-drafts/commit/f6a994be84d4df01b0c9cb77225ca11f1b131dde)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-link-params-1|css-link-params-1]]、[[repos/w3c-csswg-drafts/topics/css-env-1|css-env-1]]
 - 2026-11-02 — グラデーションの色域外の色を CSS の色域マッピングにかけることを必須に（#14545）（[`12ab907`](https://github.com/w3c/csswg-drafts/commit/12ab9071206ce8c70860808cec8a7af1f4ee0297)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-images-4|css-images-4]]
 - 2026-11-02 — named feature の綴りを `gamut mapping` から `gamut-mapping` に（#14545）（[`f9abe9e`](https://github.com/w3c/csswg-drafts/commit/f9abe9e14e72e6fc3f3a0253817670520bf61278)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-conditional-5|css-conditional-5]]
-- 2026-11-02 — フォントの feature value のシリアライズを定義（#14658）（[#14677](https://github.com/w3c/csswg-drafts/pull/14677)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]]
 
 ## トピック
 
@@ -40,7 +40,7 @@ tags:
 - [[repos/w3c-csswg-drafts/topics/css-font-loading-3|css-font-loading-3]] — フォントの読み込みの API（IDL）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-fonts-4|css-fonts-4]] — フォントの選択とフォントの機能（カーニングと `palt`、feature value のシリアライズなど）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-forms-1|css-forms-1]] — フォームコントロールの見た目（appearance）を定義する仕様
-- [[repos/w3c-csswg-drafts/topics/css-gaps-1|css-gaps-1]] — ギャップと gap decoration（`rule-visibility`・gap segments）の仕様
+- [[repos/w3c-csswg-drafts/topics/css-gaps-1|css-gaps-1]] — ギャップと gap decoration（`rule-visibility`・gap segments・grid lanes の segment endpoint）の仕様
 - [[repos/w3c-csswg-drafts/topics/css-grid-3|css-grid-3]] — CSS Grid Layout Level 3（`fit-tolerance`・Grid Lanes の整列など）の仕様
 - [[repos/w3c-csswg-drafts/topics/css-highlight-api-1|css-highlight-api-1]] — CSS Custom Highlight API（`::highlight()`）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-images-4|css-images-4]] — `image()` やグラデーション（色域外の色の色域マッピング）など画像関連の値・関数を定義する仕様
@@ -66,4 +66,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-csswg-drafts/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-11-09|2026-11-09]]、[[repos/w3c-csswg-drafts/changes/2026-11-06|2026-11-06]]、[[repos/w3c-csswg-drafts/changes/2026-11-04|2026-11-04]]、[[repos/w3c-csswg-drafts/changes/2026-11-02|2026-11-02]]、[[repos/w3c-csswg-drafts/changes/2026-10-30|2026-10-30]]
+- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-11-11|2026-11-11]]、[[repos/w3c-csswg-drafts/changes/2026-11-09|2026-11-09]]、[[repos/w3c-csswg-drafts/changes/2026-11-06|2026-11-06]]、[[repos/w3c-csswg-drafts/changes/2026-11-04|2026-11-04]]、[[repos/w3c-csswg-drafts/changes/2026-11-02|2026-11-02]]

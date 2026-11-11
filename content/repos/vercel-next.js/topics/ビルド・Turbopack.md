@@ -1,6 +1,6 @@
 ---
 title: ビルド・Turbopack
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/vercel-next.js
   - topic
@@ -35,6 +35,14 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 
 ## 変更履歴
 
+- 2026-11-11 — turbo-tasks-malloc: mimalloc の公式の Rust バインディング（v3.6.1）に切り替え（[#101518](https://github.com/vercel/next.js/pull/101518)）⏳ 未リリース · [[repos/vercel-next.js/changes/2026-11-11|変更]]
+- 2026-11-11 — turbo-tasks-backend: 集約の辺の早すぎる削除を再試行ではなく負の follower の数（負債）で記録（[#100873](https://github.com/vercel/next.js/pull/100873)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
+- 2026-11-11 — `new Worker(new URL(...))` で使わない URL の効果（`import.meta` のオブジェクト）を出力しない（[#101297](https://github.com/vercel/next.js/pull/101297)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
+- 2026-11-10 — `next build --experimental-cpu-prof` が静的ワーカーごとに `build-static-worker-*.cpuprofile` を書き出す（ファイル名にプロセス ID）（[#100614](https://github.com/vercel/next.js/pull/100614)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
+- 2026-11-10 — scope hoisting で結合したモジュールから存在しない export を import したときの「module factory is not available」の実行時エラーを修正（[#101482](https://github.com/vercel/next.js/pull/101482)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
+- 2026-11-10 — 存在しない export の「Did you mean」で、同じ宣言で import 済みの名前を勧めない（[#101479](https://github.com/vercel/next.js/pull/101479)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
+- 2026-11-10 — turbo-tasks: `CellKey` を 1 つの `u64` に詰め、タスクのストレージを削減（3990.9 MiB → 3747.9 MiB の例）（[#101393](https://github.com/vercel/next.js/pull/101393)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
+- 2026-11-10 — ID・永続化するハッシュ・タイムスタンプを bincode の fixint でエンコード（永続キャッシュが 0.5% 小さくなった例）（[#101419](https://github.com/vercel/next.js/pull/101419)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
 - 2026-11-08 — `new URL()` で `turbopackIgnore` に対応（[#99965](https://github.com/vercel/next.js/pull/99965)）📦 v16.5.0-canary.45 · [[repos/vercel-next.js/changes/2026-11-09|変更]]
 - 2026-11-08 — turbo-tasks-backend: タスクのストレージの使っていない容量を解放（[#101344](https://github.com/vercel/next.js/pull/101344)）📦 v16.5.0-canary.45 · [[repos/vercel-next.js/changes/2026-11-09|変更]]
 - 2026-11-08 — `AstPathTrie` のノードを親と種類のインデックスで持つ（701 MiB → 269 MiB）（[#101370](https://github.com/vercel/next.js/pull/101370)）📦 v16.5.0-canary.45 · [[repos/vercel-next.js/changes/2026-11-09|変更]]
@@ -245,3 +253,5 @@ Turbopack・webpack を使ったビルド/開発サーバーの実装と、そ�
 - [[repos/vercel-next.js/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/vercel-next.js/changes/2026-11-06|2026-11-06 の変更]]
 - [[repos/vercel-next.js/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/vercel-next.js/changes/2026-11-11|2026-11-11 の変更]]
+- [[repos/vercel-next.js/releases/v16.4.6|v16.4.6]]

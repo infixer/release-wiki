@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-11-11
+
+- 期間: 2026-11-09T00:49:34Z 〜 2026-11-11T01:17:33Z
+- PR 102 件（詳しく 28 件 / 1 行 74 件、うち brief 72 件）、Release 3 件（安定版 3 件: crates_v0.158.0、oxfmt_v0.78.0、oxlint_v1.93.0）
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-11-11|changes]]（新規）、[[repos/oxc-project-oxc/releases/crates_v0.158.0|crates_v0.158.0]]（新規）、[[repos/oxc-project-oxc/releases/oxfmt_v0.78.0|oxfmt_v0.78.0]]（新規）、[[repos/oxc-project-oxc/releases/oxlint_v1.93.0|oxlint_v1.93.0]]（新規）、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/no-unused-vars|no-unused-vars]]、[[repos/oxc-project-oxc/topics/React-Compiler|React-Compiler]]、[[repos/oxc-project-oxc/topics/推奨ルール|推奨ルール]]、[[repos/oxc-project-oxc/topics/ES2022クラス変換|ES2022クラス変換]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/Isolated-Declarations|Isolated-Declarations]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/TypeScriptトランスフォーマー|TypeScriptトランスフォーマー]]、[[repos/oxc-project-oxc/topics/パーサー|パーサー]]、[[repos/oxc-project-oxc/topics/oxlint-CLI|oxlint-CLI]]・[[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]・[[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]（関連リンクのみ）、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: oxc-guard[bot] 3 件、renovate[bot] 4 件）
 
 ## 2026-11-09
 

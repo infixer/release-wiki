@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-11-11
+
+- 期間: 2026-11-09T00:18:08Z 〜 2026-11-11T01:17:33Z
+- PR 44 件（詳しく 30 件 / 1 行 14 件）、Release 2 件（安定版 1 件: v12.19.0。プレリリース 1 件: pnpr@0.1.0-alpha.19）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-11-11|changes]]（新規）、[[repos/pnpm-pnpm/releases/v12.19.0|v12.19.0]]（新規）、[[repos/pnpm-pnpm/releases/v12.18.0|v12.18.0]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/インストール|インストール]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/ランタイム管理|ランタイム管理]]、[[repos/pnpm-pnpm/topics/設定|設定]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/topics/CLI-コマンド|CLI コマンド]]、[[repos/pnpm-pnpm/topics/セキュリティ|セキュリティ]]、[[repos/pnpm-pnpm/topics/loaded-リンカー|loaded リンカー]]（関連にリリースを追記）、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 14 件（修正 3 件・リファクタ 2 件を含む）は「その他」に 1 行で書いた。#17925 は #17919 の空行の変更を戻すものなので、`lockfile.format: v13`（#17886）と 1 つの新機能の項目にまとめた。PR 18 件は 📦 pnpr@0.1.0-alpha.19、26 件は ⏳ 未リリース（inbox の表記のまま）。v12.19.0 の公開日は JST で書いた（2026-11-10）。リリースノートの本文は途中で切れている（`pnpm store add` の項目まで取り込めた）。lockfile の形式は既存の「依存関係解決」トピック（`lockfile.includeResolutionSettings` などを扱う）に入れた
+- エラー: なし
 
 ## 2026-11-09
 

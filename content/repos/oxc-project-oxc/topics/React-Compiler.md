@@ -1,6 +1,6 @@
 ---
 title: React-Compiler
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -17,6 +17,7 @@ oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-trans
 
 ## 変更履歴
 
+- 2026-11-11 — 論理代入演算子（`??=`・`||=`・`&&=`）に対応（`ref.current ??=` は遅延初期化として扱う）（[#29137](https://github.com/oxc-project/oxc/pull/29137)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
 - 2026-11-06 — コールバック内のローカル変数の再代入を無視（#28401）（[#28820](https://github.com/oxc-project/oxc/pull/28820)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-06|変更]]
 - 2026-11-04 — 非 ASCII で始まる ref のような名前で panic しない（#28278）（[#28758](https://github.com/oxc-project/oxc/pull/28758)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-04|変更]]
 - 2026-10-30 — React Compiler の未マージの修正 11 件をまとめて取り込み、28 件の issue を解決（[#28195](https://github.com/oxc-project/oxc/pull/28195)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-30|変更]]
@@ -48,3 +49,4 @@ oxc の React Compiler（`oxc_react_compiler`）と、それを使う `oxc-trans
 - [[repos/oxc-project-oxc/releases/oxlint_v1.91.0|oxlint_v1.91.0]]
 - [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.92.0|oxlint_v1.92.0]]
+- [[repos/oxc-project-oxc/changes/2026-11-11|2026-11-11 の変更]]

@@ -1,6 +1,6 @@
 ---
 title: Firefox リリースノート
-updated: 2026-11-04
+updated: 2026-11-11
 tags:
   - blog/firefox
 ---
@@ -9,6 +9,9 @@ tags:
 
 ## 記事
 
+- 2026-11-10 — [[blogs/firefox/posts/2026-11-10-160.0|Firefox 160.0]] — ピクチャーインピクチャーの再生速度、Mini Window、リンク処理の「Never allow」、MKV 再生、macOS の WebGL を Metal で描画、`SpeechRecognition` 対応
+- 2026-11-10 — [[blogs/firefox/posts/2026-11-10-153.7.0|Firefox 153.7.0]] — ESR 153 の更新
+- 2026-11-10 — [[blogs/firefox/posts/2026-11-10-115.45.0|Firefox 115.45.0]] — ESR 115 の更新（Windows 7〜8.1・macOS 10.12〜10.14 のみサポート）
 - 2026-11-03 — [[blogs/firefox/posts/2026-11-03-159.0.1|Firefox 159.0.1]] — 関連サイト間で共有するパスキーのサインイン失敗、Windows のセキュリティソフト併用時のクラッシュ、Linux の WebGL の色の入れ替わりなどを修正する修正版
 - 2026-10-27 — [[blogs/firefox/posts/2026-10-27-159.0|Firefox 159.0]] — macOS のネイティブ共有ピッカー、Smart Window の `/watch`、タブ検索ショートカット、CSS スクロール駆動アニメーション
 - 2026-10-27 — [[blogs/firefox/posts/2026-10-27-153.6.0|Firefox 153.6.0]] — ESR 153 の更新
@@ -32,6 +35,7 @@ tags:
 
 ## 取り込み履歴
 
+- 2026-11-11 — 記事 3 件。エラー: なし
 - 2026-11-04 — 記事 1 件。エラー: なし
 - 2026-10-28 — 記事 3 件。エラー: なし
 - 2026-10-21 — 記事 3 件。エラー: なし

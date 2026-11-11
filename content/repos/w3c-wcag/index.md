@@ -1,6 +1,6 @@
 ---
 title: w3c/wcag
-updated: 2026-11-04
+updated: 2026-11-11
 tags:
   - repo/w3c-wcag
 ---
@@ -41,4 +41,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-wcag/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-wcag/changes/2026-11-04|2026-11-04]]、[[repos/w3c-wcag/changes/2026-10-21|2026-10-21]]、[[repos/w3c-wcag/changes/2026-10-05|2026-10-05]]、[[repos/w3c-wcag/changes/2026-09-24|2026-09-24]]
+- 最近の変更: [[repos/w3c-wcag/changes/2026-11-11|2026-11-11]]、[[repos/w3c-wcag/changes/2026-11-04|2026-11-04]]、[[repos/w3c-wcag/changes/2026-10-21|2026-10-21]]、[[repos/w3c-wcag/changes/2026-10-05|2026-10-05]]、[[repos/w3c-wcag/changes/2026-09-24|2026-09-24]]

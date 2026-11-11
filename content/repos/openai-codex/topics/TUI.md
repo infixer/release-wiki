@@ -1,6 +1,6 @@
 ---
 title: TUI
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/openai-codex
   - topic
@@ -34,6 +34,15 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-11 — サイドのチャットのチューザーで最新のプロンプトのプレビュー、発見の失敗時の再試行、`Ctrl+C` で閉じる（[#60319](https://github.com/openai/codex/pull/60319)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — 完全なトランスクリプトに古いアイテムの無いクラウドの失敗を含める（`FullTranscript`）（[#60320](https://github.com/openai/codex/pull/60320)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — スレッドを開き直した後の古いクラウドのストリームの切断を抑える（[#60327](https://github.com/openai/codex/pull/60327)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — クラウドのスレッドの再開でアシスタントのメッセージが重複しない（[#60335](https://github.com/openai/codex/pull/60335)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — フルスクリーンの Markdown のトランスクリプトで収まる URL を分割しない（[#60416](https://github.com/openai/codex/pull/60416)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — バックグラウンドのターミナルの実行中もターミナルの状態を `Done` に（[#60418](https://github.com/openai/codex/pull/60418)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — アカウントの利用量が回復したらモデルの切り替えの提案を閉じる（回復の通知）（[#60435](https://github.com/openai/codex/pull/60435)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — macOS でネイティブのクリップボードの画像（PNG 優先）を読み、画像の向きを反映（[#60455](https://github.com/openai/codex/pull/60455)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
+- 2026-11-11 — 質問への回答をクラウドのメッセージの受け付けに通す（[#60462](https://github.com/openai/codex/pull/60462)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
 - 2026-11-09 — 共有の app-server に接続したときの MCP の起動の追跡を修正（[#60280](https://github.com/openai/codex/pull/60280)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-09|変更]]
 - 2026-11-09 — メッセージの送信の受領と不確かな下書きの保持（[#59817](https://github.com/openai/codex/pull/59817)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-09|変更]]
 - 2026-11-09 — 委任されたスレッドのメッセージを Markdown で描画（[#59789](https://github.com/openai/codex/pull/59789)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-09|変更]]
@@ -143,3 +152,5 @@ tags:
 - [[repos/openai-codex/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/openai-codex/changes/2026-11-06|2026-11-06 の変更]]
 - [[repos/openai-codex/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/openai-codex/releases/rust-v0.167.0|rust-v0.167.0]]
+- [[repos/openai-codex/changes/2026-11-11|2026-11-11 の変更]]

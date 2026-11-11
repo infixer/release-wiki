@@ -1,9 +1,16 @@
 ---
 title: w3c/wcag 取り込み履歴
-updated: 2026-11-04
+updated: 2026-11-11
 tags:
   - repo/w3c-wcag
 ---
+
+## 2026-11-11
+
+- 期間: 2026-11-02T12:04:42Z 〜 2026-11-11T01:17:33Z
+- PR 1 件（詳しく 0 件 / 1 行 1 件）、Release 0 件
+- 更新したページ: [[repos/w3c-wcag/changes/2026-11-11|changes]]（新規）、[[repos/w3c-wcag/index|index]]
+- エラー: なし
 
 ## 2026-11-04
 

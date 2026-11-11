@@ -1,6 +1,6 @@
 ---
 title: CLI コマンド
-updated: 2026-11-06
+updated: 2026-11-11
 tags:
   - repo/pnpm-pnpm
   - topic
@@ -43,6 +43,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-11 — `pnpm sbom` がワークスペースのマニフェストの読み取りエラーを伝える。pnpr への変更にプロジェクトのメタデータが無いときはローカルの解決に戻る（[#17915](https://github.com/pnpm/pnpm/pull/17915)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-11|変更]]
 - 2026-11-06 — `pnpm fund` を追加（[#17755](https://github.com/pnpm/pnpm/pull/17755)）⏳ 未リリース · [[repos/pnpm-pnpm/changes/2026-11-06|変更]]
 - 2026-11-06 — `pnpm peers check` が宣言されていない必須の peer の提供元を知らせる（[#17677](https://github.com/pnpm/pnpm/pull/17677)）📦 v12.18.0 · [[repos/pnpm-pnpm/changes/2026-11-06|変更]]
 - 2026-11-06 — `pnpm docs` がブラウザーを開けないときの URL を共通の方法で伏せる（[#16767](https://github.com/pnpm/pnpm/pull/16767)）📦 v12.18.0 · [[repos/pnpm-pnpm/changes/2026-11-06|変更]]
@@ -94,6 +95,8 @@ tags:
 
 ## 関連
 
+- [[repos/pnpm-pnpm/changes/2026-11-11|2026-11-11 の変更]]
+- [[repos/pnpm-pnpm/releases/v12.19.0|v12.19.0]]
 - [[repos/pnpm-pnpm/changes/2026-11-06|2026-11-06 の変更]]
 - [[repos/pnpm-pnpm/releases/v12.18.0|v12.18.0]]
 - [[repos/pnpm-pnpm/changes/2026-11-04|2026-11-04 の変更]]

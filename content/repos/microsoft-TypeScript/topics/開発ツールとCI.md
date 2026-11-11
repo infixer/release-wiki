@@ -1,6 +1,6 @@
 ---
 title: 開発ツールとCI
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/microsoft-TypeScript
   - topic
@@ -10,6 +10,7 @@ tags:
 
 TypeScript 7（tsgo、Go へのネイティブ移植）の開発を支えるビルド・CI・コード生成・ローカライズまわりのインフラ整備。コード生成にインクリメンタルキャッシュのラッパーが全面的に導入され（`generate` サブタスクを最大 80% 短縮）、loc・vendoring タスクもその対象になった。テストは `gotestsum` を Go tool として組み込み、API ベンチマークは CI の専用サブタスクに分離された。ローカライズ（loc）まわりは、loc チームの期待する構成にファイルを作り直し、OneLoc パイプラインの不具合修正も含めて作業を再開できるようにした。Go 1.27 で ARM 上の挙動が変わりうる暗黙の FMA（積和演算）も修正されている。Go らしくない `case` ブロック（意味のない `break` だけの記述）を検出する custom lint ルールも追加された。コンパイラオプションもメタデータから Go・TS のコードと JSON スキーマをコード生成するようになり、`tsconfig.schema.json` / `jsconfig.schema.json` がパッケージに同梱された（`node_modules/typescript/schemas/tsconfig.schema.json`）。VS Code 拡張（`vscode-typescript`）の VSIX の publish・署名まわりのパイプライン整備も進み、署名コマンドは msbuild に切り替わった。
 コンパイラのビルドには既定の PGO プロファイル（`tsc/cmd/tsc/default.pgo`）が使われ、実験的な `wasip1/wasm` のビルド（`tsc.wasm`）も加わった（いずれも未リリース）。
+PR のビルドは GitHub Actions のワークフローで npm に公開され（署名なし）、インストールや TS7 に対応した Playground で試せる。tsgo という名前に関する古い参照は削除された（いずれも未リリース）。
 
 ## 主な API・オプション
 
@@ -17,6 +18,7 @@ TypeScript 7（tsgo、Go へのネイティブ移植）の開発を支えるビ�
 
 ## 変更履歴
 
+- 2026-11-11 — PR のビルドを npm に公開し、インストールや Playground で使えるように（[#65406](https://github.com/microsoft/TypeScript/pull/65406)、[#65416](https://github.com/microsoft/TypeScript/pull/65416)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-11-11|変更]]
 - 2026-10-30 — コンパイラに既定の PGO プロファイルを追加（[#64986](https://github.com/microsoft/TypeScript/pull/64986)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-30|変更]]
 - 2026-10-30 — `tsc` の wasip1（Wasm）ビルドを追加（[#64174](https://github.com/microsoft/TypeScript/pull/64174)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-30|変更]]
 - 2026-10-02 — コンパイラオプションの定義をコード生成し、パッケージに JSON スキーマを同梱（#54192）（[#64457](https://github.com/microsoft/TypeScript/pull/64457)）⏳ 未リリース · [[repos/microsoft-TypeScript/changes/2026-10-02|変更]]
@@ -39,3 +41,4 @@ TypeScript 7（tsgo、Go へのネイティブ移植）の開発を支えるビ�
 
 - リポジトリ: [[repos/microsoft-TypeScript/index|microsoft/TypeScript]]
 - リリース: [[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.1|vscode-typescript/v1.0.1]]、[[repos/microsoft-TypeScript/releases/vscode-typescript-v1.0.2|vscode-typescript/v1.0.2]]
+- [[repos/microsoft-TypeScript/changes/2026-11-11|2026-11-11 の変更]]

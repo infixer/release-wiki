@@ -30,3 +30,4 @@ oxlint の CLI と npm パッケージの実行時の挙動・性能。Linux で
 - [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.92.0|oxlint_v1.92.0]]
 - [[repos/oxc-project-oxc/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/oxc-project-oxc/releases/oxlint_v1.93.0|oxlint_v1.93.0]]

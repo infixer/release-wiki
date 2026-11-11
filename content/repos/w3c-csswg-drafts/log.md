@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-11-11
+
+- 期間: 2026-11-07T21:09:32Z 〜 2026-11-11T01:17:33Z
+- PR 2 件（詳しく 1 件 / 1 行 1 件）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-11-11|changes]]（新規）、[[repos/w3c-csswg-drafts/topics/css-gaps-1|css-gaps-1]]、[[repos/w3c-csswg-drafts/index|index]]
+- エラー: なし
 
 ## 2026-11-09
 

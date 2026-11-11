@@ -1,6 +1,6 @@
 ---
 title: anthropics/claude-code
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/anthropics-claude-code
 ---
@@ -9,11 +9,14 @@ tags:
 
 ## 最新リリース
 
-- 安定版: [v2.1.319](https://github.com/anthropics/claude-code/releases/tag/v2.1.319)（2026-11-06）→ [[repos/anthropics-claude-code/releases/v2.1.319|まとめ]]
+- 安定版: [v2.1.322](https://github.com/anthropics/claude-code/releases/tag/v2.1.322)（2026-11-10）→ [[repos/anthropics-claude-code/releases/v2.1.322|まとめ]]（前の安定版: [[repos/anthropics-claude-code/releases/v2.1.321|v2.1.321]]）
 - プレリリース: なし
 
 ## 直近の注目変更
 
+- Vertex の global・us・eu リージョンで fast mode に対応（拒否されたら通常の速度にフォールバック）（[v2.1.322](https://github.com/anthropics/claude-code/releases/tag/v2.1.322)）📦 v2.1.322 · [[repos/anthropics-claude-code/releases/v2.1.322|まとめ]]
+- Claude Fable 5.2（`claude-fable-5-2`）を追加し Fable の既定モデルに、`claude remote-control --settings <file>` を追加（[v2.1.321](https://github.com/anthropics/claude-code/releases/tag/v2.1.321)）📦 v2.1.321 · [[repos/anthropics-claude-code/releases/v2.1.321|まとめ]]
+- セキュリティ修正: MCP の OAuth がリダイレクト先の別ホストに秘密情報を送る問題、Bash の権限チェック・`cp`/`mv` の deny ルールの抜け（[v2.1.321](https://github.com/anthropics/claude-code/releases/tag/v2.1.321)）📦 v2.1.321 · トピック: [[repos/anthropics-claude-code/topics/管理設定|管理設定]]
 - MCP tasks に対応（すぐにバックグラウンドへ移す）、`permissions.denyInsteadOfPrompting`、`CLAUDE_CODE_DISABLE_FEATURE_FLAGS`、`/tasks` の「Earlier in this session」、`/claude-api latency-optimize`。テレメトリ・feature flag を切った環境の auto mode はサーバーで確認できない呼び出しを確認・拒否に（`CLAUDE_CODE_AUTO_MODE_SERVER`）（[v2.1.319](https://github.com/anthropics/claude-code/releases/tag/v2.1.319)）📦 v2.1.319 · [[repos/anthropics-claude-code/releases/v2.1.319|まとめ]]
 - Claude apps gateway に `admin.pooled_conflict_rule`・`admin.pooled_priority_order`・`login_notice`・`CLAUDE_GATEWAY_LOG_FORMAT=json`、`/usage` に支出（[v2.1.319](https://github.com/anthropics/claude-code/releases/tag/v2.1.319)）📦 v2.1.319 · トピック: [[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]
 - ビルトインの `privacy` mod のソースを `mods/privacy` に公開（挙動の変更なし。`$.session.identity` の型を追加）（[#107768](https://github.com/anthropics/claude-code/pull/107768)）⏳ 未リリース · トピック: [[repos/anthropics-claude-code/topics/mod-API|mod API]]
@@ -21,9 +24,6 @@ tags:
 - アイドル時の compaction が要約ではない返答で会話を置き換える問題を修正（[v2.1.318](https://github.com/anthropics/claude-code/releases/tag/v2.1.318)）📦 v2.1.318 · トピック: [[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]
 - Claude apps gateway の管理 API にコストレポート `GET /v1/organizations/analytics/cost` と IdP グループの日次記録（[v2.1.317](https://github.com/anthropics/claude-code/releases/tag/v2.1.317)）📦 v2.1.317 · トピック: [[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]
 - Agent SDK のフックのコールバックに `onFailure: "block"`、OTel に `anthropic.plan` などの属性（[v2.1.317](https://github.com/anthropics/claude-code/releases/tag/v2.1.317)）📦 v2.1.317 · トピック: [[repos/anthropics-claude-code/topics/フック|フック]]、[[repos/anthropics-claude-code/topics/テレメトリ|テレメトリ]]
-- Opus 4.8 の fast mode を非推奨に（2026-11-30 に削除。削除後はエラーになり通常の Opus 4.8 にはフォールバックしない。Opus 5.5 へ移行）。`CLAUDE_CODE_DISABLE_ULTRATHINK`・`CLAUDE_CODE_SUBAGENT_EFFORT` を追加（[v2.1.316](https://github.com/anthropics/claude-code/releases/tag/v2.1.316)）📦 v2.1.316 · [[repos/anthropics-claude-code/releases/v2.1.316|まとめ]]
-- Claude apps gateway にグループ共有の月間予算 `pooled_budget`、`managed.policy_mode: layered`、Bedrock の `guardrail.input_tagging`。全モデルを `availableModels` などで確認するよう修正（[v2.1.316](https://github.com/anthropics/claude-code/releases/tag/v2.1.316)）📦 v2.1.316 · トピック: [[repos/anthropics-claude-code/topics/Claude-apps-gateway|Claude apps gateway]]
-- 終了時にシェルコマンドが残る問題、`claude auth login` が gateway 必須の環境で拒否される問題、PowerShell フックの終了コード 2 などを修正（[v2.1.316](https://github.com/anthropics/claude-code/releases/tag/v2.1.316)）📦 v2.1.316 · トピック: [[repos/anthropics-claude-code/topics/管理設定|管理設定]]
 
 ## トピック
 
@@ -42,4 +42,4 @@ tags:
 ## 取り込み
 
 - [[repos/anthropics-claude-code/log|取り込み履歴]]
-- 最近の変更: [[repos/anthropics-claude-code/changes/2026-11-09|2026-11-09]]、[[repos/anthropics-claude-code/changes/2026-11-06|2026-11-06]]、[[repos/anthropics-claude-code/changes/2026-11-04|2026-11-04]]、[[repos/anthropics-claude-code/changes/2026-11-02|2026-11-02]]、[[repos/anthropics-claude-code/changes/2026-10-30|2026-10-30]]
+- 最近の変更: [[repos/anthropics-claude-code/changes/2026-11-11|2026-11-11]]、[[repos/anthropics-claude-code/changes/2026-11-09|2026-11-09]]、[[repos/anthropics-claude-code/changes/2026-11-06|2026-11-06]]、[[repos/anthropics-claude-code/changes/2026-11-04|2026-11-04]]、[[repos/anthropics-claude-code/changes/2026-11-02|2026-11-02]]

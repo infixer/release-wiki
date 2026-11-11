@@ -1,6 +1,6 @@
 ---
 title: select要素
-updated: 2026-09-30
+updated: 2026-11-11
 tags:
   - repo/whatwg-html
   - topic
@@ -9,6 +9,7 @@ tags:
 ## 概要
 
 `select`・`option`・`optgroup` 要素と、選択中の `option` の内容を映す `selectedcontent` 要素に関する仕様。`select` の子孫にある `selectedcontent` のうち、無効（disabled）でないものはすべて最新の状態に保たれる。無効かどうかは挿入時に決まり、入れ子になった `selectedcontent` は更新されない。`option` の削除・移動や `selectedcontent` の移動による更新はマイクロタスクで行われ、選択済み `option` や `selectedcontent` の挿入は同期的に更新される。`multiple`・`size`・`disabled`・`selected` 属性の変更では選択状態の設定アルゴリズムが走る。
+`option` を `selectedcontent` に複製するときは、複製したものから `script`・SVG の `script`・`frame`・`iframe`・`embed`・`object` 要素を取り除く（shadow tree の中も含む。未リリース）。
 
 ## 主な API・オプション
 
@@ -19,8 +20,10 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-10 — `selectedcontent` への複製から `script`・`iframe`・`embed`・`object` などを取り除く（[#13201](https://github.com/whatwg/html/pull/13201)）⏳ 未リリース · [[repos/whatwg-html/changes/2026-11-11|変更]]
 - 2026-09-30 — 子孫のすべての `selectedcontent` を最新に保つよう変更。削除・移動時の更新をマイクロタスク化し、属性変更時の選択状態の再計算や `[CEReactions]` の追加なども実施（[#12263](https://github.com/whatwg/html/pull/12263)）⏳ 未リリース · [[repos/whatwg-html/changes/2026-09-30|変更]]
 
 ## 関連
 
 - [[repos/whatwg-html/changes/2026-09-30|2026-09-30 の変更]]
+- [[repos/whatwg-html/changes/2026-11-11|2026-11-11 の変更]]

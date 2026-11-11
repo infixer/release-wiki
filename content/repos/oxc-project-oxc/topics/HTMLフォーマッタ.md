@@ -34,3 +34,4 @@ tags:
 - [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/oxc-project-oxc/changes/2026-11-09|2026-11-09 の変更]]
 - [[repos/oxc-project-oxc/releases/oxfmt_v0.77.0|oxfmt_v0.77.0]]
+- [[repos/oxc-project-oxc/releases/oxfmt_v0.78.0|oxfmt_v0.78.0]]

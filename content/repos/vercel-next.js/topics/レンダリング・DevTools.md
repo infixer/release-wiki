@@ -1,6 +1,6 @@
 ---
 title: レンダリング・DevTools
-updated: 2026-11-06
+updated: 2026-11-11
 tags:
   - repo/vercel-next.js
   - topic
@@ -12,6 +12,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-09 — dev overlay・HMR の `sync` が npm レジストリのバージョン確認を待たない（結果は `versionInfo` で後から送る）（[#100628](https://github.com/vercel/next.js/pull/100628)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
 - 2026-11-06 — Request Insights: コンテキストメニュー（ID・MCP 用のプロンプトのコピー）とトレースの操作を改善（[#97796](https://github.com/vercel/next.js/pull/97796)）⏳ 未リリース · [[repos/vercel-next.js/changes/2026-11-06|変更]]
 - 2026-11-05 — Request Insights: リクエストの URL・ルートのテンプレートと fetch の詳細表示を改善（[#96925](https://github.com/vercel/next.js/pull/96925)）📦 v16.5.0-canary.42 · [[repos/vercel-next.js/changes/2026-11-06|変更]]
 - 2026-11-04 — Request Insights: フレームワークのリクエストの種類を分類し、サーバーが識別子を割り当てる（[#96914](https://github.com/vercel/next.js/pull/96914)）📦 v16.5.0-canary.42 · [[repos/vercel-next.js/changes/2026-11-06|変更]]
@@ -66,3 +67,4 @@ tags:
 - [[repos/vercel-next.js/changes/2026-11-02|2026-11-02 の変更]]
 - [[repos/vercel-next.js/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/vercel-next.js/changes/2026-11-06|2026-11-06 の変更]]
+- [[repos/vercel-next.js/changes/2026-11-11|2026-11-11 の変更]]

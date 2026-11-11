@@ -1,6 +1,6 @@
 ---
 title: Linterルール個別修正
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -12,6 +12,16 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-11 — `jsdoc/require-param-description` のサジェスチョン（[#29118](https://github.com/oxc-project/oxc/pull/29118)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `eslint/no-use-before-define` の隠れていた失敗ケース（実行コンテキスト、クラスの初期化子・フィールド）を修正（[#28861](https://github.com/oxc-project/oxc/pull/28861)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `eslint/no-restricted-imports` で不正な正規表現の設定をエラーとして報告（[#29119](https://github.com/oxc-project/oxc/pull/29119)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `eslint/arrow-body-style` の自動修正が収束しない問題を修正（[#29101](https://github.com/oxc-project/oxc/pull/29101)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `unicorn/prefer-negative-index` の非 ASCII の空白でのパニックを修正（[#28877](https://github.com/oxc-project/oxc/pull/28877)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `react/exhaustive-deps` の依存の削除でコメントを保つ（[#29047](https://github.com/oxc-project/oxc/pull/29047)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `unicorn/no-useless-undefined` の戻り値の型の除外を上流に合わせ、`var` の初期化子を報告しない（[#29000](https://github.com/oxc-project/oxc/pull/29000)、[#29007](https://github.com/oxc-project/oxc/pull/29007)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `vitest/expect-expect` が Vitest 5 の `bench` フィクスチャを認識（[#29044](https://github.com/oxc-project/oxc/pull/29044)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — `eslint/no-unreachable-loop` で外側の `finally` を `continue` の判定に含めない（[#29004](https://github.com/oxc-project/oxc/pull/29004)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
+- 2026-11-11 — JSDoc の対応しない `{`・バッククォートの後の `@param` を保つ（`jsdoc/require-param`）（[#28923](https://github.com/oxc-project/oxc/pull/28923)）📦 oxlint_v1.93.0 · [[repos/oxc-project-oxc/changes/2026-11-11|変更]]
 - 2026-11-09 — `promise/prefer-catch` のサジェスチョン（[#28919](https://github.com/oxc-project/oxc/pull/28919)）、CFG のラベル付きジャンプの修正（`no-unreachable`）（[#29001](https://github.com/oxc-project/oxc/pull/29001)、[#29016](https://github.com/oxc-project/oxc/pull/29016)）、`react/exhaustive-deps`（[#28925](https://github.com/oxc-project/oxc/pull/28925)）、`eslint/no-restricted-imports`（[#28920](https://github.com/oxc-project/oxc/pull/28920)）、`eslint/prefer-destructuring`（[#29003](https://github.com/oxc-project/oxc/pull/29003)）、`import/no-anonymous-default-export`（[#29002](https://github.com/oxc-project/oxc/pull/29002)）、`eslint/id-length`（[#29037](https://github.com/oxc-project/oxc/pull/29037)）、JSDoc の CR 改行（[#28902](https://github.com/oxc-project/oxc/pull/28902)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-09|変更]]
 - 2026-11-06 — `eslint/no-redeclare` に `ignoreDeclarationMerge` オプション（[#28816](https://github.com/oxc-project/oxc/pull/28816)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-06|変更]]
 - 2026-11-06 — `unicorn/prefer-type-error`（[#28819](https://github.com/oxc-project/oxc/pull/28819)）、`no-restricted-imports`（[#28842](https://github.com/oxc-project/oxc/pull/28842)）、`jsx-a11y/aria-role`（[#28804](https://github.com/oxc-project/oxc/pull/28804)）、`vitest/prefer-called-exactly-once-with`（[#28850](https://github.com/oxc-project/oxc/pull/28850)、[#28864](https://github.com/oxc-project/oxc/pull/28864)）、`no-misleading-character-class`（[#28822](https://github.com/oxc-project/oxc/pull/28822)）、`react/only-export-components`（[#28761](https://github.com/oxc-project/oxc/pull/28761)）、`jsdoc/require-param`（[#28866](https://github.com/oxc-project/oxc/pull/28866)）の修正 ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-06|変更]]
@@ -82,3 +92,5 @@ tags:
 - [[repos/oxc-project-oxc/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.92.0|oxlint_v1.92.0]]
 - [[repos/oxc-project-oxc/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/oxc-project-oxc/releases/oxlint_v1.93.0|oxlint_v1.93.0]]
+- [[repos/oxc-project-oxc/changes/2026-11-11|2026-11-11 の変更]]

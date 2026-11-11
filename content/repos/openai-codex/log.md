@@ -1,9 +1,17 @@
 ---
 title: openai/codex 取り込み履歴
-updated: 2026-11-09
+updated: 2026-11-11
 tags:
   - repo/openai-codex
 ---
+
+## 2026-11-11
+
+- 期間: 2026-11-09T00:20:20Z 〜 2026-11-11T01:17:33Z
+- PR 92 件（詳しく 29 件 / 1 行 63 件）、Release 20 件（安定版 2 件: rust-v0.167.0・rust-v0.167.1。前回までに取得できなかった 2026-11-01 以降の分を含む）
+- 更新したページ: [[repos/openai-codex/changes/2026-11-11|changes]]、[[repos/openai-codex/releases/rust-v0.167.0|rust-v0.167.0]]（新規）、[[repos/openai-codex/releases/rust-v0.167.1|rust-v0.167.1]]（新規）、[[repos/openai-codex/topics/TUI|TUI]]、[[repos/openai-codex/topics/MCP|MCP]]、[[repos/openai-codex/topics/認証|認証]]、[[repos/openai-codex/topics/リアルタイム音声|リアルタイム音声]]、[[repos/openai-codex/topics/デーモン|デーモン]]、[[repos/openai-codex/topics/状態データベース|状態データベース]]、[[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]、[[repos/openai-codex/topics/実行環境アクセス|実行環境アクセス]]、[[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]、[[repos/openai-codex/index|index]]
+- 備考: PR 数が `maxPrs`（30）を超えたため、`brief: true` の 62 件はタイトルから領域ごとにまとめて「その他」に記載した。本文のある 30 件のうち、依存関係の更新の 1 件も「その他」に 1 行で記載。この回の PR は #60622 までが rust-v0.169.0-alpha.9（プレリリース）に収録、それ以降は未リリース。rust-v0.167.1 の Release の本文は比較へのリンクのみ
+- エラー: なし
 
 ## 2026-11-09
 
