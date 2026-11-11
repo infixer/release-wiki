@@ -1,0 +1,745 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-11-11T01:17:33Z",
+  "range": {
+    "from": "2026-11-09T00:49:34Z",
+    "to": "2026-11-11T01:17:33Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.93.0",
+      "publishedAt": "2026-11-09T11:47:15Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.93.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "crates_v0.158.0",
+      "name": "oxc crates_v0.158.0",
+      "publishedAt": "2026-11-09T11:13:17Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/crates_v0.158.0",
+      "prerelease": false,
+      "body": "### 🐛 Bug Fixes\n\n- de6ac92 isolated-declarations: Preserve object accessor mutability (#29039) (camc314)\n- 3729ce1 transformer/typescript: Merge exported enums across namespace blocks (#28999) (camc314)\n- 7243594 minifier: Preserve throwing ArrayBuffer and URI calls (#29012) (camc314)\n- 67ac6be isolated-declarations: Evaluate enum template literal initializers (#28997) (camc314)\n- f05b30e isolated-declarations: Infer auto-accessor initializer types (#29038) (camc314)\n- 030d410 isolated-declarations: Preserve computed ambient enum members (#29040) (camc314)\n- 6303df1 jsdoc: Preserve param tags after unmatched description delimiters (#28923) (Vishal Punjabi)\n- 99e67d3 transformer: Preserve static private brands with shadowed class names (#28894) (Dunqing)\n- 595f3c2 minifier: Preserve left-hand side effects in instanceof checks (#29011) (camc314)\n- a791a5b cfg: Resolve continues through stacked loop labels (#29016) (camc314)\n- 9e3b3d1 ecmascript: Reject signs after nondecimal prefixes (#29034) (camc314)\n- 43c5273 ecmascript: Round nondecimal strings to numbers once (#29026) (camc314)\n- b71234f cfg: Skip labeled contexts for unlabeled jumps (#29001) (camc314)\n- fd51bff jsdoc: Handle every line terminators as newline (#28902) (leaysgur)\n- c00dc61 codegen: Keep one source map mapping per generated position (#28844) (YT)\n- 52f3e3d jsdoc: Do not treat `@word` containing `/` as tag (#28834) (leaysgur)\n- 0b48483 minifier: Preserve UTF-16 boundaries in empty-search replaceAll folding (#28807) (huuya)\n- 1e57a4e codegen: Print infinite numeric literals as `1e400` instead of `Infinity` (#28812) (Dominic Elm)\n- 28a44b7 transformer/class-properties: Preserve private accessor assignment receivers (#28790) (Dunqing)\n- ea76490 transformer/class-properties: Preserve private method values in assignments (#28788) (Dunqing)\n- 8432de6 transformer/class-properties: Apply a compound assignment to a static private field once (#28606) (YT)\n- 3dbf140 parser: Treat escaped contextual keywords as names, not modifiers (#28748) (Dominic Elm)\n- e3b1bb4 transformer/class-properties: Keep the value of a private accessor assignment (#28716) (YT)\n- ae7474e minifier: Keep array concat chain reads before later side effects (#28261) (Dunqing)\n- ec327aa semantic: Keep block type bindings separate from hoisted vars (#28601) (YT)\n- 3fd78d7 codegen: Preserve names in duplicate source mappings (#26051) (camc314)\n\n### ⚡ Performance\n\n- 7761a39 codegen: Remove redundant sourcemap buffer shrinks (#28893) (Dunqing)\n- bee25de regular_expression: Check only the latest group per name in duplicate prescan (#29083) (Yuji Sugiura)\n- 4da1752 codegen: Use SWAR scanning and shared column tables (#28939) (Dunqing)\n- cc84126 mangler: Inline candidate checks during slot assignment (#28881) (Dunqing)\n- 6611cf9 parser: Specialize quoted string value access (#28965) (Boshen)\n- 5038ba6 parser: Avoid repeated await-using lookahead (#28960) (Boshen)\n- ecc807b parser: Skip discarded arrow diagnostics (#28940) (Bos\n…(truncated)"
+    },
+    {
+      "tag": "oxfmt_v0.78.0",
+      "name": "oxfmt v0.78.0",
+      "publishedAt": "2026-11-09T11:47:09Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxfmt_v0.78.0",
+      "prerelease": false,
+      "body": "### 🐛 Bug Fixes\n\n- ab78621 formatter_css/less: Print `~` escape consistently (#29089) (Yuji Sugiura)\n- 91721d2 formatter_css/less: Print Less % selectors (#29088) (Yuji Sugiura)\n- 449e91f oxfmt: Format ts-in-astro as TSX (#29080) (leaysgur)\n- 8d8845e formatter/jsdoc: Strip `*` prefixes from multiline default value (#28910) (leaysgur)\n- cdb1501 formatter/jsdoc: Handle every line terminator in multi-line JSDoc types (#28909) (leaysgur)\n- fd51bff jsdoc: Handle every line terminators as newline (#28902) (leaysgur)\n- 2f80765 formatter_toml: Format whitespace-only document to empty (#28899) (leaysgur)\n- 5e1e02c formatter_graphql: Allow empty document (#28898) (leaysgur)\n- 06e72c0 formatter/tailwind: Normalize CR in Tailwind template with `preserveWhitespace` (#28896) (leaysgur)\n\n### ⚡ Performance\n\n- 934ca98 formatter: Use `Arc` for tailwind options across embedding (#29079) (leaysgur)\n- dde9c5c formatter_htmlish: Skip `</script` escape if possible (#29078) (leaysgur)\n- dc4d918 formatter: Format embedded expr of one name without parsing (#29077) (leaysgur)\n\n### 📚 Documentation\n\n- eb2eb2d formatter_htmlish: Cover block elements in `DIVERGENCES.md#interpolation-element-as-text` (#28901) (leaysgur)\n- 0f4ec80 formatter/tailwind: Note Tailwind sorting tears escaped whitespace apart (#28900) (leaysgur)"
+    },
+    {
+      "tag": "oxlint_v1.93.0",
+      "name": "oxlint v1.93.0",
+      "publishedAt": "2026-11-09T11:47:15Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.93.0",
+      "prerelease": false,
+      "body": "### 🚀 Features\n\n- 6195265 linter/promise/prefer-catch: Implement suggestion (#28919) (Mikhail Baev)\n\n### 🐛 Bug Fixes\n\n- 866664e linter/unicorn/no-useless-undefined: Skip var initializers (#29007) (camc314)\n- 30603cb linter/react/exhaustive-deps: Preserve comments in dependency removals (#29047) (camc314)\n- 4630fe4 linter/unicorn/no-useless-undefined: Narrow return type exemptions (#29000) (camc314)\n- b63870a linter/vitest/expect-expect: Recognize benchmark fixtures (#29044) (camc314)\n- 9c62d2a linter/eslint/no-unreachable-loop: Ignore enclosing finalizers for continues (#29004) (camc314)\n- 6303df1 jsdoc: Preserve param tags after unmatched description delimiters (#28923) (Vishal Punjabi)\n- fe66fa7 linter/eslint/no-lone-blocks: Report redundant blocks in function bodies (#29043) (camc314)\n- e1694bd linter/unicorn/no-useless-undefined: Preserve shadowed bindings (#29046) (camc314)\n- 791b5f5 linter/unicorn/prefer-regexp-test: Restrict automatic argument swaps (#29045) (camc314)\n- e7654f6 linter/react/display-name: Ignore unrelated memo and forwardRef calls (#29005) (camc314)\n- 2487360 linter/unicorn/no-useless-undefined: Report guarded indexed access (#29014) (camc314)\n- a791a5b cfg: Resolve continues through stacked loop labels (#29016) (camc314)\n- 287ba19 linter/eslint/id-length: Ignore TypeScript qualified references (#29037) (camc314)\n- b71234f cfg: Skip labeled contexts for unlabeled jumps (#29001) (camc314)\n- bb21a3c linter/import/no-anonymous-default-export: Report parenthesized exports (#29002) (camc314)\n- f38f738 linter/eslint/prefer-destructuring: Skip fixes that remove comments (#29003) (camc314)\n- bf11006 linter/react/exhaustive-deps: Suggest dependency removals (#28925) (camc314)\n- 6bbb92a linter: Remove unused `oxlint-disable` directives with `--fix` (#27698) (Ryan Tsao)\n- 3b35cb6 linter/disable-directives: Preserve separators and disable spans (#28921) (camc314)\n- 1253445 linter/eslint/no-restricted-imports: Report re-exported imports once (#28920) (Ramy Akin Saidi)\n\n### ⚡ Performance\n\n- da620e6 linter: Start tsgolint before the regular lint pass (#28824) (Max Schwenk)"
+    }
+  ],
+  "prs": [
+    {"number":29077,"title":"perf(formatter): format embedded expr of one name without parsing","hint":"unknown","release":"📦 oxlint_v1.93.0","brief":true},
+    {
+      "number": 28894,
+      "title": "fix(transformer): preserve static private brands with shadowed class names",
+      "url": "https://github.com/oxc-project/oxc/pull/28894",
+      "author": "Dunqing",
+      "mergedAt": "2026-11-09T01:19:41Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Static private accesses can fail when a method parameter or local shadows the class name, because the emitted brand check resolves to that binding. Use a per-evaluation lexical alias so classes retained from different loop iterations keep their own private brands.\n\nFor example, targeting ES2020:\n\n```js\nconst classes = [];\nfor (let i = 0; i < 2; i++) {\n  class C {\n    static #m() { return 42; }\n    static has(C = this) { return #m in C; }\n    static read(C = this) { return C.#m(); }\n  }\n  classes.push(C);\n}\n\nfor (const C of classes) console.log(C.has(), C.read());\n// true 42\n// true 42\nconsole.log(classes[0].has(classes[1])); // false\n```\n\nDeclare the alias before computed keys and initialize it before user code in the first retained static block, or immediately after the class when static blocks are lowered. This allows checks during class evaluation without a temporal dead zone. Reparent functions extracted from computed keys to the enclosing scope.\n\nBabel renames shadowing bindings instead, so generated output differs while the tested runtime behavior matches native JavaScript.\n\nFixes #27376. Supersedes #27529, building on @anzal1's original work and static-shadow fixture.\n\nAI assistance: implementation, investigation, and validation were assisted by Codex.",
+      "files": [
+        "crates/oxc_transformer/src/es2022/class_properties/class.rs (+55 -0)",
+        "crates/oxc_transformer/src/es2022/class_properties/class_bindings.rs (+18 -2)",
+        "tasks/coverage/snapshots/semantic_misc.snap (+0 -21)",
+        "tasks/transform_conformance/snapshots/babel_exec.snap.md (+1 -20)",
+        "tasks/transform_conformance/snapshots/oxc.snap.md (+2 -2)",
+        "tasks/transform_conformance/snapshots/oxc_exec.snap.md (+1 -1)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-class-properties/test/fixtures/oxc/static-private-shadow-computed-key/exec.js (+23 -0)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-class-properties/test/fixtures/oxc/static-private-shadow-computed-key/input.js (+5 -0)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-class-properties/test/fixtures/oxc/static-private-shadow-computed-key/options.json (+9 -0)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-class-properties/test/fixtures/oxc/static-private-shadow-computed-key/output.js (+9 -0)"
+      ],
+      "filesTotal": 22
+    },
+    {"number":29078,"title":"perf(formatter_htmlish): skip `</script` escape if possible","hint":"unknown","release":"📦 oxlint_v1.93.0","brief":true},
+    {"number":29079,"title":"perf(formatter): use `Arc` for tailwind options across embedding","hint":"unknown","release":"📦 oxlint_v1.93.0","brief":true},
+    {
+      "number": 29080,
+      "title": "fix(oxfmt): format ts-in-astro as TSX",
+      "url": "https://github.com/oxc-project/oxc/pull/29080",
+      "author": "leaysgur",
+      "mergedAt": "2026-11-09T02:45:33Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Fixes #29060.",
+      "files": [
+        "apps/oxfmt/src-js/libs/prettier-plugin-oxfmt/text-to-doc.ts (+3 -2)",
+        "apps/oxfmt/conformance/fixtures/astro/generic-arrow-trailing-comma.astro (+9 -0)",
+        "apps/oxfmt/conformance/fixtures/astro/generic-arrow-trailing-comma.astro.snap.md (+31 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28923,
+      "title": "fix(jsdoc): preserve param tags after unmatched description delimiters",
+      "url": "https://github.com/oxc-project/oxc/pull/28923",
+      "author": "vshalpnjabi",
+      "mergedAt": "2026-11-09T03:19:10Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "## Summary\n\n`jsdoc/require-param` reported a documented parameter as missing when the JSDoc description contained an unmatched `{` or backtick. The tokenizer stayed inside that delimiter and swallowed the following `@param`.\n\nReset curly-brace depth and inline (1–2) backtick spans on line terminators, matching parentheses and square brackets. Fenced code (3+ backticks) still spans lines. Balanced braces, balanced code spans, extra `}`, and `{@link}` are unchanged. A truly missing `@param` still reports.\n\n## Test plan\n\n- [x] Issue fixtures: unmatched `{`, unmatched backtick — fail on main, pass after\n- [x] Balanced `{ a }`, `` `{ a }` ``, extra `}` stay clean\n- [x] Control: documented `p` plus undocumented `q` still reports `q`\n- [x] `just test -p oxc_linter`\n- [x] `just lint -p oxc_linter` / `just lint -p oxc_jsdoc`\n- [x] oxlint CLI repro with the issue config\n\n## AI assistance\n\nDrafted with AI assistance. The human opening this PR is responsible for reviewing, testing, and owning the change.\n\nFixes #28859.",
+      "files": [
+        "crates/oxc_jsdoc/src/parser/parse.rs (+34 -20)",
+        "crates/oxc_linter/src/rules/jsdoc/require_param.rs (+31 -0)",
+        "crates/oxc_linter/src/snapshots/jsdoc_require_param.snap (+9 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":28939,"title":"perf(codegen): use SWAR scanning and shared column tables","hint":"unknown","release":"📦 oxlint_v1.93.0","brief":true},
+    {"number":29083,"title":"perf(regular_expression): check only the latest group per name in duplicate prescan","hint":"unknown","release":"📦 oxlint_v1.93.0","brief":true},
+    {
+      "number": 29004,
+      "title": "fix(linter/eslint/no-unreachable-loop): ignore enclosing finalizers for continues",
+      "url": "https://github.com/oxc-project/oxc/pull/29004",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T04:58:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "A `continue` inside a loop nested in `try` or `catch` stays within that protected region. Ignore the enclosing finalizer when checking whether the jump can reach another iteration, while retaining checks for finalizers inside the loop.\n\nAdds regressions for each loop form, labeled continues, and enclosing finalizers that complete normally or return.\n\nFixes #28948",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unreachable_loop.rs (+33 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":28893,"title":"perf(codegen): remove redundant sourcemap buffer shrinks","hint":"unknown","release":"📦 oxlint_v1.93.0","brief":true},
+    {"number":29085,"title":"test(formatter_htmlish/vue): pin more cases from prettier bug issues","hint":"other","release":"📦 oxlint_v1.93.0","brief":true},
+    {
+      "number": 29040,
+      "title": "fix(isolated-declarations): preserve computed ambient enum members",
+      "url": "https://github.com/oxc-project/oxc/pull/29040",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T07:51:34Z",
+      "labels": [
+        "A-isolated-declarations"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Preserve missing initializers in non-const `declare enum` declarations so computed members remain computed in the emitted declarations. Explicit constant expressions still fold, and const and runtime enums still auto-increment.\n\nIncludes regression coverage matching TypeScript declaration output.\n\nFixes #28983",
+      "files": [
+        "crates/oxc_isolated_declarations/src/enum.rs (+2 -0)",
+        "crates/oxc_isolated_declarations/tests/fixtures/ambient-enum-members.ts (+4 -0)",
+        "crates/oxc_isolated_declarations/tests/snapshots/ambient-enum-members.snap (+30 -0)",
+        "crates/oxc_isolated_declarations/tests/snapshots/export-declare-declarations.snap (+3 -3)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 29038,
+      "title": "fix(isolated-declarations): infer auto-accessor initializer types",
+      "url": "https://github.com/oxc-project/oxc/pull/29038",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T07:56:34Z",
+      "labels": [
+        "A-isolated-declarations"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Infer auto-accessor types from their initializers when no explicit annotation is present, using the same inference as mutable class properties. Preserve private accessor handling and report TS9012 for missing or uninferable initializers.\n\nRegression coverage includes literal widening, static/protected members, explicit annotations, private members, and inference failures.\n\nFixes #28966",
+      "files": [
+        "crates/oxc_isolated_declarations/src/class.rs (+16 -4)",
+        "crates/oxc_isolated_declarations/tests/fixtures/auto-accessor-inference.ts (+18 -0)",
+        "crates/oxc_isolated_declarations/tests/snapshots/auto-accessor-inference.snap (+46 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 28997,
+      "title": "fix(isolated-declarations): evaluate enum template literal initializers",
+      "url": "https://github.com/oxc-project/oxc/pull/28997",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T08:00:34Z",
+      "labels": [
+        "A-transformer",
+        "A-isolated-declarations"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Evaluate cooked template segments and constant substitutions when emitting enum declarations. For example, `${Prefix}:click` now preserves the prefix, and `line1\\nline2` emits a newline rather than a literal backslash escape. Unevaluable substitutions follow the existing runtime-initializer handling, including TS2474 for const enums.\n\nFixes #28973",
+      "files": [
+        "crates/oxc_isolated_declarations/src/enum.rs (+8 -2)",
+        "crates/oxc_isolated_declarations/tests/fixtures/enum-template-literal.ts (+22 -0)",
+        "crates/oxc_isolated_declarations/tests/snapshots/enum-template-literal.snap (+42 -0)",
+        "napi/transform/test/id.test.ts (+16 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 29012,
+      "title": "fix(minifier): preserve throwing ArrayBuffer and URI calls",
+      "url": "https://github.com/oxc-project/oxc/pull/29012",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T08:06:33Z",
+      "labels": [
+        "A-minifier",
+        "A-ecmascript"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Keep unused `new ArrayBuffer(...)` calls unless the length is statically valid and no options are supplied, including before normalization adds pure annotations. Preserve URI calls on potentially malformed inputs while retaining constant folding for valid inputs.\n\nFixes #28974.",
+      "files": [
+        "crates/oxc_ecmascript/src/side_effects/expressions.rs (+20 -5)",
+        "crates/oxc_ecmascript/src/side_effects/known_globals.rs (+33 -0)",
+        "crates/oxc_ecmascript/src/side_effects/mod.rs (+2 -1)",
+        "crates/oxc_minifier/src/peephole/normalize.rs (+9 -2)",
+        "crates/oxc_minifier/docs/ASSUMPTIONS.md (+2 -0)",
+        "crates/oxc_minifier/tests/ecmascript/may_have_side_effects.rs (+35 -0)",
+        "crates/oxc_minifier/tests/peephole/normalize.rs (+41 -0)",
+        "napi/minify/test/throwing-builtins.test.ts (+30 -0)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 28999,
+      "title": "fix(transformer/typescript): merge exported enums across namespace blocks",
+      "url": "https://github.com/oxc-project/oxc/pull/28999",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T08:38:34Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Reuse an exported enum’s existing namespace object when lowering each declaration, preserving earlier members and object identity across namespace blocks.\n\nAdds runtime coverage for nested namespaces, private enum isolation, and enum optimization options.\n\nFixes #28944.",
+      "files": [
+        "crates/oxc_transformer/src/typescript/enum.rs (+45 -26)",
+        "crates/oxc_transformer/src/typescript/mod.rs (+2 -2)",
+        "crates/oxc_transformer/src/typescript/namespace.rs (+14 -8)",
+        "tasks/coverage/snapshots/semantic_typescript.snap (+2 -2)",
+        "tasks/transform_conformance/overrides/babel-plugin-transform-typescript/test/fixtures/namespace/nested-enum-after-namespace/output.mjs (+12 -0)",
+        "tasks/transform_conformance/overrides/babel-plugin-transform-typescript/test/fixtures/namespace/nested-namespace/output.mjs (+8 -0)",
+        "tasks/transform_conformance/overrides/babel-plugin-transform-typescript/test/fixtures/namespace/nested/output.mjs (+37 -0)",
+        "tasks/transform_conformance/overrides/babel-plugin-transform-typescript/test/fixtures/namespace/same-name/output.mjs (+1 -1)",
+        "tasks/transform_conformance/snapshots/oxc.snap.md (+2 -2)",
+        "tasks/transform_conformance/snapshots/oxc_exec.snap.md (+1 -1)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 29039,
+      "title": "fix(isolated-declarations): preserve object accessor mutability",
+      "url": "https://github.com/oxc-project/oxc/pull/29039",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T08:42:34Z",
+      "labels": [
+        "A-isolated-declarations"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Fixes #28985\n\nGetter-only object properties now emit `readonly`, while properties with setters remain writable even under `as const`. Accessor pairing uses JavaScript property names, so differently spelled keys such as `value` and `\"value\"` produce one writable property.\n\nRegression snapshots cover accessor order, equivalent keys, and const assertions. Output mutability matches TypeScript 5.9 declaration emit.",
+      "files": [
+        "crates/oxc_isolated_declarations/src/class.rs (+38 -8)",
+        "crates/oxc_isolated_declarations/src/types.rs (+11 -5)",
+        "crates/oxc_isolated_declarations/tests/fixtures/object-accessor-readonly.ts (+60 -0)",
+        "crates/oxc_isolated_declarations/tests/snapshots/object-accessor-readonly.snap (+127 -0)",
+        "crates/oxc_isolated_declarations/tests/snapshots/object.snap (+1 -1)"
+      ],
+      "filesTotal": 5
+    },
+    {"number":29074,"title":"docs(traverse): clarify ancestor access during traversal","hint":"other","release":"📦 oxlint_v1.93.0","brief":true},
+    {"number":29075,"title":"docs(syntax): correct crate capabilities and module records","hint":"other","release":"📦 oxlint_v1.93.0","brief":true},
+    {
+      "number": 29044,
+      "title": "fix(linter/vitest/expect-expect): recognize benchmark fixtures",
+      "url": "https://github.com/oxc-project/oxc/pull/29044",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T09:10:46Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Recognize calls to Vitest 5's `bench` test-context fixture as satisfying `expect-expect`, including destructured aliases, context access, and `bench.compare()`.\n\nMatch the callback's binding by symbol so unrelated or shadowed `bench` calls still report. Exclude parameterized callbacks, where the first argument is table data. Add regression coverage for both accepted benchmarks and missing assertions.\n\nFixes #28908",
+      "files": [
+        "crates/oxc_linter/src/rules/shared/jest_vitest/expect_expect.rs (+97 -11)",
+        "crates/oxc_linter/src/rules/vitest/expect_expect.rs (+19 -1)",
+        "crates/oxc_linter/src/snapshots/vitest_expect_expect.snap (+35 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 29000,
+      "title": "fix(linter/unicorn/no-useless-undefined): narrow return type exemptions",
+      "url": "https://github.com/oxc-project/oxc/pull/29000",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T09:17:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Match Unicorn's return-type exemptions: report `return undefined` for `void` and `undefined` return types, and check initializers and defaults regardless of the enclosing return type. Keep annotated concise arrow bodies and other annotated returns exempt.\n\nPreserve TypeScript parameter optionality when removing defaults. Withhold fixes for unannotated TypeScript parameters, parameter properties, TypeScript destructuring defaults, and `var` initializers to preserve types and binding resets; keep reporting them. Exclude `using` declarations, whose initializers are required. Regression coverage includes defaults before required parameters and JavaScript fixes.\n\nFixes #28979",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_useless_undefined.rs (+371 -62)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 29088,
+      "title": "fix(formatter_css/less): print Less % selectors",
+      "url": "https://github.com/oxc-project/oxc/pull/29088",
+      "author": "leaysgur",
+      "mergedAt": "2026-11-09T09:29:05Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "- bump oxc-css-parser 0.0.21\n  - Thanks @guru-irl !\n- print newly added AST `LessPercentage`",
+      "files": [
+        "Cargo.lock (+2 -2)",
+        "Cargo.toml (+1 -1)",
+        "crates/oxc_formatter_css/src/print/selector.rs (+3 -2)",
+        "crates/oxc_formatter_css/tests/fixtures/format/less/percentage-selector.less (+11 -0)",
+        "crates/oxc_formatter_css/tests/fixtures/format/less/percentage-selector.less.snap (+94 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 29089,
+      "title": "fix(formatter_css/less): print `~` escape consistently",
+      "url": "https://github.com/oxc-project/oxc/pull/29089",
+      "author": "leaysgur",
+      "mergedAt": "2026-11-09T09:29:30Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Always hug it.",
+      "files": [
+        "Cargo.lock (+2 -2)",
+        "Cargo.toml (+1 -1)",
+        "crates/oxc_formatter_css/src/print/at_rule.rs (+7 -6)",
+        "crates/oxc_formatter_css/src/print/selector.rs (+5 -5)",
+        "crates/oxc_formatter_css/src/print/value.rs (+30 -10)",
+        "crates/oxc_formatter_css/DIVERGENCES.md (+39 -0)",
+        "crates/oxc_formatter_css/tests/fixtures/format/less/escaped-string.less (+19 -0)",
+        "crates/oxc_formatter_css/tests/fixtures/format/less/escaped-string.less.snap (+76 -0)",
+        "crates/oxc_formatter_css/tests/fixtures/format/less/percentage-selector.less (+11 -0)",
+        "crates/oxc_formatter_css/tests/fixtures/format/less/percentage-selector.less.snap (+94 -0)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 29047,
+      "title": "fix(linter/react/exhaustive-deps): preserve comments in dependency removals",
+      "url": "https://github.com/oxc-project/oxc/pull/29047",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T10:10:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Dependency-removal suggestions preserve the original array comments and layout, including comments inside parenthesized dependencies. Invalid entries are removed together without overlapping edits, while respecting inline suppressions. Diagnostics also name the full dependency expression and identify `ref.current` as mutable.\n\nCompletes the remaining source-preservation work after #28925.\n\nFixes #28884",
+      "files": [
+        "crates/oxc_linter/src/rules/react/exhaustive_deps.rs (+122 -29)",
+        "crates/oxc_linter/src/snapshots/react_exhaustive_deps.snap (+29 -29)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":29092,"title":"docs(oxc-types): correct TypeScript spelling in README","hint":"other","release":"📦 oxlint_v1.93.0","brief":true},
+    {"number":29093,"title":"docs(tasks/transform_conformance): correct filter example","hint":"other","release":"📦 oxlint_v1.93.0","brief":true},
+    {
+      "number": 29007,
+      "title": "fix(linter/unicorn/no-useless-undefined): skip var initializers",
+      "url": "https://github.com/oxc-project/oxc/pull/29007",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T10:59:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "📦 oxlint_v1.93.0",
+      "body": "Do not report `var` initializers: they can reset an existing binding, including on each loop iteration. This matches eslint-plugin-unicorn 79 and avoids recommending removal of a meaningful assignment.\n\nFixes #28978",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_useless_undefined.rs (+7 -12)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 28877,
+      "title": "fix(linter/unicorn/prefer-negative-index): avoid panic on non-ASCII whitespace",
+      "url": "https://github.com/oxc-project/oxc/pull/28877",
+      "author": "magurotuna",
+      "mergedAt": "2026-11-09T11:19:30Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`unicorn/prefer-negative-index` panics if a non-ASCII whitespace character directly follows `.length`. The panic also happens without `--fix`. With Oxlint 1.91.0:\n\n```sh\nprintf 'foo.slice(foo.length\\xc2\\xa0- 1);\\n' > a.js  # U+00A0 after `length`\noxlint -A all -D unicorn/prefer-negative-index a.js\n```\n\n```\nthread '<unnamed>' panicked at crates/oxc_span/src/span.rs:483:21:\nend byte index 21 is not a char boundary; it is inside '\\u{a0}' (bytes 20..22 of string)\n```\n\nThe fix sliced the source text at `member_expr_span.end + 1` to check for a space after `.length`. If the next character is multi-byte, such as U+00A0 or U+2028, this offset is inside that character.\n\nThis PR checks the text after `.length` with `starts_with(' ')` instead. The fix output does not change.\n\n---\n\nI used AI assistance (Claude Code) to find this bug and write this change. I reviewed the code and ran the tests.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_negative_index.rs (+10 -7)",
+        "crates/oxc_linter/src/snapshots/unicorn_prefer_negative_index.snap (+14 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":28747,"title":"perf(oxlint): build diagnostic output while linting runs","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29101,
+      "title": "fix(linter/eslint/arrow-body-style): converge fixes for wrapped object returns",
+      "url": "https://github.com/oxc-project/oxc/pull/29101",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T11:58:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "With `as-needed` and `requireReturnForObjectLiteral: true`, a TypeScript-wrapped object return could alternate between concise and block bodies on every autofix run. A parenthesized plain-object return could cycle too.\n\nUse the same parentheses-only classification in both directions. This matches ESLint: `satisfies`, `as`, non-null assertions, and type assertions allow concise bodies, while plain objects still require explicit returns. Add regression coverage for both body forms, nested wrappers, and preserved fixes.\n\nFixes #29099",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/arrow_body_style.rs (+130 -5)",
+        "crates/oxc_linter/src/snapshots/eslint_arrow_body_style@ts.snap (+67 -4)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29111,
+      "title": "fix(parser): require `declare` before `abstract` modifiers",
+      "url": "https://github.com/oxc-project/oxc/pull/29111",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T12:08:36Z",
+      "labels": [
+        "A-parser"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Reject `abstract declare` with TS1029 while preserving `declare abstract`, matching microsoft/TypeScript#65360. This applies to exported and unexported classes in `.ts` and `.d.ts` files, and to abstract properties.",
+      "files": [
+        "crates/oxc_parser/src/modifiers.rs (+5 -3)",
+        "tasks/coverage/misc/fail/abstract-declare-property-order.ts (+3 -0)",
+        "tasks/coverage/snapshots/lexer_misc.snap (+2 -2)",
+        "tasks/coverage/snapshots/parser_misc.snap (+9 -1)",
+        "tasks/coverage/snapshots/parser_typescript.snap (+16 -3)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 29115,
+      "title": "fix(parser): reject exponentiation operands hidden by assertions",
+      "url": "https://github.com/oxc-project/oxc/pull/29115",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T13:32:35Z",
+      "labels": [
+        "A-parser"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Reject `-x as number ** 2`, `-x satisfies number ** 2`, and equivalent wrapped `await` and angle-bracket assertions, matching [TypeScript #65323](https://github.com/microsoft/TypeScript/pull/65323). Parentheses and update expressions remain valid, including when parentheses are omitted from the AST.\n\nAlso preserve right-associative `**` binding across assertions and recognize the upstream fixture’s `erasableSyntaxOnly` baseline variants. Regression coverage checks assertion chains, operand spans, and valid boundaries.",
+      "files": [
+        "crates/oxc_parser/src/js/expression.rs (+21 -13)",
+        "crates/oxc_parser/src/lib.rs (+36 -0)",
+        "tasks/coverage/misc/fail/asserted-unary-exponentiation-right-operand.ts (+5 -0)",
+        "tasks/coverage/misc/pass/parenthesized-exponentiation-left-operands.ts (+10 -0)",
+        "tasks/coverage/snapshots/codegen_typescript.snap (+2 -2)",
+        "tasks/coverage/snapshots/formatter_typescript.snap (+2 -2)",
+        "tasks/coverage/snapshots/lexer_misc.snap (+2 -2)",
+        "tasks/coverage/snapshots/parser_misc.snap (+9 -1)",
+        "tasks/coverage/snapshots/parser_typescript.snap (+300 -86)",
+        "tasks/coverage/snapshots/semantic_typescript.snap (+2 -139)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 29117,
+      "title": "fix(parser): highlight invalid numeric separators",
+      "url": "https://github.com/oxc-project/oxc/pull/29117",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T13:52:36Z",
+      "labels": [
+        "A-parser",
+        "A-lexer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Malformed literals such as `10_;`, `0b00_;`, `0o00_;`, and `0x00_n;` currently blame the character after the underscore. Highlight the offending underscore with “Numeric separators must appear between digits” and guidance to remove it or place it between two digits.\n\nParsing and recovery remain unchanged. Keep `oxc_lexer`’s diagnostic bridge in sync with the parser. Existing conformance fixtures cover the regressions; 93 parser diagnostics change with no change to parser pass/fail counts or lexer differential snapshots.",
+      "files": [
+        "crates/oxc_lexer/src/diagnostics.rs (+36 -10)",
+        "crates/oxc_parser/src/diagnostics.rs (+6 -0)",
+        "crates/oxc_parser/src/lexer/numeric.rs (+8 -2)",
+        "tasks/coverage/snapshots/parser_babel.snap (+268 -207)",
+        "tasks/coverage/snapshots/parser_test262.snap (+88 -71)",
+        "tasks/coverage/snapshots/parser_typescript.snap (+16 -16)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 29118,
+      "title": "feat(linter/jsdoc/require-param-description): implement suggestion",
+      "url": "https://github.com/oxc-project/oxc/pull/29118",
+      "author": "baevm",
+      "mergedAt": "2026-11-09T14:04:16Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "this PR implements suggestion for `jsdoc/require-param-description` rule, using the same logic as the suggestion in the `jsdoc/require-param-type` rule.\n\nissue #1170",
+      "files": [
+        "crates/oxc_linter/src/rules/jsdoc/require_param_description.rs (+64 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 28762,
+      "title": "feat(linter/eslint/no-unused-vars): suggest removing unused type parameters",
+      "url": "https://github.com/oxc-project/oxc/pull/28762",
+      "author": "YanYunCY",
+      "mergedAt": "2026-11-09T14:07:12Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Part of #16832. Follow-up to #28730, which renamed unused type parameters to `_T`; per @camc314's review there, this removes them instead.\n\n## What\n\nUnused type parameters now get a dangerous suggestion (respecting `fix.variables`) that removes them:\n\n```ts\ntype Foo<T> = {};                    // -> type Foo = {};\nfunction foo<T, U>(u: U) {}          // -> function foo<U>(u: U) {}\nfunction foo<T, U>(t: T) {}          // -> function foo<T>(t: T) {}\ntype Foo<T, U,> = T;                 // -> type Foo<T,> = T;\n```\n\nWhen the last parameter goes, the whole `<...>` list is removed.\n\nNo fix is offered for:\n- type parameters of interfaces and classes, since those can merge with other declarations that must declare identical type parameters;\n- `infer` type parameters in conditional types, which can't simply be dropped.\n\nIt's marked dangerous because call sites or references that pass explicit type arguments (`foo<string, number>()`) will no longer match the new arity.\n\n## Tests\n\nNew `test_type_parameter_remove_fix` in `tests/oxc.rs`. `cargo test -p oxc_linter --lib` (1292 passed), `cargo clippy -p oxc_linter --all-targets -- -D warnings` and `cargo fmt` pass locally; CI also ran on my fork.\n\nAI disclosure: this PR was written with AI assistance (code and description); I reviewed and tested it.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/fixers/fix_type_params.rs (+82 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/fixers/mod.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/mod.rs (+6 -1)",
+        "crates/oxc_linter/src/rules/eslint/no_unused_vars/tests/oxc.rs (+135 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 29113,
+      "title": "fix(transformer): lower wrapped assignments and preserve computed receivers",
+      "url": "https://github.com/oxc-project/oxc/pull/29113",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T14:19:58Z",
+      "labels": [
+        "A-transformer"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Normalize TypeScript-wrapped assignment targets before the parent expression reaches the JavaScript transforms. Previously, `(value as number) ||= 1` and `(value as number) **= 2` could retain unsupported operators in ES2015 output because target erasure happened after lowering inspected the assignment. Reuse the existing erasure path to preserve reference IDs and the lowerers' read/write bookkeeping.\n\nCapture computed member receivers before evaluating nonliteral keys. This preserves the original object when key evaluation reassigns the receiver, including through `eval` or an imported live binding. Add static regressions for those cases alongside the wrapper matrix and update the affected expected outputs. The upstream `compoundAssignmentWithTypeOnlyExpressions.ts` transformer mismatch now passes.",
+      "files": [
+        "crates/oxc_transformer/src/es2016/exponentiation_operator.rs (+19 -20)",
+        "crates/oxc_transformer/src/typescript/annotations.rs (+11 -3)",
+        "tasks/coverage/snapshots/transformer_typescript.snap (+1 -3)",
+        "tasks/transform_conformance/snapshots/oxc.snap.md (+1 -1)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-exponentiation-operator/test/fixtures/assign-to-member-expression/output.js (+17 -11)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-exponentiation-operator/test/fixtures/assign-used-result/output.js (+3 -3)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-exponentiation-operator/test/fixtures/oxc/typescript-assignment-targets/input.ts (+83 -0)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-exponentiation-operator/test/fixtures/oxc/typescript-assignment-targets/options.json (+6 -0)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-exponentiation-operator/test/fixtures/oxc/typescript-assignment-targets/output.js (+91 -0)",
+        "tasks/transform_conformance/tests/babel-plugin-transform-logical-assignment-operators/test/fixtures/oxc/typescript-assignment-targets/input.ts (+123 -0)"
+      ],
+      "filesTotal": 12
+    },
+    {"number":29103,"title":"refactor(lexer): add `#[cpu_version(Generic)]` attr to generic functions","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29104,"title":"refactor(simd): move CPU detection into separate module","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29105,"title":"refactor(simd): shorten code","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29106,"title":"refactor(simd): re-order `cfg` terms for consistency","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29107,"title":"refactor(simd, lexer): replace `to_dyn` function with `DynCpu::from` method","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29108,"title":"refactor(simd): clarify `prefetch` implementation","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29119,
+      "title": "fix(linter/eslint/no-restricted-imports): report invalid regex configuration",
+      "url": "https://github.com/oxc-project/oxc/pull/29119",
+      "author": "camc314",
+      "mergedAt": "2026-11-09T14:36:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Propagate pattern deserialization errors instead of silently dropping restrictions. Unsupported lookaheads, including the reported `^(?!snappyjs/)[^./][^/]*/.+$`, now produce a configuration error with the existing Rust regex engine.\n\nAdd regression coverage for invalid and supported expressions in `regex`, `importNamePattern`, and `allowImportNamePattern`, both configuration forms, and existing case-sensitivity behavior.\n\nFixes #29097",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_restricted_imports.rs (+74 -27)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":29120,"title":"docs(estree): correct serialization capabilities","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28861,
+      "title": "fix(linter/eslint/no-use-before-defne): fix numerous failing cases",
+      "url": "https://github.com/oxc-project/oxc/pull/28861",
+      "author": "camchenry",
+      "mergedAt": "2026-11-09T14:46:08Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- fixes https://github.com/oxc-project/oxc/issues/28841\n- fixes https://github.com/oxc-project/oxc/issues/19504\n\nthe tests for this rule were completely ignored and hiding 44 failing test cases. this surfaced a few issues:\n\n- handle checking if a symbol is in a different \"execution context\" or the same one and apply this to the \"is outer class\"/\"is outer enum\"/\"is outer variable\" checks\n- handle class initializers / fields correctly\n- remove one test that relied on ES5 behavior and wasn't actually passing upstream anyway\n\nused AI to help research upstream implementation and draft code for this change.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_use_before_define.rs (+89 -17)",
+        "crates/oxc_linter/src/snapshots/eslint_no_use_before_define.snap (+1922 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":29121,"title":"docs(parser): clarify syntax support and AST preservation","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29122,"title":"docs(linter): move rule creation guidance into crate AGENTS.md","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29125,"title":"docs(isolated-declarations): add agent guide","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29129,"title":"docs(agents): shorten verification guidance","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29130,"title":"fix(data_structures): fix `assert_unchecked!` macro","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29135,"title":"fix(linter/eslint/no-useless-assignment): handle instance field captures","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29136,"title":"fix(linter/prefer-mock-return-shorthand): avoid mock return shorthand for mutations","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29137,
+      "title": "feat(react-compiler): support logical assignment operators",
+      "url": "https://github.com/oxc-project/oxc/pull/29137",
+      "author": "anonrig",
+      "mergedAt": "2026-11-09T18:33:36Z",
+      "labels": [
+        "A-react-compiler"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "**Why:** `??=`, `||=`, and `&&=` were a lowering Todo, so React Compiler skipped any component or hook that used one. Upstream `babel-plugin-react-compiler` still reports the Todo. Two upstream PRs that add support (react/react#36394, react/react#36733) were closed as stale, not rejected.\n\n**What:**\n\n- `a ??= b` lowers as `a ?? (a = b)` (likewise `||=` and `&&=`) with the value blocks of `LogicalExpression` lowering. The right side and the store only evaluate when the assignment is taken.\n- The object and computed key of a member target, including identifier operands, are snapshotted before the property load so a getter cannot retarget the conditional store.\n- Logical assignment to a `const` binding is a Todo (not a Syntax error). Emitting the store would rewrite `const` to `let` and swallow the runtime TypeError when the store is taken.\n- `ref.current ??=` is treated as the same lazy initialization as `if (ref.current == null)`. A later read of `ref.current` during render is still reported. `||=` is not given that allowance.\n- Fixtures: the two from react/react#36733, plus context/value-block, reference capture, const bailout, and ref lazy-init cases.\n\n**Upstream divergence:** intentional. Marked with an \"Unlike the TS implementation\" comment. Upstream still Todos the operator and skips the function; the stale upstream PRs were not rejected. Identifier operands are also snapshotted (those PRs left plain identifiers unbound, which re-reads the binding after a getter).",
+      "files": [
+        "crates/oxc_react_compiler/src/diagnostics.rs (+16 -13)",
+        "crates/oxc_react_compiler/src/react_compiler_lowering/build_hir.rs (+247 -32)",
+        "crates/oxc_react_compiler/src/react_compiler_lowering/find_context_identifiers.rs (+35 -1)",
+        "crates/oxc_react_compiler/src/react_compiler_validation/validate_no_ref_access_in_render.rs (+74 -0)",
+        "crates/oxc_react_compiler/fixtures/allow-ref-lazy-initialization-logical-assignment.js (+21 -0)",
+        "crates/oxc_react_compiler/fixtures/error.invalid-ref-logical-or-assignment-in-render.js (+10 -0)",
+        "crates/oxc_react_compiler/fixtures/error.todo-logical-assignment-const-taken.js (+18 -0)",
+        "crates/oxc_react_compiler/fixtures/error.todo-logical-assignment-const.js (+32 -0)",
+        "crates/oxc_react_compiler/fixtures/error.todo-logical-assignment-to-const.js (+21 -0)",
+        "crates/oxc_react_compiler/fixtures/logical-assignment-captured-key.js (+28 -0)"
+      ],
+      "filesTotal": 28
+    },
+    {
+      "number": 29131,
+      "title": "feat(data_structures): add `unreachable_unchecked!` macro",
+      "url": "https://github.com/oxc-project/oxc/pull/29131",
+      "author": "overlookmotel",
+      "mergedAt": "2026-11-09T22:23:38Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Add an `unreachable_unchecked!` macro to `oxc_data_structures` crate.\n\nSimilar to `assert_unchecked!`, it's an unchecked assertion (undefined behavior if it is in fact reachable) in release builds, and a normal assertion in debug builds (panics if reached).\n\nUnlike Rust's native `std::hint::unreachable_unchecked`, in debug builds it panics, rather than aborts, so the panic can be caught e.g. in conformance tests.",
+      "files": [
+        "crates/oxc_data_structures/src/assert_unchecked.rs (+174 -41)",
+        "crates/oxc_data_structures/README.md (+1 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":29132,"title":"refactor(simd): clarify conversion from `Cpu` types to `DynCpu`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29133,"title":"docs(simd): use consistent formatting for bullet points in doc comments","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29134,"title":"refactor(allocator): use `unreachable_unchecked!` macro","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29087,"title":"refactor(ecmascript): centralize argument-dependent builtin purity","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29166,"title":"chore(ci): remove code coverage reporting","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 28091,
+      "title": "feat(linter): mark oxc rules as recommended",
+      "url": "https://github.com/oxc-project/oxc/pull/28091",
+      "author": "camchenry",
+      "mergedAt": "2026-11-10T04:32:18Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "These are my initial thoughts on recommended rules for the `oxc` plugin. Mostly correctness with a few suspicious rules.",
+      "files": [
+        "crates/oxc_linter/src/rules/oxc/bad_array_method_on_arguments.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/bad_char_at_comparison.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/bad_comparison_sequence.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/bad_match_all_arg.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/bad_min_max_func.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/bad_object_literal_comparison.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/bad_replace_all_arg.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/const_comparisons.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/double_comparisons.rs (+1 -0)",
+        "crates/oxc_linter/src/rules/oxc/erasing_op.rs (+1 -0)"
+      ],
+      "filesTotal": 16
+    },
+    {"number":29156,"title":"fix(formatter_htmlish/vue): preserve `v-for` alias holding `in|of`","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29159,"title":"fix(formatter_htmlish): keep empty comment only element as-is","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29170,"title":"fix(formatter_markdown): keep whitespace as written only between two CJ characters","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29169,"title":"perf(parser): reduce arena list reallocations","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29177,"title":"chore(benchmark): remove synthetic whitespace benchmarks","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29171,"title":"fix(formatter_htmlish): keep whitespace as written only between two CJ characters","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29185,"title":"perf(parser): buffer remaining parser lists","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29168,"title":"perf(parser): skip unused identifier hashes","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29188,"title":"perf(parser): collect short declaration lists before allocating","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29195,"title":"fix(parser): preserve type-only flags on re-exported imports","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29197,"title":"perf(parser): collect short TypeScript type lists","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29174,"title":"fix(linter/vitest/require-awaited-expect-poll): avoid duplicated reports","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29157,"title":"refactor(transformer): share class AST builders","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29141,"title":"chore(oxlint): remove redundant build script comments","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29158,"title":"refactor(transformer): centralize class transform ownership","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29212,"title":"refactor(lexer): replace Arena with reusable caller-owned Tokens","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29175,"title":"docs(oxlint): remove experimental label from `typeCheck`","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29160,"title":"refactor(transformer): encapsulate instance initializer insertion","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29179,"title":"refactor(transformer): share contextual class name inference","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29182,"title":"fix(transformer): isolate logical assignment temporaries in parameters","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29221,"title":"fix(linter/vitest/prefer-snapshot-hint): recognize conditional test scopes","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29218,"title":"fix(transformer/optional-chaining): preserve parenthesized chain boundaries","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":28996,"title":"fix(isolated-declarations): retain types used by exported ambient variables","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29018,"title":"fix(react-compiler): avoid invariants for catch phis and ref-free callbacks","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29213,"title":"perf(parser): omit discarded recovered parentheses","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29232,"title":"refactor(oxfmt): convert build script to TypeScript","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29226,"title":"docs(lexer): add comments","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29227,"title":"refactor(lexer): move `resolve_unicode_leads` into `pipeline`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29228,"title":"refactor(lexer): move `Lexer` into its own module","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29229,"title":"refactor(lexer): rename `disambiguate`'s `Tokens` to `TokensView`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29230,"title":"refactor(lexer): replace `token_view` function with `TokensView::new` method","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29231,"title":"docs(lexer): correct safety comment on `TokensView::new`","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29234,"title":"fix(parser): preserve re-exported default import names in raw transfer","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29239,"title":"test(lexer): irregular whitespace tests test both SIMD and generic implementations","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29240,"title":"test(lexer): `lex_with_cpu` take unpadded source text","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29241,"title":"test(lexer): all tests use `DynCpu` provided by `#[test_cpus]` macro","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29242,"title":"test(lexer): scope `#[expect]` to where it is needed","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29243,"title":"fix(linter/vitest/no-standalone-expect): support Vitest `.extend` test functions","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29244,"title":"docs(simd): improve comment","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29251,"title":"test(lexer): prevent usage of `DynCpu::detect` in tests","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29223,
+      "title": "feat(skills): add the oxc-playground-url skill",
+      "url": "https://github.com/oxc-project/oxc/pull/29223",
+      "author": "Dunqing",
+      "mergedAt": "2026-11-11T00:42:35Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Building or checking a playground.oxc.rs share link is manual today: the URL packs the source, tab, options, lint rules, and formatter panels into query parameters. This adds a repository skill that does both directions so a reproduction can be shared and inspected consistently.\n\nThe encoder re-parses its own output before printing, so a malformed link is rejected instead of shared. The decoder preserves the state and writes the source only when asked, into a directory that must not exist yet. Both scripts resolve paths relative to the skill, so they work from any checkout.\n\nVerified with `npx oxfmt --check`, Oxlint, `typos`, and an encode/decode round-trip of a transformer example. The encoder rejects malformed option JSON and the decoder reproduces the source byte for byte.\n\nAI assistance was used to implement and verify this change.",
+      "files": [
+        ".agents/skills/oxc-playground-url/scripts/decode.mjs (+90 -0)",
+        ".agents/skills/oxc-playground-url/scripts/encode.mjs (+137 -0)",
+        ".agents/skills/oxc-playground-url/SKILL.md (+33 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":29224,"title":"docs(transformer): require reproductions in fix PR descriptions","hint":"other","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "oxc-guard[bot]": 3,
+      "renovate[bot]": 4
+    }
+  }
+}

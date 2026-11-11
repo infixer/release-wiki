@@ -1,0 +1,53 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-11-11T01:17:33Z",
+  "range": {
+    "from": "2026-11-06T22:03:26Z",
+    "to": "2026-11-11T01:17:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 13201,
+      "title": "Remove elements when cloning into selectedcontent",
+      "url": "https://github.com/whatwg/html/pull/13201",
+      "author": "annevk",
+      "mergedAt": "2026-11-09T09:49:04Z",
+      "labels": [
+        "topic: select"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "When cloning an option into a selectedcontent element, remove script, SVG script, frame, iframe, embed, and object elements from the copy, including those in shadow trees.\n\nTests: https://github.com/web-platform-tests/wpt/pull/64813\n\n- [x] At least two implementers are interested (and none opposed):\n   * WebKit\n   * Chromium\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/64813\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: https://issues.chromium.org/issues/582927057\n   * Gecko: https://bugzilla.mozilla.org/show_bug.cgi?id=2090868\n   * WebKit: https://bugs.webkit.org/show_bug.cgi?id=330330\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs: not needed\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A\n- [x] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13201/form-elements.html\" title=\"Last updated on Nov 9, 2026, 9:51 AM UTC (e68fe70)\">/form-elements.html</a>  ( <a href=\"https://whatpr.org/html/13201/5955a33...e68fe70/form-elements.h\n…(truncated)",
+      "files": [
+        "source (+9 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13216,
+      "title": "Handle a null custom element registry when upgrading an element",
+      "url": "https://github.com/whatwg/html/pull/13216",
+      "author": "annevk",
+      "mergedAt": "2026-11-09T15:17:50Z",
+      "labels": [
+        "topic: custom elements"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "An element can be adopted into another document after its upgrade reaction is enqueued and before that reaction runs. Adoption changes the element's custom element registry, possibly to null, and \"upgrade an element\" then set the active custom element constructor map entry to null, which the HTML element constructor did not account for.\n\nRemove the entry instead, so that the HTML element constructor falls back to the current global object's associated Document's custom element registry. Adoption into a document with another global custom element registry still makes the upgrade fail.\n\nTests: https://github.com/web-platform-tests/wpt/pull/64915\n\n- [x] At least two implementers are interested (and none opposed):\n   * WebKit\n   * Chromium\n   * Gecko presumably, as this matches them\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/64915\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: Captcha :-(\n   * Gecko: N/A\n   * WebKit: https://bugs.webkit.org/show_bug.cgi?id=330622\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs: n/a\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: n/a\n- [x] The top of this comment includes a [clear commit message](https://g\n…(truncated)",
+      "files": [
+        "source (+6 -2)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

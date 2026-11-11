@@ -1,0 +1,796 @@
+{
+  "kind": "repo",
+  "repo": "openai/codex",
+  "branch": "main",
+  "collectedAt": "2026-11-11T01:17:33Z",
+  "range": {
+    "from": "2026-11-09T00:20:20Z",
+    "to": "2026-11-11T01:17:33Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "rust-v0.167.1",
+      "publishedAt": "2026-11-10T21:32:01Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.1"
+    },
+    "prerelease": {
+      "tag": "rust-v0.169.0-alpha.9",
+      "publishedAt": "2026-11-10T22:09:09Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.169.0-alpha.9"
+    }
+  },
+  "releasesInRange": [
+    {
+      "tag": "rust-v0.167.0-alpha.2",
+      "name": "0.167.0-alpha.2",
+      "publishedAt": "2026-11-01T19:00:13Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.0-alpha.3",
+      "name": "0.167.0-alpha.3",
+      "publishedAt": "2026-11-01T22:26:17Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.0-alpha.4",
+      "name": "0.167.0-alpha.4",
+      "publishedAt": "2026-11-03T02:24:00Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.4",
+      "prerelease": true
+    },
+    {
+      "tag": "libcap-v2.75",
+      "name": "libcap 2.75 source archive",
+      "publishedAt": "2026-11-03T23:04:31Z",
+      "url": "https://github.com/openai/codex/releases/tag/libcap-v2.75",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.168.0-alpha.1",
+      "name": "0.168.0-alpha.1",
+      "publishedAt": "2026-11-04T02:54:53Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.0-alpha.5",
+      "name": "0.167.0-alpha.5",
+      "publishedAt": "2026-11-04T18:09:02Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.5",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.0-alpha.3.1",
+      "name": "0.167.0-alpha.3.1",
+      "publishedAt": "2026-11-04T19:05:21Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.3.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.168.0-alpha.2",
+      "name": "0.168.0-alpha.2",
+      "publishedAt": "2026-11-04T20:47:50Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.168.0-alpha.3",
+      "name": "0.168.0-alpha.3",
+      "publishedAt": "2026-11-05T02:34:18Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.0-alpha.3.2",
+      "name": "0.167.0-alpha.3.2",
+      "publishedAt": "2026-11-05T13:16:05Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.3.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.168.0-alpha.6",
+      "name": "0.168.0-alpha.6",
+      "publishedAt": "2026-11-05T19:52:28Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.6",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.168.0-alpha.7",
+      "name": "0.168.0-alpha.7",
+      "publishedAt": "2026-11-05T22:55:03Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.7",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.0",
+      "name": "0.167.0",
+      "publishedAt": "2026-11-06T01:40:00Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0",
+      "prerelease": false,
+      "body": "## New Features\n\n- Open the agent command center with `codex agents --no-daemon`. The command center and session picker now mark unread results (#58238, #58239, #58263, #58264).\n- Switch between connected backends from the terminal session picker and keep your drafts when switching (#58280, #58457).\n- Preview local image attachments while composing on supported terminals, and open viewed local images from clickable transcript paths (#58261, #58446).\n- Find API key and cloud provider options under “Sign in another way.” Enable `gcp_setup_wizard` to set up Google Cloud Vertex AI with Application Default Credentials or a credential file (#57857, #58427).\n- Opt into macOS or Windows system proxy settings from `/experimental` (#58157).\n- Expand patch details directly in the transcript while an approval prompt is open (#58281).\n\n## Bug Fixes\n\n- Saved chats stay visible after you switch model providers. If a chat can’t resume, you can read its transcript and prepare an editable prompt to continue in a new chat (#58202).\n- `Ctrl+L` clears the terminal display while keeping earlier messages available through `Ctrl+T` (#58266).\n- Deleting text that exposes a leading `!` keeps an ordinary draft in chat mode (#58412).\n- Network approval prompts close when their requests end. Concurrent requests to the same endpoint prompt one at a time (#58350, #58351).\n- Long realtime V3 conversations save completed speech to chat history as the transcript grows (#58221).\n- Automatic context compaction now accounts for retained output from failed responses and responses with missing token usage data (#58404).\n\n## Documentation\n\n- The app-server README covers managed network constraints under `[permissions.network]` and `prompt-user` command rules that require fresh human approval (#58045, #58182).\n- The `openai-docs` skill recommends the documented replacement when migrating away from a deprecated model (#58134).\n\n## Chores\n\n- DotSlash manifests now reference the Cargo packages shipped with the release (#58717, #58757).\n- Linux musl builds use fewer allocator arenas to reduce idle memory after conversations unload (#58399).\n\n## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.166.0...rust-v0.167.0\n\n- #57848 Add bounded Code Mode output collection and rendering @seanh-oai\n- #57850 Wire bounded output collection into the code mode runtime @seanh-oai\n- #57855 Load TUI plugin mentions from installed plugins @zamoshchin-openai\n- #57857 Add Google Cloud Vertex AI setup to TUI onboarding @alexsong-oai\n- #57859 Extend the provider OAuth sign-in timeout to ten minutes @smurching-oai\n- #57861 Skip resource template discovery for hosted Apps @khong-oai\n- #57862 Keep resume picker pagination moving across backends @bc-openai\n- #57864 Allow upstream interruption when canceling Responses Lite turns @liame-oai\n- #57866 Retry transient environment startup failures on the next turn @pansul47-oai\n- #57870 Enable server-side output truncation for Code Mode sessions @\n…(truncated)"
+    },
+    {
+      "tag": "rust-v0.169.0-alpha.2",
+      "name": "0.169.0-alpha.2",
+      "publishedAt": "2026-11-06T22:13:30Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.169.0-alpha.2",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.169.0-alpha.3",
+      "name": "0.169.0-alpha.3",
+      "publishedAt": "2026-11-07T19:31:41Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.169.0-alpha.3",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.169.0-alpha.6",
+      "name": "0.169.0-alpha.6",
+      "publishedAt": "2026-11-09T19:25:26Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.169.0-alpha.6",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.169.0-alpha.7",
+      "name": "0.169.0-alpha.7",
+      "publishedAt": "2026-11-09T21:55:10Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.169.0-alpha.7",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.0-alpha.4.1",
+      "name": "0.167.0-alpha.4.1",
+      "publishedAt": "2026-11-09T23:45:38Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.0-alpha.4.1",
+      "prerelease": true
+    },
+    {
+      "tag": "rust-v0.167.1",
+      "name": "0.167.1",
+      "publishedAt": "2026-11-10T21:32:01Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.167.1",
+      "prerelease": false,
+      "body": "## Changelog\n\nFull Changelog: https://github.com/openai/codex/compare/rust-v0.167.0...rust-v0.167.1"
+    },
+    {
+      "tag": "rust-v0.169.0-alpha.9",
+      "name": "0.169.0-alpha.9",
+      "publishedAt": "2026-11-10T22:09:09Z",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.169.0-alpha.9",
+      "prerelease": true
+    }
+  ],
+  "prs": [
+    {
+      "number": 60319,
+      "title": "Improve side-chat discovery and navigation in the TUI",
+      "url": "https://github.com/openai/codex/pull/60319",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T01:53:16Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Improve side-chat discovery and navigation in the TUI\n\n## What changed\n\n- Show latest user-prompt previews beneath saved side-chat titles, fetching previews only for visible entries when the chooser refreshes.\n- Keep cached chats available during discovery, show loading and refresh status, and offer an inline retry action on failure.\n- Preserve the selected chat across list updates and prevent asynchronous changes or held activation keys from opening an unintended entry. Account for preview rows in paging and mouse selection.\n- Explain that side chats become available after the first main-chat message, and let `Ctrl+C` dismiss the chooser while preserving the main draft.\n- Separate tabs with noninteractive gaps and improve hover styling for tabs, overflow arrows, and the add button.\n\n## Testing\n\nExtend integration tests and snapshots for discovery failures and retries, refreshed prompt previews, activation guards, variable-height paging, draft preservation, and tab hover states across light, dark, and fallback colors.",
+      "files": [
+        "codex-rs/tui/src/app.rs (+2 -1)",
+        "codex-rs/tui/src/app/event_dispatch.rs (+15 -10)",
+        "codex-rs/tui/src/app/owned_transcript.rs (+21 -17)",
+        "codex-rs/tui/src/app/side_focus.rs (+99 -42)",
+        "codex-rs/tui/src/app/sidebar.rs (+95 -6)",
+        "codex-rs/tui/src/app/sidebar_close.rs (+1 -1)",
+        "codex-rs/tui/src/app/snapshots/codex_tui__app__tests__saved_chat_discovery_states.snap (+86 -0)",
+        "codex-rs/tui/src/app/tests.rs (+236 -42)",
+        "codex-rs/tui/src/app_event.rs (+7 -1)",
+        "codex-rs/tui/src/app_server_session/side_chat_history.rs (+80 -25)"
+      ],
+      "filesTotal": 22
+    },
+    {
+      "number": 60320,
+      "title": "Include older itemless Cloud failures in full transcripts",
+      "url": "https://github.com/openai/codex/pull/60320",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T01:54:19Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Include older itemless Cloud failures in full transcripts\n\n## Why\n\nFailed Cloud turns can contain an error without any items. Loading history through item pages alone can omit these older failures from the full transcript.\n\n## What changed\n\n- Add a `FullTranscript` hydration scope that fetches remaining Cloud turn metadata in pages of 100 after loading items.\n- Deduplicate overlapping turn pages while preserving chronological order and already loaded items.\n- Use the new scope for session transcripts while retaining `Complete` hydration for exports.\n\n## Testing\n\nAdd a regression test covering older itemless failures, overlapping turn pages, repeated pagination cursors, transcript ordering, and item-only exports.",
+      "files": [
+        "codex-rs/tui/src/app_server_session/history.rs (+30 -2)",
+        "codex-rs/tui/src/thread_transcript.rs (+1 -1)",
+        "codex-rs/tui/src/app/tests/history_hydration_tests.rs (+121 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 60327,
+      "title": "Suppress stale cloud stream disconnects after reopening a thread",
+      "url": "https://github.com/openai/codex/pull/60327",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T02:32:17Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Suppress stale cloud stream disconnects after reopening a thread\n\n## Why\n\nA queued cloud stream disconnect can outlive a successful reopen of the same conversation, causing an obsolete reconnect error to reach the TUI.\n\n## What changed\n\nRepresent cloud reply stream losses with `AppServerEvent::ThreadStreamDisconnected` and filter queued losses superseded by a successful attachment to the same thread. Preserve losses for other threads and any newer disconnects; failed reopen attempts do not supersede pending losses.\n\nContinue displaying current stream disconnects through the TUI's error notification handler.\n\n## Testing\n\nAdd regression coverage for successful and failed reopens, disconnect ordering across threads, and TUI handling of disconnect events from the active and foreign backends.",
+      "files": [
+        "codex-rs/app-server-client/src/cloud.rs (+62 -1)",
+        "codex-rs/app-server-client/src/cloud_backend/connection_tests.rs (+47 -4)",
+        "codex-rs/app-server-client/src/cloud_backend/mod.rs (+24 -15)",
+        "codex-rs/app-server-client/src/lib.rs (+8 -2)",
+        "codex-rs/tui/src/app/app_server_events.rs (+7 -0)",
+        "codex-rs/tui/src/dynamic_tools_tests.rs (+1 -0)",
+        "codex-rs/tui/src/onboarding/onboarding_screen.rs (+2 -1)",
+        "codex-rs/tui/src/app/tests/backend_event_tests.rs (+23 -2)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 60335,
+      "title": "Avoid duplicate assistant messages when resuming Cloud threads",
+      "url": "https://github.com/openai/codex/pull/60335",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T03:01:27Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Avoid duplicate assistant messages when resuming Cloud threads\n\n## Why\n\nAfter Cloud thread history is replayed in the TUI, notifications for the same completed assistant items can render their text again.\n\n## What changed\n\nTrack completed assistant items rendered from Cloud history by turn and item ID, and ignore subsequent starts, text deltas, and completions for those items. Apply this tracking when resuming threads and replaying thread snapshots, while allowing unfinished items and new turns to continue streaming.\n\n## Testing\n\nExtend the Cloud resume picker test to cover repeated notifications for completed messages, continued streaming in an active turn, and responses in a later turn. Retain coverage for queued user message reconciliation without resubmission.",
+      "files": [
+        "codex-rs/tui/src/app/thread_routing.rs (+10 -4)",
+        "codex-rs/tui/src/chatwidget/protocol.rs (+7 -1)",
+        "codex-rs/tui/src/chatwidget/replay.rs (+16 -1)",
+        "codex-rs/tui/src/chatwidget/streaming.rs (+10 -0)",
+        "codex-rs/tui/src/chatwidget/transcript.rs (+11 -0)",
+        "codex-rs/tui/src/app/tests/session_lifecycle_requests.rs (+108 -15)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 60342,
+      "title": "Treat goal objectives as untrusted context",
+      "url": "https://github.com/openai/codex/pull/60342",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T03:58:32Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Treat goal objectives as untrusted context\n\n## What changed\n\n- Pass goal objectives as untrusted `goal_objective` context instead of embedding them in continuation instructions. Direct the model to use `get_goal` if the objective is missing or truncated.\n- Inject newly created objectives into their originating active turn without dropping unrelated client context. Render them as tool outputs when `UntrustedAsToolOutput` is enabled.\n- Queue additional context together with automatic turn input so both reach the first model request.\n\n## Testing\n\nExtend app-server coverage to verify that model-written objectives appear as tool outputs at creation and continuation, without duplicating them in user messages. Update steering and Python SDK tests to check objective preservation and delivery alongside continuation instructions.",
+      "files": [
+        "codex-rs/core/src/codex_thread.rs (+7 -0)",
+        "codex-rs/core/src/session/turn_input.rs (+62 -15)",
+        "codex-rs/core/src/state/additional_context.rs (+12 -1)",
+        "codex-rs/ext/goal/src/extension.rs (+2 -2)",
+        "codex-rs/ext/goal/src/runtime.rs (+6 -10)",
+        "codex-rs/ext/goal/src/steering.rs (+16 -5)",
+        "codex-rs/ext/goal/src/tool.rs (+29 -11)",
+        "codex-rs/app-server/tests/suite/v2/snapshots/all__suite__v2__thread_resume__model_written_goal_as_untrusted_tool_output.snap (+10 -0)",
+        "codex-rs/app-server/tests/suite/v2/thread_resume.rs (+30 -0)",
+        "codex-rs/ext/goal/templates/goals/continuation.md (+1 -5)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 60389,
+      "title": "Include Codex Apps configuration in cloud prewarm requests",
+      "url": "https://github.com/openai/codex/pull/60389",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T12:53:30Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Include Codex Apps configuration in cloud prewarm requests\n\n## What changed\n\nSet `plugins_mcp.product_sku` to `\"codex\"` in cloud thread prewarm requests for both default environments and selected projects.\n\n## Testing\n\nUpdate request payload assertions to verify the Codex plugins configuration alongside managed environment defaults, model overrides, and deferred project readiness.",
+      "files": [
+        "codex-rs/cloud-client/src/client_tests.rs (+21 -5)",
+        "codex-rs/cloud-client/src/prewarm.rs (+10 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 60390,
+      "title": "Allow deferring plain-text MCP output in thread item listings",
+      "url": "https://github.com/openai/codex/pull/60390",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T12:54:43Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Allow deferring plain-text MCP output in thread item listings\n\n## What changed\n\nAdd experimental `deferOutput.mcpToolCall` support to `thread/items/list` requests scoped to a `turnId`. Successful, completed MCP calls with nonempty, unannotated plain-text results can return empty `result.content` with `outputDeferred: true`. Clients can retrieve the saved output through `thread/items/read`; connector identity remains on the listed item.\n\nKeep rich results, JSON or fenced text, app UI results, and built-in `codex_app` results inline. Preserve plain-text output when creating bounded previews of oversized MCP results so those previews remain eligible for deferral. Reads return the saved preview when output exceeds the 64 KiB history limit.\n\n## Testing\n\nExtend thread history integration coverage for independent and combined command/MCP deferral, experimental capability gating, excluded result types, connector identity, oversized previews, and retrieval of deferred items.",
+      "files": [
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-experimental.json.zst (+0 -0)",
+        "codex-rs/app-server-protocol/src/protocol/v2/thread.rs (+5 -1)",
+        "codex-rs/app-server/src/request_processors/thread_processor.rs (+56 -14)",
+        "codex-rs/protocol/src/mcp.rs (+15 -0)",
+        "codex-rs/utils/output-truncation/src/lib.rs (+22 -1)",
+        "codex-rs/app-server/README.md (+17 -7)",
+        "codex-rs/app-server/tests/suite/v2/thread_read.rs (+192 -41)"
+      ],
+      "filesTotal": 7
+    },
+    {"number":60391,"title":"Simplify Guardian's post-denial approval guidance","hint":"other","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {
+      "number": 60414,
+      "title": "Enable model catalog discovery with gateway OAuth",
+      "url": "https://github.com/openai/codex/pull/60414",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T16:37:56Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Enable model catalog discovery with gateway OAuth\n\n## Why\n\nCustom providers with gateway OAuth and an explicit model catalog should be able to discover models without an API key or API key model discovery enabled.\n\n## What changed\n\n- Enable catalog refreshes for custom gateway providers when `model_catalog_url` and `base_url` have the same origin.\n- Reuse gateway credentials without starting an interactive login during catalog refreshes.\n- Keep an unrelated saved API key from making gateway catalog discovery depend on the API key discovery setting.\n\n## Testing\n\nAdd an app-server test for discovering a gateway catalog after OAuth login with no API key. Update coverage for catalog invalidation after gateway credentials require login, including across manager restarts, with API key discovery disabled.",
+      "files": [
+        "codex-rs/model-provider/src/gateway_auth.rs (+9 -0)",
+        "codex-rs/model-provider/src/models_endpoint.rs (+36 -1)",
+        "codex-rs/model-provider/src/shared_state_tests.rs (+10 -9)",
+        "codex-rs/models-manager/src/manager.rs (+16 -5)",
+        "codex-rs/app-server/tests/suite/v2/gateway_oauth_tests.rs (+71 -12)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 60416,
+      "title": "Keep fitting URLs intact in fullscreen Markdown transcripts",
+      "url": "https://github.com/openai/codex/pull/60416",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T16:58:40Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Keep fitting URLs intact in fullscreen Markdown transcripts\n\n## Why\n\nURLs in fullscreen Markdown transcripts could split across rows even when the full URL would fit on its own row.\n\n## What changed\n\nMark non-code Markdown lines containing URL-like text with the `UrlAware` wrap policy so transcript layout preserves fitting URLs on a single row.\n\n## Testing\n\nAdd a regression snapshot showing a documentation URL moving intact to the next row after introductory text. Update the conversation snapshot and copy-on-select test dimensions for the changed wrapping.",
+      "files": [
+        "codex-rs/tui/src/app/snapshots/codex_tui__app__owned_transcript__tests__conversation_in_offset_rect.snap (+3 -3)",
+        "codex-rs/tui/src/markdown_render.rs (+5 -0)",
+        "codex-rs/tui/src/transcript_view/copy_on_select_tests.rs (+1 -1)",
+        "codex-rs/tui/src/transcript_view/text_tests.rs (+23 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 60418,
+      "title": "Let terminal status become done while background terminals run",
+      "url": "https://github.com/openai/codex/pull/60418",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T16:59:41Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Let terminal status become done while background terminals run\n\n## Why\n\nBackground terminals kept the terminal program status at `Working` after a turn completed, preventing it from reporting `Done` or returning to `Idle` when acknowledged.\n\n## What changed\n\nStop treating running background processes as active work when computing terminal program status. Background terminals remain visible in the TUI while the status follows the turn lifecycle.\n\n## Testing\n\nUpdate the lifecycle regression test to complete a turn with a background terminal still running and assert the `Done` → `Idle` transition on acknowledgment.",
+      "files": [
+        "codex-rs/tui/src/chatwidget/status_surfaces.rs (+0 -1)",
+        "codex-rs/tui/src/chatwidget/tests/terminal_program_status.rs (+7 -13)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 60423,
+      "title": "Expose deferred MCP servers in resource listings",
+      "url": "https://github.com/openai/codex/pull/60423",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T17:58:53Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Expose deferred MCP servers in resource listings\n\n## Why\n\nAggregate resource listings omitted dormant MCP servers, leaving callers without their names for explicit queries.\n\n## What changed\n\nInclude a sorted `deferredServers` list in aggregate `list_mcp_resources` and `list_mcp_resource_templates` results alongside resources from ready servers. Apply the listing filters to deferred servers and omit the field when empty. Discovery leaves dormant servers unstarted; callers can query them by passing `server` explicitly.\n\n## Testing\n\nExtend the resource discovery scenario for direct calls and Code Mode to verify deferred server names, confirm discovery leaves the server unstarted, and then list and read resources by server name.",
+      "files": [
+        "codex-rs/codex-mcp/src/binding.rs (+4 -3)",
+        "codex-rs/codex-mcp/src/binding_clients.rs (+36 -7)",
+        "codex-rs/codex-mcp/src/binding_tests.rs (+4 -4)",
+        "codex-rs/codex-mcp/src/connection_manager/tool_catalog.rs (+10 -0)",
+        "codex-rs/codex-mcp/src/connection_manager_tests.rs (+6 -3)",
+        "codex-rs/codex-mcp/src/connection_pool_tests.rs (+4 -4)",
+        "codex-rs/codex-mcp/src/lib.rs (+1 -0)",
+        "codex-rs/core/src/tools/handlers/mcp_resource.rs (+13 -4)",
+        "codex-rs/core/src/tools/handlers/mcp_resource_tests.rs (+8 -2)",
+        "codex-rs/core/tests/suite/scenarios_mcp_resource_messages.rs (+66 -27)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 60432,
+      "title": "Upgrade bundled SQLite to 3.54 for WAL fixes",
+      "url": "https://github.com/openai/codex/pull/60432",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T19:26:51Z",
+      "hint": "fix",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Upgrade bundled SQLite to 3.54 for WAL fixes\n\n## Why\n\nSQLite 3.54 fixes `RUSTSEC-2026-0459` when opening a database with a WAL, while retaining the WAL-reset corruption fix.\n\n## What changed\n\n- Upgrade `libsqlite3-sys` to `0.39.1` and require SQLite 3.54 or newer with a compile-time assertion in `codex-state`.\n- Pin `sqlx-core` and `sqlx-sqlite` to the same upstream revision that supports the newer SQLite dependency, and allow that Git source in `cargo-deny`.\n- Refresh the Cargo and Bazel lockfiles.",
+      "files": [
+        "MODULE.bazel.lock (+8 -6)",
+        "codex-rs/Cargo.lock (+33 -37)",
+        "codex-rs/Cargo.toml (+6 -1)",
+        "codex-rs/deny.toml (+2 -0)",
+        "codex-rs/state/src/lib.rs (+3 -2)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 60433,
+      "title": "Bind API workload identity source reuse to session claims",
+      "url": "https://github.com/openai/codex/pull/60433",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T19:27:25Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Bind API workload identity source reuse to session claims\n\n## Why\n\nMatching API workload identity metadata alone can preserve a credential source across session-family or provider and mapping revision changes.\n\n## What changed\n\n- Compare API workload identity tokens using OAuth source claims so ordinary token refreshes preserve the source while session or identity changes retire it.\n- Include `wif_runtime_authorization_version`, `wif_provider_revision`, and `wif_mapping_revision` in source comparisons.\n- Reject API workload identity exchange tokens without parseable source claims and nonempty `iss` and `session_id` values. Evict rejected credentials so a subsequent resolve exchanges them again.\n\n## Testing\n\nAdd regression coverage for refresh continuity, session-family and revision changes, and rejection and re-exchange of tokens with missing, empty, or whitespace-only `session_id` values.",
+      "files": [
+        "codex-rs/login/src/auth/change_state_tests.rs (+66 -0)",
+        "codex-rs/login/src/auth/source.rs (+32 -25)",
+        "codex-rs/login/src/auth/workload_identity.rs (+11 -4)",
+        "codex-rs/login/src/auth/workload_identity_tests.rs (+90 -10)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 60434,
+      "title": "Reset app-server turn summaries when a turn starts",
+      "url": "https://github.com/openai/codex/pull/60434",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T19:29:07Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Reset app-server turn summaries when a turn starts\n\n## Why\n\nAn error recorded before a turn starts can cause a successful turn to be reported as failed.\n\n## What changed\n\nReset `TurnSummary` on `TurnStarted`, preserving the new turn's `started_at` timestamp while clearing accumulated errors, command start times, and the last agent message.\n\n## Testing\n\nExtend turn completion tests to cover clearing an error recorded before turn start and retaining an error recorded during the turn.",
+      "files": [
+        "codex-rs/app-server/src/bespoke_event_handling.rs (+23 -0)",
+        "codex-rs/app-server/src/thread_state.rs (+4 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 60435,
+      "title": "Dismiss the model switch prompt when account usage recovers",
+      "url": "https://github.com/openai/codex/pull/60435",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T19:37:41Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Dismiss the model switch prompt when account usage recovers\n\n## Why\n\nThe rate-limit model switch prompt can remain visible after account usage falls below the warning threshold.\n\n## What changed\n\nUse fresh account usage reads to clear pending prompts when all reported usage windows fall below 90%. If the prompt is already visible, replace it with a recovery notice that counts down for five seconds before dismissing. Users can also dismiss the notice with Enter or Esc.\n\nIgnore stale account reads when detecting recovery and preserve the recovery state when backend banners replace the prompt.\n\n## Testing\n\nAdd regression tests and a snapshot covering pending prompt cancellation, stale reads, the recovery notice countdown, automatic dismissal, and manual dismissal with Enter or Esc.",
+      "files": [
+        "codex-rs/tui/src/chatwidget.rs (+1 -0)",
+        "codex-rs/tui/src/chatwidget/backend_banners.rs (+4 -0)",
+        "codex-rs/tui/src/chatwidget/rate_limits.rs (+77 -20)",
+        "codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__rate_limit_switch_prompt_recovered.snap (+11 -0)",
+        "codex-rs/tui/src/chatwidget/usage_notice.rs (+1 -1)",
+        "codex-rs/tui/src/chatwidget/tests/status_and_layout.rs (+48 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 60436,
+      "title": "Revalidate request auth ownership after budget checks",
+      "url": "https://github.com/openai/codex/pull/60436",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T19:50:49Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Revalidate request auth ownership after budget checks\n\n## Why\n\nAccount changes during asynchronous request setup can invalidate the credentials selected for a generation request.\n\n## What changed\n\n- Restart HTTP request setup if the auth owner changes during the budget check.\n- Validate the WebSocket connection's retained auth owner with `AuthOwner::is_current()` after budget checks.\n\n## Testing\n\nAdd regression coverage for account switches during HTTP budget checks and external credential changes before WebSocket request setup, in both dual-header and assertion-only runtime auth modes.",
+      "files": [
+        "codex-rs/core/src/client.rs (+14 -1)",
+        "codex-rs/core/tests/suite/client_websockets_runtime_auth.rs (+103 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 60443,
+      "title": "Support cancellation and deadlines for realtime attachments",
+      "url": "https://github.com/openai/codex/pull/60443",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T20:25:15Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Support cancellation and deadlines for realtime attachments\n\n## Why\n\nA pending realtime connection handshake can hold up subsequent attachment requests. Callers need to cancel obsolete attempts or limit how long they may take to establish a connection.\n\n## What changed\n\n- Add `RealtimeAttachmentOptions` with an optional cancellation receiver and `start_before` deadline to `Op::RealtimeConversationAttach`.\n- Interrupt pending connection work and finish cleanup before acknowledging cancellation. Reject cancelled or expired requests before replacing an existing conversation, and recheck cancellation and the deadline before publishing a connection.\n- Preserve a successfully published connection when cancellation arrives later. Dropping a cancellation sender whose value is `false` lets the attempt continue.\n- Prepare the daemon startup test's socket directory with `codex_uds::prepare_private_socket_directory`.\n\n## Testing\n\nAdd integration coverage for cancelling a held handshake, skipping cancelled or expired queued requests, preserving the next usable call, and releasing a pending handshake when its deadline expires without a cancellation receiver.",
+      "files": [
+        "codex-rs/Cargo.lock (+1 -0)",
+        "codex-rs/cli/Cargo.toml (+1 -0)",
+        "codex-rs/core/src/realtime_conversation.rs (+122 -10)",
+        "codex-rs/core/src/realtime_conversation/existing_call.rs (+7 -2)",
+        "codex-rs/core/src/session/handlers.rs (+7 -2)",
+        "codex-rs/protocol/src/protocol.rs (+14 -0)",
+        "codex-rs/cli/tests/daemon_startup.rs (+2 -1)",
+        "codex-rs/core/tests/suite/realtime_attachment.rs (+170 -2)"
+      ],
+      "filesTotal": 8
+    },
+    {
+      "number": 60454,
+      "title": "Update OpenSSL Rust dependencies",
+      "url": "https://github.com/openai/codex/pull/60454",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T21:29:23Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Update OpenSSL Rust dependencies\n\n## What changed\n\nUpdate `openssl` from `0.10.75` to `0.10.82` and `openssl-sys` from\n`0.9.111` to `0.9.118` in `codex-rs/Cargo.lock` and `MODULE.bazel.lock`.",
+      "files": [
+        "MODULE.bazel.lock (+2 -2)",
+        "codex-rs/Cargo.lock (+4 -5)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 60455,
+      "title": "Prefer native clipboard images on macOS and honor image orientation",
+      "url": "https://github.com/openai/codex/pull/60455",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T21:30:39Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Prefer native clipboard images on macOS and honor image orientation\n\n## Why\n\nThe macOS clipboard reader requests TIFF even when PNG or JPEG data is available, causing clipboard owners to generate a large TIFF just for a paste. Pasted image files also need their orientation metadata applied before encoding attachments.\n\n## What changed\n\n- Read native macOS pasteboard representations before falling back to `arboard`, preferring PNG within each item while respecting item order and JPEG/TIFF ordering.\n- Keep copied image files ahead of clipboard previews and apply orientation metadata when decoding files and native PNG/JPEG data.\n- Share orientation-aware decoding with transcript thumbnails while preserving allocation limits.\n\n## Testing\n\nAdd tests for pasteboard item ordering, all EXIF orientations in PNG and JPEG images, and rejection of images exceeding the allocation budget.",
+      "files": [
+        "codex-rs/Cargo.lock (+1 -0)",
+        "codex-rs/tui/Cargo.toml (+3 -2)",
+        "codex-rs/tui/src/clipboard_paste.rs (+51 -53)",
+        "codex-rs/tui/src/clipboard_paste/macos.rs (+65 -0)",
+        "codex-rs/tui/src/clipboard_paste/macos_tests.rs (+50 -0)",
+        "codex-rs/tui/src/image_decode.rs (+31 -0)",
+        "codex-rs/tui/src/image_decode_tests.rs (+76 -0)",
+        "codex-rs/tui/src/lib.rs (+1 -0)",
+        "codex-rs/tui/src/transcript_image.rs (+2 -11)"
+      ],
+      "filesTotal": 9
+    },
+    {
+      "number": 60461,
+      "title": "Honor permission grant scopes in executor capability discovery",
+      "url": "https://github.com/openai/codex/pull/60461",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T22:20:40Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Honor permission grant scopes in executor capability discovery\n\n## Why\n\nApproved filesystem access should make executor skills discoverable and readable for the lifetime of the grant. Turn-scoped access must not authorize persistent plugin servers or hooks, or bypass disabled-plugin policy.\n\n## What changed\n\n- Apply environment-specific session grants to capability discovery and refresh MCP after session grants change.\n- Use a separate discovery inventory for skills with turn-scoped grants, keeping plugin servers and hooks on the session inventory. Reuse discovery results across unchanged model steps.\n- Preserve disabled-plugin checks for unreadable manifests and symlinked manifest files or directories, including ancestor markers, while retaining standalone skill roots.\n\n## Testing\n\nAdd coverage for V1 and V2 skill discovery before approval, after approval, and on the next turn; disabled-plugin ownership checks; discovery cache reuse; and session hooks surviving turn-scoped discovery failure.",
+      "files": [
+        "codex-rs/core-plugins/src/executor_provider.rs (+82 -35)",
+        "codex-rs/core-plugins/src/executor_provider_tests.rs (+49 -36)",
+        "codex-rs/core/src/mcp.rs (+4 -3)",
+        "codex-rs/core/src/session/mcp.rs (+57 -11)",
+        "codex-rs/core/src/session/mod.rs (+76 -29)",
+        "codex-rs/core/src/session/tests.rs (+1 -0)",
+        "codex-rs/core/src/state/service.rs (+15 -0)",
+        "codex-rs/ext/extension-api/src/contributors/mcp.rs (+15 -0)",
+        "codex-rs/ext/mcp/src/plugin.rs (+7 -2)",
+        "codex-rs/core/tests/common/exec_server.rs (+10 -2)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 60462,
+      "title": "Route TUI question answers through Cloud message admission",
+      "url": "https://github.com/openai/codex/pull/60462",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T22:21:50Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Route TUI question answers through Cloud message admission\n\n## What changed\n\nSubmit asynchronous question answers through Cloud's start-or-steer admission path when a turn is running, and use start-if-idle submission otherwise. Resolve the submission intent against the session mode so local and remote sessions retain their existing behavior.\n\nApply normal message admission handling to Cloud answers, clearing accepted replies and restoring rejected replies to the composer.\n\n## Testing\n\nAdd a regression test covering accepted and rejected Cloud question replies, including the submitted answer and client message ID, composer state, and absence of extra requests.",
+      "files": [
+        "codex-rs/tui/src/app/user_turn_submission.rs (+29 -3)",
+        "codex-rs/tui/src/app_command.rs (+2 -0)",
+        "codex-rs/tui/src/app_server_session/user_message_submission.rs (+1 -6)",
+        "codex-rs/tui/src/chatwidget/input_submission.rs (+7 -3)",
+        "codex-rs/tui/src/app/tests/session_lifecycle_requests.rs (+114 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 60466,
+      "title": "Keep thread storage available when diagnostic logs fail",
+      "url": "https://github.com/openai/codex/pull/60466",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-09T23:22:40Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Keep thread storage available when diagnostic logs fail\n\n## Why\n\nFailure to open the diagnostic logs database should not disable thread storage or database-only history listing. Thread deletion must still preserve saved conversations when diagnostic log cleanup cannot complete.\n\n## What changed\n\n- Allow state initialization to continue after non-corruption errors opening the logs database, while preserving corruption recovery.\n- Report the original diagnostic database error after tracing is installed in the TUI and app server, and return it from log operations.\n- Reject thread deletion before destructive cleanup when diagnostic storage failed to initialize.\n- Continue periodic cleanup of legacy logs when the current logs database is unavailable.\n\n## Testing\n\nExtend coverage for unavailable log directories, database-only history listing, startup diagnostics, deletion preserving saved conversations, corrupt log headers, and periodic legacy log cleanup during a diagnostic storage outage.",
+      "files": [
+        "codex-rs/app-server/src/lib.rs (+8 -0)",
+        "codex-rs/state/src/runtime.rs (+55 -25)",
+        "codex-rs/state/src/runtime/logs.rs (+7 -4)",
+        "codex-rs/state/src/runtime/logs_maintenance.rs (+4 -3)",
+        "codex-rs/state/src/runtime/logs_maintenance_tests.rs (+60 -45)",
+        "codex-rs/state/src/runtime/threads.rs (+3 -3)",
+        "codex-rs/state/src/sqlite_tests.rs (+8 -1)",
+        "codex-rs/thread-store/src/local/delete_thread.rs (+17 -0)",
+        "codex-rs/tui/src/startup_orchestration.rs (+7 -0)",
+        "codex-rs/app-server/tests/suite/v2/sqlite_recovery.rs (+77 -1)"
+      ],
+      "filesTotal": 11
+    },
+    {
+      "number": 60472,
+      "title": "Serialize default thread permissions as a permission profile",
+      "url": "https://github.com/openai/codex/pull/60472",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T00:07:07Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Serialize default thread permissions as a permission profile\n\n## What changed\n\nInitialize thread metadata's `sandbox_policy` with a serialized `PermissionProfile::read_only()`, matching the format used by turn contexts and session settings. Remove the legacy `SandboxPolicy` field from `ThreadMetadataBuilder` and redundant rollout metadata defaults.\n\n## Testing\n\nExtend thread-store tests to cover reading the default read-only permission profile from SQLite and accepting both string and serialized legacy `danger-full-access` policies.",
+      "files": [
+        "codex-rs/rollout/src/metadata.rs (+0 -4)",
+        "codex-rs/state/src/extract.rs (+2 -1)",
+        "codex-rs/state/src/model/thread_metadata.rs (+4 -7)",
+        "codex-rs/state/src/runtime/test_support.rs (+3 -3)",
+        "codex-rs/thread-store/src/local/read_thread.rs (+46 -31)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 60473,
+      "title": "Respect error retry policy during local compaction",
+      "url": "https://github.com/openai/codex/pull/60473",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T00:07:43Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Respect error retry policy during local compaction\n\n## Why\n\nLocal compaction retried invalid requests and server overload errors without retry advice, and used local backoff even when the server supplied `Retry-After`.\n\n## What changed\n\nUse `CodexErr::retry_delay` to decide whether and when to retry local compaction. Honor the original `Retry-After` deadline when present, while retaining the configured retry limit and context-window trimming behavior.\n\n## Testing\n\nAdd coverage verifying that manual local compaction does not retry invalid requests or overload responses without retry advice, but retries overload responses with `Retry-After`.",
+      "files": [
+        "codex-rs/core/src/compact.rs (+17 -33)",
+        "codex-rs/core/tests/suite/compact.rs (+31 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 60475,
+      "title": "Stop retrying explicit invalid-workspace errors",
+      "url": "https://github.com/openai/codex/pull/60475",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T00:08:28Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Stop retrying explicit invalid-workspace errors\n\n## Why\n\nHTTP 403 responses with `invalid_workspace_selected` were treated as unexpected status errors, allowing retries and compaction fallback to another model after the server rejected the selected workspace.\n\n## What changed\n\nRecognize the code in `detail.code` or `error.code`, falling back to the `x-error-json` header when the body has no code. Classify these 403 responses as `InvalidWorkspaceSelected` and disable retries and compaction model fallback while preserving the response details and HTTP status. Other 403 responses retain their existing retry behavior.\n\n## Testing\n\nAdd coverage for body and header error codes, code precedence, HTTP and WebSocket retry behavior, and local and remote compaction during a model downshift.",
+      "files": [
+        "codex-rs/codex-api/src/api_bridge.rs (+14 -2)",
+        "codex-rs/codex-api/src/api_bridge_tests.rs (+53 -0)",
+        "codex-rs/core/src/compact_model_fallback.rs (+1 -0)",
+        "codex-rs/protocol/src/error.rs (+11 -6)",
+        "codex-rs/core/tests/suite/compact.rs (+57 -0)",
+        "codex-rs/core/tests/suite/websocket_fallback.rs (+43 -0)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 60476,
+      "title": "Treat access program denials as terminal errors",
+      "url": "https://github.com/openai/codex/pull/60476",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T00:09:05Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Treat access program denials as terminal errors\n\n## What changed\n\nRecognize `access_program_not_enabled` in HTTP 403 responses and response stream errors as a dedicated, non-retryable error. Preserve HTTP diagnostic details and provider stream messages, with a default message when none is supplied.\n\nStop SSE streams immediately on this error and avoid triggering WebSocket fallback for explicit access program denials. Add a fixed diagnostic label for doctor output and telemetry.\n\n## Testing\n\nExtend coverage for HTTP and WebSocket denials, immediate SSE termination despite retry headers, and doctor diagnostic redaction.",
+      "files": [
+        "codex-rs/cli/src/doctor.rs (+5 -0)",
+        "codex-rs/codex-api/src/api_bridge.rs (+11 -0)",
+        "codex-rs/codex-api/src/error.rs (+11 -0)",
+        "codex-rs/codex-api/src/sse/responses.rs (+1 -0)",
+        "codex-rs/codex-api/src/sse/responses_error_tests.rs (+6 -0)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/metrics.rs (+1 -0)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/sampler/execution.rs (+1 -0)",
+        "codex-rs/protocol/src/error.rs (+15 -0)",
+        "codex-rs/response-debug-context/src/lib.rs (+1 -0)",
+        "codex-rs/core/tests/suite/websocket_fallback.rs (+3 -1)"
+      ],
+      "filesTotal": 10
+    },
+    {
+      "number": 60479,
+      "title": "Treat content policy violations as terminal errors",
+      "url": "https://github.com/openai/codex/pull/60479",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T00:53:34Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Treat content policy violations as terminal errors\n\n## What changed\n\nRecognize `content_policy_violation` in HTTP 400 responses and streamed errors as a dedicated, non-retryable error. Preserve the provider's message and available HTTP status, use a fallback message when needed, and report `CodexErrorInfo::InvalidPrompt` to clients.\n\nEnd the response stream immediately on this error and stop compaction from falling back to the current model after a content policy rejection. Add redacted diagnostic output and a dedicated sampler failure reason.\n\n## Testing\n\nExtend coverage for HTTP and wrapped WebSocket errors, missing or blank provider messages, terminal stream failures with retry headers, and content policy rejections during local and remote compaction on model downshift.",
+      "files": [
+        "codex-rs/cli/src/doctor.rs (+8 -0)",
+        "codex-rs/codex-api/src/api_bridge.rs (+4 -0)",
+        "codex-rs/codex-api/src/api_bridge_tests.rs (+5 -0)",
+        "codex-rs/codex-api/src/error.rs (+16 -0)",
+        "codex-rs/codex-api/src/sse/responses.rs (+1 -0)",
+        "codex-rs/codex-api/src/sse/responses_error_tests.rs (+2 -0)",
+        "codex-rs/core/src/compact_model_fallback.rs (+1 -0)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/metrics.rs (+1 -0)",
+        "codex-rs/ext/guardian-v2/src/async_scorer/sampler/execution.rs (+1 -0)",
+        "codex-rs/protocol/src/error.rs (+11 -2)"
+      ],
+      "filesTotal": 12
+    },
+    {
+      "number": 60480,
+      "title": "Treat workspace access denials as terminal errors",
+      "url": "https://github.com/openai/codex/pull/60480",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T00:54:59Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Treat workspace access denials as terminal errors\n\n## Why\n\nA `403` with `codex_workspace_access_denied` indicates that the account cannot use Codex in the selected workspace. Retrying or falling back to HTTP does not resolve that denial.\n\n## What changed\n\nMap `codex_workspace_access_denied` and `invalid_workspace_selected` responses to a shared workspace access denial error, and rename the error variant to reflect its broader scope. Keep workspace denials excluded from compaction model fallback.\n\n## Testing\n\nExtend API error mapping tests to cover the new code on `403` and preserve ordinary handling for `503`. Add WebSocket coverage verifying that an explicit workspace access denial does not trigger HTTP fallback.",
+      "files": [
+        "codex-rs/codex-api/src/api_bridge.rs (+4 -3)",
+        "codex-rs/codex-api/src/api_bridge_tests.rs (+4 -4)",
+        "codex-rs/core/src/compact_model_fallback.rs (+1 -1)",
+        "codex-rs/protocol/src/error.rs (+5 -5)",
+        "codex-rs/core/tests/suite/websocket_fallback.rs (+1 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 60481,
+      "title": "Treat invalid access program stream errors as terminal",
+      "url": "https://github.com/openai/codex/pull/60481",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T00:55:30Z",
+      "hint": "unknown",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Treat invalid access program stream errors as terminal\n\n## Why\n\nAn `invalid_access_program` or `unsupported_access_program` streaming error should end the stream immediately, even if a later `response.completed` event arrives or the error includes a retry header.\n\n## What changed\n\nMap both error codes to `ApiError::InvalidRequest` and stop processing the response stream on invalid requests. Preserve a nonblank provider message, falling back to an explanation that the requested access program cannot be used with the model.\n\n## Testing\n\nExtend the terminal-error test to cover both codes in `error` and `response.failed` events, verifying that retry headers are ignored and the stream ends before a later completion event.",
+      "files": [
+        "codex-rs/codex-api/src/error.rs (+16 -20)",
+        "codex-rs/codex-api/src/sse/responses.rs (+1 -0)",
+        "codex-rs/codex-api/src/sse/responses_error_tests.rs (+2 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":60482,"title":"Handle context length errors consistently across response transports","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60486,"title":"Add device authorization to app-server gateway OAuth","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60487,"title":"Enable untrusted context tool outputs by default","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60488,"title":"Remove the Xcode 26.4 MCP elicitation compatibility workaround","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {
+      "number": 60489,
+      "title": "Honor feature overrides when starting the app-server daemon",
+      "url": "https://github.com/openai/codex/pull/60489",
+      "author": "copyberry[bot]",
+      "mergedAt": "2026-11-10T01:31:52Z",
+      "hint": "feature",
+      "release": "📦 rust-v0.169.0-alpha.9",
+      "body": "Honor feature overrides when starting the app-server daemon\n\n## Why\n\n`codex app-server daemon start` ignored CLI feature overrides, while `restart` already parsed and applied them.\n\n## What changed\n\nParse and validate feature overrides for `start` using the same handling as `restart`, including `--enable`, `--disable`, and `-c features.<name>=<bool>`. Pass the overrides through to daemon startup so they are saved when launching a stopped daemon. Starting an already running daemon preserves its process and saved overrides.\n\n## Testing\n\nAdd coverage for applying overrides on a fresh start and preserving them on a subsequent `start`. Extend validation coverage to ensure both `start` and `restart` reject non-toggle feature keys without changing settings or the running process.",
+      "files": [
+        "codex-rs/app-server-daemon/src/lib.rs (+9 -5)",
+        "codex-rs/cli/src/main.rs (+12 -10)",
+        "codex-rs/cli/tests/app_server_daemon.rs (+52 -15)"
+      ],
+      "filesTotal": 3
+    },
+    {"number":60492,"title":"Add local-only Claude Code skill migration","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60496,"title":"Preserve typed gRPC code-mode session admission errors","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60498,"title":"Unify Guardian context preparation across reviewers","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60500,"title":"Derive sandbox telemetry labels directly from permission profiles","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60505,"title":"Trace MCP refresh causes and plugin metadata changes","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60506,"title":"Preserve MCP trace context when tracing is disabled","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60507,"title":"Use hermetic LLVM for Windows MSVC Bazel builds","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60511,"title":"Treat inference hook denials as terminal errors","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60513,"title":"Record an MCP refresh reason for session permission grants","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60517,"title":"Route sandbox CLI launches through the shared sandbox manager","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60519,"title":"Handle unfinished tool calls in restored history","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60522,"title":"Fragment large Responses WebSocket messages into bounded frames","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60523,"title":"Add policy-checked TCP upstream tunneling for SOCKS","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60524,"title":"Encapsulate thread metadata construction","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60525,"title":"Preserve first-party catalog display order in app-server model lists","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60526,"title":"Disable Daybreak when the selected model lacks access","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60528,"title":"Reuse installed Git objects when upgrading marketplaces","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60542,"title":"Add local diagnostic ZIP saves to the TUI","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60554,"title":"Add optional tool call summaries to the full-screen transcript","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60555,"title":"Extend output-free transcript summaries to more tools","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60556,"title":"Group consecutive tool calls in the full-screen conversation","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60557,"title":"Collapse completed turn activity beneath transcript prompts","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60558,"title":"Discard opening prompts when side chat creation fails","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60559,"title":"Preserve inherited previews for paginated thread forks","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60560,"title":"Avoid periodic wakeups in idle Windows file watchers","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60568,"title":"Add an OpenSSH ProxyCommand mode to `codex tcp-tunnel`","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60574,"title":"Allow searching persisted attached threads","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60578,"title":"Add published OAuth metadata discovery to the RMCP client","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60599,"title":"Keep the TUI responsive while opening saved side chats","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60613,"title":"Clarify safety recourse messaging and add a reporting option","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60617,"title":"Support incremental tool declarations on GCP","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60620,"title":"Allow sampling in-progress turns with `thread/sample`","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60622,"title":"Use app-server MCP configuration and startup events in the TUI","hint":"unknown","release":"📦 rust-v0.169.0-alpha.9","brief":true},
+    {"number":60624,"title":"Preserve script quotes in Windows sandbox cmd invocations","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60635,"title":"Support archiving and restoring cloud threads","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60637,"title":"Show pending key chords in a shared floating shortcut guide","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60638,"title":"Honor read-only MCP tool hints in automatic approval","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60639,"title":"Refresh Apps tools outside the MCP runtime gate","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60644,"title":"Keep interrupts responsive during host service-tier updates","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60645,"title":"Update the safety consent test for the current dialog","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":60646,"title":"Use trusted Guardian templates for managed policies","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60647,"title":"Restore PowerShell's working directory in the MXC sandbox","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60651,"title":"Enable model and reasoning effort selection for Cloud conversations","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60655,"title":"Support environment updates in app-server settings APIs","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60662,"title":"Support gateway device-code sign-in in headless TUI sessions","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60663,"title":"Defer exec-server sandbox preparation to the execution host","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60665,"title":"Add a content helper for forwarding MCP blocks in Code Mode","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60669,"title":"Skip submodule worktree scans when checking repository changes","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60670,"title":"Initialize Guardian evidence cursors from thread history state","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60671,"title":"Add sign-only mode and tighten macOS signing verification","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":60673,"title":"Preserve agent message deliveries in rollout traces","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60675,"title":"Avoid redundant reads and screen clears when switching side chats","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60680,"title":"Keep TUI status content separate from composer hints","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60681,"title":"Prioritize draft space when allocating composer footer rows","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60682,"title":"Wrap built-in TUI status lines within the footer row budget","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60683,"title":"Fit composer footer hints to available terminal space","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":60695,"title":"Add a Signer Service backend for macOS notarization","hint":"other","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": []
+}

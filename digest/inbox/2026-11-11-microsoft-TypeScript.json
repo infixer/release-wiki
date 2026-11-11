@@ -1,0 +1,325 @@
+{
+  "kind": "repo",
+  "repo": "microsoft/TypeScript",
+  "branch": "main",
+  "collectedAt": "2026-11-11T01:17:33Z",
+  "range": {
+    "from": "2026-11-06T22:57:29Z",
+    "to": "2026-11-11T01:17:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v7.0.2",
+      "publishedAt": "2026-08-20T18:09:49Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    "prerelease": {
+      "tag": "v7.1-beta",
+      "publishedAt": "2026-10-20T17:38:20Z",
+      "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.1-beta"
+    }
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 65373,
+      "title": "Drop old references and code relating to the tsgo name",
+      "url": "https://github.com/microsoft/TypeScript/pull/65373",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-09T16:46:20Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is overdue but there's no reason for us to keep any of this stuff around anymore; we do not publish any artifact named tsgo.",
+      "files": [
+        "Herebyfile.mjs (+103 -139)",
+        "package.json (+2 -2)",
+        "packages/typescript/lib/getExePath.js (+3 -8)",
+        "packages/typescript/package.json (+2 -3)",
+        "packages/typescript/src/api/async/client.ts (+1 -1)",
+        "packages/typescript/src/api/syncChannel.ts (+1 -1)",
+        "packages/vscode-typescript/l10n/bundle.l10n.json (+1 -1)",
+        "packages/vscode-typescript/src/client.ts (+7 -7)",
+        "packages/vscode-typescript/src/extension.ts (+8 -8)",
+        "packages/vscode-typescript/src/extension.web.ts (+8 -8)"
+      ],
+      "filesTotal": 812
+    },
+    {
+      "number": 65407,
+      "title": "Encode LSP messages directly instead of via MarshalJSON",
+      "url": "https://github.com/microsoft/TypeScript/pull/65407",
+      "author": "hood",
+      "mergedAt": "2026-11-09T18:31:34Z",
+      "labels": [
+        "Domain: Performance",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #65371\n\n`lsproto.Message` only had the old `[]byte`-returning `MarshalJSON`, so json/v2 got the already-encoded bytes back and validated + copied the whole payload again before writing it out 🫠. Switched it to `MarshalJSONTo`, so the wrapped message gets encoded straight into the encoder. Payload is identical, just a lot less work for big responses like completions, semantic tokens and diagnostics.\n\n**Some raw numbers plus a real-world test on a reasonably-sized OSS project (`recharts`):**\n| | `main` | this PR | |\n|---|---|---|---|\n| `BenchmarkMarshalCompletionResponse` (2k items, n=10) | 1.934 ms ±7% | 1.273 ms ±1% | −34.2% (p=0.000) |\n| B/op | 1243 KiB | 467 KiB | −62.5% |\n| allocs/op | 37 | 16 | −57% |\n| completion in `recharts` `Line.tsx` (531 KB) | 2.93 ms | 1.89 ms | −36% |\n\n```sh\ngo -C ./tsc test -run '^$' -bench MarshalCompletionResponse -count 10 ./internal/lsp/lsproto\n```\n\nTests:\n- added `TestMarshalMessage`, which checks a wrapped `Message` encodes exactly like the message inside it (invalid UTF-8, HTML chars, null result, error response). It passes on `main` too, so it's really just pinning the output.\n- diffed the output against `main` on the real 531 KB completion payload too, byte-identical.\n- `npx hereby test`, `npx hereby lint` and `npx hereby check:format` all pass.\n\nAI disclosure: I helped myself review and, most importantly, measured this with Claude Code. I've gone through everything it's added and I'll handle the review myself ofc.",
+      "files": [
+        "tsc/internal/lsp/lsproto/jsonrpc.go (+4 -2)",
+        "tsc/internal/lsp/lsproto/jsonrpc_test.go (+65 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 65408,
+      "title": "Collect garbage before writing allocation profiles",
+      "url": "https://github.com/microsoft/TypeScript/pull/65408",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-09T18:31:34Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The profile only shows stuff up to the last GC, which means that much of the time a lot can be missing from the profile. For example, doing `--pprofDir` on the webpack benchmark loses something like 50% of the samples!\n\nAdd the `GC` call where it should be; `SaveHeapProfile` already got this right.",
+      "files": [
+        "tsc/internal/pprof/pprof.go (+4 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 65009,
+      "title": "Go to a content-mapped file from its module specifier",
+      "url": "https://github.com/microsoft/TypeScript/pull/65009",
+      "author": "NullVoxPopuli",
+      "mergedAt": "2026-11-09T20:57:28Z",
+      "labels": [
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64828\n\nGo-to-definition on a module specifier now goes to the top of a content-mapped target file. Before, it returned nothing when the target was a content-mapped file.\n\n## Problem\n\nFor a module specifier, the declaration is the target `SourceFile`. `createDefinitionLocations` maps the whole file's range, from the first token to the end of the file. The `IsSingleSegment` check then drops that range unless one segment covers all of it. A mapper can't fix this from its side.\n\nRelative `import` specifiers were not affected, because they take the `getReferenceAtPosition` path. These were affected:\n\n- `export ... from \"./Card.vue\"`\n- non-relative specifiers, such as a `paths` alias: `import { title } from \"@/Card.vue\"`\n\n## Fix\n\nWhen the declaration is a `SourceFile` in a content-mapped file, `createDefinitionLocations` returns a zero-length location at the top of the original file. It does not map the file's range. This matches what the `getReferenceAtPosition` path already returns.\n\n## Test\n\n`contentMapperModuleSpecifierDefinition` uses two mappers. `.vue` goes through the component mapper, which emits several segments. `.foo` goes through the verbatim mapper, which emits one. The test runs go-to-definition on five specifiers:\n\n- relative `import` of `.vue`\n- `paths` alias `import` of `.vue` and of `.foo`\n- `export ... from` of `.vue` and of `.foo`\n\nOn `main`, only the relative `import` returns a location. With this change, all five go to the target file at 0:0.\n\n🤖 Gener\n…(truncated)",
+      "files": [
+        "tsc/internal/ls/definition.go (+9 -0)",
+        "tsc/testdata/baselines/reference/fourslash/goToDefinition/contentMapperModuleSpecifierDefinition.baseline.jsonc (+84 -0)",
+        "tsc/internal/fourslash/tests/contentMapperModuleSpecifierDefinition_test.go (+67 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 65406,
+      "title": "Publish PR builds to npm for installation and the Playground",
+      "url": "https://github.com/microsoft/TypeScript/pull/65406",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-09T20:59:59Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This brings back \"pack this\" as a GHA workflow using the `typescript-deploys` account with OIDC for publishing. This is now useful again as the playground supports TS7, and simply publishing packages to npm is enough to make them available, no multi-stage monaco building required.\n\nThis won't sign the artifacts, so there may potentially be issues with antivirus or whatever macOS does with unknown binaries, but I don't see us officially signing PRs.",
+      "files": [
+        "Herebyfile.mjs (+65 -13)",
+        "packages/typescript/lib/getExePath.js (+2 -2)",
+        "packages/vscode-typescript/src/tsdkPackage.ts (+1 -1)",
+        "packages/vscode-typescript/src/util.ts (+3 -3)",
+        "tools/scripts/validate-pr-build.mjs (+96 -0)",
+        ".github/workflows/pr-build.yml (+302 -0)",
+        "packages/vscode-typescript/test/tsdkPackage.test.ts (+16 -14)"
+      ],
+      "filesTotal": 7
+    },
+    {
+      "number": 65321,
+      "title": "Don't run go-test-wasm in merge queue CI",
+      "url": "https://github.com/microsoft/TypeScript/pull/65321",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-09T21:08:00Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "other",
+      "release": "⏳ 未リリース",
+      "filesTotal": 1
+    },
+    {
+      "number": 65004,
+      "title": "Skip code generation in CI",
+      "url": "https://github.com/microsoft/TypeScript/pull/65004",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-09T21:35:19Z",
+      "labels": [
+        "Domain: Performance",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The benchmarker is now constantly regenerating when building, so now the prep phase takes a half hour. Add a flag so it can skip.\n\nDefaults to `!isCI`, so it's on locally but off in CI where we already do \"code was generated\" checks.",
+      "files": [
+        "Herebyfile.mjs (+12 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 65416,
+      "title": "Fix PR package publishing",
+      "url": "https://github.com/microsoft/TypeScript/pull/65416",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-09T22:03:09Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "As per usual, the success rate of a new pipeline is 0%.\n\nFix two things:\n\n- The Wasm package was missing the `repository` link, which apparently OIDC publishing needs.\n- The PR build report didn't request permission to actually post its reply comment.\n\nFix both. Maybe next run it'll work/",
+      "files": [
+        "packages/typescript-wasip1-wasm/package.json (+4 -0)",
+        ".github/workflows/pr-build.yml (+1 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 65319,
+      "title": "Adjust folding range's end line only if closing bracket followed by non-trivia",
+      "url": "https://github.com/microsoft/TypeScript/pull/65319",
+      "author": "gabritto",
+      "mergedAt": "2026-11-10T01:35:33Z",
+      "labels": [
+        "Author: Team",
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64235.\n\nThis PR roughly implements the algorithm described in #64235.\n\nBasically before the PR, if the client had `lineOnly: true`, and the folding range ended with some kind of closing bracket, we'd recede the end line by one, so that the closing bracket is visible once the range is collapsed.\nHowever, this behavior is not the one desired by many users (see https://github.com/microsoft/vscode/issues/3352), who'd rather not see a single line with only a closing bracket. Since vscode is not planning on supporting `lineOnly: false` any time soon, this PR allows us to adopt the better behavior for TS: now we only recede the end line if there's some non-whitespace character in the same line as the closing bracket (and therefore it's likely relevant for the user to see that line).\n\nI'm not sure however if we should indeed show a `};` in the case of:\n```ts\nif (blah) {\n    ...\n};\n```\nAlso not sure if we should omit the closing bracket if there's a comment on that line, though maybe that's not very common.\n\nI also took the liberty of changing the algorithm in the case of a content-mapped file.\nIf the TS file we're computing ranges for is generated by a content mapper, we can't be sure that absence of non-whitespace in the same line as a closing bracket in the TS file means there isn't any relevant information to show in the corresponding original line. So in that case, we recede the end line if there's any non-whitespace character in the original line (see test `TestFoldingRan\n…(truncated)",
+      "files": [
+        "tsc/internal/ls/folding.go (+50 -1)",
+        "tsc/internal/fourslash/tests/foldingRangeLineFoldingOnly_test.go (+178 -6)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 65417,
+      "title": "Strip content mapper known extensions as part of moduleSuffixes lookups",
+      "url": "https://github.com/microsoft/TypeScript/pull/65417",
+      "author": "andrewbranch",
+      "mergedAt": "2026-11-10T16:02:42Z",
+      "labels": [
+        "Author: Team",
+        "For Milestone Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #64548 and partly https://github.com/microsoft/TypeScript/pull/65047#discussion_r4518420849",
+      "files": [
+        "tsc/internal/module/resolver.go (+3 -0)",
+        "tsc/testdata/baselines/reference/compiler/contentMapperModuleSuffixes.contentmapper (+24 -0)",
+        "tsc/testdata/baselines/reference/compiler/contentMapperModuleSuffixes.errors.txt (+56 -0)",
+        "tsc/testdata/baselines/reference/compiler/contentMapperModuleSuffixes.trace.json (+45 -0)",
+        "tsc/testdata/tests/cases/compiler/contentMapperModuleSuffixes.ts (+63 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 65418,
+      "title": "Use org-local package feed in Pipelines",
+      "url": "https://github.com/microsoft/TypeScript/pull/65418",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-10T18:25:42Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "We've been asked to switch back to the old feed; do so.\n\nUnfortunately this means not using `fetch` for the vsix tarball inputs, so, `npm pack` has to be used with auth.",
+      "files": [
+        "Herebyfile.mjs (+12 -30)",
+        "tools/pipelines/steps/setup-node-npm-ci.yml (+6 -1)",
+        "tools/pipelines/steps/setup-vsce.yml (+7 -1)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 65022,
+      "title": "Keep nested JSDoc properties after a property with a missing name",
+      "url": "https://github.com/microsoft/TypeScript/pull/65022",
+      "author": "NullVoxPopuli",
+      "mergedAt": "2026-11-10T19:04:11Z",
+      "labels": [
+        "For Uncommitted Bug"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #65020\n\nWhen a nested `@property` type does not parse, every nested property after it is lost. With this change they are kept, as they are in flat typedefs and in TS 6.\n\n```js\n/**\n * @typedef Sig\n * @property {object} Args\n * @property {string} Args.name\n * @property {function(string)=} Args.onSave\n * @property {((v: string) => void)=} Args.onCancel\n */\n```\n\n- Before: `keyof Sig['Args']` is `\"name\"`.\n- After: `keyof Sig['Args']` is `\"\" | \"name\" | \"onCancel\"`. The `TS1005` on `function(` stays.\n\n## Cause\n\nThe type parse stops at `(`, so the name of the `Args.onSave` tag is a missing identifier. `parseChildParameterOrPropertyTag` reads a plain identifier name as the start of a new top-level property, so it ended the `Args` type literal there. `Args.onSave` and `Args.onCancel` were then parsed at the typedef level.\n\nThe fix skips that check when the name is missing, so the tag stays in the nested literal. That gives the same `\"\"` property that a flat typedef gets for the same tag.\n\n## Test\n\n`jsdocNestedPropertyTagInvalidType.ts` has a nested and a flat typedef with the same broken property, and `keyof` checks in a `.ts` file. Without the fix it reports `TS2322` and `TS2339` for `onCancel`.\n\n`npx hereby test` passes with no other baseline changes. `hereby lint` and `hereby check:format` pass.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+      "files": [
+        "tsc/internal/parser/jsdoc.go (+1 -0)",
+        "tsc/testdata/baselines/reference/compiler/jsdocNestedPropertyTagInvalidType.errors.txt (+33 -0)",
+        "tsc/testdata/baselines/reference/compiler/jsdocNestedPropertyTagInvalidType.symbols (+41 -0)",
+        "tsc/testdata/baselines/reference/compiler/jsdocNestedPropertyTagInvalidType.types (+43 -0)",
+        "tsc/testdata/tests/cases/compiler/jsdocNestedPropertyTagInvalidType.ts (+29 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 65432,
+      "title": "Fix content mapper's virtual file module format",
+      "url": "https://github.com/microsoft/TypeScript/pull/65432",
+      "author": "andrewbranch",
+      "mergedAt": "2026-11-10T20:34:31Z",
+      "labels": [
+        "Breaking Change",
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #65135\n\nAlso issues a diagnostic when the `extension` provided in a Transform response implies a module format that disagrees with the module format that will be assigned to the declaration file output. For example, if you respond to Transform as a `.mts` file, then either your package.json must have `\"type\": \"module\"` or your configured `outputExtensions` must map your custom file extension to a `.mjs` output. This is because the module format of a declaration file name like `App.d.svelte.ts` is always determined by the package.json, so it would create problems if that decision disagrees with what the virtual file claims to be.",
+      "files": [
+        "tsc/internal/compiler/contentmapper_test.go (+285 -2)",
+        "tsc/internal/compiler/fileloader.go (+11 -2)",
+        "tsc/internal/compiler/program.go (+44 -5)",
+        "tsc/internal/contentmapper/contentmapper.go (+1 -0)",
+        "tsc/internal/contentmapper/host.go (+2 -1)",
+        "tsc/internal/diagnostics/diagnosticMessages.generated.json (+1 -0)",
+        "tsc/internal/diagnostics/diagnosticMessages.json (+4 -0)",
+        "tsc/internal/diagnostics/diagnostics_generated.go (+3 -0)",
+        "tsc/internal/project/contentmapper_test.go (+80 -2)",
+        "tsc/internal/testrunner/compiler_runner.go (+7 -2)"
+      ],
+      "filesTotal": 26
+    },
+    {
+      "number": 65390,
+      "title": "Fix LS crashes found in checker order fuzz",
+      "url": "https://github.com/microsoft/TypeScript/pull/65390",
+      "author": "jakebailey",
+      "mergedAt": "2026-11-10T23:25:29Z",
+      "labels": [
+        "Author: Team",
+        "For Uncommitted Bug"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Two things found while working on the checker ordering, where now LS operations are fuzzed.",
+      "files": [
+        "tsc/internal/checker/nodebuilderimpl.go (+30 -0)",
+        "tsc/internal/ls/inlay_hints.go (+16 -0)",
+        "tsc/testdata/baselines/reference/fourslash/inlayHints/inlayHintsAccessorTypeCrash.baseline (+109 -0)",
+        "tsc/testdata/baselines/reference/fourslash/quickInfo/quickInfoLocalTypeInGenericFunctionCrash.baseline (+298 -0)",
+        "tsc/internal/fourslash/tests/inlayHintsAccessorTypeCrash_test.go (+19 -0)",
+        "tsc/internal/fourslash/tests/quickInfoLocalTypeInGenericFunctionCrash_test.go (+30 -0)"
+      ],
+      "filesTotal": 6
+    }
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "Copilot": 1,
+      "dependabot[bot]": 1
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "kind": "repo",
+  "repo": "adobe/react-spectrum",
+  "branch": "main",
+  "collectedAt": "2026-11-11T01:17:33Z",
+  "range": {
+    "from": "2026-11-06T23:28:56Z",
+    "to": "2026-11-11T01:17:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "react-aria-components@1.22.0",
+      "publishedAt": "2026-10-09T03:06:51Z",
+      "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 10946,
+      "title": "fix: don't add a redundant role to Separator's hr",
+      "url": "https://github.com/adobe/react-spectrum/pull/10946",
+      "author": "okeken",
+      "mergedAt": "2026-11-09T22:01:23Z",
+      "labels": [
+        "RAC",
+        "no testing",
+        "Separator"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Closes #10894\n\n## Summary\n\n**Problem:** `<Separator />` renders `<hr role=\"separator\">`. `<hr>` already has the `separator` role built in, so HTML validators flag the attribute as redundant (html-validate `no-redundant-role`).\n\n**Intent:** a default `<Separator />` should be a plain `<hr>` that relies on its built-in role. Every separator that isn't rendered as an `<hr>` should still expose `role=\"separator\"`, plus `aria-orientation` when vertical.\n\n## Test Instructions\n\n**Regression tests** in `packages/react-aria-components/test/Separator.test.js`:\n- `should not add a redundant role to the default hr element` covers the example from the issue.\n- `should add role to a horizontal div element`.\n- `should expose role and orientation for a vertical separator`, run for three cases: default, `hr` and `div` elements.\n\n## Release impact\n\n- [ ] Only changes docs, tests, CI, or development tools. Nothing shipped to users changes.\n- [x] Fixes a bug or improves existing code without changing how apps use it.\n- [ ] Adds a feature or API while keeping existing usage working.\n- [ ] May break existing usage or require changes in apps that use this code.\n\n## ✅ PR Checklist\n\n- [x] I followed the [contributing guide](https://github.com/adobe/react-spectrum/blob/main/CONTRIBUTING.md).\n- [x] I tested this change locally and included the results in Test Instructions, or explained why testing does not apply.\n- [x] I understand and can explain every change in this PR. If I used AI assistance, I fol\n…(truncated)",
+      "files": [
+        "packages/react-aria-components/src/Separator.tsx (+3 -3)",
+        "packages/react-aria-components/test/Separator.test.js (+28 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}

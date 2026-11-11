@@ -1,0 +1,38 @@
+{
+  "kind": "repo",
+  "repo": "w3c/wcag",
+  "branch": "main",
+  "collectedAt": "2026-11-11T01:17:33Z",
+  "range": {
+    "from": "2026-11-02T12:04:42Z",
+    "to": "2026-11-11T01:17:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 5459,
+      "title": "Fix typo in touch target requirements explanation",
+      "url": "https://github.com/w3c/wcag/pull/5459",
+      "author": "timelsass",
+      "mergedAt": "2026-11-09T20:24:52Z",
+      "labels": [
+        "Understanding",
+        "2.5.5 Target size (Enhanced)",
+        "Bug Fixes"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "",
+      "files": [
+        "understanding/21/target-size-enhanced.html (+1 -1)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

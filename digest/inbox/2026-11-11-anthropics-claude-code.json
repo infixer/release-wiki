@@ -1,0 +1,39 @@
+{
+  "kind": "repo",
+  "repo": "anthropics/claude-code",
+  "branch": "main",
+  "collectedAt": "2026-11-11T01:17:33Z",
+  "range": {
+    "from": "2026-11-06T00:00:34Z",
+    "to": "2026-11-11T01:17:33Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v2.1.322",
+      "publishedAt": "2026-11-10T02:29:43Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v2.1.321",
+      "name": "v2.1.321",
+      "publishedAt": "2026-11-09T19:22:30Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such as refresh tokens to another host when a server redirected them\n- Fixed a case where a read-only Bash command ran outside the sandbox without a permission prompt\n- Fixed a case where Bash permission checks judged a file write from the wrong folder and didn't prompt\n- Fixed deny rules and protected-file prompts not applying to the file that a `cp` or `mv` into a directory writes\n- Fixed the \"Draws from usage credits\" note showing after a switch to Fable on Enterprise seats whose plan includes Fable\n- Fixed the fallback model sometimes declining a request or mentioning a stopped response when the first model was blocked before replying\n- Fixed `claude mcp login` printing a SEP-2352 issuer warning each time you sign in again to a server that Claude Code registered with\n- Fixed `NotebookEdit` deleting or overwriting a notebook's first cell when the call named no cell, on network paths (UNC shares, WSL folders, `/net` mounts)\n- Fixed Edit changing the first of several matches, replacing a whole file on an empty `old_string`, or editing a notebook as text, on network paths (UNC shares, WSL folders, `/net` mounts)\n- Fixed `/config` showing Manual as the default permission mode when new sessions start in auto mode; pressing Space on \"Auto (default)\" now saves Don't Ask, not Plan\n- Windows: Fixed `FileChanged` hooks stopping for paths set through `watchPaths` after the first shell command, when the session's working directory had a lowercase drive letter\n- Fixed `--plugin-dir .` and `--plugin-dir ./builtin` writing generated type files for Claude Code's built-in plugins into a `builtin` folder\n- Fixed context usage estimates overcounting tool definitions when exact token counts are unavailable\n- Fixed `/compact` showing twice in Remote Control on web and mobile\n- Fixed plugin auto-updates and `/plugin` marketplace updates downloading a plugin again for each worktree or folder of a repository\n- Fixed auto mode losing a background subagent's report that had started a turn when the conversation was compacted before Claude answered it\n- Fixed project skills, commands and agents staying missing after their folder was removed and came back mid-session, such as with `git stash`, including after entering a worktree\n- Fixed `claude -p` sometimes telling Claude that background commands get 30 minutes when they are stopped after 10\n- Fixed `pkill`, `pgrep` and `pidwait` in cloud sessions matching the session's own parent processes\n- Fixed Claude in Chrome and computer use server processes staying alive after their parent exits behind a proxy that stalls connections\n- Fixed a\n…(truncated)"
+    },
+    {
+      "tag": "v2.1.322",
+      "name": "v2.1.322",
+      "publishedAt": "2026-11-10T02:29:43Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it"
+    }
+  ],
+  "prs": [],
+  "errors": []
+}
