@@ -1,0 +1,294 @@
+{
+  "kind": "repo",
+  "repo": "w3c/csswg-drafts",
+  "branch": "main",
+  "collectedAt": "2026-11-13T01:55:28Z",
+  "range": {
+    "from": "2026-11-10T21:17:48Z",
+    "to": "2026-11-13T01:55:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 14740,
+      "title": "[web-animations-1] Seek to the effect end in the finished-state example",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14740",
+      "author": "JinDX",
+      "mergedAt": "2026-11-11T03:22:46Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Change the seek value from `1000` to `2000` so the animation temporarily enters the finished play state.\n\nThe subsequent `updateTiming({ iterations: 2 })` extends the effect end to `4000`, restoring the intended running state before the finish-notification microtask runs.\n\nThis fixes the example without changing any algorithms.",
+      "files": [
+        "web-animations-1/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14785,
+      "title": "[css-overflow] Improve terminology",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14785",
+      "author": "frivoal",
+      "mergedAt": "2026-11-12T14:59:23Z",
+      "labels": [
+        "css-overflow-4",
+        "Closed Accepted as Editorial",
+        "Testing Unnecessary",
+        "Closed Accepted by Editor Discretion",
+        "editorial",
+        "topic: line-clamp"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/w3c/csswg-drafts/issues/14709",
+      "files": [
+        "css-overflow-4/Overview.bs (+13 -11)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14752,
+      "title": "[css-conditional-5] Remove naming issue label",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14752",
+      "author": "DevSDK",
+      "mergedAt": "2026-11-12T15:02:07Z",
+      "labels": [
+        "css-conditional-5"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The CSSWG resolved to keep as-is.\n\nSee https://github.com/w3c/csswg-drafts/issues/14541",
+      "files": [
+        "css-conditional-5/Overview.bs (+0 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14771,
+      "title": "[selectors-4] Fix the default namespace bibliography link",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14771",
+      "author": "JinDX",
+      "mergedAt": "2026-11-12T16:50:23Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Use the same CSS Namespaces bibliography key as the rest of the draft so the default namespace citation resolves to the existing reference.\n\nTranslations: [Chinese](https://htmlspecs.com/css/selectors-4/) · [Japanese](https://jp.htmlspecs.com/css/selectors-4/) · [Korean](https://ko.htmlspecs.com/css/selectors-4/)",
+      "files": [
+        "selectors-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14775,
+      "title": "[css-conditional-4] Use CSS comments in the selector namespace examples",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14775",
+      "author": "JinDX",
+      "mergedAt": "2026-11-12T17:34:16Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Replace JavaScript-style placeholder comments with CSS comments. The example marked invalid still uses an undeclared namespace prefix, isolating the condition the example is intended to demonstrate.\n\nTranslations: [Chinese](https://htmlspecs.com/css/css-conditional-4/) · [Japanese](https://jp.htmlspecs.com/css/css-conditional-4/) · [Korean](https://ko.htmlspecs.com/css/css-conditional-4/)",
+      "files": [
+        "css-conditional-4/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 14772,
+      "title": "[css-color-5] Fix CSS comments in relative Lab and LCH examples",
+      "url": "https://github.com/w3c/csswg-drafts/pull/14772",
+      "author": "JinDX",
+      "mergedAt": "2026-11-12T17:35:13Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Use CSS block comments in the relative Lab and LCH examples so the two desaturation declarations are parsed. Keep the color values unchanged.\n\nTranslations: [Chinese](https://htmlspecs.com/css/css-color-5/) · [Japanese](https://jp.htmlspecs.com/css/css-color-5/) · [Korean](https://ko.htmlspecs.com/css/css-color-5/)",
+      "files": [
+        "css-color-5/Overview.bs (+7 -7)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": [],
+  "commitsRange": {
+    "from": "2026-11-10T21:17:48Z",
+    "to": "2026-11-13T01:55:28Z"
+  },
+  "commits": [
+    {
+      "sha": "acde592",
+      "url": "https://github.com/w3c/csswg-drafts/commit/acde592534ad2f339f220b5046417383ecf54428",
+      "author": "frivoal",
+      "committedAt": "2026-11-12T12:27:47Z",
+      "title": "[css-overflow] -webkit-line-clamp:none sets block-ellipsis to no-ellipsis",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "See https://github.com/w3c/csswg-drafts/issues/14673",
+      "files": [
+        "css-overflow-4/Overview.bs (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "0396208",
+      "url": "https://github.com/w3c/csswg-drafts/commit/0396208d4a39527042db6f2128c5a68657a6d040",
+      "author": "frivoal",
+      "committedAt": "2026-11-12T12:54:09Z",
+      "title": "[css-overflow] Adjust grammar order to the sake of serialization",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "See https://github.com/w3c/csswg-drafts/issues/14671",
+      "files": [
+        "css-overflow-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "64bbba2",
+      "url": "https://github.com/w3c/csswg-drafts/commit/64bbba2b5e28f69d337d84cbd970745910dd414b",
+      "author": "frivoal",
+      "committedAt": "2026-11-12T13:14:47Z",
+      "title": "[css-overflow] Make the line-clamp grammar more flexible",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Closes https://github.com/w3c/csswg-drafts/issues/14672",
+      "files": [
+        "css-overflow-4/Overview.bs (+10 -6)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "6265f62",
+      "url": "https://github.com/w3c/csswg-drafts/commit/6265f62f9a50fc33b180e9d30963c506a9fa1611",
+      "author": "frivoal",
+      "committedAt": "2026-11-12T13:37:20Z",
+      "title": "[css-overflow] Fix markup syntax errors",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Follow up to https://github.com/w3c/csswg-drafts/issues/14672",
+      "files": [
+        "css-overflow-4/Overview.bs (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "9767e4b",
+      "url": "https://github.com/w3c/csswg-drafts/commit/9767e4baad9ad1f40d830f43687a2033326d811f",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T20:37:25Z",
+      "title": "[css-color-4] Linked to CSS Values 3 for definition of syntactic whitespace, #14786",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+1 -1)",
+        "css-color-4/explainer for color 4.txt (+4 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "sha": "6c4213f",
+      "url": "https://github.com/w3c/csswg-drafts/commit/6c4213fa6f7737d6d6f1787a3f57f34f088fe150",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T20:38:28Z",
+      "title": "[css-color-4][editorial] wpt",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "5d77258",
+      "url": "https://github.com/w3c/csswg-drafts/commit/5d772580599149c112e02248005d1973ccbfb927",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T20:40:22Z",
+      "title": "[css-color-4][editorial] Update changes",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "a33dd51",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a33dd512d6a5406438430a7ebaf7b3506b9a322e",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T20:46:18Z",
+      "title": "[css-color-4][editorial] Update changes",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "033e242",
+      "url": "https://github.com/w3c/csswg-drafts/commit/033e24226d5173b9248a71467e93b25c829f7d45",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T21:16:48Z",
+      "title": "[css-color-5][editorial] wpt",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-5/Overview.bs (+3 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "64c3a4c",
+      "url": "https://github.com/w3c/csswg-drafts/commit/64c3a4cc5f045c089ce9f24897bc812abdf5dff0",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T21:31:51Z",
+      "title": "[css-fonts-4][editorial] wpt",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-fonts-4/Overview.bs (+13 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "a7a5194",
+      "url": "https://github.com/w3c/csswg-drafts/commit/a7a5194860ce68405f875d004eb6c04480c95994",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T21:34:47Z",
+      "title": "[css-color-5][editorial] wpt",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-5/Overview.bs (+3 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "0a6f41c",
+      "url": "https://github.com/w3c/csswg-drafts/commit/0a6f41c908da155a643f6a4278b76b1ec3271e75",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T21:59:04Z",
+      "title": "[css-color-hdr] Use higher precision in ICtCp examples, fix #14764",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-hdr-1/Overview.bs (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "sha": "8e3693e",
+      "url": "https://github.com/w3c/csswg-drafts/commit/8e3693ea9baa53f5411eb18d3b18201e8c15fb14",
+      "author": "svgeesus",
+      "committedAt": "2026-11-12T22:51:34Z",
+      "title": "[css-color-4][editorial] Use higher precision and direct, one-step conversion in \"these are exactly equivalent\" examples, #14765",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "files": [
+        "css-color-4/Overview.bs (+9 -6)"
+      ],
+      "filesTotal": 1
+    }
+  ]
+}

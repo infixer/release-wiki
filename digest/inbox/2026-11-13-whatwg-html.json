@@ -1,0 +1,211 @@
+{
+  "kind": "repo",
+  "repo": "whatwg/html",
+  "branch": "main",
+  "collectedAt": "2026-11-13T01:55:28Z",
+  "range": {
+    "from": "2026-11-09T15:17:50Z",
+    "to": "2026-11-13T01:55:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": null,
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 11734,
+      "title": "Add tone mapping to canvas",
+      "url": "https://github.com/whatwg/html/pull/11734",
+      "author": "ccameron-chromium",
+      "mergedAt": "2026-11-11T06:42:39Z",
+      "labels": [
+        "addition/proposal",
+        "topic: canvas"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Add tone mapping to canvas\n\nAdd the `CanvasToneMapping` dictionary and `CanvasToneMappingMode` enum (`\"standard\"` and `\"extended\"`), and a `toneMapping` member to `CanvasRenderingContext2DSettings`, reflected by `getContextAttributes()`. These replace WebGPU's `GPUCanvasToneMapping` and `GPUCanvasToneMappingMode`, which WebGPU will reference from HTML in the same way it references `PredefinedColorSpace`.\n\nWhen a canvas is rendered to the output device, it is now tone mapped to the device's HDR headroom, as limited by `dynamic-range-limit`, before color space conversion.\n\nThis has been the planned trajectory of the API since [its proposal to WebGPU](https://github.com/ccameron-chromium/webgpu-hdr/blob/main/EXPLAINER.md#notes-on-canvasrenderingcontext2d-and-unification-of-apis). Its move from WebGPU-only to HTML was waiting for float16 support for 2D canvas and WebGL.\n\nFixes https://github.com/whatwg/html/issues/11424\n\n- [X] At least two implementers are interested (and none opposed):\n   * Chromium: Proposed\n   * Gecko: [No feedback](https://github.com/mozilla/standards-positions/issues/1359)\n   * WebKit: [Supportive](https://github.com/whatwg/html/pull/11734#issuecomment-6140323936)\n- [X] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * https://github.com/web-platform-tests/wpt/pull/62367\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chrom\n…(truncated)",
+      "files": [
+        "source (+125 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13232,
+      "title": "Fix JSON commas in import map merge examples",
+      "url": "https://github.com/whatwg/html/pull/13232",
+      "author": "JinDX",
+      "mergedAt": "2026-11-11T07:20:43Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Add the missing separators and remove trailing commas so all three import map merge examples parse as JSON.\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13232/webappapis.html\" title=\"Last updated on Nov 11, 2026, 12:58 AM UTC (f37abd5)\">/webappapis.html</a>  ( <a href=\"https://whatpr.org/html/13232/a044232...f37abd5/webappapis.html\" title=\"Last updated on Nov 11, 2026, 12:58 AM UTC (f37abd5)\">diff</a> )",
+      "files": [
+        "source (+4 -4)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13234,
+      "title": "Fix two links to DOM definitions",
+      "url": "https://github.com/whatwg/html/pull/13234",
+      "author": "JinDX",
+      "mergedAt": "2026-11-11T07:29:13Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Point the append() reference to ParentNode.append() and link the declarative shadow roots flag to its current DOM definition.\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)",
+      "files": [
+        "source (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13236,
+      "title": "Editorial: add Jon Surrell to acknowledgments",
+      "url": "https://github.com/whatwg/html/pull/13236",
+      "author": "sirreal",
+      "mergedAt": "2026-11-11T08:51:29Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Add myself to the Acknowledgments. My earlier pull requests did not include the line the contributing guidelines ask for.\n\nPull requests:\n\n- https://github.com/whatwg/html/pull/12653 handles processing instruction tokens in the \"in head noscript\" and \"in template\" insertion modes.\n- https://github.com/whatwg/html/pull/12654 serializes processing instructions with a closing `?>`, so data ending in `?` is preserved when the output is parsed again.\n- https://github.com/whatwg/html/pull/12658 removes the statement that the insertion mode decides whether CDATA sections are supported.\n\nIssues, comments and reviews:\n\n- https://github.com/whatwg/html/issues/12023 proposed dropping the distinction between missing and empty DOCTYPE identifiers, which led to https://github.com/whatwg/html/pull/12084 and Gecko bug https://bugzilla.mozilla.org/show_bug.cgi?id=2010245.\n- https://github.com/whatwg/html/issues/9559: a test case, `<nobr><table><marquee></table><nobr>`, on which Chrome and Firefox build different trees. https://github.com/whatwg/html/commit/9f50934d44024efb11e276945aca31c4341f3277 clarified the step three days later, and Lexbor fixed its implementation.\n- https://github.com/whatwg/html/issues/4016 and https://github.com/whatwg/html/issues/8558: showed that the standard already specifies CDATA handling at integration points and that browsers differ. WebKit changed to match the standard in https://github.com/WebKit/WebKit/pull/69464, which cites the issue.\n- https://github.com/w\n…(truncated)",
+      "files": [
+        "source (+1 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13005,
+      "title": "Refine when selectedcontent elements are updated",
+      "url": "https://github.com/whatwg/html/pull/13005",
+      "author": "annevk",
+      "mergedAt": "2026-11-11T15:35:41Z",
+      "labels": [
+        "topic: select"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This is a follow-up to #12263 that addresses the remaining cases where selectedcontent elements were updated too little or too much:\n\n* Inserting an option element that causes another option element to become selected now updates selectedcontent elements. This happens when the select element has no selected option, e.g., after setting selectedIndex to -1.\n* Inserting a select element that already contains option elements now updates its selectedcontent elements once, rather than again from the post-connection steps of its selected option element.\n* Inserting a selectedcontent element before option elements that change selectedness now updates it once, rather than from both its own post-connection steps and those of the option elements. Its post-connection steps now leave updating it to its select element's pending selectedcontent update, if there is one.\n* The microtasks queued to update selectedcontent elements after option elements are removed or moved are now coalesced per select element, and do nothing if the selectedcontent elements were updated in the meantime.\n* Moving a selectedcontent element now queues the same update for its select element, rather than a microtask that updates the moved element from that select element even if it was moved out of it by the time the microtask runs. This also updates the select element's other selectedcontent elements.\n* Moving a selectedcontent element no longer updates it when its select element and disabledness do not change, e.g.\n…(truncated)",
+      "files": [
+        "source (+172 -66)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13225,
+      "title": "Match the cross-document view-transition setup parameters",
+      "url": "https://github.com/whatwg/html/pull/13225",
+      "author": "JinDX",
+      "mergedAt": "2026-11-11T15:52:03Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Pass the displayed document, target document, and navigation continuation to the CSS View Transitions setup algorithm. The setup algorithm has no navigation-type parameter. Keep passing the navigation type to the eligibility check and pageswap.\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/13225/browsing-the-web.html\" title=\"Last updated on Nov 10, 2026, 5:26 AM UTC (864bcdd)\">/browsing-the-web.html</a>  ( <a href=\"https://whatpr.org/h\n…(truncated)",
+      "files": [
+        "source (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13091,
+      "title": "Fix the UTC time in the Date conversion example",
+      "url": "https://github.com/whatwg/html/pull/13091",
+      "author": "JinDX",
+      "mergedAt": "2026-11-11T16:05:09Z",
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "The example describes a time 23,045 microseconds after 01:00 UTC, but the corresponding ISO timestamp is `2000-01-01T00:00:00.023045Z`.\n\nChange `01:00 UTC` to `00:00 UTC` so the starting time agrees with the ISO timestamps and the example correctly illustrates truncation to millisecond precision.\n\n***\n<a href=\"https://whatpr.org/html/13091/infrastructure.html\" title=\"Last updated on Nov 11, 2026, 1:48 AM UTC (1556f72)\">/infrastructure.html</a>  ( <a href=\"https://whatpr.org/html/13091/a044232...1556f72/infrastructure.html\" title=\"Last updated on Nov 11, 2026, 1:48 AM UTC (1556f72)\">diff</a> )",
+      "files": [
+        "source (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13233,
+      "title": "Update links to moved CSS definitions",
+      "url": "https://github.com/whatwg/html/pull/13233",
+      "author": "JinDX",
+      "mergedAt": "2026-11-11T16:05:56Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Update the dependency links for display-p3-linear, font width keywords, field-sizing, cross-document view transitions, and supported color schemes.\n\n- [ ] At least two implementers are interested (and none opposed):\n   * …\n   * …\n- [ ] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * …\n- [ ] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: …\n   * Gecko: …\n   * WebKit: …\n   * Deno (only for timers, structured clone, base64 utils, channel messaging, module resolution, web workers, and web storage): …\n   * Node.js (only for timers, structured clone, base64 utils, channel messaging, and module resolution): …\n- [ ] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [ ] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: …\n- [ ] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)",
+      "files": [
+        "source (+13 -13)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13244,
+      "title": "Editorial: pass a URL to \"obtain a connection\"",
+      "url": "https://github.com/whatwg/html/pull/13244",
+      "author": "noamr",
+      "mergedAt": "2026-11-11T18:50:47Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Fetch's [obtain a connection](https://fetch.spec.whatwg.org/#concept-connection-obtain) algorithm expects a URL as its second argument (using it to find proxies and then extracting its origin), whereas `preconnect` was passing `url`'s origin.\n\n***\n<a href=\"https://whatpr.org/html/13244/links.html\" title=\"Last updated on Nov 11, 2026, 6:32 PM UTC (b9e813e)\">/links.html</a>  ( <a href=\"https://whatpr.org/html/13244/b351bd6...b9e813e/links.html\" title=\"Last updated on Nov 11, 2026, 6:32 PM UTC (b9e813e)\">diff</a> )",
+      "files": [
+        "source (+1 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 12960,
+      "title": "Check the incumbent document's sandboxing flags in window.close()",
+      "url": "https://github.com/whatwg/html/pull/12960",
+      "author": "shannonbooth",
+      "mergedAt": "2026-11-11T21:16:07Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This regressed in the navigation rewrite (0a97a81da), and incumbent matches the intent, as well as what engines implement.\n\n- [x] At least two implementers are interested (and none opposed):\n   * Chromium: Implements\n   * Webkit: Implements\n   * Firefox: Implements\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   *https://github.com/web-platform-tests/wpt/pull/62903\n- [x] [Implementation bugs](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) are filed:\n   * Chromium: N/A (they already implement, but timing bug raised for failing WPT as https://issues.chromium.org/issues/565835888)\n   * Gecko: N/A\n   * WebKit: N/A\n- [x] Corresponding [HTML AAM](https://w3c.github.io/html-aam/) & [ARIA in HTML](https://w3c.github.io/html-aria/) issues & PRs:\n- [x] [MDN issue](https://github.com/whatwg/meta/blob/main/MAINTAINERS.md#handling-pull-requests) is filed: N/A\n- [x] The top of this comment includes a [clear commit message](https://github.com/whatwg/meta/blob/main/COMMITTING.md) to use.\n\n(See [WHATWG Working Mode: Changes](https://whatwg.org/working-mode#changes) for more details.)\n\n***\n<a href=\"https://whatpr.org/html/12960/nav-history-apis.html\" title=\"Last updated on Oct 24, 2026, 12:21 AM UTC (01aa00c)\">/nav-history-apis.html</a>  ( <a href=\"https://whatpr.org/html/12960/d78d7dd...01aa00c/nav-history-apis.html\" title=\"Last updated on Oct 24, 2026, 12:21 AM UTC (01aa00c)\">diff</a> )",
+      "files": [
+        "source (+2 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13248,
+      "title": "Use SharedWorkerOptions for the SharedWorker string overload",
+      "url": "https://github.com/whatwg/html/pull/13248",
+      "author": "JinDX",
+      "mergedAt": "2026-11-12T11:12:19Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Use `SharedWorkerOptions` when a string is supplied as the second argument to `SharedWorker()`. This gives the legacy name overload the same `extendedLifetime: false` default as the dictionary overload, which the subsequent reuse check and initialization both read.\n\nThe existing [shared worker name test](workers/shared-worker-name-via-options.html) exercises reusing a worker across the two overloads.\n\n***\n<a href=\"https://whatpr.org/html/13248/workers.html\" title=\"Last updated on Nov 12, 2026, 10:58 AM UTC (f3d3edb)\">/workers.html</a>  ( <a href=\"https://whatpr.org/html/13248/91052e8...f3d3edb/workers.html\" title=\"Last updated on Nov 12, 2026, 10:58 AM UTC (f3d3edb)\">diff</a> )",
+      "files": [
+        "source (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13247,
+      "title": "Bind the navigation API method tracker when aborting a NavigateEvent",
+      "url": "https://github.com/whatwg/html/pull/13247",
+      "author": "JinDX",
+      "mergedAt": "2026-11-12T13:52:28Z",
+      "labels": [
+        "topic: navigation API"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Read the ongoing API method tracker into `apiMethodTracker` in the steps to abort a `NavigateEvent`. The existing step checks that tracker for null and then passes an unbound `apiMethodTracker` to the promise rejection algorithm. The new binding supplies the checked tracker at the same point in the steps.\n\nThe existing [stop test](navigation-api/ordering-and-transition/navigate-intercept-stop.html) and [interception rejection test](navigation-api/ordering-and-transition/navigate-same-document-intercept-reject.html) both assert that the navigation result’s `finished` promise rejects after the `committed` promise has been fulfilled.\n\n***\n<a href=\"https://whatpr.org/html/13247/nav-history-apis.html\" title=\"Last updated on Nov 12, 2026, 10:55 AM UTC (591de8a)\">/nav-history-apis.html</a>  ( <a href=\"https://whatpr.org/html/13247/91052e8...591de8a/nav-history-apis.html\" title=\"Last updated on Nov 12, 2026, 10:55 AM UTC (591de8a)\">diff</a> )",
+      "files": [
+        "source (+5 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 13228,
+      "title": "Define when the parser finishes parsing an element's children",
+      "url": "https://github.com/whatwg/html/pull/13228",
+      "author": "annevk",
+      "mergedAt": "2026-11-12T18:08:07Z",
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "Define when the parser finishes parsing an element's children\n\nDefine \"finish parsing the children\" of an element, which runs whenever\nan element leaves the stack of open elements: when it is popped, when\nit is removed without being the current node (the \"form\" end tag, the\nhead element pointer, and the adoption agency algorithm), and when the\nadoption agency algorithm replaces its entry. This replaces the\nscattered \"when a foo element is popped off the stack of open elements\nof an HTML parser or XML parser\" prose with \"HTML element children\nparsed steps\", keyed on local name alongside the existing insertion,\npost-connection, removing, and moving steps.\n\nRunning these steps when an element is removed without being the\ncurrent node matches WebKit and Chromium. Gecko only runs them when the\nelement is popped.\n\nThe style, audio/video, option, and textarea prose is migrated to the\nnew hook. The object element's condition list keeps its own wording, as\nformalizing it means parameterizing the ~390-line algorithm that\ndetermines what an object element represents.\n\n\"Update a style block\" now takes the style element as an argument.\n\nTests: https://github.com/web-platform-tests/wpt/pull/64990.\n\nCloses #11781.\n\n- [x] At least two implementers are interested (and none opposed):\n   * WebKit\n   * Chromium\n- [x] [Tests](https://github.com/web-platform-tests/wpt) are written and can be reviewed and commented upon at:\n   * See commit message.\n- [ ] [Implementation bugs](https://github.com/wha\n…(truncated)",
+      "files": [
+        "source (+245 -176)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

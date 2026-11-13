@@ -1,0 +1,98 @@
+{
+  "kind": "repo",
+  "repo": "react/react",
+  "branch": "main",
+  "collectedAt": "2026-11-13T01:55:28Z",
+  "range": {
+    "from": "2026-11-10T18:39:27Z",
+    "to": "2026-11-13T01:55:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v19.3.1",
+      "publishedAt": "2026-10-14T17:06:15Z",
+      "url": "https://github.com/react/react/releases/tag/v19.3.1"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 38186,
+      "title": "[Flight] Fix streams hanging after a synchronous abort",
+      "url": "https://github.com/react/react/pull/38186",
+      "author": "unstubbable",
+      "mergedAt": "2026-11-11T10:40:40Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "A render or prerender can abort synchronously while Flight serializes the model. When that happens, Flight continues through the remaining properties. It creates tasks for async iterables, readable streams, and blobs, then registers their abort listeners after the cache signal has already fired. Those listeners never run, so pending reads keep the Flight stream open indefinitely.\n\nFlight now checks whether the cache signal has already aborted before it starts reading from an async iterator or stream. If so, it calls the existing abort handler immediately. Rendering still emits an error for the unfinished task, while prerendering leaves its reference unresolved.\n\nThis fixes the React bug behind vercel/next.js#101356. Regression tests cover all three value types during rendering and prerendering. They check that the Flight stream closes and that `throw()` or `cancel()` receives the original abort reason.",
+      "files": [
+        "packages/react-server/src/ReactFlightServer.js (+21 -9)",
+        "packages/react-server-dom-webpack/src/__tests__/ReactFlightDOMEdge-test.js (+80 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 38228,
+      "title": "[DevTools] Use Node's process in the standalone editor launcher",
+      "url": "https://github.com/react/react/pull/38228",
+      "author": "hoxyq",
+      "mergedAt": "2026-11-11T17:31:12Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\n`webpack.standalone.js` uses `ProvidePlugin({process: 'process/browser'})` with `target: 'electron-main'`. Every free `process` in the standalone bundle gets rewritten to that polyfill, including the ones in `react-devtools-core/src/editor.js`. The polyfill's `env` is `{}` and it has no `platform`. In the built `dist/standalone.js`, `guessEditor()` reads:\n\n```js\nif(Ph.env.REACT_EDITOR)return(0,Lh.Q)(Ph.env.REACT_EDITOR);if(\"darwin\"===Ph.platform)try{const e=(0,Fh.execSync)(\"ps x\")...\n```\n\nHere `Ph` is the `process/browser` module. So `guessEditor()` always returns `[]`: `REACT_EDITOR`, the `ps x` running-editor heuristic and `VISUAL`/`EDITOR` all have no effect. In the standalone app (`react-devtools`), \"View source for this element\" and the source link never open an editor. The `cmd.exe` branch for Windows is skipped too. This has been the case since the webpack 5 upgrade (#26887).\n\nThis PR imports Node's `process` explicitly in `editor.js`. With `target: 'electron-main'` it compiles to `require(\"process\")`, the same way the file's `fs`/`path`/`child_process` imports are emitted. ProvidePlugin only rewrites free identifiers, so it leaves the imported binding alone.\n\nThe polyfill itself is still needed, so ProvidePlugin stays. The inlined `parseSourceAndMetadata` worker is built in a child compilation that inherits ProvidePlugin. Its dependencies (`@babel/types`, `debug`, `supports-color`, `picocolors`, …) read `process` inside a Web Worker, which has no Node inte\n…(truncated)",
+      "files": [
+        "packages/react-devtools-core/src/editor.js (+4 -0)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 38202,
+      "title": "[DevTools] Upgrade ws to 7.5.13 in react-devtools-core",
+      "url": "https://github.com/react/react/pull/38202",
+      "author": "hoxyq",
+      "mergedAt": "2026-11-12T13:18:36Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "## Summary\n\nws@7.5.10 is affected by GHSA-96hv-2xvq-fx4p (fixed in 7.5.11). The standalone server bundles ws into dist/standalone.js, so the fix reaches users with the next react-devtools-core release.\n\nFixes #37639. Same change as #37640 by @lazerg; either can land.\n\nPart of a stack of DevTools dependency security upgrades. Each PR changes one dependency and its own lockfile entries.\n\n## How did you test this change?\n\nBuilt `react-devtools-core` and checked that `dist/standalone.js` now contains the `WS_ERR_TOO_MANY_BUFFERED_PARTS` guard added in ws 7.5.11. Shipping the fix to users needs a new `react-devtools-core` release.\n\n### Screenshots\n\nStandalone app (`node packages/react-devtools/bin.js`) from this branch, with the demo page open in Chrome. Its `<script src=\"http://localhost:8097\">` loads the backend and connects:\n\nWaiting screen: the ws 7.5.11 server is listening on 8097. The second `http://undefined:8097` snippet comes from this machine's network setup (no LAN IPv4 address for `internal-ip` to find). It shows up the same way on main.\n\nConnected: the Components tree and the inspected `<Counter>` (props, hooks, rendered by, source) all come over the WebSocket.\n\nThe demo page is a small `createRoot` app (`<App>` with a context provider, a `<Counter>` using `useState` and `useContext`, and a `<TodoList>`) built against `build/oss-experimental`.\n\nChecks run on the whole stack:\n- Every branch: `yarn install --frozen-lockfile` is consistent with the lockfile, and every pa\n…(truncated)",
+      "files": [
+        "packages/react-devtools-core/package.json (+1 -1)",
+        "yarn.lock (+4 -4)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 38233,
+      "title": "[Flight] Ignore missing owner and stack data after EOF",
+      "url": "https://github.com/react/react/pull/38233",
+      "author": "unstubbable",
+      "mergedAt": "2026-11-12T15:46:51Z",
+      "labels": [
+        "CLA Signed",
+        "React Core Team"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "The Flight client already ignores missing owner and stack references when no readable debug channel is connected (#33757). The check in `waitForReference` only handles pending chunks. Once the response closes, missing chunks are rejected or halted. A lazy element initialized afterward can therefore throw `Connection closed.` or remain suspended with `unstable_allowPartialStream`.\n\nThe client now records which chunks never arrived. The close paths record existing pending chunks, and `getChunk` records chunks first requested after close because those did not exist during closure. Late owner and stack lookups use that information to omit missing metadata.\n\nThe response retains whether a readable debug channel was originally supplied, preserving the distinction from #34304 after the close paths clear `_debugChannel`. Tests cover normal and partial streams and a supplied debug channel that closes without its data.",
+      "files": [
+        "packages/react-client/src/ReactFlightClient.js (+35 -2)",
+        "packages/react-server-dom-turbopack/src/__tests__/ReactFlightTurbopackDOMNode-test.js (+146 -0)"
+      ],
+      "filesTotal": 2
+    }
+  ],
+  "errors": []
+}

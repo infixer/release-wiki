@@ -1,0 +1,31 @@
+{
+  "kind": "repo",
+  "repo": "anthropics/claude-code",
+  "branch": "main",
+  "collectedAt": "2026-11-13T01:55:28Z",
+  "range": {
+    "from": "2026-11-06T00:00:34Z",
+    "to": "2026-11-13T01:55:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "v2.1.323",
+      "publishedAt": "2026-11-12T22:12:13Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [
+    {
+      "tag": "v2.1.323",
+      "name": "v2.1.323",
+      "publishedAt": "2026-11-12T22:12:13Z",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
+      "prerelease": false,
+      "body": "## What's changed\n\n- Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization\n- Added `engines[\"claude-code\"]` to `plugin.json`: plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest version that fits\n- Added type checking of a plugin's TypeScript hooks module to `claude plugin validate`; each finding is a warning, and `--strict` fails on it\n- Added to `claude plugin validate` the `$` nouns a mod's `engine.create` hook adds, withholds or replaces\n- Added support for `CLAUDE_CODE_AUTO_MODE_MODEL` in managed settings for Claude Desktop sessions on third-party providers (takes effect once Claude Desktop includes this version)\n- Added an options menu (stop, switch to usage credits, upgrade) when a model needs usage credits that are turned off or used up\n- Added a progress heartbeat every 30 seconds while hooks run long in `claude -p` and SDK sessions, so a host such as Claude Desktop won't end the turn as hung (once it includes this version)\n- Added `.docx` support to Artifact tool asset uploads\n- Added a `/diff to close` hint to the diff panel, and the keys that focus and close a panel to the `?` shortcut guide\n- Added a start-up warning for Bash allow rules with a `*` in a variable's value, such as `Bash(PORT=* npm run dev)`\n- Added a warning when a plugin's language server can't start, naming the server and what to check\n- Added a one-time startup notice naming `CLAUDE_CODE_PERFORCE_MODE` when Perforce settings are found and the mode is off\n- Added `CLAUDE_CODE_DISABLE_AGENT_PROGRESS_SUMMARIES` (available since 2.1.318): set it to `1` to turn off subagent progress summaries and the requests that write them (anthropics/claude-code#86879)\n- Added `CLAUDE_CODE_RESUME_HINT_COMMAND`, which a program that starts Claude Code can set to have the exit hint name its own resume command\n- Added `unsetOptionCount` to the `claude plugin install --json` result: how many `userConfig` options are not yet set\n- Added `isPromptCovered` to the props a mod's pane is drawn with, telling it when a dialog or a field above the prompt covers the prompt\n- Fixed running `/compact` again, or after a command such as `/context`, summarizing away a message that Claude had not answered yet\n- Fixed a resumed session joining your next message to an old interrupted message that was not resumed\n- Fixed a memory spike at the next prompt after Claude changed a very large file\n- Fixed a setting saved in a running session undoing a hand edit made to `settings.json` moments earlier; a settings file you delete during a session now stays deleted\n- Fixed `claude plugin` commands and `claude mcp list` signing you out of a Console profile when they ended while the token was being renewed\n- Fixed Edit and Bash running out of memory on certain `/proc` files, and Edit hanging or running \n…(truncated)"
+    }
+  ],
+  "prs": [],
+  "errors": []
+}

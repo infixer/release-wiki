@@ -1,0 +1,78 @@
+{
+  "kind": "repo",
+  "repo": "tc39/ecma262",
+  "branch": "main",
+  "collectedAt": "2026-11-13T01:55:28Z",
+  "range": {
+    "from": "2026-11-08T06:54:57Z",
+    "to": "2026-11-13T01:55:28Z"
+  },
+  "maxPrs": 60,
+  "latest": {
+    "stable": {
+      "tag": "es2026-errata",
+      "publishedAt": "2026-07-28T00:12:15Z",
+      "url": "https://github.com/tc39/ecma262/releases/tag/es2026-errata"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 4057,
+      "title": "Editorial: note that TA.prototype.subarray can be customized by Symbol.species",
+      "url": "https://github.com/tc39/ecma262/pull/4057",
+      "author": "bakkot",
+      "mergedAt": "2026-11-12T20:15:22Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This addresses the issue identified in #4014 by @JinDX, but I wrote my own wording that I prefer.\n\nI considered leaving out this detail, especially in light of https://github.com/tc39/ecma262/pull/3450, but since it has potential security implementations if different parts of an implementation make different assumptions here it seemed worth including. I originally tried to enumerate _how_ it could change the behavior but doing so precisely makes it pretty wordy so I didn't bother.",
+      "files": [
+        "spec.html (+1 -1)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 4073,
+      "title": "Meta: Upgrade ESMeta to v0.8.2",
+      "url": "https://github.com/tc39/ecma262/pull/4073",
+      "author": "jhnaldo",
+      "mergedAt": "2026-11-12T22:04:40Z",
+      "labels": [
+        "meta",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "This PR updates the version of ESMeta to [v0.8.2](https://github.com/es-meta/esmeta/releases/tag/v0.8.2) with the following key updates:\n* https://github.com/es-meta/esmeta/pull/400 (supports the `≠` form of lookahead restrictions used in #1727)\n* https://github.com/es-meta/esmeta/pull/373\n* https://github.com/es-meta/esmeta/pull/377\n\nThis version removes six algorithms from `esmeta-ignore.json` (`CreateDynamicFunction`, `DecimalEscape[0,1].CapturingGroupNumber`, `IncrementModuleAsyncEvaluationCount`, `PerformEval`, `TimeString`, and `TimeZoneString`), but newly adds two algorithms:\n* `LocalTime`\n* `MakeFullYear`\n\nBoth are false alarms caused by modeling the overflow of Number arithmetic to infinities (https://github.com/es-meta/esmeta/pull/377). For example, in `LocalTime`, ESMeta does not know that `_tv_` is bounded, so it reports that `_tv_ + 𝔽(_offsetMilliseconds_)` may be infinite. We plan to remove them with an interval domain (https://github.com/es-meta/esmeta/issues/354).",
+      "files": [
+        "esmeta-ignore.json (+2 -6)",
+        ".github/workflows/esmeta-installer/action.yml (+2 -2)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 4079,
+      "title": "Editorial: Initialize [[LoadedModules]] in InitializeHostDefinedRealm",
+      "url": "https://github.com/tc39/ecma262/pull/4079",
+      "author": "jungwngkim",
+      "mergedAt": "2026-11-12T23:38:58Z",
+      "labels": [
+        "editorial change",
+        "ready to merge"
+      ],
+      "hint": "unknown",
+      "release": "⏳ 未リリース",
+      "body": "[Realm Records](https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm-record) have a [[LoadedModules]] field, but nothing initializes it.\n\n#2905 added [[LoadedModules]] to Script Records, Cyclic Module Records, and Realm Records. ParseScript and ParseModule create their records with `[[LoadedModules]]: « »`, but CreateRealm was not updated to initialize the new field, and #3139 carried that omission over when it inlined CreateRealm into InitializeHostDefinedRealm.\n\nThis PR initializes the field to a new empty List, as ParseScript and ParseModule already do.\n\nThis was found while adding module support to [ESMeta](https://github.com/es-meta/esmeta).",
+      "files": [
+        "spec.html (+1 -0)"
+      ],
+      "filesTotal": 1
+    }
+  ],
+  "errors": []
+}

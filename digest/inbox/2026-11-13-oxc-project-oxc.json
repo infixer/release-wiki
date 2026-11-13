@@ -1,0 +1,637 @@
+{
+  "kind": "repo",
+  "repo": "oxc-project/oxc",
+  "branch": "main",
+  "collectedAt": "2026-11-13T01:55:28Z",
+  "range": {
+    "from": "2026-11-11T00:47:35Z",
+    "to": "2026-11-13T01:55:28Z"
+  },
+  "maxPrs": 30,
+  "latest": {
+    "stable": {
+      "tag": "oxlint_v1.93.0",
+      "publishedAt": "2026-11-09T11:47:15Z",
+      "url": "https://github.com/oxc-project/oxc/releases/tag/oxlint_v1.93.0"
+    },
+    "prerelease": null
+  },
+  "releasesInRange": [],
+  "prs": [
+    {
+      "number": 29254,
+      "title": "feat(playground): allow a custom runtime helper module name",
+      "url": "https://github.com/oxc-project/oxc/pull/29254",
+      "author": "Dunqing",
+      "mergedAt": "2026-11-11T02:01:35Z",
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Expose `TransformOptions.helper_loader.module_name` as `helperModuleName`, so the playground can emit helper imports from a URL such as a versioned esm.sh package that a browser can load directly.\n\nCompanion UI: https://github.com/oxc-project/playground/pull/478\n\nVerified with `cargo check -p oxc_playground_napi`, `cargo fmt --check`, and clippy.",
+      "files": [
+        "napi/playground/index.d.ts (+2 -0)",
+        "napi/playground/playground.wasi.d.cts (+2 -0)",
+        "napi/playground/src/lib.rs (+6 -0)",
+        "napi/playground/src/options.rs (+2 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 29264,
+      "title": "feat(lexer): publish lexer and SIMD crates",
+      "url": "https://github.com/oxc-project/oxc/pull/29264",
+      "author": "Boshen",
+      "mergedAt": "2026-11-11T07:24:34Z",
+      "labels": [
+        "A-lexer"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Enable standalone use of `oxc_lexer` by publishing it and its SIMD dependencies. Remove the dependency on an unpublished helper so the initial releases build against crates.io.\n\nAI-assisted with Codex.",
+      "files": [
+        "Cargo.lock (+3 -4)",
+        "Cargo.toml (+3 -3)",
+        "crates/oxc_lexer/Cargo.toml (+3 -3)",
+        "crates/oxc_simd/Cargo.toml (+2 -3)",
+        "crates/oxc_simd/src/cpu/mod.rs (+4 -3)",
+        "crates/oxc_simd_macros/Cargo.toml (+2 -2)"
+      ],
+      "filesTotal": 6
+    },
+    {
+      "number": 29270,
+      "title": "fix(linter/import/no-duplicates): ignore braces in module strings",
+      "url": "https://github.com/oxc-project/oxc/pull/29270",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T09:51:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Duplicate imports such as `import '}{'; import '}{';` panic during ordinary linting because the merge fix treats braces in the module string as specifier delimiters, even when fixes are disabled.\n\nBound delimiter searches to the text before the module string, select the outer brace pair with the existing forward/reverse helpers, and require ordered positions before slicing. Add regressions for ordinary linting and autofixes, including empty/default imports and braces in string-named specifiers and comments.",
+      "files": [
+        "crates/oxc_linter/src/rules/import/no_duplicates.rs (+49 -22)",
+        "crates/oxc_linter/src/snapshots/import_no_duplicates.snap (+8 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29271,
+      "title": "fix(linter/eslint/no-empty): use byte offsets for finally suggestions",
+      "url": "https://github.com/oxc-project/oxc/pull/29271",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T09:55:36Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Suggestion fixing for an empty `finally` could panic when earlier source contained multibyte characters: the keyword search mixed byte offsets with character indices. Scan backward with `char_indices()` over the source before the finalizer so deletion ranges use actual byte offsets.\n\nSkip suggestions when the matched text is inside a comment or removing `finally` would leave a `try` without a handler. Regression cases cover the reported crash input, Unicode whitespace, and comment boundaries.",
+      "files": [
+        "crates/oxc_linter/src/rules/eslint/no_empty.rs (+40 -22)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":29268,"title":"docs(napi/parser): correct TS-ESTree differences","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29272,
+      "title": "fix(linter/no-large-snapshots): avoid panics on Unicode whitespace",
+      "url": "https://github.com/oxc-project/oxc/pull/29272",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T10:02:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Jest and Vitest `no-large-snapshots` panic when a snapshot argument is followed by multibyte whitespace, such as U+00A0. Line counting treats the exclusive span end as inclusive and slices into the following UTF-8 character.\n\nUse the exclusive range and add regressions for Unicode whitespace after string and template snapshots in both plugins.",
+      "files": [
+        "crates/oxc_linter/src/rules/jest/no_large_snapshots.rs (+2 -0)",
+        "crates/oxc_linter/src/rules/shared/jest_vitest/no_large_snapshots.rs (+1 -1)",
+        "crates/oxc_linter/src/rules/vitest/no_large_snapshots.rs (+2 -0)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 29273,
+      "title": "fix(linter/unicorn/prefer-array-flat): avoid panic on rest parameters",
+      "url": "https://github.com/oxc-project/oxc/pull/29273",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T10:05:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Skip `reduce` callbacks with rest parameters and require exactly two ordinary parameters before inspecting their binding patterns. This prevents `array.reduce((a, ...b) => a.concat(b), [])` from panicking, with regression coverage for both concat and spread callback bodies.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_array_flat.rs (+10 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 29275,
+      "title": "fix(linter/unicorn/no-document-cookie): stop resolving cyclic aliases",
+      "url": "https://github.com/oxc-project/oxc/pull/29275",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T10:09:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Inputs such as `var a = a; a.cookie = 0;` cause unbounded recursion while `unicorn/no-document-cookie` follows variable initializers.\n\nResolve aliases iteratively with a visited-symbol set and stop when a symbol repeats. Add regressions for self-reference, mutual cycles, aliases leading into cycles, and valid alias chains across shadowed bindings.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_document_cookie.rs (+31 -18)",
+        "crates/oxc_linter/src/snapshots/unicorn_no_document_cookie.snap (+16 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29276,
+      "title": "fix(linter/unicorn/prefer-set-has): avoid panics on Unicode whitespace",
+      "url": "https://github.com/oxc-project/oxc/pull/29276",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T10:13:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Unicode whitespace between `new` and `Array` could cause the fixer to slice inside a UTF-8 character and panic even when autofix was disabled.\n\nWrap the complete initializer in `new Set(...)` using its AST span. This preserves whitespace, comments, escaped identifiers, and constructor syntax. Regression tests cover diagnostics and fixed output, including `new Array` without parentheses.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_set_has.rs (+39 -46)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 29274,
+      "title": "fix(linter/typescript/consistent-type-imports): avoid panic on quoted import names",
+      "url": "https://github.com/oxc-project/oxc/pull/29274",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T10:17:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Quoted import names containing `}` can make ordinary linting panic while computing a fix, even without `--fix`:\n\n```ts\nimport type { \"}\" as A } from 'm';\nimport { B, C } from 'm';\ntype T = A | B;\nC();\n```\n\nSearch for the closing brace after the last named specifier and before the module source, validating the search bounds before slicing. Add regressions for ordinary linting and autofixes covering quoted names, comments, trailing commas, empty lists, and both import orders. The fixed output matches typescript-eslint.",
+      "files": [
+        "crates/oxc_linter/src/rules/typescript/consistent_type_imports.rs (+33 -4)",
+        "crates/oxc_linter/src/snapshots/typescript_consistent_type_imports.snap (+7 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29278,
+      "title": "fix(linter/unicorn/no-useless-spread): avoid panics on Unicode whitespace",
+      "url": "https://github.com/oxc-project/oxc/pull/29278",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T11:27:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "A sequence such as `[...( 0, [])]` (U+00A0 before `0`) can panic during diagnostic construction, even with fixes disabled. Expanding its span by one byte splits the whitespace's UTF-8 encoding.\n\nUse the original expression span for the snippet and add regressions for two- and three-byte whitespace in array and object spreads, including autofixes.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_useless_spread/mod.rs (+8 -4)",
+        "crates/oxc_linter/src/snapshots/unicorn_no_useless_spread.snap (+29 -1)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29277,
+      "title": "fix(linter/unicorn/no-length-as-slice-end): avoid panic on wrapped callees",
+      "url": "https://github.com/oxc-project/oxc/pull/29277",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T11:31:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`unicorn/no-length-as-slice-end` panics on valid source such as `(a.slice)(0, a.length)`. Normalize the callee once and reuse the member for matching, receiver comparison, and diagnostic spans so the call reports normally and fixes to `(a.slice)(0)`.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/no_length_as_slice_end.rs (+38 -47)",
+        "crates/oxc_linter/src/snapshots/unicorn_no_length_as_slice_end.snap (+54 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29279,
+      "title": "fix(linter/unicorn/prefer-dom-node-remove): avoid panic on parenthesized optional chains",
+      "url": "https://github.com/oxc-project/oxc/pull/29279",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T11:44:33Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`(parentNode?.removeChild)(child)` passes the method-call guard, but the callee-span helper returns `None`, causing an `unwrap()` panic.\n\nSkip the diagnostic when that helper returns `None`, matching ESLint/Unicorn, and add regression cases for parenthesized optional chains.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_dom_node_remove.rs (+18 -31)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 29256,
+      "title": "fix(formatter): break after `=` for hugged type alias",
+      "url": "https://github.com/oxc-project/oxc/pull/29256",
+      "author": "leaysgur",
+      "mergedAt": "2026-11-11T12:49:34Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Fixes #29222.",
+      "files": [
+        "crates/oxc_formatter/src/print/mod.rs (+2 -2)",
+        "crates/oxc_formatter/src/print/union_type.rs (+59 -46)",
+        "crates/oxc_formatter/src/utils/assignment_like.rs (+8 -10)",
+        "crates/oxc_formatter/tests/fixtures/ts/union/hug-alias-overflow.ts (+23 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/union/hug-alias-overflow.ts.snap (+121 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 29257,
+      "title": "fix(formatter_htmlish): keep attrs holding character reference",
+      "url": "https://github.com/oxc-project/oxc/pull/29257",
+      "author": "leaysgur",
+      "mergedAt": "2026-11-11T12:58:35Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Keep `<button onclick=\"x=a &amp; b\">a</button>` as-is.\n\nIf this is written in `.js`, it's just `x = a & amp; b;`. But in `.html` attribute, it should be kept and leave it to browser.",
+      "files": [
+        "crates/oxc_formatter_htmlish/src/print/embed.rs (+15 -1)",
+        "apps/oxfmt/DIVERGENCES.md (+28 -0)",
+        "apps/oxfmt/conformance/fixtures/html/character-reference-in-code-as-written.html (+2 -0)",
+        "apps/oxfmt/conformance/fixtures/html/character-reference-in-code-as-written.html.snap.md (+33 -0)",
+        "crates/oxc_formatter_htmlish/AGENTS.md (+1 -0)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 29258,
+      "title": "fix(formatter_htmlish/angular): keep block params, ignore whole block",
+      "url": "https://github.com/oxc-project/oxc/pull/29258",
+      "author": "leaysgur",
+      "mergedAt": "2026-11-11T12:59:18Z",
+      "labels": [
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Preparation for native Angular support.",
+      "files": [
+        "crates/oxc_formatter_htmlish/src/print/block.rs (+7 -61)",
+        "crates/oxc_formatter_htmlish/src/tree/build/mod.rs (+12 -0)",
+        "crates/oxc_formatter_htmlish/src/tree/mod.rs (+25 -1)",
+        "crates/oxc_formatter_htmlish/DIVERGENCES.md (+29 -0)",
+        "crates/oxc_formatter_htmlish/tests/fixtures/angular/angular-ignored-block-chain.component.html (+3 -0)",
+        "crates/oxc_formatter_htmlish/tests/fixtures/angular/angular-ignored-block-chain.component.html.snap (+28 -0)",
+        "crates/oxc_formatter_htmlish/tests/fixtures/angular/blocks.component.html (+2 -0)",
+        "crates/oxc_formatter_htmlish/tests/fixtures/angular/blocks.component.html.snap (+10 -0)",
+        "crates/oxc_formatter_htmlish/tests/fixtures/fingerprint.rs (+1 -1)"
+      ],
+      "filesTotal": 9
+    },
+    {"number":29259,"title":"refactor(formatter_htmlish): rename `Facts::prettier_ignore` to `::suppressed`","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29260,"title":"test(oxfmt,formatter_htmlish): track angular in conformance","hint":"other","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29261,
+      "title": "fix(formatter): align union hug and conditional branch",
+      "url": "https://github.com/oxc-project/oxc/pull/29261",
+      "author": "leaysgur",
+      "mergedAt": "2026-11-11T14:08:57Z",
+      "labels": [
+        "A-cli",
+        "A-formatter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "- A single-line block comment right before a hugged union (`X | null`) is the first member's, so the union expands (`| /* c */ X`)\n- A line-ending comment before a hugged alias union keeps the hug\n- A union in a conditional type's branch prints its first `|` right behind the `?` / `:`\n- Record the union style hold's scope, the hug and comment table, and two open debts in AGENTS.md and DIVERGENCES.md",
+      "files": [
+        "crates/oxc_formatter/src/print/union_type.rs (+17 -11)",
+        "crates/oxc_formatter/src/utils/typescript.rs (+19 -1)",
+        "apps/oxfmt/conformance/snapshots/prettier.snap.md (+6 -7)",
+        "crates/oxc_formatter/AGENTS.md (+27 -0)",
+        "crates/oxc_formatter/DIVERGENCES.md (+55 -1)",
+        "crates/oxc_formatter/tests/fixtures/ts/comments/hug-block-comment.ts (+14 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/comments/hug-block-comment.ts.snap (+144 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/conditional-type/union-branch.ts (+21 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/conditional-type/union-branch.ts.snap (+157 -0)",
+        "crates/oxc_formatter/tests/fixtures/ts/union/alias-flat-retry.ts (+12 -0)"
+      ],
+      "filesTotal": 15
+    },
+    {
+      "number": 29285,
+      "title": "fix(linter/unicorn/prefer-object-from-entries): avoid panic on wrapped callees",
+      "url": "https://github.com/oxc-project/oxc/pull/29285",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T14:16:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`(x.reduce)(0, 0);` panics because `is_method_call` unwraps the callee while the rule casts the original expression. Inspect the normalized member expression to avoid the panic and preserve optional-call exclusions. Add regression coverage for parenthesized, computed, and TypeScript-wrapped callees.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_object_from_entries.rs (+12 -1)",
+        "crates/oxc_linter/src/snapshots/unicorn_prefer_object_from_entries.snap (+28 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29286,
+      "title": "fix(linter/unicorn/prefer-includes): avoid panic on parenthesized optional chains",
+      "url": "https://github.com/oxc-project/oxc/pull/29286",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T14:21:57Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`(obj?.indexOf)('x') !== -1` passes the method-name check but has no callee metadata, causing `unicorn/prefer-includes` to panic. Return early for these unsupported callees, avoiding suggestions that would change the optional-chain boundary.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/prefer_includes.rs (+10 -2)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":29282,"title":"refactor(formatter): stop union layout decisions depending on cursor","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29289,
+      "title": "fix(linter/vitest/prefer-called-once): avoid panics on escaped matcher names",
+      "url": "https://github.com/oxc-project/oxc/pull/29289",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T14:31:34Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Matchers are recognized by their decoded names, but the rule trimmed `Times` from the raw source span. An escaped Unicode line continuation could therefore put the slice endpoint inside a UTF-8 character and panic during linting, even without autofix.\n\nUse canonical replacement names and preserve the quotes or backticks around computed properties. Add regression coverage for both aliases, Unicode continuations, and escaped matcher spellings.",
+      "files": [
+        "crates/oxc_linter/src/rules/vitest/prefer_called_once.rs (+60 -7)"
+      ],
+      "filesTotal": 1
+    },
+    {"number":29288,"title":"refactor(linter/unicorn/prefer-includes): use let chains","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29292,
+      "title": "fix(linter/jest/prefer-to-be,linter/vitest/prefer-to-be): avoid Unicode whitespace panics",
+      "url": "https://github.com/oxc-project/oxc/pull/29292",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T14:53:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Unicode whitespace before computed matchers or `not` modifiers could make `jest/prefer-to-be` and `vitest/prefer-to-be` panic when recommending `toBeNull` or `toBeNaN`.\n\nLocate the opening bracket within the member access with a comment-aware token lookup instead of subtracting a byte from the literal span. Preserve optional member/call operators in autofixes and add regressions for both plugins.",
+      "files": [
+        "crates/oxc_linter/src/rules/shared/jest_vitest/prefer_to_be.rs (+101 -34)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 29293,
+      "title": "fix(linter/oxc/no-accumulating-spread): avoid panic on parenthesized optional chains",
+      "url": "https://github.com/oxc-project/oxc/pull/29293",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T14:59:36Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "`is_method_call` recognizes `(arr?.reduce)((acc, x) => [...acc, x], [])`, but diagnostic extraction previously failed to unwrap the optional chain and panicked. Use `get_member_expr()` to extract the method span with a guard, then pass the span to diagnostic creation.\n\nAdds regression coverage for `reduce`/`reduceRight`, computed properties, TypeScript wrappers, and calls that should remain unreported.",
+      "files": [
+        "crates/oxc_linter/src/rules/oxc/no_accumulating_spread.rs (+24 -13)",
+        "crates/oxc_linter/src/snapshots/oxc_no_accumulating_spread.snap (+90 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29294,
+      "title": "fix(linter/react/jsx-key): only check direct JSX array elements",
+      "url": "https://github.com/oxc-project/oxc/pull/29294",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T15:04:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Limit array key checks to JSX elements and fragments that are direct array members, ignoring parentheses. This matches eslint-plugin-react and avoids reporting conditional tuple entries such as `[value, needed ? <Counter /> : null] as const`. Conditional JSX returned from iterator callbacks still requires a key.\n\nFixes #29246",
+      "files": [
+        "crates/oxc_linter/src/rules/react/jsx_key.rs (+22 -3)",
+        "crates/oxc_linter/src/snapshots/react_jsx_key.snap (+12 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29291,
+      "title": "feat(linter/vue/no-shared-component-data): implement fixer",
+      "url": "https://github.com/oxc-project/oxc/pull/29291",
+      "author": "baevm",
+      "mergedAt": "2026-11-11T15:14:22Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "this PR implements fixer for `vue/no-shared-component-data` rule, used all tests from upstream.\n\nissue #11440",
+      "files": [
+        "crates/oxc_linter/src/rules/vue/no_shared_component_data.rs (+101 -3)",
+        "crates/oxc_linter/src/snapshots/vue_no_shared_component_data.snap (+8 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {"number":29295,"title":"refactor(span): remove extraneous exports from `oxc_span` crate","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29296,"title":"refactor(str, span): move `ContentEq` for string types into `oxc_str` crate","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29297,"title":"style(str): import types and traits at top level","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29298,
+      "title": "fix(linter/unicorn/consistent-template-literal-escape): avoid panics after CRLF",
+      "url": "https://github.com/oxc-project/oxc/pull/29298",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T15:31:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "The parser normalizes CRLF in template raw values, so applying offsets from that text to the original source can panic on Unicode even without `--fix`, or corrupt autofixes.\n\nScan each quasi's original source to keep diagnostic and fix spans aligned. Add regression coverage for line endings, Unicode, backslash parity, and multiple quasis.",
+      "files": [
+        "crates/oxc_linter/src/rules/unicorn/consistent_template_literal_escape.rs (+28 -1)",
+        "crates/oxc_linter/src/snapshots/unicorn_consistent_template_literal_escape.snap (+106 -0)"
+      ],
+      "filesTotal": 2
+    },
+    {
+      "number": 29299,
+      "title": "fix(linter/vitest/require-test-timeout): avoid overflow when sorting configurations",
+      "url": "https://github.com/oxc-project/oxc/pull/29299",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T15:35:35Z",
+      "labels": [
+        "A-linter"
+      ],
+      "hint": "fix",
+      "release": "⏳ 未リリース",
+      "body": "Three sequential `vi.setConfig({ testTimeout: ... })` calls can panic in builds with overflow checks enabled because the span comparator subtracts unsigned offsets. Sort by `Reverse(span.end)` instead, preserving the earliest completed configuration for the timeout check, and cover repeated and nested configuration calls.",
+      "files": [
+        "crates/oxc_linter/src/rules/vitest/require_test_timeout.rs (+5 -3)"
+      ],
+      "filesTotal": 1
+    },
+    {
+      "number": 29303,
+      "title": "feat(minifier): inline member reads into call arguments",
+      "url": "https://github.com/oxc-project/oxc/pull/29303",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T17:48:35Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "A single-use member read was never inlined into a call because the call guard skipped any call whose callee was an identifier. The guard now only blocks the case where the replaced variable is the callee, since inlining it there would change `this`.\n\n## Call arguments\n\n```js\n// Before\nfunction getTexture(cubemaps, texture, mapTextureMapping) {\n  var cubemap = cubemaps.get(texture).texture;\n  return mapTextureMapping(cubemap, texture.mapping);\n}\n\n// After\nfunction getTexture(cubemaps, texture, mapTextureMapping) {\n  return mapTextureMapping(cubemaps.get(texture).texture, texture.mapping);\n}\n```\n\n## Call callees\n\nThis case is unchanged because `o.method()` would call `method` with `this` set to `o`:\n\n```js\nfunction call(o) {\n  var method = o.method;\n  return method();\n}\n```\n\n`typescript.js` shrinks by 1,827 B, or 459 B gzipped.",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+1 -1)",
+        "tasks/minsize/minsize.snap (+7 -7)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+11 -11)",
+        "crates/oxc_minifier/tests/peephole/inline_single_use_variable.rs (+30 -0)"
+      ],
+      "filesTotal": 4
+    },
+    {
+      "number": 29304,
+      "title": "feat(minifier): inline member reads into `new` expressions",
+      "url": "https://github.com/oxc-project/oxc/pull/29304",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T17:59:35Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "`new` does not take `this` from a member reference, so the `this` guard on `new` expressions is removed. Single-use member reads can now be inlined into both the constructor and its arguments.\n\n## Constructor\n\n```js\n// Before\nfunction create(o) {\n  var Ctor = o.Ctor;\n  return new Ctor(o.options);\n}\n\n// After\nfunction create(o) {\n  return new o.Ctor(o.options);\n}\n```\n\n## Arguments\n\n```js\n// Before\nfunction create(o, Ctor) {\n  var options = o.options;\n  return new Ctor(options);\n}\n\n// After\nfunction create(o, Ctor) {\n  return new Ctor(o.options);\n}\n```",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+34 -43)",
+        "tasks/minsize/minsize.snap (+3 -3)",
+        "crates/oxc_minifier/tests/peephole/inline_single_use_variable.rs (+32 -8)"
+      ],
+      "filesTotal": 3
+    },
+    {
+      "number": 29305,
+      "title": "feat(minifier): inline member reads into callees as indirect calls",
+      "url": "https://github.com/oxc-project/oxc/pull/29305",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T18:12:35Z",
+      "labels": [
+        "A-minifier"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "A single-use member read is now inlined into a call callee as `(0, o.m)()`, so `m` still runs without `this` bound to `o`. This matches terser, uglify-js and swc. esbuild keeps the variable, so the affected esbuild-derived expectations now have a note.\n\nThe tagged-template path already used this rewrite; both paths now share `passes_this_when_called`.\n\n## Member callees\n\n```js\n// Before\nfunction call(o) {\n  var method = o.method;\n  return method(o.value);\n}\n\n// After\nfunction call(o) {\n  return (0, o.method)(o.value);\n}\n```\n\n## Optional member callees\n\n```js\n// Before\nfunction call(o) {\n  var method = o?.method;\n  return method();\n}\n\n// After\nfunction call(o) {\n  return (0, o?.method)();\n}\n```",
+      "files": [
+        "crates/oxc_minifier/src/peephole/minimize_statements.rs (+66 -58)",
+        "tasks/minsize/minsize.snap (+5 -5)",
+        "tasks/track_memory_allocations/allocs_minifier.yaml (+4 -4)",
+        "crates/oxc_minifier/tests/peephole/esbuild.rs (+9 -8)",
+        "crates/oxc_minifier/tests/peephole/inline_single_use_variable.rs (+20 -4)"
+      ],
+      "filesTotal": 5
+    },
+    {
+      "number": 29316,
+      "title": "feat(minifier): merge adjacent switch cases with identical bodies",
+      "url": "https://github.com/oxc-project/oxc/pull/29316",
+      "author": "camc314",
+      "mergedAt": "2026-11-11T19:55:36Z",
+      "labels": [
+        "A-linter",
+        "A-parser",
+        "A-cli",
+        "A-minifier",
+        "A-linter-plugins"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "When two adjacent cases have the same body and that body always exits the switch (`return`, `throw`, `break` or `continue`), the earlier body is emptied so it falls through to the later one.\n\n```js\n// Input\nexport function isConstraint(node, parent) {\n  switch (node.kind) {\n    case 165: return node === parent.constraint;\n    case 347: return node === parent.constraint;\n    case 1: visit(node); break;\n    case 2: visit(node); break;\n    default: return false;\n  }\n}\nexport function minValue(kind) {\n  switch (kind) {\n    case 208:\n    case 209: return -2147483648;\n    default: return -2147483648;\n  }\n}\n```\n\nBefore:\n\n```js\nexport function isConstraint(node, parent) {\n\tswitch (node.kind) {\n\t\tcase 165: return node === parent.constraint;\n\t\tcase 347: return node === parent.constraint;\n\t\tcase 1:\n\t\t\tvisit(node);\n\t\t\tbreak;\n\t\tcase 2:\n\t\t\tvisit(node);\n\t\t\tbreak;\n\t\tdefault: return !1;\n\t}\n}\nexport function minValue(kind) {\n\tswitch (kind) {\n\t\tcase 208:\n\t\tcase 209: return -2147483648;\n\t\tdefault: return -2147483648;\n\t}\n}\n```\n\nAfter:\n\n```js\nexport function isConstraint(node, parent) {\n\tswitch (node.kind) {\n\t\tcase 165:\n\t\tcase 347: return node === parent.constraint;\n\t\tcase 1:\n\t\tcase 2:\n\t\t\tvisit(node);\n\t\t\tbreak;\n\t\tdefault: return !1;\n\t}\n}\nexport function minValue(kind) {\n\treturn -2147483648;\n}\n```\n\n- When the later body is the last one in the switch, a trailing unlabeled `break` is ignored on both sides, because falling off the end also exits the switch. The merge runs before `try_fold_switch` remo\n…(truncated)",
+      "files": [
+        "apps/oxlint/src-js/generated/deserialize.js (+0 -1)",
+        "crates/oxc_minifier/src/peephole/minimize_switch_statements.rs (+91 -3)",
+        "crates/oxc_minifier/src/peephole/mod.rs (+1 -0)",
+        "napi/parser/src-js/generated/deserialize/js.js (+0 -3)",
+        "napi/parser/src-js/generated/deserialize/js_parent.js (+0 -3)",
+        "napi/parser/src-js/generated/deserialize/js_range.js (+0 -3)",
+        "napi/parser/src-js/generated/deserialize/js_range_parent.js (+0 -3)",
+        "napi/parser/src-js/generated/deserialize/ts.js (+0 -3)",
+        "napi/parser/src-js/generated/deserialize/ts_parent.js (+0 -3)",
+        "napi/parser/src-js/generated/deserialize/ts_range.js (+0 -3)"
+      ],
+      "filesTotal": 15
+    },
+    {"number":29324,"title":"refactor(linter): add shared test.extend support to jest node resolution","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":28865,"title":"fix(ci): cache Windows NAPI builds on Dev Drive","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {"number":29344,"title":"chore(react_compiler): version crate on release to keep its changelog updated","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29350,"title":"ci(triage): add Astro software factory","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":28411,"title":"perf(napi): add profile-guided native builds","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29357,"title":"ci(triage): use Oxc Captain for triage bot","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29347,"title":"perf(parser): reduce identifier dispatch overhead","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29370,"title":"test(mangler): benchmark all minimal files with keep_name","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29373,"title":"docs(parser): fix grammar context formatting","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29374,"title":"refactor(parser): move context methods to context module","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29375,"title":"refactor(parser): move list parsing methods to list module","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29376,"title":"fix(react-compiler): resolve computed dependencies in merged memo scopes","hint":"fix","release":"⏳ 未リリース","brief":true},
+    {
+      "number": 29380,
+      "title": "feat(linter/typescript/no-misused-promises): add `flagUnions` option",
+      "url": "https://github.com/oxc-project/oxc/pull/29380",
+      "author": "camc314",
+      "mergedAt": "2026-11-12T18:01:34Z",
+      "labels": [
+        "A-linter",
+        "A-cli"
+      ],
+      "hint": "feature",
+      "release": "⏳ 未リリース",
+      "body": "Update to [oxlint-tsgolint 7.0.2007](https://github.com/oxc-project/tsgolint/releases/tag/v7.0.2007) and accept `checksConditionals: { flagUnions: \"none\" | \"strict\" | \"all\" }`. Preserve boolean configuration and existing defaults, and regenerate the JSON schema and TypeScript config types.",
+      "files": [
+        "apps/oxlint/src-js/package/config.generated.ts (+14 -2)",
+        "apps/oxlint/src/snapshots/fixtures__cli__tsgolint_rule_options_--type-aware@oxlint.snap (+13 -2)",
+        "crates/oxc_linter/src/rules/typescript/no_misused_promises.rs (+30 -3)",
+        "npm/oxlint/configuration_schema.json (+41 -3)",
+        "npm/oxlint/package.json (+1 -1)",
+        "package.json (+1 -1)",
+        "pnpm-lock.yaml (+68 -7)",
+        "apps/oxlint/fixtures/cli/tsgolint_rule_options/.oxlintrc.json (+8 -0)",
+        "apps/oxlint/fixtures/cli/tsgolint_rule_options/test.ts (+10 -0)"
+      ],
+      "filesTotal": 9
+    },
+    {"number":29355,"title":"refactor(lexer): add Bitmap type","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29387,"title":"chore(deps): update rust to v1.100.0","hint":"other","release":"⏳ 未リリース","brief":true},
+    {"number":29391,"title":"perf(mangler): skip a liveness walk that never marks a scope","hint":"unknown","release":"⏳ 未リリース","brief":true},
+    {"number":29363,"title":"test(react_compiler): port Sprout runtime conformance runner","hint":"other","release":"⏳ 未リリース","brief":true}
+  ],
+  "errors": [],
+  "excluded": {
+    "bots": {
+      "renovate[bot]": 1
+    }
+  }
+}
