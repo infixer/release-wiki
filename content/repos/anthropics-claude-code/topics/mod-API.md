@@ -1,6 +1,6 @@
 ---
 title: mod API
-updated: 2026-11-06
+updated: 2026-11-13
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -19,6 +19,7 @@ managed settings でインストールした mod は `$.prompt.media`（添付�
 v2.1.310 で `Image` が tmux（`allow-passthrough`・`focus-events` 有効）や kitty・Ghostty・iTerm2 3.5+ の全画面描画でも描画されるようになった（以前は `alt` テキストだけ）。
 v2.1.304 で `tool.check` の回答に `decider: "person"`（権限ダイアログかホストのコールバックだけが承認でき、尋ねる相手がいなければ拒否）が、イベントに `e.isReadOnly` が加わった。
 v2.1.318 で `$.model.fork` に `effort` オプションが加わり、セッションの effort に関係なく別の処理を `low` などで動かせる（結果には送った effort が入る）。セッション中に Claude Code が書いた mod を有効にするかの回答も記録される。
+v2.1.323 で、mod のペインを描く props に `isPromptCovered`（ダイアログやプロンプトの上の入力欄がプロンプトを覆っているか）が加わった。`claude plugin validate` は、mod の `engine.create` フックが追加・保留・置き換える `$` の名詞を表示し、プラグインの TypeScript の hooks モジュールを型チェックする（指摘は警告、`--strict` で失敗）。
 
 ## 主な API・オプション
 
@@ -33,9 +34,12 @@ v2.1.318 で `$.model.fork` に `effort` オプションが加わり、セッシ
 - `$.prompt.media` / `$.session.identity()` — managed settings でインストールした mod 向け
 - `tool.check` の `decider: "person"` / `e.isReadOnly` — 人だけが承認できる ask と、読み取り専用の呼び出しの判定（v2.1.304）
 - `$.model.fork({ effort })` — 別の処理を指定した effort で動かす（結果に送った effort が入る。v2.1.318）
+- ペインの props の `isPromptCovered` — ダイアログなどがプロンプトを覆っているか（v2.1.323）
+- `claude plugin validate`（`--strict`）— TypeScript の hooks モジュールの型チェックと、`engine.create` が変える `$` の名詞の表示（v2.1.323）
 
 ## 変更履歴
 
+- 2026-11-12 — ペインの props に `isPromptCovered`、`claude plugin validate` に hooks モジュールの型チェックと `engine.create` が変える `$` の名詞の表示を追加 📦 v2.1.323 · [[repos/anthropics-claude-code/releases/v2.1.323|リリース]]
 - 2026-11-06 — ビルトインの `privacy` mod のソースを `mods/privacy` に公開（挙動の変更なし）、`mods/types/claude-code.d.ts` に `$.session.identity` の型を追加（[#107768](https://github.com/anthropics/claude-code/pull/107768)）⏳ 未リリース · [[repos/anthropics-claude-code/changes/2026-11-06|変更]]
 - 2026-11-04 — `$.model.fork` に `effort` オプション、セッションで書いた mod を有効にするかの回答の記録を追加 📦 v2.1.318 · [[repos/anthropics-claude-code/releases/v2.1.318|リリース]]
 - 2026-10-24 — `Image` を tmux（`allow-passthrough`・`focus-events` 有効）、kitty・Ghostty・iTerm2 3.5+ の全画面描画で描画できるように 📦 v2.1.310 · [[repos/anthropics-claude-code/releases/v2.1.310|リリース]]
@@ -61,3 +65,4 @@ v2.1.318 で `$.model.fork` に `effort` オプションが加わり、セッシ
 - [[repos/anthropics-claude-code/releases/v2.1.310|v2.1.310]]
 - [[repos/anthropics-claude-code/releases/v2.1.318|v2.1.318]]
 - [[repos/anthropics-claude-code/changes/2026-11-06|2026-11-06 の変更]]
+- [[repos/anthropics-claude-code/releases/v2.1.323|v2.1.323]]

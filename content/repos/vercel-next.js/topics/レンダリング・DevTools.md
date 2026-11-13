@@ -1,6 +1,6 @@
 ---
 title: レンダリング・DevTools
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/vercel-next.js
   - topic
@@ -9,9 +9,12 @@ tags:
 ## 概要
 
 メタデータのレンダリング経路、オンデマンド生成時のエラーハンドリング、開発オーバーレイ（dev overlay）の表示まわりの実装。ストリーミングとブロッキングでメタデータの扱いを揃える変更に続き、Edge SSR でも Node SSR と同じユーザーエージェントベースのメタデータ方針（HTML 制限ボットにはブロッキング）が使われるようになった。`error.tsx` が正しく使われるようにする修正、開発オーバーレイのハイドレーションエラー表示・レイアウトの改善も含まれる。クライアントコンポーネントの読み込み時間のテレメトリは、HTML を生成するレンダーごとに計測するようになった（非同期モジュールの評価時間も含む）。App Router の開発インジケーターは出力完了時に分類を確定するようになり、OpenTelemetry のトレーサーには正しい Next.js のバージョンが設定される。Instant Navigation の検証では、`prefetch()` / `navigation()` による待ちを URL データと区別し、ブロッキングにならない指摘をアンバーの「Instant Insights」として表示するようになった。完全に静的なルートのエラーには、クライアント側での修正方法が加わり、オーバーレイ・ビルドメッセージ・エラーページの説明が揃えられた。サーバーのエラー表示（`patch-error-inspect.ts`）は、複数行のメッセージをスタックフレームと誤って解釈しなくなった（v16.5.0-canary.8）。`next dev` のコードフレームはターミナルのサイズ変更に追従し、マルチバイト文字（CJK など）を含むソースでの `next-code-frame` の panic も修正された。Client Component 経由で `next/headers` を使ったときのエラーは、Pages Router と誤って表示されなくなった（いずれも v16.5.0-canary.10）。安定版 v16.4.2 には `next-code-frame` のマルチバイト文字での修正がバックポートされた。エラーオーバーレイの「Open in editor」ボタンは共通のコンポーネントになり、Code Wrap アイコンで見つけやすくなった（未リリース）。開発時の HMR では、ルーターの初期化前に届いた更新が失われたり（App Router）警告になったり（Pages Router の ISR マニフェスト）する問題が修正され、DevTools インジケーターは問題とコンパイル中の状態を同時に表示する（いずれも v16.5.0-canary.21）。ボットの判定は 1KB を超える User-Agent を対象外にし（`htmlLimitedBots` を含む正規表現の処理量を抑える DoS 対策）、サーバーの起動時には描画の検証や fetch の重複排除のために React を読み込まなくなった（いずれも v16.5.0-canary.24）。開発時の Chrome DevTools のワークスペースの UUID は、キャッシュディレクトリが無いときも作成してから保存され、Docker 環境でも永続化されるようになった（いずれも v16.5.0-canary.29）。v16.5.0-canary.32 では、エラーオーバーレイ（redbox）が HMR の `sync` メッセージを待たずに表示されるようになり、React の experimental 版（`enableHydrationChangeEvent` を含む）を選ぶ `experimental.hydrationChangeEvent` が加わった。v16.5.0-canary.36 では、ソースマップが無効なとき（本番サーバーなど）は error inspection の差し替えをやめ、`node_modules` のフレームが隠れ続けないようにした。`experimental.externalBrowserRuntime` を有効にすると、React の命令をインラインの `<script>` ではなく `<template data-rci>` と外部のランタイムスクリプトで適用し、CSP の `unsafe-inline` を減らせる（App Router のみ、`react@experimental` を使用、v16.5.0-canary.40）。開発オーバーレイの Request Insights では、サーバーがリクエストに識別子を割り当ててページ・API・画像・RSC・Proxy などの種類を分類し、リクエストの URL と一致したルートのテンプレート、同一オリジンと外部の fetch の区別を（認証情報・クエリの値を除いて）表示するようになった（v16.5.0-canary.42）。ID や MCP 用のプロンプトをコピーできるコンテキストメニューは未リリース。段階的レンダリングの `onStage` は、中断されたステージではリスナーを実行しなくなった。
+v16.5.0-canary.49 では、webpack の開発時にモジュールの変わらない hot update で dev overlay のエラーが消える問題が直り、メタデータの `alternates.canonical` の `title` や単一の値の `songs`・`creators` が正しく解決されるようになった。
 
 ## 変更履歴
 
+- 2026-11-12 — `alternates.canonical` の `title`、単一の値の `songs`・`creators` が解決されない問題を修正し、`Metadata` / `Viewport` のリファレンスを補完（[#101547](https://github.com/vercel/next.js/pull/101547)）📦 v16.5.0-canary.49 · [[repos/vercel-next.js/changes/2026-11-13|変更]]
+- 2026-11-11 — webpack の開発時に、モジュールの変わらない hot update で dev overlay のエラーを消さない（[#101532](https://github.com/vercel/next.js/pull/101532)）📦 v16.5.0-canary.49 · [[repos/vercel-next.js/changes/2026-11-13|変更]]
 - 2026-11-09 — dev overlay・HMR の `sync` が npm レジストリのバージョン確認を待たない（結果は `versionInfo` で後から送る）（[#100628](https://github.com/vercel/next.js/pull/100628)）📦 v16.5.0-canary.47 · [[repos/vercel-next.js/changes/2026-11-11|変更]]
 - 2026-11-06 — Request Insights: コンテキストメニュー（ID・MCP 用のプロンプトのコピー）とトレースの操作を改善（[#97796](https://github.com/vercel/next.js/pull/97796)）⏳ 未リリース · [[repos/vercel-next.js/changes/2026-11-06|変更]]
 - 2026-11-05 — Request Insights: リクエストの URL・ルートのテンプレートと fetch の詳細表示を改善（[#96925](https://github.com/vercel/next.js/pull/96925)）📦 v16.5.0-canary.42 · [[repos/vercel-next.js/changes/2026-11-06|変更]]
@@ -68,3 +71,4 @@ tags:
 - [[repos/vercel-next.js/changes/2026-11-04|2026-11-04 の変更]]
 - [[repos/vercel-next.js/changes/2026-11-06|2026-11-06 の変更]]
 - [[repos/vercel-next.js/changes/2026-11-11|2026-11-11 の変更]]
+- [[repos/vercel-next.js/changes/2026-11-13|2026-11-13 の変更]]

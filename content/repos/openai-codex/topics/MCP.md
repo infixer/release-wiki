@@ -1,6 +1,6 @@
 ---
 title: MCP
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/openai-codex
   - topic
@@ -25,9 +25,13 @@ Codex から MCP（Model Context Protocol）サーバーに接続するクライ
 - MCP の承認の取り消しの理由 — `user`・`interrupted`・`non_interactive`
 - `features.apps_early_resource_discovery` — Apps のカタログ（`mcp/plugin`・`mcp/skill`）を初回のツールの一覧の完了前に発見（既定で無効）
 - `AgentMcpMetadataRecipient` — ツール呼び出しのメタデータを受け取る MCP のプラグインの登録をホストが指定するスレッドの拡張
+- `apps_mcp_product_sku` — Node REPL のサーバーとブラウザのコネクターへの `product_sku` の出どころ（不明な値は `other`）。クライアントの `product_sku` は転送しない
 
 ## 変更履歴
 
+- 2026-11-13 — MCP の OAuth の保存をロックと再確認で古い資格情報の書き込みから守る（[#60849](https://github.com/openai/codex/pull/60849)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
+- 2026-11-13 — MCP の設定の更新でセッションの `apps` の上書きを反映（リンクの承認の変更が次のターンから効く）（[#60730](https://github.com/openai/codex/pull/60730)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
+- 2026-11-13 — `product_sku` を転送せず、Node REPL のサーバーとブラウザのコネクターにだけ `apps_mcp_product_sku` から入れる（[#60697](https://github.com/openai/codex/pull/60697)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
 - 2026-11-11 — `thread/items/list` の `deferOutput.mcpToolCall`（実験的）で MCP のプレーンテキストの出力を後回しにし `thread/items/read` で取得（[#60390](https://github.com/openai/codex/pull/60390)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
 - 2026-11-11 — まとめてのリソース一覧に待機中のサーバーの `deferredServers`（[#60423](https://github.com/openai/codex/pull/60423)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
 - 2026-11-09 — 共有の app-server に接続したときの MCP の起動の追跡を修正（[#60280](https://github.com/openai/codex/pull/60280)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-09|変更]]

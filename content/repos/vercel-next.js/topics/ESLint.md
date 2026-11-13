@@ -1,6 +1,6 @@
 ---
 title: ESLint
-updated: 2026-11-09
+updated: 2026-11-13
 tags:
   - repo/vercel-next.js
   - topic
@@ -10,6 +10,7 @@ tags:
 
 Next.js の ESLint 設定パッケージ `eslint-config-next` まわり。`eslint-config-next` は ESLint 9 と 10 の両方で動くようになった。Next.js の Node.js の最小要件（`>=20.9.0`）は変えず、ESLint 10 が要求する Node.js（`^20.19.0 || ^22.13.0 || >=24`）より古い Node.js 20 では ESLint 9 を使い続ける。ESLint 10 に対応したリリースが無い依存（`next` に同梱の Babel パーサーなど）は、`eslint-config-next` 側のパッチで補っている（ESLint 9 では何もしない）。create-next-app で作る新規プロジェクトは ESLint `^10` を使うようになった（ESLint 9 までしか peer 依存を宣言していないプラグインでは警告が出ることがある）。
 `eslint-config-next` の省略可能な TypeScript の peer は、`typescript-eslint` と同じ `>=4.8.4 <6.1.0` になった（TypeScript 7 は対象外。v16.5.0-canary.45）。TypeScript 7 と併用する設定はドキュメントで説明されている。
+`no-html-link-for-pages` のルールは、JSX の文字列リテラルだけでなく、定数の式や静的な配列のインラインの `.map()` 内の `href` も報告するようになった（警告が増えることがある。v16.5.0-canary.49）。
 
 ## 主な API・オプション
 
@@ -17,9 +18,11 @@ Next.js の ESLint 設定パッケージ `eslint-config-next` まわり。`eslin
 - `eslint-config-next/parser` — Babel パーサーに `scopeManager.addGlobals()` が無い場合に追加する
 - create-next-app — 新規プロジェクトの `eslint` は `^10`
 - `eslint-config-next` の peer `typescript` — `>=4.8.4 <6.1.0`（省略可能）
+- `no-html-link-for-pages` — 内部リンクの `<a>` に `next/link` の `Link` を勧めるルール。v16.5.0-canary.49 から定数・`.map()` の `href` も対象
 
 ## 変更履歴
 
+- 2026-11-13 — `no-html-link-for-pages` が定数の href や静的な配列の `.map()` 内の href も報告（[#101641](https://github.com/vercel/next.js/pull/101641)）📦 v16.5.0-canary.49 · [[repos/vercel-next.js/changes/2026-11-13|変更]]
 - 2026-11-06 — `eslint-config-next` の TypeScript の peer を `typescript-eslint` に揃える（[#101247](https://github.com/vercel/next.js/pull/101247)）📦 v16.5.0-canary.45 · [[repos/vercel-next.js/changes/2026-11-09|変更]]
 - 2026-10-09 — create-next-app の新規プロジェクトで ESLint 10 を使うように（[#99814](https://github.com/vercel/next.js/pull/99814)）📦 v16.5.0-canary.5 · [[repos/vercel-next.js/changes/2026-10-09|変更]]
 - 2026-10-07 — `eslint-config-next` が ESLint 10 に対応（[#99628](https://github.com/vercel/next.js/pull/99628)）📦 v16.5.0-canary.1 · [[repos/vercel-next.js/changes/2026-10-07|変更]]
@@ -29,3 +32,4 @@ Next.js の ESLint 設定パッケージ `eslint-config-next` まわり。`eslin
 - [[repos/vercel-next.js/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/vercel-next.js/changes/2026-10-07|2026-10-07 の変更]]
 - [[repos/vercel-next.js/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/vercel-next.js/changes/2026-11-13|2026-11-13 の変更]]

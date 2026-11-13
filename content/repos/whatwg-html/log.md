@@ -1,9 +1,16 @@
 ---
 title: whatwg/html 取り込み履歴
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/whatwg-html
 ---
+
+## 2026-11-13
+
+- 期間: 2026-11-09T15:17:50Z 〜 2026-11-13T01:55:28Z
+- PR 13 件（詳しく 6 件 / 1 行 7 件）、Release 0 件
+- 更新したページ: [[repos/whatwg-html/changes/2026-11-13|changes]]（新規）、[[repos/whatwg-html/topics/canvas要素|canvas要素]]（新規）、[[repos/whatwg-html/topics/HTMLパーサー|HTMLパーサー]]（新規）、[[repos/whatwg-html/topics/Windowオブジェクト|Windowオブジェクト]]（新規）、[[repos/whatwg-html/topics/ワーカー|ワーカー]]（新規）、[[repos/whatwg-html/topics/select要素|select要素]]、[[repos/whatwg-html/topics/style要素|style要素]]、[[repos/whatwg-html/topics/Navigation-API|Navigation-API]]、[[repos/whatwg-html/index|index]]
+- エラー: なし
 
 ## 2026-11-11
 

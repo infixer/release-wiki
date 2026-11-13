@@ -1,9 +1,16 @@
 ---
 title: oxc-project/oxc 取り込み履歴
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/oxc-project-oxc
 ---
+
+## 2026-11-13
+
+- 期間: 2026-11-11T00:47:35Z 〜 2026-11-13T01:55:28Z
+- PR 54 件（詳しく 30 件 / 1 行 24 件、うち brief 24 件）、Release 0 件
+- 更新したページ: [[repos/oxc-project-oxc/changes/2026-11-13|changes]]（新規）、[[repos/oxc-project-oxc/topics/Linterルール個別修正|Linterルール個別修正]]、[[repos/oxc-project-oxc/topics/Minifier|Minifier]]、[[repos/oxc-project-oxc/topics/Oxfmt|Oxfmt]]、[[repos/oxc-project-oxc/topics/HTMLフォーマッタ|HTMLフォーマッタ]]、[[repos/oxc-project-oxc/topics/Playground|Playground]]、[[repos/oxc-project-oxc/topics/レキサー基盤|レキサー基盤]]、[[repos/oxc-project-oxc/topics/型認識Lint|型認識Lint]]、[[repos/oxc-project-oxc/index|index]]
+- エラー: なし（除外した bot の PR: renovate[bot] 1 件）
 
 ## 2026-11-11
 

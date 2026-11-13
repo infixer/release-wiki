@@ -1,6 +1,6 @@
 ---
 title: Collections
-updated: 2026-11-04
+updated: 2026-11-13
 tags:
   - repo/adobe-react-spectrum
   - topic
@@ -13,9 +13,11 @@ react-aria のコレクション基盤（`Document`/`BaseCollection`、`packages
 `TreeItem` は `hasChildItems` を `useTreeItem` に渡し、子の行がまだ無い行でも展開できる（v3・S2 の `TreeView` も同様。未リリース）。
 `GridListItem` は `onFocus`・`onBlur`・`onFocusChange` を受け付け、マウスとキーボードの両方で呼ばれる（`useFocus` を使用。未リリース）。
 Table の `Row` も `GridListItem` と同じく `onFocus`・`onBlur`・`onFocusChange` を受け付ける（行自体のフォーカスだけを報告し、セル・ボタンなど内側へのフォーカスは別扱い。未リリース）。Tree の項目は `Text slot="description"` の説明テキストに対応し、GridList と同じく継承した `aria-labelledby` で行の名前に説明も含まれる（未リリース）。
+`useTreeData` は、キーが `0` や `''` の親の下でも更新・削除・挿入・ルートへの移動を返すツリーに反映する（以前は検索用のマップだけが更新され、古いノードが残ることがあった。未リリース）。
 
 ## 変更履歴
 
+- 2026-11-12 — `useTreeData` で 0 や空文字のキーを持つ親の下の変更がツリーに反映されない問題を修正（#10907）（[#10908](https://github.com/adobe/react-spectrum/pull/10908)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-11-13|変更]]
 - 2026-11-03 — Tree の項目に説明テキスト（`Text slot="description"`）（#10665）（[#10710](https://github.com/adobe/react-spectrum/pull/10710)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-11-04|変更]]
 - 2026-11-03 — Table の `Row` に `onFocus`・`onBlur`・`onFocusChange` を追加（[#10857](https://github.com/adobe/react-spectrum/pull/10857)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-11-04|変更]]
 - 2026-10-22 — `GridListItem` に `onFocus`・`onBlur`・`onFocusChange` を追加（[#10822](https://github.com/adobe/react-spectrum/pull/10822)）⏳ 未リリース · [[repos/adobe-react-spectrum/changes/2026-10-23|変更]]
@@ -32,3 +34,4 @@ Table の `Row` も `GridListItem` と同じく `onFocus`・`onBlur`・`onFocusC
 - [[repos/adobe-react-spectrum/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-10-23|2026-10-23 の変更]]
 - [[repos/adobe-react-spectrum/changes/2026-11-04|2026-11-04 の変更]]
+- [[repos/adobe-react-spectrum/changes/2026-11-13|2026-11-13 の変更]]

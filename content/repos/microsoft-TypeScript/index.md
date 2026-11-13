@@ -1,6 +1,6 @@
 ---
 title: microsoft/TypeScript
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/microsoft-TypeScript
 ---
@@ -15,6 +15,8 @@ tags:
 
 ## 直近の注目変更
 
+- コンテンツマッパーの登録を `include` の glob で絞り込めるように（既定の `extension` はマニフェストから）（[#65047](https://github.com/microsoft/TypeScript/pull/65047)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/コンテンツマッパー|コンテンツマッパー]]
+- 遅延した indexed access 型のキャッシュのキーを永続的な access flags に（移植のバグ）（[#65450](https://github.com/microsoft/TypeScript/pull/65450)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
 - コンテンツマッパーの仮想ファイルのモジュール形式を修正し、形式の食い違いに診断を出す（[#65432](https://github.com/microsoft/TypeScript/pull/65432)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/コンテンツマッパー|コンテンツマッパー]]
 - 折りたたみ範囲の終わりの行は、閉じかっこの後に何かあるときだけ戻す（[#65319](https://github.com/microsoft/TypeScript/pull/65319)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/言語サービス|言語サービス]]
 - PR のビルドを npm に公開し、インストールや Playground で使えるように（[#65406](https://github.com/microsoft/TypeScript/pull/65406)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/開発ツールとCI|開発ツールとCI]]
@@ -23,8 +25,6 @@ tags:
 - API の `Program` に `getProjectReferences`・`getRootFileNames`・`getStatistics` を追加し、`Program`・`Project` の重複メソッドを削除（[#64988](https://github.com/microsoft/TypeScript/pull/64988)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 - fanotify がマウントを `EXDEV` で拒否したときは inotify にフォールバック（[#65325](https://github.com/microsoft/TypeScript/pull/65325)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/ビルドとファイル監視|ビルドとファイル監視]]
 - エスケープしたキーワードのクラスメンバーの前の ASI を修正（[#64885](https://github.com/microsoft/TypeScript/pull/64885)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- accessor の decorator metadata で getter の型注釈を保つ（[#65343](https://github.com/microsoft/TypeScript/pull/65343)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/型チェッカー・コンパイラ|型チェッカー・コンパイラ]]
-- Checker の API に不足していたメソッドを追加（`getAugmentedPropertiesOfType` は削除）（[#65037](https://github.com/microsoft/TypeScript/pull/65037)）⏳ 未リリース · トピック: [[repos/microsoft-TypeScript/topics/プログラム的API|プログラム的API]]
 
 ## トピック
 
@@ -38,4 +38,4 @@ tags:
 ## 取り込み
 
 - [[repos/microsoft-TypeScript/log|取り込み履歴]]
-- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-11-11|2026-11-11]]、[[repos/microsoft-TypeScript/changes/2026-11-09|2026-11-09]]、[[repos/microsoft-TypeScript/changes/2026-11-06|2026-11-06]]、[[repos/microsoft-TypeScript/changes/2026-11-04|2026-11-04]]、[[repos/microsoft-TypeScript/changes/2026-11-02|2026-11-02]]
+- 最近の変更: [[repos/microsoft-TypeScript/changes/2026-11-13|2026-11-13]]、[[repos/microsoft-TypeScript/changes/2026-11-11|2026-11-11]]、[[repos/microsoft-TypeScript/changes/2026-11-09|2026-11-09]]、[[repos/microsoft-TypeScript/changes/2026-11-06|2026-11-06]]、[[repos/microsoft-TypeScript/changes/2026-11-04|2026-11-04]]

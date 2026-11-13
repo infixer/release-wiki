@@ -1,9 +1,17 @@
 ---
 title: vercel/next.js 取り込み履歴
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/vercel-next.js
 ---
+
+## 2026-11-13
+
+- 期間: 2026-11-11T00:37:14Z 〜 2026-11-13T01:55:28Z
+- PR 50 件（詳しく 23 件 / 1 行 27 件）、Release 2 件（安定版 0 件、v16.5.0-canary.48〜.49）
+- 更新したページ: [[repos/vercel-next.js/changes/2026-11-13|changes]]（新規）、[[repos/vercel-next.js/topics/ビルド・Turbopack|ビルド・Turbopack]]、[[repos/vercel-next.js/topics/キャッシュ・プリレンダリング|キャッシュ・プリレンダリング]]、[[repos/vercel-next.js/topics/レンダリング・DevTools|レンダリング・DevTools]]、[[repos/vercel-next.js/topics/テレメトリ|テレメトリ]]、[[repos/vercel-next.js/topics/create-next-app|create-next-app]]、[[repos/vercel-next.js/topics/ESLint|ESLint]]、[[repos/vercel-next.js/topics/next-og|next/og]]、[[repos/vercel-next.js/index|index]]
+- 備考: `hint: fix` の #101642（ベンチマークの `pnpm-lock.yaml` の修正）は「その他」に入れた。`hint: unknown` のうち内部のリファクタ・eval・ベンチマーク・turbo-persistence の API 変更など 11 件は 1 行扱い。PR 49 件は 📦 v16.5.0-canary.49（canary.48 の公開前にマージされたものも inbox の表記のまま）、1 件は ⏳ 未リリース
+- エラー: なし（bot の PR 2 件を除外: `next-js-bot[bot]`）
 
 ## 2026-11-11
 

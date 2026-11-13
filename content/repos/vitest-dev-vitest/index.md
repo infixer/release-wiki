@@ -1,6 +1,6 @@
 ---
 title: vitest-dev/vitest
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/vitest-dev-vitest
 ---
@@ -15,6 +15,8 @@ tags:
 
 ## 直近の注目変更
 
+- pool: 取り残された forks のワーカーを watchdog プロセスで `SIGKILL` する（#11915 を修正）（[#11939](https://github.com/vitest-dev/vitest/pull/11939)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
+- 性能: CLI のファイルフィルタを 1 回だけ解決（作者の例で 23.9 秒 → 0.69 秒）（[#11935](https://github.com/vitest-dev/vitest/pull/11935)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/テストの絞り込み|テストの絞り込み]]
 - `testTimeout` を無効にしていても、切断された forks のワーカーを終了する（[#11924](https://github.com/vitest-dev/vitest/pull/11924)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/プール|プール]]
 - ソースマップを base64 のコメントではなく文字列でワーカーに送る（キャッシュのバージョンも更新）（[#11750](https://github.com/vitest-dev/vitest/pull/11750)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - `configureServer` の中でも fs モジュールキャッシュにヒットできるように（[#11927](https://github.com/vitest-dev/vitest/pull/11927)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
@@ -23,8 +25,6 @@ tags:
 - cache: 削除されたキャッシュファイルをキャッシュミスとして扱う（[#11861](https://github.com/vitest-dev/vitest/pull/11861)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - fs モジュールキャッシュの環境変数 `VITEST_FS_MODULE_CACHE` / `VITEST_FS_MODULE_CACHE_PATH` を追加（[#11859](https://github.com/vitest-dev/vitest/pull/11859)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
 - cache: ルート外のキャッシュ済みファイルも `--watch` で監視（[#11860](https://github.com/vitest-dev/vitest/pull/11860)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/キャッシュ|キャッシュ]]
-- mocker: ホイストした import の再 export を保つ（[#11867](https://github.com/vitest-dev/vitest/pull/11867)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/モック|モック]]
-- リトライ間でテストの `expect` の状態をリセット（`expect.assertions` / `hasAssertions`）（[#11900](https://github.com/vitest-dev/vitest/pull/11900)）⏳ 未リリース · トピック: [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]]
 
 ## トピック
 
@@ -36,7 +36,7 @@ tags:
 - [[repos/vitest-dev-vitest/topics/テスト環境|テスト環境]] — jsdom・happy-dom などのテスト環境の統合と Node ビルトインの解決
 - [[repos/vitest-dev-vitest/topics/ブラウザモード|ブラウザモード]] — ブラウザモードのサーバー・環境設定・カスタムコマンド・トレース・Playwright 連携
 - [[repos/vitest-dev-vitest/topics/プロジェクト|プロジェクト]] — 複数のプロジェクト（`projects`）の解決と `root` の扱い
-- [[repos/vitest-dev-vitest/topics/プール|プール]] — ワーカーのプール（`maxWorkers`・vm プール・`VITEST_POOL_ID`・typecheck の `typescript` プール）
+- [[repos/vitest-dev-vitest/topics/プール|プール]] — ワーカーのプール（`maxWorkers`・vm プール・`VITEST_POOL_ID`・typecheck の `typescript` プール・forks のワーカーを終了する watchdog）
 - [[repos/vitest-dev-vitest/topics/モック|モック]] — `vi.spyOn`・`vi.resetAllMocks` などモック・スパイ、モックのインターセプター、in-source testing のモック
 - [[repos/vitest-dev-vitest/topics/ランタイム|ランタイム]] — テストを動かすランタイム（`process` の扱い・非同期リーク検出・`repeats` / `retry`・フィクスチャ・フックのクリーンアップ・`skipIf`・キャンセル・テスト名の整形）
 - [[repos/vitest-dev-vitest/topics/レポーター|レポーター]] — レポーター実装とオプション（JUnit・HTML・Node のトレースのタイムラインを含む）
@@ -44,4 +44,4 @@ tags:
 ## 取り込み
 
 - [[repos/vitest-dev-vitest/log|取り込み履歴]]
-- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-11-11|2026-11-11]]、[[repos/vitest-dev-vitest/changes/2026-11-09|2026-11-09]]、[[repos/vitest-dev-vitest/changes/2026-11-06|2026-11-06]]、[[repos/vitest-dev-vitest/changes/2026-11-04|2026-11-04]]、[[repos/vitest-dev-vitest/changes/2026-11-02|2026-11-02]]
+- 最近の変更: [[repos/vitest-dev-vitest/changes/2026-11-13|2026-11-13]]、[[repos/vitest-dev-vitest/changes/2026-11-11|2026-11-11]]、[[repos/vitest-dev-vitest/changes/2026-11-09|2026-11-09]]、[[repos/vitest-dev-vitest/changes/2026-11-06|2026-11-06]]、[[repos/vitest-dev-vitest/changes/2026-11-04|2026-11-04]]

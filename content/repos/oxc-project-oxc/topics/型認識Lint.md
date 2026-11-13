@@ -1,6 +1,6 @@
 ---
 title: 型認識Lint
-updated: 2026-11-09
+updated: 2026-11-13
 tags:
   - repo/oxc-project-oxc
   - topic
@@ -8,7 +8,7 @@ tags:
 
 ## 概要
 
-TSGolint をバックエンドにした oxlint の型認識（type-aware）lint。型解析は TSGolint 側で行う。`Pick<Data, never>` のように `{}` になる型操作を報告する `typescript/no-generated-empty-object-type` が追加された（対応するバックエンドが必要）。`--type-check-only` モードでは型認識ルールを実行せず、型エラーだけを報告するよう修正された。型認識の診断ごとにファイルのソース全文をコピーしていたのをやめ、ファイルごとに 1 つ共有するようにした。診断が多い大規模プロジェクトで oxlint プロセスのピーク RSS が大きく減る（VS Code の `src` で約 31 GiB → 0.7 GiB。未リリース）。2026-10-26 の回では、oxlint-tsgolint 7.0.2005 に合わせて `typescript/no-unsafe-enum-assignment` ルールと `typescript/await-thenable` の `allowMixedPromiseArrays` オプションが追加され、`oxlint` が要求する `oxlint-tsgolint` の最低バージョンが `>=7.0.2005` に上がった。`unicorn/prefer-string-starts-ends-with` のように他のプラグインに同名のルールがあっても、型認識の診断には型認識ルールの重大度を使うよう直った（いずれも未リリース）。2026-11-06 の回（未リリース）では、oxlint が新しい `tsrs-lint` ランチャー（oxc-project/tsrs#857）を `node_modules/.bin`・`PATH`・ディレクトリの上書き指定から探して優先的に使い、無ければ `tsgolint` にフォールバックするようになった。明示した実行ファイルのパスが優先され、Go のプロファイリングのオプションを使うときは `tsgolint` を選ぶ。`tsrs-lint` の探索（#28751）は oxlint_v1.92.0（2026-11-06）で公開された。
+TSGolint をバックエンドにした oxlint の型認識（type-aware）lint。型解析は TSGolint 側で行う。`Pick<Data, never>` のように `{}` になる型操作を報告する `typescript/no-generated-empty-object-type` が追加された（対応するバックエンドが必要）。`--type-check-only` モードでは型認識ルールを実行せず、型エラーだけを報告するよう修正された。型認識の診断ごとにファイルのソース全文をコピーしていたのをやめ、ファイルごとに 1 つ共有するようにした。診断が多い大規模プロジェクトで oxlint プロセスのピーク RSS が大きく減る（VS Code の `src` で約 31 GiB → 0.7 GiB。未リリース）。2026-10-26 の回では、oxlint-tsgolint 7.0.2005 に合わせて `typescript/no-unsafe-enum-assignment` ルールと `typescript/await-thenable` の `allowMixedPromiseArrays` オプションが追加され、`oxlint` が要求する `oxlint-tsgolint` の最低バージョンが `>=7.0.2005` に上がった。`unicorn/prefer-string-starts-ends-with` のように他のプラグインに同名のルールがあっても、型認識の診断には型認識ルールの重大度を使うよう直った（いずれも未リリース）。2026-11-06 の回（未リリース）では、oxlint が新しい `tsrs-lint` ランチャー（oxc-project/tsrs#857）を `node_modules/.bin`・`PATH`・ディレクトリの上書き指定から探して優先的に使い、無ければ `tsgolint` にフォールバックするようになった。明示した実行ファイルのパスが優先され、Go のプロファイリングのオプションを使うときは `tsgolint` を選ぶ。`tsrs-lint` の探索（#28751）は oxlint_v1.92.0（2026-11-06）で公開された。2026-11-13 の回（未リリース）では、oxlint-tsgolint 7.0.2007 に更新し、`typescript/no-misused-promises` の `checksConditionals` に `flagUnions`（`"none"` / `"strict"` / `"all"`）を指定できるようになった。
 
 ## 主な API・オプション
 
@@ -19,9 +19,11 @@ TSGolint をバックエンドにした oxlint の型認識（type-aware）lint�
 - `typescript/await-thenable` の `allowMixedPromiseArrays` — Promise をまとめる関数に同期の値と Promise ライクな値が混ざった入力を許す（既定 `false`）
 - `oxlint-tsgolint` — `oxlint` の optional な peer dependency（`>=7.0.2005`）
 - `tsrs-lint` — 型認識 lint のランチャー。見つかれば `tsgolint` より優先（未リリース）
+- `typescript/no-misused-promises` の `checksConditionals: { flagUnions: "none" | "strict" | "all" }` — 真偽値の設定も引き続き使える（oxlint-tsgolint 7.0.2007。未リリース）
 
 ## 変更履歴
 
+- 2026-11-13 — `typescript/no-misused-promises` に `flagUnions` オプション（oxlint-tsgolint 7.0.2007）（[#29380](https://github.com/oxc-project/oxc/pull/29380)）⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-13|変更]]
 - 2026-11-06 — 型認識 lint で `tsrs-lint` を探して優先的に使う（`tsgolint` にフォールバック）（[#28751](https://github.com/oxc-project/oxc/pull/28751)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-11-06|変更]]
 - 2026-10-26 — `typescript/no-unsafe-enum-assignment` を追加（[#28117](https://github.com/oxc-project/oxc/pull/28117)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-26|変更]]
 - 2026-10-26 — `typescript/await-thenable` に `allowMixedPromiseArrays` オプション（[#28116](https://github.com/oxc-project/oxc/pull/28116)） ⏳ 未リリース · [[repos/oxc-project-oxc/changes/2026-10-26|変更]]
@@ -38,3 +40,4 @@ TSGolint をバックエンドにした oxlint の型認識（type-aware）lint�
 - [[repos/oxc-project-oxc/releases/oxlint_v1.90.0|oxlint_v1.90.0]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.92.0|oxlint_v1.92.0]]
 - [[repos/oxc-project-oxc/releases/oxlint_v1.93.0|oxlint_v1.93.0]]
+- [[repos/oxc-project-oxc/changes/2026-11-13|2026-11-13 の変更]]

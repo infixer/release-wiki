@@ -1,6 +1,6 @@
 ---
 title: UIテンプレート・ローディング画面
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/nuxt-nuxt
   - topic
@@ -10,6 +10,7 @@ tags:
 
 ローディング表示まわり（`packages/ui-templates` のローディング画面、SPA ローディングテンプレート、`<NuxtLoadingIndicator>`）。`packages/ui-templates` のローディング画面は、WebGPU を使い、パーティクルによる山脈アニメーションをシェーダー1つ・描画コール1つで描画する。WebGPU が使えない環境では canvas を出さずロゴのみになり、`prefers-reduced-motion` ではアニメーションを止める。進捗表示は `window.__NUXT_LOADING_STATE__` または `nuxt:loading-state` イベントを読み取る。SPA ローディングテンプレートは、`experimental.spaLoadingTemplateLocation: 'within'` のとき実験的な Vite サーバービルダー（`@nuxt/vite-server`）でも `#__nuxt` の中に描画され、マウント時に Vue が置き換える（Nitro のレンダラーと同じ挙動）。`<NuxtLoadingIndicator>` には、進捗が 100% に達したときの色を指定する `finishColor` プロップが加わった（エラー時は `errorColor` が優先、未指定なら `color`）（いずれも未リリース）。狭い画面でもシェーダーの比率が崩れないよう修正された（未リリース）。
 SPA ローディングテンプレートの解決は kit の内部ヘルパーに共通化され、vite-server でもレイヤーの探索はファイルだけに一致し、読めないテンプレートは飛ばす（未リリース）。
+既定のエラーテンプレート（`nuxt-error-page.vue`）は `defineAsyncComponent` なしで読み込み、遅延コンポーネントの無いアプリで 555B（brotli）小さくなった（未リリース）。
 
 ## 主な API・オプション
 
@@ -19,6 +20,7 @@ SPA ローディングテンプレートの解決は kit の内部ヘルパー�
 
 ## 変更履歴
 
+- 2026-11-12 — perf: 既定のエラーテンプレートを `defineAsyncComponent` なしで読み込む（[#36985](https://github.com/nuxt/nuxt/pull/36985)） ⏳ 未リリース · [[repos/nuxt-nuxt/changes/2026-11-13|変更]]
 - 2026-11-10 — SPA ローディングテンプレートの解決を共通化（vite でも読めないテンプレートは飛ばす）（[#36956](https://github.com/nuxt/nuxt/pull/36956)） ⏳ 未リリース · [[repos/nuxt-nuxt/changes/2026-11-11|変更]]
 - 2026-10-21 — 狭い画面でもローディング画面のシェーダーの比率を保つ（[#36654](https://github.com/nuxt/nuxt/pull/36654)）⏳ 未リリース · [[repos/nuxt-nuxt/changes/2026-10-23|変更]]
 - 2026-10-10 — `<NuxtLoadingIndicator>` に `finishColor` プロップを追加（[#36533](https://github.com/nuxt/nuxt/pull/36533)）⏳ 未リリース · [[repos/nuxt-nuxt/changes/2026-10-12|変更]]
@@ -30,3 +32,4 @@ SPA ローディングテンプレートの解決は kit の内部ヘルパー�
 - [[repos/nuxt-nuxt/changes/2026-09-24|2026-09-24 の変更]]
 - [[repos/nuxt-nuxt/changes/2026-10-12|2026-10-12 の変更]]
 - [[repos/nuxt-nuxt/changes/2026-11-11|2026-11-11 の変更]]
+- [[repos/nuxt-nuxt/changes/2026-11-13|2026-11-13 の変更]]

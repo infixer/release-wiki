@@ -1,6 +1,6 @@
 ---
 title: w3c/csswg-drafts
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/w3c-csswg-drafts
 ---
@@ -14,6 +14,8 @@ tags:
 
 ## 直近の注目変更
 
+- 2026-11-12 — `-webkit-line-clamp: none` で `block-ellipsis` を `no-ellipsis` にする（#14673）（[`acde592`](https://github.com/w3c/csswg-drafts/commit/acde592534ad2f339f220b5046417383ecf54428)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-overflow-4|css-overflow-4]]
+- 2026-11-12 — `line-clamp` の構文をより柔軟にし（#14672）、シリアライズに合わせて並び順を調整（#14671）（[`64bbba2`](https://github.com/w3c/csswg-drafts/commit/64bbba2b5e28f69d337d84cbd970745910dd414b)、[`0396208`](https://github.com/w3c/csswg-drafts/commit/0396208d4a39527042db6f2128c5a68657a6d040)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-overflow-4|css-overflow-4]]
 - 2026-11-10 — grid lanes で、複数のトラックにまたがるアイテムの前後に segment endpoint を作り、グリッド軸の rule を伸ばせるように（[#14732](https://github.com/w3c/csswg-drafts/pull/14732)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-gaps-1|css-gaps-1]]
 - 2026-11-06 — 用語「gap segments」を定義し、`rule-visibility` の挙動を明確化（[#14637](https://github.com/w3c/csswg-drafts/pull/14637)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-gaps-1|css-gaps-1]]
 - 2026-11-05 — 「determine the device pixel ratio」に `Document` の引数を追加（HTML の画像の候補の選択から使う）（[#14724](https://github.com/w3c/csswg-drafts/pull/14724)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/cssom-view-1|cssom-view-1]]
@@ -22,8 +24,6 @@ tags:
 - 2026-11-04 — 空の引数を許して取り除き、最後の末尾カンマを JS と同じ扱いに（#14370）（[`909869d`](https://github.com/w3c/csswg-drafts/commit/909869d6b501d19e4bf632e458848f3c81af425f)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-mixins-1|css-mixins-1]]
 - 2026-11-03 — `@private` の中に `@property` を置けるように（#14442）（[`5df2d97`](https://github.com/w3c/csswg-drafts/commit/5df2d97275eb118fb96be4f8444a5bddd509e2ab)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-mixins-1|css-mixins-1]]
 - 2026-11-03 — `param()` の名前と値の間を `:` に（#14275）、`color` / `accent-color` を `env()` として渡す（#14447）（[`636a76a`](https://github.com/w3c/csswg-drafts/commit/636a76a25e992170038bbdcc032cc8f24519e991)、[`f6a994b`](https://github.com/w3c/csswg-drafts/commit/f6a994be84d4df01b0c9cb77225ca11f1b131dde)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-link-params-1|css-link-params-1]]、[[repos/w3c-csswg-drafts/topics/css-env-1|css-env-1]]
-- 2026-11-02 — グラデーションの色域外の色を CSS の色域マッピングにかけることを必須に（#14545）（[`12ab907`](https://github.com/w3c/csswg-drafts/commit/12ab9071206ce8c70860808cec8a7af1f4ee0297)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-images-4|css-images-4]]
-- 2026-11-02 — named feature の綴りを `gamut mapping` から `gamut-mapping` に（#14545）（[`f9abe9e`](https://github.com/w3c/csswg-drafts/commit/f9abe9e14e72e6fc3f3a0253817670520bf61278)）⏳ 未リリース · トピック: [[repos/w3c-csswg-drafts/topics/css-conditional-5|css-conditional-5]]
 
 ## トピック
 
@@ -47,7 +47,7 @@ tags:
 - [[repos/w3c-csswg-drafts/topics/css-link-params-1|css-link-params-1]] — link params（`param()` の名前と値を `:` で区切るなど）の仕様
 - [[repos/w3c-csswg-drafts/topics/css-masking-1|css-masking-1]] — クリッピングとマスキング（断片化への応じ方など）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-mixins-1|css-mixins-1]] — CSS の mixin を定義する仕様（mixin 本体での `@layer` の扱い、`@private` 内の `@property` など）
-- [[repos/w3c-csswg-drafts/topics/css-overflow-4|css-overflow-4]] — あふれた内容の扱い（`line-clamp`・`block-ellipsis` など）を定義する仕様
+- [[repos/w3c-csswg-drafts/topics/css-overflow-4|css-overflow-4]] — あふれた内容の扱い（`line-clamp` の構文・`-webkit-line-clamp`・`block-ellipsis` など）を定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-overflow-5|css-overflow-5]] — `scroll-axis-lock` などを定義する仕様
 - [[repos/w3c-csswg-drafts/topics/css-overscroll-2|css-overscroll-2]] — オーバースクロール（`overscrollcontainer`・`overscrollareas`）を説明する新しい仕様
 - [[repos/w3c-csswg-drafts/topics/css-pseudo-4|css-pseudo-4]] — 疑似要素（`::interest-invoker` など）を定義する仕様
@@ -66,4 +66,4 @@ tags:
 ## 取り込み
 
 - [[repos/w3c-csswg-drafts/log|取り込み履歴]]
-- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-11-11|2026-11-11]]、[[repos/w3c-csswg-drafts/changes/2026-11-09|2026-11-09]]、[[repos/w3c-csswg-drafts/changes/2026-11-06|2026-11-06]]、[[repos/w3c-csswg-drafts/changes/2026-11-04|2026-11-04]]、[[repos/w3c-csswg-drafts/changes/2026-11-02|2026-11-02]]
+- 最近の変更: [[repos/w3c-csswg-drafts/changes/2026-11-13|2026-11-13]]、[[repos/w3c-csswg-drafts/changes/2026-11-11|2026-11-11]]、[[repos/w3c-csswg-drafts/changes/2026-11-09|2026-11-09]]、[[repos/w3c-csswg-drafts/changes/2026-11-06|2026-11-06]]、[[repos/w3c-csswg-drafts/changes/2026-11-04|2026-11-04]]

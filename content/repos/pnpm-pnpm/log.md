@@ -1,9 +1,17 @@
 ---
 title: pnpm/pnpm 取り込み履歴
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/pnpm-pnpm
 ---
+
+## 2026-11-13
+
+- 期間: 2026-11-11T00:23:30Z 〜 2026-11-13T01:55:28Z
+- PR 83 件（詳しく 30 件 / 1 行 53 件）、Release 1 件（安定版 1 件: v12.20.0）
+- 更新したページ: [[repos/pnpm-pnpm/changes/2026-11-13|changes]]（新規）、[[repos/pnpm-pnpm/releases/v12.20.0|v12.20.0]]（新規）、[[repos/pnpm-pnpm/releases/v12.19.0|v12.19.0]]（次のリリースへのリンクを追記）、[[repos/pnpm-pnpm/topics/pnpr|pnpr]]、[[repos/pnpm-pnpm/topics/依存関係解決|依存関係解決]]、[[repos/pnpm-pnpm/topics/ストア|ストア]]、[[repos/pnpm-pnpm/topics/パック・公開|パック・公開]]、[[repos/pnpm-pnpm/topics/ワークスペース|ワークスペース]]、[[repos/pnpm-pnpm/index|index]]
+- 備考: `maxPrs: 30` を超えたため `brief: true` の 53 件（修正 38 件・リファクタ/性能改善 11 件を含む）は「その他」に 1 行で書いた。詳しく扱った 30 件のうち、`hint: fix` の #17939（meta-updater）と `hint: feature` の #17956（埋め込み向けのエンジンの feature とサイズのレポート）は開発用なので「その他」に入れた（新機能 13 件・変更・修正 15 件）。期間内の PR はすべて ⏳ 未リリース（inbox の表記のまま。v12.20.0 のリリースノートには #17930・#17947・#17976・#17753・#17960 などに当たる項目がある）。v12.20.0 の公開日は JST で書いた（2026-11-12）。リリースノートの本文は途中で切れている（`nodeLinker: hoisted` の項目まで取り込めた）。inbox の `latest.stable` は v12.18.0 となっていたが、`releasesInRange` の v12.20.0 と前回の v12.19.0 の方が新しいので、index の最新の安定版は v12.20.0 にした
+- エラー: なし
 
 ## 2026-11-11
 

@@ -1,6 +1,6 @@
 ---
 title: openai/codex
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/openai-codex
 ---
@@ -14,16 +14,16 @@ tags:
 
 ## 直近の注目変更
 
+- 既存の ChatGPT のログインを使う Git の資格情報ヘルパー `codex git-credential`（[#60746](https://github.com/openai/codex/pull/60746)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/認証|認証]]
+- 承認したプランを添付ファイルで新しいスレッドに引き継ぐ（`thread/prepareApprovedPlan`）、スレッドのタイトルを生成の失敗に強く（[#60763](https://github.com/openai/codex/pull/60763)、[#60842](https://github.com/openai/codex/pull/60842)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
+- ネイティブのヘルパー・サブエージェントで保存済みの Daybreak の選択を引き継ぎ・解決（`daybreak_program_propagation`）（[#60749](https://github.com/openai/codex/pull/60749)、[#60773](https://github.com/openai/codex/pull/60773)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]]
+- 大きすぎる WebSocket のリクエストはすぐ HTTP にフォールバック（`x-codex-websocket-max-message-bytes`）、GCP でインクリメンタルなツールの宣言を既定で有効に（[#60840](https://github.com/openai/codex/pull/60840)、[#60841](https://github.com/openai/codex/pull/60841)、[#60848](https://github.com/openai/codex/pull/60848)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]
+- `input_audio` のツール出力でファイルに基づく音声（`file_id`）を保つ（[#60735](https://github.com/openai/codex/pull/60735)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]
+- MCP の OAuth の保存を古い資格情報の書き込みから守る、設定の更新でセッションの `apps` の上書きを反映、`product_sku` の帰属を限定（[#60849](https://github.com/openai/codex/pull/60849)、[#60730](https://github.com/openai/codex/pull/60730)、[#60697](https://github.com/openai/codex/pull/60697)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/MCP|MCP]]
+- スレッドの検索の修正（Unicode のケースフォールディング、空白を含む検索語）と昇順の一覧のページ分けの修正（[#60759](https://github.com/openai/codex/pull/60759)、[#60846](https://github.com/openai/codex/pull/60846)、[#61181](https://github.com/openai/codex/pull/61181)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]]
 - TUI のサイドのチャットのチューザーで最新のプロンプトのプレビュー、発見の失敗時の再試行（[#60319](https://github.com/openai/codex/pull/60319)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/TUI|TUI]]
 - `thread/items/list` で MCP のプレーンテキストの出力を後回し（`deferOutput.mcpToolCall`）、リソース一覧に待機中のサーバー（`deferredServers`）（[#60390](https://github.com/openai/codex/pull/60390)、[#60423](https://github.com/openai/codex/pull/60423)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/MCP|MCP]]
 - ゲートウェイの OAuth で API キーなしにモデルカタログを発見（[#60414](https://github.com/openai/codex/pull/60414)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/認証|認証]]
-- リアルタイムのアタッチの取り消しと `start_before` の期限（`RealtimeAttachmentOptions`）（[#60443](https://github.com/openai/codex/pull/60443)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/リアルタイム音声|リアルタイム音声]]
-- ワークスペース・アクセスプログラムの拒否と `content_policy_violation` を再試行しない終端のエラーに（[#60475](https://github.com/openai/codex/pull/60475)、[#60480](https://github.com/openai/codex/pull/60480)、[#60476](https://github.com/openai/codex/pull/60476)、[#60481](https://github.com/openai/codex/pull/60481)、[#60479](https://github.com/openai/codex/pull/60479)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]]
-- クラウドのスレッドの修正（古い失敗をトランスクリプトに含める、古いストリームの切断を抑える、再開でメッセージを重複させない）（[#60320](https://github.com/openai/codex/pull/60320)、[#60327](https://github.com/openai/codex/pull/60327)、[#60335](https://github.com/openai/codex/pull/60335)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- 同梱の SQLite を 3.54 に更新、診断ログが失敗してもスレッドの保存を使える（[#60432](https://github.com/openai/codex/pull/60432)、[#60466](https://github.com/openai/codex/pull/60466)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/状態データベース|状態データベース]]
-- `codex app-server daemon start` で機能の上書きを反映（[#60489](https://github.com/openai/codex/pull/60489)）📦 rust-v0.169.0-alpha.9 · トピック: [[repos/openai-codex/topics/デーモン|デーモン]]
-- TUI のサイドバーで複数のサイドのチャット（番号付きのタブ、引数付きの `/side` で新規作成）とチューザーの幅の変更（[#59784](https://github.com/openai/codex/pull/59784)、[#59824](https://github.com/openai/codex/pull/59824)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
-- TUI にクラウドのバックエンド（`TuiMultiBackend`）、クラウドへの送信の受領に従い不確かな下書きを自動で送り直さない（[#59828](https://github.com/openai/codex/pull/59828)、[#59817](https://github.com/openai/codex/pull/59817)）⏳ 未リリース · トピック: [[repos/openai-codex/topics/TUI|TUI]]
 
 ## トピック
 
@@ -38,17 +38,17 @@ tags:
 - [[repos/openai-codex/topics/状態データベース|状態データベース]] — スレッドのメタデータ・ログを保存するローカルの SQLite データベース（NFS 向けの `codex migrate-nfs-db`、同梱の SQLite 3.54、診断ログの失敗時もスレッドの保存を継続）
 - [[repos/openai-codex/topics/セッション・スレッド管理|セッション・スレッド管理]] — スレッドの起動・再開・アーカイブ・ゴール・コンパクション（非同期コンパクションを含む）・既読状態・ソースに結び付けた fork・アカウントで絞った履歴の発見・クラウドのスレッドの有効化と事前準備・状態管理
 - [[repos/openai-codex/topics/デーモン|デーモン]] — app-server の共有デーモン/embedded モード（`daemon_auto_start` の自動起動、機能フラグの照合）、起動時の設定の確認（`--print-startup-config`）、ソケット接続（WebSocket の zstd 圧縮）とリモートコントロールの再接続
-- [[repos/openai-codex/topics/認証|認証]] — ChatGPT へのブラウザサインインとアカウント切り替え時の扱い、Responses API プロキシの認証（GitHub Actions の OIDC・フェデレーション）、ゲートウェイの認証（資格情報を書き出すコマンド・デバイスコード）、FedRAMP の API キーの振り分け、ランタイムの認証
+- [[repos/openai-codex/topics/認証|認証]] — ChatGPT へのブラウザサインインとアカウント切り替え時の扱い、Responses API プロキシの認証（GitHub Actions の OIDC・フェデレーション）、ゲートウェイの認証（資格情報を書き出すコマンド・デバイスコード）、Git の資格情報ヘルパー（`codex git-credential`）、FedRAMP の API キーの振り分け、ランタイムの認証
 - [[repos/openai-codex/topics/フィードバック・診断|フィードバック・診断]] — 利用状況・設定のレポート機構、診断レポートのローカルの ZIP 保存と `codex doctor`（`--network-only`）、ツールのクリティカルパスの計測（`critical_path_timing`）
 - [[repos/openai-codex/topics/プラグイン|プラグイン]] — プラグインのマーケットプレイス・ソースのパスの照合、内容に結び付いたフックの承認・アーカイブの展開、クラウドのカタログの更新とバックオフ、表示用の情報の省略、モデルカタログによるガイダンスの上書き
 - [[repos/openai-codex/topics/プロジェクトの指示|プロジェクトの指示]] — `AGENTS.md` などのプロジェクトの指示の読み込みと `project_doc_max_bytes` の予算（超過時の警告）
 - [[repos/openai-codex/topics/メモリ|メモリ]] — 過去のロールアウトからのメモリの抽出（入力の上限）、拡張のリソースの保持期間、外部エージェントからの取り込み、`thread/memory/read`
 - [[repos/openai-codex/topics/マルチエージェント|マルチエージェント]] — `spawn_agent` などによるサブエージェントへの委任（`multi_agent` の機能フラグは非推奨）、fork、メッセージボード（独立したランタイム間の共有、通知しない追記、単体の HTTP の MCP サーバーとプラグインを含む）、エージェントのメッセージによる起床、モデルカタログ
 - [[repos/openai-codex/topics/管理要件|管理要件]] — `requirements.toml` などの managed requirements による機能ゲートと設定（Desktop のワークスペースの保存先、独自の設定サーバーと起動・サインインへの組み込み、OpenTelemetry の設定を含む）
-- [[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]] — モデル・サービスティアの選択、app-server のプロバイダーの一覧・設定の書き込み、Responses のリクエスト形式（インクリメンタルなツールの宣言）、拡張の予算の確認、接続ルーティングとリトライ（WebSocket への復帰、ワークスペース・アクセスプログラムの拒否やコンテンツポリシーの違反は終端のエラー）、Vertex AI（GCP）のプロバイダーと資格情報ファイル
+- [[repos/openai-codex/topics/モデル・接続設定|モデル・接続設定]] — モデル・サービスティアの選択、app-server のプロバイダーの一覧・設定の書き込み、Responses のリクエスト形式（インクリメンタルなツールの宣言）、拡張の予算の確認、接続ルーティングとリトライ（WebSocket への復帰、大きすぎるリクエストの HTTP へのフォールバック、ワークスペース・アクセスプログラムの拒否やコンテンツポリシーの違反は終端のエラー）、Vertex AI（GCP）のプロバイダーと資格情報ファイル
 - [[repos/openai-codex/topics/リアルタイム音声|リアルタイム音声]] — 音声会話（realtime voice）の文字起こし・音声トラック・入出力デバイス・呼び出し側のチャンネルでのアタッチ（取り消しと期限）
 
 ## 取り込み
 
 - [[repos/openai-codex/log|取り込み履歴]]
-- 最近の変更: [[repos/openai-codex/changes/2026-11-11|2026-11-11]]、[[repos/openai-codex/changes/2026-11-09|2026-11-09]]、[[repos/openai-codex/changes/2026-11-06|2026-11-06]]、[[repos/openai-codex/changes/2026-11-04|2026-11-04]]、[[repos/openai-codex/changes/2026-11-02|2026-11-02]]
+- 最近の変更: [[repos/openai-codex/changes/2026-11-13|2026-11-13]]、[[repos/openai-codex/changes/2026-11-11|2026-11-11]]、[[repos/openai-codex/changes/2026-11-09|2026-11-09]]、[[repos/openai-codex/changes/2026-11-06|2026-11-06]]、[[repos/openai-codex/changes/2026-11-04|2026-11-04]]

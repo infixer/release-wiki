@@ -1,9 +1,16 @@
 ---
 title: anthropics/claude-code 取り込み履歴
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/anthropics-claude-code
 ---
+
+## 2026-11-13
+
+- 期間: 2026-11-06T00:00:34Z 〜 2026-11-13T01:55:28Z
+- PR 0 件、Release 1 件（安定版 1 件: v2.1.323）
+- 更新したページ: [[repos/anthropics-claude-code/changes/2026-11-13|changes]]（新規）、[[repos/anthropics-claude-code/releases/v2.1.323|v2.1.323]]（新規）、[[repos/anthropics-claude-code/releases/v2.1.322|v2.1.322]]、[[repos/anthropics-claude-code/topics/コンテキスト・コンパクション|コンテキスト・コンパクション]]、[[repos/anthropics-claude-code/topics/管理設定|管理設定]]、[[repos/anthropics-claude-code/topics/フック|フック]]、[[repos/anthropics-claude-code/topics/mod-API|mod API]]、[[repos/anthropics-claude-code/topics/Diffパネル|Diff パネル]]、[[repos/anthropics-claude-code/index|index]]
+- エラー: なし（v2.1.323 の Release 本文は途中で切れている）
 
 ## 2026-11-11
 

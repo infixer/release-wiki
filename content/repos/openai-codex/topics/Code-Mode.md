@@ -1,6 +1,6 @@
 ---
 title: Code Mode
-updated: 2026-11-09
+updated: 2026-11-13
 tags:
   - repo/openai-codex
   - topic
@@ -22,6 +22,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-13 — プロキシの HTTP 503（プレーンテキスト・HTML の本文）でもセッションの受け付けを `Unavailable` として再試行（[#61153](https://github.com/openai/codex/pull/61153)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
 - 2026-11-09 — gRPC の Code Mode の接続の寿命をセッションに結び付け（[#59783](https://github.com/openai/codex/pull/59783)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-09|変更]]
 - 2026-10-30 — `code_mode_host_output_truncation` の機能フラグ（[#58159](https://github.com/openai/codex/pull/58159)）⏳ 未リリース · [[repos/openai-codex/changes/2026-10-30|変更]]
 - 2026-10-19 — V8 を 152.2.0 に更新し `Array.sort` の安全性のチェックをバックポート（[#54519](https://github.com/openai/codex/pull/54519)）📦 rust-v0.164.0-alpha.3 · [[repos/openai-codex/changes/2026-10-19|変更]]

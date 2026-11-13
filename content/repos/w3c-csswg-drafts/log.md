@@ -1,9 +1,16 @@
 ---
 title: w3c/csswg-drafts 取り込み履歴
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/w3c-csswg-drafts
 ---
+
+## 2026-11-13
+
+- 期間: 2026-11-10T21:17:48Z 〜 2026-11-13T01:55:28Z（直接のコミット: 2026-11-10T21:17:48Z 〜）
+- PR 6 件、直接のコミット 13 件（詳しく 3 件 / 1 行 16 件。WPT の editorial のコミット 4 件と Changes の更新 2 件はそれぞれ 1 行にまとめた）、Release 0 件
+- 更新したページ: [[repos/w3c-csswg-drafts/changes/2026-11-13|changes]]（新規）、[[repos/w3c-csswg-drafts/topics/css-overflow-4|css-overflow-4]]、[[repos/w3c-csswg-drafts/index|index]]
+- エラー: なし
 
 ## 2026-11-11
 

@@ -1,6 +1,6 @@
 ---
 title: TUI
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/openai-codex
   - topic
@@ -30,10 +30,14 @@ tags:
 - `focus_pane_left` / `focus_pane_right`（キーマップ）— ワークスペースモードで親とサイドの会話の間をフォーカス移動（既定 `leader left`・`leader h` / `leader right`・`leader l`）。クラシックモードではキーを奪わない
 - `/side`（サイドの保持が有効なとき）— プロンプト付きで新しいサイドのチャットを作成、引数なしで選択中のサイドのチャットを開き直す
 - `TuiMultiBackend`（機能ゲート）— 対応する macOS・Linux で、選択中の ChatGPT アカウントを使うクラウドの接続を追加で登録
-
+- `thread/prepareApprovedPlan`（実験的）— 承認したプランの添付ファイルを新しいスレッドの実行側が読めるかを確認する
 
 ## 変更履歴
 
+- 2026-11-13 — 再構築したセッションで別のスレッドの fork 元を引き継がない（[#61183](https://github.com/openai/codex/pull/61183)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
+- 2026-11-13 — 重なる検索のルートからのファイル検索の結果の重複を除く（[#60845](https://github.com/openai/codex/pull/60845)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
+- 2026-11-13 — スレッドのタイトルを最初のメッセージの抜粋ですぐ表示し、生成の失敗時は抜粋を保存（[#60842](https://github.com/openai/codex/pull/60842)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
+- 2026-11-13 — 「Yes, clear context and implement」で承認したプランを添付ファイルで新しいスレッドに引き継ぐ（`thread/prepareApprovedPlan`）（[#60763](https://github.com/openai/codex/pull/60763)）⏳ 未リリース · [[repos/openai-codex/changes/2026-11-13|変更]]
 - 2026-11-11 — サイドのチャットのチューザーで最新のプロンプトのプレビュー、発見の失敗時の再試行、`Ctrl+C` で閉じる（[#60319](https://github.com/openai/codex/pull/60319)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
 - 2026-11-11 — 完全なトランスクリプトに古いアイテムの無いクラウドの失敗を含める（`FullTranscript`）（[#60320](https://github.com/openai/codex/pull/60320)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]
 - 2026-11-11 — スレッドを開き直した後の古いクラウドのストリームの切断を抑える（[#60327](https://github.com/openai/codex/pull/60327)）📦 rust-v0.169.0-alpha.9 · [[repos/openai-codex/changes/2026-11-11|変更]]

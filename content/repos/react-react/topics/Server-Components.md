@@ -1,6 +1,6 @@
 ---
 title: Server Components
-updated: 2026-11-09
+updated: 2026-11-13
 tags:
   - repo/react-react
   - topic
@@ -11,6 +11,7 @@ tags:
 Flight プロトコル（React Server Components のシリアライズ形式）まわりの実装。関数だけでなくオブジェクトも Server Reference として参照できる実験的な仕組みや、テキストのシリアライズ・デコード時の互換性の修正が含まれる。エラーを debug info として送る処理（`serializeDebugErrorValue`）では、スタックフレームの無いエラー（Node 内部の `ECONNREFUSED` など）をクライアントで復元できず、`AggregateError` では root が解決されなくなる問題が修正された。2026-10-14 には Flight の転送プロトコルの改善（クライアント・Reply の処理・各環境のストリーム設定）が main に入り、同じ題名の変更が 19.0.9・19.1.10・19.2.9・19.3.1 として各リリースラインに公開された（詳細は PR に書かれていない）。
 FB 向けの Flight バンドラー（`react-flight-server-fb`）では、未対応の Server Reference のデコードが無効化され、モジュールの読み込み前に拒否される（レンダリング・Client Reference の読み込み・ブラウザのアクションのプロキシは変わらない。未リリース）。
 ストリームの項目や非同期イテレーターの戻り値として描画される Server Components でも `useId` などの hooks が使える（共通の描画の入口で hook の context を用意し、直前の request を戻す。未リリース）。
+レンダー・プリレンダーが同期的に abort された後でも、非同期イテラブル・ReadableStream・Blob の読み取りがすぐ abort され、Flight のストリームが閉じる（未リリース）。クライアントは届かなかったチャンクを記録し、ストリームの終了後に欠けた owner・スタックのデータを省いて、`Connection closed.` を投げたりサスペンドしたままになったりしない（未リリース）。
 
 ## 主な API・オプション
 
@@ -18,6 +19,8 @@ FB 向けの Flight バンドラー（`react-flight-server-fb`）では、未対
 
 ## 変更履歴
 
+- 2026-11-13 — ストリームの終了後に欠けた owner・スタックのデータを無視する（[#38233](https://github.com/react/react/pull/38233)）⏳ 未リリース · [[repos/react-react/changes/2026-11-13|変更]]
+- 2026-11-11 — 同期的な abort の後にストリームが閉じない問題を修正（vercel/next.js#101356 の原因）（[#38186](https://github.com/react/react/pull/38186)）⏳ 未リリース · [[repos/react-react/changes/2026-11-13|変更]]
 - 2026-11-06 — ストリームで描画される Server Components の中で hooks が throw する問題を修正（#38105。#38108・#38114 を置き換え）（[#38128](https://github.com/react/react/pull/38128)）⏳ 未リリース · [[repos/react-react/changes/2026-11-09|変更]]
 - 2026-10-31 — FB 向け Flight バンドラー（`react-flight-server-fb`）で未対応の Server Reference のデコードを無効化（[#36865](https://github.com/react/react/pull/36865)）⏳ 未リリース · [[repos/react-react/changes/2026-11-02|変更]]
 - 2026-10-19 — I/O の名前から `<anonymous>.` の接頭辞を正しく取り除く（`ous>.fetch` のように壊れていた）（[#37856](https://github.com/react/react/pull/37856)）⏳ 未リリース · [[repos/react-react/changes/2026-10-21|変更]]
@@ -35,3 +38,4 @@ FB 向けの Flight バンドラー（`react-flight-server-fb`）では、未対
 - [[repos/react-react/changes/2026-10-21|2026-10-21 の変更]]
 - [[repos/react-react/changes/2026-11-02|2026-11-02 の変更]]
 - [[repos/react-react/changes/2026-11-09|2026-11-09 の変更]]
+- [[repos/react-react/changes/2026-11-13|2026-11-13 の変更]]

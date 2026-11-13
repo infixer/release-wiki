@@ -1,6 +1,6 @@
 ---
 title: Diff パネル
-updated: 2026-10-12
+updated: 2026-11-13
 tags:
   - repo/anthropics-claude-code
   - topic
@@ -9,6 +9,7 @@ tags:
 ## 概要
 
 `mods/diff` は、ビルトインの diff パネルと同じ見た目・挙動を目指す独立実装。最初の編集でパネルを自動的に開く条件（メインループでの編集かつファイルチェックポイントが有効なときのみ）、幅が確定しないうちにエンジンが開こうとした表示の扱い、ドッキング表示前にリポジトリを読んでおくことで「Loading diff…」を経由しない点、再開・継続したセッションでの表示や `/clear` の挙動、セッション開始時刻の基準など、細かな差分を随時ビルトインに合わせている。読み取り専用のシェルコマンド（`isReadOnly`）の後は diff を再取得しない。`git diff` に常に `--no-color` を付ける変更（[#96363](https://github.com/anthropics/claude-code/pull/96363)）は 2026-09-30 に revert され、以前の挙動に戻っている。hunk は表示するファイルをまとめて 1 回の `git diff --raw -z -p` で読み（失敗すると全ファイルが「Diff unavailable」になる）、`/diff` のダイアログでは表示中の行の分だけ読み足す。HEAD はパネルを開いた時点から監視し、別のターミナルで終えたマージや中止したリベースを数秒で検知する。リベース中かどうかは `REBASE_HEAD` と `rebase-merge` / `rebase-apply` フォルダの両方で判定する。フックのマッチャーはリテラルのコマンド名（`'diff'`）と、同梱ビルドでの登録名 `cc-plugin-diff` にも対応する。`/diff` による手動の開閉は影響を受けない。エンジンがドッキングしたペインの先頭行（閉じるマーク用）を確保するようになったのに合わせ、ドッキング表示の `/diff` はヘッダーの上に自前の空行を入れなくなった（`PANE_TOP_PAD_ROWS` を削除）。最終列の空白（`PANE_RIGHT_PAD_COLUMNS`）は残る。
+v2.1.323 で、ビルトインの diff パネルに `/diff to close` のヒントが出るようになり、パネルにフォーカスする・閉じるキーが `?` のショートカット一覧に加わった。
 
 ## 主な API・オプション
 
@@ -20,6 +21,7 @@ tags:
 
 ## 変更履歴
 
+- 2026-11-12 — ビルトインの diff パネルに `/diff to close` のヒント、`?` のショートカット一覧にパネルのフォーカス・閉じるキーを追加 📦 v2.1.323 · [[repos/anthropics-claude-code/releases/v2.1.323|リリース]]
 - 2026-10-09 — `/diff` のパネル・ダイアログを開いている間、トースト・通知が表示されずに待たされる問題を修正 📦 v2.1.296 · [[repos/anthropics-claude-code/releases/v2.1.296|リリース]]
 - 2026-10-07 — ドッキングしたパネルの上の自前の空行（`PANE_TOP_PAD_ROWS`）を削除し、エンジンが確保する先頭行の下にヘッダーから描くように（[#99206](https://github.com/anthropics/claude-code/pull/99206)）⏳ 未リリース · [[repos/anthropics-claude-code/changes/2026-10-07|変更]]
 - 2026-10-01 — `/diff` のダイアログで一覧のどのファイルも開けるように（表示中の行の hunk を読む）、閉じても「Diff dialog dismissed」を出さないように（[#98555](https://github.com/anthropics/claude-code/pull/98555)）📦 v2.1.287 · [[repos/anthropics-claude-code/changes/2026-10-02|変更]]
@@ -42,3 +44,4 @@ tags:
 - [[repos/anthropics-claude-code/releases/v2.1.283|v2.1.283]]
 - [[repos/anthropics-claude-code/releases/v2.1.281|v2.1.281]]
 - [[repos/anthropics-claude-code/releases/v2.1.296|v2.1.296]]
+- [[repos/anthropics-claude-code/releases/v2.1.323|v2.1.323]]

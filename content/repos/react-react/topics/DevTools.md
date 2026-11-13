@@ -1,6 +1,6 @@
 ---
 title: DevTools
-updated: 2026-11-11
+updated: 2026-11-13
 tags:
   - repo/react-react
   - topic
@@ -11,6 +11,7 @@ tags:
 React DevTools のブラウザ拡張機能（`packages/react-devtools-extensions`）まわり。拡張機能は、調べているページに注入したバックエンドと、DevTools のパネル（Components・Profiler）をつないで動く。Chrome 153 以降は同一ドキュメント内のナビゲーションでも `chrome.devtools.network.onNavigated` が発火するため、拡張機能はドキュメントが置き換わったときだけパネルを再マウントし、クライアント側のルート遷移では選択や Profiler の記録を保つようになった。
 DevTools のバックエンド（`react-devtools-shared`）と facade（`react-devtools-facade`）の修正も入っている。エラー・警告のメッセージキーを作る `formatConsoleArgumentsToSingleString` は、引数の無い・エスケープされた書式指定子をそのまま残す。facade の `getComponentByUid()` は BigInt を `n` 付きの文字列に正規化して返し（`JSON.stringify()` で throw しない）、`getComponentByHostInstance` は Resource でない `<title>`・`<meta>`・`<link>` も React の管理下として見つける（いずれも未リリース）。
 React Native DevTools 向けには、`react-devtools-fusebox` に Suspense タブを個別のパネルとして描画する `initializeSuspense` が加わり、Hermes でスタックフレームのファイル名が空になって「View source」が開けない問題も修正された（`getScriptNameOrSourceURL()` が無いときは `getFileName()` を使う。いずれも未リリース）。
+スタンドアロン版（`react-devtools`）では、`editor.js` が Node の `process` を使うようになり、`REACT_EDITOR` などでエディターを開けるようになった。同梱する `ws` は GHSA-96hv-2xvq-fx4p の修正を含む 7.5.13 に更新された（いずれも未リリース）。
 
 ## 主な API・オプション
 
@@ -18,6 +19,8 @@ React Native DevTools 向けには、`react-devtools-fusebox` に Suspense タ�
 
 ## 変更履歴
 
+- 2026-11-12 — `react-devtools-core` の `ws` を 7.5.13 に更新（GHSA-96hv-2xvq-fx4p）（[#38202](https://github.com/react/react/pull/38202)）⏳ 未リリース · [[repos/react-react/changes/2026-11-13|変更]]
+- 2026-11-12 — スタンドアロン版のエディター起動で Node の `process` を使う（エディターが開かない問題）（[#38228](https://github.com/react/react/pull/38228)）⏳ 未リリース · [[repos/react-react/changes/2026-11-13|変更]]
 - 2026-11-11 — `react-devtools-fusebox` に Suspense タブの入口 `initializeSuspense` を追加（[#38167](https://github.com/react/react/pull/38167)）⏳ 未リリース · [[repos/react-react/changes/2026-11-11|変更]]
 - 2026-11-11 — Hermes でスタックフレームのファイル名が空になる問題を修正（[#38168](https://github.com/react/react/pull/38168)）⏳ 未リリース · [[repos/react-react/changes/2026-11-11|変更]]
 - 2026-10-31 — facade で Resource でない hoistable（`<title>`・`<meta>` など）のインスタンスを見つけられるように（[#38067](https://github.com/react/react/pull/38067)）⏳ 未リリース · [[repos/react-react/changes/2026-11-02|変更]]
@@ -30,3 +33,4 @@ React Native DevTools 向けには、`react-devtools-fusebox` に Suspense タ�
 - [[repos/react-react/changes/2026-10-09|2026-10-09 の変更]]
 - [[repos/react-react/changes/2026-11-02|2026-11-02 の変更]]
 - [[repos/react-react/changes/2026-11-11|2026-11-11 の変更]]
+- [[repos/react-react/changes/2026-11-13|2026-11-13 の変更]]

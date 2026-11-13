@@ -1,6 +1,6 @@
 ---
 title: css-overflow-4
-updated: 2026-10-16
+updated: 2026-11-13
 tags:
   - repo/w3c-csswg-drafts
   - topic
@@ -8,16 +8,20 @@ tags:
 
 ## 概要
 
-あふれた内容の扱い（`line-clamp`・`block-ellipsis`・`text-overflow` など）を定義する仕様。`line-clamp` の構文と longhand は issue #13670 に沿って更新された。同じ行に `block-ellipsis`（line-clamp の省略記号）と `text-overflow` の省略記号がかかる場合は `block-ellipsis` が先に適用され、`text-overflow` はその後もまだあふれている場合だけ適用される。clamp された内容は視覚的に隠されるだけで、既定ではアクセシビリティツリーから外れたりフォーカスできなくなったりはしない。一方、レイアウト（ベースライン）では clamp された行は考慮されず、旧来の `-webkit-line-clamp` と互換になる。
+あふれた内容の扱い（`line-clamp`・`block-ellipsis`・`text-overflow` など）を定義する仕様。`line-clamp` の構文と longhand は issue #13670 に沿って更新された。同じ行に `block-ellipsis`（line-clamp の省略記号）と `text-overflow` の省略記号がかかる場合は `block-ellipsis` が先に適用され、`text-overflow` はその後もまだあふれている場合だけ適用される。clamp された内容は視覚的に隠されるだけで、既定ではアクセシビリティツリーから外れたりフォーカスできなくなったりはしない。一方、レイアウト（ベースライン）では clamp された行は考慮されず、旧来の `-webkit-line-clamp` と互換になる。2026-11-13 の取り込みで、`line-clamp` の構文がより柔軟になり（#14672）、シリアライズのために構文の並び順が調整された（#14671）。また `-webkit-line-clamp: none` は `block-ellipsis` を `no-ellipsis` に設定する（#14673）。
 
 ## 主な API・オプション
 
-- `line-clamp`（と longhand）— 2026-10-09 の取り込みで構文を更新（#13670）
+- `line-clamp`（と longhand）— 2026-10-09 の取り込みで構文を更新（#13670）。2026-11-13 の取り込みで構文をより柔軟にし（#14672）、シリアライズに合わせて並び順を調整（#14671）
+- `-webkit-line-clamp` — `none` は `block-ellipsis` を `no-ellipsis` にする（#14673）
 - `block-ellipsis` — line-clamp の省略記号。`text-overflow` より先に適用
 - `text-overflow` — `block-ellipsis` の適用後もあふれている行にだけ適用
 
 ## 変更履歴
 
+- 2026-11-12 — `-webkit-line-clamp: none` で `block-ellipsis` を `no-ellipsis` にする（#14673）（[`acde592`](https://github.com/w3c/csswg-drafts/commit/acde592534ad2f339f220b5046417383ecf54428)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-11-13|変更]]
+- 2026-11-12 — `line-clamp` の構文をより柔軟に（#14672）（[`64bbba2`](https://github.com/w3c/csswg-drafts/commit/64bbba2b5e28f69d337d84cbd970745910dd414b)、[`6265f62`](https://github.com/w3c/csswg-drafts/commit/6265f62f9a50fc33b180e9d30963c506a9fa1611)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-11-13|変更]]
+- 2026-11-12 — シリアライズのために構文の並び順を調整（#14671）（[`0396208`](https://github.com/w3c/csswg-drafts/commit/0396208d4a39527042db6f2128c5a68657a6d040)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-11-13|変更]]
 - 2026-10-16 — 視覚的に隠された（clamp された）行はベースラインなどレイアウトに影響しないと明確化（#12859 の続き）（[#14609](https://github.com/w3c/csswg-drafts/pull/14609)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-16|変更]]
 - 2026-10-09 — clamp された内容は視覚的に隠されるだけ（アクセシビリティツリー・フォーカスからは既定で外れない）と明記（#12859）（[`1dafa60`](https://github.com/w3c/csswg-drafts/commit/1dafa60598a1d313471673f7e06a8e4c9f94646f)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-09|変更]]
 - 2026-10-09 — `block-ellipsis` を先に、`text-overflow` を後に適用すると明記（[#14516](https://github.com/w3c/csswg-drafts/pull/14516)）⏳ 未リリース · [[repos/w3c-csswg-drafts/changes/2026-10-09|変更]]
@@ -25,5 +29,6 @@ tags:
 
 ## 関連
 
+- [[repos/w3c-csswg-drafts/changes/2026-11-13|2026-11-13 の変更]]
 - [[repos/w3c-csswg-drafts/changes/2026-10-16|2026-10-16 の変更]]
 - [[repos/w3c-csswg-drafts/changes/2026-10-09|2026-10-09 の変更]]
